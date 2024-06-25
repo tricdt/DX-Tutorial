@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="EditorsDemo.FilterBehavior.FilterBehaviorScheduler"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduling">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="4" />
+            <ColumnDefinition Width="180" />
+        </Grid.ColumnDefinitions>
+        <!--#region !-->
+        <dxmvvm:Interaction.Behaviors>
+            <dxfui:FilterBehavior  x:Name="filterBehavior" ItemsSource="{Binding ElementName=scheduler, Path=AppointmentItems}">
+                <dxfui:FilterField FieldName="LabelId" Caption="Label">
+                    <dxe:ComboBoxEditSettings ItemsSource="{Binding ElementName=scheduler, Path=LabelItems}"
+                                              DisplayMember="Caption" ValueMember="Id"/>
+                </dxfui:FilterField>
+            </dxfui:FilterBehavior>
+        </dxmvvm:Interaction.Behaviors>
+        <dxsch:SchedulerControl Name="scheduler"
+                                AppointmentFilterCriteria="{Binding ElementName=filterBehavior, Path=ActualFilterCriteria}">
+            <!--#region Settings-->
+            <dxsch:SchedulerControl.Views>
+                <dxsch:DayView ShowAllDayArea="False" DayCount="2" ShowAppointmentStatus="False"/>
+            </dxsch:SchedulerControl.Views>
+            <dxsch:SchedulerControl.DataSource>
+                <dxsch:DataSource>
+                    <dxsch:DataSource.AppointmentMappings>
+                        <dxsch:AppointmentMappings
+                            Subject="Subject"
+                            Location="Location"
+                            Description="Description"
+                            Start="Start"
+                            End="End"
+                            LabelId="LabelId"/>
+                    </dxsch:DataSource.AppointmentMappings>
+                </dxsch:DataSource>
+            </dxsch:SchedulerControl.DataSource>
+            <!--#endregion-->
+        </dxsch:SchedulerControl>
+        <dxfui:CheckedListFilterElement FieldName="LabelId" Grid.Column="2"/>
+        <!--#endregion-->
+    </Grid>
+</UserControl>

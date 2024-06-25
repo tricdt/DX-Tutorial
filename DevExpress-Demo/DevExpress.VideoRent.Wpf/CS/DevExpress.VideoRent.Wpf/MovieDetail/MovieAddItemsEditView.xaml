@@ -1,0 +1,63 @@
+<mb:CustomShowUserControl x:Class="DevExpress.VideoRent.Wpf.MovieAddItemsEditView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mb="clr-namespace:DevExpress.VideoRent.Wpf.ModulesBase"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" 
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" 
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    ShowMethodType="{DynamicResource ShowType}" MinWidth="400">
+
+    <mb:CustomShowUserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/EditsStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <helpers:IntToDecimalConverter x:Key="IntToDecimalConverter" />
+            <helpers:DataSource x:Key="DataSource" />
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore" />
+            <mb:PopupShowType x:Key="ShowType" Title="{helpers:ConstString ID=AddToMovieInventory}" />
+        </ResourceDictionary>
+    </mb:CustomShowUserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}">
+            <helpers:BindingInfo ElementName="resource:ElementLayoutDataStore" Property="{x:Static local:ElementLayoutDataStore.DisposeSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static mb:ShowType.CloseSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static helpers:CustomEventCommandHelper.ClosingProperty}" Value="{Binding CommandDispose}" />
+            <helpers:BindingInfo ElementName="FormatEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Format, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="FormatEdit" Property="{x:Static dxe:LookUpEditBase.ItemsSourceProperty}" Value="{Binding MovieItemFormatEditData.List}" />
+            <helpers:BindingInfo ElementName="CountEdit" Property="{x:Static dxe:SpinEdit.EditValueProperty}" Value="{Binding EditObject.ItemsCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToDecimalConverter}}" />
+            <helpers:BindingInfo ElementName="AvailableForSaleEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.AvailableForSell, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="SellingPriceEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.SellingPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="AddButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandSaveAndDispose}" />
+            <helpers:BindingInfo ElementName="CancelButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandDispose}" />
+            <helpers:ElementLayoutInfo ElementName="MainLayoutControl" StoreFolder="LayoutControl:MovieAddItemsEdit-MainLayoutControl" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <dxlc:LayoutControl x:Name="MainLayoutControl" Orientation="Vertical">
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=FormatLabel}">
+                <dxe:ComboBoxEdit x:Name="FormatEdit" Style="{StaticResource IconAndValueComboBoxEdit}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=CountLabel}">
+                <dxe:SpinEdit x:Name="CountEdit" Style="{StaticResource CountSpinEdit}" MaxValue="100" MinValue="1"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem HorizontalAlignment="Left" Margin="30,0,0,0">
+                <dxe:CheckEdit x:Name="AvailableForSaleEdit" Content="{helpers:ConstString ID=AvailableForSale}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=PriceLabel}">
+                <dxe:SpinEdit x:Name="SellingPriceEdit" Style="{StaticResource PriceSpinEdit}"  />
+            </dxlc:LayoutItem>
+        </dxlc:LayoutControl>
+        <dx:UniformStackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="12,0,12,12">
+            <Button x:Name="AddButton" Content="{helpers:ConstString ID=Add}" MinWidth="120" />
+            <Button x:Name="CancelButton" Content="{helpers:ConstString ID=Cancel}" MinWidth="120" />
+        </dx:UniformStackPanel>
+    </Grid>
+</mb:CustomShowUserControl>

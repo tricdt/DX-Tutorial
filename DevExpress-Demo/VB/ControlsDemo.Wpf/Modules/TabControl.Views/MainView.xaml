@@ -1,0 +1,281 @@
+﻿<demo:ControlsDemoModule x:Class="ControlsDemo.TabControl.Views.MainView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                         xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                         xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                         xmlns:demo="clr-namespace:ControlsDemo"
+                         xmlns:local="clr-namespace:ControlsDemo.TabControl.Views"
+                         DataContext="{dxmvvm:ViewModelSource local:MainViewModel}">
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12" MinWidth="322">
+                <dxlc:LayoutItem Label="View: ">
+                    <dxe:ComboBoxEdit x:Name="view" SelectedIndex="1" DisplayMember="Tag" IsTextEditable="False">
+                        <dx:TabControlMultiLineView Tag="MultiLine"
+                                                    HeaderLocation="Top"
+                                                    ShowHeaderMenu="True"
+                                                    NewButtonShowMode="InTabPanel"
+                                                    HideButtonShowMode="InAllTabs" />
+                        <dx:TabControlScrollView Tag="Scroll"
+                                                 HeaderLocation="Left"
+                                                 HeaderOrientation="Horizontal"
+                                                 ShowHeaderMenu="True"
+                                                 NewButtonShowMode="InTabPanel"
+                                                 HideButtonShowMode="InAllTabs" />
+                        <dx:TabControlStretchView Tag="Stretch"
+                                                  HeaderLocation="Top"
+                                                  ShowHeaderMenu="True"
+                                                  NewButtonShowMode="InTabPanel"
+                                                  HideButtonShowMode="InAllTabs"
+                                                  PinnedTabSize="50">
+                            <dx:TabControlStretchView.NewTabControlStyle>
+                                <Style TargetType="dx:DXTabControl">
+                                    <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <ContentControl>
+                                                    <dxmvvm:EventToCommand EventName="TabAdding" Command="{Binding AddNewTabCommand}" PassEventArgsToCommand="True" />
+                                                </ContentControl>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </dx:TabControlStretchView.NewTabControlStyle>
+                        </dx:TabControlStretchView>
+                    </dxe:ComboBoxEdit>
+                </dxlc:LayoutItem>
+
+                <GroupBox Header="View Base Properties" Margin="0,5,0,0">
+                    <StackPanel Orientation="Vertical">
+                        <dxlc:LayoutItem Label="Header Location: ">
+                            <dxe:ComboBoxEdit EditValue="{Binding ElementName=tabControl, Path=View.HeaderLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                              ValueMember="Id">
+                                <dxmvvm:Interaction.Behaviors>
+                                    <dxmvvm:EnumItemsSourceBehavior EnumType="dx:HeaderLocation" />
+                                </dxmvvm:Interaction.Behaviors>
+                            </dxe:ComboBoxEdit>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="New Button Show Mode: " Margin="0,7,0,0">
+                            <dxe:ComboBoxEdit EditValue="{Binding ElementName=tabControl, Path=View.NewButtonShowMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                              ValueMember="Id">
+                                <dxmvvm:Interaction.Behaviors>
+                                    <dxmvvm:EnumItemsSourceBehavior EnumType="dx:NewButtonShowMode" />
+                                </dxmvvm:Interaction.Behaviors>
+                            </dxe:ComboBoxEdit>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Hide Button Show Mode: " Margin="0,7,0,0">
+                            <dxe:ComboBoxEdit EditValue="{Binding ElementName=tabControl, Path=View.HideButtonShowMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                              ValueMember="Id">
+                                <dxmvvm:Interaction.Behaviors>
+                                    <dxmvvm:EnumItemsSourceBehavior EnumType="dx:HideButtonShowMode" />
+                                </dxmvvm:Interaction.Behaviors>
+                            </dxe:ComboBoxEdit>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Single Tab Item Hide Mode: " Margin="0,7,0,0">
+                            <dxe:ComboBoxEdit EditValue="{Binding ElementName=tabControl, Path=View.SingleTabItemHideMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                              ValueMember="Id">
+                                <dxmvvm:Interaction.Behaviors>
+                                    <dxmvvm:EnumItemsSourceBehavior EnumType="dx:SingleTabItemHideMode" />
+                                </dxmvvm:Interaction.Behaviors>
+                            </dxe:ComboBoxEdit>
+                        </dxlc:LayoutItem>
+
+                        <dxe:CheckEdit Content="Remove Tab Items On Hidding"
+                                       Margin="0,7,0,0"
+                                       IsChecked="{Binding ElementName=tabControl, Path=View.RemoveTabItemsOnHiding, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <Border Height="1" Background="Silver" Margin="0,7,0,7" />
+                        <dxe:CheckEdit Content="Show Header Menu"
+                                       Margin="0,0,0,0"
+                                       IsChecked="{Binding ElementName=tabControl, Path=View.ShowHeaderMenu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <dxe:CheckEdit Content="Show Visible Tabs In Header Menu"
+                                       Margin="0,4,0,0"
+                                       IsChecked="{Binding ElementName=tabControl, Path=View.ShowVisibleTabItemsInHeaderMenu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <dxe:CheckEdit Content="Show Hidden Tabs In Header Menu"
+                                       Margin="0,4,0,0"
+                                       IsChecked="{Binding ElementName=tabControl, Path=View.ShowHiddenTabItemsInHeaderMenu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <dxe:CheckEdit Content="Show Disabled Tabs In Header Menu"
+                                       Margin="0,4,0,0"
+                                       IsChecked="{Binding ElementName=tabControl, Path=View.ShowDisabledTabItemsInHeaderMenu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <dxe:CheckEdit Content="Close Header Menu On Item Selecting"
+                                       Margin="0,4,0,0"
+                                       IsChecked="{Binding ElementName=tabControl, Path=View.CloseHeaderMenuOnItemSelecting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </GroupBox>
+
+                <dx:DXTabControl Margin="0,5,0,0" Padding="0" SelectedIndex="{Binding ElementName=view, Path=SelectedIndex, Mode=OneWay}">
+                    <dx:DXTabControl.BackgroundTemplate>
+                        <DataTemplate />
+                    </dx:DXTabControl.BackgroundTemplate>
+                    <dx:DXTabControl.View>
+                        <dx:TabControlMultiLineView HeaderLocation="None" />
+                    </dx:DXTabControl.View>
+                    <GroupBox Header="Multi Line View Properties">
+                        <StackPanel Orientation="Vertical">
+                            <dxe:CheckEdit Content="Fixed Headers"
+                                           Margin="0,0,0,0"
+                                           IsChecked="{Binding ElementName=tabControl, Path=View.MultiLineView.FixedHeaders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <dxe:CheckEdit Content="Header Auto Fill"
+                                           Margin="0,7,0,0"
+                                           IsChecked="{Binding ElementName=tabControl, Path=View.MultiLineView.HeaderAutoFill, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Scroll View Properties">
+                        <StackPanel Orientation="Vertical">
+                            <dxlc:LayoutItem Label="Header Orientation: ">
+                                <dxe:ComboBoxEdit EditValue="{Binding ElementName=tabControl, Path=View.ScrollView.HeaderOrientation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  ValueMember="Id">
+                                    <dxmvvm:Interaction.Behaviors>
+                                        <dxmvvm:EnumItemsSourceBehavior EnumType="dx:HeaderOrientation" />
+                                    </dxmvvm:Interaction.Behaviors>
+                                </dxe:ComboBoxEdit>
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="Scroll Button Show Mode: " Margin="0,7,0,0">
+                                <dxe:ComboBoxEdit EditValue="{Binding ElementName=tabControl, Path=View.ScrollView.ScrollButtonShowMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  ValueMember="Id">
+                                    <dxmvvm:Interaction.Behaviors>
+                                        <dxmvvm:EnumItemsSourceBehavior EnumType="dx:ScrollButtonShowMode" />
+                                    </dxmvvm:Interaction.Behaviors>
+                                </dxe:ComboBoxEdit>
+                            </dxlc:LayoutItem>
+                            <dxe:CheckEdit Content="Allow Scroll Animation"
+                                           Margin="0,7,0,0"
+                                           IsChecked="{Binding ElementName=tabControl, Path=View.ScrollView.AllowAnimation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <dxe:CheckEdit Content="Allow Scroll On Mouse Wheel"
+                                           Margin="0,7,0,0"
+                                           IsChecked="{Binding ElementName=tabControl, Path=View.ScrollView.AllowScrollOnMouseWheel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <dxe:CheckEdit Content="Header Auto Fill"
+                                           Margin="0,7,0,0"
+                                           IsChecked="{Binding ElementName=tabControl, Path=View.ScrollView.HeaderAutoFill, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Stretch View Properties">
+                        <StackPanel Orientation="Vertical">
+                            <dxlc:LayoutItem Label="Tab Normal Size: ">
+                                <dxe:TextEdit EditValue="{Binding ElementName=tabControl, Path=View.StretchView.TabNormalSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="Tab Min Size: " Margin="0,7,0,0">
+                                <dxe:TextEdit EditValue="{Binding ElementName=tabControl, Path=View.StretchView.TabMinSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="Selected Tab Min Size: " Margin="0,7,0,0">
+                                <dxe:TextEdit EditValue="{Binding ElementName=tabControl, Path=View.StretchView.SelectedTabMinSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="Pinned Tab Size: " Margin="0,7,0,0">
+                                <dxe:TextEdit EditValue="{Binding ElementName=tabControl, Path=View.StretchView.PinnedTabSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="Drag Drop Mode: " Margin="0,7,0,0">
+                                <dxe:ComboBoxEdit EditValue="{Binding ElementName=tabControl, Path=View.StretchView.DragDropMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  ValueMember="Id">
+                                    <dxmvvm:Interaction.Behaviors>
+                                        <dxmvvm:EnumItemsSourceBehavior EnumType="dx:TabControlDragDropMode" />
+                                    </dxmvvm:Interaction.Behaviors>
+                                </dxe:ComboBoxEdit>
+                            </dxlc:LayoutItem>
+                            <dxe:CheckEdit Content="Allow Drag Drop of Pinned Tabs"
+                                           Margin="0,7,0,0"
+                                           IsChecked="{Binding ElementName=tabControl, Path=View.StretchView.PinnedTabAllowDrag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <dxe:CheckEdit Content="Allow Hide Pinned Tabs"
+                                           Margin="0,7,0,0"
+                                           IsChecked="{Binding ElementName=tabControl, Path=View.StretchView.PinnedTabAllowHide, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <dxe:CheckEdit Content="Close Window On Single Tab Item Hiding"
+                                           Margin="0,7,0,0"
+                                           IsChecked="{Binding ElementName=tabControl, Path=View.StretchView.CloseWindowOnSingleTabItemHiding, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </GroupBox>
+                </dx:DXTabControl>
+            </StackPanel>
+        </ScrollViewer>
+        <dx:BackgroundPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Margin="4,11,0,0" Text="Right-сlick Tab Headers to open the Tab Header context menu." />
+                <dx:DXTabControl x:Name="tabControl"
+                                 Grid.Row="1"
+                                 Margin="15,11,11,11"
+                                 ItemsSource="{Binding Photos}"
+                                 View="{Binding ElementName=view, Path=EditValue}">
+                    <dx:DXTabControl.Resources>
+                        <dxb:PopupMenu x:Key="tabContextMenu">
+                            <dxb:BarButtonItem Content="Enable This Item"
+                                               DataContext="{Binding RelativeSource={RelativeSource Self}, Path=Parent.PlacementTarget.DataContext}"
+                                               Command="{Binding SetIsEnabledCommand}"
+                                               CommandParameter="True"
+                                               IsVisible="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled}" />
+                            <dxb:BarButtonItem Content="Disable This Item"
+                                               DataContext="{Binding RelativeSource={RelativeSource Self}, Path=Parent.PlacementTarget.DataContext}"
+                                               Command="{Binding SetIsEnabledCommand}"
+                                               CommandParameter="False"
+                                               IsVisible="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled}" />
+                            <dxb:BarButtonItem Content="Disable All Items"
+                                               DataContext="{Binding RelativeSource={RelativeSource Self}, Path=Parent.PlacementTarget.Owner.DataContext}"
+                                               Command="{Binding SetIsEnabledCommand}"
+                                               CommandParameter="False" />
+                            <dxb:BarButtonItem Content="Enable All Items"
+                                               DataContext="{Binding RelativeSource={RelativeSource Self}, Path=Parent.PlacementTarget.Owner.DataContext}"
+                                               Command="{Binding SetIsEnabledCommand}"
+                                               CommandParameter="True" />
+                            <dxb:BarItemSelector />
+                            <dxb:BarCheckItem Content="Show Glyph In Header Menu" IsChecked="{Binding ShowGlyph, Mode=TwoWay}" />
+                            <dxb:BarButtonItem Content="Show All Glyphs In Header Menu"
+                                               DataContext="{Binding RelativeSource={RelativeSource Self}, Path=Parent.PlacementTarget.Owner.DataContext}"
+                                               Command="{Binding SetGlyphVisibleCommand}"
+                                               CommandParameter="True" />
+                            <dxb:BarButtonItem Content="Hide All Glyphs In Header Menu"
+                                               DataContext="{Binding RelativeSource={RelativeSource Self}, Path=Parent.PlacementTarget.Owner.DataContext}"
+                                               Command="{Binding SetGlyphVisibleCommand}"
+                                               CommandParameter="False" />
+                            <dxb:BarItemSelector />
+                            <dxb:BarButtonItem Content="Unpin Item"
+                                               DataContext="{Binding RelativeSource={RelativeSource Self}, Path=Parent.PlacementTarget.DataContext}"
+                                               Command="{Binding PinCommand}"
+                                               CommandParameter="None"
+                                               IsVisible="{Binding RelativeSource={RelativeSource Self}, Path=Parent.PlacementTarget.Owner.View.StretchView, Converter={dxmvvm:ObjectToBooleanConverter}}" />
+                            <dxb:BarButtonItem Content="Pin Item To Left"
+                                               DataContext="{Binding RelativeSource={RelativeSource Self}, Path=Parent.PlacementTarget.DataContext}"
+                                               Command="{Binding PinCommand}"
+                                               CommandParameter="Left"
+                                               IsVisible="{Binding RelativeSource={RelativeSource Self}, Path=Parent.PlacementTarget.Owner.View.StretchView, Converter={dxmvvm:ObjectToBooleanConverter}}" />
+                            <dxb:BarButtonItem Content="Pin Item To Right"
+                                               DataContext="{Binding RelativeSource={RelativeSource Self}, Path=Parent.PlacementTarget.DataContext}"
+                                               Command="{Binding PinCommand}"
+                                               CommandParameter="Right"
+                                               IsVisible="{Binding RelativeSource={RelativeSource Self}, Path=Parent.PlacementTarget.Owner.View.StretchView, Converter={dxmvvm:ObjectToBooleanConverter}}" />
+                        </dxb:PopupMenu>
+                    </dx:DXTabControl.Resources>
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxmvvm:EventToCommand EventName="TabAdding" Command="{Binding AddNewTabCommand}" PassEventArgsToCommand="True" />
+                    </dxmvvm:Interaction.Behaviors>
+                    <dx:DXTabControl.ItemContainerStyle>
+                        <Style TargetType="dx:DXTabItem">
+                            <Setter Property="Content" Value="{Binding Photo}" />
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <Image Source="{Binding}" MaxHeight="400" MaxWidth="600" Stretch="Uniform" />
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="ContextMenuService.ShowOnDisabled" Value="True" />
+                            <Setter Property="Header" Value="{Binding Title}" />
+                            <Setter Property="HeaderMenuGlyph" Value="{Binding Glyph}" />
+                            <Setter Property="IsEnabled" Value="{Binding IsEnabled, Mode=TwoWay}" />
+                            <Setter Property="Visibility" Value="{Binding IsVisible, Mode=TwoWay, Converter={dxmvvm:BooleanToVisibilityConverter}}" />
+                            <Setter Property="dx:TabControlStretchView.PinMode" Value="{Binding PinMode, Mode=TwoWay}" />
+                            <Setter Property="dxb:BarManager.DXContextMenu" Value="{StaticResource tabContextMenu}" />
+                        </Style>
+                    </dx:DXTabControl.ItemContainerStyle>
+                </dx:DXTabControl>
+            </Grid>
+        </dx:BackgroundPanel>
+    </DockPanel>
+</demo:ControlsDemoModule>

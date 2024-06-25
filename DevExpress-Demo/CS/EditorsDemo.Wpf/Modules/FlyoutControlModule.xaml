@@ -1,0 +1,564 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.FlyoutControlModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:local="clr-namespace:EditorsDemo"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#FF0096DD" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="0.75" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="ContentPresenter" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <SolidColorBrush Color="#FF2CB4F5" />
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="0.5" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="ContentPresenter" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <SolidColorBrush Color="#FF0088C8" />
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <SolidColorBrush Color="#66CACACA" />
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <SolidColorBrush Color="#1A000000" />
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualWhite" />
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualBlack" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unfocused" />
+                                    <VisualState x:Name="PointerFocused" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="Border"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Background="{TemplateBinding Background}"
+                                    Margin="3">
+                                <ContentPresenter x:Name="ContentPresenter"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Content="{TemplateBinding Content}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                            <Rectangle x:Name="FocusVisualWhite"
+                                       IsHitTestVisible="False"
+                                       Opacity="0"
+                                       StrokeDashOffset="1.5"
+                                       StrokeEndLineCap="Square"
+                                       Stroke="#FFFFFFFF"
+                                       StrokeDashArray="1,1" />
+                            <Rectangle x:Name="FocusVisualBlack"
+                                       IsHitTestVisible="False"
+                                       Opacity="0"
+                                       StrokeDashOffset="0.5"
+                                       StrokeEndLineCap="Square"
+                                       Stroke="#FF000000"
+                                       StrokeDashArray="1,1" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TopCenter" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="TopCenter" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyoutSettings Placement="Top" ShowIndicator="True" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="TopLeft" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="TopLeft" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyoutSettings Placement="Top" ShowIndicator="True" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="TopRight" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="TopRight" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyoutSettings Placement="Top" ShowIndicator="True" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="LeftTop" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="LeftTop" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyoutSettings Placement="Left" ShowIndicator="True" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+        <Style x:Key="LeftCenter" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="LeftCenter" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyoutSettings Placement="Left" ShowIndicator="True" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="LeftBottom" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="LeftBottom" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyoutSettings Placement="Left" ShowIndicator="True" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+        </Style>
+        <Style x:Key="RightTop" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap" Text="RightTop" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyoutSettings Placement="Right" ShowIndicator="True" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+        <Style x:Key="RightCenter" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="RightCenter" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyoutSettings Placement="Right" ShowIndicator="True" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="RightBottom" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="RightBottom" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyoutSettings Placement="Right" ShowIndicator="True" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+        </Style>
+        <Style x:Key="BottomLeft" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="BottomLeft" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyoutSettings Placement="Bottom" ShowIndicator="True" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="BottomCenter" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="BottomCenter" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyoutSettings Placement="Bottom" ShowIndicator="True" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="BottomRight" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="BottomRight" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyoutSettings Placement="Bottom" ShowIndicator="True" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="Top" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="Top" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyInSettings />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+        <Style x:Key="Left" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="Left" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyInSettings />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+        </Style>
+        <Style x:Key="Center" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="Center" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyInSettings />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="Right" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="Right" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyInSettings />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+        </Style>
+        <Style x:Key="Bottom" TargetType="dxe:FlyoutControl">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="Bottom" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Settings">
+                <Setter.Value>
+                    <dxe:FlyInSettings />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+        </Style>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot">
+        <dxe:FlyoutControl x:Name="flyoutControl"
+                           FontSize="16"
+                           AllowMoveAnimation="False"
+                           FontFamily="Segoe UI Light"
+                           PlacementTarget="{Binding ElementName=Center}"
+                           Style="{StaticResource Center}"
+                           IsOpen="True" />
+        <Grid x:Name="all" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Click="OpenFlyout" x:Name="TopLeft" Margin="27,12,27,24" Grid.Column="1">
+                <Path Stretch="Fill"
+                      Fill="White"
+                      Data="F1 M 311,637L 314,637L 317,640L 320,637L 341,637L 341,621L 311,621L 311,637 Z "
+                      HorizontalAlignment="Center"
+                      Height="19"
+                      Margin="15,5"
+                      VerticalAlignment="Center"
+                      Width="30" />
+            </Button>
+            <Button Click="OpenFlyout" x:Name="TopCenter" Margin="27,12,27,24" Grid.Column="2">
+                <Path Stretch="Fill"
+                      Fill="White"
+                      Data="F1 M 345,637L 357,637L 360,640L 363,637L 375,637L 375,621L 345,621L 345,637 Z "
+                      HorizontalAlignment="Center"
+                      Height="19"
+                      Margin="15,5"
+                      VerticalAlignment="Center"
+                      Width="30" />
+            </Button>
+            <Button Click="OpenFlyout" x:Name="TopRight" Margin="27,12,27,24" Grid.Column="3">
+                <Path Stretch="Fill"
+                      Fill="White"
+                      Data="F1 M 409,637L 406,637L 403,640L 400,637L 379,637L 379,621L 409,621L 409,637 Z "
+                      HorizontalAlignment="Center"
+                      Height="19"
+                      Margin="15,5"
+                      VerticalAlignment="Center"
+                      Width="30" />
+            </Button>
+            <Button Click="OpenFlyout" x:Name="BottomLeft" Margin="27,24,27,12" Grid.Column="1" Grid.Row="4">
+                <Path Stretch="Fill"
+                      Fill="White"
+                      Data="F1 M 316,700L 319,700L 322,697L 325,700L 346,700L 346,716L 316,716L 316,700 Z "
+                      HorizontalAlignment="Center"
+                      Height="19"
+                      Margin="15,5"
+                      VerticalAlignment="Center"
+                      Width="30" />
+            </Button>
+            <Button Click="OpenFlyout" x:Name="BottomCenter" Margin="27,24,27,12" Grid.Column="2" Grid.Row="4">
+                <Path Stretch="Fill"
+                      Fill="White"
+                      Data="F1 M 350,700L 362,700L 365,697L 368,700L 380,700L 380,716L 350,716L 350,700 Z "
+                      HorizontalAlignment="Center"
+                      Height="19"
+                      Margin="15,5"
+                      VerticalAlignment="Center"
+                      Width="30" />
+            </Button>
+            <Button Click="OpenFlyout" x:Name="BottomRight" Margin="27,24,27,12" Grid.Column="3" Grid.Row="4">
+                <Path Stretch="Fill"
+                      Fill="White"
+                      Data="F1 M 414,700L 411,700L 408,697L 405,700L 384,700L 384,716L 414,716L 414,700 Z "
+                      HorizontalAlignment="Center"
+                      Height="19"
+                      Margin="15,5"
+                      VerticalAlignment="Center"
+                      Width="30" />
+            </Button>
+            <Button Click="OpenFlyout" x:Name="RightTop" Margin="27,12" Grid.Column="4" Grid.Row="1">
+                <Path Stretch="Fill"
+                      Fill="White"
+                      Data="F1 M 453,617L 483,617L 483,637L 453,637L 453,626L 450,623L 453,620L 453,617 Z "
+                      HorizontalAlignment="Center"
+                      Height="20"
+                      Margin="15,5"
+                      VerticalAlignment="Center"
+                      Width="33"
+                      UseLayoutRounding="False" />
+            </Button>
+            <Button Click="OpenFlyout" x:Name="RightCenter" Margin="27,12" Grid.Row="2" Grid.Column="4">
+                <Path Stretch="Fill"
+                      Fill="White"
+                      Data="F1 M 453,639L 483,639L 483,659L 453,659L 453,652L 450,649L 453,646L 453,639 Z "
+                      HorizontalAlignment="Center"
+                      Height="20"
+                      Margin="15,5"
+                      VerticalAlignment="Center"
+                      Width="33" />
+            </Button>
+            <Button Click="OpenFlyout" x:Name="RightBottom" Margin="27,12" Grid.Column="4" Grid.Row="3">
+                <Path Stretch="Fill"
+                      Fill="White"
+                      Data="F1 M 453,660L 483,660L 483,680L 453,680L 453,677L 450,674L 453,671L 453,660 Z "
+                      HorizontalAlignment="Center"
+                      Height="20"
+                      Margin="15,5"
+                      VerticalAlignment="Center"
+                      Width="33" />
+            </Button>
+            <Button Click="OpenFlyout" x:Name="LeftTop" Margin="27,12" Grid.Row="1">
+                <Path Stretch="Fill"
+                      Fill="White"
+                      Data="F1 M 437,569L 407,569L 407,589L 437,589L 437,578L 440,575L 437,572L 437,569 Z "
+                      HorizontalAlignment="Center"
+                      Height="20"
+                      Margin="15,5"
+                      VerticalAlignment="Center"
+                      Width="33" />
+            </Button>
+            <Button Click="OpenFlyout" x:Name="LeftCenter" Margin="27,12" Grid.Row="2">
+                <Path Stretch="Fill"
+                      Fill="White"
+                      Data="F1 M 437,591L 407,591L 407,611L 437,611L 437,604L 440,601L 437,598L 437,591 Z "
+                      HorizontalAlignment="Center"
+                      Height="20"
+                      Margin="15,5"
+                      VerticalAlignment="Center"
+                      Width="33" />
+            </Button>
+            <Button Click="OpenFlyout" x:Name="LeftBottom" Margin="27,12" Grid.Row="3">
+                <Path Stretch="Fill"
+                      Fill="White"
+                      Data="F1 M 437,612L 407,612L 407,632L 437,632L 437,629L 440,626L 437,623L 437,612 Z "
+                      HorizontalAlignment="Center"
+                      Height="20"
+                      Margin="15,5"
+                      VerticalAlignment="Center"
+                      Width="33" />
+            </Button>
+            <Button Click="OpenInnerFlyout" x:Name="Left" Margin="27,12" Grid.Row="2" Grid.Column="1">
+                <Border BorderBrush="White"
+                        BorderThickness="10,1,1,1"
+                        Height="20"
+                        Width="35"
+                        Margin="15,5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center" />
+            </Button>
+            <Button Click="OpenInnerFlyout" x:Name="Right" Margin="27,12" Grid.Row="2" Grid.Column="3">
+                <Border BorderBrush="White"
+                        BorderThickness="1,1,10,1"
+                        Height="20"
+                        Width="35"
+                        Margin="15,5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center" />
+            </Button>
+            <Button Click="OpenInnerFlyout" x:Name="Top" Margin="27,12" Grid.Column="2" Grid.Row="1">
+                <Border BorderBrush="White"
+                        BorderThickness="1,10,1,1"
+                        Height="20"
+                        Width="35"
+                        Margin="15,5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center" />
+            </Button>
+            <Button Click="OpenInnerFlyout" x:Name="Bottom" Margin="27,12" Grid.Column="2" Grid.Row="3">
+                <Border BorderBrush="White"
+                        BorderThickness="1,1,1,10"
+                        Height="20"
+                        Width="35"
+                        Margin="15,5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center" />
+            </Button>
+            <Button Click="OpenInnerFlyout" x:Name="Center" Margin="27,12" Grid.Row="2" Grid.Column="2">
+                <Rectangle Fill="White" StrokeThickness="0" Width="35" Height="20" Margin="15,5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Button>
+        </Grid>
+    </Grid>
+</local:EditorsDemoModule>

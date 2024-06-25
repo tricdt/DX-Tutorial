@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="GridDemo.Filtering.CheckedListElementGridTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+             xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+             xmlns:local="clr-namespace:GridDemo">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+        <!--#region !-->
+        <dxfui:CheckedListFilterElement x:Name="filterElement" Grid.Column="1" Margin="8,0,0,0"
+                                        FieldName="Country" Context="{Binding ElementName=grid, Path=FilteringContext}">
+            <dxfui:CheckedListFilterElement.FilterModelTemplate>
+                <DataTemplate>
+                    <dxg:GridControl SelectionMode="MultipleRow"
+                                     ItemsSource="{Binding FilterValues}" SelectedItems="{Binding SelectedFilterValuesSource}">
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn FieldName="Row.Flag" Header="Flag" Width="30">
+                                <dxg:GridColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Value}" HorizontalAlignment="Center" Height="20"/>
+                                    </DataTemplate>
+                                </dxg:GridColumn.CellTemplate>
+                            </dxg:GridColumn>
+                            <dxg:GridColumn FieldName="Value" Width="*"/>
+                            <dxg:GridColumn FieldName="Count" SortOrder="Descending" Width="60"/>
+                        </dxg:GridControl.Columns>
+                        <dxg:GridControl.View>
+                            <dxg:TableView ShowCheckBoxSelectorColumn="True" CheckBoxSelectorColumnWidth="30" NavigationStyle="Row"
+                                           ShowGroupPanel="False" AllowGrouping="False" ShowIndicator="False" AllowEditing="False">
+                                <dxg:TableView.FormatConditions>
+                                    <dxg:DataBarFormatCondition FieldName="Value" Expression="[Count]" PredefinedFormatName="GreenSolidDataBar"/>
+                                </dxg:TableView.FormatConditions>
+                            </dxg:TableView>
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+                </DataTemplate>
+            </dxfui:CheckedListFilterElement.FilterModelTemplate>
+        </dxfui:CheckedListFilterElement>
+        <!--#endregion-->
+        <dxg:GridControl Name="grid" ItemsSource="{x:Static dxdb:NWindDataProvider.Invoices}"
+                         FilterString="[Country] In ('Brazil', 'Germany', 'USA')">
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="view" ShowFixedTotalSummary="True" NavigationStyle="Row"/>
+            </dxg:GridControl.View>
+            <dxg:GridControl.Columns>
+                <!--#region !-->
+                <dxg:GridColumn FieldName="Country" Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{x:Static local:CountriesData.DataSource}"
+                                                  ValueMember="ActualNWindName" DisplayMember="ActualNWindName"/>
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <!--#endregion-->
+                <dxg:GridColumn FieldName="City" Width="*" />
+                <dxg:GridColumn FieldName="Quantity" Width="*" />
+                <dxg:GridColumn FieldName="UnitPrice" Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="$0.00" MaskType="Numeric" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+            </dxg:GridControl.TotalSummary>
+        </dxg:GridControl>
+    </Grid>
+</UserControl>

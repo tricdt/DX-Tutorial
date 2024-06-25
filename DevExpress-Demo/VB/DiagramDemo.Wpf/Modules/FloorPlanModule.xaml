@@ -1,0 +1,30 @@
+﻿<local:DiagramDemoModule x:Class="DiagramDemo.FloorPlanModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                         xmlns:local="clr-namespace:DiagramDemo"
+                         xmlns:dxdiag="http://schemas.devexpress.com/winfx/2008/xaml/diagram"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         mc:Ignorable="d"
+                         d:DesignWidth="800"
+                         d:DesignHeight="600">
+    <dxdiag:DiagramDesignerControl x:Name="diagramControl"
+                                   DockPanel.Dock="Right"
+                                   Theme="Linear"
+                                   PropertiesPanelVisibility="Closed"
+                                   ZoomFactor="0.6"
+                                   ItemInitializing="diagramControl_ItemInitializing">
+        <dxdiag:DiagramDesignerControl.BackgroundTemplate>
+            <DataTemplate DataType="{x:Type dxdiag:BackgroundInfo}">
+                <Grid Margin="{Binding Padding}">
+                    <dx:DXImage Source="/DiagramDemo;component/Images/Backgrounds/floor.svg" />
+                </Grid>
+            </DataTemplate>
+        </dxdiag:DiagramDesignerControl.BackgroundTemplate>
+        <dxdiag:DiagramDesignerControl.Actions>
+            <dxb:UpdateAction ElementName="{x:Static dxdiag:DefaultBarItemNames.Ribbon}" PropertyName="IsMinimized" Value="True" />
+        </dxdiag:DiagramDesignerControl.Actions>
+    </dxdiag:DiagramDesignerControl>
+</local:DiagramDemoModule>

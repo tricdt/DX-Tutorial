@@ -1,0 +1,75 @@
+﻿<local:SpreadsheetDemoModule xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                             xmlns:dxsps="http://schemas.devexpress.com/winfx/2008/xaml/spreadsheet"
+                             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                             xmlns:local="clr-namespace:SpreadsheetDemo"
+                             x:Class="SpreadsheetDemo.CellCustomization">
+
+    <local:SpreadsheetDemoModule.Resources>
+        <DataTemplate x:Key="IncorrectTemplate" DataType="{x:Type dxsps:CellData}">
+            <Grid>
+                <Canvas HorizontalAlignment="Right">
+                    <Grid Canvas.Left="0" Canvas.Top="-20" Height="26">
+                        <Border Background="LightPink" Height="14" VerticalAlignment="Top">
+                            <TextBlock Margin="5,0" Text="Incorrect value" FontWeight="Bold" VerticalAlignment="Center" />
+                        </Border>
+                        <Path VerticalAlignment="Top" Margin="0,14,0,0" HorizontalAlignment="Left" Data="M 0,0 0,10 7,0" Fill="LightPink" />
+                    </Grid>
+                </Canvas>
+                <TextBlock Text="{Binding TextSettings.Text}"
+                           TextWrapping="{Binding TextSettings.TextWrapping}"
+                           FontFamily="{Binding TextSettings.FontFamily}"
+                           FontStyle="{Binding TextSettings.FontStyle}"
+                           FontSize="{Binding TextSettings.FontSize}"
+                           FontStretch="{Binding TextSettings.FontStretch}"
+                           FontWeight="{Binding TextSettings.FontWeight}"
+                           TextAlignment="{Binding TextSettings.TextAlignment}"
+                           Foreground="Red"
+                           Margin="0,0,0,2" />
+                <Border Background="Red" VerticalAlignment="Bottom" Height="2" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="CorrectTemplate" DataType="{x:Type dxsps:CellData}">
+            <Grid>
+                <Canvas HorizontalAlignment="Right">
+                    <Grid Canvas.Left="0" Canvas.Top="-20" Height="26">
+                        <Border Background="LightGreen" Height="14" VerticalAlignment="Top">
+                            <TextBlock Margin="10,0" Text="Ok" FontWeight="Bold" VerticalAlignment="Center" />
+                        </Border>
+                        <Path VerticalAlignment="Top" Margin="0,14,0,0" HorizontalAlignment="Left" Data="M 0,0 0,10 7,0" Fill="LightGreen" />
+                    </Grid>
+                </Canvas>
+                <TextBlock Text="{Binding TextSettings.Text}"
+                           TextWrapping="{Binding TextSettings.TextWrapping}"
+                           FontFamily="{Binding TextSettings.FontFamily}"
+                           FontStyle="{Binding TextSettings.FontStyle}"
+                           FontSize="{Binding TextSettings.FontSize}"
+                           FontStretch="{Binding TextSettings.FontStretch}"
+                           FontWeight="{Binding TextSettings.FontWeight}"
+                           TextAlignment="{Binding TextSettings.TextAlignment}"
+                           Foreground="Green"
+                           Margin="0,0,0,2" />
+                <Border Background="Green" VerticalAlignment="Bottom" Height="2" />
+            </Grid>
+        </DataTemplate>
+        <local:CellTemplateSelector x:Key="CellTemplateSelector" />
+    </local:SpreadsheetDemoModule.Resources>
+
+    <dxsps:SpreadsheetControl x:Name="spreadsheetControl1"
+                              CommandBarStyle="Ribbon"
+                              ShowFormulaBar="True"
+                              DocumentSource="{DXBinding '$local:DemoUtils.GetRelativePath(`CellCustomization.xlsx`)'}"
+                              CellTemplateSelector="{StaticResource CellTemplateSelector}"
+                              BorderThickness="0,1,0,0">
+        <dxsps:SpreadsheetControl.Options>
+            <dxsps:SpreadsheetControlOptions Culture="en-US" >
+                <dxsps:SpreadsheetControlOptions.Print>
+                    <dxsps:SpreadsheetPrintOptions PrintContent="ActiveSheets"/>
+                </dxsps:SpreadsheetControlOptions.Print>
+            </dxsps:SpreadsheetControlOptions>
+        </dxsps:SpreadsheetControl.Options>
+        <dxsps:SpreadsheetControl.RibbonActions>
+            <dxb:UpdateAction ElementName="{x:Static dxsps:DefaultBarItemNames.RibbonPage_Home}" PropertyName="IsSelected" Value="True" />
+        </dxsps:SpreadsheetControl.RibbonActions>
+    </dxsps:SpreadsheetControl>
+</local:SpreadsheetDemoModule>

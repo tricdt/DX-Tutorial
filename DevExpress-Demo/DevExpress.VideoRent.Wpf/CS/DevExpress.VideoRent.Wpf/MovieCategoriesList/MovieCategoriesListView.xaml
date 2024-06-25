@@ -1,0 +1,110 @@
+<mb:DemoModule x:Class="DevExpress.VideoRent.Wpf.MovieCategoriesListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:mb="clr-namespace:DevExpress.VideoRent.Wpf.ModulesBase"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:resources="clr-namespace:DevExpress.VideoRent.Resources;assembly=DevExpress.VideoRent.Resources"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    ShowMethodType="{DynamicResource ShowType}">
+
+    <mb:DemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/EditsStyles.xaml" />
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/CommonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <helpers:IntToDoubleConverter x:Key="IntToDoubleConverter" />
+            <helpers:DataSource x:Key="DataSource" />
+            <helpers:DataSource x:Key="GridSource" DataObject="{Binding Source={StaticResource DataSource}, Path=DataObject.MovieCategoriesEdit.View.Content.(helpers:GridControlHelper.Grid)}" />
+            <helpers:DataSource x:Key="GridCommandsSource" DataObject="{Binding Source={StaticResource GridSource}, Path=DataObject.View.Commands}" />
+            <resources:ImagesSourceHelper x:Key="ImagesHelper" />
+            <helpers:ImageCollectionImageSource x:Key="AddButtonImageSource" ImageCollection="{Binding Source={StaticResource ImagesHelper}, Path=BarIcons}" ImageIndex="0" />
+            <helpers:ImageCollectionImageSource x:Key="DeleteButtonImageSource" ImageCollection="{Binding Source={StaticResource ImagesHelper}, Path=BarIcons}" ImageIndex="2" />
+            <mb:ClassicShowType x:Key="ShowType" Category="{x:Static local:WpfViewsManager.CategoryMovieCategories}" />
+            <helpers:EmptyConverter x:Key="EmptyConverter"/>
+        </ResourceDictionary>
+    </mb:DemoModule.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}">
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static mb:ShowType.CloseSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static mb:ClassicShowType.SelectSignalSlotProperty}" Value="{Binding FocusSignal}" />
+            <helpers:BindingInfo ElementName="BbiSave" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding CommandSave}" />
+            <helpers:BindingInfo ElementName="BbiRefresh" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding EditObject.CommandReload}" />
+            <helpers:BindingInfo ElementName="BbiAdd" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding CommandAdd}" />
+            <helpers:BindingInfo ElementName="BbiDelete" Property="{x:Static ContentElement.IsEnabledProperty}" Value="{Binding MovieCategoriesEdit.AllowDelete}" />
+            <helpers:BindingInfo ElementName="BbiDelete"  Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding MovieCategoriesEdit.CommandDeleteCurrentRecord}" />
+            <helpers:BindingInfo ElementName="BbiFlipLayout" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding MovieCategoriesEdit.CommandFlipLayout}" />
+            <helpers:BindingInfo ElementName="MovieCategoriesEditViewPresenter" Property="{x:Static ContentControl.ContentProperty}" Value="{Binding MovieCategoriesEdit.View}" />
+            <helpers:BindingInfo ElementName="BeiMarkerSize" Property="{x:Static dxb:BarEditItem.EditValueProperty}" Value="{Binding MovieCategoriesEdit.ChartMarkerSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToDoubleConverter}}" />
+            <helpers:BindingInfo ElementName="BeiMarkerAngle" Property="{x:Static dxb:BarEditItem.EditValueProperty}" Value="{Binding MovieCategoriesEdit.ChartMarkerAngle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="BeiMarkerKind" Property="{x:Static dxb:BarEditItem.EditValueProperty}" Value="{Binding MovieCategoriesEdit.ChartMarkerKindName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="PaletteEdit" Property="{x:Static dxe:ListBoxEdit.ItemsSourceProperty}" Value="{Binding ChartPaletteEditData.List}" />
+            <helpers:BindingInfo ElementName="PaletteEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding MovieCategoriesEdit.ChartPaletteName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="MarkerKindEditSettings" Property="{x:Static dxe:LookUpEditSettingsBase.ItemsSourceProperty}" Value="{Binding ChartMarker2DKindEditData.List}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <dxb:BarManager>
+            <dxb:BarManager.Items>
+                <dxb:BarButtonItem x:Name="BbiAdd" local:ImagesHelper.VideoRentImage="Add" Content="{helpers:ConstString ID=Add}" />
+                <dxb:BarButtonItem x:Name="BbiDelete" local:ImagesHelper.VideoRentImage="Delete" Content="{helpers:ConstString ID=Delete}" />
+                <dxb:BarButtonItem x:Name="BbiRefresh" local:ImagesHelper.VideoRentImage="Refresh" Content="{helpers:ConstString ID=Refresh}" />
+                <dxb:BarButtonItem x:Name="BbiSave" local:ImagesHelper.VideoRentImage="Save" Content="{helpers:ConstString ID=Save}" />
+                <dxb:BarButtonItem x:Name="BbiFlipLayout" local:ImagesHelper.VideoRentImage="LayoutFlip" Content="{helpers:ConstString ID=FlipLayout}" />
+                <dxb:BarSplitButtonItem x:Name="BeiPalette" ActAsDropDown="True" Content="{helpers:ConstString ID=Palette}" local:ImagesHelper.VideoRentImage="Palette">
+                    <dxb:BarSplitButtonItem.PopupControl>
+                        <dxb:PopupControlContainer>
+                            <dxe:ListBoxEdit x:Name="PaletteEdit" Style="{StaticResource ChartPaletteComboBoxEdit}"/>
+                        </dxb:PopupControlContainer>
+                    </dxb:BarSplitButtonItem.PopupControl>
+                </dxb:BarSplitButtonItem>
+                <dxb:BarEditItem x:Name="BeiMarkerSize" EditWidth="210" Content="{helpers:ConstString ID=MarkerSizeLabel}">
+                    <dxb:BarEditItem.EditSettings>
+                        <dxe:TrackBarEditSettings helpers:StyleConverter.Style="{StaticResource ChartMarkerSizeTrackBarEdit}" />
+                    </dxb:BarEditItem.EditSettings>
+                </dxb:BarEditItem>
+                <dxb:BarEditItem x:Name="BeiMarkerAngle" EditWidth="210" Content="{helpers:ConstString ID=MarkerAngleLabel}">
+                    <dxb:BarEditItem.EditSettings>
+                        <dxe:TrackBarEditSettings helpers:StyleConverter.Style="{StaticResource ChartMarkerAngleTrackBarEdit}" />
+                    </dxb:BarEditItem.EditSettings>
+                </dxb:BarEditItem>
+                <dxb:BarEditItem x:Name="BeiMarkerKind" EditWidth="210" Content="{helpers:ConstString ID=MarkerLabel}">
+                    <dxb:BarEditItem.EditSettings>
+                        <dxe:ComboBoxEditSettings x:Name="MarkerKindEditSettings" helpers:StyleConverter.Style="{StaticResource ChartMarker2DKindComboBoxEdit}" />
+                    </dxb:BarEditItem.EditSettings>
+                </dxb:BarEditItem>
+            </dxb:BarManager.Items>
+            <dxr:RibbonControl>
+                <dxr:RibbonDefaultPageCategory>
+                    <dxr:RibbonPage Caption="{helpers:ConstString ID=Home}">
+                        <dxr:RibbonPageGroup Caption="{helpers:ConstString ID=CustomerRecordManagement}">
+                            <dxb:BarButtonItemLink BarItemName="BbiAdd" RibbonStyle="Large" />
+                            <dxb:BarButtonItemLink BarItemName="BbiDelete" RibbonStyle="Large" />
+                            <dxb:BarItemLinkSeparator />
+                            <dxb:BarButtonItemLink BarItemName="BbiRefresh" RibbonStyle="Large" />
+                            <dxb:BarItemLinkSeparator />
+                            <dxb:BarButtonItemLink BarItemName="BbiSave" RibbonStyle="Large" />
+                            <dxb:BarItemLinkSeparator />
+                            <dxb:BarButtonItemLink BarItemName="BbiFlipLayout" RibbonStyle="Large" />
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{helpers:ConstString ID=ChartAppearance}">
+                            <dxb:BarSplitButtonItemLink BarItemName="BeiPalette" BarItemDisplayMode="ContentAndGlyph" RibbonStyle="Large" />
+                            <dxb:BarEditItemLink BarItemName="BeiMarkerKind" BarItemDisplayMode="ContentAndGlyph" RibbonStyle="SmallWithText" />
+                            <dxb:BarEditItemLink BarItemName="BeiMarkerSize" BarItemDisplayMode="ContentAndGlyph" RibbonStyle="SmallWithText" />
+                            <dxb:BarEditItemLink BarItemName="BeiMarkerAngle" BarItemDisplayMode="ContentAndGlyph" RibbonStyle="SmallWithText" />
+                        </dxr:RibbonPageGroup>
+                    </dxr:RibbonPage>
+                </dxr:RibbonDefaultPageCategory>
+            </dxr:RibbonControl>
+        </dxb:BarManager>
+        <ContentControl Grid.Row="1" x:Name="MovieCategoriesEditViewPresenter" Style="{StaticResource ModulePresenter}" />
+    </Grid>
+</mb:DemoModule>

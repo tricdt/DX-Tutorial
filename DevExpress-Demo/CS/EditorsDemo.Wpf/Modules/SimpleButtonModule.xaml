@@ -1,0 +1,122 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.SimpleButtonModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+                         xmlns:local="clr-namespace:EditorsDemo"
+                         mc:Ignorable="d"
+                         d:DesignHeight="300"
+                         d:DesignWidth="300">
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <Grid Margin="12,5,12,12" MinWidth="350">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <GroupBox Header="Select a button" Grid.Row="0">
+                    <Grid x:Name="grid" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition  Width="Auto"/>
+                            <ColumnDefinition  Width="10"/>
+                            <ColumnDefinition  Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <RadioButton x:Name="rbSimpleButton"
+                                     GroupName="Group"
+                                     Content="SimpleButton"
+                                     Grid.Column="0"
+                                     Checked="OnRadioButtonChecked"
+                                     HorizontalAlignment="Left" />
+                        <RadioButton x:Name="rbSplitButton"
+                                     GroupName="Group"
+                                     Content="SplitButton"
+                                     Grid.Column="2"
+                                     Checked="OnRadioButtonChecked"
+                                     HorizontalAlignment="Left" />
+                        <RadioButton x:Name="rbDropDownButton"
+                                     GroupName="Group"
+                                     Content="DropDownButton"
+                                     Grid.Row="1"
+                                     Grid.Column="0"
+                                     Checked="OnRadioButtonChecked"
+                                     HorizontalAlignment="Left" />
+                        <RadioButton x:Name="rbAsyncSimpleButton"
+                                     GroupName="Group"
+                                     Content="Async SimpleButton"
+                                     Grid.Row="1"
+                                     Grid.Column="2"
+                                     Checked="OnRadioButtonChecked"
+                                     HorizontalAlignment="Left" />
+                    </Grid>
+
+                </GroupBox>
+                <GroupBox Header="The selected button's properties" Grid.Row="1" Margin="0,5,0,0">
+                    <dxprg:PropertyGridControl x:Name="propertyGrid"
+                                               ShowToolPanel="False"
+                                               ShowSearchBox="False"
+                                               ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                               ShowCategories="False"
+                                               ShowMenuButtonInRows="False"
+                                               BorderThickness="1,1,1,0"
+                                               ShowProperties="WithPropertyDefinitions">
+                        <dxprg:PropertyDefinition Path="Content" PostOnEditValueChanged="True" />
+                        <dxprg:PropertyDefinition Path="ButtonKind" PostOnEditValueChanged="True" />
+                        <dxprg:PropertyDefinition Path="Glyph" PostOnEditValueChanged="True">
+                            <dxprg:PropertyDefinition.EditSettings>
+                                <dxe:PopupImageEditSettings ShowMenuMode="Always" Stretch="Uniform" />
+                            </dxprg:PropertyDefinition.EditSettings>
+                        </dxprg:PropertyDefinition>
+                        <dxprg:PropertyDefinition Path="GlyphAlignment" PostOnEditValueChanged="True" />
+                    </dxprg:PropertyGridControl>
+                </GroupBox>
+                <GroupBox Header="Event log" Grid.Row="2" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit ItemsSource="{Binding EventLog, RelativeSource={RelativeSource AncestorType=local:EditorsDemoModule}}"
+                                     IsReadOnly="True"
+                                     Focusable="False"
+                                     ShowBorder="False" />
+                </GroupBox>
+            </Grid>
+        </ScrollViewer>
+        <StackPanel VerticalAlignment="Top"
+                    Margin="0,180,0,0"
+                    HorizontalAlignment="Center">
+            <dx:SimpleButton x:Name="simpleButton"
+                             Margin="0,0,0,24"
+                             Content="SimpleButton"
+                             Click="OnButtonClick" />
+            <dx:SplitButton x:Name="splitButton"
+                            Margin="0,0,0,24"
+                            Content="SplitButton"
+                            Click="OnButtonClick">
+                <TextBlock Text="Custom popup text" TextAlignment="Center" Margin="4" />
+            </dx:SplitButton>
+            <dx:DropDownButton x:Name="dropdownButton"
+                               Content="DropDownButton"
+                               Margin="0,0,0,24"
+                               Click="OnButtonClick">
+                <dxb:PopupMenu>
+                    <dxb:BarButtonItem Content="Apply" Glyph="/DevExpress.Images.v22.2;component/SvgImages/Icon Builder/Actions_Check.svg" ItemClick="OnBarButtonItemClick" />
+                    <dxb:BarButtonItem Content="Copy" Glyph="/DevExpress.Images.v22.2;component/SvgImages/Edit/Copy.svg" ItemClick="OnBarButtonItemClick" />
+                    <dxb:BarButtonItem Content="Delete" Glyph="/DevExpress.Images.v22.2;component/SvgImages/Icon Builder/Actions_Delete.svg" ItemClick="OnBarButtonItemClick" />
+                </dxb:PopupMenu>
+            </dx:DropDownButton>
+            <dx:SimpleButton x:Name="simpleButtonAsync"
+                             AsyncDisplayMode="WaitCancel"
+                             Content="Async SimpleButton" />
+        </StackPanel>
+    </DockPanel>
+</local:EditorsDemoModule>

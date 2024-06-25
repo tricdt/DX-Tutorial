@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="EditorsDemo.FilterBehavior.FilterBehaviorChartControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+             xmlns:dxa="http://schemas.devexpress.com/winfx/2008/xaml/accordion"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:local="clr-namespace:EditorsDemo.FilterBehavior">
+    <!--#region Resources-->
+    <UserControl.Resources>
+        <dxa:AccordionItemStyle x:Key="{x:Type dxa:AccordionItem}" FontSize="12">
+            <dxa:AccordionItemStyle.ItemContainerStyle>
+                <dxa:AccordionItemStyle ItemDisplayMode="Header" Margin="8"/>
+            </dxa:AccordionItemStyle.ItemContainerStyle>
+        </dxa:AccordionItemStyle>
+    </UserControl.Resources>
+    <!--#endregion-->
+    <UserControl.DataContext>
+        <local:FilterBehaviorChartControlViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <!--#region !-->
+        <dxa:AccordionControl SelectionMode="None" Grid.Column="1">
+            <dxmvvm:Interaction.Behaviors>
+                <dxfui:FilterBehavior x:Name="filterBehavior" ItemsSource="{Binding ElementName=chart, Path=DataSource}">
+                    <dxfui:FilterField FieldName="Company">
+                        <dxe:ComboBoxEditSettings ItemsSource="{Binding Companies}"/>
+                    </dxfui:FilterField>
+                </dxfui:FilterBehavior>
+            </dxmvvm:Interaction.Behaviors>
+            <dxa:AccordionItem Header="Year" IsExpanded="True">
+                <dxfui:RangeFilterElement FieldName="Year"/>
+            </dxa:AccordionItem>
+            <dxa:AccordionItem Header="Company" IsExpanded="True">
+                <dxfui:CheckedListFilterElement FieldName="Company"/>
+            </dxa:AccordionItem>
+        </dxa:AccordionControl>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Margin="4,4,0,0" FontWeight="DemiBold"
+                   Text="{DXBinding '@e(filterBehavior).FilterDisplayText ?? `No filter`'}"/>
+        <!--#endregion-->
+
+        <dxc:ChartControl Name="chart" DataSource="{Binding Sales}">
+            <dxc:XYDiagram2D SeriesDataMember="Company" EqualBarWidth="True">
+                <!--#region Axes-->
+                <dxc:XYDiagram2D.AxisX>
+                    <dxc:AxisX2D>
+                        <dxc:AxisX2D.NumericScaleOptions>
+                            <dxc:ManualNumericScaleOptions AutoGrid="False" />
+                        </dxc:AxisX2D.NumericScaleOptions>
+                        <dxc:AxisX2D.Title>
+                            <dxc:AxisTitle Content="Year" />
+                        </dxc:AxisX2D.Title>
+                    </dxc:AxisX2D>
+                </dxc:XYDiagram2D.AxisX>
+                <dxc:XYDiagram2D.AxisY>
+                    <dxc:AxisY2D>
+                        <dxc:AxisY2D.Title>
+                            <dxc:AxisTitle Content="Sales, millions of USD" />
+                        </dxc:AxisY2D.Title>
+                    </dxc:AxisY2D>
+                </dxc:XYDiagram2D.AxisY>
+                <!--#endregion-->
+                <dxc:XYDiagram2D.SeriesTemplate>
+                    <dxc:BarFullStackedSeries2D Name="seriesTemplate" ArgumentDataMember="Year" ValueDataMember="Sales" ToolTipHintDataMember="Charges"
+                                                FilterCriteria="{Binding ElementName=filterBehavior, Path=ActualFilterCriteria}"
+                                                CrosshairLabelPattern="{}{S}:&#xA;Sales: {V:$0.00}M&#xA;Charges: {HINT:$0.00}M">
+                    </dxc:BarFullStackedSeries2D>
+                </dxc:XYDiagram2D.SeriesTemplate>
+            </dxc:XYDiagram2D>
+            <!--#region Legend and Title-->
+            <dxc:ChartControl.Legend>
+                <dxc:Legend Orientation="Horizontal" HorizontalPosition="Center" VerticalPosition="BottomOutside" />
+            </dxc:ChartControl.Legend>
+            <dxc:ChartControl.Titles>
+                <dxc:Title Content="Market Share Over Time" HorizontalAlignment="Center" />
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+        </dxc:ChartControl>
+    </Grid>
+</UserControl>

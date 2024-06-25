@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="MVVMDemo.Behaviors.CompositeCommandBehaviorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.Behaviors"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             DataContext="{dxmvvm:ViewModelSource Type=local:CompositeCommandBehaviorViewModel}">
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <dxlc:LayoutItem Label="Enter user name:" LabelPosition="Top">
+            <dxe:TextEdit x:Name="userNameTextBox"/>
+        </dxlc:LayoutItem>
+        <Button Content="Register">
+            <!--#region !-->
+            <dxmvvm:Interaction.Behaviors>
+                <dxmvvm:CompositeCommandBehavior>
+                    <dxmvvm:CommandItem Command="{Binding LogCommand}" CommandParameter="Registration"/>
+                    <dxmvvm:CommandItem Command="{Binding RegisterCommand}" CommandParameter="{Binding ElementName=userNameTextBox, Path=Text}"/>
+                </dxmvvm:CompositeCommandBehavior>
+            </dxmvvm:Interaction.Behaviors>
+            <!--#endregion-->
+        </Button>
+        <TextBlock Text="{Binding LogText}"/>
+    </dxlc:LayoutControl>
+</UserControl>

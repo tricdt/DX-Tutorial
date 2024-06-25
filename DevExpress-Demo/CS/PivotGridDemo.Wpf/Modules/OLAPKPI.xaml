@@ -1,0 +1,97 @@
+﻿<local:PivotGridDemoModule x:Class="PivotGridDemo.OLAPKPI"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:local="clr-namespace:PivotGridDemo"
+                           xmlns:dxpg="http://schemas.devexpress.com/winfx/2008/xaml/pivotgrid"
+                           xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                           xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core">
+    <DockPanel>
+        <local:PivotGridDemoRibbon DockPanel.Dock="Top" ExportPivotGrid="{x:Reference pivotGrid}"/>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <GroupBox Header="Graphics" Margin="12,5,12,12" MinWidth="210" VerticalAlignment="Top">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="105" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,4,4">Status Graphics</TextBlock>
+                    <dxe:ComboBoxEdit Grid.Row="0"
+                                      Grid.Column="1"
+                                      Name="cbStatusGraphics"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Stretch"
+                                      IsTextEditable="False"
+                                      Margin="0,0,0,4"
+                                      ItemsSource="{dxe:EnumItemsSource EnumType=dxpg:PivotKpiGraphic}"
+                                      EditValue="{Binding ElementName=fieldStatus, Path=KpiGraphic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Trend Graphics" />
+                    <dxe:ComboBoxEdit Grid.Row="1"
+                                      Grid.Column="1"
+                                      Name="cbTrendGraphics"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Stretch"
+                                      IsTextEditable="False"
+                                      ItemsSource="{dxe:EnumItemsSource EnumType=dxpg:PivotKpiGraphic}"
+                                      EditValue="{Binding ElementName=fieldTrend, Path=KpiGraphic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" />
+                </Grid>
+            </GroupBox>
+        </ScrollViewer>
+        <dxpg:PivotGridControl x:Name="pivotGrid"
+                               local:FieldAreaHelper.FixAreas="True"
+                               RowTreeWidth="260"
+                               VerticalAlignment="Stretch"
+                               ShowBorder="False">
+            <dxpg:PivotGridControl.Fields>
+                <dxpg:PivotGridField x:Name="fieldFiscalYear"
+                                     DataBinding="{dxpg:DataSourceColumnBinding [Date].[Fiscal].[Fiscal Year]}"
+                                     Area="RowArea"
+                                     AreaIndex="0"
+                                     Caption="Fiscal Year"
+                                     ExpandedInFieldsGroup="False" />
+                <dxpg:PivotGridField x:Name="fieldFiscalSemester"
+                                     DataBinding="{dxpg:DataSourceColumnBinding [Date].[Fiscal].[Fiscal Semester]}"
+                                     Area="RowArea"
+                                     AreaIndex="1"
+                                     Caption="Fiscal Semester"
+                                     Width="100" />
+                <dxpg:PivotGridField x:Name="fieldFiscalQuarter"
+                                     DataBinding="{dxpg:DataSourceColumnBinding [Date].[Fiscal].[Fiscal Quarter]}"
+                                     Area="RowArea"
+                                     AreaIndex="2"
+                                     Caption="Fiscal Quarter" />
+                <dxpg:PivotGridField x:Name="fieldInternetRevenue"
+                                     DataBinding="{dxpg:DataSourceColumnBinding [Measures].[Internet Sales Amount]}"
+                                     Area="DataArea"
+                                     AreaIndex="0"
+                                     Caption="Internet Revenue" />
+                <dxpg:PivotGridField x:Name="fieldGoal"
+                                     DataBinding="{dxpg:DataSourceColumnBinding [Measures].[Internet Revenue Goal]}"
+                                     Area="DataArea"
+                                     AreaIndex="1"
+                                     Caption="Goal"
+                                     CellFormat="c2" />
+                <dxpg:PivotGridField x:Name="fieldStatus"
+                                     KpiGraphic="Cylinder"
+                                     DataBinding="{dxpg:DataSourceColumnBinding [Measures].[Internet Revenue Status]}"
+                                     Area="DataArea"
+                                     AreaIndex="2"
+                                     Caption="Status" />
+                <dxpg:PivotGridField x:Name="fieldTrend"
+                                     KpiGraphic="StatusArrow"
+                                     DataBinding="{dxpg:DataSourceColumnBinding [Measures].[Internet Revenue Trend]}"
+                                     Area="DataArea"
+                                     AreaIndex="3"
+                                     Caption="Trend" />
+            </dxpg:PivotGridControl.Fields>
+        </dxpg:PivotGridControl>
+    </DockPanel>
+</local:PivotGridDemoModule>

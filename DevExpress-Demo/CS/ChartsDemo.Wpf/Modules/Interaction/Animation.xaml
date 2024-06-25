@@ -1,0 +1,656 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.AnimationDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:local="clr-namespace:ChartsDemo"
+    RunChartsAnimationOnLoad="False"
+    ModuleLoaded="ChartsDemoModule_ModuleLoaded">
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style
+                TargetType="dxc:SeriesLabel">
+                <Setter
+                    Property="ResolveOverlappingMode"
+                    Value="Default" />
+            </Style>
+            <Style
+                x:Key="baseSeriesStyle"
+                TargetType="dxc:Series">
+                <Setter
+                    Property="AnimationAutoStartMode"
+                    Value="SetStartState" />
+                <Setter
+                    Property="ArgumentDataMember"
+                    Value="Argument" />
+                <Setter
+                    Property="DataSource"
+                    Value="{Binding}" />
+                <Setter
+                    Property="LabelsVisibility"
+                    Value="True" />
+                <Setter
+                    Property="ValueDataMember"
+                    Value="Value" />
+            </Style>
+            <Style
+                x:Key="rangeBarStyle"
+                TargetType="dxc:RangeBarSeries2D"
+                BasedOn="{StaticResource baseSeriesStyle}">
+                <Setter
+                    Property="LabelsVisibility"
+                    Value="False" />
+                <Setter
+                    Property="Value2DataMember"
+                    Value="Value2" />
+            </Style>
+            <Style
+                x:Key="bubbleStyle"
+                TargetType="dxc:BubbleSeries2D"
+                BasedOn="{StaticResource baseSeriesStyle}">
+                <Setter
+                    Property="ColorEach"
+                    Value="True" />
+                <Setter
+                    Property="MaxSize"
+                    Value="1" />
+                <Setter
+                    Property="MinSize"
+                    Value="1" />
+                <Setter
+                    Property="Transparency"
+                    Value="0.3" />
+                <Setter
+                    Property="WeightDataMember"
+                    Value="Weight" />
+            </Style>
+            <Style
+                x:Key="lineStyle"
+                TargetType="dxc:LineSeries2D"
+                BasedOn="{StaticResource baseSeriesStyle}">
+                <Setter
+                    Property="MarkerVisible"
+                    Value="True" />
+            </Style>
+            <Style
+                x:Key="areaStyle"
+                TargetType="dxc:AreaSeries2D"
+                BasedOn="{StaticResource baseSeriesStyle}">
+                <Setter
+                    Property="MarkerVisible"
+                    Value="True" />
+                <Setter
+                    Property="Transparency"
+                    Value="0.3" />
+            </Style>
+            <Style
+                x:Key="rangeAreaStyle"
+                TargetType="dxc:RangeAreaSeries2D"
+                BasedOn="{StaticResource baseSeriesStyle}">
+                <Setter
+                    Property="Transparency"
+                    Value="0.3" />
+                <Setter
+                    Property="Value2DataMember"
+                    Value="Value2" />
+            </Style>
+            <Style
+                x:Key="financialStyle"
+                TargetType="dxc:FinancialSeries2D"
+                BasedOn="{StaticResource baseSeriesStyle}">
+                <Setter
+                    Property="ArgumentDataMember"
+                    Value="Date" />
+                <Setter
+                    Property="ArgumentScaleType"
+                    Value="DateTime" />
+                <Setter
+                    Property="CloseValueDataMember"
+                    Value="Close" />
+                <Setter
+                    Property="HighValueDataMember"
+                    Value="High" />
+                <Setter
+                    Property="LowValueDataMember"
+                    Value="Low" />
+                <Setter
+                    Property="OpenValueDataMember"
+                    Value="Open" />
+            </Style>
+            <Style
+                x:Key="pieStyle"
+                TargetType="dxc:PieSeries2D"
+                BasedOn="{StaticResource baseSeriesStyle}">
+                <Setter
+                    Property="HoleRadiusPercent"
+                    Value="0" />
+            </Style>
+            <Style
+                x:Key="circularRangeStyle"
+                TargetType="dxc:CircularRangeAreaSeries2D"
+                BasedOn="{StaticResource baseSeriesStyle}">
+                <Setter
+                    Property="Transparency"
+                    Value="0.3" />
+                <Setter
+                    Property="Value2DataMember"
+                    Value="Value2" />
+            </Style>
+            <Style
+                x:Key="boxPlotStyle"
+                TargetType="dxc:BoxPlotSeries2D"
+                BasedOn="{StaticResource baseSeriesStyle}">
+                <Setter
+                    Property="MinValueDataMember"
+                    Value="Min" />
+                <Setter
+                    Property="Quartile1ValueDataMember"
+                    Value="Quartile1" />
+                <Setter
+                    Property="MedianValueDataMember"
+                    Value="Median" />
+                <Setter
+                    Property="Quartile3ValueDataMember"
+                    Value="Quartile3" />
+                <Setter
+                    Property="MaxValueDataMember"
+                    Value="Max" />
+                <Setter
+                    Property="MeanValueDataMember"
+                    Value="Mean" />
+                <Setter
+                    Property="OutlierValuesDataMember"
+                    Value="Outliers" />
+                <Setter Property="MeanLineVisible"
+                    Value="True" />
+            </Style>
+
+            <local:AnimationDataPointSources
+                x:Key="dataSources" />
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+    <DockPanel>
+        <!--#region ChartsDemoRibbon & Options-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}" />
+
+        <ScrollViewer
+            Name="PART_Options"
+            Style="{StaticResource optionsScrollViewerStyle}">
+            <StackPanel
+                Style="{StaticResource optionsRootStackPanelStyle}">
+                <dxe:ComboBoxEdit
+                    x:Name="cbSeriesTypes"
+                    SelectedIndexChanged="SeriesTemplateChanged"
+                    SelectedIndex="0"
+                    DisplayMember="Content"
+                    PopupMaxHeight="450">
+                    <dxe:ComboBoxEdit.Items>
+                        <!--#region Bar Series-->
+                        <local:SeriesInfo
+                            Content="2D Side-By-Side Bars"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).BarDataSource2'}">
+                            <DataTemplate>
+                                <dxc:BarSideBySideSeries2D
+                                    Style="{StaticResource baseSeriesStyle}">
+                                    <dxc:BarSideBySideSeries2D.Label>
+                                        <dxc:SeriesLabel
+                                            dxc:BarSideBySideSeries2D.LabelPosition="Outside" />
+                                    </dxc:BarSideBySideSeries2D.Label>
+                                </dxc:BarSideBySideSeries2D>
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Stacked Bars"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).BarDataSource2'}">
+                            <DataTemplate>
+                                <dxc:BarStackedSeries2D
+                                    Style="{StaticResource baseSeriesStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Waterfall"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).BarDataSource2'}">
+                            <DataTemplate>
+                                <dxc:WaterfallSeries2D
+                                    Style="{StaticResource baseSeriesStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Full-Stacked Bars"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).BarDataSource2'}">
+                            <DataTemplate>
+                                <dxc:BarFullStackedSeries2D
+                                    Style="{StaticResource baseSeriesStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Side-By-Side Stacked Bars"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).BarDataSource'}">
+                            <DataTemplate>
+                                <dxc:BarSideBySideStackedSeries2D
+                                    Style="{StaticResource baseSeriesStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Side-By-Side Full-Stacked Bars"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).BarDataSource'}">
+                            <DataTemplate>
+                                <dxc:BarSideBySideFullStackedSeries2D
+                                    Style="{StaticResource baseSeriesStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Overlapped Range Bars"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).RangeDataSource'}">
+                            <DataTemplate>
+                                <dxc:RangeBarOverlappedSeries2D
+                                    Style="{StaticResource rangeBarStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Side-By-Side Range Bars"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).RangeDataSource'}">
+                            <DataTemplate>
+                                <dxc:RangeBarSideBySideSeries2D
+                                    Style="{StaticResource rangeBarStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <!--#endregion-->
+                        <!--#region Point Series-->
+                        <local:SeriesInfo
+                            Content="2D Points"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).DataSource'}">
+                            <DataTemplate>
+                                <dxc:PointSeries2D
+                                    Style="{StaticResource baseSeriesStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Bubbles"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).BubbleDataSource'}">
+                            <DataTemplate>
+                                <dxc:BubbleSeries2D
+                                    Style="{StaticResource bubbleStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <!--#endregion-->
+                        <!--#region Line Series-->
+                        <local:SeriesInfo
+                            Content="2D Lines"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).DataSource'}">
+                            <DataTemplate>
+                                <dxc:LineSeries2D
+                                    Style="{StaticResource lineStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Stacked Lines"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).DataSource'}">
+                            <DataTemplate>
+                                <dxc:LineStackedSeries2D
+                                    Style="{StaticResource lineStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Full-Stacked Lines"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).DataSource'}">
+                            <DataTemplate>
+                                <dxc:LineFullStackedSeries2D
+                                    Style="{StaticResource lineStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Step Lines"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).DataSource'}">
+                            <DataTemplate>
+                                <dxc:LineStepSeries2D
+                                    Style="{StaticResource lineStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Scatter Lines"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).ScatterDataSource'}">
+                            <DataTemplate>
+                                <dxc:LineScatterSeries2D
+                                    Style="{StaticResource baseSeriesStyle}"
+                                    MarkerVisible="True" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <!--#endregion-->
+                        <!--#region Area Series-->
+                        <local:SeriesInfo
+                            Content="2D Areas"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).DataSource'}">
+                            <DataTemplate>
+                                <dxc:AreaSeries2D
+                                    Style="{StaticResource areaStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Stacked Areas"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).DataSource'}">
+                            <DataTemplate>
+                                <dxc:AreaStackedSeries2D
+                                    Style="{StaticResource baseSeriesStyle}"
+                                    Transparency="0.3" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Full-Stacked Areas"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).DataSource'}">
+                            <DataTemplate>
+                                <dxc:AreaFullStackedSeries2D
+                                    Style="{StaticResource baseSeriesStyle}"
+                                    Transparency="0.3" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Step Areas"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).DataSource2'}">
+                            <DataTemplate>
+                                <dxc:AreaStepSeries2D
+                                    Style="{StaticResource areaStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Stacked Step Areas"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).DataSource'}">
+                            <DataTemplate>
+                                <dxc:AreaStepStackedSeries2D
+                                    Style="{StaticResource baseSeriesStyle}"
+                                    Transparency="0.3" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Full-Stacked Step Areas"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).DataSource'}">
+                            <DataTemplate>
+                                <dxc:AreaStepFullStackedSeries2D
+                                    Style="{StaticResource baseSeriesStyle}"
+                                    Transparency="0.3" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Range Areas"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).RangeDataSource2'}">
+                            <DataTemplate>
+                                <dxc:RangeAreaSeries2D
+                                    Style="{StaticResource rangeAreaStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <!--#endregion-->
+                        <!--#region Financial Series-->
+                        <local:SeriesInfo
+                            Content="2D Stocks"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).FinancialDataSource'}">
+                            <DataTemplate>
+                                <dxc:StockSeries2D
+                                    Style="{StaticResource financialStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Candle-Sticks"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).FinancialDataSource'}">
+                            <DataTemplate>
+                                <dxc:CandleStickSeries2D
+                                    Style="{StaticResource financialStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <!--#endregion-->
+                        <!--#region Simple Series-->
+                        <local:SeriesInfo
+                            Content="2D Pie"
+                            DiagramType="Simple"
+                            DataSource="{DXBinding '@r(dataSources).PieDataSource'}">
+                            <DataTemplate>
+                                <dxc:PieSeries2D
+                                    Style="{StaticResource pieStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Nested Donut"
+                            DiagramType="Simple"
+                            DataSource="{DXBinding '@r(dataSources).NestedDonutDataSource'}">
+                            <DataTemplate>
+                                <dxc:NestedDonutSeries2D
+                                    Style="{StaticResource baseSeriesStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Funnel"
+                            DiagramType="Simple"
+                            DataSource="{DXBinding '@r(dataSources).FunnelDataSource'}">
+                            <DataTemplate>
+                                <dxc:FunnelSeries2D
+                                    Style="{StaticResource baseSeriesStyle}">
+                                    <dxc:FunnelSeries2D.Label>
+                                        <dxc:SeriesLabel
+                                            TextPattern="{}{A}: {V}" />
+                                    </dxc:FunnelSeries2D.Label>
+                                </dxc:FunnelSeries2D>
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <!--#endregion-->
+                        <!--#region Radar Series-->
+                        <local:SeriesInfo
+                            Content="2D Radar Range Area"
+                            DiagramType="Radar"
+                            DataSource="{DXBinding '@r(dataSources).PolarRangeDataSource'}">
+                            <DataTemplate>
+                                <dxc:RadarRangeAreaSeries2D
+                                    Style="{StaticResource circularRangeStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Radar Area"
+                            DiagramType="Radar"
+                            DataSource="{DXBinding '@r(dataSources).PolarDataSource'}">
+                            <DataTemplate>
+                                <dxc:RadarAreaSeries2D
+                                    Style="{StaticResource baseSeriesStyle}"
+                                    Transparency="0.3" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Radar Line"
+                            DiagramType="Radar"
+                            DataSource="{DXBinding '@r(dataSources).PolarDataSource'}">
+                            <DataTemplate>
+                                <dxc:RadarLineSeries2D
+                                    Style="{StaticResource baseSeriesStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Radar Point"
+                            DiagramType="Radar"
+                            DataSource="{DXBinding '@r(dataSources).PolarDataSource'}">
+                            <DataTemplate>
+                                <dxc:RadarPointSeries2D
+                                    Style="{StaticResource baseSeriesStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <!--#endregion-->
+                        <!--#region Polar Series-->
+                        <local:SeriesInfo
+                            Content="2D Polar Range Area"
+                            DiagramType="Polar"
+                            DataSource="{DXBinding '@r(dataSources).PolarRangeDataSource'}">
+                            <DataTemplate>
+                                <dxc:PolarRangeAreaSeries2D
+                                    Style="{StaticResource circularRangeStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Polar Area"
+                            DiagramType="Polar"
+                            DataSource="{DXBinding '@r(dataSources).PolarDataSource'}">
+                            <DataTemplate>
+                                <dxc:PolarAreaSeries2D
+                                    Style="{StaticResource baseSeriesStyle}"
+                                    Transparency="0.3" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Polar Line"
+                            DiagramType="Polar"
+                            DataSource="{DXBinding '@r(dataSources).PolarDataSource'}">
+                            <DataTemplate>
+                                <dxc:PolarLineSeries2D
+                                    Style="{StaticResource baseSeriesStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <local:SeriesInfo
+                            Content="2D Polar Point"
+                            DiagramType="Polar"
+                            DataSource="{DXBinding '@r(dataSources).PolarDataSource'}">
+                            <DataTemplate>
+                                <dxc:PolarPointSeries2D
+                                    Style="{StaticResource baseSeriesStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <!--#endregion-->
+                        <!--#region Box Plot-->
+                        <local:SeriesInfo
+                            Content="2D Box Plot"
+                            DiagramType="XY"
+                            DataSource="{DXBinding '@r(dataSources).BoxPlotDataSource'}">
+                            <DataTemplate>
+                                <dxc:BoxPlotSeries2D
+                                    Style="{StaticResource boxPlotStyle}" />
+                            </DataTemplate>
+                        </local:SeriesInfo>
+                        <!--#endregion-->
+
+                    </dxe:ComboBoxEdit.Items>
+                </dxe:ComboBoxEdit>
+                <GroupBox
+                    Header="Point Animation"
+                    Margin="0,5,0,0">
+                    <dxe:ListBoxEdit
+                        x:Name="lbPointAnimation"
+                        SelectedIndexChanged="AnimationKindChanged">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox
+                    Header="Series Animation"
+                    Margin="0,5,0,0">
+                    <dxe:ListBoxEdit
+                        x:Name="lbSeriesAnimation"
+                        SelectedIndexChanged="AnimationKindChanged">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <Button
+                    Content="Animate"
+                    Margin="{StaticResource optionsGroupTopMargin}"
+                    Click="{DXEvent '@e(chart).Animate()'}" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <Grid>
+            <Grid.Resources>
+                <dxc:XYDiagram2D
+                    x:Key="xyDiagram"
+                    SeriesItemsSource="{Binding ElementName=cbSeriesTypes, Path=SelectedItem.DataSource}"
+                    SeriesItemTemplate="{Binding ElementName=cbSeriesTypes, Path=SelectedItem.SeriesTemplate}">
+                    <dxc:XYDiagram2D.AxisY>
+                        <dxc:AxisY2D>
+                            <dxc:AxisY2D.WholeRange>
+                                <dxc:Range
+                                    dxc:AxisY2D.AlwaysShowZeroLevel="{DXBinding '@e(cbSeriesTypes).SelectedItem.DataSource != (object)@r(dataSources).FinancialDataSource'}" />
+                            </dxc:AxisY2D.WholeRange>
+                        </dxc:AxisY2D>
+                    </dxc:XYDiagram2D.AxisY>
+                </dxc:XYDiagram2D>
+                <dxc:SimpleDiagram2D
+                    x:Key="simpleDiagram"
+                    SeriesItemsSource="{Binding ElementName=cbSeriesTypes, Path=SelectedItem.DataSource}"
+                    SeriesItemTemplate="{Binding ElementName=cbSeriesTypes, Path=SelectedItem.SeriesTemplate}" />
+                <dxc:RadarDiagram2D
+                    x:Key="radarDiagram"
+                    SeriesItemsSource="{Binding ElementName=cbSeriesTypes, Path=SelectedItem.DataSource}"
+                    SeriesItemTemplate="{Binding ElementName=cbSeriesTypes, Path=SelectedItem.SeriesTemplate}" />
+                <dxc:PolarDiagram2D
+                    x:Key="polarDiagram"
+                    SeriesItemsSource="{Binding ElementName=cbSeriesTypes, Path=SelectedItem.DataSource}"
+                    SeriesItemTemplate="{Binding ElementName=cbSeriesTypes, Path=SelectedItem.SeriesTemplate}" />
+            </Grid.Resources>
+            <dxc:ChartControl
+                x:Name="chart"
+                ToolTipEnabled="False"
+                CrosshairEnabled="False"
+                AnimationMode="OnLoad">
+                <dxc:ChartControl.Style>
+                    <Style
+                        TargetType="dxc:ChartControl"
+                        BasedOn="{StaticResource baseChartStyle}">
+                        <Setter
+                            Property="Diagram"
+                            Value="{StaticResource xyDiagram}" />
+                        <Style.Triggers>
+                            <DataTrigger
+                                Binding="{Binding ElementName=cbSeriesTypes, Path=SelectedItem.DiagramType}"
+                                Value="Simple">
+                                <Setter
+                                    Property="Diagram"
+                                    Value="{StaticResource simpleDiagram}" />
+                            </DataTrigger>
+                            <DataTrigger
+                                Binding="{Binding ElementName=cbSeriesTypes, Path=SelectedItem.DiagramType}"
+                                Value="Radar">
+                                <Setter
+                                    Property="Diagram"
+                                    Value="{StaticResource radarDiagram}" />
+                            </DataTrigger>
+                            <DataTrigger
+                                Binding="{Binding ElementName=cbSeriesTypes, Path=SelectedItem.DiagramType}"
+                                Value="Polar">
+                                <Setter
+                                    Property="Diagram"
+                                    Value="{StaticResource polarDiagram}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </dxc:ChartControl.Style>
+            </dxc:ChartControl>
+        </Grid>
+    </DockPanel>
+</local:ChartsDemoModule>

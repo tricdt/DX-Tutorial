@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="MVVMDemo.TypedStylesDemo.StandardControlsTypedStylesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+    <UserControl.Resources>
+        <!--#region !-->
+        <ButtonStyle x:Key="ButtonStyle"
+                     FontSize="20" FontWeight="Bold" Foreground="Blue" Margin="15" VerticalAlignment="Top"/>
+        <CheckBoxStyle x:Key="CheckBoxStyle"
+                       IsChecked="True" IsThreeState="True" ClickMode="Press" Margin="15" VerticalAlignment="Top"/>
+        <TextBoxStyle x:Key="TextBoxStyle"
+                      TextWrapping="Wrap" IsUndoEnabled="False" Margin="15" AcceptsReturn="True" VerticalAlignment="Top"/>
+        <!--#endregion-->
+    </UserControl.Resources>
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <Button Style="{StaticResource ButtonStyle}">Button</Button>
+        <CheckBox Style="{StaticResource CheckBoxStyle}">CheckBox</CheckBox>
+        <TextBox Style="{StaticResource TextBoxStyle}">TextBox</TextBox>
+    </dxlc:LayoutControl>
+</UserControl>

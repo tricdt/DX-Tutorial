@@ -1,0 +1,164 @@
+﻿<local:SankeyDemoModule
+    x:Class="SankeyDemo.Colorizer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxsa="http://schemas.devexpress.com/winfx/2008/xaml/sankey"
+    xmlns:dxsat="http://schemas.devexpress.com/winfx/2008/xaml/sankey/themekeys"
+    xmlns:local="clr-namespace:SankeyDemo"
+    Width="800"
+    Height="600"
+    DataContext="{dxmvvm:ViewModelSource Type=local:ColorizerViewModel}">
+
+    <local:SankeyDemoModule.Resources>
+        <local:ColorizerItemToColorizerConverter x:Key="colorizerConverter" />
+        <local:NodeAlignmentConverter x:Key="nodeAlignmentConverter" />
+        <local:ColorizerDemoToolTipConverter x:Key="toolTipContentConverter" />
+        <DataTemplate x:Key="toolTipContentTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontWeight="Bold"
+                    Foreground="{dxi:ThemeResource {dxsat:SankeyBrushesThemeKey ResourceKey=ToolTipForeground}}"
+                    Text="{Binding ToolTipText}" />
+                <TextBlock
+                    Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    Foreground="{dxi:ThemeResource {dxsat:SankeyBrushesThemeKey ResourceKey=ToolTipForeground}}"
+                    Text="{Binding SourceObject, Converter={StaticResource toolTipContentConverter}}" />
+            </Grid>
+        </DataTemplate>
+    </local:SankeyDemoModule.Resources>
+
+    <DockPanel>
+        <ScrollViewer
+            DockPanel.Dock="Right"
+            dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+            Focusable="False"
+            HorizontalScrollBarVisibility="Disabled"
+            Name="PART_Options"
+            VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <GroupBox
+                    MinWidth="210"
+                    Margin="12,12,12,12"
+                    Header="Continent Visibility">
+                    <StackPanel Margin="4, 0, 0, 0">
+                        <dxe:CheckEdit
+                            x:Name="asiaChE"
+                            Content="Asia"
+                            IsChecked="{Binding IsAsiaChecked, Mode=TwoWay}" />
+                        <dxe:CheckEdit
+                            x:Name="australiaChE"
+                            Content="Australia"
+                            IsChecked="{Binding IsAustraliaChecked, Mode=TwoWay}" />
+                        <dxe:CheckEdit
+                            x:Name="europeChE"
+                            Content="Europe"
+                            IsChecked="{Binding IsEuropeChecked, Mode=TwoWay}" />
+                        <dxe:CheckEdit
+                            x:Name="northAmericaChE"
+                            Content="North America"
+                            IsChecked="{Binding IsNorthAmericaChecked, Mode=TwoWay}" />
+                        <dxe:CheckEdit
+                            x:Name="southAmericaChE"
+                            Content="South America"
+                            IsChecked="{Binding IsSouthAmericaChecked, Mode=TwoWay}" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox
+                    MinWidth="210"
+                    Margin="12,0,12,12"
+                    Header="Colorizer">
+                    <dxe:ListBoxEdit
+                        x:Name="colorizerCBE"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        SelectedIndex="0"
+                        ShowBorder="False"
+                        StyleSettings="{dxe:RadioListBoxEditStyleSettings}">
+                        <dxe:ListBoxEditItem Content="Continent Colorizer (Custom)" />
+                        <dxe:ListBoxEditItem Content="Gradient Colorizer (Custom)" />
+                        <dxe:ListBoxEditItem Content="Palette Colorizer" />
+                        <dxe:ListBoxEditItem Content="Monochrome Link Colorizer" />
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox
+                    MinWidth="210"
+                    Margin="12,12,12,12"
+                    Header="Resolve Overlapping">
+                    <StackPanel Margin="4, 0, 0, 0">
+                        <dxe:CheckEdit
+                            x:Name="resolveOverlappingChE"
+                            Content="Enabled"
+                            IsChecked="True" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox
+                    MinWidth="210"
+                    Margin="12,0,12,12"
+                    Header="Node Alignment">
+                    <dxe:ListBoxEdit
+                        x:Name="nodeAlignmentCBE"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        SelectedIndex="0"
+                        ShowBorder="False"
+                        StyleSettings="{dxe:RadioListBoxEditStyleSettings}">
+                        <dxe:ListBoxEditItem Content="Far" />
+                        <dxe:ListBoxEditItem Content="Center" />
+                        <dxe:ListBoxEditItem Content="Near" />
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <dxsa:SankeyDiagramControl
+            x:Name="sankey"
+            BorderThickness="0"
+            DataSource="{Binding DataSource}"
+            LinkToolTipContentTemplate="{StaticResource toolTipContentTemplate}"
+            NodeToolTipContentTemplate="{StaticResource toolTipContentTemplate}"
+            SourceDataMember="Exporter"
+            TargetDataMember="Importer"
+            WeightDataMember="Sum">
+            <dxsa:SankeyDiagramControl.Colorizer>
+                <MultiBinding Converter="{StaticResource colorizerConverter}">
+                    <Binding ElementName="colorizerCBE" Path="EditValue" />
+                    <Binding Path="DataSource" />
+                </MultiBinding>
+            </dxsa:SankeyDiagramControl.Colorizer>
+            <dxsa:SankeyDiagramControl.LayoutAlgorithm>
+                <dxsa:SankeyLinearLayoutAlgorithm NodeAlignment="{Binding ElementName = nodeAlignmentCBE, Path=EditValue, Converter={StaticResource nodeAlignmentConverter}}" ResolveOverlapping="{Binding ElementName=resolveOverlappingChE, Path=IsChecked}" />
+            </dxsa:SankeyDiagramControl.LayoutAlgorithm>
+            <dxsa:SankeyDiagramControl.Titles>
+                <dxsa:SankeyTitle
+                    HorizontalAlignment="Center"
+                    Content="Largest Export Partners"
+                    Dock="Top"
+                    FontFamily="Tahoma"
+                    FontSize="24" />
+                <dxsa:SankeyTitle
+                    HorizontalAlignment="Center"
+                    Content="Colored by Continent"
+                    Dock="Top"
+                    FontFamily="Tahoma"
+                    FontSize="16" />
+                <dxsa:SankeyTitle
+                    HorizontalAlignment="Right"
+                    Content="From www.cia.gov"
+                    Dock="Bottom"
+                    FontFamily="Tahoma"
+                    FontSize="12"
+                    Foreground="Gray" />
+            </dxsa:SankeyDiagramControl.Titles>
+        </dxsa:SankeyDiagramControl>
+    </DockPanel>
+
+</local:SankeyDemoModule>

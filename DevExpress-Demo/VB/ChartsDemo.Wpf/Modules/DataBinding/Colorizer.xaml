@@ -1,0 +1,101 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.ColorizerDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:local="clr-namespace:ChartsDemo">
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+
+    <dxc:ChartControl
+        Name="chart"
+        AnimationMode="OnLoad"
+        CrosshairEnabled="False"
+        ToolTipEnabled="True"
+        DataSource="{DXBinding '$local:HPIStatistics.Load()'}">
+        <!--#region Titles-->
+        <dxc:ChartControl.Titles>
+            <dxc:Title
+                Content="Happy Planet Index (HPI) for G20"
+                HorizontalAlignment="Center" />
+        </dxc:ChartControl.Titles>
+        <!--#endregion-->
+        <!--#region Legend-->
+        <dxc:ChartControl.Legend>
+            <dxc:Legend />
+        </dxc:ChartControl.Legend>
+        <!--#endregion-->
+        <dxc:ChartControl.Diagram>
+            <dxc:XYDiagram2D>
+                <!--#region Axes-->
+                <dxc:XYDiagram2D.AxisX>
+                    <dxc:AxisX2D
+                        GridLinesMinorVisible="False"
+                        TickmarksMinorVisible="False"
+                        GridLinesVisible="True" />
+                </dxc:XYDiagram2D.AxisX>
+                <dxc:XYDiagram2D.AxisY>
+                    <dxc:AxisY2D
+                        GridLinesMinorVisible="False"
+                        TickmarksMinorVisible="False"
+                        GridLinesVisible="True" LabelPosition="Inside">
+                        <dxc:AxisY2D.Title>
+                            <dxc:AxisTitle
+                                Content="GDP per capita, $" />
+                        </dxc:AxisY2D.Title>
+                    </dxc:AxisY2D>
+                </dxc:XYDiagram2D.AxisY>
+                <!--#endregion-->
+                <dxc:XYDiagram2D.Series>
+                    <dxc:BubbleSeries2D
+                        x:Name="series"
+                        MaxSize="1.5"
+                        MinSize="0.5"
+                        ArgumentDataMember="Country"
+                        ValueDataMember="Product"
+                        WeightDataMember="Population"
+                        ColorDataMember="HPI"
+                        ToolTipHintDataMember="HPI"
+                        AnimationAutoStartMode="SetStartState"
+                        ColorEach="True"
+                        ToolTipPointPattern="{}{A}&#xA;GDP per capita: ${V:n2}&#xA;Population: {W:n2}M&#xA;HPI: {HINT:n2}">
+                        <!--#region ToolTipTemplate-->
+                        <dxc:BubbleSeries2D.ToolTipPointTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Text="{Binding ToolTipText}" />
+                            </DataTemplate>
+                        </dxc:BubbleSeries2D.ToolTipPointTemplate>
+                        <!--#endregion-->
+                        <dxc:BubbleSeries2D.Colorizer>
+                            <dxc:RangeColorizer
+                                RangeStops="22 30 38 46 54 64"
+                                LegendTextPattern="{}{V1} - {V2} HPI">
+                                <dxc:RangeColorizer.Palette>
+                                    <dxc:CustomPalette>
+                                        <dxc:CustomPalette.Colors>
+                                            <Color>#FF5A19</Color>
+                                            <Color>#FEAD2D</Color>
+                                            <Color>#E5E335</Color>
+                                            <Color>#ACE45C</Color>
+                                            <Color>#6EC95C</Color>
+                                        </dxc:CustomPalette.Colors>
+                                    </dxc:CustomPalette>
+                                </dxc:RangeColorizer.Palette>
+                            </dxc:RangeColorizer>
+                        </dxc:BubbleSeries2D.Colorizer>
+                    </dxc:BubbleSeries2D>
+                </dxc:XYDiagram2D.Series>
+            </dxc:XYDiagram2D>
+        </dxc:ChartControl.Diagram>
+    </dxc:ChartControl>
+
+</local:ChartsDemoModule>

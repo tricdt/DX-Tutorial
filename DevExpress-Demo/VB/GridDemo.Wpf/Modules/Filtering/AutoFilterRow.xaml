@@ -1,0 +1,42 @@
+﻿<local:GridDemoModule x:Class="GridDemo.Filtering.AutoFilterRow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <!--#region !-->
+            <dxe:CheckEdit Content="Show Auto Filter Row" IsChecked="{Binding ElementName=gridView, Path=ShowAutoFilterRow, Mode=TwoWay}"
+                           VerticalAlignment="Top" Margin="8"/>
+            <dxe:CheckEdit Content="Show Criteria in Auto Filter Row" VerticalAlignment="Top"
+                           IsChecked="{Binding ElementName=gridView, Path=ShowCriteriaInAutoFilterRow, Mode=TwoWay}" Margin="8"/>
+            <!--#endregion-->
+        </StackPanel>
+        <dxg:GridControl x:Name="grid" Grid.Row="1">
+            <dxg:GridControl.View>
+                <!--#region !-->
+                <dxg:TableView x:Name="gridView" ShowAutoFilterRow="True" ShowCriteriaInAutoFilterRow="True"/>
+                <!--#endregion-->
+            </dxg:GridControl.View>
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="OID" Header="Id" Width="5*" ReadOnly="true" />
+                <dxg:GridColumn FieldName="Priority" IsSmart="True" Width="5*"/>
+                <dxg:GridColumn FieldName="From" MinWidth="100" Width="10*" />
+                <dxg:GridColumn FieldName="UserId" Header="To" Width="10*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings IsTextEditable="False" ValueMember="Id" DisplayMember="Name"
+                                                  ItemsSource="{x:Static local:OutlookData.Users}"/>
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Sent" Width="10*"/>
+                <dxg:GridColumn FieldName="HoursActive" Width="7*" />
+                <dxg:GridColumn FieldName="HasAttachment" Width="7*" ShowCriteriaInAutoFilterRow="False" />
+            </dxg:GridControl.Columns>
+        </dxg:GridControl>
+    </Grid>
+</local:GridDemoModule>

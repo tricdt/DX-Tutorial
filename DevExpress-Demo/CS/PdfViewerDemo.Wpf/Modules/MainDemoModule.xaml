@@ -1,0 +1,23 @@
+﻿<local:PdfViewerDemoModule x:Class="PdfViewerDemo.MainDemoModule"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           mc:Ignorable="d"
+                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                           xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                           xmlns:local="clr-namespace:PdfViewerDemo"
+                           xmlns:dxpdf="http://schemas.devexpress.com/winfx/2008/xaml/pdf"
+                           xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                           d:DesignWidth="800"
+                           d:DesignHeight="400">
+
+    <dxmvvm:Interaction.Behaviors>
+        <dxdb:DispatchFocusBehavior Element="{x:Reference viewer}" />
+    </dxmvvm:Interaction.Behaviors>
+
+    <dxpdf:PdfViewerControl Name="viewer" DocumentSource="{Binding Path=PdfStream}" ResetSettingsOnDocumentClose="False" ZoomMode="FitToWidth">
+        <dxpdf:PdfViewerControl.OutlinesViewerSettings>
+            <dxpdf:PdfOutlinesViewerSettings OutlinesViewerInitialState="Visible" />
+        </dxpdf:PdfViewerControl.OutlinesViewerSettings>
+    </dxpdf:PdfViewerControl>
+</local:PdfViewerDemoModule>

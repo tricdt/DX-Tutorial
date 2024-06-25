@@ -1,0 +1,55 @@
+﻿<local:RichEditDemoModule x:Class="RichEditDemo.MailMerge"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                          xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                          xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit"
+                          xmlns:local="clr-namespace:RichEditDemo"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          mc:Ignorable="d"
+                          d:DesignHeight="400"
+                          d:DesignWidth="800">
+    <dx:DXDockPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Margin="6,3,6,6">
+                <dxg:GridControl Name="gridControl1" GroupCount="1" Margin="0,3,0,0">
+                    <dxg:GridControl.Columns>
+                        <dxg:GridColumn FieldName="LastName" Header="Employee" GroupIndex="0" />
+                        <dxg:GridColumn FieldName="ContactName" Header="Contact Name" VisibleIndex="0" Width="*" />
+                    </dxg:GridControl.Columns>
+                    <dxg:GridControl.View>
+                        <dxg:TableView AllowEditing="False" ShowColumnHeaders="False" ShowGroupPanel="False" />
+                    </dxg:GridControl.View>
+                </dxg:GridControl>
+            </Border>
+            <dxre:RichEditControl x:Name="richEdit"
+                                  CommandBarStyle="Ribbon"
+                                  Grid.Column="1"
+                                  Margin="0,6,6,6"
+                                  DocumentSource="{DXBinding '$local:DemoUtils.GetRelativePath(`MailMerge.rtf`)'}">
+                <dxre:RichEditControl.MailMergeOptions>
+                    <dxre:DXRichEditMailMergeOptions ViewMergedData="True" />
+                </dxre:RichEditControl.MailMergeOptions>
+                <!--#region Ribbon Customization-->
+                <dxre:RichEditControl.RibbonActions>
+                    <dxb:UpdateAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_MailMerge}" PropertyName="IsSelected" Value="True" />
+                    <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonCategory_HeaderFooterTools}" />
+                    <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonCategory_TableTools}" />
+                    <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonCategory_PictureTools}" />
+                    <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_Insert}" />
+                    <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_PageLayout}" />
+                    <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_References}" />
+                    <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_Review}" />
+                    <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_View}" />
+                </dxre:RichEditControl.RibbonActions>
+                <!--#endregion-->
+            </dxre:RichEditControl>
+        </Grid>
+    </dx:DXDockPanel>
+</local:RichEditDemoModule>

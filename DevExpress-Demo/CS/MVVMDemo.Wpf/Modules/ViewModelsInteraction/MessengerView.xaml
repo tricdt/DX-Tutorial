@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="MVVMDemo.ViewModelsInteraction.MessengerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.ViewModelsInteraction"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm">
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <dxlc:LayoutGroup DataContext="{dxmvvm:ViewModelSource local:MessengerViewModel}" Header="Sender" Orientation="Vertical" View="GroupBox">
+            <Button Command="{Binding SendMessageCommand}">Send Message</Button>
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup DataContext="{dxmvvm:ViewModelSource local:ReceiverViewModel}"  Header="Receiver" Orientation="Vertical" View="GroupBox">
+            <TextBlock Text="{Binding Status}" />
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</UserControl>

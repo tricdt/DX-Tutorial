@@ -1,0 +1,97 @@
+﻿<local:RichEditDemoModule x:Class="RichEditDemo.HitTesting"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit"
+                          xmlns:local="clr-namespace:RichEditDemo"
+                          xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          mc:Ignorable="d"
+                          d:DesignHeight="400"
+                          d:DesignWidth="800">
+    <DockPanel>
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <DockPanel Margin="12,8,12,12" MinWidth="210">
+                <StackPanel DockPanel.Dock="Top">
+                    <TextBlock Text="Hit Test Scope" HorizontalAlignment="Left" />
+                    <dxe:ComboBoxEdit Name="cbScope"
+                                      ItemsSource="{dxe:EnumItemsSource EnumType={x:Type local:ScopeType}}"
+                                      VerticalAlignment="Top"
+                                      SelectedIndex="0"
+                                      IsTextEditable="False" />
+                    <TextBlock Text="Hit Accuracy" HorizontalAlignment="Left" Margin="0,8,0,0" />
+                    <GroupBox>
+                        <StackPanel>
+                            <RadioButton GroupName="rgSearchOptions" Name="exactHit" Content="Exact Hit" IsChecked="True" />
+                            <RadioButton GroupName="rgSearchOptions" Name="nearestHit" Content="Nearest Hit" />
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Highlight Options" Margin="0,6,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="0.9*" />
+                            </Grid.ColumnDefinitions>
+                            <dxe:CheckEdit Name="highlightPage" Content="Page" IsChecked="True" Grid.Column="0" Grid.Row="0" EditValueChanged="HighlightPotionsChanged" />
+                            <dxe:PopupColorEdit Name="pageHigtlightColor" Color="RoyalBlue" Grid.Column="1" Grid.Row="0" IsTextEditable="False" ColorChanged="HighlightPotionsChanged" />
+                            <dxe:CheckEdit Name="highlightPageArea" Content="PageArea" IsChecked="True" Grid.Column="0" Grid.Row="1" EditValueChanged="HighlightPotionsChanged" />
+                            <dxe:PopupColorEdit Name="pageAreaHigtlightColor" Color="SlateBlue" Grid.Column="1" Grid.Row="1" IsTextEditable="False" Margin="0,3,0,0" ColorChanged="HighlightPotionsChanged" />
+                            <dxe:CheckEdit Name="highlightColumn" Content="Column" IsChecked="True" Grid.Column="0" Grid.Row="2" EditValueChanged="HighlightPotionsChanged" />
+                            <dxe:PopupColorEdit Name="columnHigtlightColor" Color="Chocolate" Grid.Column="1" Grid.Row="2" IsTextEditable="False" Margin="0,3,0,0" ColorChanged="HighlightPotionsChanged" />
+                            <dxe:CheckEdit Name="highlightRow" Content="Row" IsChecked="True" Grid.Column="0" Grid.Row="3" EditValueChanged="HighlightPotionsChanged" />
+                            <dxe:PopupColorEdit Name="rowHigtlightColor" Color="Aqua" Grid.Column="1" Grid.Row="3" IsTextEditable="False" Margin="0,3,0,0" ColorChanged="HighlightPotionsChanged" />
+                            <dxe:CheckEdit Name="highlightBox" Content="Box" IsChecked="True" Grid.Column="0" Grid.Row="4" EditValueChanged="HighlightPotionsChanged" />
+                            <dxe:PopupColorEdit Name="boxHigtlightColor" Color="Magenta" Grid.Column="1" Grid.Row="4" IsTextEditable="False" Margin="0,3,0,0" ColorChanged="HighlightPotionsChanged" />
+                            <dxe:CheckEdit Name="highlightCharacterBox" IsChecked="True" Content="CharacterBox" Grid.Column="0" Grid.Row="5" EditValueChanged="HighlightPotionsChanged" />
+                            <dxe:PopupColorEdit Name="characterBoxHigtlightColor" Color="Yellow" Grid.Column="1" Grid.Row="5" IsTextEditable="False" Margin="0,3,0,0" ColorChanged="HighlightPotionsChanged" />
+                            <dxe:CheckEdit Name="highlightOther" Content="Other elements" IsChecked="True" Grid.Column="0" Grid.Row="6" EditValueChanged="HighlightPotionsChanged" />
+                            <dxe:PopupColorEdit Name="otherHigtlightColor" Color="ForestGreen" Grid.Column="1" Grid.Row="6" IsTextEditable="False" Margin="0,3,0,0" ColorChanged="HighlightPotionsChanged" />
+                        </Grid>
+                    </GroupBox>
+                </StackPanel>
+                <GroupBox Header="Hit Test Result" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit Name="lbResult" />
+                </GroupBox>
+            </DockPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <Grid>
+            <DockPanel>
+                <dxr:RibbonStatusBarControl DockPanel.Dock="Bottom" IsSizeGripVisible="True" />
+                <dxre:RichEditControl x:Name="richEdit"
+                                      Grid.Row="1"
+                                      VerticalAlignment="Stretch"
+                                      ShowBorder="False"
+                                      CommandBarStyle="Ribbon"
+                                      PreviewMouseLeftButtonUp="RichEditControl_MouseLeftButtonUp"
+                                      PreviewMouseMove="RichEditControl_MouseMove"
+                                      BeforePagePaint="RichEditControl_BeforePagePaint"
+                                      DocumentSource="{DXBinding '$local:DemoUtils.GetRelativePath(`HitTest.docx`)'}">
+                    <dxre:RichEditControl.DocumentCapabilitiesOptions>
+                        <dxre:DXRichEditDocumentCapabilitiesOptions Comments="Disabled" />
+                    </dxre:RichEditControl.DocumentCapabilitiesOptions>
+                    <dxre:RichEditControl.CommentOptions>
+                        <dxre:DXRichEditCommentOptions Visibility="Hidden" />
+                    </dxre:RichEditControl.CommentOptions>
+                </dxre:RichEditControl>
+            </DockPanel>
+        </Grid>
+    </DockPanel>
+</local:RichEditDemoModule>

@@ -1,0 +1,67 @@
+<UserControl x:Class="DevExpress.VideoRent.Wpf.CompanyMoviesEditView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="900">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <dx:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <helpers:EmptyConverter x:Key="EmptyConverter"/>
+            <helpers:NullContentToVisibilityConverter x:Key="NullContentToVisibilityConverter"/>
+            <local:DrawingImageToImageSourceConverter x:Key="DrawingImageToImageSourceConverter"/>
+            <helpers:DateConverter x:Key="DateConverter" />
+            <helpers:DataSource x:Key="DataSource" />
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore" />
+            <local:MoviePhotoConverter x:Key="MoviePhotoConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}">
+            <helpers:BindingInfo ElementName="resource:ElementLayoutDataStore" Property="{x:Static local:ElementLayoutDataStore.DisposeSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="DetailMoviesGrid" Property="{x:Static dxg:GridControl.ItemsSourceProperty}" Value="{Binding Detail.ListEdit.CurrentRecord.Movies}" />
+            <helpers:ElementLayoutInfo ElementName="DetailMoviesGrid" StoreFolder="GridControl:CompanyMoviesEdit-DetailMoviesGrid" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <dxg:GridControl x:Name="DetailMoviesGrid" DockPanel.Dock="Top" ShowBorder="False">
+        <helpers:UnboundColumnHelper.UnboundColumns>
+            <helpers:UnboundColumnCollection>
+                <local:MovieCardHeaderUnboundColumn ColumnName="MovieIndexInfo" />
+            </helpers:UnboundColumnCollection>
+        </helpers:UnboundColumnHelper.UnboundColumns>
+        <dxg:GridControl.View>
+            <dxg:CardView ShowGroupPanel="False" ShowColumnHeaders="False" ShowFilterPanelMode="Never" AllowGrouping="False" CardMargin="10" CardLayout="Columns" SeparatorThickness="0"
+                                CardHeaderBinding="{Binding Data.MovieIndexInfo, RelativeSource={RelativeSource Self}}">
+                <dxg:CardView.CardTemplate>
+                    <DataTemplate>
+                        <dxlc:LayoutControl Orientation="Horizontal" Background="Transparent" Padding="0" ItemSpace="12">
+                            <dxlc:LayoutItem HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent" Height="150" VerticalContentAlignment="Top">
+                                <Image Source="{Binding Path=Row.Movie!.Photo, Converter={StaticResource MoviePhotoConverter}}" Width="100" Stretch="Uniform" />
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutGroup Orientation="Vertical">
+                                <dxlc:LayoutItem>
+                                    <TextBlock Text="{Binding Path=Row.Movie!.Title}" FontSize="19" Width="240" TextWrapping="Wrap"/>
+                                </dxlc:LayoutItem>
+                                <dxlc:LayoutItem>
+                                    <TextBlock Text="{Binding Path=Row.Movie!.ReleaseDate, Converter={StaticResource DateConverter}}" />
+                                </dxlc:LayoutItem>
+                                <dxlc:LayoutItem>
+                                    <TextBlock HorizontalAlignment="Left" Width="240" TextWrapping="Wrap" Text="{Binding Path=Row.Movie!.Plot}" />
+                                </dxlc:LayoutItem>
+                            </dxlc:LayoutGroup>
+                        </dxlc:LayoutControl>
+                    </DataTemplate>
+                </dxg:CardView.CardTemplate>
+            </dxg:CardView>
+        </dxg:GridControl.View>
+        <dxg:GridControl.Columns>
+            <dxg:GridColumn FieldName="MovieIndexInfo" UnboundType="String" Visible="False" ShowInColumnChooser="False" />
+        </dxg:GridControl.Columns>
+    </dxg:GridControl>
+</UserControl>

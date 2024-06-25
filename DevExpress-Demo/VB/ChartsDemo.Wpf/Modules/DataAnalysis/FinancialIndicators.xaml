@@ -1,0 +1,300 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.FinancialIndicatorsDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ChartsDemo"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxct="http://schemas.devexpress.com/winfx/2008/xaml/charts/themekeys"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800">
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style
+                TargetType="dxc:Legend">
+                <Setter
+                    Property="Padding"
+                    Value="0" />
+                <Setter
+                    Property="IndentFromDiagram"
+                    Value="5" />
+                <Setter
+                    Property="HorizontalPosition"
+                    Value="Left" />
+                <Setter
+                    Property="VerticalPosition"
+                    Value="Top" />
+            </Style>
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+    <DockPanel>
+        <!--#region BarManager-->
+        <dxb:BarManager
+            DockPanel.Dock="Top"
+            Style="{DynamicResource {dxct:ChartToolbarThemeKey ResourceKey=BarManager}}"
+            dxc:ChartControlBase.Chart="{Binding ElementName=chart}">
+            <dxb:BarManager.Bars>
+                <dxb:Bar
+                    x:Name="FinancialIndicatorsGroup"
+                    Style="{DynamicResource {dxct:ChartToolbarThemeKey ResourceKey=BarFinancialIndicatorsGroup}}">
+                    <dxb:BarCheckItem
+                        x:Name="DrawTrendLineIndicator"
+                        Style="{DynamicResource {dxct:ChartToolbarThemeKey ResourceKey=DrawTrendLineIndicatorItem}}" />
+                    <dxb:BarCheckItem
+                        x:Name="DrawFibonacciArcsIndicatorItem"
+                        Style="{DynamicResource {dxct:ChartToolbarThemeKey ResourceKey=DrawFibonacciArcsIndicatorItem}}" />
+                    <dxb:BarCheckItem
+                        x:Name="DrawFibonacciFansIndicatorItem"
+                        Style="{DynamicResource {dxct:ChartToolbarThemeKey ResourceKey=DrawFibonacciFansIndicatorItem}}" />
+                    <dxb:BarCheckItem
+                        x:Name="DrawFibonacciRetracementIndicatorItem"
+                        Style="{DynamicResource {dxct:ChartToolbarThemeKey ResourceKey=DrawFibonacciRetracementIndicatorItem}}" />
+                    <dxb:BarCheckItem
+                        x:Name="RemoveIndicatorItem"
+                        Style="{DynamicResource {dxct:ChartToolbarThemeKey ResourceKey=RemoveIndicatorItem}}" />
+                    <dxb:BarItemSeparator />
+                    <dxb:BarSubItem
+                        x:Name="AddIndicatorItem"
+                        Style="{DynamicResource {dxct:ChartToolbarThemeKey ResourceKey=AddIndicatorItem}}" />
+                    <dxb:BarItemSeparator />
+                    <dxb:BarCheckItem
+                        x:Name="AddTextAnnotationItem"
+                        Style="{DynamicResource {dxct:ChartToolbarThemeKey ResourceKey=AddTextAnnotationItem}}" />
+                    <dxb:BarCheckItem
+                        x:Name="AddImageAnnotationItem"
+                        Style="{DynamicResource {dxct:ChartToolbarThemeKey ResourceKey=AddImageAnnotationItem}}" />
+                </dxb:Bar>
+            </dxb:BarManager.Bars>
+        </dxb:BarManager>
+        <!--#endregion-->
+
+        <dxc:ChartControl
+            x:Name="chart"
+            AutoLayout="False"
+            BoundDataChanged="chart_BoundDataChanged">
+            <!--#region CrosshairOptions-->
+            <dxc:ChartControl.CrosshairOptions>
+                <dxc:CrosshairOptions
+                    GroupHeaderPattern="{}{A:d}" />
+            </dxc:ChartControl.CrosshairOptions>
+            <!--#endregion-->
+            <!--#region Legends-->
+            <dxc:ChartControl.Legends>
+                <dxc:Legend
+                    x:Name="mainLegend"
+                    DockTarget="{x:Reference defaultPane}" />
+                <dxc:Legend
+                    x:Name="atrLegend"
+                    DockTarget="{x:Reference atrPane}"
+                    Tag="AverageTrueRange"/>
+                <dxc:Legend
+                    x:Name="rocLegend"
+                    DockTarget="{x:Reference rocPane}"
+                    Tag="RateOfChange"/>
+                <dxc:Legend
+                    x:Name="wrLegend"
+                    DockTarget="{x:Reference wrPane}"
+                    Tag="WilliamsR"/>
+            </dxc:ChartControl.Legends>
+            <!--#endregion-->
+            <dxc:XYDiagram2D
+                x:Name="xyDiagram"
+                EnableAxisXNavigation="True"
+                DependentAxesYRange="True">
+                <!--#region Axes-->
+                <dxc:XYDiagram2D.AxisX>
+                    <dxc:AxisX2D
+                        x:Name="axisX"
+                        GridLinesVisible="True">
+                        <dxc:AxisX2D.DateTimeScaleOptions>
+                            <dxc:ManualDateTimeScaleOptions
+                                AggregateFunction="Financial" />
+                        </dxc:AxisX2D.DateTimeScaleOptions>
+                        <dxc:AxisX2D.WholeRange>
+                            <dxc:Range
+                                SideMarginsValue="3" />
+                        </dxc:AxisX2D.WholeRange>
+                        <dxc:AxisX2D.VisualRange>
+                            <dxc:Range
+                                x:Name="xVisualRange" />
+                        </dxc:AxisX2D.VisualRange>
+                        <dxc:AxisX2D.VisibilityInPanes>
+                            <dxc:VisibilityInPane
+                                Pane="{x:Reference defaultPane}"
+                                Visible="False" />
+                            <dxc:VisibilityInPane
+                                Pane="{x:Reference atrPane}"
+                                Visible="False" />
+                            <dxc:VisibilityInPane
+                                Pane="{x:Reference rocPane}"
+                                Visible="False" />
+                        </dxc:AxisX2D.VisibilityInPanes>
+                    </dxc:AxisX2D>
+                </dxc:XYDiagram2D.AxisX>
+                <dxc:XYDiagram2D.AxisY>
+                    <dxc:AxisY2D
+                        Alignment="Far">
+                        <dxc:AxisY2D.WholeRange>
+                            <dxc:Range
+                                dxc:AxisY2D.AlwaysShowZeroLevel="False" />
+                        </dxc:AxisY2D.WholeRange>
+                    </dxc:AxisY2D>
+                </dxc:XYDiagram2D.AxisY>
+                <dxc:XYDiagram2D.SecondaryAxesY>
+                    <dxc:SecondaryAxisY2D
+                        x:Name="atrAxisY"
+                        Tag="AverageTrueRange">
+                        <dxc:SecondaryAxisY2D.WholeRange>
+                            <dxc:Range
+                                dxc:AxisY2D.AlwaysShowZeroLevel="False" />
+                        </dxc:SecondaryAxisY2D.WholeRange>
+                    </dxc:SecondaryAxisY2D>
+                    <dxc:SecondaryAxisY2D
+                        x:Name="rocAxisY"
+                        Tag="RateOfChange">
+                        <dxc:SecondaryAxisY2D.ConstantLinesBehind>
+                            <dxc:ConstantLine
+                                Value="0">
+                                <dxc:ConstantLine.Title>
+                                    <dxc:ConstantLineTitle
+                                        Content="0"
+                                        Alignment="Far" />
+                                </dxc:ConstantLine.Title>
+                            </dxc:ConstantLine>
+                        </dxc:SecondaryAxisY2D.ConstantLinesBehind>
+                    </dxc:SecondaryAxisY2D>
+                    <dxc:SecondaryAxisY2D
+                        x:Name="wrAxisY"
+                        Tag="WilliamsR">
+                        <dxc:SecondaryAxisY2D.ConstantLinesBehind>
+                            <dxc:ConstantLine
+                                Value="-80">
+                                <dxc:ConstantLine.Title>
+                                    <dxc:ConstantLineTitle
+                                        Content="-80"
+                                        Alignment="Far" />
+                                </dxc:ConstantLine.Title>
+                            </dxc:ConstantLine>
+                            <dxc:ConstantLine
+                                Value="-20">
+                                <dxc:ConstantLine.Title>
+                                    <dxc:ConstantLineTitle
+                                        Content="-20"
+                                        Alignment="Far"
+                                        ShowBelowLine="True" />
+                                </dxc:ConstantLine.Title>
+                            </dxc:ConstantLine>
+                        </dxc:SecondaryAxisY2D.ConstantLinesBehind>
+                    </dxc:SecondaryAxisY2D>
+                </dxc:XYDiagram2D.SecondaryAxesY>
+                <!--#endregion-->
+                <!--#region Panes-->
+                <dxc:XYDiagram2D.PaneLayout>
+                    <dxc:GridLayout>
+                        <dxc:GridLayout.ColumnDefinitions>
+                            <dxc:LayoutDefinition />
+                        </dxc:GridLayout.ColumnDefinitions>
+                        <dxc:GridLayout.RowDefinitions>
+                            <dxc:LayoutDefinition
+                                Size="2*" />
+                            <dxc:LayoutDefinition />
+                            <dxc:LayoutDefinition />
+                            <dxc:LayoutDefinition />
+                        </dxc:GridLayout.RowDefinitions>
+                    </dxc:GridLayout>
+                </dxc:XYDiagram2D.PaneLayout>
+                <dxc:XYDiagram2D.DefaultPane>
+                    <dxc:Pane
+                        x:Name="defaultPane">
+                        <dxc:Pane.AxisXScrollBarOptions>
+                            <dxc:ScrollBarOptions
+                                Visible="False" />
+                        </dxc:Pane.AxisXScrollBarOptions>
+                    </dxc:Pane>
+                </dxc:XYDiagram2D.DefaultPane>
+                <dxc:XYDiagram2D.Panes>
+                    <dxc:Pane
+                        x:Name="atrPane"
+                        Tag="AverageTrueRange">
+                        <dxc:Pane.AxisXScrollBarOptions>
+                            <dxc:ScrollBarOptions
+                                Visible="False" />
+                        </dxc:Pane.AxisXScrollBarOptions>
+                    </dxc:Pane>
+                    <dxc:Pane
+                        x:Name="rocPane"
+                        Tag="RateOfChange">
+                        <dxc:Pane.AxisXScrollBarOptions>
+                            <dxc:ScrollBarOptions
+                                Visible="False" />
+                        </dxc:Pane.AxisXScrollBarOptions>
+                    </dxc:Pane>
+                    <dxc:Pane
+                        x:Name="wrPane"
+                        Tag="WilliamsR">
+                        <dxc:Pane.AxisXScrollBarOptions>
+                            <dxc:ScrollBarOptions />
+                        </dxc:Pane.AxisXScrollBarOptions>
+                    </dxc:Pane>
+                </dxc:XYDiagram2D.Panes>
+                <!--#endregion-->
+                <dxc:StockSeries2D
+                    x:Name="financialSeries"
+                    DisplayName="Price"
+                    DataSourceSorted="True"
+                    ArgumentDataMember="DateTimeStamp"
+                    HighValueDataMember="High"
+                    LowValueDataMember="Low"
+                    CloseValueDataMember="Close"
+                    OpenValueDataMember="Open">
+                    <dxc:StockSeries2D.Indicators>
+                        <dxc:FibonacciArcs
+                            x:Name="fibonacciArcs"
+                            ShowLevel100="True" />
+                        <dxc:FibonacciFans
+                            x:Name="fibonacciFans" />
+                        <dxc:AverageTrueRange
+                            AxisY="{x:Reference Name=atrAxisY}"
+                            Pane="{x:Reference Name=atrPane}"
+                            PointsCount="14"
+                            LegendText="ATR (14)"
+                            ShowInLegend="True"
+                            Legend="{x:Reference atrLegend}"
+                            DisplayName="Average True Range"
+                            CrosshairEnabled="True"
+                            Tag="AverageTrueRange"/>
+                        <dxc:RateOfChange
+                            AxisY="{x:Reference Name=rocAxisY}"
+                            Pane="{x:Reference Name=rocPane}"
+                            PointsCount="14"
+                            LegendText="RoC (14)"
+                            Legend="{x:Reference rocLegend}"
+                            ShowInLegend="True"
+                            DisplayName="Rate of Change"
+                            CrosshairEnabled="True"
+                            Tag="RateOfChange"/>
+                        <dxc:WilliamsR
+                            AxisY="{x:Reference Name=wrAxisY}"
+                            Pane="{x:Reference Name=wrPane}"
+                            PointsCount="14"
+                            ShowInLegend="True"
+                            Legend="{x:Reference wrLegend}"
+                            LegendText="%R (14)"
+                            DisplayName="Williams %R"
+                            CrosshairEnabled="True"
+                            Tag="WilliamsR"/>
+                    </dxc:StockSeries2D.Indicators>
+                </dxc:StockSeries2D>
+            </dxc:XYDiagram2D>
+        </dxc:ChartControl>
+    </DockPanel>
+</local:ChartsDemoModule>

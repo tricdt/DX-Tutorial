@@ -1,0 +1,73 @@
+﻿<local:MapDemoModule x:Class="MapDemo.MapArrows"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+                     xmlns:local="clr-namespace:MapDemo"
+                     mc:Ignorable="d">
+    <Grid>
+        <dxm:MapControl
+            x:Name="mapControl"
+            CenterPoint="46.25, 13.26"
+            MaxZoomLevel="8"
+            MinZoomLevel="4"
+            ScrollArea="-5.55,58.89,30.38,34.25"
+            UseSprings="False"
+            ZoomLevel="4.5">
+            <dxm:MapControl.Legends>
+                <dxm:ColorScaleLegend EnableGradientScale="True" Layer="{Binding ElementName=itemsLayer}" Header="Wind Speed" Description="m/s" Alignment="TopLeft"/>
+            </dxm:MapControl.Legends>
+            <dxm:MapControl.CoordinateSystem>
+                <dxm:GeoMapCoordinateSystem CircularScrollingMode="TilesAndVectorItems"/>
+            </dxm:MapControl.CoordinateSystem>
+            <dxm:MapControl.ZoomTrackbarOptions>
+                <dxm:ZoomTrackbarOptions Visible="False" />
+            </dxm:MapControl.ZoomTrackbarOptions>
+            <dxm:MapControl.ScrollButtonsOptions>
+                <dxm:ScrollButtonsOptions Visible="False" />
+            </dxm:MapControl.ScrollButtonsOptions>
+            <dxm:MapControl.ScalePanelOptions>
+                <dxm:ScalePanelOptions Visible="False" />
+            </dxm:MapControl.ScalePanelOptions>
+            <dxm:MapControl.CoordinatesPanelOptions>
+                <dxm:CoordinatesPanelOptions Visible="False" />
+            </dxm:MapControl.CoordinatesPanelOptions>
+            <dxm:VectorLayer x:Name="vectorLayer" EnableSelection="False" EnableHighlighting="False">
+                <dxm:ShapefileDataAdapter FileUri="/MapDemo;component/Data/Shapefiles/Maps/Countries.shp" />
+            </dxm:VectorLayer>
+            <dxm:VectorLayer x:Name="itemsLayer" EnableSelection="False" EnableHighlighting="False">
+                <dxm:VectorLayer.Colorizer>
+                    <dxm:ChoroplethColorizer ApproximateColors="True" RangeStops="0 22 56">
+                        <dxm:ChoroplethColorizer.ValueProvider>
+                            <dxm:ShapeAttributeValueProvider AttributeName="Speed"/>
+                        </dxm:ChoroplethColorizer.ValueProvider>
+                        <dxm:ChoroplethColorizer.Colors>
+                            <Color>Green</Color>
+                            <Color>Yellow</Color>
+                            <Color>Red</Color>
+                        </dxm:ChoroplethColorizer.Colors>
+                    </dxm:ChoroplethColorizer>
+                </dxm:VectorLayer.Colorizer>
+                <dxm:ListSourceDataAdapter DataSource="{x:Static local:MapArrowsDemoHelper.DataItems}">
+                    <dxm:ListSourceDataAdapter.Mappings>
+                        <dxm:MapLineMappingInfo XCoordinate="Longitude" YCoordinate="Latitude" Point1="P1" Point2="P2" />
+                    </dxm:ListSourceDataAdapter.Mappings>
+                    <dxm:ListSourceDataAdapter.ItemSettings>
+                        <dxm:MapLineSettings>
+                            <dxm:MapLineSettings.StrokeStyle>
+                                <dxm:StrokeStyle Thickness="2"/>
+                            </dxm:MapLineSettings.StrokeStyle>
+                            <dxm:MapLineSettings.EndLineCap>
+                                <dxm:MapLineCap Length="12" Width="6"/>
+                            </dxm:MapLineSettings.EndLineCap>
+                        </dxm:MapLineSettings>
+                    </dxm:ListSourceDataAdapter.ItemSettings>
+                    <dxm:ListSourceDataAdapter.AttributeMappings>
+                        <dxm:MapItemAttributeMapping Name="Speed" Member="Speed"/>
+                    </dxm:ListSourceDataAdapter.AttributeMappings>
+                </dxm:ListSourceDataAdapter>
+            </dxm:VectorLayer>
+        </dxm:MapControl>
+    </Grid>
+</local:MapDemoModule>

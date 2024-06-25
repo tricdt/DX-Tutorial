@@ -1,0 +1,116 @@
+﻿<local:GridDemoModule x:Class="GridDemo.LargeDataSource"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800"
+                      Cursor="{Binding IsLoading, Converter={dxmvvm:BooleanToObjectConverter TrueValue={x:Static Cursors.Wait}}}"
+                      DataContext="{dxmvvm:ViewModelSource Type=local:LargeDataSourceViewModel}">
+    <!--#region Resources-->
+    <local:GridDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GridDemo;component/ModuleResources/SharedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="subjectEditor">
+                <ContentControl>
+                    <dxg:GridColumn>
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:MemoEditSettings ShowIcon="False" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                </ContentControl>
+            </DataTemplate>
+            <DataTemplate x:Key="priorityColumn">
+                <ContentControl>
+                    <dxg:GridColumn SortMode="Value">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:ComboBoxEditSettings IsTextEditable="False" ItemsSource="{dxe:EnumItemsSource EnumType={x:Type local:Priority}}" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                </ContentControl>
+            </DataTemplate>
+        </ResourceDictionary>
+    </local:GridDemoModule.Resources>
+    <!--#endregion-->
+    <DockPanel Loaded="{DXEvent '@DataContext.InitializeSource(@e(rowCountListBox).EditValue, @e(columnCountListBox).EditValue)'}">
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,5,12,12" MinWidth="210">
+                <GroupBox Header="Rows">
+                    <dxe:ListBoxEdit Name="rowCountListBox"
+                                     SelectedIndex="1"
+                                     ValueMember="Content"
+                                     ItemTemplate="{StaticResource countInfoTemplate}"
+                                     ShowBorder="False"
+                                     Background="{x:Null}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <local:ValueSelectorItem DisplayName="Medium" Content="{local:Int32 250000}" />
+                        <local:ValueSelectorItem DisplayName="Large" Content="{local:Int32 500000}" />
+                        <local:ValueSelectorItem DisplayName="Immense" Content="{local:Int32 1000000}" />
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Columns" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit Name="columnCountListBox"
+                                     SelectedIndex="1"
+                                     ValueMember="DisplayName"
+                                     ItemTemplate="{StaticResource countInfoTemplate}"
+                                     ShowBorder="False"
+                                     Background="{x:Null}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <local:ValueSelectorItem DisplayName="Medium" Content="{local:Int32 250}" />
+                        <local:ValueSelectorItem DisplayName="Large" Content="{local:Int32 500}" />
+                        <local:ValueSelectorItem DisplayName="Immense" Content="{local:Int32 1000}" />
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <Button x:Name="applyButton"
+                        Command="{DXCommand 'DataContext.AssignSource(@e(rowCountListBox).EditValue, @e(columnCountListBox).EditValue)'}"
+                        Margin="0,12,0,0"
+                        Height="22">
+                    Apply
+                </Button>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxg:GridControl Name="grid"
+                         AutoGenerateColumns="AddNew"
+                         EnableSmartColumnsGeneration="True"
+                         ItemsSource="{Binding ItemsSource}"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch"
+                         ShowBorder="False">
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+            </dxg:GridControl.TotalSummary>
+            <dxg:GridControl.View>
+                <dxg:TableView ShowFixedTotalSummary="True"
+                               Name="view"
+                               AllowEditing="True"
+                               ShowAutoFilterRow="False"
+                               BestFitMode="VisibleRows"
+                               ShowSearchPanelMode="Never">
+                    <dxg:TableView.ColumnMenuCustomizations>
+                        <dxb:RemoveBarItemAndLinkAction ItemName="BestFitColumns" />
+                    </dxg:TableView.ColumnMenuCustomizations>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

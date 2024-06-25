@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="GridDemo.Filtering.ColumnGroupFilters"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+             mc:Ignorable="d">
+    <dxg:GridControl ItemsSource="{x:Static dxdb:NWindDataProvider.Invoices}" FilterString="[ShipCountry] = 'USA' And [ShipCity] = 'Albuquerque'">
+        <dxg:GridControl.Columns>
+            <dxg:GridColumn FieldName="ProductName" Width="*" />
+            <dxg:GridColumn FieldName="UnitPrice" Width="*" />
+            <dxg:GridColumn FieldName="Quantity" Width="*" />
+            <dxg:GridColumn FieldName="OrderDate" Width="*" />
+            <dxg:GridColumn FieldName="ShipCountry" Width="*" />
+            <!--#region !-->
+            <dxg:GridColumn FieldName="ShipCity" Width="*" FilterPopupGroupFields="ShipCountry;ShipCity" />
+            <!--#endregion-->
+        </dxg:GridControl.Columns>
+        <dxg:GridControl.View>
+            <dxg:TableView ShowGroupPanel="False" NavigationStyle="Row"/>
+        </dxg:GridControl.View>
+    </dxg:GridControl>
+</UserControl>

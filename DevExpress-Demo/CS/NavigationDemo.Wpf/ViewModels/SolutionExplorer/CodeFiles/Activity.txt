@@ -1,0 +1,121 @@
+﻿using System.ComponentModel;
+using System;
+using System.Drawing;
+using System.Linq;
+using System.IO;
+using DevExpress.CrmDemo.Win.Helpers;
+
+namespace DevExpress.CrmDemo.Win.Data {
+    public class Activity : INotifyPropertyChanged {
+        #region Public members
+
+        public int Id {
+            get { return _id; }
+            set {
+                _id = value;
+                InvokePropertyChanged("Id");
+            }
+        }
+
+        public string ActivityType {
+            get { return _activityType; }
+            set {
+                _activityType = value;
+                InvokePropertyChanged("ActivityType");
+            }
+        }
+
+        public string Description {
+            get { return _description; }
+            set {
+                _description = value;
+                InvokePropertyChanged("Description");
+            }
+        }
+
+        public string DocumentPath {
+            get { return _documentPath; }
+            set {
+                _documentPath = value;
+                InvokePropertyChanged("DocumentPath");
+                InvokePropertyChanged("DocumentName");
+                InvokePropertyChanged("Icon");
+            }
+        }
+
+        public string DocumentName {
+            get {
+                if(string.IsNullOrEmpty(DocumentPath))
+                    return null;
+                else
+                    return Path.GetFileNameWithoutExtension(DocumentPath);
+            }
+        }
+
+        public Bitmap Icon {
+            get {
+                return FileHelpers.GetFileIcon(DocumentPath);
+            }
+        }
+
+        public Bitmap Image {
+            get { return _image; }
+            set {
+                _image = value;
+                InvokePropertyChanged("Image");
+            }
+        }
+
+        public DateTime CompletedDate {
+            get { return _completedDate; }
+            set {
+                _completedDate = value;
+                InvokePropertyChanged("CompletedDate");
+            }
+        }
+
+        public int OwnerId {
+            get { return _ownerId; }
+            set {
+                _ownerId = value;
+                InvokePropertyChanged("OwnerId");
+                InvokePropertyChanged("OwnerName");
+            }
+        }
+
+        public string OwnerName {
+            get {
+                TeamMember tm = DataProvider.Instance.TeamMembers.SingleOrDefault(t => t.Id == this.OwnerId);
+
+                if(tm != null)
+                    return tm.FullName;
+                else
+                    return null;
+            }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged implementation
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void InvokePropertyChanged(string name) {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if(handler != null) handler(this, new PropertyChangedEventArgs(name));
+        }
+        #endregion
+
+        #region Private data
+        private int _id;
+        private DateTime _completedDate;
+        private int _ownerId;
+        private string _activityType;
+        private string _description;
+        private string _documentPath;
+        private Bitmap _image;
+        #endregion
+
+    }
+
+    public class ActivityList : BindingList<Activity> { }
+}

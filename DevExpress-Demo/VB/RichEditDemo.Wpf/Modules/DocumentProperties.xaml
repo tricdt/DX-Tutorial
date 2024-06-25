@@ -1,0 +1,58 @@
+﻿<local:RichEditDemoModule x:Class="RichEditDemo.DocumentProperties"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                          xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit"
+                          xmlns:local="clr-namespace:RichEditDemo"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          mc:Ignorable="d"
+                          d:DesignHeight="400"
+                          d:DesignWidth="800">
+    <dxre:RichEditControl x:Name="richEdit"
+                          CommandBarStyle="Ribbon"
+                          VerticalAlignment="Stretch"
+                          ShowBorder="False"
+                          ActiveViewType="Simple"
+                          DocumentPropertiesChanged="OnDocumentPropertiesChanged"
+                          CustomPropertiesChanged="OnDocumentPropertiesChanged"
+                          CalculateDocumentVariable="OnCalculateDocumentVariable"
+                          DocumentSource="{DXBinding '$local:DemoUtils.GetRelativePath(`DocumentProperties.docx`)'}">
+        <dxre:RichEditControl.RibbonActions>
+            <dxb:InsertAction ContainerName="{x:Static dxre:DefaultBarItemNames.RibbonGroup_File_Info}">
+                <dxb:BarSubItem Content="Insert Document Property"
+                                LargeGlyph="/RichEditDemo;component/Images/InsertDocumentProperty.svg"
+                                Glyph="/RichEditDemo;component/Images/InsertDocumentProperty.svg">
+                    <dxb:BarLinkContainerItem ItemLinksSource="{x:Static local:DocumentProperties.Properties}">
+                        <dxb:BarLinkContainerItem.ItemTemplate>
+                            <DataTemplate>
+                                <ContentControl>
+                                    <dxb:BarButtonItem Content="{Binding DisplayName}" ItemClick="OnPropertyItemClick" />
+                                </ContentControl>
+                            </DataTemplate>
+                        </dxb:BarLinkContainerItem.ItemTemplate>
+                    </dxb:BarLinkContainerItem>
+                </dxb:BarSubItem>
+            </dxb:InsertAction>
+            <!--#region Ribbon Customization-->
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonCategory_HeaderFooterTools}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonCategory_TableTools}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonCategory_PictureTools}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_Home}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_Insert}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_PageLayout}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_References}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_Review}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_View}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonItem_MailMerge_PreviewResults_ViewMergedData}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonItem_MailMerge_PreviewResults_FirstRecord}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonItem_MailMerge_PreviewResults_PreviousRecord}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonItem_MailMerge_PreviewResults_NextRecord}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonItem_MailMerge_PreviewResults_LastRecord}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonItem_MailMerge_PreviewResults_MailMerge}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonGroup_MailMerge_WriteInsertFields}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonItem_File_Common_PrintPreview}" />
+            <!--#endregion-->
+        </dxre:RichEditControl.RibbonActions>
+    </dxre:RichEditControl>
+</local:RichEditDemoModule>

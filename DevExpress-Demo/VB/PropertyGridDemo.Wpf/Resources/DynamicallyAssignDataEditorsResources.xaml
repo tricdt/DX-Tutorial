@@ -1,0 +1,311 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:PropertyGridDemo"
+    xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="MultiEditorDescriptions.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <Style x:Key="descriptionContainerStyle" TargetType="dxprg:PropertyDescriptionPresenterControl">
+        <Setter Property="ShowSelectedRowHeader" Value="False"/>
+        <Setter Property="MinHeight" Value="70"/>
+    </Style>
+    <local:DataEditorsViewModel x:Key="DemoDataProvider" />
+    <dxdb:NWindDataLoader x:Key="NWindDataLoader"/>
+    <local:DynamicallyAssignDataEditorsTemplateSelector x:Key="DynamicallyAssignDataEditorsTemplateSelector"/>
+    <dxe:BytesToImageSourceConverter x:Key="imageConverter" />
+    <local:PropertyDescriptorToDisplayNameConverter x:Key="PropertyDescriptorToDisplayNameConverter"/>
+    <local:CategoryNameToImageSourceConverter x:Key="CategoryToImageSourceConverter"/>
+    <DataTemplate x:Key="descriptionTemplate">
+        <RichTextBox x:Name="descriptionRichTextBox" Foreground="{Binding Path=(TextElement.Foreground), RelativeSource={RelativeSource TemplatedParent}}"  Background="Transparent" BorderThickness="0" IsReadOnly="True" MinWidth="150" HorizontalContentAlignment="Stretch" local:DescriptionAttachedBehavior.Description="{Binding}" IsTabStop="False" />
+    </DataTemplate>
+    <DataTemplate x:Key="FilterHeaderContentTemplate">
+        <ContentPresenter Content="{Binding}"/>
+    </DataTemplate>
+    <ControlTemplate x:Key="displayTemplate">
+        <Image x:Name="PART_Editor" Margin="1" Source="{Binding Path=SelectedItem.Picture, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource imageConverter}}"/>
+    </ControlTemplate>
+    <ControlTemplate x:Key="comboBoxItemTemplate">
+        <StackPanel Orientation="Horizontal" Background="Transparent">
+            <dx:DXImage Source="{Binding Path=(dxe:BaseEdit.OwnerEdit).SelectedItem.CategoryName, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource CategoryToImageSourceConverter}}" />
+            <TextBlock Margin="2" Text="{Binding Path=(dxe:BaseEdit.OwnerEdit).SelectedItem.CategoryName, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Center" />
+        </StackPanel>
+    </ControlTemplate>
+    <ControlTemplate x:Key="gridBeveragesTemplate">
+        <dxg:GridControl x:Name="PART_GridControl">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="CategoryID" Header="Category" HeaderToolTip="Category" MinWidth="36" Width="36" AllowResizing="False" Fixed="None"
+                                        DisplayTemplate="{StaticResource displayTemplate}" AutoFilterRowDisplayTemplate="{StaticResource displayTemplate}"
+                                        AutoFilterRowEditTemplate="{StaticResource displayTemplate}" FilterEditorHeaderTemplate="{StaticResource FilterHeaderContentTemplate}">
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate/>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings
+                                    IsTextEditable="False"
+                                    ValueMember="CategoryID"
+                                    DisplayMember="CategoryName"
+                                    ItemsSource="{Binding Path=Categories, Source={StaticResource NWindDataLoader}}">
+                            <dxe:ComboBoxEditSettings.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Width="30" Source="{Binding Path=Picture, Converter={StaticResource imageConverter}}"/>
+                                        <TextBlock Margin="2,0,0,0"  Text="{Binding Path=CategoryName}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </dxe:ComboBoxEditSettings.ItemTemplate>
+                            <dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+                                <ControlTemplate>
+                                    <Image x:Name="PART_Editor" Width="30" HorizontalAlignment="Left" Margin="1" Source="{Binding Path=(dxe:BaseEdit.OwnerEdit).SelectedItem.Picture, Converter={StaticResource imageConverter}}"/>
+                                </ControlTemplate>
+                            </dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+                        </dxe:ComboBoxEditSettings>
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="CategoryName" />
+                <dxg:GridColumn FieldName="Description" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView Name="view" ShowAutoFilterRow="True" ShowGroupedColumns="True" AutoWidth="true"/>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </ControlTemplate>
+
+    <Style TargetType="dxprg:PropertyDefinition" x:Key="DynamicallyAssignDataEditorsPropertyDefinitionStyle">
+        <Setter Property="Path" Value="{Binding Name}"/>
+        <Setter Property="Header" Value="{Binding Converter={StaticResource PropertyDescriptorToDisplayNameConverter}}"/>
+        <Setter Property="Description" Value="{Binding}"/>
+        <Setter Property="DescriptionTemplate" Value="{StaticResource descriptionTemplate}"/>
+    </Style>
+
+    <DataTemplate x:Key="RegExTextEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:TextEditSettings MaskType="RegEx" Mask="\d{5}-\d{3}-\d{4}" MaskUseAsDisplayFormat="True" />
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="ButtonEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:ButtonEditSettings AllowDefaultButton="False">
+                    <dxe:ButtonEditSettings.Buttons>
+                        <dxe:ButtonInfo ClickMode="Release" GlyphKind="Regular" />
+                    </dxe:ButtonEditSettings.Buttons>
+                </dxe:ButtonEditSettings>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="ComboBoxEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.CellTemplate>
+                <DataTemplate>
+                    <dxe:ComboBoxEdit Name="PART_Editor" ItemsSource="{Binding Categories, Source={StaticResource NWindDataLoader}}"
+                              ValueMember="CategoryID" IsTextEditable="False" DisplayTemplate="{DynamicResource comboBoxItemTemplate}" EditNonEditableTemplate="{DynamicResource comboBoxItemTemplate}">
+                        <dxe:ComboBoxEdit.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Background="Transparent">
+                                    <dx:DXImage Source="{Binding Path=CategoryName, Converter={StaticResource CategoryToImageSourceConverter}}" />
+                                    <TextBlock Text="{Binding Path=CategoryName}" Margin="2" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </dxe:ComboBoxEdit.ItemTemplate>
+                    </dxe:ComboBoxEdit>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.CellTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="AutoCompleteComboBoxEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.CellTemplate>
+                <DataTemplate>
+                    <dxe:ComboBoxEdit Name="PART_Editor" ItemsSource="{Binding Countries, Source={StaticResource NWindDataLoader}}"
+                              AutoComplete="True" IsTextEditable="True" ImmediatePopup="True" />
+                </DataTemplate>
+            </dxprg:PropertyDefinition.CellTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="SearchLookUpEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.CellTemplate>
+                <DataTemplate>
+                    <dxg:LookUpEdit
+                                Name="PART_Editor"
+                                ItemsSource="{Binding Categories, Source={StaticResource NWindDataLoader}}"
+                                ValueMember="CategoryID" PopupHeight="400" PopupWidth="500"
+                                DisplayTemplate="{DynamicResource comboBoxItemTemplate}"
+                                EditNonEditableTemplate="{DynamicResource comboBoxItemTemplate}"
+                                PopupContentTemplate="{DynamicResource gridBeveragesTemplate}"
+                                AutoPopulateColumns="False"
+                                FilterCondition="Contains">
+                        <dxg:LookUpEdit.StyleSettings>
+                            <dxg:SearchLookUpEditStyleSettings/>
+                        </dxg:LookUpEdit.StyleSettings>
+                    </dxg:LookUpEdit>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.CellTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="LookUpEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.CellTemplate>
+                <DataTemplate>
+                    <dxg:LookUpEdit
+                                Name="PART_Editor"
+                                ItemsSource="{Binding Categories, Source={StaticResource NWindDataLoader}}"
+                                ValueMember="CategoryID"
+                                DisplayMember="CategoryName"
+                                PopupContentTemplate="{DynamicResource gridBeveragesTemplate}"
+                                AutoComplete="True"
+                                IncrementalFiltering="True"
+                                ImmediatePopup="True"
+                                AutoPopulateColumns="False"
+                                IsPopupAutoWidth="False" PopupWidth="300"/>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.CellTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="DatePicker">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:DateEditSettings>
+                    <dxe:DateEditSettings.StyleSettings>
+                        <dxe:DateEditPickerStyleSettings/>
+                    </dxe:DateEditSettings.StyleSettings>
+                </dxe:DateEditSettings>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="FontEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:FontEditSettings/>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="BarCodeEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:BarCodeEditSettings ShowText="False">
+                    <dxe:BarCodeEditSettings.StyleSettings>
+                        <dxe:Code128StyleSettings/>
+                    </dxe:BarCodeEditSettings.StyleSettings>
+                </dxe:BarCodeEditSettings>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="PopupCalcEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:CalcEditSettings Mask="c" MaskCulture="en-US" Precision="4" MaskUseAsDisplayFormat="True"/>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="PopupColorEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:PopupColorEditSettings/>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="PopupBrushEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxprg:PopupBrushEditSettings/>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="PopupImageEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:PopupImageEditSettings ShowMenuMode="Always"/>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="TrackBarEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:TrackBarEditSettings TickPlacement="None"/>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="ZoomTrackBarEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:TrackBarEditSettings TickPlacement="None">
+                    <dxe:TrackBarEditSettings.StyleSettings>
+                        <dxe:TrackBarZoomStyleSettings/>
+                    </dxe:TrackBarEditSettings.StyleSettings>
+                </dxe:TrackBarEditSettings>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="RangeTrackBarEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:TrackBarEditSettings TickPlacement="None">
+                    <dxe:TrackBarEditSettings.StyleSettings>
+                        <dxe:TrackBarRangeStyleSettings/>
+                    </dxe:TrackBarEditSettings.StyleSettings>
+                </dxe:TrackBarEditSettings>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="ProgressBarEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:ProgressBarEditSettings/>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="ListBoxEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.CellTemplate>
+                <DataTemplate>
+                    <dxe:ListBoxEdit Name="PART_Editor" ItemsSource="{Binding PalleteSizes, Source={StaticResource DemoDataProvider}}">
+                        <dxe:ListBoxEdit.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Height="60" Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </dxe:ListBoxEdit.ItemsPanel>
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.CellTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="SpinEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:SpinEditSettings MaskType="Numeric" Mask="c" MaskUseAsDisplayFormat="True"/>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="RatingEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:RatingEditSettings HorizontalContentAlignment="Left"/>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="ToggleSwitchEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:ToggleSwitchEditSettings CheckedStateContent="On" UncheckedStateContent="Off"/>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="HyperlinkEdit">
+        <dxprg:PropertyDefinition>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:HyperlinkEditSettings AllowAutoNavigate="True" NavigationUrlFormat="https://www.google.com/search?newwindow=1&amp;q={0}"/>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+</ResourceDictionary>

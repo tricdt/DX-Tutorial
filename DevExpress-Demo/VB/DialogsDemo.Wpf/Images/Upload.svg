@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<svg viewBox="6 -2 32 32" xmlns="http://www.w3.org/2000/svg">
+  <g id="Layer_1" transform="translate(0, 12) rotate(90, 8, 8)">
+    <g id="Remove_1_">
+      <path d="M15, 10L1, 10C0.4, 10 0, 9.6 0, 9L0, 7C0, 6.4 0.4, 6 1, 6L15, 6C15.6, 6 16, 6.4 16, 7L16, 9C16, 9.6 15.6, 10 15, 10z" fill="#727272" class="Black" />
+    </g>
+  </g>
+  <g id="Layer_1" transform="translate(6, 20)">
+    <g id="Remove_1_">
+      <path d="M15, 10L1, 10C0.4, 10 0, 9.6 0, 9L0, 7C0, 6.4 0.4, 6 1, 6L15, 6C15.6, 6 16, 6.4 16, 7L16, 9C16, 9.6 15.6, 10 15, 10z" fill="#727272" class="Black" />
+    </g>
+  </g>
+  <g id="Layer_1" transform="translate(22, 20)">
+    <g id="Remove_1_">
+      <path d="M15, 10L1, 10C0.4, 10 0, 9.6 0, 9L0, 7C0, 6.4 0.4, 6 1, 6L15, 6C15.6, 6 16, 6.4 16, 7L16, 9C16, 9.6 15.6, 10 15, 10z" fill="#727272" class="Black" />
+    </g>
+  </g>
+  <g id="Layer_1" transform="translate(28, 12) rotate(90, 8, 8)">
+    <g id="Remove_1_">
+      <path d="M15, 10L1, 10C0.4, 10 0, 9.6 0, 9L0, 7C0, 6.4 0.4, 6 1, 6L15, 6C15.6, 6 16, 6.4 16, 7L16, 9C16, 9.6 15.6, 10 15, 10z" fill="#727272" class="Black" />
+    </g>
+  </g>
+  <g id="Layer_1" transform="translate(6, -4)">
+    <g id="Arrow1Up">
+      <path d="M14, 28L14, 14L13.3, 14L6, 14L16, 4L26, 14L18.7, 14L18, 14L18, 28L14, 28z" fill="#1177D7" id="Group_Selection_3_" class="Blue" />
+    </g>
+  </g>
+  <g id="Layer_1" transform="translate(14, 20)">
+    <g id="Remove_1_">
+      <path d="M15, 10L1, 10C0.4, 10 0, 9.6 0, 9L0, 7C0, 6.4 0.4, 6 1, 6L15, 6C15.6, 6 16, 6.4 16, 7L16, 9C16, 9.6 15.6, 10 15, 10z" fill="#727272" class="Black" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,54 @@
+﻿<local:GanttDemoModule x:Class="GanttDemo.CriticalPath"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+      xmlns:dxgn="http://schemas.devexpress.com/winfx/2008/xaml/gantt"
+      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+      xmlns:local="clr-namespace:GanttDemo"
+      mc:Ignorable="d"
+      d:DesignHeight="600"
+      d:DesignWidth="1200"
+      DataContext="{dxmvvm:ViewModelSource Type={x:Type local:CriticalPathViewModel}}">
+    <DockPanel>
+        <local:GanttDemoRibbon DockPanel.Dock="Top" ExportGantt="{x:Reference gantt}" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Disabled"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel>
+                <GroupBox Header="Critical Path Highlight Mode"
+                          Margin="12,0,12,12" MinWidth="190">
+                    <dxe:ComboBoxEdit x:Name="cbCriticalPathHighlightMode"
+                                      IsTextEditable="False"
+                                      SelectedIndex="0"
+                                      SelectedItem="{Binding CriticalPathHighlightMode, Mode=TwoWay}">
+                        <dxgn:CriticalPathHighlightMode>Single</dxgn:CriticalPathHighlightMode>
+                        <dxgn:CriticalPathHighlightMode>Multiple</dxgn:CriticalPathHighlightMode>
+                    </dxe:ComboBoxEdit>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <dxgn:GanttControl x:Name="gantt" ShowBorder="False"
+                           ItemsSource="{DXBinding 'CriticalPathHighlightMode == $dxgn:CriticalPathHighlightMode.Single ? SingleSource : MultipleSource'}">
+            <dxgn:GanttControl.View>
+                <dxgn:GanttView AutoExpandAllNodes="True"
+                                NewItemRowPosition="Bottom"
+                                TreeListWidth="Auto"
+                                ScrollMargin="0"
+                                Zoom="1:0:0"
+                                TopRowIndex="20"
+                                AllowValidatePredecessorLinks="False"
+                                FirstVisibleDate="{Binding FirstVisibleDate, Mode=TwoWay}"
+                                CriticalPathHighlightMode="{Binding CriticalPathHighlightMode}"/>
+            </dxgn:GanttControl.View>
+            <dxgn:GanttColumn BindTo="Name"/>
+            <dxgn:GanttColumn BindTo="StartDate"/>
+            <dxgn:GanttColumn BindTo="Duration"/>
+        </dxgn:GanttControl>
+    </DockPanel>
+</local:GanttDemoModule>

@@ -1,0 +1,1319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{50448EF7-3331-477B-937C-E61730EC4897}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <BaseIntermediateOutputPath>obj.Wpf</BaseIntermediateOutputPath>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ChartsDemo</RootNamespace>
+    <AssemblyName>ChartsDemo</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ConvertToNet6Windows />
+  </PropertyGroup>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;WPF;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Debug\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;CLICKONCE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWin32Manifest>true</NoWin32Manifest>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Release\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Release\</OutputPath>
+    <DefineConstants>TRACE;WPF;CLICKONCE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWin32Manifest>true</NoWin32Manifest>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugTest\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DEBUGTEST</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>demoicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Data\Top10LargestCountriesInfo.xml" />
+    <Resource Include="Data\HPI.xml" />
+    <Resource Include="Images\Mars.png" />
+    <Resource Include="Data\Heightmap.jpg" />
+    <Resource Include="Data\IrisDataSet.xml" />
+    <Resource Include="Images\Functions\1.png" />
+    <Resource Include="Images\Functions\2.png" />
+    <Resource Include="Images\Functions\3.png" />
+    <Resource Include="Images\Functions\4.png" />
+    <Resource Include="Images\Functions\5.png" />
+    <Resource Include="Data\Population.xml" />
+    <Resource Include="Data\DailyWeather\DeathValley.xml" />
+    <Resource Include="Data\DailyWeather\VostokStation.xml" />
+    <Resource Include="Data\OilPrices.xml" />
+    <Resource Include="Data\CommentsData.xml" />
+    <Resource Include="Data\MarsTemperatureData.xml" />
+    <Resource Include="Data\LondonTemperature.xml" />
+    <Resource Include="Data\WindRoseData.xml" />
+    <Resource Include="Data\DashboardSales.xml" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Area.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Area3D.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Area3DStacked.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Area3DStacked100%25.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_AreaStacked.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_AreaStacked100%25.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_AreaStepStacked.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_AreaStepStacked100%25.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Bar.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Bar3D.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Bar3DStacked.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Bar3DStacked100%25.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_BarStacked.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_BarStacked100%25.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Bubble.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_CandleStick.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Doughnut.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Doughnut3D.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Funnel.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Funnel3D.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Gantt.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Line.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Line3D.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Line3DStacked.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Line3DStacked100%25.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_LineStacked.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_LineStacked100%25.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_ManhattanBar.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_NestedDoughnut.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Pie.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Pie3D.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Point.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_PolarArea.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_PolarLine.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_PolarPoint.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_PolarRangeArea.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_RadarArea.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_RadarLine.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_RadarPoint.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_RadarRangeArea.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_RadatPoint.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_RangeArea.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_RangeArea3D.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_RangeBar.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_ScatterLine.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_ScatterPolarLine.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_ScatterRadarLine.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_SideBySideBar3DStacked.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_SideBySideBar3DStacked100%25.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_SideBySideBarStacked.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_SideBySideBarStacked100%25.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_SideBySideGantt.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_SideBySideRangeBar.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Spline.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Spline3D.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_SplineArea.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_SplineArea3D.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_SplineArea3DStacked.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_SplineArea3DStacked100%25.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_SplineAreaStacked.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_SplineAreaStacked100%25.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_StepArea.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_StepArea3D.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_StepLine.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_StepLine3D.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Stock.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_SwiftPlot.svg" />
+    <Resource Include="Images\NestedDonut2-3.png" />
+    <Resource Include="Images\NestedDonut1-2.png" />
+    <Resource Include="Images\NestedDonut2-2.png" />
+    <Resource Include="Images\NestedDonut3-3.png" />
+    <Resource Include="Images\NestedDonut1-3.png" />
+    <Resource Include="Images\FibonacciArcs.png" />
+    <Resource Include="Images\FibonacciRetracement.png" />
+    <Resource Include="Images\FibonacciFans.png" />
+    <Resource Include="Images\TrendLine.png" />
+    <Resource Include="Images\Employees\Andrew Fuller.png" />
+    <Resource Include="Images\Employees\Anne Dodsworth.png" />
+    <Resource Include="Images\Employees\Margaret Peacock.png" />
+    <Resource Include="Images\Employees\Michael Suyama.png" />
+    <Resource Include="Images\Employees\Nancy Davolio.png" />
+    <Resource Include="Images\Employees\Robert King.png" />
+    <Resource Include="Images\1.png" />
+    <Resource Include="Images\Charts.svg" />
+    <Resource Include="Images\Logo.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Bubble3D.svg" />
+    <Resource Include="Images\SeriesViews\ChartTypes_Point3D.svg" />
+    <Resource Include="Data\CityWeather.xml" />
+    <Reference Include="DevExpress.Charts.Designer.v22.2">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Printing.v22.2.Core">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Data.Desktop.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Drawing.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Data.v22.2">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.DemoData.v22.2">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Charts.v22.2.Core">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Map.v22.2.Core">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Xpf.Core.v22.2">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Xpf.Charts.v22.2">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2.Core">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Xpf.Map.v22.2">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Xpf.DemoBase.v22.2">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v22.2">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Mvvm.v22.2">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Xpf.Gauges.v22.2">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Xpf.Ribbon.v22.2">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Xpf.TypedStyles.v22.2">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Xpf.Accordion.v22.2">
+      <Private>False</Private>
+    <HintPath></HintPath></Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="PresentationUI"><Private>False</Private></Reference>
+    <Reference Include="System"><Private>False</Private></Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations"><Private>False</Private></Reference>
+    <Reference Include="System.Configuration"><Private>False</Private></Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    <Private>False</Private></Reference>
+    <Reference Include="System.Drawing"><Private>False</Private></Reference>
+    <Reference Include="System.Windows.Forms"><Private>False</Private></Reference>
+    <Reference Include="System.Xaml"><Private>False</Private></Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    <Private>False</Private></Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    <Private>False</Private></Reference>
+    <Reference Include="System.Data"><Private>False</Private></Reference>
+    <Reference Include="System.Xml"><Private>False</Private></Reference>
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    <Private>False</Private></Reference>
+    <Reference Include="UIAutomationTypes"><Private>False</Private></Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    <Private>False</Private></Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    <Private>False</Private></Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    <Private>False</Private></Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ChartElements\Annotations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\ChartElements\ConstantLinesAndStrips.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ChartElements\AxisAndSeriesLabels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ChartElements\LogarithmicScale.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ChartElements\DateTimeScale.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\ChartElements\Legends.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ChartElements\Panes\GridPaneLayoutTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ChartElements\Panes\LinearPaneLayoutTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ChartElements\Panes\PanesDemo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ChartElements\ScaleBreaks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\ChartElements\Titles\SimpleDiagramTitlesTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ChartElements\Titles\Titles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ChartElements\Titles\XYDiagramTitlesTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataAnalysis\MovingAverageAndRegressionLine.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataAnalysis\FinancialIndicators.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataBinding\DataAggregation\DataAggregation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataBinding\DataAggregation\TimeSpanDataAggregationTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataBinding\DataAggregation\DateTimeDataAggregationTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataBinding\DataAggregation\NumericDataAggregationTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataBinding\DataAggregation\QualitativeDataAggregationTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Highlighted\SeriesPointMoving.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Highlighted\TornadoChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Interaction\DrillDown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\DataAnalysis\ErrorBars.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataBinding\BindingIndividualSeries.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\DataBinding\DataFiltering.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataBinding\DataGridCharting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataBinding\MvvmStyleBinding.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataBinding\SeriesTemplateBinding.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\DataBinding\TopNAndOthers.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Highlighted\LargeDataSource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Highlighted\RealTimeChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Highlighted\LargeSeriesNumber.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\AppearanceCustomization\AdvancedCustomization.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Highlighted\Histogram.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Highlighted\BoxPlot.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Highlighted\Waterfall.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Interaction\Animation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataBinding\Colorizer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Highlighted\MvvmFinancialCharting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Interaction\TooltipAndCrosshairCursor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Areas\Area3DTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Areas\AreasDemo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Areas\AreaTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Areas\FullStackedArea3DTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Areas\FullStackedAreaTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Areas\FullStackedSplineAreaTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Areas\FullStackedStepAreaTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Areas\RangeAreaTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Areas\SplineAreaTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Areas\StackedArea3DTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Areas\StackedAreaTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Areas\StackedSplineAreaTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Areas\StackedStepAreaTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Areas\StepAreaTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Bars\BarsDemo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Bars\CustomBarModel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Bars\FullStackedBarTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Bars\ManhattanBarTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Bars\Models3D\Chair\bottom.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Bars\Models3D\Chair\center.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Bars\Models3D\Chair\top.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Bars\Models3D\Pencil\bottom.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Bars\Models3D\Pencil\top.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Bars\OverlappedRangeBarTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Bars\SideBySideBar3DTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Bars\SideBySideBarTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Bars\SideBySideFullStackedBarTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Bars\SideBySideRangeBarTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Bars\SideBySideStackedBarTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Bars\StackedBarTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\CustomMarkerModel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Financial\CandleStickTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Financial\CustomFinancialModels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Financial\FinancialSeriesDemo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Financial\StockTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Lines\FullStackedLineTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Lines\LinesDemo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Lines\LineTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Lines\ScatterLineTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Lines\SplineTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Lines\StackedLineTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\Lines\StepLineTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PiesDonutsAndFunnels\CustomPieModel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PiesDonutsAndFunnels\FunnelTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PiesDonutsAndFunnels\NestedDonutTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PiesDonutsAndFunnels\Pie3DTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PiesDonutsAndFunnels\PiesDonutsAndFunnelsDemo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PiesDonutsAndFunnels\PieTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PointsAndBubbles\Bubble3DTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PointsAndBubbles\BubbleTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PointsAndBubbles\Point3DTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PointsAndBubbles\PointsAndBubblesDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PointsAndBubbles\PointTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PolarAndRadar\PolarAndRadarDemo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PolarAndRadar\PolarAreaTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PolarAndRadar\PolarLineTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PolarAndRadar\PolarPointTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PolarAndRadar\PolarRangeAreaTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PolarAndRadar\RadarAreaTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PolarAndRadar\RadarLineTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PolarAndRadar\RadarPointTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PolarAndRadar\RadarRangeAreaTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PolarAndRadar\ScatterPolarLineTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SeriesTypes\PolarAndRadar\ScatterRadarLineTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\XyzChart\DataBinding\DataBindingDemo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\XyzChart\DataBinding\DataPoint3DBindingTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\XyzChart\SeriesViews\SeriesViewsDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\XyzChart\SeriesViews\PointSeriesViewTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\XyzChart\SeriesViews\Bubble3DSeriesViewTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\XyzChart\SeriesViews\Bar3DSeriesViewTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\XyzChart\DataBinding\RegularGridDataTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\XyzChart\SeriesViews\SurfaceSeriesViewTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Common.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Interaction\RangeControlIntegration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Interaction\Selection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ChartElements\SecondaryAxes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataBinding\EmptyPoints.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\XyzChart\Charting3D.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Highlighted\RealTime3DChartDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChartsDemoRibbon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChartsDemoModule.cs" />
+    <Compile Include="DataModels\AgeStructure.cs" />
+    <Compile Include="DataModels\Bar3DDataGenerator.cs" />
+    <Compile Include="DataModels\BoxPlotPoint.cs" />
+    <Compile Include="DataModels\CarbonContributionDataPoint.cs" />
+    <Compile Include="DataModels\CountriesData.cs" />
+    <Compile Include="DataModels\DataLoader.cs" />
+    <Compile Include="DataModels\RandomSequenceGenerator.cs" />
+    <Compile Include="DataModels\SeriesPointMovingDataModel.cs" />
+    <Compile Include="DataModels\TimeSpanArgumentData.cs" />
+    <Compile Include="DataModels\DateTimeArgumentData.cs" />
+    <Compile Include="DataModels\DevAVBranchesSales.cs" />
+    <Compile Include="DataModels\DevAVHierarchicalSalesData.cs" />
+    <Compile Include="DataModels\DevAVSalesByLast10Years.cs" />
+    <Compile Include="DataModels\DevAVSalesByYear.cs" />
+    <Compile Include="DataModels\DevAVSalesMixByRegion.cs" />
+    <Compile Include="DataModels\ErrorBarsData.cs" />
+    <Compile Include="DataModels\ExtremeWeatherData.cs" />
+    <Compile Include="DataModels\FinancialDataGenerator.cs" />
+    <Compile Include="DataModels\FinancialDataLoader.cs" />
+    <Compile Include="DataModels\FinancialDataPoint.cs" />
+    <Compile Include="DataModels\FuelPrices.cs" />
+    <Compile Include="DataModels\HighestGrossingFilmsByYear.cs" />
+    <Compile Include="DataModels\PopulationGenerator.cs" />
+    <Compile Include="DataModels\HpiStatistics.cs" />
+    <Compile Include="DataModels\LargeDataGenerator.cs" />
+    <Compile Include="DataModels\NumericArgumentData.cs" />
+    <Compile Include="DataModels\OutsideVendorCosts.cs" />
+    <Compile Include="DataModels\PointGenerator.cs" />
+    <Compile Include="DataModels\PowerConsumption.cs" />
+    <Compile Include="DataModels\RealEstateData.cs" />
+    <Compile Include="DataModels\SalesProductData.cs" />
+    <Compile Include="DataModels\SimpleDataPoint.cs" />
+    <Compile Include="DataModels\SurfaceDataGenerator.cs" />
+    <Compile Include="DemoTesting\ImageComparer.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ChartElements\ConstantLinesAndStrips.xaml.cs">
+      <DependentUpon>ConstantLinesAndStrips.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ChartElements\AxisAndSeriesLabels.xaml.cs">
+      <DependentUpon>AxisAndSeriesLabels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\OperatingSurfaceTemperatureData.cs" />
+    <Compile Include="DataModels\FinancialDataWithBreaksGenerator.cs" />
+    <Compile Include="Modules\ChartElements\ConstantLinesAndStripsViewModel.cs" />
+    <Compile Include="Modules\ChartElements\DateTimeScaleViewModel.cs" />
+    <Compile Include="DataModels\HeadphoneComparisonDataReader.cs" />
+    <Compile Include="Modules\ChartElements\LogarithmicScaleViewModel.cs" />
+    <Compile Include="DataModels\WebSitePerformanceIndicator.cs" />
+    <Compile Include="DataModels\PlanetData.cs" />
+    <Compile Include="Modules\ChartElements\LogarithmicScale.xaml.cs">
+      <DependentUpon>LogarithmicScale.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ChartElements\DateTimeScale.xaml.cs">
+      <DependentUpon>DateTimeScale.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ChartElements\Panes\GridPaneLayoutTab.xaml.cs">
+      <DependentUpon>GridPaneLayoutTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ChartElements\Panes\LinearPaneLayoutTab.xaml.cs">
+      <DependentUpon>LinearPaneLayoutTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ChartElements\Panes\PanesDemo.xaml.cs">
+      <DependentUpon>PanesDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ChartElements\ScaleBreaks.xaml.cs">
+      <DependentUpon>ScaleBreaks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ChartElements\Titles\SimpleDiagramTitlesTab.xaml.cs">
+      <DependentUpon>SimpleDiagramTitlesTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ChartElements\Titles\Titles.xaml.cs">
+      <DependentUpon>Titles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ChartElements\Titles\XYDiagramTitlesTab.xaml.cs">
+      <DependentUpon>XYDiagramTitlesTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataAnalysis\MovingAverageAndRegressionLine.xaml.cs">
+      <DependentUpon>MovingAverageAndRegressionLine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataAnalysis\FinancialIndicators.xaml.cs">
+      <DependentUpon>FinancialIndicators.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataBinding\DataAggregation\DataAggregation.xaml.cs">
+      <DependentUpon>DataAggregation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataBinding\DataAggregation\TimeSpanDataAggregationTab.xaml.cs">
+      <DependentUpon>TimeSpanDataAggregationTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataBinding\DataAggregation\DateTimeDataAggregationTab.xaml.cs">
+      <DependentUpon>DateTimeDataAggregationTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataBinding\DataAggregation\NumericDataAggregationTab.xaml.cs">
+      <DependentUpon>NumericDataAggregationTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataBinding\DataAggregation\QualitativeDataAggregationTab.xaml.cs">
+      <DependentUpon>QualitativeDataAggregationTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Highlighted\BoxPlotViewModel.cs" />
+    <Compile Include="Modules\Highlighted\SeriesPointMoving.xaml.cs">
+      <DependentUpon>SeriesPointMoving.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Highlighted\TornadoChart.xaml.cs">
+      <DependentUpon>TornadoChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Highlighted\SeriesPointMovingViewModel.cs" />
+    <Compile Include="Modules\Highlighted\TornadoChartViewModel.cs" />
+    <Compile Include="Modules\Interaction\DrillDown.xaml.cs">
+      <DependentUpon>DrillDown.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Interaction\DrillDownViewModel.cs" />
+    <Compile Include="Modules\Highlighted\LargeDataSource.xaml.cs">
+      <DependentUpon>LargeDataSource.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\SensorDataGenerator.cs" />
+    <Compile Include="Modules\Highlighted\RealTimeChartViewModel.cs" />
+    <Compile Include="Modules\Highlighted\RealTimeChart.xaml.cs">
+      <DependentUpon>RealTimeChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Highlighted\LargeSeriesNumber.xaml.cs">
+      <DependentUpon>LargeSeriesNumber.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\SeaIceAreaDataReader.cs" />
+    <Compile Include="DataModels\RealTimeFinancialDataGenerator.cs" />
+    <Compile Include="Modules\Highlighted\MvvmFinancialChartingViewModel.cs" />
+    <Compile Include="Modules\DataBinding\BindingIndividualSeries.xaml.cs">
+      <DependentUpon>BindingIndividualSeries.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataBinding\BindingIndividualSeriesViewModel.cs" />
+    <Compile Include="Modules\DataBinding\DataFiltering.xaml.cs">
+      <DependentUpon>DataFiltering.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataBinding\DataFilteringViewModels.cs" />
+    <Compile Include="Modules\DataBinding\DataGridCharting.xaml.cs">
+      <DependentUpon>DataGridCharting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChartsDemoRibbon.xaml.cs">
+      <DependentUpon>ChartsDemoRibbon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataBinding\SeriesTemplateBinding.xaml.cs">
+      <DependentUpon>SeriesTemplateBinding.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataBinding\SeriesTemplateBindingViewModel.cs" />
+    <Compile Include="Modules\DataBinding\StandardDeviationCustomAggregateFunction.cs" />
+    <Compile Include="Modules\DataBinding\TopNAndOthers.xaml.cs">
+      <DependentUpon>TopNAndOthers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Highlighted\MvvmFinancialCharting.xaml.cs">
+      <DependentUpon>MvvmFinancialCharting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AppearanceCustomization\AdvancedCustomization.xaml.cs">
+      <DependentUpon>AdvancedCustomization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Highlighted\HistogramViewModel.cs" />
+    <Page Include="Modules\Highlighted\SegmentColorizer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="Modules\Highlighted\Histogram.xaml.cs">
+      <DependentUpon>Histogram.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Highlighted\BoxPlot.xaml.cs">
+      <DependentUpon>BoxPlot.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Highlighted\Waterfall.xaml.cs">
+      <DependentUpon>Waterfall.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Highlighted\SegmentColorizer.xaml.cs">
+      <DependentUpon>SegmentColorizer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Interaction\TooltipAndCrosshairCursor.xaml.cs">
+      <DependentUpon>TooltipAndCrosshairCursor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\OptionsConverter.cs" />
+    <Compile Include="Modules\SeriesTypes\Areas\Area3DTab.xaml.cs">
+      <DependentUpon>Area3DTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Areas\AreasDemo.xaml.cs">
+      <DependentUpon>AreasDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Areas\AreaTab.xaml.cs">
+      <DependentUpon>AreaTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Areas\FullStackedArea3DTab.xaml.cs">
+      <DependentUpon>FullStackedArea3DTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Areas\FullStackedAreaTab.xaml.cs">
+      <DependentUpon>FullStackedAreaTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Areas\FullStackedSplineAreaTab.xaml.cs">
+      <DependentUpon>FullStackedSplineAreaTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Areas\FullStackedStepAreaTab.xaml.cs">
+      <DependentUpon>FullStackedStepAreaTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Areas\RangeAreaTab.xaml.cs">
+      <DependentUpon>RangeAreaTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Areas\SplineAreaTab.xaml.cs">
+      <DependentUpon>SplineAreaTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Areas\StackedArea3DTab.xaml.cs">
+      <DependentUpon>StackedArea3DTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Areas\StackedAreaTab.xaml.cs">
+      <DependentUpon>StackedAreaTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Areas\StackedSplineAreaTab.xaml.cs">
+      <DependentUpon>StackedSplineAreaTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Areas\StackedStepAreaTab.xaml.cs">
+      <DependentUpon>StackedStepAreaTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Areas\StepAreaTab.xaml.cs">
+      <DependentUpon>StepAreaTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Bars\Bar2DKindToTickmarksLengthConverter.cs" />
+    <Compile Include="Modules\SeriesTypes\Bars\BarsDemo.xaml.cs">
+      <DependentUpon>BarsDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Bars\CustomBar3DModelNamed.cs" />
+    <Compile Include="Modules\SeriesTypes\Bars\FullStackedBarTab.xaml.cs">
+      <DependentUpon>FullStackedBarTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Bars\ManhattanBarTab.xaml.cs">
+      <DependentUpon>ManhattanBarTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Bars\OverlappedRangeBarTab.xaml.cs">
+      <DependentUpon>OverlappedRangeBarTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Bars\SideBySideBar3DTab.xaml.cs">
+      <DependentUpon>SideBySideBar3DTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Bars\SideBySideBarTab.xaml.cs">
+      <DependentUpon>SideBySideBarTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Bars\SideBySideFullStackedBarTab.xaml.cs">
+      <DependentUpon>SideBySideFullStackedBarTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Bars\SideBySideRangeBarTab.xaml.cs">
+      <DependentUpon>SideBySideRangeBarTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Bars\SideBySideStackedBarTab.xaml.cs">
+      <DependentUpon>SideBySideStackedBarTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Bars\StackedBarTab.xaml.cs">
+      <DependentUpon>StackedBarTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Financial\CandleStickTab.xaml.cs">
+      <DependentUpon>CandleStickTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Financial\FinancialSeriesDemo.xaml.cs">
+      <DependentUpon>FinancialSeriesDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Financial\StockTab.xaml.cs">
+      <DependentUpon>StockTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Financial\ValueSelectorItem.cs" />
+    <Compile Include="Modules\SeriesTypes\Lines\FullStackedLineTab.xaml.cs">
+      <DependentUpon>FullStackedLineTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Lines\LinesDemo.xaml.cs">
+      <DependentUpon>LinesDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Lines\LineTab.xaml.cs">
+      <DependentUpon>LineTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Lines\ScatterLineTab.xaml.cs">
+      <DependentUpon>ScatterLineTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Lines\SplineTab.xaml.cs">
+      <DependentUpon>SplineTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Lines\StackedLineTab.xaml.cs">
+      <DependentUpon>StackedLineTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\Lines\StepLineTab.xaml.cs">
+      <DependentUpon>StepLineTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\MarkerSizeToLabelIndentConverter.cs" />
+    <Compile Include="Modules\SeriesTypes\PiesDonutsAndFunnels\FunnelTab.xaml.cs">
+      <DependentUpon>FunnelTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PiesDonutsAndFunnels\NestedDonutTab.xaml.cs">
+      <DependentUpon>NestedDonutTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PiesDonutsAndFunnels\NestedDonutTabViewModel.cs" />
+    <Compile Include="Modules\SeriesTypes\PiesDonutsAndFunnels\Pie3DTab.xaml.cs">
+      <DependentUpon>Pie3DTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PiesDonutsAndFunnels\PieChartSelectionBehavior.cs" />
+    <Compile Include="Modules\SeriesTypes\PiesDonutsAndFunnels\PiesDonutsAndFunnelsDemo.xaml.cs">
+      <DependentUpon>PiesDonutsAndFunnelsDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PiesDonutsAndFunnels\PieTab.xaml.cs">
+      <DependentUpon>PieTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PointsAndBubbles\Bubble3DTab.xaml.cs">
+      <DependentUpon>Bubble3DTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PointsAndBubbles\BubbleTab.xaml.cs">
+      <DependentUpon>BubbleTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PointsAndBubbles\Point3DTab.xaml.cs">
+      <DependentUpon>Point3DTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PointsAndBubbles\PointsAndBubblesDemo.xaml.cs">
+      <DependentUpon>PointsAndBubblesDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PointsAndBubbles\PointTab.xaml.cs">
+      <DependentUpon>PointTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\LondonTemperatureData.cs" />
+    <Compile Include="Modules\SeriesTypes\PolarAndRadar\PolarAndRadarDemo.xaml.cs">
+      <DependentUpon>PolarAndRadarDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PolarAndRadar\PolarAreaTab.xaml.cs">
+      <DependentUpon>PolarAreaTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PolarAndRadar\PolarLineTab.xaml.cs">
+      <DependentUpon>PolarLineTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PolarAndRadar\PolarPointTab.xaml.cs">
+      <DependentUpon>PolarPointTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PolarAndRadar\PolarRangeAreaTab.xaml.cs">
+      <DependentUpon>PolarRangeAreaTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PolarAndRadar\RadarAreaTab.xaml.cs">
+      <DependentUpon>RadarAreaTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PolarAndRadar\RadarLineTab.xaml.cs">
+      <DependentUpon>RadarLineTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PolarAndRadar\RadarPointTab.xaml.cs">
+      <DependentUpon>RadarPointTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PolarAndRadar\RadarRangeAreaTab.xaml.cs">
+      <DependentUpon>RadarRangeAreaTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PolarAndRadar\ScatterPolarLineTab.xaml.cs">
+      <DependentUpon>ScatterPolarLineTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesTypes\PolarAndRadar\ScatterRadarLineTab.xaml.cs">
+      <DependentUpon>ScatterRadarLineTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TabbedModuleViewModel.cs" />
+    <Compile Include="Modules\TabItemModule.cs" />
+    <Compile Include="Modules\XyzChart\DataBinding\DataBindingDemo.xaml.cs">
+      <DependentUpon>DataBindingDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\XyzChart\DataBinding\DataPoint3DBindingTab.xaml.cs">
+      <DependentUpon>DataPoint3DBindingTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataModels\Random3DDataGenerator.cs" />
+    <Compile Include="DataModels\HightMapGenerator.cs" />
+    <Compile Include="Modules\XyzChart\SeriesViews\PointSeriesViewViewModel.cs" />
+    <Compile Include="DataModels\RealTime3DDataGenerator.cs" />
+    <Compile Include="Modules\XyzChart\SeriesViews\SeriesViewsDemo.xaml.cs">
+      <DependentUpon>SeriesViewsDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\XyzChart\SeriesViews\PointSeriesViewTab.xaml.cs">
+      <DependentUpon>PointSeriesViewTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\XyzChart\SeriesViews\Bubble3DSeriesViewTab.xaml.cs">
+      <DependentUpon>Bubble3DSeriesViewTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\XyzChart\SeriesViews\Bar3DSeriesViewTab.xaml.cs">
+      <DependentUpon>Bar3DSeriesViewTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\XyzChart\DataBinding\RegularGridDataTab.xaml.cs">
+      <DependentUpon>RegularGridDataTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\XyzChart\SeriesViews\SurfaceSeriesViewTab.xaml.cs">
+      <DependentUpon>SurfaceSeriesViewTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Interaction\AnimationHelper.cs" />
+    <Compile Include="Utils\ChartAnimationService.cs" />
+    <Compile Include="Utils\ColorUtils.cs" />
+    <Compile Include="Utils\CsvReader.cs" />
+    <Compile Include="Utils\Debug.cs" />
+    <Compile Include="Utils\ForwardOnlyValueConverter.cs" />
+    <Compile Include="Modules\ChartElements\Annotations.xaml.cs">
+      <DependentUpon>Annotations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ChartElements\Legends.xaml.cs">
+      <DependentUpon>Legends.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataAnalysis\ErrorBars.xaml.cs">
+      <DependentUpon>ErrorBars.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataBinding\MvvmStyleBinding.xaml.cs">
+      <DependentUpon>MvvmStyleBinding.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Interaction\Animation.xaml.cs">
+      <DependentUpon>Animation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataBinding\Colorizer.xaml.cs">
+      <DependentUpon>Colorizer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Interaction\RangeControlIntegration.xaml.cs">
+      <DependentUpon>RangeControlIntegration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\XyzChart\Charting3D.xaml.cs">
+      <DependentUpon>Charting3D.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Highlighted\RealTime3DChartDemo.xaml.cs">
+      <DependentUpon>RealTime3DChartDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SeriesInfo.cs" />
+    <Compile Include="DemoTesting\Fixtures.cs" />
+    <Compile Include="DataModels\CommentsData.cs" />
+    <Compile Include="DataModels\CountriesAreaData.cs" />
+    <Compile Include="DataModels\AnimationDemoDataSources.cs" />
+    <Compile Include="DataModels\DevAVSalesData.cs" />
+    <Compile Include="DataModels\ExchangeRatesModel.cs" />
+    <Compile Include="Modules\XyzChart\DataBinding\DataPoint3DBindingViewModel.cs" />
+    <Compile Include="CommonViewModels.cs" />
+    <Compile Include="DataModels\ResourceUsageData.cs" />
+    <Compile Include="Modules\DataBinding\MvvmStyleBindingViewModel.cs" />
+    <Compile Include="Modules\Interaction\SelectionViewModel.cs" />
+    <Compile Include="Modules\Interaction\Selection.xaml.cs">
+      <DependentUpon>Selection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ChartElements\SecondaryAxes.xaml.cs">
+      <DependentUpon>SecondaryAxes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataBinding\EmptyPoints.xaml.cs">
+      <DependentUpon>EmptyPoints.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="DataModels\MarsTemperatureData.cs" />
+    <Compile Include="DataModels\OilPrices.cs" />
+    <Compile Include="Modules\Highlighted\RealTime3DChartDemoViewModel.cs" />
+    <Compile Include="DataModels\StarsData.cs" />
+    <Compile Include="DataModels\EmptyPointsDemoData.cs" />
+    <Compile Include="DataModels\WindRoseData.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <netcore3ignore />
+    </None>
+    
+    <EmbeddedResource Include="clickonce.txt">
+      <netcore3ignore />
+    </EmbeddedResource>
+    <Resource Include="Data\ShapeFiles\Top10LargestCountries.dbf" />
+    <Resource Include="Data\ShapeFiles\Top10LargestCountries.shp" />
+    <Resource Include="Data\starsdata.csv" />
+    <Resource Include="Data\Star.ps" />
+    <Resource Include="Data\InitialFinData.csv" />
+    <Resource Include="Data\nsidc_global_nt_final_and_nrt.dat" />
+    <Resource Include="Data\HeadphoneComparison.dat" />
+    <Resource Include="Data\ShapeFiles\Top10LargestCountries.prj" />
+    <EmbeddedResource Include="Data\EURUSDDaily.csv" />
+    <EmbeddedResource Include="Data\GBPUSDDaily.csv" />
+    <EmbeddedResource Include="Data\carbon.csv" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <Resource Include="Images\PipetteCursor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\Countries.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\GoogleStockData.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ArrowUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ArrowDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ZeroDynamic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Volume.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent"><ItemGroup><Resource Include="@(Page)" /></ItemGroup><ItemGroup><Resource Include="@(Compile)" /></ItemGroup></Target>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+	<GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+	<ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3
+    <Import Project="Demo.targets" />
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3 
+    <Import Project="Themes.WPF.NetCore.targets" />
+  ONLY NETCORE3-->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    
+  </PropertyGroup>
+</Project>

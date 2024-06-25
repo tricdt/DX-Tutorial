@@ -1,0 +1,179 @@
+﻿<local:TabItemModule
+    x:Class="ChartsDemo.TimeSpanDataAggregationTab"
+    x:Name="TimeSpanTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:ChartsDemo"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800">
+    <!--#region Resources-->
+    <local:TabItemModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Modules/SeriesTypes/CustomMarkerModel.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:TabItemModule.Resources>
+    <!--#endregion-->
+
+    <!--#region Options-->
+    <local:TabItemModule.Options>
+        <StackPanel
+            Style="{StaticResource optionsRootStackPanelStyle}">
+            <GroupBox
+                Header="Aggregation Function">
+                <dxe:ListBoxEdit
+                    x:Name="lbeAggregationFunctions"
+                    ItemsSource="{dxe:EnumItemsSource EnumType=dxc:AggregateFunction}"
+                    EditValue="{x:Static dxc:AggregateFunction.Average}">
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+        </StackPanel>
+    </local:TabItemModule.Options>
+    <!--#endregion-->
+
+    <DockPanel>
+
+        <dxc:ChartControl
+            Name="chart"
+            IsManipulationEnabled="True"
+            AxisScaleChanged="chart_AxisScaleChanged"
+            CustomDrawCrosshair="Chart_CustomDrawCrosshair">
+            <dxc:ChartControl.CrosshairOptions>
+                <!--#region Crosshair Options-->
+                <dxc:CrosshairOptions
+                    LinesMode="Free"
+                    ShowValueLine="True"
+                    ShowArgumentLabels="True"
+                    ShowValueLabels="True">
+                    <dxc:CrosshairOptions.CommonLabelPosition>
+                        <dxc:CrosshairFreePosition
+                            DockTarget="{Binding ElementName=defaultPane}"
+                            DockCorner="TopRight"/>
+                    </dxc:CrosshairOptions.CommonLabelPosition>
+                </dxc:CrosshairOptions>
+            </dxc:ChartControl.CrosshairOptions>
+            <!--#endregion-->
+            <dxc:ChartControl.Diagram>
+                <dxc:XYDiagram2D
+                    EnableAxisXNavigation="True"
+                    DependentAxesYRange="True">
+                    <!--#region Default Pane-->
+                    <dxc:XYDiagram2D.DefaultPane>
+                        <dxc:Pane
+                            Name="defaultPane"/>
+                    </dxc:XYDiagram2D.DefaultPane>
+                    <!--#endregion-->
+                    <!--#region Navigation Options-->
+                    <dxc:XYDiagram2D.NavigationOptions>
+                        <dxc:NavigationOptions
+                            AxisXMaxZoomPercent="100000"/>
+                    </dxc:XYDiagram2D.NavigationOptions>
+                    <!--#endregion-->
+                    <!--#region Axis X-->
+                    <dxc:XYDiagram2D.AxisX>
+                        <dxc:AxisX2D
+                            x:Name="AxisX">
+                            <dxc:AxisX2D.TimeSpanScaleOptions>
+                                <dxc:AutomaticTimeSpanScaleOptions
+                                    AggregateFunction="{Binding ElementName=lbeAggregationFunctions, Path=EditValue}">
+                                    <dxc:AutomaticTimeSpanScaleOptions.CustomAggregateFunction>
+                                        <local:StandardDeviationCustomAggregateFunction />
+                                    </dxc:AutomaticTimeSpanScaleOptions.CustomAggregateFunction>
+                                </dxc:AutomaticTimeSpanScaleOptions>
+                            </dxc:AxisX2D.TimeSpanScaleOptions>
+                            <!--#region Title-->
+                            <dxc:AxisX2D.Title>
+                                <dxc:AxisTitle
+                                    Content="{Binding ElementName=TimeSpanTab, Path=Title}" />
+                            </dxc:AxisX2D.Title>
+                            <!--#endregion-->
+                        </dxc:AxisX2D>
+                    </dxc:XYDiagram2D.AxisX>
+                    <!--#endregion-->
+                    <!--#region Axis Y-->
+                    <dxc:XYDiagram2D.AxisY>
+                        <dxc:AxisY2D>
+                            <dxc:AxisY2D.CrosshairAxisLabelOptions>
+                                <dxc:CrosshairAxisLabelOptions
+                                    Pattern="{}{V:0}°C"/>
+                            </dxc:AxisY2D.CrosshairAxisLabelOptions>
+                            <dxc:AxisY2D.Label>
+                                <dxc:AxisLabel
+                                    TextPattern="{}{V:0}°C"/>
+                            </dxc:AxisY2D.Label>
+                            <dxc:AxisY2D.WholeRange>
+                                <dxc:Range
+                                    dxc:AxisY2D.AlwaysShowZeroLevel="False"
+                                    SideMarginsValue="0"/>
+                            </dxc:AxisY2D.WholeRange>
+                        </dxc:AxisY2D>
+                    </dxc:XYDiagram2D.AxisY>
+                    <!--#endregion-->
+                    <!--#region Secondary Axes Y-->
+                    <dxc:XYDiagram2D.SecondaryAxesY>
+                        <dxc:SecondaryAxisY2D>
+                            <dxc:SecondaryAxisY2D.CrosshairAxisLabelOptions>
+                                <dxc:CrosshairAxisLabelOptions
+                                    Pattern="{}{V:0}°F"/>
+                            </dxc:SecondaryAxisY2D.CrosshairAxisLabelOptions>
+                            <dxc:SecondaryAxisY2D.Label>
+                                <dxc:AxisLabel
+                                    TextPattern="{}{V:0}°F"/>
+                            </dxc:SecondaryAxisY2D.Label>
+                            <dxc:SecondaryAxisY2D.WholeRange>
+                                <dxc:Range
+                                    dxc:AxisY2D.AlwaysShowZeroLevel="False"
+                                    SideMarginsValue="0"/>
+                            </dxc:SecondaryAxisY2D.WholeRange>
+                        </dxc:SecondaryAxisY2D>
+                    </dxc:XYDiagram2D.SecondaryAxesY>
+                    <!--#endregion-->
+                    <!--#region Series-->
+                    <dxc:XYDiagram2D.Series>
+                        <dxc:LineSeries2D AllowResample="False"
+                            DisplayName="CPU Temperature"
+                            DataSource="{DXBinding 'new $local:TimeSpanArgumentDataGenerator().Generate(20, 35, 80)'}"
+                            ArgumentDataMember="Argument"
+                            ValueDataMember="Value"
+                            ArgumentScaleType="TimeSpan"
+                            CrosshairLabelPattern="{}{S}: {V:0}°C"/>
+                        <dxc:LineSeries2D
+                            DisplayName="GPU Temperature" AllowResample="False"
+                            DataSource="{DXBinding 'new $local:TimeSpanArgumentDataGenerator().Generate(20, 25, 50)'}"
+                            ArgumentDataMember="Argument"
+                            ValueDataMember="Value"
+                            ArgumentScaleType="TimeSpan"
+                            CrosshairLabelPattern="{}{S}: {V:0}°C"/>
+                    </dxc:XYDiagram2D.Series>
+                    <!--#endregion-->
+                </dxc:XYDiagram2D>
+            </dxc:ChartControl.Diagram>
+            <!--#region Legend-->
+            <dxc:ChartControl.Legend>
+                <dxc:Legend
+                    Visible="False"/>
+            </dxc:ChartControl.Legend>
+            <!--#endregion-->
+            <!--#region Titles-->
+            <dxc:ChartControl.Titles>
+                <dxc:Title
+                    HorizontalAlignment="Center"
+                    Content="Hardware Monitor" />
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+        </dxc:ChartControl>
+
+    </DockPanel>
+</local:TabItemModule>

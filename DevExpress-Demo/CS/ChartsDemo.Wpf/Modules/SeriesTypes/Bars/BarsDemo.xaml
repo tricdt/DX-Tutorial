@@ -1,0 +1,88 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.BarsDemo"
+    x:Name="demoModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ChartsDemo"
+    DataContext="{dxmvvm:ViewModelSource Type=local:TabbedModuleViewModel}">
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:OptionsConverter
+                x:Key="optionsConverter" />
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+
+    <DockPanel>
+        <!--#region Options-->
+        <ScrollViewer
+            Name="PART_Options"
+            Style="{StaticResource optionsScrollViewerStyle}"
+            Content="{Binding SelectedTab, Converter={StaticResource optionsConverter}}">
+        </ScrollViewer>
+        <!--#endregion-->
+
+        <dx:DXTabControl
+            SelectedTabItem="{Binding SelectedTab, Mode=TwoWay}"
+            Style="{StaticResource moduleTabControlStyle}">
+            <dx:DXTabControl.View>
+                <dx:TabControlScrollView
+                    ShowHeaderMenu="True" />
+            </dx:DXTabControl.View>
+            <dx:DXTabItem
+                Header="Side-by-Side Bar"
+                Glyph="{dx:SvgImageSource Uri='../../../Images/SeriesViews/ChartTypes_Bar.svg', Size='16,16'}">
+                <local:SideBySideBarTab
+                    IsModuleLoaded="{Binding ElementName=demoModule, Path=IsModuleLoaded}" />
+            </dx:DXTabItem>
+            <dx:DXTabItem
+                Header="Stacked Bar"
+                Glyph="{dx:SvgImageSource Uri='../../../Images/SeriesViews/ChartTypes_BarStacked.svg', Size='16,16'}">
+                <local:StackedBarTab />
+            </dx:DXTabItem>
+            <dx:DXTabItem
+                Header="Full-Stacked Bar"
+                Glyph="{dx:SvgImageSource Uri='../../../Images/SeriesViews/ChartTypes_BarStacked100%.svg', Size='16,16'}">
+                <local:FullStackedBarTab />
+            </dx:DXTabItem>
+            <dx:DXTabItem
+                Header="Side-by-Side Stacked Bar"
+                Glyph="{dx:SvgImageSource Uri='../../../Images/SeriesViews/ChartTypes_SideBySideBarStacked.svg', Size='16,16'}">
+                <local:SideBySideStackedBarTab />
+            </dx:DXTabItem>
+            <dx:DXTabItem
+                Header="Side-by-Side Full-Stacked Bar"
+                Glyph="{dx:SvgImageSource Uri='../../../Images/SeriesViews/ChartTypes_SideBySideBarStacked100%.svg', Size='16,16'}">
+                <local:SideBySideFullStackedBarTab />
+            </dx:DXTabItem>
+            <dx:DXTabItem
+                Header="Side-by-Side Range Bar"
+                Glyph="{dx:SvgImageSource Uri='../../../Images/SeriesViews/ChartTypes_SideBySideRangeBar.svg', Size='16,16'}">
+                <local:SideBySideRangeBarTab />
+            </dx:DXTabItem>
+            <dx:DXTabItem
+                Header="Overlapped Range Bar"
+                Glyph="{dx:SvgImageSource Uri='../../../Images/SeriesViews/ChartTypes_RangeBar.svg', Size='16,16'}">
+                <local:OverlappedRangeBarTab />
+            </dx:DXTabItem>
+            <dx:DXTabItem
+                Header="3D Side-by-Side Bar"
+                Glyph="{dx:SvgImageSource Uri='../../../Images/SeriesViews/ChartTypes_Bar3D.svg', Size='16,16'}">
+                <local:SideBySideBar3DTab />
+            </dx:DXTabItem>
+            <dx:DXTabItem
+                Header="Manhattan Bar"
+                Glyph="{dx:SvgImageSource Uri='../../../Images/SeriesViews/ChartTypes_ManhattanBar.svg', Size='16,16'}">
+                <local:ManhattanBarTab />
+            </dx:DXTabItem>
+        </dx:DXTabControl>
+
+    </DockPanel>
+</local:ChartsDemoModule>

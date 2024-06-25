@@ -1,0 +1,419 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ComponentModel;
+using System.IO;
+using DevExpress.Utils;
+
+namespace DevExpress.CrmDemo.Win.Data {
+    public class DataGenerator {
+        public static BindingList<Opportunity> GenerateOpportunities() {
+            int totalOpportunities = 250;
+            int numberOfNonClosedOpportunities = 20;
+            int percentClosed = 65;
+
+            // Generate opportunities back through history, starting with 43 minutes ago
+            DateTime oppDate = DateTime.Now.AddMinutes(-43);
+
+            Random random = new Random((int)DateTime.Now.Ticks);
+
+            BindingList<Opportunity> opps = new BindingList<Opportunity>();
+
+            for(int i = 0; i < totalOpportunities; i++) {
+                ProjectTuple project = Projects[random.Next(Projects.Count)];
+
+                Stage stage;
+                string nextStep = "";
+
+                if(i < numberOfNonClosedOpportunities) {
+                    stage = (Stage)random.Next(5);
+
+                    switch(stage) {
+                        case Stage.Lead:
+                            nextStep = "Send marketing deck and follow up with a call"; break;
+                        case Stage.Qualification:
+                            nextStep = "Confirm when qualified"; break;
+                        case Stage.NeedsAnalysis:
+                            nextStep = "Collect information for draft proposal"; break;
+                        case Stage.Proposed:
+                            nextStep = "Finalize proposal and estimates"; break;
+                        case Stage.Negotiation:
+                            nextStep = "Follow up on proposal, and get signatures"; break;
+                    }
+                } else {
+                    if(random.Next(100) < percentClosed)
+                        stage = Stage.Closed;
+                    else
+                        stage = Stage.Cancelled;
+                }
+
+                int costSize = Amounts[random.Next(Amounts.Count)];
+
+                List<string> accountOwnerInfo = AccountOwnerInfo[random.Next(AccountOwnerInfo.Count)];
+
+                Opportunity newOpp = new Opportunity() {
+                    ID = i,
+                    OwnerId = DataProvider.Instance.TeamMembers[random.Next(DataProvider.Instance.TeamMembers.Count)].Id,
+                    Name = project.Name,
+                    Technology = project.Technology,
+                    CostSize = costSize,
+                    Revenue = (int)(7 * (costSize / 10)),
+                    Weeks = random.Next(4, 17),
+                    TeamSize = random.Next(1, 9),
+                    CloseDate = (stage == Stage.Cancelled || stage == Stage.Closed) ? (DateTime?)oppDate.AddDays(random.Next(30, 90)) : null,
+                    Stage = stage,
+                    CreatedDate = oppDate,
+                    AccountName = Companies[random.Next(Companies.Count)],
+                    ProbabilityPercent = 0.5m + ((decimal)random.Next(0, 10) * 0.05m), // 50-95%
+                    AccountOwnerName = accountOwnerInfo[0],
+                    AccountOwnerPhone = accountOwnerInfo[1],
+                    AccountOwnerEmail = accountOwnerInfo[2],
+                    AccountOwnerRole = accountOwnerInfo[3],
+                    NextStep = nextStep,
+                    Description = Descriptions.ContainsKey(project.Technology) ? Descriptions[project.Technology] : string.Empty,
+                    OpportunityType = random.Next(2) > 0 ? "New Business" : "Continuing",
+                    LeadSource = random.Next(2) > 0 ? "Referral" : "Web"
+                };
+
+                int nextActivityId = opps.Count == 0 ? 0 : opps.SelectMany(o => o.Activities).Select(a => a.Id).Max() + 1;
+
+                List<Activity> newActivities = GenerateActivities(newOpp, nextActivityId);
+
+                foreach(Activity a in newActivities)
+                    newOpp.Activities.Add(a);
+
+                opps.Add(newOpp);
+
+                oppDate = oppDate.AddDays(random.Next(5) * -1);
+            }
+
+            return opps;
+        }
+
+        public static List<ProjectTuple> Projects = new List<ProjectTuple>()
+        {
+            new ProjectTuple("Intraweb Dev", "HTML5"),
+            new ProjectTuple("Mobile Apps", "iOS"),
+            new ProjectTuple("Concept Design", "Design"),
+            new ProjectTuple("Phase 1", "Design"),
+            new ProjectTuple("Field Sales App", "iOS"),
+            new ProjectTuple("Concept Design", "WP7"),
+            new ProjectTuple("iOS/Android Port", "WP7"),
+            new ProjectTuple("Envisioning", "Design"),
+            new ProjectTuple("Deployment & Support", "Support"),
+            new ProjectTuple("HTML5 New Site", "HTML5"),
+            new ProjectTuple("Live Tiles", "Win 8"),
+            new ProjectTuple("Metro App", "Win 8"),
+            new ProjectTuple("Windows Touch Experience", "WPF"),
+            new ProjectTuple("Metro Dashboard", "Win 8"),
+            new ProjectTuple("Design Exercise", "Metro"),
+            new ProjectTuple("3D Viewer for Web", "SL"),
+            new ProjectTuple("Design Exercise", "Metro"),
+            new ProjectTuple("Corp Intranet", "ASP.NET"),
+            new ProjectTuple("iOS Port", "Android"),
+            new ProjectTuple("Metro Recruiting App", "Win 8"),
+            new ProjectTuple("New Mobile Apps", "Android"),
+            new ProjectTuple("Mobile", "iOS")
+        };
+        public class ProjectTuple {
+            public ProjectTuple(string name, string technology) {
+                Name = name;
+                Technology = technology;
+            }
+            public string Name;
+            public string Technology;
+        }
+        public static Dictionary<string, string> Descriptions = new Dictionary<string, string>()
+        {
+            {"HTML5",   "Seeks to design and build an innovative HTML5 site to coincide with their release of an unidentified celebrity's new book. Would involve maps, video and other media along with creative use of HTML5 capabilities. We're competing against larger ad agencies for this work."}, 
+            {"Android", "We designed and built several iOS applications for them and they would like us to extend those to the Android platform. Same design based on their brand. Mostly development work with some design work to adapt to the new platform."}, 
+            {"SL",      "They are looking for a Silverlight line of business application for their enterprise. Would include a suite of analytic applications plus dashboards. Design includes data visualization. Looks like an exciting opportunity with a high profile client."},  
+            {"Win 8",   "New client very interested in getting ahead of the curve on Windows 8. They want a productivity application for their health care system to manage and access patient records. May also include touch-based Metro dashboards for doctors and nurses."},  
+            {"Design",  "They have an aging productivity application that is in need of refresh for both improved usability and branding. They will build the application in-house, but may ask for our expertise with some of the thornier development work."},  
+            {"iOS",     "They need an iOS application for their sports news service. Could also include scores and statistics. Their timeframe is ambitious but do-able. This is their first mobile application and they are very concerned with extending their brand to the mobile market."},  
+            {"Support", "Following up on the work we did for them last year they are coming back to us for ongoing support and to extend the application. Previous company let them down. Would be a small team for around a year or so or work. Good client."},
+            {"WP7",     "Interesting opportunity to design and build a WP7 flight tracking app for the Mango OS. May also extend to iOS and Android. Budget may be limited but they'll evaluate after seeing a proposal. An interesting new space for us to enter."},
+            {"WPF",     "WPF app for trading desks at several prestigious trading firms. Need solid, robust data visualization design, and system performance is critical since time is of the essence in this industry. Referred based on our previous financial work. Smart, ambitious client."},
+            {"Metro",   "They would like us to design & build a first class Windows 8 Metro dashboard for their current manufacturing tracking application. Referred to us by previous clients and understand our capabilities and strengths. Would involve a Discovery phase followed by design & build."},
+            {"ASP.NET", "Logistics company wants to expand their ASP.NET-based internal web site and combine their trucking and rail freight movement systems. Primarily development work, but they are also seeking input on visual design and data visualization of freight movements."}
+        };
+
+        public static List<int> Amounts = new List<int>()
+            {
+                200000,
+                150000,
+                45000,
+                80000,
+                30000,
+                100000,
+                135000,
+                25000,
+                200000,
+                130000,
+                25000,
+                65000,
+                40000,
+                400000,
+                75000,
+                90000,
+                130000,
+                140000
+            };
+
+        public static List<string> Companies = new List<string>()
+            {
+                "Around the Horn",
+                "Bottom-Dollar Markets",
+                "B's Beverages",
+                "Chop-suey Chinese",
+                "Consolidated Holdings",
+                "Eastern Connection",
+                "Great Lakes Food Market",
+                "Hungry Coyote Import Store",
+                "Hungry Owl All-Night Grocers",
+                "Island Trading",
+                "Laughing Bacchus Wine Cellars",
+                "Lazy K Kountry Store",
+                "Lehmanns Marktstand",
+                "Let's Stop N Shop",
+                "Lonesome Pine Restaurant",
+                "North/South",
+                "Old World Delicatessen",
+                "QUICK-Stop",
+                "Rattlesnake Canyon Grocery",
+                "Save-a-lot Markets",
+                "Seven Seas Imports",
+                "Simons bistro",
+                "Split Rail Beer & Ale",
+                "The Big Cheese",
+                "The Cracker Box",
+                "Trail's Head Gourmet Provisioners",
+                "White Clover Markets"
+            };
+        static List<string> DocNames = new List<string>() {
+            "About World Wide - Design And Build.pptx", 
+            "World Wide Data - Visualization Design.pptx", 
+            "World Wide - 15 Years of Design and Build.pptx",
+            "Sample Wireframes.pptx", 
+            "World Wide - Exceptional Design And Build.pptx", 
+            "Initial project structure options.docx", 
+            "Initial Project Outline - Design and Build.docx",
+            "World Wide Proposal.docx", 
+            "World Wide Proposal V2.docx" };
+        static string DocPath = "SampleDocuments";
+        public static void CreateSampleDocuments() {
+            try {
+                foreach(string name in DocNames) {
+                    string path = string.Format("{0}\\{1}", System.Windows.Forms.Application.StartupPath, DocPath);
+                    string fileName = string.Format("{0}\\{1}", path, name);
+                    if(!Directory.Exists(path)) Directory.CreateDirectory(path);
+                    if(!File.Exists(fileName)) {
+                        using(System.IO.FileStream file = File.Create(fileName)) {
+                            using(System.IO.BinaryWriter writer = new System.IO.BinaryWriter(file)) {
+                                using(Stream fileStream = AssemblyHelper.GetEmbeddedResourceStream(typeof(MainForm).Assembly, "SampleDocuments." + name, false)) {
+                                    byte[] data = new byte[fileStream.Length];
+                                    fileStream.Read(data, 0, data.Length);
+                                    writer.Write(data, 0, data.Length);
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch { 
+            }
+        }
+        public static List<Activity> GenerateActivities(Opportunity opp, int nextActivityId) {
+            List<Activity> activities = new List<Activity>();
+
+            string email = "Email";
+            string phone = "Phone Call";
+            string meetg = "Meeting";
+
+            switch(opp.Stage) {
+                case Stage.Lead:
+                    activities = new List<Activity>()
+                    {
+                        new Activity() { ActivityType = email, DocumentPath = DocNames[0], Description = "Sent email to respond to request to talk" },
+                        new Activity() { ActivityType = phone, DocumentPath = "", Description = "Called and left VM" },
+                    };
+                    break;
+                case Stage.Qualification:
+                    activities = new List<Activity>()
+                    {
+                        new Activity() { ActivityType = email, DocumentPath = DocNames[0], Description = "Sent email to respond to request to talk" },
+                        new Activity() { ActivityType = phone, DocumentPath = "", Description = "Called to discuss what they are looking for" },
+                        new Activity() { ActivityType = meetg, DocumentPath = DocNames[5], Description = "Met to review our capabilities and discuss options for the project" },
+                    };
+                    break;
+                case Stage.NeedsAnalysis:
+                    activities = new List<Activity>()
+                    {
+                        new Activity() { ActivityType = email, DocumentPath = "", Description = "Met at the MIX conference, followed up with email" },
+                        new Activity() { ActivityType = phone, DocumentPath = "", Description = "Called to check back in and see what their plans are" },
+                        new Activity() { ActivityType = phone, DocumentPath = DocNames[1], Description = "Call to discuss our data visualization experience" },
+                        new Activity() { ActivityType = email, DocumentPath = "", Description = "Emailed with a few follow up notes" },
+                        new Activity() { ActivityType = email, DocumentPath = DocNames[6], Description = "Sent email with initial project outline for feedback" },
+                    };
+                    break;
+                case Stage.Proposed:
+                    activities = new List<Activity>()
+                    {
+                        new Activity() { ActivityType = meetg, DocumentPath = "", Description = "Met for lunch and initial discussions" },
+                        new Activity() { ActivityType = email, DocumentPath = DocNames[2], Description = "Followed up by email with the expertise deck" },
+                        new Activity() { ActivityType = phone, DocumentPath = DocNames[3], Description = "Called per request to discuss the requirements in more detail and explain how we might dealt with certain issues" },
+                        new Activity() { ActivityType = meetg, DocumentPath = "", Description = "Met to dive into more detail about their needs" },
+                        new Activity() { ActivityType = email, DocumentPath = DocNames[7], Description = "Sent initial proposal" },
+                    };
+                    break;
+                case Stage.Negotiation:
+                    activities = new List<Activity>()
+                    {
+                        new Activity() { ActivityType = email, DocumentPath = "", Description = "Quick follow up after receiving call from marketing director" },
+                        new Activity() { ActivityType = phone, DocumentPath = "", Description = "Call to follow up on email, spoke at length about the work" },
+                        new Activity() { ActivityType = email, DocumentPath = DocNames[4], Description = "Follow up email with information about our experience" },
+                        new Activity() { ActivityType = email, DocumentPath = "", Description = "Responded to request for more specific information" },
+                        new Activity() { ActivityType = phone, DocumentPath = DocNames[7], Description = "Sent proposal and called to schedule a meeting to discuss" },
+                        new Activity() { ActivityType = phone, DocumentPath = "", Description = "Client wanted to discuss pricing struture and concerns over duration" },
+                        new Activity() { ActivityType = email, DocumentPath = DocNames[8], Description = "Emailed revised proposal - looks good so far" },
+                    };
+                    break;
+            }
+
+
+
+            DateTime completedDate = opp.CreatedDate;
+
+            Random random = new Random((int)DateTime.Now.Ticks);
+
+            foreach(Activity a in activities) {
+                a.OwnerId = opp.OwnerId;
+
+                a.Id = nextActivityId;
+                nextActivityId++;
+
+                completedDate = completedDate.AddDays(random.Next(5));
+                a.CompletedDate = completedDate;
+
+                if(!string.IsNullOrEmpty(a.DocumentPath))
+                    a.DocumentPath = string.Format("./{0}/{1}", DocPath, a.DocumentPath);
+            }
+
+            return activities;
+        }
+
+        public static BindingList<KeywordStat> GenerateKeywordStats() {
+            return new BindingList<KeywordStat>()
+            {
+                new KeywordStat()
+                {
+                    Keyword = "HTML5",
+                    Total = 145,
+                    Image = Properties.Resources.green_up_arrow
+                },
+                new KeywordStat()
+                {
+                    Keyword = "Metro",
+                    Total = 98,
+                    Image = Properties.Resources.red_down_arrow
+                },
+                new KeywordStat()
+                {
+                    Keyword = "Windows 8",
+                    Total = 92,
+                    Image = null
+                },
+                new KeywordStat()
+                {
+                    Keyword = "WP7",
+                    Total = 79,
+                    Image = Properties.Resources.green_up_arrow
+                },
+                new KeywordStat()
+                {
+                    Keyword = "iOS",
+                    Total = 65,
+                    Image = null
+                }
+            };
+        }
+
+        public static BindingList<TeamMember> GenerateTeamMembers() {
+            return new BindingList<TeamMember>()
+            {
+                new TeamMember() 
+                {
+                    Id = 0, 
+                    FullName = "Aaron Bergeson", 
+                    Photo = Properties.Resources.mugshot1, 
+                    PhotoSmall = Properties.Resources.mugshot1 
+                },
+                new TeamMember() 
+                {
+                    Id = 1, 
+                    FullName = "Brenda Weaver", 
+                    Photo = Properties.Resources.mugshot2, 
+                    PhotoSmall = Properties.Resources.mugshot2 
+                },
+                new TeamMember() 
+                {
+                    Id = 2, 
+                    FullName = "James Cate", 
+                    Photo = Properties.Resources.mugshot3, 
+                    PhotoSmall = Properties.Resources.mugshot3 
+                },
+                new TeamMember() 
+                {
+                    Id = 3, 
+                    FullName = "Nancy Porter", 
+                    Photo = Properties.Resources.mugshot4, 
+                    PhotoSmall = Properties.Resources.mugshot4 
+                }
+            };
+        }
+
+        private static List<List<string>> AccountOwnerInfo = new List<List<string>>()
+        {
+            new List<string> () { "William Hawkins", "719-778-7839", "william.hawkins@teleworm.com", "Decision Maker" },
+            new List<string> () { "Holly Bingham", "920-252-4148", "holly.bingham@teleworm.com", "Marketing Manager" },
+            new List<string> () { "Franklin Harrison", "216-633-9731", "franklin.harrison@teleworm.com", "Decision Maker" },
+            new List<string> () { "Eileen Taylor", "903-488-7598", "eileen.taylor@teleworm.com	", "Project Lead" },
+            new List<string> () { "Henry Potter", "713-457-0531", "henry.potter@teleworm.com", "Decision Maker" }
+        };
+
+        internal static CustomEventList GenerateAppointments(IList<TeamMember> teamMembers) {
+            int totalAppointments = 100;
+
+            CustomEventList appointments = new CustomEventList();
+
+            Random random = new Random((int)DateTime.Now.Ticks);
+
+            DateTime runningDate = DateTime.Now.Date.AddDays(-10).AddHours(DateTime.Now.Hour);
+
+            List<Opportunity> oppsWithNextStep = DataProvider.Instance.Opportunities.Where(o => o.Stage != Stage.Cancelled && o.Stage != Stage.Closed).ToList();
+
+            for(int i = 0; i < totalAppointments; i++) {
+                Opportunity relatedOpportunity = oppsWithNextStep[random.Next(0, oppsWithNextStep.Count)];
+
+                runningDate = runningDate.AddHours(random.Next(3, 10));
+
+                // if it's after 5, advance to 8am next day
+                if(runningDate.Hour > 17 || runningDate.Hour < 6)
+                    runningDate = runningDate.Date.AddHours(32 + random.Next(0, 2));
+
+                CustomAppointment newAppointment = new CustomAppointment(appointments);
+
+                newAppointment.Description = relatedOpportunity.NextStep;
+                newAppointment.Subject = relatedOpportunity.AccountName;
+                newAppointment.StartTime = runningDate;
+                newAppointment.EndTime = newAppointment.StartTime.AddMinutes(90);//.AddMinutes(random.Next(1, 9) * 15);
+                newAppointment.Status = random.Next(1, 3);
+                newAppointment.OwnerId = teamMembers[random.Next(teamMembers.Count)].Id;
+                newAppointment.Label = 2;
+                appointments.Add(newAppointment);
+            }
+
+            return appointments;
+        }
+    }
+}

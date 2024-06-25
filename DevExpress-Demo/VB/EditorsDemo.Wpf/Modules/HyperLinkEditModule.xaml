@@ -1,0 +1,61 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.HyperLinkEditModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:local="clr-namespace:EditorsDemo"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                         xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase">
+    <local:EditorsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/EditorsDemo;component/ModuleResources/RowTemplateTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dxdb:NWindDataLoader x:Key="NWindDataLoader" />
+        </ResourceDictionary>
+    </local:EditorsDemoModule.Resources>
+    <Grid MaxWidth="800">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.8*" />
+        </Grid.RowDefinitions>
+        <dxe:HyperlinkEdit x:Name="editor"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           AllowAutoNavigate="True"
+                           EditValue="http://www.devexpress.com" />
+        <dxg:GridControl Name="grid" Grid.Row="1" Margin="32,0,32,32" ItemsSource="{Binding Path=Employees, Source={StaticResource NWindDataLoader}}">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="FirstName" MinWidth="60" Width="*" />
+                <dxg:GridColumn FieldName="LastName" MinWidth="60" Width="*" />
+                <dxg:GridColumn FieldName="BirthDate" MinWidth="60" Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:DateEditSettings DisplayFormat="d" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn x:Name="colEMail"
+                                FieldName="EMail"
+                                Header="E-mail"
+                                Width="*"
+                                FixedWidth="true"
+                                UnboundType="String"
+                                UnboundExpression="Lower([LastName])+'@devexpress.com'">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:HyperlinkEditSettings AllowAutoNavigate="True" NavigationUrlFormat="mailto:{0}" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Title" MinWidth="60" Width="*" Header="Position" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView Name="view"
+                               AllowScrollAnimation="True"
+                               ShowGroupedColumns="True"
+                               NavigationStyle="Row"
+                               DataRowTemplate="{DynamicResource expandableRowDetailTemplate}">
+                    <dxg:TableView.UseLightweightTemplates>
+                        <dxg:UseLightweightTemplates>None</dxg:UseLightweightTemplates>
+                    </dxg:TableView.UseLightweightTemplates>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </Grid>
+</local:EditorsDemoModule>

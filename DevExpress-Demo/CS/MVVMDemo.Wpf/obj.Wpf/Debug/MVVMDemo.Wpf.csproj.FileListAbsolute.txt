@@ -1,0 +1,408 @@
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\bin\Debug\MVVMDemo.exe.config
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\bin\Debug\MVVMDemo.exe
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\bin\Debug\MVVMDemo.pdb
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo.Wpf.csproj.AssemblyReference.cache
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\FormatStringConverterView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\NumericToVisibilityConverterView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\NumericToBooleanConverterView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\StringToBooleanConverterView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\ObjectToBooleanConverterView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\BooleanToObjectConverterView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\BooleanNegationConverterView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\BooleanToVisibilityConverterView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXEvent\MultipleCallsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\TemplateTriggersView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\StyleTriggersView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\MarkupExtensionsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\EventsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\AttachedPropertiesView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\BaseStylesView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\ImplicitStylesView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\StandardSettersView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\StandardControlsTypedStylesView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MainWindow.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\AsyncCommands\AsyncDelegateCommandsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\BehaviorsInStyleView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\EnumItemsSourceBehaviorView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\FocusBehaviorView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\ConfirmationBehaviorView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\DependencyPropertyBehaviorView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\CompositeCommandBehaviorView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\CustomBehaviorView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\ValidationErrorsHostBehaviorView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\KeyToCommandView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\BindableBase\BindablePropertiesViaFieldsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\BindableBase\BindablePropertiesView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\AutoCommandsChangeNotificationsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\AutoCommandsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\ChangeNotificationsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\POCOCommandsChangeNotificationsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\POCOCommandsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\DelegateCommandsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\AsyncCommands\AsyncPOCOCommandsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\EventToCommandView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\FormatStringConverterView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\ObjectToObjectConverterView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\NumericToVisibilityConverterView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\NumericToBooleanConverterView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\StringToBooleanConverterView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\ObjectToBooleanConverterView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\BooleanToObjectConverterView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\BooleanNegationConverterView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\BooleanToVisibilityConverterView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXBinding\BackConversionView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXBinding\SourcesView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXBinding\FunctionsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXBinding\BindingExpressionsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXCommand\MultipleCallsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXCommand\CommandParameterView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXCommand\ValuesFromControlsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXCommand\BindingCommandToMethodsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXDataTemplateSelector\UsingDXBindingView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXDataTemplateSelector\DeclarativeDataTemplateSelectorView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXEvent\EventArgsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXEvent\MultipleCallsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXEvent\BindingEventToMethodView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\EnumItemsSource\ComboBoxEditView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\EnumItemsSource\GridControlView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\EnumItemsSource\ListBoxEditView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\DependentPropertiesView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\ChangeNotificationsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\DataErrorInfoView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\LoginView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\CommandsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\ServicesView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\PropertiesView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\UIObjectServiceView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\FolderBrowserDialogServiceView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\CustomServiceView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\OpenFolderDialogServiceView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\SaveFileDialogServiceView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\OpenFileDialogServiceView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DispatcherServiceView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\SplashScreenManagerView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\WindowServiceView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\DocumentDetailView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\CollectionView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\FrameView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\DockingView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\TabbedView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DialogServiceView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\MessageBoxService\MessageBoxServiceView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\WindowedView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\NavigationService\NavigationDetailView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\NavigationService\FrameView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\BindingsAndDynamicResourcesView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\DataTriggersView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\TemplateTriggersView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\StyleTriggersView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\MarkupExtensionsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\EventsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\DXControlsTypedStylesView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\AttachedPropertiesView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\DXBindingAndDXCommandView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\BaseStylesView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\ImplicitStylesView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\StandardSettersView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\StandardControlsTypedStylesView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\DataErrorInfoView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\ManualCommandsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\AutoCommandsView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\LoginView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\ServicesView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\MessengerView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\MainPOCOView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\ParentPOCOView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\ParentView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\MainView.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\App.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo_MarkupCompile.cache
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo_MarkupCompile.lref
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MainWindow.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\AsyncCommands\AsyncDelegateCommandsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\BehaviorsInStyleView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\EnumItemsSourceBehaviorView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\FocusBehaviorView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\ConfirmationBehaviorView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\DependencyPropertyBehaviorView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\CompositeCommandBehaviorView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\CustomBehaviorView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\ValidationErrorsHostBehaviorView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\KeyToCommandView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\BindableBase\BindablePropertiesViaFieldsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\BindableBase\BindablePropertiesView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\AutoCommandsChangeNotificationsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\AutoCommandsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\ChangeNotificationsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\POCOCommandsChangeNotificationsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\POCOCommandsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\DelegateCommandsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\AsyncCommands\AsyncPOCOCommandsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\EventToCommandView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\ObjectToObjectConverterView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXBinding\BackConversionView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXBinding\SourcesView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXBinding\FunctionsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXBinding\BindingExpressionsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXCommand\MultipleCallsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXCommand\CommandParameterView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXCommand\ValuesFromControlsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXCommand\BindingCommandToMethodsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXDataTemplateSelector\UsingDXBindingView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXDataTemplateSelector\DeclarativeDataTemplateSelectorView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXEvent\EventArgsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXEvent\BindingEventToMethodView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\EnumItemsSource\ComboBoxEditView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\EnumItemsSource\GridControlView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\EnumItemsSource\ListBoxEditView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\DependentPropertiesView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\ChangeNotificationsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\DataErrorInfoView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\LoginView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\CommandsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\ServicesView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\PropertiesView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\UIObjectServiceView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\FolderBrowserDialogServiceView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\CustomServiceView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\OpenFolderDialogServiceView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\SaveFileDialogServiceView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\OpenFileDialogServiceView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DispatcherServiceView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\SplashScreenManagerView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\WindowServiceView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\DocumentDetailView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\CollectionView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\FrameView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\DockingView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\TabbedView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DialogServiceView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\MessageBoxService\MessageBoxServiceView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\WindowedView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\NavigationService\NavigationDetailView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\NavigationService\FrameView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\BindingsAndDynamicResourcesView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\DataTriggersView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\DXControlsTypedStylesView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\DXBindingAndDXCommandView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\DataErrorInfoView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\ManualCommandsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\AutoCommandsView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\LoginView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\ServicesView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\MessengerView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\MainPOCOView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\ParentPOCOView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\ParentView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\MainView.baml
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo.g.resources
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo.Properties.Resources.resources
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo.Wpf.csproj.GenerateResource.cache
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo.Wpf.csproj.CoreCompileInputs.cache
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo.exe
+C:\Users\Public\Documents\DevExpress Demos 22.2\Components\WPF\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo.pdb
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\bin\Debug\MVVMDemo.exe.config
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\bin\Debug\MVVMDemo.exe
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\bin\Debug\MVVMDemo.pdb
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo.Wpf.csproj.AssemblyReference.cache
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\FormatStringConverterView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\NumericToVisibilityConverterView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\NumericToBooleanConverterView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\StringToBooleanConverterView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\ObjectToBooleanConverterView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\BooleanToObjectConverterView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\BooleanNegationConverterView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\BooleanToVisibilityConverterView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXEvent\MultipleCallsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\TemplateTriggersView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\StyleTriggersView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\MarkupExtensionsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\EventsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\AttachedPropertiesView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\BaseStylesView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\ImplicitStylesView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\StandardSettersView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\StandardControlsTypedStylesView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MainWindow.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\AsyncCommands\AsyncDelegateCommandsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\BehaviorsInStyleView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\EnumItemsSourceBehaviorView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\FocusBehaviorView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\ConfirmationBehaviorView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\DependencyPropertyBehaviorView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\CompositeCommandBehaviorView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\CustomBehaviorView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\ValidationErrorsHostBehaviorView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\KeyToCommandView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\BindableBase\BindablePropertiesViaFieldsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\BindableBase\BindablePropertiesView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\AutoCommandsChangeNotificationsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\AutoCommandsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\ChangeNotificationsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\POCOCommandsChangeNotificationsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\POCOCommandsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\DelegateCommandsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\AsyncCommands\AsyncPOCOCommandsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\EventToCommandView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\FormatStringConverterView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\ObjectToObjectConverterView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\NumericToVisibilityConverterView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\NumericToBooleanConverterView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\StringToBooleanConverterView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\ObjectToBooleanConverterView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\BooleanToObjectConverterView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\BooleanNegationConverterView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\BooleanToVisibilityConverterView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXBinding\BackConversionView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXBinding\SourcesView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXBinding\FunctionsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXBinding\BindingExpressionsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXCommand\MultipleCallsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXCommand\CommandParameterView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXCommand\ValuesFromControlsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXCommand\BindingCommandToMethodsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXDataTemplateSelector\UsingDXBindingView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXDataTemplateSelector\DeclarativeDataTemplateSelectorView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXEvent\EventArgsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXEvent\MultipleCallsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXEvent\BindingEventToMethodView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\EnumItemsSource\ComboBoxEditView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\EnumItemsSource\GridControlView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\EnumItemsSource\ListBoxEditView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\DependentPropertiesView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\ChangeNotificationsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\DataErrorInfoView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\LoginView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\CommandsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\ServicesView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\PropertiesView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\UIObjectServiceView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\FolderBrowserDialogServiceView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\CustomServiceView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\OpenFolderDialogServiceView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\SaveFileDialogServiceView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\OpenFileDialogServiceView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DispatcherServiceView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\SplashScreenManagerView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\WindowServiceView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\DocumentDetailView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\CollectionView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\FrameView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\DockingView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\TabbedView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DialogServiceView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\MessageBoxService\MessageBoxServiceView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\WindowedView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\NavigationService\NavigationDetailView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\NavigationService\FrameView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\BindingsAndDynamicResourcesView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\DataTriggersView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\TemplateTriggersView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\StyleTriggersView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\MarkupExtensionsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\EventsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\DXControlsTypedStylesView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\AttachedPropertiesView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\DXBindingAndDXCommandView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\BaseStylesView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\ImplicitStylesView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\StandardSettersView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\StandardControlsTypedStylesView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\DataErrorInfoView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\ManualCommandsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\AutoCommandsView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\LoginView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\ServicesView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\MessengerView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\MainPOCOView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\ParentPOCOView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\ParentView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\MainView.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\App.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\GeneratedInternalTypeHelper.g.cs
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo_MarkupCompile.cache
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo_MarkupCompile.lref
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MainWindow.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\AsyncCommands\AsyncDelegateCommandsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\BehaviorsInStyleView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\EnumItemsSourceBehaviorView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\FocusBehaviorView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\ConfirmationBehaviorView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\DependencyPropertyBehaviorView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\CompositeCommandBehaviorView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\CustomBehaviorView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\ValidationErrorsHostBehaviorView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\KeyToCommandView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\BindableBase\BindablePropertiesViaFieldsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\BindableBase\BindablePropertiesView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\AutoCommandsChangeNotificationsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\AutoCommandsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\ChangeNotificationsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\POCOCommandsChangeNotificationsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\POCOCommandsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Commands\DelegateCommandsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\AsyncCommands\AsyncPOCOCommandsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Behaviors\EventToCommandView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Converters\ObjectToObjectConverterView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXBinding\BackConversionView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXBinding\SourcesView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXBinding\FunctionsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXBinding\BindingExpressionsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXCommand\MultipleCallsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXCommand\CommandParameterView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXCommand\ValuesFromControlsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXCommand\BindingCommandToMethodsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXDataTemplateSelector\UsingDXBindingView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXDataTemplateSelector\DeclarativeDataTemplateSelectorView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXEvent\EventArgsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\DXEvent\BindingEventToMethodView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\EnumItemsSource\ComboBoxEditView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\EnumItemsSource\GridControlView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\EnumItemsSource\ListBoxEditView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\DependentPropertiesView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\ChangeNotificationsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\DataErrorInfoView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\LoginView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\CommandsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\ServicesView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\POCOViewModels\PropertiesView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\UIObjectServiceView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\FolderBrowserDialogServiceView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\CustomServiceView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\OpenFolderDialogServiceView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\SaveFileDialogServiceView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\OpenFileDialogServiceView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DispatcherServiceView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\SplashScreenManagerView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\WindowServiceView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\DocumentDetailView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\CollectionView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\FrameView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\DockingView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\TabbedView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DialogServiceView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\MessageBoxService\MessageBoxServiceView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\DocumentManagerService\WindowedView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\NavigationService\NavigationDetailView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\Services\NavigationService\FrameView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\BindingsAndDynamicResourcesView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\DataTriggersView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\DXControlsTypedStylesView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\TypedStyles\DXBindingAndDXCommandView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\DataErrorInfoView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\ManualCommandsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\AutoCommandsView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\LoginView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelBase\ServicesView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\MessengerView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\MainPOCOView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\ParentPOCOView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\ParentView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\Modules\ViewModelsInteraction\MainView.baml
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo.g.resources
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo.Properties.Resources.resources
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo.Wpf.csproj.GenerateResource.cache
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo.Wpf.csproj.CoreCompileInputs.cache
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo.exe
+D:\MCU\DotNet\WPF\DX Tutorial\DevExpress-Demo\CS\MVVMDemo.Wpf\obj.Wpf\Debug\MVVMDemo.pdb

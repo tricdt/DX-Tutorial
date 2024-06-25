@@ -1,0 +1,283 @@
+﻿<local:LayoutControlDemoModule x:Class="LayoutControlDemo.pageProducts"
+                               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                               xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                               xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                               xmlns:local="clr-namespace:LayoutControlDemo">
+    <local:LayoutControlDemoModule.Resources>
+        <Style x:Key="TechnologyContainerStyle" TargetType="dxlc:FlowLayoutControl">
+            <Setter Property="ItemSpace" Value="15" />
+            <Setter Property="LayerSpace" Value="3" />
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+        <Style x:Key="TechnologyStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="LightGray" />
+        </Style>
+        <Style x:Key="PackStyle" TargetType="Hyperlink">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="TextDecorations" Value="None" />
+            <EventSetter Event="RequestNavigate" Handler="PackTextBlock_RequestNavigate" />
+            <EventSetter Event="MouseEnter" Handler="PackTextBlock_MouseEnter" />
+            <EventSetter Event="MouseLeave" Handler="PackTextBlock_MouseLeave" />
+        </Style>
+        <SolidColorBrush x:Key="EnabledProductBrush" Color="Black" />
+        <SolidColorBrush x:Key="DisabledProductBrush" Color="#C0C0C0" />
+        <Style x:Key="ProductGroupStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="{StaticResource EnabledProductBrush}" />
+        </Style>
+        <Style x:Key="ProductStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Foreground" Value="{StaticResource EnabledProductBrush}" />
+        </Style>
+        <Style x:Key="ProductsLayerSeparatorStyle" TargetType="dxlc:LayerSeparator">
+            <Setter Property="Foreground" Value="Silver" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="dxlc:LayerSeparator">
+                        <Line X1="1"
+                              X2="1"
+                              Y2="10000"
+                              Width="{TemplateBinding Thickness}"
+                              StrokeThickness="{TemplateBinding Thickness}"
+                              Stroke="{TemplateBinding Foreground}"
+                              StrokeDashArray="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Thickness" Value="2" />
+        </Style>
+
+        <Storyboard x:Key="DisabledProductBrushAnimation">
+            <ColorAnimation Storyboard.TargetName="DisabledProductBrush" Storyboard.TargetProperty="Color" From="Black" Duration="0:0:0.5" />
+        </Storyboard>
+    </local:LayoutControlDemoModule.Resources>
+
+    <dxlc:DockLayoutControl x:Name="LayoutRoot" ItemSpace="0">
+        <dxlc:FlowLayoutControl ItemSpace="0" Orientation="Vertical" dxlc:DockLayoutControl.Dock="Top" DragScrolling="False">
+            <dxlc:FlowLayoutControl.Background>
+                <LinearGradientBrush EndPoint="1,1">
+                    <GradientStop Offset="0" Color="DodgerBlue" />
+                    <GradientStop Offset="1" Color="Blue" />
+                </LinearGradientBrush>
+            </dxlc:FlowLayoutControl.Background>
+
+            <TextBlock Text="Developer Express Subscriptions and Product Packages" FontSize="12" Foreground="White" />
+
+            <Canvas Width="335" Height="2">
+                <Canvas.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Offset="0" Color="Red" />
+                        <GradientStop Offset="1" Color="#00FF0000" />
+                    </LinearGradientBrush>
+                </Canvas.Background>
+            </Canvas>
+
+            <dxlc:DockLayoutControl ItemSpace="10" Margin="0,10,0,0">
+                <dx:DXImage Source="/LayoutControlDemo;component/Images/VisualStudio.svg" dxlc:DockLayoutControl.Dock="Left" />
+                <dxlc:FlowLayoutControl dxlc:DockLayoutControl.Dock="Client" VerticalAlignment="Center" Style="{StaticResource TechnologyContainerStyle}">
+                    <TextBlock Text="Visual Studio" Style="{StaticResource TechnologyStyle}" />
+                    <TextBlock dxlc:FlowLayoutControl.IsFlowBreak="True">
+                        <Hyperlink x:Name="tbPack8"
+                                   Style="{StaticResource PackStyle}"
+                                   NavigateUri="http://www.devexpress.com/Products/NET/DXperience/editionUniversal.xml">
+                            DXperience™ Universal
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink x:Name="tbPack1"
+                                   Style="{StaticResource PackStyle}"
+                                   NavigateUri="http://www.devexpress.com/Products/NET/DXperience/editionEnt.xml">
+                            DXperience™ Enterprise
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink x:Name="tbPack2"
+                                   Style="{StaticResource PackStyle}"
+                                   NavigateUri="http://www.devexpress.com/Products/NET/DXperience/editionWinForms.xml">
+                            DXperience™ WinForms
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink x:Name="tbPack3"
+                                   Style="{StaticResource PackStyle}"
+                                   NavigateUri="http://www.devexpress.com/Products/NET/DXperience/editionASPNET.xml">
+                            DXperience™ ASP.NET
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink x:Name="tbPack4" Style="{StaticResource PackStyle}" NavigateUri="http://devexpress.com/Products/NET/DXperience/editionWpf.xml">
+                            DXperience™ WPF
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink x:Name="tbPack9" Style="{StaticResource PackStyle}" NavigateUri="https://www.devexpress.com/Products/NET/Controls/Win10Apps/">
+                            Windows 10 Apps
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink x:Name="tbPack7" Style="{StaticResource PackStyle}" NavigateUri="https://js.devexpress.com/">
+                            DevExtreme™ Complete
+                        </Hyperlink>
+                    </TextBlock>
+                </dxlc:FlowLayoutControl>
+            </dxlc:DockLayoutControl>
+
+            <dxlc:DockLayoutControl ItemSpace="10" Margin="0,10,0,0">
+                <Image Source="/LayoutControlDemo;component/Images/VCL.png" dxlc:DockLayoutControl.Dock="Left" />
+                <dxlc:FlowLayoutControl dxlc:DockLayoutControl.Dock="Client" VerticalAlignment="Center" Style="{StaticResource TechnologyContainerStyle}">
+                    <TextBlock Text="Delphi &amp; C++Builder" Style="{StaticResource TechnologyStyle}" />
+                    <TextBlock dxlc:FlowLayoutControl.IsFlowBreak="True">
+                        <Hyperlink x:Name="tbPack5" Style="{StaticResource PackStyle}" NavigateUri="http://www.devexpress.com/Products/VCL/Subscription/">
+                            VCL Subscription™
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock>
+                        <Hyperlink x:Name="tbPack6" Style="{StaticResource PackStyle}" NavigateUri="http://www.devexpress.com/Products/VCL/ExQuantumPack/">
+                            ExpressQuantumPack™
+                        </Hyperlink>
+                    </TextBlock>
+                </dxlc:FlowLayoutControl>
+            </dxlc:DockLayoutControl>
+        </dxlc:FlowLayoutControl>
+
+        <Canvas Height="6" dxlc:DockLayoutControl.Dock="Top">
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Offset="0" Color="#6A6000" />
+                    <GradientStop Offset="1" Color="LemonChiffon" />
+                </LinearGradientBrush>
+            </Canvas.Background>
+        </Canvas>
+
+        <dxlc:FlowLayoutControl x:Name="layoutProducts"
+                                LayerSpace="15"
+                                ShowLayerSeparators="True"
+                                BreakFlowToFit="False"
+                                dxlc:DockLayoutControl.Dock="Client"
+                                DragScrolling="False"
+                                Background="LemonChiffon"
+                                LayerSeparatorStyle="{StaticResource ProductsLayerSeparatorStyle}">
+            <TextBlock Text="WinForms Controls" Style="{StaticResource ProductGroupStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraGrid™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraBars™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraPivotGrid™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraScheduler™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraReports™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraTreeList™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraGauges™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraRichEdit™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraWizard™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraVerticalGrid™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraCharts™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraLayoutControl™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraNavBar™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraEditors™ Library" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraPrinting™ Library" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraSpellChecker™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+            <TextBlock Text="XtraSkins™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2" />
+
+            <TextBlock Text="ASP.NET Controls"
+                       dxlc:FlowLayoutControl.IsFlowBreak="True"
+                       Style="{StaticResource ProductGroupStyle}"
+                       Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="XtraReports™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3" />
+            <TextBlock Text="XtraCharts™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3" />
+            <TextBlock Text="ASPxGridView and Editors™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxFilterControl™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxScheduler™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxHtmlEditor™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxGauges™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxTreeList™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxEditors™ Library" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxPivotGrid™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxSpellChecker™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxCloudControl™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxDataView™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxMenu™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxNavBar™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxNewsControl™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxPopupControl™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxSiteMapControl™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxTabControl™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxTitleIndex™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxUploadControl™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxUtilities™ Library" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+            <TextBlock Text="ASPxThemes™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack3;Pack5" />
+
+            <TextBlock Text="WPF Controls" dxlc:FlowLayoutControl.IsFlowBreak="True" Style="{StaticResource ProductGroupStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="XtraReports™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXGrid™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXTreeList™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXRibbon™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXBars™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXCharts™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXGauges™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXPivotGrid™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXScheduler™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXRichEdit™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXDocking™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXLayoutControl™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXPrinting™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXEditors™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXNavBar™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXControls™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXCarousel™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXSpellChecker™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+            <TextBlock Text="DXThemes™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack4" />
+
+            <TextBlock Text="Windows 10 App Controls"
+                       dxlc:FlowLayoutControl.IsFlowBreak="True"
+                       Style="{StaticResource ProductGroupStyle}"
+                       Tag="Pack9;Pack8;Pack1" />
+            <TextBlock Text="Data Grid" Style="{StaticResource ProductStyle}" Tag="Pack9;Pack8;Pack1" />
+            <TextBlock Text="Charting" Style="{StaticResource ProductStyle}" Tag="Pack9;Pack8;Pack1" />
+            <TextBlock Text="Ribbon Control" Style="{StaticResource ProductStyle}" Tag="Pack9;Pack8;Pack1" />
+            <TextBlock Text="PDF Viewer" Style="{StaticResource ProductStyle}" Tag="Pack9;Pack8;Pack1" />
+            <TextBlock Text="Gauge Controls" Style="{StaticResource ProductStyle}" Tag="Pack9;Pack8;Pack1" />
+            <TextBlock Text="Map Control" Style="{StaticResource ProductStyle}" Tag="Pack9;Pack8;Pack1" />
+            <TextBlock Text="Range Control" Style="{StaticResource ProductStyle}" Tag="Pack9;Pack8;Pack1" />
+            <TextBlock Text="Application Navigation Controls" Style="{StaticResource ProductStyle}" Tag="Pack9;Pack8;Pack1" />
+            <TextBlock Text="Layout Controls" Style="{StaticResource ProductStyle}" Tag="Pack9;Pack8;Pack1" />
+            <TextBlock Text="Data Editors" Style="{StaticResource ProductStyle}" Tag="Pack9;Pack8;Pack1" />
+
+            <TextBlock Text="DevExtreme" Margin="0,10,0,0" Style="{StaticResource ProductGroupStyle}" Tag="Pack8;Pack1;Pack7" />
+            <TextBlock Text="DevExtreme Mobile (HTML5-JavaScript)" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack7" />
+            <TextBlock Text="DevExtreme Web (HTML5-JavaScript)" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack7" />
+            <TextBlock Text="DevExtreme Visual Studio Integration" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack7" />
+
+            <TextBlock Text="VCL Components" dxlc:FlowLayoutControl.IsFlowBreak="True" Style="{StaticResource ProductGroupStyle}" Tag="Pack5;Pack6" />
+            <TextBlock Text="ExpressQuantumGrid™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack5;Pack6" />
+            <TextBlock Text="ExpressBars™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack5;Pack6" />
+            <TextBlock Text="ExpressPrinting System™" Style="{StaticResource ProductStyle}" Tag="Pack5" />
+            <TextBlock Text="ExpressScheduler™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack5" />
+            <TextBlock Text="ExpressPivotGrid™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack5" />
+            <TextBlock Text="ExpressQuantumTreeList™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack5;Pack6" />
+            <TextBlock Text="ExpressVerticalGrid™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack5" />
+            <TextBlock Text="ExpressSpellChecker™" Style="{StaticResource ProductStyle}" Tag="Pack5" />
+            <TextBlock Text="ExpressNavBar™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack5" />
+            <TextBlock Text="ExpressLayout Control™" Style="{StaticResource ProductStyle}" Tag="Pack5" />
+            <TextBlock Text="ExpressSkins™ Library" Style="{StaticResource ProductStyle}" Tag="Pack5" />
+            <TextBlock Text="ExpressSpreadSheet™" Style="{StaticResource ProductStyle}" Tag="Pack5" />
+            <TextBlock Text="ExpressMasterView™" Style="{StaticResource ProductStyle}" Tag="Pack5" />
+            <TextBlock Text="ExpressDBTree™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack5;Pack6" />
+            <TextBlock Text="ExpressOrgChart™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack5;Pack6" />
+            <TextBlock Text="ExpressFlowChart™ Suite" Style="{StaticResource ProductStyle}" Tag="Pack5" />
+
+            <TextBlock Text="Visual Studio® Productivity Tools"
+                       dxlc:FlowLayoutControl.IsFlowBreak="True"
+                       Style="{StaticResource ProductGroupStyle}"
+                       Tag="Pack8;Pack1" />
+            <TextBlock Text="CodeRush™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1" />
+            <TextBlock Text="CodeRush™ Roslyn" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1" />
+
+            <TextBlock Text="Business Application Frameworks" Margin="0,10,0,0" Style="{StaticResource ProductGroupStyle}" Tag="Pack8;Pack1;Pack3" />
+            <TextBlock Text="XAF™" Style="{StaticResource ProductStyle}" Tag="Pack8" />
+            <TextBlock Text="XPO™" Style="{StaticResource ProductStyle}" Tag="Pack8;Pack1;Pack2;Pack3;Pack4" />
+        </dxlc:FlowLayoutControl>
+    </dxlc:DockLayoutControl>
+</local:LayoutControlDemoModule>

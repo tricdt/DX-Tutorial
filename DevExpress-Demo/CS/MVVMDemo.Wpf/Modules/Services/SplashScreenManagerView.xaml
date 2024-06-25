@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="MVVMDemo.Services.SplashScreenManagerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.Services"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             DataContext="{dxmvvm:ViewModelSource Type=local:SplashScreenManagerViewModel}">
+    <!--#region !-->
+    <dxmvvm:Interaction.Behaviors>
+        <dx:SplashScreenManagerService x:Name="ThemedSplashScreenService" PredefinedSplashScreenType="Themed" InputBlock="WindowContent"
+                                       Owner="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+        <dx:SplashScreenManagerService x:Name="FluentSplashScreenService" PredefinedSplashScreenType="Fluent" InputBlock="WindowContent"
+                                       Owner="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+        <dx:SplashScreenManagerService x:Name="WaitIndicatorSplashScreenService" PredefinedSplashScreenType="WaitIndicator" InputBlock="WindowContent"
+                                       Owner="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+    </dxmvvm:Interaction.Behaviors>
+    <!--#endregion-->
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <Button Command="{Binding ShowSplashScreenCommand}" CommandParameter="ThemedSplashScreenService" VerticalAlignment="Top">Show Themed</Button>
+        <Button Command="{Binding ShowSplashScreenCommand}" CommandParameter="FluentSplashScreenService" VerticalAlignment="Top">Show Fluent</Button>
+        <Button Command="{Binding ShowSplashScreenCommand}" CommandParameter="WaitIndicatorSplashScreenService" VerticalAlignment="Top">Show WaitIndicator</Button>
+    </dxlc:LayoutControl>
+</UserControl>

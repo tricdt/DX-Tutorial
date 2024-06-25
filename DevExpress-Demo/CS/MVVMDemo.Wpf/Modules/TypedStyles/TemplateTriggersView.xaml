@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="MVVMDemo.TypedStylesDemo.TemplateTriggersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+    <UserControl.Resources>
+        <!--#region !-->
+        <ControlTemplate x:Key="ButtonTemplate" TargetType="Button">
+            <Border x:Name="border" Background="Red" Padding="15">
+                <ContentPresenter />
+            </Border>
+            <ControlTemplate.Triggers>
+                <ButtonTrigger IsMouseOver="True" SourceName="border">
+                    <ButtonStyle Background="Green" TargetName="border"/>
+                </ButtonTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <!--#endregion-->
+    </UserControl.Resources>
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <Button Template="{StaticResource ButtonTemplate}">Button</Button>
+    </dxlc:LayoutControl>
+</UserControl>

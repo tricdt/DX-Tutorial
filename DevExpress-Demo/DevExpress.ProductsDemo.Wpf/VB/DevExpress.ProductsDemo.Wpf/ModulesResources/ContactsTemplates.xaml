@@ -1,0 +1,119 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:local="clr-namespace:ProductsDemo.Modules"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <local:ViewToVisibilityConverter x:Key="ViewToVisibilityConverter"/>
+    <local:EmptyPhotoConverter x:Key="EmptyPhotoConverter"/>
+    <local:ViewToMarginConverter x:Key="ViewToMarginConverter"/>
+    <local:PhoneFormatConverter x:Key="phoneFormatConverter" />
+    <local:AddressDetailPanelConverter x:Key="AddressDetailPanelConverter"/>
+    <dxmvvm:FormatStringConverter x:Key="birthDateConverter">
+        <dxmvvm:FormatStringConverter.FormatString>
+            {0:dd MMM yyyy}
+        </dxmvvm:FormatStringConverter.FormatString>
+    </dxmvvm:FormatStringConverter>
+    <DataTemplate x:Key="ContactDetailsTemplate">
+        <Grid>
+            <TextBlock Text="No contact selected" FontFamily="Segoe UI" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock.Opacity>
+                    <Binding Path="View.FocusedRowData.Row" ElementName="grid">
+                        <Binding.Converter>
+                            <local:ObjectToOpacityConverter Opacity="0.5" Invert="True"/>
+                        </Binding.Converter>
+                    </Binding>
+                </TextBlock.Opacity>
+            </TextBlock>
+            <Grid>
+                <Grid.Opacity>
+                    <Binding Path="View.FocusedRowData.Row" ElementName="grid">
+                        <Binding.Converter>
+                            <local:ObjectToOpacityConverter Opacity="1" Invert="False"/>
+                        </Binding.Converter>
+                    </Binding>
+                </Grid.Opacity>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <dxe:ImageEdit EditValue="{Binding View.FocusedRowData.Row.Photo, ElementName=grid, Converter={StaticResource EmptyPhotoConverter}}" Margin="0,0,0,23" IsReadOnly="True" ShowBorder="False"/>
+                <Border BorderThickness="1" BorderBrush="Black" Opacity="0.25" Margin="0,0,0,23"/>
+                <TextBlock Grid.Row="1" Text="{Binding View.FocusedRowData.Row.Name.FullName, ElementName=grid}" Margin="0,0,0,23" FontSize="20" FontWeight="SemiBold"/>
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <TextBlock Opacity="0.65" Text="BIRTHDATE" Margin="0,0,4,2"/>
+                    <TextBlock Text="{Binding View.FocusedRowData.Row.BirthDate, ElementName=grid, Converter={StaticResource birthDateConverter}}" TextWrapping="Wrap" Margin="0,0,0,2"/>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Orientation="Horizontal">
+                    <TextBlock Opacity="0.65" Text="ADDRESS" Margin="0,0,4,2"/>
+                    <TextBlock Text="{Binding View.FocusedRowData.Row.Address, ElementName=grid, Converter={StaticResource AddressDetailPanelConverter}}" TextWrapping="Wrap" Margin="0,0,0,2"/>
+                </StackPanel>
+                <StackPanel Grid.Row="4" Orientation="Horizontal">
+                    <TextBlock Opacity="0.65" Text="EMAIL" Margin="0,0,4,2"/>
+                    <TextBlock Text="{Binding View.FocusedRowData.Row.Email, ElementName=grid}" TextWrapping="Wrap" Margin="0,0,0,2"/>
+                </StackPanel>
+                <StackPanel Grid.Row="5" Orientation="Horizontal">
+                    <TextBlock Opacity="0.65" Text="PHONE" Margin="0,0,4,0"/>
+                    <TextBlock Text="{Binding View.FocusedRowData.Row.Phone, ElementName=grid, Converter={StaticResource phoneFormatConverter}}" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="cardTemplate">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="195"/>
+            </Grid.ColumnDefinitions>
+            <Grid VerticalAlignment="Top">
+                <dxe:ImageEdit Stretch="Uniform" Source="{Binding Path=DataContext.Photo, Converter={StaticResource EmptyPhotoConverter}}" ShowMenu="False" ShowBorder="False"/>
+                <Border BorderThickness="1" BorderBrush="Black" Opacity="0.25"/>
+            </Grid>
+            <Grid Grid.Column="1" Margin="12,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Vertical" Margin="0,0,0,12">
+                    <TextBlock Text="ADDRESS" Opacity="0.65"/>
+                    <TextBlock Text="{Binding Path=DataContext.Address}" TextWrapping="Wrap"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,0,0,12">
+                    <TextBlock Text="EMAIL" Opacity="0.65"/>
+                    <TextBlock Text="{Binding Path=DataContext.Email}" TextWrapping="Wrap"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Orientation="Vertical">
+                    <TextBlock Text="PHONE" Opacity="0.65"/>
+                    <TextBlock Text="{Binding Path=DataContext.Phone,  Converter={StaticResource phoneFormatConverter}}" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </DataTemplate>
+    <Style x:Key="ContactsGridViewStyle" TargetType="dxg:GridViewBase">
+        <Setter Property="AllowEditing" Value="False" />
+        <Setter Property="ShowSearchPanelMode" Value="Always" />
+        <Setter Property="ShowGroupPanel" Value="False" />
+    </Style>
+    <dxg:TableView x:Key="TableView" Style="{StaticResource ContactsGridViewStyle}" AutoWidth="True" ShowGroupedColumns="True" ShowIndicator="False" AllowPerPixelScrolling="True">
+        <dxmvvm:Interaction.Triggers>
+            <dxmvvm:EventToCommand EventName="RowDoubleClick" Command="{Binding ShowEditContactWindowCommand}"/>
+        </dxmvvm:Interaction.Triggers>
+    </dxg:TableView>
+    <dxg:CardView x:Key="CardView" Style="{StaticResource ContactsGridViewStyle}" CardTemplate="{StaticResource cardTemplate}" SeparatorTemplate="{x:Null}" CardHeaderBinding="{Binding Data.Name.FullName, RelativeSource={RelativeSource Self}, IsAsync=True, FallbackValue={x:Null}}" CardLayout="Rows" FixedSize="205" >
+        <dxmvvm:Interaction.Triggers>
+            <dxmvvm:EventToCommand EventName="MouseDoubleClick" Command="{Binding ShowEditContactWindowCommand}"/>
+        </dxmvvm:Interaction.Triggers>
+    </dxg:CardView>
+    <dx:EnumToObjectConverter x:Key="ViewTypeToViewConverter">
+        <dx:EnumToObjectConverter.Values>
+            <dx:EnumObjectProvider x:Key="TableView" Value="{StaticResource TableView}"/>
+            <dx:EnumObjectProvider x:Key="CardView" Value="{StaticResource CardView}"/>
+        </dx:EnumToObjectConverter.Values>
+    </dx:EnumToObjectConverter>
+</ResourceDictionary>

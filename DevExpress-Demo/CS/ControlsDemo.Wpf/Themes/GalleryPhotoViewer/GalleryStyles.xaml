@@ -1,0 +1,397 @@
+﻿<ResourceDictionary
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:local="clr-namespace:ControlsDemo">
+    <dx:BooleanToVisibilityConverter Invert="True" x:Key="invertBoolToVisibilityConverter" />
+    <dx:BooleanToVisibilityConverter x:Key="boolToVisibilityConverter" />
+    <ControlTemplate x:Key="GalleryGroupCaptionControlTemplate" TargetType="{x:Type ContentControl}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Border VerticalAlignment="Top" Visibility="{Binding IsFirstVisibleGroup, Converter={StaticResource boolToVisibilityConverter}}" Height="25" Grid.Row="0">
+            </Border>
+            <Grid Grid.Row="1">
+                <Grid x:Name="Separator" Height="2" VerticalAlignment="Top" Visibility="{Binding IsFirstVisibleGroup, Converter={StaticResource invertBoolToVisibilityConverter}}">
+                    <Border Height="1" VerticalAlignment="Top" Opacity="0.35">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                                <GradientStop Color="#00A2A7C6" Offset="0" />
+                                <GradientStop Color="#00A2A7C6" Offset="1" />
+                                <GradientStop Color="#FF1D1E24" Offset="0.1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                    <Border Height="1" VerticalAlignment="Bottom">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                                <GradientStop Color="#00A2A7C6" Offset="0" />
+                                <GradientStop Color="#00A2A7C6" Offset="1" />
+                                <GradientStop Color="#FFA2A7C6" Offset="0.1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                    <Border BorderThickness="1" HorizontalAlignment="Left" Margin="0,0,0,-70" Width="141" Opacity="0.1">
+                        <Border.Background>
+                            <RadialGradientBrush Center="0.492,-0.156" GradientOrigin="0.492,-0.156" RadiusY="0.971" RadiusX="0.489">
+                                <GradientStop Color="#BFD3D9FF" />
+                                <GradientStop Color="Transparent" Offset="1" />
+                            </RadialGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </Grid>
+                <ContentPresenter Grid.Row="1" />
+            </Grid>
+            <Border BorderThickness="1" HorizontalAlignment="Left" Margin="0,0,0,-30" Width="141" Opacity="0.15" Visibility="{Binding IsFirstVisibleGroup, Converter={StaticResource boolToVisibilityConverter}}" Grid.RowSpan="2" Grid.Row="0">
+                <Border.Background>
+                    <RadialGradientBrush Center="0.492,-0.156" GradientOrigin="0.492,-0.156" RadiusY="0.971" RadiusX="0.489">
+                        <GradientStop Color="#BFD3D9FF" />
+                        <GradientStop Color="Transparent" Offset="1" />
+                    </RadialGradientBrush>
+                </Border.Background>
+            </Border>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="GalleryItemBorderTemplate" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Grid>
+            <Border x:Name="border1">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF393A4A" Offset="0" />
+                        <GradientStop Color="#FF414152" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border Margin="1">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#FF1C1E24" Offset="0" />
+                            <GradientStop Color="#FF1D1E24" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border x:Name="border" Margin="1">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                                <GradientStop Color="#FF2C2D3A" Offset="0" />
+                                <GradientStop Color="#FF20222D" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </Border>
+            </Border>
+            <ContentPresenter Margin="10" />
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup Name="State">
+                    <VisualStateGroup.Transitions>
+                        <VisualTransition GeneratedDuration="0:0:0.25" To="Hover">
+                            <VisualTransition.GeneratedEasingFunction>
+                                <CircleEase EasingMode="EaseOut" />
+                            </VisualTransition.GeneratedEasingFunction>
+                        </VisualTransition>
+                        <VisualTransition From="Hover" GeneratedDuration="0:0:0.25">
+                            <VisualTransition.GeneratedEasingFunction>
+                                <CircleEase EasingMode="EaseOut" />
+                            </VisualTransition.GeneratedEasingFunction>
+                        </VisualTransition>
+                        <VisualTransition GeneratedDuration="0:0:0.25" To="Pressed">
+                            <VisualTransition.GeneratedEasingFunction>
+                                <CircleEase EasingMode="EaseOut" />
+                            </VisualTransition.GeneratedEasingFunction>
+                        </VisualTransition>
+                        <VisualTransition From="HoverChecked" GeneratedDuration="0:0:0.25">
+                            <VisualTransition.GeneratedEasingFunction>
+                                <CircleEase EasingMode="EaseOut" />
+                            </VisualTransition.GeneratedEasingFunction>
+                        </VisualTransition>
+                    </VisualStateGroup.Transitions>
+
+                    <VisualState Name="Hover">
+                        <Storyboard>
+                            <ColorAnimation Duration="0" To="#FF21232D" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="border" />
+                            <ColorAnimation Duration="0" To="#FF171922" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="border" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState Name="Normal" />
+                    <VisualState x:Name="HoverChecked">
+                        <Storyboard>
+                            <ColorAnimation Duration="0" To="#FF5A5E72" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="border1" />
+                            <ColorAnimation Duration="0" To="#FF5F6378" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="border1" />
+                            <ColorAnimation Duration="0" To="#FF21232E" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="border" />
+                            <ColorAnimation Duration="0" To="#FF171922" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="border" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Grid>
+    </ControlTemplate>
+    <DataTemplate x:Key="GalleryItemCaptionTemplate">
+        <Grid HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border BorderBrush="#FF414352" BorderThickness="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,0,0,10" Width="{Binding ViewSize.Width}" Height="{Binding ViewSize.Height}">
+                <Image RenderOptions.BitmapScalingMode="HighQuality" Source="{Binding Source}" Stretch="Uniform" />
+            </Border>
+            <TextBlock Grid.Column="0" Foreground="#FF9496A2" Grid.Row="1" Text="{Binding Caption}" HorizontalAlignment="Left" />
+            <TextBlock Grid.Column="1" Foreground="#FF9496A2" Grid.Row="1" Text="{Binding SizeInfo}" HorizontalAlignment="Right" />
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="GalleryHintCaptionTemplate">
+        <Image RenderOptions.BitmapScalingMode="HighQuality" Source="{Binding Source}" Stretch="Uniform" />
+    </DataTemplate>
+    <ControlTemplate x:Key="GalleryToolTipTemplate" TargetType="{x:Type ToolTip}">
+        <Grid>
+            <Grid Opacity="0.6">
+                <Border>
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF9EA3C1" Offset="0" />
+                            <GradientStop Color="#FF686C81" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border Margin="1" Padding="12,12,2,12">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF565A71" Offset="0" />
+                                <GradientStop Color="#FF323441" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </Border>
+            </Grid>
+            <Border BorderThickness="1" Margin="12" Padding="1">
+                <Border BorderThickness="1" Margin="0" Padding="0">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF2F313E" Offset="0" />
+                            <GradientStop Color="#FF2F313E" Offset="1" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border BorderBrush="#FF414352" BorderThickness="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,0,0,0" MaxWidth="300" MaxHeight="600">
+                        <ContentPresenter />
+                    </Border>
+                </Border>
+            </Border>
+        </Grid>
+    </ControlTemplate>
+    <Style x:Key="GalleryGroupCaptionTextStyle" TargetType="{x:Type ContentControl}">
+        <Setter Property="Foreground" Value="#FFD3D9FF" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+    <ControlTemplate x:Key="MenuGalleryItemBorderTemplate" TargetType="{x:Type dxb:ItemBorderControl}">
+        <Grid>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="State">
+                    <VisualStateGroup.Transitions>
+                        <VisualTransition GeneratedDuration="0:0:0.25" To="Normal" />
+                        <VisualTransition GeneratedDuration="0:0:0.25" To="Checked" />
+                        <VisualTransition GeneratedDuration="0:0:0.25" To="Hover">
+                            <VisualTransition.GeneratedEasingFunction>
+                                <SineEase EasingMode="EaseInOut" />
+                            </VisualTransition.GeneratedEasingFunction>
+                        </VisualTransition>
+                        <VisualTransition GeneratedDuration="0">
+                            <VisualTransition.GeneratedEasingFunction>
+                                <SineEase EasingMode="EaseInOut" />
+                            </VisualTransition.GeneratedEasingFunction>
+                        </VisualTransition>
+                    </VisualStateGroup.Transitions>
+                    <VisualState x:Name="Normal">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PART_Checked" />
+                            <DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PART_HoverChecked" />
+                            <DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PART_Hover" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Checked">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PART_Checked" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Hover">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PART_Hover" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="HoverChecked">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PART_HoverChecked" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Grid x:Name="PART_HoverChecked" Opacity="0">
+                <Border Height="1" VerticalAlignment="Top">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#261D1E24" Offset="0" />
+                            <GradientStop Color="#001D1E24" Offset="1" />
+                            <GradientStop Color="#FF2D2F3B" Offset="0.35" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Border Height="1" VerticalAlignment="Bottom">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#261D1E24" Offset="0" />
+                            <GradientStop Color="#001D1E24" Offset="1" />
+                            <GradientStop Color="#FF1D1E24" Offset="0.35" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Border Opacity="0.2" Margin="0,1">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#269695EF" Offset="0" />
+                            <GradientStop Color="#009695EF" Offset="1" />
+                            <GradientStop Color="#FF959BBB" Offset="0.35" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Border VerticalAlignment="Top" Height="1" Margin="0,1,0,0">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#269695EF" Offset="0" />
+                            <GradientStop Color="#009695EF" Offset="1" />
+                            <GradientStop Color="#FFA1A6C4" Offset="0.35" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+            </Grid>
+            <Grid x:Name="PART_Checked" Opacity="0">
+                <Border Height="1" VerticalAlignment="Top">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#261D1E24" Offset="0" />
+                            <GradientStop Color="#001D1E24" Offset="1" />
+                            <GradientStop Color="#FF2D2F3B" Offset="0.35" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Border Height="1" VerticalAlignment="Bottom">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#261D1E24" Offset="0" />
+                            <GradientStop Color="#001D1E24" Offset="1" />
+                            <GradientStop Color="#FF1D1E24" Offset="0.35" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Border Opacity="0.2" Margin="0,1">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#269695EF" Offset="0" />
+                            <GradientStop Color="#009695EF" Offset="1" />
+                            <GradientStop Color="#FF959BBB" Offset="0.35" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Border VerticalAlignment="Top" Height="1" Margin="0,1,0,0">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#269695EF" Offset="0" />
+                            <GradientStop Color="#009695EF" Offset="1" />
+                            <GradientStop Color="#FFA1A6C4" Offset="0.35" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+            </Grid>
+            <Grid x:Name="PART_Hover" Opacity="0">
+                <Border Height="1" VerticalAlignment="Top">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#261D1E24" Offset="0" />
+                            <GradientStop Color="#001D1E24" Offset="1" />
+                            <GradientStop Color="#FF1D1E24" Offset="0.35" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Border Height="1" VerticalAlignment="Bottom">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#261D1E24" Offset="0" />
+                            <GradientStop Color="#001D1E24" Offset="1" />
+                            <GradientStop Color="#FF1D1E24" Offset="0.35" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Border Opacity="0.2" Margin="0,1">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#269695EF" Offset="0" />
+                            <GradientStop Color="#009695EF" Offset="1" />
+                            <GradientStop Color="#FF9695EF" Offset="0.35" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Border VerticalAlignment="Top" Height="1" Margin="0,1,0,0">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                            <GradientStop Color="#269695EF" Offset="0" />
+                            <GradientStop Color="#009695EF" Offset="1" />
+                            <GradientStop Color="#FF9695EF" Offset="0.35" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+            </Grid>
+            <ContentPresenter />
+        </Grid>
+
+    </ControlTemplate>
+    <Style x:Key="MenuGalleryItemCaptionTextStyle" TargetType="{x:Type ContentControl}">
+        <Setter Property="FontSize" Value="13.333" />
+        <Setter Property="Foreground" Value="#FFBEC3E6" />
+    </Style>
+    <Style x:Key="CloseButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="Transparent">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.1" />
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Disabled" />
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0" To="#FFC4C9E4" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="path1" />
+                                        <ColorAnimation Duration="0" To="#FFC4C9E4" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="path2" />
+                                        <ColorAnimation Duration="0" To="#FFAAAFD0" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="path1" />
+                                        <ColorAnimation Duration="0" To="#FFAAAFD0" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="path2" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Path x:Name="path1" Data="F1 M 131.006,53.0052L 132.007,52.0065L 136.006,56.0013L 140.006,52.0065L 141.006,53.0052L 137.006,57L 141.006,60.9948L 140.006,61.9935L 136.006,57.9987L 132.007,61.9935L 131.006,60.9948L 135.006,57L 131.006,53.0052 Z " Stretch="Fill" UseLayoutRounding="False">
+                            <Path.Fill>
+                                <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                                    <GradientStop Color="#FFA4A9C4" Offset="0" />
+                                    <GradientStop Color="#FF8A8FB0" Offset="1" />
+                                </LinearGradientBrush>
+                            </Path.Fill>
+                        </Path>
+                        <Path x:Name="path2" Data="F1 M 131.006,53.0052L 132.007,52.0065L 136.006,56.0013L 140.006,52.0065L 141.006,53.0052L 137.006,57L 141.006,60.9948L 140.006,61.9935L 136.006,57.9987L 132.007,61.9935L 131.006,60.9948L 135.006,57L 131.006,53.0052 Z " Stretch="Fill" UseLayoutRounding="False">
+                            <Path.Fill>
+                                <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                                    <GradientStop Color="#FFA4A9C4" Offset="0" />
+                                    <GradientStop Color="#FF8A8FB0" Offset="1" />
+                                </LinearGradientBrush>
+                            </Path.Fill>
+                        </Path>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CC1EF141-C3B1-46AD-86D7-59A11BAA6082}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <BaseIntermediateOutputPath>obj.Wpf</BaseIntermediateOutputPath>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RichEditDemo</RootNamespace>
+    <AssemblyName>RichEditDemo</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ConvertToNet6Windows />
+  </PropertyGroup>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;WPF;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Debug\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;CLICKONCE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Release\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Release\</OutputPath>
+    <DefineConstants>TRACE;WPF;CLICKONCE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugTest\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DEBUGTEST</DefineConstants>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>demoicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Images\About.svg" />
+    <Resource Include="Images\NewComment.svg" />
+    <Resource Include="Images\InsertDocumentProperty.svg" />
+    <Resource Include="Images\DocumentStatistics_16x16.png" />
+    <Resource Include="Images\DocumentStatistics_32x32.png" />
+    <Resource Include="Images\SpellCheckAsYouType_16x16.png" />
+    <Resource Include="Images\SpellCheckAsYouType_32x32.png" />
+    <Reference Include="DevExpress.Printing.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Data.Desktop.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Data.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Drawing.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.DemoData.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Core.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.DemoBase.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Docking.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.PropertyGrid.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Ribbon.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.RichEdit.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Office.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Spreadsheet.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Spreadsheet.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Docs.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.RichEdit.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.SpellChecker.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.SpellChecker.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Printing.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.CodeParser.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Mvvm.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\Bin\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath></HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    <Private>False</Private></Reference>
+    <Reference Include="System"><Private>False</Private></Reference>
+    <Reference Include="System.Core"><Private>False</Private></Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47">
+      <HintPath>..\..\Bin\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.108.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47">
+      <HintPath>..\..\Bin\System.Data.SQLite.EF6.dll</HintPath>
+      <Private>True</Private>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="System.DirectoryServices"><Private>False</Private></Reference>
+    <Reference Include="System.DirectoryServices.AccountManagement"><Private>False</Private></Reference>
+    <Reference Include="System.Drawing"><Private>False</Private></Reference>
+    <Reference Include="System.ServiceModel"><Private>False</Private></Reference>
+    <Reference Include="System.Windows.Forms"><Private>False</Private></Reference>
+    <Reference Include="System.Xaml"><Private>False</Private></Reference>
+    <Reference Include="System.Xml.Linq"><Private>False</Private></Reference>
+    <Reference Include="System.Data.DataSetExtensions"><Private>False</Private></Reference>
+    <Reference Include="System.Data"><Private>False</Private></Reference>
+    <Reference Include="System.Xml"><Private>False</Private></Reference>
+    <Reference Include="UIAutomationProvider"><Private>False</Private></Reference>
+    <Reference Include="UIAutomationTypes"><Private>False</Private></Reference>
+    <Reference Include="WindowsBase"><Private>False</Private></Reference>
+    <Reference Include="PresentationCore"><Private>False</Private></Reference>
+    <Reference Include="PresentationFramework"><Private>False</Private></Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations"><Private>False</Private></Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DemoTesting\Fixtures.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AutoCorrect.xaml.cs">
+      <DependentUpon>AutoCorrect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AutoCorrect\AutoCorrectHelper.cs" />
+    <Compile Include="Modules\ContextMenuCustomization.xaml.cs">
+      <DependentUpon>ContextMenuCustomization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CustomDraw\CustomDrawPagePainter.cs" />
+    <Compile Include="Modules\CustomDraw\CustomsRichEditCommandFactoryService.cs" />
+    <Compile Include="Modules\DocumentProperties.xaml.cs">
+      <DependentUpon>DocumentProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DocumentProperties\DocumentPropertyInfo.cs" />
+    <Compile Include="Modules\DocumentProtection\UserService.cs" />
+    <Compile Include="Modules\FirstLook\PageInfoConverter.cs" />
+    <Compile Include="Modules\HitTesting.xaml.cs">
+      <DependentUpon>HitTesting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CustomDraw.xaml.cs">
+      <DependentUpon>CustomDraw.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FirstLook\StaticsticsVisitor.cs" />
+    <Compile Include="Modules\FirstLook\StatisticsViewModel.cs" />
+    <Compile Include="Modules\HitTesting\HitTestPagePainter.cs" />
+    <Compile Include="Modules\HitTesting\ScopeType.cs" />
+    <Compile Include="Modules\MailMerge\DBUriStreamProvider.cs" />
+    <Compile Include="Modules\OperationRestrictions\RichEditOptionsProvider.cs" />
+    <Compile Include="Modules\SyntaxHighlighting\CustomRichEditCommandFactoryService.cs" />
+    <Compile Include="Modules\SyntaxHighlighting\SourceCodeDocumentFormat.cs" />
+    <Compile Include="Modules\SyntaxHighlighting\SourcesCodeDocumentExporter.cs" />
+    <Compile Include="Modules\SyntaxHighlighting\SourcesCodeDocumentImporter.cs" />
+    <Compile Include="Modules\SyntaxHighlighting\SyntaxHighlightService.cs" />
+    <Compile Include="Modules\SpellChecking.xaml.cs">
+      <DependentUpon>SpellChecking.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DocumentProtection.xaml.cs">
+      <DependentUpon>DocumentProtection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\MailMerge.xaml.cs">
+      <DependentUpon>MailMerge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\OperationRestrictions.xaml.cs">
+      <DependentUpon>OperationRestrictions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FirstLook.xaml.cs">
+      <DependentUpon>FirstLook.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RibbonUICustomization.xaml.cs">
+      <DependentUpon>RibbonUICustomization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DynamicContent.xaml.cs">
+      <DependentUpon>DynamicContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SyntaxHighlighting.xaml.cs">
+      <DependentUpon>SyntaxHighlighting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Navigation.xaml.cs">
+      <DependentUpon>Navigation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Comments.xaml.cs">
+      <DependentUpon>Comments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RichEditDemoExceptionHandler.cs" />
+    <Compile Include="DemoUtils.cs" />
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\AutoCorrect.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ContextMenuCustomization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\DocumentProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\HitTesting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\CustomDraw.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SpellChecking.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DocumentProtection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\MailMerge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\OperationRestrictions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FirstLook.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RibbonUICustomization.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DynamicContent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SyntaxHighlighting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Navigation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Comments.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="RichEditDemoModule.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <netcore3ignore />
+    </None>
+    
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <EmbeddedResource Include="clickonce.txt">
+      <netcore3ignore />
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\ribbon-application-32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CustomizeMergeField_16x16.png" />
+    <Resource Include="Images\CustomizeMergeField_32x32.png" />
+    <Resource Include="Images\SmallAbout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="smile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MergeToNewDocument_16x16.png" />
+    <Resource Include="Images\MergeToNewDocument_32x32.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    
+  </PropertyGroup>
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent"><ItemGroup><Resource Include="@(Page)" /></ItemGroup><ItemGroup><Resource Include="@(Compile)" /></ItemGroup></Target>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+	<GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+	<RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>	
+	<ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3
+    <Import Project="Demo.targets" />
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3 
+    <Import Project="Themes.WPF.NetCore.targets" />
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3 
+      <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="4.6.0" />
+      <PackageReference Include="System.ServiceModel.Syndication" Version="4.6.0" />
+      </ItemGroup>
+  ONLY NETCORE3-->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

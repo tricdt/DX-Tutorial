@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/Helpers/PicturesGallery.xaml" />
+        <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/Helpers/AssociationsGrid.xaml" />
+        <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/Helpers/NoteControl.xaml" />
+        <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/Helpers/PhotoViewer.xaml" />
+        <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/ModulesBase/DemoModules.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

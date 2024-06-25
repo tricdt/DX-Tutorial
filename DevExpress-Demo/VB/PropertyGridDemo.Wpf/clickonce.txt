@@ -1,0 +1,11 @@
+DevExpress.Xpf.PropertyGrid.v{DXVersion}
+DevExpress.Xpf.Core.v{DXVersion}.Extensions
+DevExpress.Xpo.v{DXVersion}
+DevExpress.DataAccess.v{DXVersion}
+DevExpress.Xpf.Charts.v{DXVersion}
+DevExpress.Charts.v{DXVersion}.Core
+DevExpress.Xpf.Printing.v{DXVersion}
+DevExpress.RichEdit.v{DXVersion}.Core
+DevExpress.Office.v{DXVersion}.Core
+DevExpress.Xpf.DocumentViewer.v{DXVersion}.Core
+DevExpress.DataVisualization.v{DXVersion}.Core

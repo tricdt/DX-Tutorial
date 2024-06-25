@@ -1,0 +1,107 @@
+﻿<local:GaugesDemoModule x:Class="GaugesDemo.StateIndicatorModels"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
+                        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                        xmlns:local="clr-namespace:GaugesDemo"
+                        mc:Ignorable="d"
+                        d:DesignHeight="676"
+                        d:DesignWidth="1375">
+    <local:GaugesDemoModule.Resources>
+        <Style TargetType="{x:Type dxe:TrackBarEdit}">
+            <Setter Property="IsSnapToTickEnabled" Value="True"/>
+            <Setter Property="TickFrequency" Value="1"/>
+        </Style>
+    </local:GaugesDemoModule.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="32*" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="32*" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="6*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Lamp" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" />
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="Arrow" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" />
+        <TextBlock Grid.Column="0" Grid.Row="7" Text="Traffic Lights" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" />
+        <TextBlock Grid.Column="1" Grid.Row="7" Text="Smile" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" />
+        <dxga:StateIndicatorControl x:Name="lampStateIndicatorControl"
+                                    Grid.Column="0"
+                                    Grid.Row="3"
+                                    StateIndex="{Binding ElementName=lampTrackBar, Path=Value}">
+            <dxga:StateIndicatorControl.Model>
+                <dxga:LampStateIndicatorModel />
+            </dxga:StateIndicatorControl.Model>
+        </dxga:StateIndicatorControl>
+        <dxga:StateIndicatorControl x:Name="arrowStateIndicatorControl"
+                                    Grid.Column="1"
+                                    Grid.Row="3"
+                                    StateIndex="{Binding ElementName=arrowTrackBar, Path=Value}">
+            <dxga:StateIndicatorControl.Model>
+                <dxga:ArrowStateIndicatorModel />
+            </dxga:StateIndicatorControl.Model>
+        </dxga:StateIndicatorControl>
+        <dxga:StateIndicatorControl x:Name="trafficLightsStateIndicatorControl"
+                                    Grid.Column="0"
+                                    Grid.Row="9"
+                                    StateIndex="{Binding ElementName=trafficLightsTrackBar, Path=Value}">
+            <dxga:StateIndicatorControl.Model>
+                <dxga:TrafficLightsStateIndicatorModel />
+            </dxga:StateIndicatorControl.Model>
+        </dxga:StateIndicatorControl>
+        <dxga:StateIndicatorControl x:Name="smileStateIndicatorControl"
+                                    Grid.Column="1"
+                                    Grid.Row="9"
+                                    StateIndex="{Binding ElementName=smileTrackBar, Path=Value}">
+            <dxga:StateIndicatorControl.Model>
+                <dxga:SmileStateIndicatorModel />
+            </dxga:StateIndicatorControl.Model>
+        </dxga:StateIndicatorControl>
+        <Grid Grid.Column="0" Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="15*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+            <dxe:TrackBarEdit x:Name="lampTrackBar" Grid.Column="1" Maximum="3"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="15*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+            <dxe:TrackBarEdit x:Name="arrowTrackBar" Grid.Column="1" Maximum="7"/>
+        </Grid>
+        <Grid Grid.Column="0" Grid.Row="11">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="15*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+            <dxe:TrackBarEdit x:Name="trafficLightsTrackBar" Grid.Column="1" Maximum="3"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="11">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="15*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+            <dxe:TrackBarEdit x:Name="smileTrackBar" Grid.Column="1" Maximum="3" />
+        </Grid>
+    </Grid>
+</local:GaugesDemoModule>

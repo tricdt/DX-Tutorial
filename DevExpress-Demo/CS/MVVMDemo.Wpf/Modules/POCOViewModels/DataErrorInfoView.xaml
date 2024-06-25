@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="MVVMDemo.POCOViewModels.DataErrorInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.POCOViewModels"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             DataContext="{dxmvvm:ViewModelSource Type=local:DataErrorInfoViewModel}">
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <dxlc:LayoutItem Label="User name:" LabelPosition="Top">
+            <dxe:TextEdit Text="{Binding UserName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+        </dxlc:LayoutItem>
+        <Button Command="{Binding RegisterCommand}">Register</Button>
+    </dxlc:LayoutControl>
+</UserControl>

@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="GanttDemo.Examples.CustomSnapping"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxgn="http://schemas.devexpress.com/winfx/2008/xaml/gantt"
+             xmlns:dxgni="http://schemas.devexpress.com/winfx/2008/xaml/gantt/internal"
+             xmlns:local="clr-namespace:GanttDemo.Examples">
+    <UserControl.DataContext>
+        <local:CustomSnappingViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style TargetType="{x:Type dxgni:GanttTaskEditFlyoutControl}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding TaskEditKind}" Value="{x:Static dxgni:TaskEditKind.Duration}">
+                    <Setter Property="ContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold" Text="{Binding Header}"/>
+                                    <TextBlock>
+                                        <Run Text="Duration: "/>
+                                        <Run Text="{DXBinding '@e(ganttView).CalculateDuration(Node.StartDate, Content).Hours', Mode=OneWay}"/>
+                                        <Run Text="Hours,"/>
+                                        <Run Text="{DXBinding '@e(ganttView).CalculateDuration(Node.StartDate, Content).Minutes', Mode=OneWay}"/>
+                                        <Run Text="Minutes"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <dxgn:GanttControl ItemsSource="{Binding Tasks}">
+        <dxgn:GanttControl.View>
+            <dxgn:GanttView
+                x:Name="ganttView"
+                AllowEditConnectors="False"
+                AllowTaskProgressMove="False"
+                AutoExpandAllNodes="True"
+                SnapTaskDateTimeOnEditing="False"
+                TaskMoving="TaskMoving"
+                TaskFinishDateMoving="TaskFinishDateMoving"
+                TaskMoved="TaskMoved"
+                TaskFinishDateMoved="TaskFinishDateMoved"
+                BeginNewTaskDraw="BeginNewTaskDraw"
+                NewTaskDrawing="NewTaskDrawing"
+                NewTaskDrawn="NewTaskDrawn"
+                AllowEditing="True"
+                ScrollMargin="0"
+                Zoom="0:1:0"
+                ZoomRange="0:1:0 - 0:1:0"
+                TreeListWidth="Auto"
+                NewItemRowPosition="Bottom"
+                RequestTimescaleRulers="RequestTimescaleRulers">
+                <dxgn:GanttView.WorkingTimeRules>
+                    <dxgn:WorkingTimeRule WorkingTime="0:0:0-24:0:0">
+                        <dxgn:Daily/>
+                    </dxgn:WorkingTimeRule>
+                </dxgn:GanttView.WorkingTimeRules>
+                <dxgn:GanttView.WorkdayRules>
+                    <dxgn:WorkdayRule IsWorkday="True">
+                        <dxgn:Daily/>
+                    </dxgn:WorkdayRule>
+                </dxgn:GanttView.WorkdayRules>
+            </dxgn:GanttView>
+        </dxgn:GanttControl.View>
+        <dxgn:GanttColumn BindTo="StartDate"/>
+        <dxgn:GanttColumn BindTo="Duration"/>
+    </dxgn:GanttControl>
+</UserControl>

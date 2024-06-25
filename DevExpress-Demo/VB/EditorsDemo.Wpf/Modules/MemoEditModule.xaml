@@ -1,0 +1,112 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.MemoEditModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:local="clr-namespace:EditorsDemo"
+                         xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid">
+    <local:EditorsDemoModule.Resources>
+        <DataTemplate x:Key="iconTemplate">
+            <dxe:ImageEdit Source="{Binding Path=Value}"
+                           Height="55"
+                           Stretch="Uniform"
+                           HorizontalAlignment="Center"
+                           Margin="3"
+                           ShowMenu="False"
+                           IsReadOnly="True" />
+        </DataTemplate>
+    </local:EditorsDemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="250">
+                <GroupBox Header="Properties" Margin="0,12,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit Margin="0,0,0,6" Content="Accepts RETURN" IsChecked="{Binding Path=MemoAcceptsReturn, Mode=TwoWay, ElementName=editor}" />
+                        <dxe:CheckEdit Margin="0,0,0,6" Content="Accepts TAB" IsChecked="{Binding Path=MemoAcceptsTab, Mode=TwoWay, ElementName=editor}" />
+                        <dxe:CheckEdit Margin="0,0,0,6" Content="Show icon" IsChecked="{Binding Path=ShowIcon, Mode=TwoWay, ElementName=editor}" />
+                        <dxe:CheckEdit Margin="0,0,0,0" Content="Show size grip" IsChecked="{Binding Path=ShowSizeGrip, Mode=TwoWay, ElementName=editor}" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Memo Scrollbars" Margin="0,12,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Horizontal:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Margin="0,0,6,3" />
+                        <dxe:ComboBoxEdit x:Name="cbHorizontalScroll"
+                                          IsTextEditable="False"
+                                          Grid.Column="1"
+                                          Grid.Row="0"
+                                          EditValue="{Binding Path=MemoHorizontalScrollBarVisibility, Mode=TwoWay, ElementName=editor}"
+                                          Margin="0,0,0,6" />
+                        <TextBlock Text="Vertical:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Margin="0,0,6,0" />
+                        <dxe:ComboBoxEdit x:Name="cbVerticalScroll"
+                                          IsTextEditable="False"
+                                          Grid.Column="1"
+                                          Grid.Row="1"
+                                          EditValue="{Binding Path=MemoVerticalScrollBarVisibility, Mode=TwoWay, ElementName=editor}" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Text Wrapping" Margin="0,12,0,0">
+                    <Grid>
+                        <dxe:ListBoxEdit x:Name="lbTextWrapping"
+                                         SelectedItem="{Binding Path=MemoTextWrapping, Mode=TwoWay, ElementName=editor}"
+                                         Background="{x:Null}"
+                                         ShowBorder="False">
+                            <dxe:ListBoxEdit.StyleSettings>
+                                <dxe:RadioListBoxEditStyleSettings />
+                            </dxe:ListBoxEdit.StyleSettings>
+                        </dxe:ListBoxEdit>
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.25*" />
+                <RowDefinition Height="0.75*" />
+            </Grid.RowDefinitions>
+            <dxe:MemoEdit x:Name="editor"
+                          MaxWidth="300"
+                          MemoVerticalScrollBarVisibility="Auto"
+                          MemoHorizontalScrollBarVisibility="Auto"
+                          VerticalAlignment="Center"
+                          MemoTextWrapping="Wrap"
+                          PopupWidth="250" />
+
+            <dxg:GridControl Margin="32,0,32,32" Grid.Row="1" ItemsSource="{Binding}">
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn Header="Icon" FieldName="ImageSource" AllowColumnFiltering="False" CellTemplate="{StaticResource iconTemplate}" />
+                    <dxg:GridColumn Header="Category" FieldName="Category" Width="120" />
+                    <dxg:GridColumn Header="Trademark" FieldName="Trademark" Width="120" />
+                    <dxg:GridColumn Header="Model" FieldName="Model" Width="250" />
+                    <dxg:GridColumn FieldName="Price" Width="100">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings DisplayFormat="$0" MaskType="Numeric" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn FieldName="Description" AllowGrouping="False" Width="100">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:MemoEditSettings PopupWidth="500" MemoTextWrapping="Wrap" MemoVerticalScrollBarVisibility="Auto" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.View>
+                    <dxg:TableView ShowGroupPanel="False" />
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+
+        </Grid>
+    </DockPanel>
+</local:EditorsDemoModule>

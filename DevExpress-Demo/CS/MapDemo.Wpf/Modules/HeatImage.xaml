@@ -1,0 +1,84 @@
+﻿<local:MapDemoModule x:Class="MapDemo.HeatImage"
+                     mc:Ignorable="d"
+                     xmlns:local="clr-namespace:MapDemo"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                     xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+                     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                     DataContext="{dxmvvm:ViewModelSource Type=local:HeatImageViewModel}"
+                     d:DesignHeight="600"
+                     d:DesignWidth="800">
+    <local:MapDemoModule.Resources>
+        <local:DemoValuesProvider x:Key="DemoValuesProvider" />
+    </local:MapDemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      DockPanel.Dock="Right">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Header="Point Radius" Margin="0,5,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="2" Margin="0,6,5,0"/>
+                        <dxe:TrackBarEdit x:Name="pointRadiusTrackbar"
+                                Minimum="2"
+                                Maximum="20"
+                                Margin="0,6,0,0"
+                                MinWidth="200"
+                                TickPlacement="None"
+                                LargeStep="1"
+                                EditValue="8">
+                        </dxe:TrackBarEdit>
+                        <TextBlock Text="20" Margin="0,6,5,0"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Palette" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit x:Name="lbPaletteType"
+                                     ShowBorder="False"
+                                     ItemsSource="{Binding PaletteItems}"
+                                     DisplayMember="Name"
+                                     ValueMember="Colorizer"
+                                     SelectedItem="{Binding ActualPaletteItem, Mode=TwoWay}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid>
+            <dxm:MapControl MinZoomLevel="2" LegendItemCreating="{DXEvent 'OnLegendItemCreating(@args)'}"
+                            EnableRotation="False">
+                <dxm:MapControl.ScalePanelOptions>
+                    <dxm:ScalePanelOptions Visible="False"/>
+                </dxm:MapControl.ScalePanelOptions>
+                <dxm:MapControl.CoordinatesPanelOptions>
+                    <dxm:CoordinatesPanelOptions Visible="False"/>
+                </dxm:MapControl.CoordinatesPanelOptions>
+                <dxm:ImageLayer>
+                    <dxm:BingMapDataProvider BingKey="{Binding DevexpressBingKey, Source={StaticResource DemoValuesProvider}}" />
+                </dxm:ImageLayer>
+                <dxm:ImageLayer Name="heatLayer" Opacity="0.75">
+                    <dxm:HeatmapProvider Colorizer="{Binding ActualPaletteItem.Colorizer}">
+                        <dxm:HeatmapProvider.PointSource>
+                            <dxm:HeatmapDataSourceAdapter DataSource="{x:Static local:EarthquakesData.DataItems}">
+                                <dxm:HeatmapDataSourceAdapter.Mappings>
+                                    <dxm:HeatmapPointMappingInfo XCoordinate="Longitude" YCoordinate="Latitude"/>
+                                </dxm:HeatmapDataSourceAdapter.Mappings>
+                            </dxm:HeatmapDataSourceAdapter>
+                        </dxm:HeatmapProvider.PointSource>
+                        <dxm:HeatmapProvider.Algorithm >
+                            <dxm:HeatmapDensityBasedAlgorithm PointRadius="{Binding ElementName=pointRadiusTrackbar, Path=Value}"/>
+                        </dxm:HeatmapProvider.Algorithm>
+                    </dxm:HeatmapProvider>
+                </dxm:ImageLayer>
+                <dxm:MapControl.Legends>
+                    <dxm:ColorScaleLegend Layer="{Binding ElementName=heatLayer}" EnableGradientScale="True" Header="Seismic Density"/>
+                </dxm:MapControl.Legends>
+            </dxm:MapControl>
+            <local:CopyrightControl ProviderName="Bing" />
+        </Grid>
+    </DockPanel>
+</local:MapDemoModule>

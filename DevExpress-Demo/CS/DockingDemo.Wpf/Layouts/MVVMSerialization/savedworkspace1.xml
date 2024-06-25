@@ -1,0 +1,96 @@
+﻿<XtraSerializer version="1.0" application="DockLayoutManager">
+  <property name="#LayoutVersion" isnull="true" />
+  <property name="$DockLayoutManager" iskey="true" value="DockLayoutManager">
+    <property name="Items" iskey="true" value="10">
+      <property name="Item1" isnull="true" iskey="true">
+        <property name="Appearance">~Xtra#NULL</property>
+        <property name="TypeName">LayoutGroup</property>
+        <property name="ParentName" isnull="true" />
+        <property name="ParentCollectionName" isnull="true" />
+        <property name="SerializableSelectedTabPageIndex">-1</property>
+        <property name="Name">dockItem1</property>
+      </property>
+      <property name="Item2" isnull="true" iskey="true">
+        <property name="Appearance">~Xtra#NULL</property>
+        <property name="TypeName">LayoutGroup</property>
+        <property name="ParentName">dockItem1</property>
+        <property name="ParentCollectionName" isnull="true" />
+        <property name="DestroyOnClosingChildren">false</property>
+        <property name="SerializableSelectedTabPageIndex">-1</property>
+        <property name="Name">PanelHost</property>
+      </property>
+      <property name="Item3" isnull="true" iskey="true">
+        <property name="ItemHeight">*</property>
+        <property name="ItemWidth">*</property>
+        <property name="Appearance">~Xtra#NULL</property>
+        <property name="TypeName">LayoutGroup</property>
+        <property name="ParentName">PanelHost</property>
+        <property name="ParentCollectionName" isnull="true" />
+        <property name="SerializableSelectedTabPageIndex">-1</property>
+        <property name="Orientation">Vertical</property>
+        <property name="AllowSplitters">true</property>
+        <property name="Name">dockItem2</property>
+      </property>
+      <property name="Item4" isnull="true" iskey="true">
+        <property name="ParentCollectionName" isnull="true" />
+        <property name="ParentName">dockItem2</property>
+        <property name="TypeName">LayoutPanel</property>
+        <property name="Appearance">~Xtra#NULL</property>
+        <property name="Name">Model0</property>
+      </property>
+      <property name="Item5" isnull="true" iskey="true">
+        <property name="ParentCollectionName" isnull="true" />
+        <property name="ParentName">dockItem2</property>
+        <property name="TypeName">LayoutPanel</property>
+        <property name="Appearance">~Xtra#NULL</property>
+        <property name="FloatSize">181,613</property>
+        <property name="Name">Model2</property>
+      </property>
+      <property name="Item6" isnull="true" iskey="true">
+        <property name="ItemHeight">*</property>
+        <property name="ItemWidth">*</property>
+        <property name="Appearance">~Xtra#NULL</property>
+        <property name="TypeName">LayoutGroup</property>
+        <property name="ParentName">PanelHost</property>
+        <property name="ParentCollectionName" isnull="true" />
+        <property name="SerializableSelectedTabPageIndex">-1</property>
+        <property name="Orientation">Vertical</property>
+        <property name="AllowSplitters">true</property>
+        <property name="Name">dockItem3</property>
+      </property>
+      <property name="Item7" isnull="true" iskey="true">
+        <property name="ParentCollectionName" isnull="true" />
+        <property name="ParentName">dockItem3</property>
+        <property name="TypeName">LayoutPanel</property>
+        <property name="Appearance">~Xtra#NULL</property>
+        <property name="Name">Model4</property>
+      </property>
+      <property name="Item8" isnull="true" iskey="true">
+        <property name="ParentCollectionName" isnull="true" />
+        <property name="ParentName">dockItem3</property>
+        <property name="TypeName">LayoutPanel</property>
+        <property name="Appearance">~Xtra#NULL</property>
+        <property name="FloatSize">228,613</property>
+        <property name="Name">Model1</property>
+      </property>
+      <property name="Item9" isnull="true" iskey="true">
+        <property name="FloatSize">318,625</property>
+        <property name="ParentCollectionName">$FloatGroups</property>
+        <property name="ParentName" isnull="true" />
+        <property name="TypeName">FloatGroup</property>
+        <property name="Appearance">~Xtra#NULL</property>
+        <property name="ShouldRestoreOnActivate">false</property>
+        <property name="SerializableSelectedTabPageIndex">-1</property>
+        <property name="FloatLocation">395,60</property>
+        <property name="Name">dockItem4</property>
+      </property>
+      <property name="Item10" isnull="true" iskey="true">
+        <property name="ParentCollectionName" isnull="true" />
+        <property name="ParentName">dockItem4</property>
+        <property name="TypeName">LayoutPanel</property>
+        <property name="Appearance">~Xtra#NULL</property>
+        <property name="Name">Model3</property>
+      </property>
+    </property>
+  </property>
+</XtraSerializer>

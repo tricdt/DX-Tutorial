@@ -1,0 +1,83 @@
+﻿<local:PivotGridDemoModule x:Class="PivotGridDemo.Groups"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:local="clr-namespace:PivotGridDemo"
+                           xmlns:dxpg="http://schemas.devexpress.com/winfx/2008/xaml/pivotgrid"
+                           xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase">
+    <DockPanel>
+        <local:PivotGridDemoRibbon DockPanel.Dock="Top" ExportPivotGrid="{x:Reference pivotGrid}"/>
+
+        <StackPanel Name="PART_Options" DockPanel.Dock="Right" Margin="12" MinWidth="210">
+            <Button Content="Collapse All Groups" Click="Collapse_Click" Name="ButtonCollapse" />
+            <Button Content="Expand All Groups" Click="Expand_Click" Name="ButtonExpand" Margin="0,12,0,0" />
+        </StackPanel>
+
+        <dxpg:PivotGridControl x:Name="pivotGrid"
+                               DataProcessingEngine="Optimized"
+                               DataSource="{x:Static dxdb:NWindDataProvider.SalesPersons}"
+                               local:FieldAreaHelper.FixAreas="True" ShowDateTimeGroupIntervalItems="None"
+                               RowTreeWidth="200"
+                               ShowBorder="False">
+            <dxpg:PivotGridControl.Fields>
+                <dxpg:PivotGridField x:Name="fieldCategory"
+                                     DataBinding="{dxpg:DataSourceColumnBinding CategoryName}"
+                                     Area="RowArea"
+                                     Width="100"
+                                     Caption="Category"
+                                     Group="{x:Reference PivotGridGroup1}" />
+                <dxpg:PivotGridField x:Name="fieldProduct"
+                                     DataBinding="{dxpg:DataSourceColumnBinding ProductName}"
+                                     Area="RowArea"
+                                     Width="200"
+                                     Caption="Product"
+                                     Group="{x:Reference PivotGridGroup1}" />
+                <dxpg:PivotGridField x:Name="fieldYear"
+                                     DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateYear}"
+                                     Area="ColumnArea"
+                                     Caption="Year"
+                                     Width="80"
+                                     Group="{x:Reference PivotGridGroup2}" />
+                <dxpg:PivotGridField x:Name="fieldQuarter"
+                                     DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateQuarter}"
+                                     Area="ColumnArea"
+                                     Caption="Quarter"
+                                     ExpandedInFieldsGroup="False"
+                                     Width="80"
+                                     ValueFormat="Quarter {0}"
+                                     Group="{x:Reference PivotGridGroup2}" />
+                <dxpg:PivotGridField x:Name="fieldMonth"
+                                     DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateMonth}"
+                                     Area="ColumnArea"
+                                     Caption="Month"
+                                     Width="80"
+                                     Group="{x:Reference PivotGridGroup2}" />
+                <dxpg:PivotGridField x:Name="fieldExtendedPrice"
+                                     DataBinding="{dxpg:DataSourceColumnBinding ExtendedPrice}"
+                                     Area="DataArea"
+                                     Width="100"
+                                     Caption="Order Amount"
+                                     ExpandedInFieldsGroup="False"
+                                     Group="{x:Reference PivotGridGroup3}" />
+                <dxpg:PivotGridField x:Name="fieldQuantity"
+                                     DataBinding="{dxpg:DataSourceColumnBinding Quantity}"
+                                     Area="DataArea"
+                                     Width="100"
+                                     Caption="Quantity"
+                                     Group="{x:Reference PivotGridGroup3}" />
+                <dxpg:PivotGridField x:Name="fieldDiscount"
+                                     DataBinding="{dxpg:DataSourceColumnBinding Discount}"
+                                     Area="DataArea"
+                                     Width="100"
+                                     Caption="Discount (Avg)"
+                                     SummaryType="Average"
+                                     CellFormat="p"
+                                     Group="{x:Reference PivotGridGroup3}" />
+            </dxpg:PivotGridControl.Fields>
+            <dxpg:PivotGridControl.Groups>
+                <dxpg:PivotGridGroup x:Name="PivotGridGroup1" />
+                <dxpg:PivotGridGroup x:Name="PivotGridGroup2" />
+                <dxpg:PivotGridGroup x:Name="PivotGridGroup3" />
+            </dxpg:PivotGridControl.Groups>
+        </dxpg:PivotGridControl>
+    </DockPanel>
+</local:PivotGridDemoModule>

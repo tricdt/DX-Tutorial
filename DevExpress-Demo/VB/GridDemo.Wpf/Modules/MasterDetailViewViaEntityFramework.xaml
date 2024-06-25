@@ -1,0 +1,118 @@
+﻿<local:GridDemoModule x:Class="GridDemo.MasterDetailViewViaEntityFramework"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxrudex="http://schemas.devexpress.com/winfx/2008/xaml/reports/userdesignerextensions"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800">
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top"
+                              ExportGrid="{x:Reference grid}"
+                              ReportService="{x:Reference rmsMasterDetailViewViaEntityFramework}" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <local:RecentReports Margin="12,0,12,12"
+                                 VerticalAlignment="Top"
+                                 ReportService="{x:Reference rmsMasterDetailViewViaEntityFramework}" />
+        </ScrollViewer>
+        <dxg:GridControl Name="grid" ShowBorder="False" AutoGenerateColumns="KeepOld" Loaded="{DXEvent '@Self.ExpandMasterRow(1)'}">
+            <dxg:GridControl.DetailDescriptor>
+                <!--#region Orders-->
+                <dxg:DataControlDetailDescriptor Name="gridDetailDescriptor" ItemsSourceBinding="{Binding Path=Orders}" ShowHeader="false">
+                    <dxg:GridControl Name="detailGrid">
+                        <dxg:GridControl.DetailDescriptor>
+                            <!--#region OrderDetails-->
+                            <dxg:DataControlDetailDescriptor ItemsSourceBinding="{Binding Path=OrderDetails}" ShowHeader="false">
+                                <dxg:GridControl Name="subDetailGrid">
+                                    <dxg:GridControl.Columns>
+                                        <dxg:GridColumn FieldName="ProductName" Width="*" />
+                                        <dxg:GridColumn FieldName="UnitPrice" Width="*" />
+                                        <dxg:GridColumn FieldName="Quantity" Width="*" />
+                                        <dxg:GridColumn FieldName="TotalPrice" Width="*" UnboundDataType="{x:Type sys:Decimal}" UnboundExpression="[UnitPrice]*[Quantity]" />
+                                        <dxg:GridColumn FieldName="Discount" Width="*">
+                                            <dxg:GridColumn.EditSettings>
+                                                <dxe:TextEditSettings MaskType="Numeric" Mask="p" MaskUseAsDisplayFormat="True" MaskCulture="en-US" />
+                                            </dxg:GridColumn.EditSettings>
+                                        </dxg:GridColumn>
+                                    </dxg:GridControl.Columns>
+                                    <dxg:GridControl.TotalSummary>
+                                        <dxg:GridSummaryItem SummaryType="Sum" FieldName="TotalPrice" ShowInColumn="TotalPrice" />
+                                        <dxg:GridSummaryItem SummaryType="Sum" FieldName="Quantity" ShowInColumn="Quantity" />
+                                        <dxg:GridSummaryItem SummaryType="Count" FieldName="ProductName" />
+                                    </dxg:GridControl.TotalSummary>
+                                    <dxg:GridControl.View>
+                                        <dxg:TableView Name="subDetailView"
+                                                       DetailHeaderContent="Order details"
+                                                       UseAnimationWhenExpanding="true"
+                                                       ShowColumnHeaders="True"
+                                                       AllowFixedColumnMenu="true"
+                                                       TotalSummaryPosition="Bottom" />
+                                    </dxg:GridControl.View>
+                                </dxg:GridControl>
+                            </dxg:DataControlDetailDescriptor>
+                            <!--#endregion-->
+                        </dxg:GridControl.DetailDescriptor>
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn FieldName="OrderDate" Width="*" />
+                            <dxg:GridColumn FieldName="ShippedDate" Width="*" />
+                            <dxg:GridColumn FieldName="ShipPostalCode" Width="*" />
+                            <dxg:GridColumn FieldName="Freight" Width="*" />
+                            <dxg:GridColumn FieldName="ShipCountry" Width="*" />
+                        </dxg:GridControl.Columns>
+                        <dxg:GridControl.TotalSummary>
+                            <dxg:GridSummaryItem SummaryType="Sum" FieldName="Freight" ShowInColumn="Freight" />
+                            <dxg:GridSummaryItem SummaryType="Count" FieldName="OrderDate" />
+                        </dxg:GridControl.TotalSummary>
+                        <dxg:GridControl.View>
+                            <dxg:TableView Name="detailView"
+                                           DetailHeaderContent="Orders"
+                                           UseAnimationWhenExpanding="true"
+                                           ShowColumnHeaders="True"
+                                           AllowFixedColumnMenu="true"
+                                           TotalSummaryPosition="Bottom" />
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+                </dxg:DataControlDetailDescriptor>
+                <!--#endregion-->
+            </dxg:GridControl.DetailDescriptor>
+            <!--#region Columns-->
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="ContactName" Width="*" />
+                <dxg:GridColumn FieldName="Country" Width="*" />
+                <dxg:GridColumn FieldName="City" Width="*" />
+                <dxg:GridColumn FieldName="Address" Width="*" />
+                <dxg:GridColumn FieldName="PostalCode" Width="*" />
+                <dxg:GridColumn FieldName="CustomerID" Width="*" />
+            </dxg:GridControl.Columns>
+            <!--#endregion-->
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem SummaryType="Count" FieldName="ContactName" />
+            </dxg:GridControl.TotalSummary>
+            <dxg:GridControl.View>
+                <dxg:TableView Name="masterView"
+                               DetailHeaderContent="Customers"
+                               AllowScrollAnimation="true"
+                               AllowFixedGroups="true"
+                               NavigationStyle="Cell"
+                               AllowFixedColumnMenu="true"
+                               TotalSummaryPosition="Bottom">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxrudex:GridReportManagerService Name="rmsMasterDetailViewViaEntityFramework" />
+                    </dxmvvm:Interaction.Behaviors>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

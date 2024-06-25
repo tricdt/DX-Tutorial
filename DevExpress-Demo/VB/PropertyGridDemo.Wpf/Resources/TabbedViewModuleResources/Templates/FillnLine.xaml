@@ -1,0 +1,112 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                    xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+                    xmlns:local="clr-namespace:PropertyGridDemo"
+                    >
+    <DataTemplate x:Key="CommonBorderAndFillOptions.Opacity">
+        <dxprg:PropertyDefinition Path="Opacity" PostOnEditValueChanged="True" EditorHorizontalAlignment="Stretch">
+            <dxprg:PropertyDefinition.CellTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10*"/>
+                        </Grid.ColumnDefinitions>
+                        <dxe:TrackBarEdit Grid.Column="1" Minimum="0" Maximum="1" SmallStep="0.01" LargeStep="0.1" EditValue="{Binding Value, Mode=TwoWay}" EditValuePostMode="Immediate" TickPlacement="None"/>
+                        <dxe:SpinEdit Grid.Column="3" x:Name="PART_Editor" MinValue="0" MaxValue="1" Increment="0.01" Mask="##0 %" MaskUseAsDisplayFormat="True"/>
+                    </Grid>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.CellTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="CommonBorderAndFillOptions.Color">
+        <dxprg:PropertyDefinition Path="Color" AllowExpanding="Never" EditorHorizontalAlignment="Right" PostOnEditValueChanged="True" EditSettings="{dxe:PopupColorEditSettings DisplayMode=Color}"/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="BorderOptions.BorderType">
+        <dxprg:PropertyDefinition Path="BorderType" HeaderShowMode="OnlyExpander">
+            <dxprg:PropertyDefinition.ContentTemplate>
+                <DataTemplate>
+                    <dxprg:CellEditorPresenter Path="BorderType" PathMode="Absolute"/>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.ContentTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="SolidBorderOptions.Thickness">
+        <dxprg:PropertyDefinition Path="Thickness" Header="Width" PostOnEditValueChanged="True">
+            <dxprg:PropertyDefinition.CellTemplate>
+                <DataTemplate>
+                    <dxe:SpinEdit x:Name="PART_Editor" MinValue="0" MaxValue="20" Increment="1" Mask="##0.0 pt" MaskUseAsDisplayFormat="True"/>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.CellTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="SolidBorderOptions.DashStyle">
+        <dxprg:PropertyDefinition Path="DashStyle" PostOnEditValueChanged="True" AllowExpanding="Never">
+            <dxprg:PropertyDefinition.CellTemplate>
+                <DataTemplate>
+                    <dxe:ComboBoxEdit x:Name="PART_Editor"
+                                                  ItemsSource="{local:StaticProperties Type=DashStyles}"
+                                                  HorizontalContentAlignment="Stretch"
+                                                  IsTextEditable="False" ApplyItemTemplateToSelectedItem="True"
+                                                  Foreground="{Binding Parent.Value.Color, Converter={local:ColorToBrushConverter}}"
+                                                  EditValuePostMode="Immediate"
+                                                  >
+                        <dxe:ComboBoxEdit.ItemTemplate>
+                            <DataTemplate>
+                                <Rectangle x:Name="PART_Rectangle" StrokeDashArray="{Binding Dashes}" Stroke="{Binding Path=(TextElement.Foreground), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type dxe:ComboBoxEdit}}}" MinHeight="16" StrokeThickness="2" Margin="2"/>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type dxe:ComboBoxEditItem}}}" Value="True">
+                                        <Setter Property="Stroke" TargetName="PART_Rectangle" Value="{Binding Path=(TextElement.Foreground), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type dxe:ComboBoxEditItem}}}"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </dxe:ComboBoxEdit.ItemTemplate>
+                    </dxe:ComboBoxEdit>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.CellTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+
+
+    <DataTemplate x:Key="FillOptions.FillType">
+        <dxprg:PropertyDefinition Path="FillType" HeaderShowMode="OnlyExpander">
+            <dxprg:PropertyDefinition.ContentTemplate>
+                <DataTemplate>
+                    <dxprg:CellEditorPresenter Path="FillType" PathMode="Absolute"/>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.ContentTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PictureFillOptions.Picture">
+        <dxprg:PropertyDefinition Path="Picture" AllowExpanding="Never" PostOnEditValueChanged="True" HeaderShowMode="OnlyExpander">
+            <dxprg:PropertyDefinition.CellTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Content="Open..." Command="{Binding Path=Parent.Value.SelectPictureCommand}"/>
+                            <Button Grid.Column="2" Content="Close" Command="{Binding Path=Parent.Value.ClearPictureCommand}"/>
+                        </Grid>
+                        <dxe:ImageEdit ShowMenu="False" ShowBorder="False" x:Name="PART_Editor" Grid.Row="1" Opacity="{Binding Path=Parent.Value.Opacity}" Stretch="Uniform" MaxHeight="200"/>
+                    </Grid>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.CellTemplate>
+            <dxprg:PropertyDefinition.EditSettings>
+                <dxe:ImageEditSettings ShowMenuMode="Always"/>
+            </dxprg:PropertyDefinition.EditSettings>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+</ResourceDictionary>

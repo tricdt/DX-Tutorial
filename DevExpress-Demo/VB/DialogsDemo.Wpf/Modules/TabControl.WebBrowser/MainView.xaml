@@ -1,0 +1,19 @@
+﻿<dxdb:DemoModule x:Class="CommonDemo.TabControl.WebBrowser.MainView"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                 xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                 xmlns:local="clr-namespace:CommonDemo.TabControl.WebBrowser"
+                 DataContext="{dxmvvm:ViewModelSource local:MainViewModel}">
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:WindowService WindowStartupLocation="CenterScreen" Title="Web Browser" AllowSetWindowOwner="False" WindowType="{x:Type local:WebBrowserWindow}"/>
+    </dxmvvm:Interaction.Behaviors>
+    <Grid>
+        <Button Content="Launch ThemedWindow"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Command="{Binding LaunchDemoCommand}"
+                Height="50"
+                Width="300" />
+    </Grid>
+</dxdb:DemoModule>

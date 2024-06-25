@@ -1,0 +1,123 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.ListBoxEditModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:local="clr-namespace:EditorsDemo">
+    <local:EditorsDemoModule.Resources>
+        <local:DisplayTextConverter x:Key="displayTextConverter" />
+    </local:EditorsDemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12" MinWidth="250">
+                <GroupBox Header="Style">
+                    <dxe:ListBoxEdit Name="styleSelector"
+                                     ValueMember="Content"
+                                     SelectedIndex="0"
+                                     ShowBorder="False"
+                                     Background="{x:Null}"
+                                     SelectedIndexChanged="styleSelector_SelectionChanged">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </dxe:ListBoxEdit.ItemsPanel>
+                        <dxe:ListBoxEdit.Items>
+                            <dxe:ListBoxEditItem Content="Default" />
+                            <dxe:ListBoxEditItem Content="Checked" Margin="12,0,12,0" />
+                            <dxe:ListBoxEditItem Content="Radio" />
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Properties" VerticalAlignment="Top" Margin="0,12,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock  Text="Edit value:" VerticalAlignment="Center" Margin="0,0,6,6" />
+                        <dxe:TextEdit IsReadOnly="True"
+                                      Grid.Column="1"
+                                      Grid.Row="0"
+                                      EditValue="{Binding ElementName=edit, Path=EditValue}"
+                                      MaxWidth="160"
+                                      Margin="0,0,0,6"
+                                      DisplayTextConverter="{StaticResource displayTextConverter}" />
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Selected index:" VerticalAlignment="Center" Margin="0,0,6,6" />
+                        <dxe:TextEdit IsReadOnly="True"
+                                      Grid.Column="1"
+                                      Grid.Row="1"
+                                      Text="{Binding ElementName=edit, Path=SelectedIndex}"
+                                      MaxWidth="160"
+                                      Margin="0,0,0,6" />
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Selected item:" VerticalAlignment="Center" Margin="0,0,6,6" />
+                        <dxe:TextEdit IsReadOnly="True"
+                                      Grid.Column="1"
+                                      Grid.Row="2"
+                                      Text="{Binding ElementName=edit, Path=SelectedItem}"
+                                      MaxWidth="160"
+                                      Margin="0,0,0,6" />
+                        <dxe:CheckEdit Name="allowHighlightingCheck"
+                                       Grid.Row="3"
+                                       IsChecked="{Binding ElementName=edit, Path=AllowItemHighlighting, Mode=TwoWay}"
+                                       Content="Allow item highlighting"
+                                       Grid.ColumnSpan="2"
+                                       Margin="0,0,0,6" />
+                        <dxe:CheckEdit x:Name="chShowCustomItems" Grid.Row="4" IsChecked="true" Content="Show custom items" Grid.ColumnSpan="2" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Selection" VerticalAlignment="Top" Margin="0,12,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Selection mode:" VerticalAlignment="Center" Margin="0,0,6,12" />
+                        <dxe:ComboBoxEdit Name="selectionModeSelector"
+                                          Grid.Column="1"
+                                          Grid.Row="0"
+                                          IsTextEditable="False"
+                                          EditValue="{Binding ElementName=edit, Path=SelectionMode, Mode=TwoWay}"
+                                          MaxWidth="160"
+                                          Margin="0,0,0,4"
+                                          SelectedIndexChanged="selectionModeSelector_SelectedIndexChanged" />
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Selected item(s):" VerticalAlignment="Center" Margin="0,0,6,0" />
+                        <dxe:ListBoxEdit Name="selectedItemList"
+                                         Grid.Column="1"
+                                         Grid.Row="1"
+                                         ItemsSource="{Binding ElementName=edit, Path=SelectedItems}"
+                                         MaxWidth="160"
+                                         Height="100" />
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid>
+            <dxe:ListBoxEdit Name="edit"
+                             VerticalAlignment="Center"
+                             MaxWidth="220"
+                             SelectedIndex="0"
+                             MaxHeight="360"
+                             ShowCustomItems="{Binding Path=IsChecked, ElementName=chShowCustomItems, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+    </DockPanel>
+</local:EditorsDemoModule>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<style type="text/css">
+		.Red{fill:#BB89CC;}
+		.Yellow{fill:#DFC48F;}
+		.Blue{fill:#71B5F4;}
+		.Green{fill:#86BA73;}
+		.Black{fill:#727272;}
+		.White{fill:#FFFFFF;}
+		.st0{opacity:0.5;}
+		.st1{opacity:0.75;}
+		.st2{opacity:0.35;}
+		.st3{opacity:0.65;}
+	</style>
+	<path class="Yellow" d="M12 0H23L15 12H28L10 30L14 18H4L12 0Z" />
+</svg>

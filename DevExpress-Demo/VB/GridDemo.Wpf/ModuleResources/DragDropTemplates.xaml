@@ -1,0 +1,24 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:local="clr-namespace:GridDemo">
+
+    <local:MultiSelectModeConverter x:Key="multiSelectConverter"/>
+    <dx:EnumToObjectConverter x:Key="countToEnabledConverter" DefaultValue="True">
+        <dx:EnumToObjectConverter.Values>
+            <dx:EnumObjectProvider x:Key="0" Value="False" />
+        </dx:EnumToObjectConverter.Values>
+    </dx:EnumToObjectConverter>
+
+    <DataTemplate x:Key="listBoxItemTemplate">
+        <StackPanel Orientation="Vertical" Margin="0,0,0,8">
+            <TextBlock Text="{Binding}" FontWeight="Bold" />
+            <TextBlock Text="{Binding JobTitle}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="colGroupNameCellTemplate">
+        <dx:DXImage Source="{Binding Path=RowData.Row.GroupName, Converter={local:GroupNameToImageConverter}}" Width="16" Height="16"/>
+    </DataTemplate>
+</ResourceDictionary>

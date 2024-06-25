@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="MVVMDemo.ViewModelBaseDemo.DataErrorInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.ViewModelBaseDemo"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+    <UserControl.DataContext>
+        <local:DataErrorInfoViewModel/>
+    </UserControl.DataContext>
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <dxlc:LayoutItem Label="User name:" LabelPosition="Top">
+            <dxe:TextEdit Text="{Binding UserName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+        </dxlc:LayoutItem>
+        <Button Command="{Binding RegisterCommand}">Register</Button>
+    </dxlc:LayoutControl>
+</UserControl>

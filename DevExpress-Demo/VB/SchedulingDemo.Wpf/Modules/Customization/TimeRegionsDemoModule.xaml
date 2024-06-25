@@ -1,0 +1,161 @@
+﻿<local:SchedulingDemoModule x:Class="SchedulingDemo.TimeRegionsDemoModule"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                            xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                            xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                            xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                            xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduling"
+                            xmlns:local="clr-namespace:SchedulingDemo"
+                            xmlns:vm="clr-namespace:SchedulingDemo.ViewModels"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            mc:Ignorable="d"
+                            d:DesignWidth="800"
+                            d:DesignHeight="600"
+                            DataContext="{dxmvvm:ViewModelSource vm:TimeRegionsDemoViewModel}">
+
+    <!--#region Resources-->
+    <local:SchedulingDemoModule.Resources>
+        <DataTemplate x:Key="TimeRegionItemTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Border Height="20" Width="50"
+                        BorderThickness="1"
+                        Background="{DXBinding Expr='@e(scheduler).ActualBrushSet.GetBrush(BrushName)'}"
+                        BorderBrush="{DXBinding Expr='@e(scheduler).ActualBrushSet.GetBrush(BorderBrushName)'}"/>
+                <TextBlock Text="{Binding Caption}" Margin="4,0,0,0"/>
+            </StackPanel>
+        </DataTemplate>
+    </local:SchedulingDemoModule.Resources>
+    <!--#endregion Resources-->
+
+    <DockPanel>
+        <!--#region Options-->
+        <dxlc:LayoutControl Name="PART_Options" DockPanel.Dock="Right" Orientation="Vertical" Padding="12,8,12,12" dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap">
+            <dxe:CheckEdit Content="Highlight Non-working Hours" IsChecked="{Binding ElementName=dayView, Path=HighlightNonworkingHours}" VerticalAlignment="Top"
+                           Visibility="{DXBinding '@e(scheduler).ActiveView.DayViewBase != null ? $Visibility.Visible : $Visibility.Collapsed'}"/>
+            <dxe:CheckEdit Content="Highlight Even Months" IsChecked="{Binding ElementName=monthView, Path=HighlightEvenMonths}" VerticalAlignment="Top"
+                           Visibility="{DXBinding '@e(scheduler).ActiveView.MonthView != null ? $Visibility.Visible : $Visibility.Collapsed'}"/>
+            <dxe:CheckEdit Content="Highlight Non-working Hours" IsChecked="{Binding ElementName=timelineView, Path=HighlightNonworkingHours}" VerticalAlignment="Top"
+                           Visibility="{DXBinding '@e(scheduler).ActiveView.TimelineView != null ? $Visibility.Visible : $Visibility.Collapsed'}"/>
+            <dxe:CheckEdit Content="Show Only Resource Time Regions" IsChecked="{DXBinding '@e(scheduler).ShowOnlyResourceTimeRegions'}" VerticalAlignment="Top"/>
+            <dxlc:LayoutItem Label="Time Region Visibility: " VerticalAlignment="Top">
+                <dxe:ComboBoxEdit EditValue="{DXBinding '@e(scheduler).ActiveView.TimeRegionVisibility', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                  ItemsSource="{dxe:EnumItemsSource EnumType=dxsch:TimeRegionVisibility}"
+                                  IsTextEditable="False" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Snap To Cells Mode: " VerticalAlignment="Top">
+                <dxe:ComboBoxEdit EditValue="{DXBinding '@e(scheduler).ActiveView.TimeRegionSnapToCellsMode', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                  ItemsSource="{dxe:EnumItemsSource EnumType=dxsch:TimeRegionSnapToCellsMode}"
+                                  IsTextEditable="False"
+                                  IsEnabled="{DXBinding '@e(scheduler).ActiveView.DayViewBase != null  || @e(scheduler).ActiveView.TimelineView != null'}"/>
+            </dxlc:LayoutItem>
+
+            <GroupBox Header="Time Regions" >
+                <dxlc:LayoutControl Padding="0" Orientation="Vertical">
+                    <dxe:ListBoxEdit EditValue="{Binding SelectedTimeRegion}"
+                                     ItemsSource="{Binding TimeRegions}"
+                                     ItemTemplate="{StaticResource TimeRegionItemTemplate}"
+                                     DisplayMember="Caption"/>
+                    <dxlc:LayoutItem Label="Start: ">
+                        <dxe:DateEdit DateTime="{Binding SelectedTimeRegion.Start}"
+                                      MaskUseAsDisplayFormat="True"
+                                      Mask="G"
+                                      IsEnabled="{Binding SelectedTimeRegion, Converter={dxmvvm:ObjectToBooleanConverter}}">
+                            <dxe:DateEdit.StyleSettings>
+                                <dxe:DateEditNavigatorWithTimePickerStyleSettings/>
+                            </dxe:DateEdit.StyleSettings>
+                        </dxe:DateEdit>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="End: ">
+                        <dxe:DateEdit DateTime="{Binding SelectedTimeRegion.End}"
+                                      MaskUseAsDisplayFormat="True"
+                                      Mask="G"
+                                      IsEnabled="{Binding SelectedTimeRegion, Converter={dxmvvm:ObjectToBooleanConverter}}">
+                            <dxe:DateEdit.StyleSettings>
+                                <dxe:DateEditNavigatorWithTimePickerStyleSettings/>
+                            </dxe:DateEdit.StyleSettings>
+                        </dxe:DateEdit>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Resource Id: ">
+                        <dxe:ComboBoxEdit EditValue="{Binding SelectedTimeRegion.ResourceIds, UpdateSourceTrigger=PropertyChanged, Converter={local:ResourceNameToIdConverter}}"
+                                          ItemsSource="{Binding Resources}"
+                                          IsEnabled="{Binding SelectedTimeRegion, Converter={dxmvvm:ObjectToBooleanConverter}}">
+                            <dxmvvm:Interaction.Behaviors>
+                                <local:ComboBoxResourceSelectionBehavior/>
+                            </dxmvvm:Interaction.Behaviors>
+                            <dxe:ComboBoxEdit.StyleSettings>
+                                <dxe:CheckedComboBoxStyleSettings ShowSelectAllItem="False"/>
+                            </dxe:ComboBoxEdit.StyleSettings>
+                        </dxe:ComboBoxEdit>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Brush Name: ">
+                        <dxe:ComboBoxEdit EditValue="{Binding SelectedTimeRegion.BrushName, UpdateSourceTrigger=PropertyChanged}"
+                                          ItemsSource="{x:Static dxsch:DefaultBrushNames.TimeRegions}"
+                                          IsEnabled="{Binding SelectedTimeRegion, Converter={dxmvvm:ObjectToBooleanConverter}}"/>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem>
+                        <Button
+                            Content="Add New Time Region"
+                            Command="{Binding AddNewTimeRegionCommand}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem>
+                        <Button
+                            Content="Remove Selected Time Region"
+                            Command="{Binding RemoveSelectedTimeRegionCommand}"
+                            IsEnabled="{Binding SelectedTimeRegion, Converter={dxmvvm:ObjectToBooleanConverter}}" />
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutControl>
+            </GroupBox>
+        </dxlc:LayoutControl>
+        <!--#endregion Options-->
+        <dxsch:SchedulerControl x:Name="scheduler"
+                                CommandBarStyle="Ribbon"
+                                ShowBorder="False"
+                                GroupType="Resource"
+                                Start="{Binding Start, Mode=TwoWay}"
+                                AllowAppointmentConflicts="True">
+            <dxsch:DayView x:Name="dayView"
+                           ShowAllDayArea="True"
+                           DayCount="5">
+            </dxsch:DayView>
+            <dxsch:WorkWeekView />
+            <dxsch:WeekView />
+            <dxsch:MonthView x:Name="monthView" ViewMode="Standard"/>
+            <dxsch:TimelineView x:Name="timelineView" ViewMode="Standard"/>
+            <dxsch:SchedulerControl.DataSource>
+                <dxsch:DataSource
+                    AppointmentsSource="{Binding Appointments}"
+                    ResourcesSource="{Binding Calendars}"
+                    TimeRegionsSource="{Binding TimeRegions}"
+                    ResourceSharing="True">
+                    <dxsch:DataSource.AppointmentMappings>
+                        <dxsch:AppointmentMappings
+                            Id="Id"
+                            AllDay="AllDay"
+                            Type="AppointmentType"
+                            Start="Start"
+                            End="End"
+                            Subject="Subject"
+                            Description="Description"
+                            Location="Location"
+                            ResourceId="CalendarIds"
+                            RecurrenceInfo="RecurrenceInfo"
+                            StatusId="Status"
+                            LabelId="Label" />
+                    </dxsch:DataSource.AppointmentMappings>
+                    <dxsch:DataSource.ResourceMappings>
+                        <dxsch:ResourceMappings Id="Id" Caption="Name" Visible="IsVisible" Group="Group" />
+                    </dxsch:DataSource.ResourceMappings>
+                    <dxsch:DataSource.TimeRegionMappings>
+                        <dxsch:TimeRegionMappings
+                            Start="Start"
+                            End="End"
+                            BrushName="BrushName"
+                            ResourceId="ResourceIds"/>
+                    </dxsch:DataSource.TimeRegionMappings>
+                </dxsch:DataSource>
+            </dxsch:SchedulerControl.DataSource>
+        </dxsch:SchedulerControl>
+    </DockPanel>
+</local:SchedulingDemoModule>

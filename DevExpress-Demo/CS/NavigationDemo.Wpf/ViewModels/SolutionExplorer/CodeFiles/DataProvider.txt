@@ -1,0 +1,308 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using DevExpress.CrmDemo.Win.Helpers;
+using DevExpress.CrmDemo.Win.Controls;
+using System.Drawing;
+using System.Resources;
+using DevExpress.XtraScheduler;
+
+namespace DevExpress.CrmDemo.Win.Data {
+    public class DataProvider {
+        #region Constructor, Singleton handling
+
+        private static DataProvider instance;
+
+        private DataProvider() { }
+
+        public static DataProvider Instance {
+            get {
+                if(instance == null) {
+                    instance = new DataProvider();
+                    instance.InitializeData();
+                }
+
+                return instance;
+            }
+        }
+
+        #endregion
+
+        #region Properties
+
+        public BindingList<Opportunity> Opportunities { get; set; }
+        public BindingList<Opportunity> NewestOpportunities { get; set; }
+        public BindingList<Activity> Activities { get; set; }
+        public BindingList<KeywordStat> KeywordStats { get; set; }
+        public BindingList<TeamMember> TeamMembers { get; set; }
+        public GeneralStats GeneralStats { get; set; }
+
+        public CustomEventList Appointments { get; set; }
+        public BindingList<CustomAppointment> NewestAppointments { get; set; }
+
+        public IList<string> Technologies {
+            get {
+                return Opportunities
+                    .Select(o => o.Technology)
+                    .Where(t => !string.IsNullOrEmpty(t))
+                    .Distinct()
+                    .OrderBy(t => t)
+                    .ToList();
+            }
+        }
+
+        public IList<string> LeadSources {
+            get {
+                return Opportunities
+                    .Select(o => o.LeadSource)
+                    .Where(t => !string.IsNullOrEmpty(t))
+                    .Distinct()
+                    .OrderBy(t => t)
+                    .ToList();
+            }
+        }
+
+        public IList<string> OpportunityTypes {
+            get {
+                return Opportunities
+                    .Select(o => o.OpportunityType)
+                    .Where(t => !string.IsNullOrEmpty(t))
+                    .Distinct()
+                    .OrderBy(t => t)
+                    .ToList();
+            }
+        }
+
+        public IList<StageTuple> Stages {
+            get {
+                
+                return new[]
+                    {
+                        new StageTuple(Stage.Lead, "Lead"),
+                        new StageTuple(Stage.Qualification, "Qualification"),
+                        new StageTuple(Stage.NeedsAnalysis, "Needs Analysis"),
+                        new StageTuple(Stage.Proposed, "Proposal / Price Quote"),
+                        new StageTuple(Stage.Negotiation, "Negotiaion / Review"),
+                        new StageTuple(Stage.Closed, "Closed"),
+                        new StageTuple(Stage.Cancelled, "Cancelled")
+                    };
+            }
+        }
+
+        public class StageTuple {
+            Stage stage;
+            string name;
+            public StageTuple(Stage stage, string name) {
+                this.stage = stage;
+                this.name = name;
+            }
+            public Stage Stage { 
+                get { return stage; }
+                set { stage = value; }
+            }
+            public string Name {
+                get { return name; }
+                set { name = value; }
+            }
+        }
+        #endregion
+
+        #region Data setup and synchronization
+
+        private void InitializeData() {
+            TeamMembers = DataGenerator.GenerateTeamMembers();
+            Opportunities = DataGenerator.GenerateOpportunities();
+            Opportunities.ListChanged += new ListChangedEventHandler(Opportunities_ListChanged);
+            Appointments = DataGenerator.GenerateAppointments(TeamMembers);
+            Appointments.ListChanged += new ListChangedEventHandler(Appointments_ListChanged);
+
+            KeywordStats = DataGenerator.GenerateKeywordStats();
+
+            RefreshNewestOppsList();
+            RefreshGeneralStats();
+            RefreshNewAppointmentsList();
+        }
+
+        public Opportunity CreateNewOpportunity() {
+            Opportunity newOpp = new Opportunity() {
+                ID = Opportunities.Max(o => o.ID) + 1,
+                CreatedDate = DateTime.Now,
+                OwnerId = DataProvider.Instance.TeamMembers.Count > 0 ? DataProvider.Instance.TeamMembers.First().Id : 0,
+                Stage = Data.Stage.Lead
+            };
+
+            Opportunities.Add(newOpp);
+
+            return newOpp;
+        }
+
+        public Activity CreateNewActivity(Opportunity opp) {
+            Activity newActivity = new Activity() {
+                Id = Opportunities.SelectMany(o => o.Activities).Select(a => a.Id).Max() + 1,
+                CompletedDate = DateTime.Now,
+                OwnerId = opp.OwnerId
+            };
+
+            return newActivity;
+        }
+
+        void Opportunities_ListChanged(object sender, ListChangedEventArgs e) {
+            RefreshNewestOppsList();
+            RefreshGeneralStats();
+        }
+
+        void RefreshNewestOppsList() {
+            if(NewestOpportunities == null)
+                NewestOpportunities = new BindingList<Opportunity>();
+
+            foreach(Opportunity opp in Opportunities.OrderByDescending(o => o.CreatedDate).Take(3)) {
+                if(!NewestOpportunities.Contains(opp)) {
+                    if(NewestOpportunities.Count >= 3) {
+                        Opportunity oppToRemove = NewestOpportunities.OrderBy(o => o.CreatedDate).First();
+                        NewestOpportunities.Remove(oppToRemove);
+                    }
+
+                    NewestOpportunities.Add(opp);
+                }
+            }
+        }
+
+        void RefreshGeneralStats() {
+            if(GeneralStats == null)
+                GeneralStats = new GeneralStats();
+
+            int oppsClosingThisYear = Opportunities.Where(o => o.Stage == Stage.Closed && (o.CloseDate ?? DateTime.Now).Year == DateTime.Now.Year).Count();
+            int oppsCancelledThisYear = Opportunities.Where(o => o.Stage == Stage.Cancelled && (o.CloseDate ?? DateTime.Now).Year == DateTime.Now.Year).Count();
+
+            GeneralStats.YtdClosedCount = oppsClosingThisYear;
+
+            if(oppsClosingThisYear + oppsCancelledThisYear > 0)
+                GeneralStats.YtdPercentClosing = (decimal)oppsClosingThisYear / (decimal)(oppsClosingThisYear + oppsCancelledThisYear);
+            else
+                GeneralStats.YtdPercentClosing = 0;
+
+            GeneralStats.AvgContractSize = Opportunities.Average(o => o.CostSize ?? 0);
+            GeneralStats.AvgTeamSize = Opportunities.Average(o => o.TeamSize ?? 0);
+            GeneralStats.AvgWeeks = Opportunities.Average(o => o.Weeks ?? 0);
+
+            GeneralStats.TeamMemberOpenOppsCount0 = GetOpenOppsCount(0);
+            GeneralStats.TeamMemberOpenOppsCount1 = GetOpenOppsCount(1);
+            GeneralStats.TeamMemberOpenOppsCount2 = GetOpenOppsCount(2);
+            GeneralStats.TeamMemberOpenOppsCount3 = GetOpenOppsCount(3);
+        }
+
+        int GetOpenOppsCount(int teamMemberId) {
+            return Opportunities.Where(o => o.Stage != Stage.Closed && o.Stage != Stage.Cancelled && o.OwnerId == teamMemberId).Count();
+        }
+
+        void Appointments_ListChanged(object sender, ListChangedEventArgs e) {
+            RefreshNewAppointmentsList();
+        }
+
+        public void RefreshNewAppointmentsList() {
+            if(NewestAppointments == null)
+                NewestAppointments = new BindingList<CustomAppointment>();
+
+            List<CustomAppointment> newestAppts = Appointments.OfType<CustomAppointment>()
+                .Where(a => a.StartTime >= DateTime.Now)
+                .OrderBy(a => a.StartTime)
+                .Take(3)
+                .ToList();
+
+            NewestAppointments.Clear();
+
+            foreach(CustomAppointment appt in newestAppts)
+                NewestAppointments.Add(appt);
+        }
+
+        #endregion
+
+        #region Company, Category and Team stats - these are controlled by the month slider
+
+        public static void RefreshCompanyStats(DateTime startDate, DateTime endDate, CompanyStatList stats) {
+            var companyStatsQuery = from o in DataProvider.Instance.Opportunities
+                                    where o.CreatedDate >= startDate && o.CreatedDate <= endDate
+                                    group o by new { Date = new DateTime(o.CreatedDate.Year, o.CreatedDate.Month, 1) } into d
+                                    select new CompanyStat {
+                                        Date = d.Key.Date,
+                                        DateString = d.Key.Date.ToString("MMM").ToUpper() + " " + d.Key.Date.ToString("yyyy"),
+                                        Count = d.Count(),
+                                        Amount = d.Sum(opp => opp.CostSize ?? 0) / 1000
+                                    };
+
+            stats.Clear();
+
+            foreach(CompanyStat stat in companyStatsQuery.OrderBy(stat => stat.Date))
+                stats.Add(stat);
+        }
+
+        public static void RefreshCategoryStats(DateTime startDate, DateTime endDate, CategoryStatList stats) {
+            var categoryStatsQuery = from o in DataProvider.Instance.Opportunities
+                                     where o.CreatedDate >= startDate && o.CreatedDate <= endDate
+                                     group o by o.Technology into tech
+                                     select new CategoryStat {
+                                         Tech = tech.Key,
+                                         Count = tech.Count(),
+                                         Amount = tech.Sum(opp => opp.CostSize ?? 0) / 1000
+                                     };
+
+            int numCategoriesToShow = 5;
+
+            var categoryStats = categoryStatsQuery.OrderByDescending(c => c.Amount).ToList();
+
+            var topCategoryStats = categoryStats.Take(numCategoriesToShow).ToList();
+
+            CategoryStat otherStat = new CategoryStat() {
+                Tech = "Other",
+                Count = categoryStats.Skip(numCategoriesToShow).Count(),
+                Amount = categoryStats.Skip(numCategoriesToShow).Sum(c => c.Amount)
+            };
+
+            topCategoryStats.Add(otherStat);
+
+            stats.Clear();
+
+            foreach(CategoryStat stat in topCategoryStats)
+                stats.Add(stat);
+        }
+
+        public static void RefreshTeamStats(DateTime startDate, DateTime endDate, TeamMemberStatList stats, TeamMemberStatDetailList statDetails) {
+            var teamMemberStatDetailsQuery = from o in DataProvider.Instance.Opportunities
+                                             where o.CreatedDate >= startDate && o.CreatedDate <= endDate
+                                             group o by new { Date = new DateTime(o.CreatedDate.Year, o.CreatedDate.Month, 1), OwnerId = o.OwnerId } into d
+                                             select new TeamMemberStatDetail {
+                                                 TeamMemberId = d.Key.OwnerId,
+                                                 Date = d.Key.Date,
+                                                 DateString = d.Key.Date.ToString("MMM").ToUpper() + " " + d.Key.Date.ToString("yyyy"),
+                                                 Amount = d.Sum(opp => opp.CostSize ?? 0)
+                                             };
+
+            var teamMemberStatDetails = teamMemberStatDetailsQuery.OrderBy(stat => stat.Date).ToList();
+
+            statDetails.Clear();
+
+            foreach(TeamMemberStatDetail detail in teamMemberStatDetails)
+                statDetails.Add(detail);
+
+            long teamTotal = statDetails.Sum(s => s.Amount);
+
+            var teamMemberStatQuery = from s in statDetails
+                                      group s by s.TeamMemberId into g
+                                      select new TeamMemberStat {
+                                          TeamMemberId = g.Key,
+                                          Percent = teamTotal <= 0 ? 0 : (int)(((double)g.Sum(a => a.Amount) / (double)teamTotal) * 100)
+                                      };
+
+            stats.Clear();
+
+            foreach(TeamMemberStat stat in teamMemberStatQuery.ToList())
+                stats.Add(stat);
+        }
+
+        #endregion
+    }
+}

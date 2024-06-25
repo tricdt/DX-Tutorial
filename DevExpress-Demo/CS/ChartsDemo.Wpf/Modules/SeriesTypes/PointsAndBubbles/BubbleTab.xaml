@@ -1,0 +1,298 @@
+﻿<local:TabItemModule
+    x:Class="ChartsDemo.BubbleTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ChartsDemo"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800">
+    <!--#region Resources-->
+    <local:TabItemModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Modules/SeriesTypes/CustomMarkerModel.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dxmvvm:BooleanNegationConverter
+                x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </local:TabItemModule.Resources>
+    <!--#endregion-->
+
+    <!--#region Options-->
+    <local:TabItemModule.Options>
+        <StackPanel
+            Style="{StaticResource optionsRootStackPanelStyle}">
+            <dxe:CheckEdit
+                Name="cheShowLabels"
+                Content="Show Labels"
+                Margin="0,0,0,1"
+                IsChecked="False" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        Width="Auto" />
+                    <ColumnDefinition
+                        MinWidth="73"
+                        Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Text="Position:"
+                    Margin="0,2,3,2" />
+                <dxe:ComboBoxEdit
+                    Name="chePosition"
+                    Grid.Column="1"
+                    Margin="3,2,0,2"
+                    SelectedIndex="1"
+                    IsEnabled="{Binding RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}, Path=Children[0].IsChecked}"
+                    ItemsSource="{dxe:EnumItemsSource EnumType=dxc:Bubble2DLabelPosition}" />
+            </Grid>
+            <GroupBox
+                Header="Transparency"
+                Margin="0,3,0,0">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Text="0"
+                            HorizontalAlignment="Left" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="0.5"
+                            HorizontalAlignment="Center" />
+                        <TextBlock
+                            Grid.Column="2"
+                            Text="1"
+                            HorizontalAlignment="Right" />
+                    </Grid>
+                    <dxe:TrackBarEdit
+                        Name="tbeTransparency"
+                        Value="0"
+                        Minimum="0"
+                        Maximum="1"
+                        SmallStep="0.01"
+                        LargeStep="0.1"
+                        TickPlacement="None" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox
+                Header="Max Size"
+                Margin="0,5,0,0">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Text="2.5"
+                            HorizontalAlignment="Left" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="3.75"
+                            HorizontalAlignment="Center" />
+                        <TextBlock
+                            Grid.Column="2"
+                            Text="5"
+                            HorizontalAlignment="Right" />
+                    </Grid>
+                    <dxe:TrackBarEdit
+                        Name="tbeMaxSize"
+                        Minimum="2.5"
+                        Maximum="5"
+                        Value="2.7"
+                        SmallStep="0.01"
+                        LargeStep="0.25"
+                        TickPlacement="None" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox
+                Header="Min Size"
+                Margin="0,5,0,0">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Text="0.1"
+                            HorizontalAlignment="Left" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="1.25"
+                            HorizontalAlignment="Center" />
+                        <TextBlock
+                            Grid.Column="2"
+                            Text="2.4"
+                            HorizontalAlignment="Right" />
+                    </Grid>
+                    <dxe:TrackBarEdit
+                        Name="tbeMinSize"
+                        Minimum="0.1"
+                        Maximum="2.4"
+                        Value="0.8"
+                        SmallStep="0.01"
+                        LargeStep="0.25"
+                        TickPlacement="None" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox
+                Header="Marker Kind"
+                Margin="0,5,0,0">
+                <dxe:ListBoxEdit
+                    Name="lbeMarkerKind"
+                    DisplayMember="ModelName"
+                    SelectedItem="{x:Reference ringMarkerModel}">
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                    <dxe:ListBoxEdit.Items>
+                        <dxc:BorderlessSimpleMarker2DModel />
+                        <dxc:SimpleMarker2DModel />
+                        <dxc:CircleMarker2DModel />
+                        <dxc:CrossMarker2DModel />
+                        <dxc:DollarMarker2DModel />
+                        <dxc:PolygonMarker2DModel />
+                        <dxc:RingMarker2DModel
+                            x:Name="ringMarkerModel" />
+                        <dxc:SquareMarker2DModel />
+                        <dxc:StarMarker2DModel />
+                        <dxc:TriangleMarker2DModel />
+                        <dxc:InvertedTriangleMarker2DModel />
+                        <dxc:DiamondMarker2DModel />
+                        <dxc:PlusMarker2DModel />
+                        <dxc:PentagonMarker2DModel />
+                        <dxc:CustomMarker2DModel
+                            PointTemplate="{StaticResource customMarkerPointTemplate}" />
+                    </dxe:ListBoxEdit.Items>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+        </StackPanel>
+    </local:TabItemModule.Options>
+    <!--#endregion-->
+
+    <DockPanel
+        Loaded="{DXEvent '@e(chart).Animate()'}">
+
+        <!--#region ChartsRibbon-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}" />
+        <!--#endregion-->
+
+        <dxc:ChartControl
+            Name="chart"
+            AnimationMode="OnLoad"
+            CrosshairEnabled="False"
+            ToolTipEnabled="{Binding ElementName=cheShowLabels, Path=IsChecked, Converter={StaticResource InvertedBoolConverter}}">
+            <dxc:ChartControl.Diagram>
+                <dxc:XYDiagram2D>
+                    <!--#region Axes-->
+                    <dxc:XYDiagram2D.AxisX>
+                        <dxc:AxisX2D>
+                            <dxc:AxisX2D.DateTimeScaleOptions>
+                                <dxc:ManualDateTimeScaleOptions
+                                    MeasureUnit="Year" />
+                            </dxc:AxisX2D.DateTimeScaleOptions>
+                        </dxc:AxisX2D>
+                    </dxc:XYDiagram2D.AxisX>
+                    <dxc:XYDiagram2D.AxisY>
+                        <dxc:AxisY2D>
+                            <dxc:AxisY2D.Label>
+                                <dxc:AxisLabel
+                                    TextPattern="{}${V}M" />
+                            </dxc:AxisY2D.Label>
+                            <dxc:AxisY2D.Title>
+                                <dxc:AxisTitle
+                                    Content="Production Budget" />
+                            </dxc:AxisY2D.Title>
+                            <dxc:AxisY2D.WholeRange>
+                                <dxc:Range
+                                    dxc:AxisY2D.AlwaysShowZeroLevel="False" />
+                            </dxc:AxisY2D.WholeRange>
+                        </dxc:AxisY2D>
+                    </dxc:XYDiagram2D.AxisY>
+                    <!--#endregion-->
+                    <dxc:XYDiagram2D.Series>
+                        <dxc:BubbleSeries2D
+                            DisplayName="Top 10 Films by Worldwide Grosses"
+                            ColorEach="True"
+                            AutoSize="False"
+                            MinSize="{Binding ElementName=tbeMinSize, Path=Value}"
+                            MaxSize="{Binding ElementName=tbeMaxSize, Path=Value}"
+                            Transparency="{Binding ElementName=tbeTransparency, Path=Value}"
+                            MarkerModel="{Binding ElementName=lbeMarkerKind, Path=SelectedItem}"
+                            AnimationAutoStartMode="SetStartState"
+                            DataSource="{Binding Data}"
+                            ArgumentDataMember="Year"
+                            ValueDataMember="Budget"
+                            WeightDataMember="Grosses"
+                            ToolTipPointPattern="Production budget: ${V}M&#xA;Worldwide grosses: ${W}B"
+                            LabelsVisibility="{Binding ElementName=cheShowLabels, Path=IsChecked}"
+                            LegendTextPattern="{}{Title}">
+                            <dxc:BubbleSeries2D.DataContext>
+                                <local:HighestGrossingFilmsByYear />
+                            </dxc:BubbleSeries2D.DataContext>
+                            <dxc:BubbleSeries2D.PointAnimation>
+                                <dxc:Marker2DWidenAnimation
+                                    PointOrder="Random" />
+                            </dxc:BubbleSeries2D.PointAnimation>
+                            <dxc:BubbleSeries2D.Label>
+                                <dxc:SeriesLabel
+                                    ConnectorVisible="False"
+                                    dxc:MarkerSeries2D.Angle="90"
+                                    Indent="2"
+                                    dxc:BubbleSeries2D.LabelPosition="{Binding ElementName=chePosition, Path=EditValue}"
+                                    TextPattern="Grosses: ${W}B" />
+                            </dxc:BubbleSeries2D.Label>
+                        </dxc:BubbleSeries2D>
+                    </dxc:XYDiagram2D.Series>
+                </dxc:XYDiagram2D>
+            </dxc:ChartControl.Diagram>
+            <!--#region Titles-->
+            <dxc:ChartControl.Titles>
+                <dxc:Title
+                    Dock="Top"
+                    HorizontalAlignment="Center"
+                    Content="Highest-Grossing Films by Year" />
+                <dxc:Title
+                    Dock="Bottom"
+                    HorizontalAlignment="Right"
+                    FontSize="12"
+                    Foreground="Silver"
+                    Margin="0,10,0,0"
+                    Content="From www.boxofficemojo.com" />
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+            <!--#region Legend-->
+            <dxc:ChartControl.Legend>
+                <dxc:Legend
+                    Visible="True"
+                    HorizontalPosition="Center"
+                    VerticalPosition="BottomOutside"
+                    Orientation="Horizontal"
+                    MaxWidth="800" />
+            </dxc:ChartControl.Legend>
+            <!--#endregion-->
+        </dxc:ChartControl>
+
+    </DockPanel>
+</local:TabItemModule>

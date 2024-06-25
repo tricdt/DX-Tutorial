@@ -1,0 +1,75 @@
+﻿<demo:ControlsDemoModule x:Class="ControlsDemo.Wizard.WpfTour.MainView"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+                         xmlns:dxco="http://schemas.devexpress.com/winfx/2008/xaml/controls"
+                         xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                         xmlns:local="clr-namespace:ControlsDemo.Wizard.WpfTour"
+                         xmlns:demo="clr-namespace:ControlsDemo"
+                         DataContext="{dxmvvm:ViewModelSource local:MainViewModel}">
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DialogService>
+            <dx:DialogService.ViewTemplate>
+                <DataTemplate>
+                    <dxco:Wizard Width="700"
+                                 Height="400"
+                                 ItemsSource="{Binding Items}"
+                                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                                 AnimationType="SlideHorizontal"
+                                 DefaultButton="NextThenFinish">
+                        <dxco:Wizard.Resources>
+                            <ResourceDictionary>
+                                <ResourceDictionary.MergedDictionaries>
+                                    <ResourceDictionary Source="/ControlsDemo;component/Modules/Wizard.WpfTour/Templates.xaml" />
+                                </ResourceDictionary.MergedDictionaries>
+                            </ResourceDictionary>
+                        </dxco:Wizard.Resources>
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxco:WizardService />
+                            <dx:DXMessageBoxService />
+                        </dxmvvm:Interaction.Behaviors>
+                        <dxco:Wizard.ItemContainerStyle>
+                            <Style TargetType="dxco:WizardPage">
+                                <Setter Property="AllowBack" Value="{Binding CanBack}" />
+                                <Setter Property="AllowCancel" Value="{Binding CanCancel}" />
+                                <Setter Property="AllowFinish" Value="{Binding CanFinish}" />
+                                <Setter Property="AllowNext" Value="{Binding CanNext}" />
+                                <Setter Property="Header" Value="{x:Null}" />
+                                <Setter Property="NextPage" Value="{Binding GoToPage}" />
+                                <Setter Property="ShowBack" Value="{Binding ShowBack}" />
+                                <Setter Property="ShowCancel" Value="{Binding ShowCancel}" />
+                                <Setter Property="ShowFinish" Value="{Binding ShowFinish}" />
+                                <Setter Property="ShowNext" Value="{Binding ShowNext}" />
+                            </Style>
+                        </dxco:Wizard.ItemContainerStyle>
+                    </dxco:Wizard>
+                </DataTemplate>
+            </dx:DialogService.ViewTemplate>
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="dx:ThemedWindow">
+                    <Setter Property="ResizeMode" Value="NoResize" />
+                    <Setter Property="SizeToContent" Value="WidthAndHeight" />
+                    <Setter Property="dxi:ThemedWindowOptions.UseLegacyDialogFooter" Value="True" />
+                    <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <ContentControl>
+                                    <dxmvvm:EventToCommand EventName="Closing" Command="{Binding CancelCommand}" PassEventArgsToCommand="True" />
+                                </ContentControl>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </dx:DialogService.DialogStyle>
+        </dx:DialogService>
+    </dxmvvm:Interaction.Behaviors>
+    <Grid>
+        <Button Content="Launch Wizard"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Command="{Binding LaunchWizardCommand}"
+                Height="50"
+                Width="300" />
+    </Grid>
+</demo:ControlsDemoModule>

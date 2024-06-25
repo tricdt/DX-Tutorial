@@ -1,0 +1,85 @@
+﻿<local:GridDemoModule x:Class="GridDemo.GridCellMultiColumnLookupEditor"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800">
+    <local:GridDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GridDemo;component/ModuleResources/GridCellMultiColumnLookupEditorResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dxdb:NWindDataLoader x:Key="NWindDataLoader" />
+        </ResourceDictionary>
+    </local:GridDemoModule.Resources>
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <GroupBox Header="Properties" Margin="12,5,12,12" MinWidth="250" VerticalAlignment="Top">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <dxe:CheckEdit Content="Show Size Grip" Grid.ColumnSpan="2" Grid.Row="0" Margin="0,0,0,4" Name="chkShowSizeGrip" IsChecked="True" />
+                    <dxe:CheckEdit Content="Immediate Popup" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,4" Name="chkImmediatePopup" IsChecked="True" />
+                    <dxe:CheckEdit Content="Allow Auto Complete" Grid.ColumnSpan="2" Grid.Row="2" Margin="0,0,0,4" Name="chkAllowAutoComplete" IsChecked="True" />
+                </Grid>
+            </GroupBox>
+        </ScrollViewer>
+        <dxg:GridControl Name="grid" ItemsSource="{Binding Orders, Source={StaticResource NWindDataLoader}}" ShowBorder="False">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="OrderID" Header="ID" Width="*" MinWidth="30" />
+                <dxg:GridColumn FieldName="CustomerID" Header="Customer" MinWidth="50" Width="4*" HeaderTemplate="{StaticResource headerTemplate}">
+                    <dxg:GridColumn.EditSettings>
+                        <dxg:LookUpEditSettings ValueMember="CustomerID"
+                                                DisplayMember="CompanyName"
+                                                ItemsSource="{Binding Customers, Source={StaticResource NWindDataLoader}}"
+                                                PopupContentTemplate="{StaticResource customerGridTemplate}"
+                                                AutoPopulateColumns="False"
+                                                IsPopupAutoWidth="False"
+                                                AutoComplete="{Binding Path=IsChecked, ElementName=chkAllowAutoComplete, Mode=TwoWay}"
+                                                ImmediatePopup="{Binding Path=IsChecked, ElementName=chkImmediatePopup, Mode=TwoWay}"
+                                                ShowSizeGrip="{Binding Path=IsChecked, ElementName=chkShowSizeGrip}" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="EmployeeID" Header="Employee" MinWidth="50" Width="3*" HeaderTemplate="{StaticResource headerTemplate}">
+                    <dxg:GridColumn.EditSettings>
+                        <dxg:LookUpEditSettings ValueMember="EmployeeID"
+                                                DisplayMember="LastName"
+                                                ItemsSource="{Binding Employees, Source={StaticResource NWindDataLoader}}"
+                                                PopupContentTemplate="{StaticResource employeeGridTemplate}"
+                                                AutoPopulateColumns="False"
+                                                IsPopupAutoWidth="False"
+                                                AutoComplete="{Binding Path=IsChecked, ElementName=chkAllowAutoComplete, Mode=TwoWay}"
+                                                ImmediatePopup="{Binding Path=IsChecked, ElementName=chkImmediatePopup, Mode=TwoWay}"
+                                                ShowSizeGrip="{Binding Path=IsChecked, ElementName=chkShowSizeGrip}" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="OrderDate" MinWidth="30" Width="2*" />
+                <dxg:GridColumn FieldName="RequiredDate" MinWidth="30" Width="2*" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView Name="view"/>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

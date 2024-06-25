@@ -1,0 +1,48 @@
+﻿using System.ComponentModel;
+using System;
+using DevExpress.CrmDemo.Win.Helpers;
+
+namespace DevExpress.CrmDemo.Win.Data {
+    public enum Stage {
+        Lead, Qualification, NeedsAnalysis, Proposed, Negotiation, Closed, Cancelled
+    }
+
+    public class Opportunity {
+
+        #region Public members
+        public int ID {
+            get { return _id; }
+            set {
+                _id = value;
+                InvokePropertyChanged("ID");
+            }
+        }
+
+        public string Name {
+            get { return _name; }
+            set {
+                _name = value;
+                InvokePropertyChanged("Name");
+            }
+        }
+
+        public string AccountName {
+            get { return _accountName; }
+            set {
+                _accountName = value;
+                InvokePropertyChanged("AccountName");
+            }
+        }     
+
+        #endregion
+
+        #region Private data
+        private int _id;
+        private string _name;
+        private string _accountName;     
+        #endregion
+
+    }
+
+    public class OpportunityList : BindingList<Opportunity> { }
+}

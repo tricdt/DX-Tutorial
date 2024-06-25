@@ -1,0 +1,77 @@
+﻿<local:GridDemoModule x:Class="GridDemo.Validation"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800"
+                      DataContext="{dxmvvm:ViewModelSource Type=local:ValidationViewModel}">
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" />
+        <dxlc:LayoutControl Padding="0">
+            <dxlc:LayoutGroup Orientation="Vertical">
+                <dxg:GridControl Name="grid"
+                                 ItemsSource="{Binding SelectedCollectionInfo.Collection}"
+                                 AutoGenerateColumns="None"
+                                 EnableSmartColumnsGeneration="True"
+                                 ShowBorder="False"
+                                 dxe:ValidationService.AllowAccessibilityAlerts="True">
+                    <dxg:GridControl.Bands>
+                        <dxg:GridControlBand Header="Name and address">
+                            <dxg:GridColumn FieldName="FirstName" IsSmart="True" Width="80" />
+                            <dxg:GridColumn FieldName="LastName" IsSmart="True" Width="80" />
+                        </dxg:GridControlBand>
+                        <dxg:GridControlBand Header="Job">
+                            <dxg:GridColumn FieldName="Title" IsSmart="True" Width="150" />
+                            <dxg:GridColumn FieldName="HireDate" IsSmart="True" Width="100" />
+                            <dxg:GridColumn FieldName="Salary" IsSmart="True" Width="80" />
+                            <dxg:GridColumn FieldName="CreditCard" IsSmart="True" Width="150" />
+                        </dxg:GridControlBand>
+                        <dxg:GridControlBand Header="Contact">
+                            <dxg:GridColumn FieldName="Phone" IsSmart="True" />
+                            <dxg:GridColumn FieldName="Email" IsSmart="True" Width="200" />
+                            <dxg:GridColumn FieldName="Facebook" IsSmart="True" Width="250" />
+                        </dxg:GridControlBand>
+                        <dxg:GridControlBand Header="Address">
+                            <dxg:GridColumn FieldName="Address" IsSmart="True" Width="150" />
+                            <dxg:GridColumn FieldName="ZipCode" IsSmart="True" Width="80" />
+                        </dxg:GridControlBand>
+                    </dxg:GridControl.Bands>
+                    <dxg:GridControl.View>
+                        <dxg:TableView ShowGroupPanel="False" Name="view" AllowScrollAnimation="True"/>
+                    </dxg:GridControl.View>
+                </dxg:GridControl>
+
+                <StackPanel Orientation="Horizontal" Margin="12,14,12,0" VerticalAlignment="Top">
+                    <dxe:CheckEdit Content="Allow commit on vallidation attribute errors"
+                                   IsChecked="{Binding AllowCommitOnValidationAttributeError, ElementName=view, Mode=TwoWay}"
+                                   Margin="0,0,12,0" />
+                    <dxe:CheckEdit Content="Show validation attribute errors"
+                                   IsChecked="{Binding ShowValidationAttributeErrors, ElementName=view, Mode=TwoWay}"
+                                   Margin="0,0,0,0" />
+                </StackPanel>
+
+                <dxlc:LayoutItem Label="Collection item type:" Margin="12,0,12,0">
+                    <dxe:ComboBoxEdit x:Name="comboBoxItems"
+                                      ItemsSource="{Binding Items}"
+                                      SelectedItem="{Binding SelectedCollectionInfo, Mode=TwoWay}"
+                                      DisplayMember="Description"
+                                      SelectedIndex="0"
+                                      IsTextEditable="False" />
+                </dxlc:LayoutItem>
+                <dxdb:CodeViewer Margin="12,4,12,12"
+                                 CodePath="ModuleResources/Validation"
+                                 CurrentItem="{Binding SelectedCollectionInfo.Collection[0]}"
+                                 BorderBrush="{DynamicResource {dxt:BrushesThemeKey ResourceKey=PanelBorder}}" />
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutControl>
+    </DockPanel>
+</local:GridDemoModule>

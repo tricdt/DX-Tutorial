@@ -1,0 +1,15 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ProductsDemo">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/DevExpress.ProductsDemo.Wpf;component/Themes/DashboardGroup.xaml" />
+        <ResourceDictionary Source="/DevExpress.ProductsDemo.Wpf;component/Themes/Controls/PhotoGallery/PhotoGalleryButton.xaml" />
+        <ResourceDictionary Source="/DevExpress.ProductsDemo.Wpf;component/Themes/Controls/PhotoGallery/PhotoGalleryControl.xaml" />
+        <ResourceDictionary Source="/DevExpress.ProductsDemo.Wpf;component/Themes/Controls/PhotoGallery/PhotoGalleryItemControl.xaml" />
+        <ResourceDictionary Source="/DevExpress.ProductsDemo.Wpf;component/Themes/Controls/PhotoGallery/PlaceInfoControl.xaml" />
+        <ResourceDictionary Source="/DevExpress.ProductsDemo.Wpf;component/Themes/Controls/PhotoGallery/CityInformationControl.xaml" />
+        <ResourceDictionary Source="/DevExpress.ProductsDemo.Wpf;component/Themes/Controls/PhotoGallery/LabelControl.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

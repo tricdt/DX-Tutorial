@@ -1,0 +1,74 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:local="clr-namespace:LayoutControlDemo">
+    <Style TargetType="local:SampleLayoutItem">
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="MinWidth" Value="20"/>
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:SampleLayoutItem">
+                    <dx:Container>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MouseOverElement" Storyboard.TargetProperty="Visibility" Duration="0">
+                                            <ObjectAnimationUsingKeyFrames.KeyFrames>
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames.KeyFrames>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualState x:Name="Unselected"/>
+                                <VisualState x:Name="Selected">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SelectionElement" Storyboard.TargetProperty="Visibility" Duration="0">
+                                            <ObjectAnimationUsingKeyFrames.KeyFrames>
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames.KeyFrames>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Rectangle x:Name="MouseOverElement" Margin="-3" RadiusX="4" RadiusY="4" Visibility="Collapsed"
+                                   StrokeThickness="2" Stroke="Red" StrokeDashArray="3 1"/>
+                        <dxlc:GroupBox x:Name="MainElement" Header="{TemplateBinding Caption}" State="Minimized" MinimizeElementVisibility="Collapsed">
+                            <dxlc:GroupBox.Resources>
+                                <Style TargetType="dxlc:LayoutControl">
+                                    <Setter Property="DragScrolling" Value="False" />
+                                </Style>
+                            </dxlc:GroupBox.Resources>
+                            <dxlc:GroupBox.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" Margin="2,6" TextAlignment="Center"/>
+                                </DataTemplate>
+                            </dxlc:GroupBox.HeaderTemplate>
+                        </dxlc:GroupBox>
+                        <Path Margin="5" Width="15" Height="8" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill" Fill="#FF828282"
+                              dx:FrameworkElementHelper.IsVisible="{Binding Path=(dxlc:FlowLayoutControl.IsFlowBreak), RelativeSource={RelativeSource TemplatedParent}}"
+                              Data="F1 M 1280,737L 1280,740L 1274,740L 1274,738L 1268,741L 1268,742L 1274,745L 1274,743L 1283,743L 1283,737L 1280,737 Z "/>
+                        <Border x:Name="SelectionElement" CornerRadius="{Binding ElementName=MainElement, Path=CornerRadius}"
+                                Background="Red" Opacity="0.2" Visibility="Collapsed"/>
+                    </dx:Container>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

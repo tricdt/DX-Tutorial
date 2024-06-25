@@ -1,0 +1,279 @@
+﻿<local:TreeListDemoModule x:Class="TreeListDemo.NodeChecking"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                          xmlns:local="clr-namespace:TreeListDemo"
+                          mc:Ignorable="d"
+                          d:DesignHeight="400"
+                          d:DesignWidth="800">
+
+    <local:TreeListDemoModule.Resources>
+        <dxdb:EmployeesData x:Key="employeesData" />
+        <local:FileSystem x:Key="fileSystem" />
+        <local:FileSystemImageSelector x:Key="FileSystemImageSelector" />
+        <local:WaitIndicatorVisibilityConverter x:Key="DisplaySizeVisibilityConverter" />
+        <dx:BoolToVisibilityInverseConverter x:Key="BoolToVisibilityInverseConverter" />
+        <Style TargetType="dxg:FixedTotalSummaryControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="dxg:FixedTotalSummaryControl">
+                        <dxe:TextEdit EditMode="InplaceInactive"
+                                      EditValue="{Binding Path=DataContext.TotalSize, ElementName=treeList}"
+                                      HorizontalAlignment="Right"
+                                      DisplayFormatString="Total size of checked files: {0}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="loadingGrid" TargetType="{x:Type ProgressBar}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5" />
+                                <SkewTransform CenterY="0.5" CenterX="0.5" />
+                                <RotateTransform CenterY="0.5" CenterX="0.5" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FFFFFFFF" Offset="0.25" />
+                        <GradientStop Color="#19FFFFFF" Offset="0.6" />
+                        <GradientStop Color="#19FFFFFF" Offset="1" />
+                        <GradientStop Color="#FFFFFFFF" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <ControlTemplate.Resources>
+                            <Storyboard RepeatBehavior="Forever" x:Key="Anima">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="p90">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.75" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.5" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.35" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0.15" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.1" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0.05" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="p135">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.75" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.5" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.35" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.15" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0.1" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.05" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="1" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="p180">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.5" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.35" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.15" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.1" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0.05" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0.75" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="p225">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.35" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.15" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.1" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.05" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0.75" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0.5" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="p270">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.15" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.1" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.05" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.75" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0.5" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0.35" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="p315">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.15" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.1" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.05" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.75" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0.5" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0.35" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="p0">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.05" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.75" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0.5" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.35" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0.15" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0.1" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="p45">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.75" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.5" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0.35" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.15" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0.1" />
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0.05" />
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Grid Height="18" Width="18">
+                            <Path x:Name="p135"
+                                  Stretch="Fill"
+                                  Fill="{TemplateBinding Foreground}"
+                                  Data="F1 M 209,345C 210.105,345 211,345.895 211,347C 211,348.104 210.105,349 209,349C 207.895,349 207,348.104 207,347C 207,345.895 207.895,345 209,345 Z "
+                                  HorizontalAlignment="Left"
+                                  Height="4"
+                                  Margin="2,2,0,0"
+                                  VerticalAlignment="Top"
+                                  Width="4"
+                                  Opacity="0" />
+                            <Path x:Name="p180"
+                                  Stretch="Fill"
+                                  Fill="{TemplateBinding Foreground}"
+                                  Data="F1 M 207,350C 208.105,350 209,350.896 209,352C 209,353.105 208.105,354 207,354C 205.895,354 205,353.105 205,352C 205,350.896 205.895,350 207,350 Z "
+                                  HorizontalAlignment="Left"
+                                  Height="Auto"
+                                  Margin="0,7"
+                                  VerticalAlignment="Stretch"
+                                  Width="4"
+                                  Opacity="0" />
+                            <Path x:Name="p225"
+                                  Stretch="Fill"
+                                  Fill="{TemplateBinding Foreground}"
+                                  Data="F1 M 209,355C 210.105,355 211,355.896 211,357C 211,358.105 210.105,359 209,359C 207.895,359 207,358.105 207,357C 207,355.896 207.895,355 209,355 Z "
+                                  HorizontalAlignment="Left"
+                                  Height="4"
+                                  Margin="2,0,0,2"
+                                  VerticalAlignment="Bottom"
+                                  Width="4"
+                                  Opacity="0" />
+                            <Path x:Name="p270"
+                                  Stretch="Fill"
+                                  Fill="{TemplateBinding Foreground}"
+                                  Data="F1 M 214,357C 215.105,357 216,357.895 216,359C 216,360.104 215.105,361 214,361C 212.895,361 212,360.104 212,359C 212,357.895 212.895,357 214,357 Z "
+                                  HorizontalAlignment="Stretch"
+                                  Height="4"
+                                  Margin="7,0"
+                                  VerticalAlignment="Bottom"
+                                  Width="Auto"
+                                  Opacity="0" />
+                            <Path x:Name="p315"
+                                  Stretch="Fill"
+                                  Fill="{TemplateBinding Foreground}"
+                                  Data="F1 M 219,355C 220.105,355 221,355.895 221,357C 221,358.104 220.105,359 219,359C 217.895,359 217,358.104 217,357C 217,355.895 217.895,355 219,355 Z "
+                                  HorizontalAlignment="Right"
+                                  Height="4"
+                                  Margin="0,0,2,2"
+                                  VerticalAlignment="Bottom"
+                                  Width="4"
+                                  Opacity="0" />
+                            <Path x:Name="p0"
+                                  Stretch="Fill"
+                                  Fill="{TemplateBinding Foreground}"
+                                  Data="F1 M 221,350C 222.105,350 223,350.896 223,352C 223,353.105 222.105,354 221,354C 219.895,354 219,353.105 219,352C 219,350.896 219.895,350 221,350 Z "
+                                  HorizontalAlignment="Right"
+                                  Height="Auto"
+                                  Margin="0,7"
+                                  VerticalAlignment="Stretch"
+                                  Width="4"
+                                  Opacity="0" />
+                            <Path x:Name="p45"
+                                  Stretch="Fill"
+                                  Fill="{TemplateBinding Foreground}"
+                                  Data="F1 M 219,345C 220.105,345 221,345.896 221,347C 221,348.105 220.105,349 219,349C 217.895,349 217,348.105 217,347C 217,345.896 217.895,345 219,345 Z "
+                                  HorizontalAlignment="Right"
+                                  Height="4"
+                                  Margin="0,2,2,0"
+                                  VerticalAlignment="Top"
+                                  Width="4"
+                                  Opacity="0" />
+                            <Path x:Name="p90"
+                                  Stretch="Fill"
+                                  Fill="{TemplateBinding Foreground}"
+                                  Data="F1 M 214,343C 215.105,343 216,343.895 216,345C 216,346.105 215.105,347 214,347C 212.895,347 212,346.105 212,345C 212,343.895 212.895,343 214,343 Z "
+                                  HorizontalAlignment="Stretch"
+                                  Height="4"
+                                  Margin="7,0"
+                                  VerticalAlignment="Top"
+                                  Width="Auto"
+                                  Opacity="0" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsIndeterminate" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource Anima}" />
+                                </Trigger.EnterActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="sizeCellTemplate">
+            <Grid>
+                <dxe:TextEdit x:Name="PART_Editor" HorizontalAlignment="Center">
+                    <dxe:TextEdit.Visibility>
+                        <Binding Path="Text" Converter="{StaticResource DisplaySizeVisibilityConverter}" RelativeSource="{RelativeSource Self}" />
+                    </dxe:TextEdit.Visibility>
+                </dxe:TextEdit>
+                <ProgressBar HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             Style="{StaticResource loadingGrid}"
+                             Foreground="{Binding Foreground, ElementName=PART_Editor}"
+                             Background="{x:Null}"
+                             IsIndeterminate="True"
+                             Visibility="{Binding IsVisible, ElementName=PART_Editor, Converter={StaticResource BoolToVisibilityInverseConverter}}" />
+            </Grid>
+        </DataTemplate>
+    </local:TreeListDemoModule.Resources>
+
+    <DockPanel DataContext="{Binding Source={StaticResource fileSystem}}">
+        <local:TreeListDemoRibbon DockPanel.Dock="Top" ExportTreeList="{x:Reference treeList}" />
+        <dxg:TreeListControl x:Name="treeList" ItemsSource="{Binding Path=Source}">
+            <dxg:TreeListControl.Columns>
+                <dxg:TreeListColumn FieldName="Name" AllowSorting="True" Width="8*" />
+                <dxg:TreeListColumn FieldName="ItemType" Header="Type" Width="*" AllowSorting="True" />
+                <dxg:TreeListColumn FieldName="Size.DisplaySize" Header="Size" Width="*" CellTemplate="{StaticResource sizeCellTemplate}" />
+                <dxg:TreeListColumn FieldName="AffectsTotalSize" Visible="False"  />
+                <dxg:TreeListColumn FieldName="Checked" Visible="False" />
+            </dxg:TreeListControl.Columns>
+            <dxg:TreeListControl.View>
+                <dxg:TreeListView x:Name="view"
+                                  AllowEditing="False"
+                                  AllowColumnFiltering="False"
+                                  TreeDerivationMode="ChildNodesSelector"
+                                  ChildNodesSelector="{Binding}"
+                                  ShowCheckboxes="True"
+                                  CheckBoxFieldName="Checked"
+                                  AllowRecursiveNodeChecking="True"
+                                  FetchSublevelChildrenOnExpand="False"
+                                  ShowNodeImages="True"
+                                  NodeImageSelector="{StaticResource FileSystemImageSelector}"
+                                  ShowFixedTotalSummary="True"
+                                  IsTotalSummaryMenuEnabled="False"
+                                  NodeChanged="view_NodeChanged"
+                                  PrintNodeImages="True" />
+            </dxg:TreeListControl.View>
+        </dxg:TreeListControl>
+    </DockPanel>
+</local:TreeListDemoModule>

@@ -1,0 +1,4 @@
+DevExpress.Xpf.Carousel.v{DXVersion}
+DevExpress.Xpf.TypedStyles.v{DXVersion}
+DevExpress.Xpf.DocumentViewer.v{DXVersion}.Core
+DevExpress.Xpf.PdfViewer.v{DXVersion}

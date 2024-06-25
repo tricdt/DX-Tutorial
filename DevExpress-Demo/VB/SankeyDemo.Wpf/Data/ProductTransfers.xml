@@ -1,0 +1,864 @@
+<?xml version="1.0"?>
+<ArrayOfProductTransfer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Pasta Buttini s.r.l.</From>
+    <To>Grains/Cereals</To>
+    <TotalPrice>2280</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Aux joyeux ecclésiastiques</From>
+    <To>Beverages</To>
+    <TotalPrice>2340</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Plutzer Lebensmittelgroßmärkte AG</From>
+    <To>Meat/Poultry</To>
+    <TotalPrice>2228.2200000000003</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>G'day, Mate</From>
+    <To>Produce</To>
+    <TotalPrice>6360</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Plutzer Lebensmittelgroßmärkte AG</From>
+    <To>Meat/Poultry</To>
+    <TotalPrice>2475.8</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Plutzer Lebensmittelgroßmärkte AG</From>
+    <To>Meat/Poultry</To>
+    <TotalPrice>2475.8</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Aux joyeux ecclésiastiques</From>
+    <To>Beverages</To>
+    <TotalPrice>2635</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Aux joyeux ecclésiastiques</From>
+    <To>Beverages</To>
+    <TotalPrice>7905</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Aux joyeux ecclésiastiques</From>
+    <To>Beverages</To>
+    <TotalPrice>7905</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Gai pâturage</From>
+    <To>Dairy Products</To>
+    <TotalPrice>2200</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Aux joyeux ecclésiastiques</From>
+    <To>Beverages</To>
+    <TotalPrice>2108</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Gai pâturage</From>
+    <To>Dairy Products</To>
+    <TotalPrice>2040</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Gai pâturage</From>
+    <To>Dairy Products</To>
+    <TotalPrice>2750</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Gai pâturage</From>
+    <To>Dairy Products</To>
+    <TotalPrice>2310</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Forêts d'érables</From>
+    <To>Confections</To>
+    <TotalPrice>2465</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Tokyo Traders</From>
+    <To>Seafood</To>
+    <TotalPrice>3100</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Aux joyeux ecclésiastiques</From>
+    <To>Beverages</To>
+    <TotalPrice>15810</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Tokyo Traders</From>
+    <To>Seafood</To>
+    <TotalPrice>2170</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Aux joyeux ecclésiastiques</From>
+    <To>Beverages</To>
+    <TotalPrice>10540</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Gai pâturage</From>
+    <To>Dairy Products</To>
+    <TotalPrice>2200</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Plutzer Lebensmittelgroßmärkte AG</From>
+    <To>Meat/Poultry</To>
+    <TotalPrice>2970.96</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Gai pâturage</From>
+    <To>Dairy Products</To>
+    <TotalPrice>3400</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Plutzer Lebensmittelgroßmärkte AG</From>
+    <To>Meat/Poultry</To>
+    <TotalPrice>9903.2</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Plutzer Lebensmittelgroßmärkte AG</From>
+    <To>Meat/Poultry</To>
+    <TotalPrice>7427.4000000000005</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>G'day, Mate</From>
+    <To>Produce</To>
+    <TotalPrice>2120</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Forêts d'érables</From>
+    <To>Confections</To>
+    <TotalPrice>2958</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Specialty Biscuits, Ltd.</From>
+    <To>Confections</To>
+    <TotalPrice>4050</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Aux joyeux ecclésiastiques</From>
+    <To>Beverages</To>
+    <TotalPrice>15810</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Forêts d'érables</From>
+    <To>Confections</To>
+    <TotalPrice>1972</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Plutzer Lebensmittelgroßmärkte AG</From>
+    <To>Meat/Poultry</To>
+    <TotalPrice>6189.5</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Plutzer Lebensmittelgroßmärkte AG</From>
+    <To>Produce</To>
+    <TotalPrice>3192</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Gai pâturage</From>
+    <To>Dairy Products</To>
+    <TotalPrice>6050</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Heli Süßwaren GmbH &amp; Co. KG</From>
+    <To>Confections</To>
+    <TotalPrice>1967.49</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>G'day, Mate</From>
+    <To>Produce</To>
+    <TotalPrice>2332</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Plutzer Lebensmittelgroßmärkte AG</From>
+    <To>Meat/Poultry</To>
+    <TotalPrice>7427.4000000000005</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Gai pâturage</From>
+    <To>Dairy Products</To>
+    <TotalPrice>5500</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Aux joyeux ecclésiastiques</From>
+    <To>Beverages</To>
+    <TotalPrice>6587.5</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>G'day, Mate</From>
+    <To>Meat/Poultry</To>
+    <TotalPrice>2296</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Pavlova, Ltd.</From>
+    <To>Seafood</To>
+    <TotalPrice>2187.5</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Pavlova, Ltd.</From>
+    <To>Meat/Poultry</To>
+    <TotalPrice>3003</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Company</TypeFrom>
+    <TypeTo>Product Category</TypeTo>
+    <From>Plutzer Lebensmittelgroßmärkte AG</From>
+    <To>Grains/Cereals</To>
+    <TotalPrice>4322.5</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Grains/Cereals</From>
+    <To>Speedy Express</To>
+    <TotalPrice>2280</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Beverages</From>
+    <To>Federal Shipping</To>
+    <TotalPrice>2340</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Meat/Poultry</From>
+    <To>United Package</To>
+    <TotalPrice>2228.2200000000003</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Produce</From>
+    <To>Federal Shipping</To>
+    <TotalPrice>6360</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Meat/Poultry</From>
+    <To>Speedy Express</To>
+    <TotalPrice>2475.8</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Meat/Poultry</From>
+    <To>United Package</To>
+    <TotalPrice>2475.8</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Beverages</From>
+    <To>Federal Shipping</To>
+    <TotalPrice>2635</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Beverages</From>
+    <To>United Package</To>
+    <TotalPrice>7905</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Beverages</From>
+    <To>United Package</To>
+    <TotalPrice>7905</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Dairy Products</From>
+    <To>United Package</To>
+    <TotalPrice>2200</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Beverages</From>
+    <To>United Package</To>
+    <TotalPrice>2108</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Dairy Products</From>
+    <To>Speedy Express</To>
+    <TotalPrice>2040</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Dairy Products</From>
+    <To>United Package</To>
+    <TotalPrice>2750</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Dairy Products</From>
+    <To>Speedy Express</To>
+    <TotalPrice>2310</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Confections</From>
+    <To>Speedy Express</To>
+    <TotalPrice>2465</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Seafood</From>
+    <To>United Package</To>
+    <TotalPrice>3100</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Beverages</From>
+    <To>Speedy Express</To>
+    <TotalPrice>15810</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Seafood</From>
+    <To>Speedy Express</To>
+    <TotalPrice>2170</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Beverages</From>
+    <To>Federal Shipping</To>
+    <TotalPrice>10540</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Dairy Products</From>
+    <To>United Package</To>
+    <TotalPrice>2200</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Meat/Poultry</From>
+    <To>United Package</To>
+    <TotalPrice>2970.96</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Dairy Products</From>
+    <To>Speedy Express</To>
+    <TotalPrice>3400</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Meat/Poultry</From>
+    <To>United Package</To>
+    <TotalPrice>9903.2</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Meat/Poultry</From>
+    <To>United Package</To>
+    <TotalPrice>7427.4000000000005</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Produce</From>
+    <To>Federal Shipping</To>
+    <TotalPrice>2120</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Confections</From>
+    <To>Federal Shipping</To>
+    <TotalPrice>2958</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Confections</From>
+    <To>United Package</To>
+    <TotalPrice>4050</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Beverages</From>
+    <To>United Package</To>
+    <TotalPrice>15810</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Confections</From>
+    <To>United Package</To>
+    <TotalPrice>1972</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Meat/Poultry</From>
+    <To>Federal Shipping</To>
+    <TotalPrice>6189.5</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Produce</From>
+    <To>Federal Shipping</To>
+    <TotalPrice>3192</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Dairy Products</From>
+    <To>United Package</To>
+    <TotalPrice>6050</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Confections</From>
+    <To>Speedy Express</To>
+    <TotalPrice>1967.49</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Produce</From>
+    <To>Speedy Express</To>
+    <TotalPrice>2332</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Meat/Poultry</From>
+    <To>United Package</To>
+    <TotalPrice>7427.4000000000005</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Dairy Products</From>
+    <To>United Package</To>
+    <TotalPrice>5500</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Beverages</From>
+    <To>Federal Shipping</To>
+    <TotalPrice>6587.5</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Meat/Poultry</From>
+    <To>Federal Shipping</To>
+    <TotalPrice>2296</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Seafood</From>
+    <To>United Package</To>
+    <TotalPrice>2187.5</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Meat/Poultry</From>
+    <To>Speedy Express</To>
+    <TotalPrice>3003</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Product Category</TypeFrom>
+    <TypeTo>Shipping Company</TypeTo>
+    <From>Grains/Cereals</From>
+    <To>United Package</To>
+    <TotalPrice>4322.5</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Speedy Express</From>
+    <To>Sweden</To>
+    <TotalPrice>2280</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Federal Shipping</From>
+    <To>Austria</To>
+    <TotalPrice>2340</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>Germany</To>
+    <TotalPrice>2228.2200000000003</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Federal Shipping</From>
+    <To>Austria</To>
+    <TotalPrice>6360</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Speedy Express</From>
+    <To>France</To>
+    <TotalPrice>2475.8</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>Spain</To>
+    <TotalPrice>2475.8</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Federal Shipping</From>
+    <To>USA</To>
+    <TotalPrice>2635</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>USA</To>
+    <TotalPrice>7905</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>Germany</To>
+    <TotalPrice>7905</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>Venezuela</To>
+    <TotalPrice>2200</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>Norway</To>
+    <TotalPrice>2108</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Speedy Express</From>
+    <To>Austria</To>
+    <TotalPrice>2040</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>Belgium</To>
+    <TotalPrice>2750</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Speedy Express</From>
+    <To>Brazil</To>
+    <TotalPrice>2310</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Speedy Express</From>
+    <To>USA</To>
+    <TotalPrice>2465</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>Austria</To>
+    <TotalPrice>3100</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Speedy Express</From>
+    <To>Germany</To>
+    <TotalPrice>15810</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Speedy Express</From>
+    <To>Brazil</To>
+    <TotalPrice>2170</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Federal Shipping</From>
+    <To>USA</To>
+    <TotalPrice>10540</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>Belgium</To>
+    <TotalPrice>2200</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>Germany</To>
+    <TotalPrice>2970.96</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Speedy Express</From>
+    <To>Austria</To>
+    <TotalPrice>3400</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>Ireland</To>
+    <TotalPrice>9903.2</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>Ireland</To>
+    <TotalPrice>7427.4000000000005</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Federal Shipping</From>
+    <To>Spain</To>
+    <TotalPrice>2120</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Federal Shipping</From>
+    <To>Canada</To>
+    <TotalPrice>2958</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>UK</To>
+    <TotalPrice>4050</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>Brazil</To>
+    <TotalPrice>15810</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>USA</To>
+    <TotalPrice>1972</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Federal Shipping</From>
+    <To>Sweden</To>
+    <TotalPrice>6189.5</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Federal Shipping</From>
+    <To>Austria</To>
+    <TotalPrice>3192</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>Austria</To>
+    <TotalPrice>6050</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Speedy Express</From>
+    <To>Germany</To>
+    <TotalPrice>1967.49</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Speedy Express</From>
+    <To>Germany</To>
+    <TotalPrice>2332</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>USA</To>
+    <TotalPrice>7427.4000000000005</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>USA</To>
+    <TotalPrice>5500</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Federal Shipping</From>
+    <To>USA</To>
+    <TotalPrice>6587.5</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Federal Shipping</From>
+    <To>Switzerland</To>
+    <TotalPrice>2296</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>Austria</To>
+    <TotalPrice>2187.5</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>Speedy Express</From>
+    <To>USA</To>
+    <TotalPrice>3003</TotalPrice>
+  </ProductTransfer>
+  <ProductTransfer>
+    <TypeFrom>Shipping Company</TypeFrom>
+    <TypeTo>Customer Country</TypeTo>
+    <From>United Package</From>
+    <To>Austria</To>
+    <TotalPrice>4322.5</TotalPrice>
+  </ProductTransfer>
+</ArrayOfProductTransfer>

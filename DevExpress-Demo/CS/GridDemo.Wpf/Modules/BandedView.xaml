@@ -1,0 +1,159 @@
+﻿<local:GridDemoModule x:Class="GridDemo.BandedView"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      xmlns:dxrudex="http://schemas.devexpress.com/winfx/2008/xaml/reports/userdesignerextensions"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch">
+    <local:GridDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GridDemo;component/ModuleResources/SharedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:GridDemoModule.Resources>
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" ReportService="{x:Reference rmsBandedView}" />
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Header="Bands Layout Options" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit x:Name="showBandsPanelCheckEdit"
+                                       Content="Show Bands Panel"
+                                       IsChecked="{Binding Path=View.ShowBandsPanel, Mode=TwoWay}"
+                                       Margin="0,0,0,4" />
+                        <dxe:CheckEdit x:Name="allowChangeColumnParentCheckEdit"
+                                       Content="Allow Change Column Parent"
+                                       IsChecked="{Binding Path=View.AllowChangeColumnParent, Mode=TwoWay}"
+                                       Margin="0,0,0,4" />
+                        <dxe:CheckEdit x:Name="allowChangeBandParentCheckEdit"
+                                       Content="Allow Change Band Parent"
+                                       IsChecked="{Binding Path=View.AllowChangeBandParent, Mode=TwoWay}"
+                                       Margin="0,0,0,4" />
+                        <dxe:CheckEdit x:Name="allowBandMovingCheckEdit"
+                                       Content="Allow Band Moving"
+                                       IsChecked="{Binding Path=View.AllowBandMoving, Mode=TwoWay}"
+                                       Margin="0,0,0,4" />
+                        <dxe:CheckEdit x:Name="allowBandResizingCheckEdit"
+                                       Content="Allow Band Resizing"
+                                       IsChecked="{Binding Path=View.AllowBandResizing, Mode=TwoWay}"
+                                       Margin="0,0,0,4" />
+                        <dxe:CheckEdit x:Name="allowBandMultiRowCheckEdit"
+                                       Content="Allow Band Multi Row"
+                                       IsChecked="{Binding Path=View.AllowBandMultiRow, Mode=TwoWay, ElementName=pictureBand}"
+                                       Margin="0,0,0,4" />
+                        <dxe:CheckEdit x:Name="overlayHeaderCheckEdit" Content="Overlay Band Header By Single Child" IsChecked="True" Margin="0,0,0,4" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Table View Options" Margin="0,5,0,12">
+                    <StackPanel>
+                        <dxe:CheckEdit x:Name="autoWidthCheckEdit" Content="Auto Width" IsChecked="{Binding Path=View.AutoWidth, Mode=TwoWay}" Margin="0,0,0,4" />
+                        <dxe:CheckEdit x:Name="allowPerPixelScrollingCheckEdit"
+                                       Content="Allow Per Pixel Scrolling"
+                                       IsChecked="{Binding Path=View.AllowPerPixelScrolling, Mode=TwoWay}"
+                                       Margin="0,0,0,4" />
+                        <dxe:CheckEdit x:Name="showAutoFilterRowCheckEdit"
+                                       Content="Show Auto Filter Row"
+                                       IsChecked="{Binding Path=View.ShowAutoFilterRow, Mode=TwoWay}"
+                                       Margin="0,0,0,4" />
+                        <dxe:CheckEdit x:Name="allowMovingCheckEdit"
+                                       Content="Allow Moving"
+                                       IsChecked="{Binding Path=View.AllowColumnMoving, Mode=TwoWay}"
+                                       Margin="0,0,0,4" />
+                        <dxe:CheckEdit x:Name="allowResizingCheckEdit"
+                                       Content="Allow Resizing"
+                                       IsChecked="{Binding Path=View.AllowResizing, Mode=TwoWay}"
+                                       Margin="0,0,0,4" />
+                        <dxe:CheckEdit x:Name="bandSeparatorsCheckEdit" Content="Show Band Separators" Margin="0,0,0,4">
+                            <dxe:CheckEdit.IsChecked>
+                                <Binding Path="View.BandSeparatorWidth" Mode="TwoWay">
+                                    <Binding.Converter>
+                                        <dxmvvm:ObjectToObjectConverter>
+                                            <dxmvvm:ObjectToObjectConverter.Map>
+                                                <dxmvvm:MapItem Source="0" Target="False" />
+                                                <dxmvvm:MapItem Source="2" Target="True" />
+                                            </dxmvvm:ObjectToObjectConverter.Map>
+                                        </dxmvvm:ObjectToObjectConverter>
+                                    </Binding.Converter>
+                                </Binding>
+                            </dxe:CheckEdit.IsChecked>
+                        </dxe:CheckEdit>
+                    </StackPanel>
+                </GroupBox>
+                <Button Command="{Binding View.Commands.ShowRibbonPrintPreview}">Show Print Preview</Button>
+                <local:RecentReports ReportService="{x:Reference rmsBandedView}" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxg:GridControl x:Name="grid" AutoExpandAllGroups="True" dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap" ShowBorder="False">
+            <!--#region Bands-->
+            <dxg:GridControl.Bands>
+                <dxg:GridControlBand Header="Model Details">
+                    <dxg:GridColumn FieldName="Trademark.Name" Header="Trademark" />
+                    <dxg:GridColumn FieldName="Name" Header="Model" />
+                    <dxg:GridColumn FieldName="Modification" />
+                    <dxg:GridColumn FieldName="BodyStyle.Name" Header="Body Style" GroupIndex="0" />
+                    <dxg:GridColumn FieldName="Description" dxg:BandBase.GridRow="1" Image="{local:DemoHeaderImage Description}" BestFitWidth="300">
+                        <dxg:GridColumn.CellTemplate>
+                            <DataTemplate>
+                                <dxe:TextEdit x:Name="PART_Editor" TextWrapping="Wrap" MaxHeight="60" />
+                            </DataTemplate>
+                        </dxg:GridColumn.CellTemplate>
+                    </dxg:GridColumn>
+                </dxg:GridControlBand>
+                <dxg:GridControlBand Header="Performance Attributes" Image="{local:DemoHeaderImage PerformanceAttributes}">
+                    <dxg:GridColumn FieldName="Horsepower" />
+                    <dxg:GridColumn FieldName="Torque" />
+                    <dxg:GridColumn FieldName="MPGCity" Header="MPG City" dxg:BandBase.GridRow="1" />
+                    <dxg:GridColumn FieldName="MPGHighway" Header="MPG Highway" dxg:BandBase.GridRow="1" />
+                    <dxg:GridColumn FieldName="Doors" dxg:BandBase.GridRow="2" />
+                    <dxg:GridColumn FieldName="Cylinders" Header="Cyl" dxg:BandBase.GridRow="2" />
+                    <dxg:GridColumn FieldName="TransmissionType.Name" Header="Transmission" dxg:BandBase.GridRow="3" />
+                    <dxg:GridColumn FieldName="TransmissionSpeeds" Header="# of Gears" dxg:BandBase.GridRow="3" />
+                </dxg:GridControlBand>
+                <dxg:GridControlBand x:Name="pictureBand" Header="Picture" OverlayHeaderByChildren="{Binding IsChecked, ElementName=overlayHeaderCheckEdit}">
+                    <dxg:GridColumn FieldName="Image" Header="Photo" ReadOnly="True">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:ImageEditSettings Stretch="Uniform" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                </dxg:GridControlBand>
+            </dxg:GridControl.Bands>
+            <!--#endregion-->
+            <dxg:GridControl.View>
+                <dxg:TableView AutoWidth="True"
+                               AllowScrollAnimation="True"
+                               ShowAutoFilterRow="False"
+                               AllowChangeBandParent="True"
+                               AllowChangeColumnParent="True"
+                               AllowPrintColumnHeaderImage="True"
+                               BandSeparatorWidth="2">
+                    <!--#region Format Conditions-->
+                    <dxg:TableView.FormatConditions>
+                        <dxg:IconSetFormatCondition PredefinedFormatName="Arrows3ColoredIconSet" FieldName="MPGCity" />
+                        <dxg:IconSetFormatCondition PredefinedFormatName="Arrows3ColoredIconSet" FieldName="MPGHighway" />
+                    </dxg:TableView.FormatConditions>
+                    <!--#endregion-->
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxrudex:GridReportManagerService Name="rmsBandedView" />
+                    </dxmvvm:Interaction.Behaviors>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

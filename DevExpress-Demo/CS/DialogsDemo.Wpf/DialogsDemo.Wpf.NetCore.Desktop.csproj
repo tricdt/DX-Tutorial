@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProjectGuid>{692513D3-2A30-0C88-39CD-D670D5800500}</ProjectGuid>
+    <EnableDefaultItems>False</EnableDefaultItems>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <Configurations>Debug;Release;DebugTest</Configurations>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    <EmbeddedResourceUseDependentUponConvention>False</EmbeddedResourceUseDependentUponConvention>
+    <RootNamespace>DialogsDemo</RootNamespace>
+    <AssemblyName>DialogsDemo</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>WinExe</OutputType>
+    <WarningLevel>4</WarningLevel>
+    <IntermediateOutputPath>obj.NCD</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;WPF;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputPath>.\bin\ClickOnce DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\ClickOnce ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;WPF;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktopTest\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DEBUGTEST;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Countries.xml" />
+    <Resource Include="Images\Download.svg" />
+    <Resource Include="Images\Upload.svg" />
+    <Resource Include="Images\TabControl\Amazon.png" />
+    <Resource Include="Images\TabControl\Devexpress.png" />
+    <Resource Include="Images\TabControl\Facebook.png" />
+    <Resource Include="Images\TabControl\Google.png" />
+    <Resource Include="Images\TabControl\Microsoft.png" />
+    <Resource Include="Images\TabControl\Stackoverflow.png" />
+    <Resource Include="Images\TabControl\Twitter.png" />
+    <Resource Include="Images\TabControl\VisualStudio.png" />
+    <Resource Include="Images\TabControl\Youtube.png" />
+    <PackageReference Include="DevExpress.Wpf.Demos" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="22.2.3" />
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FileDialogsModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TabControl.WebBrowser\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TabControl.WebBrowser\WebBrowserView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TabControl.WebBrowser\WebBrowserWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ThemedWindowDialogsModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ThemedWindowModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ThemedMessageBoxModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Windows8StyleMessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ThemedWindowDialogsModuleResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ThemedWindowModuleResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DialogsDemoModule.cs" />
+    <Compile Include="Data\CountriesData.cs" />
+    <Compile Include="Helpers\DialogsDemoHelper.cs" />
+    <Compile Include="Helpers\FilterHelper.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
+    <Compile Include="Helpers\ThemedWindowHeaderItemContainerStyleSelector.cs" />
+    <Compile Include="Helpers\ThemedWindowService.cs" />
+    <Compile Include="Helpers\WebBrowserSupressScriptErrorsBehavior.cs" />
+    <Compile Include="Helpers\WindowShowTitleAndIconConverter.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TabControl.WebBrowser\Helper.cs" />
+    <Compile Include="Modules\TabControl.WebBrowser\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TabControl.WebBrowser\MainViewModel.cs" />
+    <Compile Include="Modules\TabControl.WebBrowser\WebBrowserView.xaml.cs">
+      <DependentUpon>WebBrowserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TabControl.WebBrowser\WebBrowserViewModel.cs" />
+    <Compile Include="Modules\TabControl.WebBrowser\WebBrowserWindow.xaml.cs">
+      <DependentUpon>WebBrowserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\PredefinedFormat.cs" />
+    <Compile Include="Modules\ThemedWindowDialogsModule.xaml.cs">
+      <DependentUpon>ThemedWindowDialogsModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ThemedWindowModule.xaml.cs">
+      <DependentUpon>ThemedWindowModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ThemedMessageBoxModule.xaml.cs">
+      <DependentUpon>ThemedMessageBoxModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Windows8StyleMessageBox.xaml.cs">
+      <DependentUpon>Windows8StyleMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\FileDialogsViewModel.cs" />
+    <Compile Include="Modules\FileDialogsModule.xaml.cs">
+      <DependentUpon>FileDialogsModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ThemedWindowDemoConverters.cs" />
+    <Compile Include="ViewModels\ThemedWindowDialogsViewModel.cs" />
+    <Compile Include="ViewModels\ThemedWindowModule\ContentModels\BaseThemedWindowContentModel.cs" />
+    <Compile Include="ViewModels\ThemedWindowModule\ContentModels\RibbonThemedWindowContentModel.cs" />
+    <Compile Include="ViewModels\ThemedWindowModule\ContentModels\SimpleThemedWindowContentModel.cs" />
+    <Compile Include="ViewModels\ThemedWindowModule\ContentModels\TabbedThemedWindowContentModel.cs" />
+    <Compile Include="ViewModels\ThemedWindowModule\HeaderModels\BaseHeaderItemModel.cs" />
+    <Compile Include="ViewModels\ThemedWindowModule\HeaderModels\CustomHeaderItemModel.cs" />
+    <Compile Include="ViewModels\ThemedWindowModule\HeaderModels\PredefinedHeaderItemModel.cs" />
+    <Compile Include="ViewModels\ThemedWindowModule\HeaderModels\WindowTitleEditorHeaderItemModel.cs" />
+    <Compile Include="ViewModels\ThemedWindowModule\ThemedWindowViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DemoTesting\Fixtures.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ThemedWindow\Gender\Female.svg" />
+    <Resource Include="Images\ThemedWindow\Gender\Male.svg" />
+  </ItemGroup>
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent"><ItemGroup><Resource Include="@(Page)" /></ItemGroup><ItemGroup><Resource Include="@(Compile)" /></ItemGroup></Target>
+  <ItemGroup></ItemGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

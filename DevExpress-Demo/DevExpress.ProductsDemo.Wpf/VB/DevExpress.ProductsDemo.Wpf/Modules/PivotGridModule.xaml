@@ -1,0 +1,242 @@
+﻿<UserControl x:Class="ProductsDemo.Modules.PivotGridModule"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ProductsDemo.Modules"
+        xmlns:dxpg="http://schemas.devexpress.com/winfx/2008/xaml/pivotgrid"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+        xmlns:dxcr="http://schemas.devexpress.com/winfx/2008/xaml/charts/rangecontrolclient"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+        xmlns:dxet="http://schemas.devexpress.com/winfx/2008/xaml/editors/themekeys"
+        Loaded="OnLoaded">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.ProductsDemo.Wpf;component/ModulesResources/SalesDashboardResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:IntToKMConverter x:Key="intToKMConverter" />
+            <DataTemplate x:Key="chartLabelTemplate" >
+                <TextBlock Text="{Binding Text, Converter={StaticResource ResourceKey=intToKMConverter}}" />
+            </DataTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <UserControl.DataContext>
+        <local:PivotGridViewModel />
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="110" />
+            <RowDefinition Height="55*" />
+            <RowDefinition Height="25*" />
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="65*" />
+            <ColumnDefinition Width="45*" />
+        </Grid.ColumnDefinitions>
+
+        <dxlc:TileLayoutControl
+            ItemsSource="{Binding TilesData}"
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            AllowLayerSizing="False"
+            AllowItemMoving="False"
+            Padding="0">
+            <dxlc:TileLayoutControl.ItemTemplate>
+                <DataTemplate  DataType="{x:Type local:TileData}">
+                    <dxlc:Tile Height="100" Width="250" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32" />
+                                <RowDefinition Height="60" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding MainText}" FontSize="23" Padding="13,8,0,0" />
+                            <TextBlock Text="{Binding SubText}" FontSize="12" Grid.Row="1" Padding="13,6,0,0" />
+                            <TextBlock Text="{Binding Value}" HorizontalAlignment="Right" FontSize="38" Grid.Row="1" Padding="0,7,10,0" />
+                        </Grid>
+                    </dxlc:Tile>
+                </DataTemplate>
+            </dxlc:TileLayoutControl.ItemTemplate>
+        </dxlc:TileLayoutControl>
+
+        <dxpg:PivotGridControl
+            x:Name="pivotGrid"
+            DataSource="{Binding FilteredSourceByDate, Mode=OneWay}"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            ShowFilterHeaders="False"
+            RowTotalsLocation="Far"
+            local:FieldAreaHelper.FixAreas="True" >
+            <dxpg:PivotGridControl.Fields>
+                <dxpg:PivotGridField FieldName="StartOfPeriod" Area="RowArea" Caption="Year" GroupInterval="DateYear" TotalsVisibility="None" />
+                <dxpg:PivotGridField FieldName="StartOfPeriod" Area="RowArea" Caption="Month" GroupInterval="DateMonth" TotalsVisibility="None" />
+                <dxpg:PivotGridField FieldName="GroupName" Area="ColumnArea" Caption="Product" />
+                <dxpg:PivotGridField FieldName="TotalCost" Area="DataArea" Caption="Sales" />
+                <dxpg:PivotGridField FieldName="Units" Area="DataArea" Caption="Units" />
+            </dxpg:PivotGridControl.Fields>
+        </dxpg:PivotGridControl>
+
+        <Grid Grid.Row="2" Grid.Column="0">
+            <dxc:ChartControl BorderBrush="Transparent" Name="chartUnits" Padding="0,10,4,4" DataSource="{Binding FilteredSource, Mode=OneWay}" AnimationMode="OnDataChanged" >
+                <dxc:XYDiagram2D Rotated="True">
+                    <dxc:XYDiagram2D.AxisX>
+                        <dxc:AxisX2D Visible="False" />
+                    </dxc:XYDiagram2D.AxisX>
+                    <dxc:XYDiagram2D.AxisY>
+                        <dxc:AxisY2D Visible="False" />
+                    </dxc:XYDiagram2D.AxisY>
+                    <dxc:XYDiagram2D.Series>
+                        <dxc:BarSideBySideSeries2D ColorEach="True" ValueDataMember="Units" ArgumentDataMember="GroupName" LabelsVisibility="True" >
+                            <dxc:BarSideBySideSeries2D.Label>
+                                <dxc:SeriesLabel dxc:BarSideBySideSeries2D.LabelPosition="Center" ElementTemplate="{StaticResource chartLabelTemplate}" />
+                            </dxc:BarSideBySideSeries2D.Label>
+                            <dxc:BarSideBySideSeries2D.LegendPointOptions>
+                                <dxc:PointOptions Pattern="{}{A}"/>
+                            </dxc:BarSideBySideSeries2D.LegendPointOptions>
+                            <dxc:BarSideBySideSeries2D.PointOptions>
+                                <dxc:PointOptions>
+                                    <dxc:PointOptions.ValueNumericOptions>
+                                        <dxc:NumericOptions Precision="0" />
+                                    </dxc:PointOptions.ValueNumericOptions>
+                                </dxc:PointOptions>
+                            </dxc:BarSideBySideSeries2D.PointOptions>
+                            <dxc:BarSideBySideSeries2D.Model>
+                                <dxc:SimpleBar2DModel/>
+                            </dxc:BarSideBySideSeries2D.Model>
+                        </dxc:BarSideBySideSeries2D>
+                    </dxc:XYDiagram2D.Series>
+                </dxc:XYDiagram2D >
+                <dxc:ChartControl.Legend>
+                    <dxc:Legend BorderBrush="Transparent" VerticalPosition="Top" HorizontalPosition="RightOutside" />
+                </dxc:ChartControl.Legend>
+            </dxc:ChartControl>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Border
+                            Margin="0,17,31,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderThickness="1"
+                            SnapsToDevicePixels="True"
+                            Background="{StaticResource ResourceKey=backgroundBrush}"
+                            BorderBrush="#acacac"
+                            UseLayoutRounding="True">
+
+                    <Border.Effect>
+                        <DropShadowEffect
+                                    Direction="271"
+                                    BlurRadius="0"
+                                    Opacity="0.1"
+                                    ShadowDepth="3" />
+                    </Border.Effect>
+                    <TextBlock
+                                Margin="7,7,7,7"
+                                Text="Units"
+                                Foreground="{StaticResource ResourceKey=textBrush}" />
+                </Border>
+                <Border Width="{Binding ElementName=chartUnits, Path=Legend.ActualWidth, Mode=OneWay}" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <dxc:ChartControl Name="chartSales" BorderBrush="Transparent" Padding="0,10,4,4" DataSource="{Binding FilteredSource, Mode=OneWay}" AnimationMode="OnDataChanged" >
+                <dxc:XYDiagram2D >
+                    <dxc:XYDiagram2D.AxisX>
+                        <dxc:AxisX2D Visible="False" />
+                    </dxc:XYDiagram2D.AxisX>
+                    <dxc:XYDiagram2D.AxisY>
+                        <dxc:AxisY2D Visible="False" />
+                    </dxc:XYDiagram2D.AxisY>
+                    <dxc:XYDiagram2D.Series>
+                        <dxc:BarSideBySideSeries2D ColorEach="True"  ValueDataMember="TotalCost" ArgumentDataMember="GroupName"  LabelsVisibility="True"
+                                                       CrosshairLabelPattern="{}{A}: ${V:0,#}">
+                            <dxc:BarSideBySideSeries2D.Label>
+                                <dxc:SeriesLabel dxc:BarSideBySideSeries2D.LabelPosition="Center" ElementTemplate="{StaticResource chartLabelTemplate}" />
+                            </dxc:BarSideBySideSeries2D.Label>
+                            <dxc:BarSideBySideSeries2D.Model>
+                                <dxc:SimpleBar2DModel>
+                                </dxc:SimpleBar2DModel>
+                            </dxc:BarSideBySideSeries2D.Model>
+                            <dxc:BarSideBySideSeries2D.PointOptions>
+                                <dxc:PointOptions >
+                                    <dxc:PointOptions.ValueNumericOptions>
+                                        <dxc:NumericOptions Precision="0" />
+                                    </dxc:PointOptions.ValueNumericOptions>
+                                </dxc:PointOptions>
+                            </dxc:BarSideBySideSeries2D.PointOptions>
+                        </dxc:BarSideBySideSeries2D>
+                    </dxc:XYDiagram2D.Series>
+                </dxc:XYDiagram2D >
+            </dxc:ChartControl>
+            <Border
+                    Margin="11,17,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    BorderThickness="1"
+                    SnapsToDevicePixels="True"
+                    Background="{StaticResource ResourceKey=backgroundBrush}"
+                    BorderBrush="#acacac"
+                    UseLayoutRounding="True">
+
+                <Border.Effect>
+                    <DropShadowEffect
+                            Direction="271"
+                            BlurRadius="0"
+                            Opacity="0.1"
+                            ShadowDepth="3" />
+                </Border.Effect>
+                <TextBlock
+                        Margin="7,7,7,7"
+                        Text="Sales"
+                        Foreground="{StaticResource ResourceKey=textBrush}" />
+            </Border>
+        </Grid>
+
+        <dxe:RangeControl Grid.Row="3" Grid.ColumnSpan="2"
+                              AllowZoom="False"
+                              AllowScroll="False"
+                              ShowNavigationButtons="False"
+                              ShowRangeBar="False"
+                              BorderBrush="Transparent"
+                              Background="Transparent"
+                              ShowLabels="False"
+                              RangeStart="{Binding Path=RangeStart}"
+                              RangeEnd="{Binding Path=RangeEnd}"
+                              SelectionRangeStart="{Binding Path=SelectedRangeStart, Mode=TwoWay}"
+                              SelectionRangeEnd="{Binding Path=SelectedRangeEnd, Mode=TwoWay}"
+                              AllowSnapToInterval="True"
+                              ShadingMode="Shading" >
+            <dxe:RangeControl.Resources>
+                <Style x:Key="{dxet:RangeControlThemeKey ResourceKey=OutOfRangeAreaBorderStyle, IsThemeIndependent=True}"
+                        TargetType="{x:Type Border}">
+                    <Setter
+                            Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush
+                                    Color="White"
+                                    Opacity="0.75" />
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </dxe:RangeControl.Resources>
+            <dxe:RangeControl.Client>
+                <dxcr:DateTimeChartRangeControlClient
+                        ArgumentLabelFormatString="{}{0:yyyy/MM}"
+                        GridLinesBrush="{StaticResource ResourceKey=separatorBrush}"
+                        ShowGridLines="True"
+                        GridAlignment="Month"
+                        SnapAlignment="Month"
+                        ItemsSource="{Binding DataSource}"
+                        ArgumentDataMember="StartOfPeriod"
+                        ValueDataMember="TotalCost"
+                        GridSpacing="1">
+                    <dxcr:DateTimeChartRangeControlClient.View>
+                        <dxcr:RangeControlClientAreaView AreaOpacity="0.4" Brush="{StaticResource ResourceKey=powderBlue}"  />
+                    </dxcr:DateTimeChartRangeControlClient.View>
+                </dxcr:DateTimeChartRangeControlClient>
+            </dxe:RangeControl.Client>
+        </dxe:RangeControl>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,116 @@
+﻿<XtraSerializer version="1.0" application="PivotGridControl">
+  <property name="#LayoutVersion" isnull="true" />
+  <property name="$PivotGridControl" iskey="true" value="PivotGridControl">
+    <property name="ShowRowHeaders">true</property>
+    <property name="ShowRowGrandTotals">true</property>
+    <property name="ShowRowTotals">true</property>
+    <property name="TotalsLocation">Far</property>
+    <property name="ShowTotalsForSingleValues">true</property>
+    <property name="ShowCustomTotalsForSingleValues">false</property>
+    <property name="ShowColumnTotals">true</property>
+    <property name="ShowDataHeaders">true</property>
+    <property name="ShowGrandTotalsForSingleValues">false</property>
+    <property name="ShowFilterHeaders">true</property>
+    <property name="ShowColumnHeaders">true</property>
+    <property name="Fields" iskey="true" value="6">
+      <property name="Item1" isnull="true" iskey="true">
+        <property name="Visible">true</property>
+        <property name="UnboundFieldName">fieldYear</property>
+        <property name="SerializedSortByField" isnull="true" />
+        <property name="SortByConditions" iskey="true" value="0" />
+        <property name="Caption">Order Year</property>
+        <property name="GroupInterval">DateYear</property>
+        <property name="FieldName">OrderDate</property>
+        <property name="Width">85</property>
+        <property name="Height">21</property>
+        <property name="Area">ColumnArea</property>
+        <property name="AreaIndex">0</property>
+        <property name="Name">fieldYear</property>
+        <property name="SortOrder">Descending</property>
+        <property name="SortMode">Default</property>
+      </property>
+      <property name="Item2" isnull="true" iskey="true">
+        <property name="Visible">true</property>
+        <property name="UnboundFieldName">fieldQuarter</property>
+        <property name="SerializedSortByField" isnull="true" />
+        <property name="SortByConditions" iskey="true" value="0" />
+        <property name="ValueFormat">Qtr {0}</property>
+        <property name="Caption">Order Quarter</property>
+        <property name="GroupInterval">DateQuarter</property>
+        <property name="FieldName">OrderDate</property>
+        <property name="Width">70</property>
+        <property name="Height">21</property>
+        <property name="Area">FilterArea</property>
+        <property name="AreaIndex">0</property>
+        <property name="Name">fieldQuarter</property>
+        <property name="SortOrder">Ascending</property>
+        <property name="SortMode">Default</property>
+      </property>
+      <property name="Item3" isnull="true" iskey="true">
+        <property name="Visible">true</property>
+        <property name="UnboundFieldName">fieldMonth</property>
+        <property name="SerializedSortByField" isnull="true" />
+        <property name="SortByConditions" iskey="true" value="0" />
+        <property name="Caption">Order Month</property>
+        <property name="GroupInterval">DateMonth</property>
+        <property name="FieldName">OrderDate</property>
+        <property name="Width">70</property>
+        <property name="Height">21</property>
+        <property name="Area">FilterArea</property>
+        <property name="AreaIndex">1</property>
+        <property name="Name">fieldMonth</property>
+        <property name="SortOrder">Ascending</property>
+        <property name="SortMode">Default</property>
+      </property>
+      <property name="Item4" isnull="true" iskey="true">
+        <property name="Visible">true</property>
+        <property name="UnboundFieldName" />
+        <property name="SerializedSortByField" isnull="true" />
+        <property name="SortByConditions" iskey="true" value="0" />
+        <property name="Caption">Customer</property>
+        <property name="FieldName">CompanyName</property>
+        <property name="Width">171</property>
+        <property name="Height">21</property>
+        <property name="Area">RowArea</property>
+        <property name="AreaIndex">0</property>
+        <property name="Name">fieldCompanyName</property>
+        <property name="SortOrder">Ascending</property>
+        <property name="SortMode">Default</property>
+      </property>
+      <property name="Item5" isnull="true" iskey="true">
+        <property name="Visible">true</property>
+        <property name="UnboundFieldName" />
+        <property name="SerializedSortByField" isnull="true" />
+        <property name="SortByConditions" iskey="true" value="0" />
+        <property name="Caption">Product Name</property>
+        <property name="FieldName">ProductName</property>
+        <property name="Width">120</property>
+        <property name="Height">21</property>
+        <property name="Area">FilterArea</property>
+        <property name="AreaIndex">2</property>
+        <property name="Name">fieldProductName</property>
+        <property name="SortOrder">Ascending</property>
+        <property name="SortMode">Default</property>
+      </property>
+      <property name="Item6" isnull="true" iskey="true">
+        <property name="Visible">true</property>
+        <property name="UnboundFieldName" />
+        <property name="SerializedSortByField" isnull="true" />
+        <property name="SortByConditions" iskey="true" value="0" />
+        <property name="CellFormat">c</property>
+        <property name="Caption">Product Amount</property>
+        <property name="FieldName">ProductAmount</property>
+        <property name="Width">70</property>
+        <property name="Height">21</property>
+        <property name="Area">DataArea</property>
+        <property name="AreaIndex">0</property>
+        <property name="Name">fieldProductAmount</property>
+        <property name="SortOrder">Ascending</property>
+        <property name="SortMode">Default</property>
+      </property>
+    </property>
+    <property name="DrawFocusedCellRect">true</property>
+    <property name="ShowColumnGrandTotals">true</property>
+    <property name="Groups" iskey="true" value="0" />
+  </property>
+</XtraSerializer>

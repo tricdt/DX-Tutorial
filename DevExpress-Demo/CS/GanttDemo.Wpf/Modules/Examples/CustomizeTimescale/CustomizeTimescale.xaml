@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="GanttDemo.Examples.CustomizeTimescale"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxgn="http://schemas.devexpress.com/winfx/2008/xaml/gantt"
+             xmlns:local="clr-namespace:GanttDemo.Examples">
+    <UserControl.DataContext>
+        <local:ProjectTaskViewModel/>
+    </UserControl.DataContext>
+    <dxgn:GanttControl ItemsSource="{Binding Tasks}">
+        <dxgn:GanttControl.View>
+            <!--#region !-->
+            <dxgn:GanttView RequestTimescaleRulers="GanttView_RequestTimeScales"
+                            TimescaleRulerCount="3"
+                            TreeListWidth="0"
+                            AutoExpandAllNodes="True"/>
+            <!--#endregion-->
+        </dxgn:GanttControl.View>
+    </dxgn:GanttControl>
+</UserControl>

@@ -1,0 +1,464 @@
+﻿<XtraSerializer version="1.0" application="BarManager">
+  <property name="#LayoutVersion">1.00</property>
+  <property name="$BarManager" iskey="true" value="BarManager">
+    <property name="Items" iskey="true" value="5">
+      <property name="Item1" isnull="true" iskey="true">
+        <property name="ItemTypeName">DevExpress.Xpf.Bars.BarSubItem</property>
+        <property name="ItemLinks" iskey="true" value="10">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bNew</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bOpen</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bClose</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarItemLinkSeparator</property>
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bSave</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bSaveAs</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarItemLinkSeparator</property>
+          </property>
+          <property name="Item8" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bPrint</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item9" isnull="true" iskey="true">
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarItemLinkSeparator</property>
+          </property>
+          <property name="Item10" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bExit</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+        </property>
+        <property name="BarItemName">bsFile</property>
+        <property name="Content" type="System.String">File</property>
+      </property>
+      <property name="Item2" isnull="true" iskey="true">
+        <property name="ItemTypeName">DevExpress.Xpf.Bars.BarSubItem</property>
+        <property name="ItemLinks" iskey="true" value="11">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bUndo</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarItemLinkSeparator</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bCut</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bCopy</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bPaste</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarItemLinkSeparator</property>
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bClear</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item8" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bSelectAll</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item9" isnull="true" iskey="true">
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarItemLinkSeparator</property>
+          </property>
+          <property name="Item10" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bFind</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item11" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bReplace</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+        </property>
+        <property name="BarItemName">bsEdit</property>
+        <property name="Content" type="System.String">Edit</property>
+      </property>
+      <property name="Item3" isnull="true" iskey="true">
+        <property name="ItemTypeName">DevExpress.Xpf.Bars.BarSubItem</property>
+        <property name="ItemLinks" iskey="true" value="4">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bFont</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarSplitButtonItemLink</property>
+            <property name="BarItemName">bFontColor</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarItemLinkSeparator</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarCheckItemLink</property>
+            <property name="BarItemName">bBullets</property>
+          </property>
+        </property>
+        <property name="BarItemName">bsFormat</property>
+        <property name="Content" type="System.String">Format</property>
+      </property>
+      <property name="Item4" isnull="true" iskey="true">
+        <property name="ItemTypeName">DevExpress.Xpf.Bars.BarSubItem</property>
+        <property name="ItemLinks" iskey="true" value="1">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.ToolbarListItemLink</property>
+            <property name="BarItemName">toolbarListItemCore</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+        </property>
+        <property name="BarItemName">bsToolBars</property>
+        <property name="Content" type="System.String">Toolbars</property>
+      </property>
+      <property name="Item5" isnull="true" iskey="true">
+        <property name="ItemTypeName">DevExpress.Xpf.Bars.BarSubItem</property>
+        <property name="ItemLinks" iskey="true" value="3">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bHome</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarItemLinkSeparator</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bAbout</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+        </property>
+        <property name="BarItemName">bsHelp</property>
+        <property name="Content" type="System.String">Help</property>
+      </property>
+    </property>
+    <property name="Bars" iskey="true" value="6">
+      <property name="Item1" isnull="true" iskey="true">
+        <property name="IsStatusBar">false</property>
+        <property name="BarTypeName">DevExpress.Xpf.Bars.Bar</property>
+        <property name="IsMainMenu">true</property>
+        <property name="ItemLinks" iskey="true" value="5">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarSubItemLink</property>
+            <property name="BarItemName">bsFile</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarSubItemLink</property>
+            <property name="BarItemName">bsEdit</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarSubItemLink</property>
+            <property name="BarItemName">bsFormat</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarSubItemLink</property>
+            <property name="BarItemName">bsToolBars</property>
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarSubItemLink</property>
+            <property name="BarItemName">bsHelp</property>
+          </property>
+        </property>
+        <property name="Caption">MainMenu</property>
+        <property name="UseWholeRow">True</property>
+        <property name="DockInfo" isnull="true" iskey="true">
+          <property name="ContainerName">TopDockControl</property>
+        </property>
+        <property name="AllowCollapse">false</property>
+      </property>
+      <property name="Item2" isnull="true" iskey="true">
+        <property name="BarTypeName">DevExpress.Xpf.Bars.Bar</property>
+        <property name="ItemLinks" iskey="true" value="11">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bNew</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bOpen</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bSave</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarItemLinkSeparator</property>
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bPrint</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarItemLinkSeparator</property>
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bCut</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item8" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bCopy</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item9" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bPaste</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item10" isnull="true" iskey="true">
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarItemLinkSeparator</property>
+          </property>
+          <property name="Item11" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bUndo</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+        </property>
+        <property name="Caption">Standard</property>
+        <property name="DockInfo" isnull="true" iskey="true">
+          <property name="ContainerName">TopDockControl</property>
+          <property name="Row">1</property>
+          <property name="Column">1</property>
+        </property>
+      </property>
+      <property name="Item3" isnull="true" iskey="true">
+        <property name="BarTypeName">DevExpress.Xpf.Bars.Bar</property>
+        <property name="ItemLinks" iskey="true" value="2">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarEditItemLink</property>
+            <property name="BarItemName">eFontFamily</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarEditItemLink</property>
+            <property name="BarItemName">eFontSize</property>
+          </property>
+        </property>
+        <property name="Caption">Font</property>
+        <property name="DockInfo" isnull="true" iskey="true">
+          <property name="FloatBarOffset">131,45</property>
+          <property name="ContainerName">TopDockControl</property>
+          <property name="Row">1</property>
+          <property name="Column">1</property>
+          <property name="Offset">252</property>
+        </property>
+      </property>
+      <property name="Item4" isnull="true" iskey="true">
+        <property name="BarTypeName">DevExpress.Xpf.Bars.Bar</property>
+        <property name="ItemLinks" iskey="true" value="9">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarCheckItemLink</property>
+            <property name="BarItemName">bBold</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarCheckItemLink</property>
+            <property name="BarItemName">bItalic</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarCheckItemLink</property>
+            <property name="BarItemName">bUnderline</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarItemLinkSeparator</property>
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarCheckItemLink</property>
+            <property name="BarItemName">bLeft</property>
+          </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarCheckItemLink</property>
+            <property name="BarItemName">bCenter</property>
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarCheckItemLink</property>
+            <property name="BarItemName">bRight</property>
+          </property>
+          <property name="Item8" isnull="true" iskey="true">
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarItemLinkSeparator</property>
+          </property>
+          <property name="Item9" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarCheckItemLink</property>
+            <property name="BarItemName">bBullets</property>
+          </property>
+        </property>
+        <property name="Caption">Format</property>
+        <property name="DockInfo" isnull="true" iskey="true">
+          <property name="FloatBarOffset">-5,396</property>
+          <property name="ContainerName">LeftDockControl</property>
+          <property name="Row">0</property>
+          <property name="Column">1</property>
+          <property name="Offset">53.000000000000014</property>
+        </property>
+      </property>
+      <property name="Item5" isnull="true" iskey="true">
+        <property name="BarTypeName">DevExpress.Xpf.Bars.Bar</property>
+        <property name="ItemLinks" iskey="true" value="4">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarButtonItemLink</property>
+            <property name="BarItemName">bFont</property>
+            <property name="IsLinkEnabled">true</property>
+            <property name="UserContent" isnull="true" />
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarSplitButtonItemLink</property>
+            <property name="BarItemName">bFontColor</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarItemLinkSeparator</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarSubItemLink</property>
+            <property name="BarItemName">bsEdit</property>
+          </property>
+        </property>
+        <property name="Caption">Font</property>
+        <property name="DockInfo" isnull="true" iskey="true">
+          <property name="FloatBarOffset">598,157</property>
+          <property name="ContainerName">RightDockControl</property>
+          <property name="Row">0</property>
+          <property name="Column">0</property>
+          <property name="Offset">108</property>
+        </property>
+      </property>
+      <property name="Item6" isnull="true" iskey="true">
+        <property name="IsStatusBar">true</property>
+        <property name="BarTypeName">DevExpress.Xpf.Bars.Bar</property>
+        <property name="IsMainMenu">false</property>
+        <property name="ItemLinks" iskey="true" value="2">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarStaticItemLink</property>
+            <property name="BarItemName">bInfo</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="UserContent" isnull="true" />
+            <property name="IsLinkEnabled">true</property>
+            <property name="LinkTypeName">DevExpress.Xpf.Bars.BarStaticItemLink</property>
+            <property name="BarItemName">bEmpty</property>
+          </property>
+        </property>
+        <property name="Caption">Status Bar</property>
+        <property name="UseWholeRow">True</property>
+        <property name="DockInfo" isnull="true" iskey="true">
+          <property name="ContainerName">BottomDockControl</property>
+        </property>
+        <property name="AllowCollapse">false</property>
+      </property>
+    </property>
+  </property>
+</XtraSerializer>

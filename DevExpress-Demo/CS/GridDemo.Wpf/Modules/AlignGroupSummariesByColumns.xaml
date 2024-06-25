@@ -1,0 +1,89 @@
+﻿<local:GridDemoModule x:Class="GridDemo.AlignGroupSummariesByColumns"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800"
+                      DataContext="{dxmvvm:ViewModelSource local:AlignGroupSummariesByColumnsViewModel}">
+    <local:GridDemoModule.Resources>
+        <!--#region Column Template-->
+        <DataTemplate x:Key="columnTemplate">
+            <ContentControl>
+                <dxg:GridColumn FieldName="{Binding PropertyName}">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:SpinEditSettings MaskType="Numeric" Mask="c" MaskCulture="en-US" MaskUseAsDisplayFormat="True" DisplayFormat="${0:N}" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </ContentControl>
+        </DataTemplate>
+        <!--#endregion-->
+        <Style x:Key="summaryStyle" TargetType="Run">
+            <Style.Triggers>
+                <DataTrigger Binding="{DXBinding 'Value gt 210000 and Column.View.DataContext.HighlightBestSelling'}" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource {dxt:FormatThemeKey ResourceKey=FormatGreenTextBrush}}" />
+                </DataTrigger>
+                <DataTrigger Binding="{DXBinding 'Value lt 140000 and Column.View.DataContext.HighlightWorstSelling'}" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource {dxt:FormatThemeKey ResourceKey=FormatRedTextBrush}}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <DataTemplate x:Key="summaryTemplate">
+            <ContentControl>
+                <dxg:GridSummaryItem FieldName="{Binding Path=(dxi:DependencyObjectExtensions.DataContext).PropertyName, RelativeSource={RelativeSource Self}}"
+                                     GroupColumnSummaryElementStyle="{StaticResource summaryStyle}"
+                                     SummaryType="Sum"
+                                     DisplayFormat="${0:N}" />
+            </ContentControl>
+        </DataTemplate>
+    </local:GridDemoModule.Resources>
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" />
+        <!--#region Options-->
+        <StackPanel Name="PART_Options" DockPanel.Dock="Right" Margin="12,8,12,4" MinWidth="210">
+            <dxe:CheckEdit IsChecked="{Binding DataContext.HighlightBestSelling}" Margin="0,0,0,4">Highlight Best Selling</dxe:CheckEdit>
+            <dxe:CheckEdit IsChecked="{Binding DataContext.HighlightWorstSelling}" Margin="0,0,0,4">Highlight Worst Selling</dxe:CheckEdit>
+        </StackPanel>
+        <!--#endregion-->
+        <dxg:GridControl x:Name="grid"
+                         ItemsSource="{x:Static local:SalesByYearData.Data}"
+                         GroupSummarySource="{x:Static local:SalesByYearData.Columns}"
+                         GroupSummaryGeneratorTemplate="{StaticResource summaryTemplate}"
+                         TotalSummarySource="{x:Static local:SalesByYearData.Columns}"
+                         TotalSummaryGeneratorTemplate="{StaticResource summaryTemplate}"
+                         ColumnsSource="{x:Static local:SalesByYearData.Columns}"
+                         ColumnGeneratorTemplate="{StaticResource columnTemplate}"
+                         Loaded="{DXEvent '@Self.ExpandGroupRow(-1)'}"
+                         ShowBorder="False">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn Header="Year"
+                                FieldName="Date"
+                                ReadOnly="True"
+                                GroupIndex="0"
+                                SortOrder="Descending"
+                                GroupInterval="DateYear"
+                                Fixed="Left"
+                                MinWidth="100">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:DateEditSettings MaskType="DateTime" MaskUseAsDisplayFormat="True" Mask="Y" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="view"
+                               GroupSummaryDisplayMode="AlignByColumns"
+                               TotalSummaryPosition="Bottom"
+                               ShowGroupedColumns="True"
+                               AllowGrouping="False"
+                               AllowScrollAnimation="True"/>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

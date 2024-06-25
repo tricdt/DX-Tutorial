@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProjectGuid>{50213988-734E-0FE0-3F4F-C726CC6B5576}</ProjectGuid>
+    <EnableDefaultItems>False</EnableDefaultItems>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <Configurations>Debug;Release;DebugTest</Configurations>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    <EmbeddedResourceUseDependentUponConvention>False</EmbeddedResourceUseDependentUponConvention>
+    <RootNamespace>DevExpress.MailClient</RootNamespace>
+    <AssemblyName>DevExpress.MailClient.Xpf</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>WinExe</OutputType>
+    <WarningLevel>4</WarningLevel>
+    <ApplicationIcon>Images\AppIcon\AppIcon.ico</ApplicationIcon>
+    <IntermediateOutputPath>obj.NCD</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\ClickOnce DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\ClickOnce ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\x86\DebugNetCoreDesktopTest\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;DEBUGTEST;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Themes.WPF.NetCore.targets" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Wpf.Demos" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Document.Processor" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="22.2.3" />
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Behaviors\GridUpdateLockerBehavior.cs" />
+    <Compile Include="DataProvider\Common.cs" />
+    <Compile Include="DataProvider\DesignTimeDataProvider.cs" />
+    <Compile Include="DataProvider\TaskGenerator.cs" />
+    <Compile Include="DataProvider\XmlDataProvider.cs" />
+    <Compile Include="Helpers\ExceptionHelper.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
+    <Compile Include="Utils\AccordionStrategy.cs" />
+    <Compile Include="ViewModel\Calendar\AppointmentViewModel.cs" />
+    <Compile Include="ViewModel\Calendar\CalendarNavigationViewModel.cs" />
+    <Compile Include="ViewModel\Contacts\AddressViewModel.cs" />
+    <Compile Include="ViewModel\Contacts\ContactEditViewModel.cs" />
+    <Compile Include="ViewModel\Contacts\ContactItemViewModel.cs" />
+    <Compile Include="ViewModel\Contacts\ContactsNavigationViewModel.cs" />
+    <Compile Include="ViewModel\Contacts\NameViewModel.cs" />
+    <Compile Include="ViewModel\Mail\MailFolderViewModel.cs" />
+    <Compile Include="ViewModel\Mail\MailNavigationViewModel.cs" />
+    <Compile Include="ViewModel\Tasks\GridColumnModel.cs" />
+    <Compile Include="ViewModel\Mail\MailMessageViewModel.cs" />
+    <Compile Include="ViewModel\Tasks\TaskItemViewModel.cs" />
+    <Compile Include="Resources\Converters.cs" />
+    <Compile Include="ViewModel\Calendar\CalendarViewModel.cs" />
+    <Compile Include="ViewModel\Common.cs" />
+    <Compile Include="ViewModel\Contacts\ContactsViewModel.cs" />
+    <Compile Include="ViewModel\Mail\MailViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\Tasks\TaskNavigationViewModel.cs" />
+    <Compile Include="ViewModel\Tasks\TasksViewModel.cs" />
+    <Compile Include="View\CalendarViews\CalendarView.xaml.cs">
+      <DependentUpon>CalendarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CalendarViews\NavigationCalendarView.xaml.cs">
+      <DependentUpon>NavigationCalendarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactsViews\ContactsView.xaml.cs">
+      <DependentUpon>ContactsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactsViews\EditContactContent.xaml.cs">
+      <DependentUpon>EditContactContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactsViews\NavigationContactsView.xaml.cs">
+      <DependentUpon>NavigationContactsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Behaviors\LayoutControlFlipBehavior.cs" />
+    <Compile Include="View\MailViews\MailView.xaml.cs">
+      <DependentUpon>MailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MailViews\NavigationMailView.xaml.cs">
+      <DependentUpon>NavigationMailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MailViews\NewMessageContent.xaml.cs">
+      <DependentUpon>NewMessageContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskViews\CustomFlagView.xaml.cs">
+      <DependentUpon>CustomFlagView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskViews\EditTaskView.xaml.cs">
+      <DependentUpon>EditTaskView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskViews\TasksView.xaml.cs">
+      <DependentUpon>TasksView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskViews\NavigationTasksView.xaml.cs">
+      <DependentUpon>NavigationTasksView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Resources\GridTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CalendarViews\CalendarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CalendarViews\NavigationCalendarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactsViews\ContactsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ContactsViews\EditContactContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactsViews\NavigationContactsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MailViews\MailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MailViews\NavigationMailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MailViews\NewMessageContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TaskViews\CustomFlagView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TaskViews\EditTaskView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TaskViews\TasksView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TaskViews\NavigationTasksView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Contacts\Unknown-user.png" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)' == 'ClickOnce Debug' OR '$(Configuration)' == 'ClickOnce Release'" />
+  <ItemGroup>
+    <Resource Include="Images\AppIcon\AppIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tasks\Doctor.svg" />
+    <Resource Include="Images\Tasks\Miss.svg" />
+    <Resource Include="Images\Tasks\Mr.svg" />
+    <Resource Include="Images\Tasks\Mrs.svg" />
+    <Resource Include="Images\Tasks\Ms.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Contacts\ByState.svg" />
+    <Resource Include="Images\Contacts\Card.svg" />
+    <Resource Include="Images\Contacts\List.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tasks\Category_HouseChores.svg" />
+    <Resource Include="Images\Tasks\Category_Shopping.svg" />
+    <Resource Include="Images\Tasks\Category_Work.svg" />
+    <Resource Include="Images\Tasks\Completed.svg" />
+    <Resource Include="Images\Tasks\Custom.svg" />
+    <Resource Include="Images\Tasks\ListByDate.svg" />
+    <Resource Include="Images\Tasks\NextWeek.svg" />
+    <Resource Include="Images\Tasks\NoDate.svg" />
+    <Resource Include="Images\Tasks\Overdue.svg" />
+    <Resource Include="Images\Tasks\Prioritized.svg" />
+    <Resource Include="Images\Tasks\Priority_Low.svg" />
+    <Resource Include="Images\Tasks\Status_0.svg" />
+    <Resource Include="Images\Tasks\Status_1.svg" />
+    <Resource Include="Images\Tasks\ThisWeek.svg" />
+    <Resource Include="Images\Tasks\Today.svg" />
+    <Resource Include="Images\Tasks\ToDoList.svg" />
+    <Resource Include="Images\Tasks\Tomorrow.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tasks\Column_FlagStatus.svg" />
+    <Resource Include="Images\Tasks\Column_Icon.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LayoutFlip.svg" />
+    <Resource Include="Images\LayoutRotate.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Mail\Attachment.svg" />
+    <Resource Include="Images\Mail\Read.svg" />
+    <Resource Include="Images\Mail\Reply.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\FoldersIcons\Customer.svg" />
+    <Resource Include="Images\FoldersIcons\Deleted.svg" />
+    <Resource Include="Images\FoldersIcons\Draft.svg" />
+    <Resource Include="Images\FoldersIcons\Engineering.svg" />
+    <Resource Include="Images\FoldersIcons\Frameworks.svg" />
+    <Resource Include="Images\FoldersIcons\Inbox.svg" />
+    <Resource Include="Images\FoldersIcons\IT.svg" />
+    <Resource Include="Images\FoldersIcons\Management.svg" />
+    <Resource Include="Images\FoldersIcons\Sales.svg" />
+    <Resource Include="Images\FoldersIcons\Sent.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AppIcon\AppIcon.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
+  </ItemGroup>
+  <ItemGroup></ItemGroup>
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

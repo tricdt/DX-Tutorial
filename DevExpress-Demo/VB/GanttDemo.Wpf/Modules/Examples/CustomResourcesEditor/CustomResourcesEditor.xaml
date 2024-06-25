@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="GanttDemo.Examples.CustomResourcesEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:GanttDemo.Examples"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxgn="http://schemas.devexpress.com/winfx/2008/xaml/gantt">
+    <UserControl.DataContext>
+        <local:PartsProductionViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <CollectionViewSource Source="{Binding EditableResourceLinks, ElementName=View}" x:Key="resourcesSource">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Resource.WorkshopName"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
+    <dxgn:GanttControl ItemsSource="{Binding Parts}">
+        <dxgn:GanttColumn BindTo="Name" Width="Auto"/>
+        <!--#region !-->
+        <dxgn:GanttColumn BindTo="ResourceLinks" AllowEditing="True" Width="200">
+            <dxgn:GanttColumn.EditSettings>
+                <dxe:ComboBoxEditSettings DisplayMember="Name"
+                                          AllowCollectionView="True"
+                                          IsTextEditable="False"
+                                          ItemsSource="{Binding Source={StaticResource resourcesSource}}">
+                    <dxe:ComboBoxEditSettings.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.ContainerStyle>
+                                <Style TargetType="{x:Type GroupItem}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <Expander Header="{Binding Path=Name}" IsExpanded="True" HorizontalContentAlignment="Stretch" Margin="3,3,3,0">
+                                                    <ItemsPresenter />
+                                                    <Expander.HeaderTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding}" FontWeight="Bold" />
+                                                        </DataTemplate>
+                                                    </Expander.HeaderTemplate>
+                                                </Expander>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </GroupStyle.ContainerStyle>
+                        </GroupStyle>
+                    </dxe:ComboBoxEditSettings.GroupStyle>
+                    <dxe:ComboBoxEditSettings.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Resource.Name}"/>
+                        </DataTemplate>
+                    </dxe:ComboBoxEditSettings.ItemTemplate>
+                    <dxe:ComboBoxEditSettings.StyleSettings>
+                        <dxe:CheckedComboBoxStyleSettings/>
+                    </dxe:ComboBoxEditSettings.StyleSettings>
+                </dxe:ComboBoxEditSettings>
+            </dxgn:GanttColumn.EditSettings>
+        </dxgn:GanttColumn>
+        <!--#endregion-->
+        <dxgn:GanttControl.View>
+            <dxgn:GanttView ResourcesSource="{Binding MachineTools}"
+                            ResourceLinksPath="MachineTools"
+                            Zoom="2:0:0"
+                            AutoExpandAllNodes="True"
+                            TreeListWidth="Auto"
+                            TreeDerivationMode="ChildNodesSelector"
+                            StartDateMapping="StartProductionDate"
+                            FinishDateMapping="FinishProductionDate"
+                            NameMapping="Name"
+                            NonworkingTimeDisplayMode="Cut"
+                            AllowEditing="False"
+                            x:Name="View">
+                <dxgn:GanttView.ResourceMappings>
+                    <dxgn:GanttResourceMappings Name="DisplayName" Key="Id"/>
+                </dxgn:GanttView.ResourceMappings>
+                <dxgn:GanttView.ResourceLinkMappings>
+                    <dxgn:GanttResourceLinkMappings Resource="MachineToolId"/>
+                </dxgn:GanttView.ResourceLinkMappings>
+            </dxgn:GanttView>
+        </dxgn:GanttControl.View>
+    </dxgn:GanttControl>
+</UserControl>

@@ -1,0 +1,42 @@
+<ResourceDictionary xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/Helpers/AddDeleteBar.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <local:DrawingImageToImageSourceConverter x:Key="DrawingImageToImageSourceConverter"/>
+    <DataTemplate x:Key="GalleryItemTemplate">
+        <dxe:ImageEdit Stretch="Uniform" HorizontalAlignment="Stretch"
+            Source="{Binding Image, Converter={StaticResource DrawingImageToImageSourceConverter}}">
+            <dxe:ImageEdit.MenuTemplate>
+                <ControlTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <dxe:ImageEditCopyToolButton/>
+                        <dxe:ImageEditSaveToolButton />
+                    </StackPanel>
+                </ControlTemplate>
+            </dxe:ImageEdit.MenuTemplate>
+        </dxe:ImageEdit>
+    </DataTemplate>
+    <Style TargetType="helpers:PicturesGallery" BasedOn="{StaticResource AddDeleteBarDefaultStyle}">
+        <Setter Property="MainContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <dx:DXListBox x:Name="ListBox" BorderThickness="0" ItemTemplate="{StaticResource GalleryItemTemplate}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                        SelectedValue="{Binding CurrentPicture, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        ItemsSource="{Binding ItemsSource}" ScrollViewer.CanContentScroll="False">
+                        <dx:DXListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Padding" Value="6"/>
+                            </Style>
+                        </dx:DXListBox.ItemContainerStyle>
+                    </dx:DXListBox>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

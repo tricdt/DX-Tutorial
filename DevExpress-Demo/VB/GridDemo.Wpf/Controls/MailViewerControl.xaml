@@ -1,0 +1,118 @@
+﻿<UserControl
+    x:Class="GridDemo.MailViewerControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+    xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:GridDemo"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <dxre:MhtToContentConverter x:Key="MhtToContentConverter" />
+        <local:ByteImageConverter x:Key="ByteImageConverter" DecodePixelHeight="160"/>
+        <local:NameToColorConverter x:Key="NameToColorConverter" />
+    </UserControl.Resources>
+
+    <Grid Margin="5,0,5,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock
+            Margin="5,5,0,10" FontSize="20" Text="{Binding Subject}" Foreground="Black"
+            TextWrapping="WrapWithOverflow"/>
+        <Grid Grid.Row="1" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Margin="5,5,15,5" ToolTip="{Binding Path=Employee.FullName}">
+                <Ellipse Height="80" Width="80" UseLayoutRounding="True">
+                    <Ellipse.Fill>
+                        <ImageBrush Stretch="UniformToFill" AlignmentY="Top" ImageSource="{Binding Path=Employee.Image, Converter={StaticResource ByteImageConverter}}"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse Height="80" Width="80" UseLayoutRounding="True">
+                    <Ellipse.Fill>
+                        <SolidColorBrush Color="{Binding Path=Employee.FullName, Converter={StaticResource NameToColorConverter}}" />
+                    </Ellipse.Fill>
+                    <Ellipse.Visibility>
+                        <Binding Path="Employee.Image">
+                            <Binding.Converter>
+                                <dx:ObjectToVisibilityConverter Invert="True"/>
+                            </Binding.Converter>
+                        </Binding>
+                    </Ellipse.Visibility>
+                </Ellipse>
+                <Label
+                    HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                    Content="{Binding Path=Employee.Initials}" FontSize="25" Foreground="White">
+                    <Label.Style>
+                        <Style TargetType="Label">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Value="{x:Null}" Binding="{Binding Path=Employee.Image}">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                </Label>
+            </Grid>
+            <Grid Grid.Column="1" Margin="4,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" Content="{Binding Path=Employee.FullName}" FontSize="15" Margin="0,0,0,-4" />
+                <Label
+                    Grid.Row="1" VerticalAlignment="Top" VerticalContentAlignment="Top" Content="{Binding Received}"
+                    FontSize="11" Foreground="DarkGray" />
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2" Margin="7,4,11,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{dxi:ThemeResource {dxgt:GridRowThemeKey ResourceKey=BorderFocusedBrush}}" />
+            <Border Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#80D6D7DC">
+                <TextBlock
+                    Margin="15,10,0,10" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF525263"
+                    Text="This message was sent with high importance" />
+            </Border>
+            <Grid.Visibility>
+                <Binding Path="Priority">
+                    <Binding.Converter>
+                        <dxmvvm:ObjectToObjectConverter DefaultTarget="Collapsed">
+                            <dxmvvm:MapItem Source="2" Target="Visible" />
+                        </dxmvvm:ObjectToObjectConverter>
+                    </Binding.Converter>
+                </Binding>
+            </Grid.Visibility>
+        </Grid>
+        <dxre:RichEditControl
+            Margin="-10,0,0,0"
+            dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+            Grid.Row="3" ActiveViewType="Simple" Content="{Binding Text, Converter={StaticResource MhtToContentConverter}}" HorizontalScrollBarVisibility="Collapsed"
+            ReadOnly="True" ShowBorder="False" ShowCaretInReadOnly="False" VerticalScrollBarVisibility="Visible" />
+    </Grid>
+
+    <UserControl.Visibility>
+        <Binding Path="">
+            <Binding.Converter>
+                <dxmvvm:ObjectToObjectConverter DefaultTarget="Visible">
+                    <dxmvvm:MapItem Source="{x:Null}" Target="Hidden" />
+                </dxmvvm:ObjectToObjectConverter>
+            </Binding.Converter>
+        </Binding>
+    </UserControl.Visibility>
+
+</UserControl>

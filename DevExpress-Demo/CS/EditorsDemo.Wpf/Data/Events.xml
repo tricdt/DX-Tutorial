@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<ArrayOfEventItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EventItem>
+    <Type xsi:type="xsd:int">0</Type>
+    <StartTime xsi:type="xsd:dateTime">2016-07-12T11:05:00</StartTime>
+    <EndTime xsi:type="xsd:dateTime">2016-07-12T14:30:00</EndTime>
+    <Description>Rent this car </Description>
+    <AllDay>false</AllDay>
+    <Label xsi:type="xsd:int">2</Label>
+    <Location>city</Location>
+    <ResourceId xsi:type="xsd:int">1</ResourceId>
+    <Status xsi:type="xsd:int">3</Status>
+    <Subject>Mr.Brown</Subject>
+    <Price xsi:type="xsd:double">0</Price>
+    <RecurrenceInfo />
+    <ReminderInfo />
+  </EventItem>
+  <EventItem>
+    <Type xsi:type="xsd:int">0</Type>
+    <StartTime xsi:type="xsd:dateTime">2016-07-14T08:15:00</StartTime>
+    <EndTime xsi:type="xsd:dateTime">2016-07-16T16:40:00</EndTime>
+    <Description>Scheduled repair of this car</Description>
+    <AllDay>false</AllDay>
+    <Label xsi:type="xsd:int">4</Label>
+    <Location>Service Center</Location>
+    <ResourceId xsi:type="xsd:int">1</ResourceId>
+    <Status xsi:type="xsd:int">2</Status>
+    <Subject>Repair</Subject>
+    <Price xsi:type="xsd:double">0</Price>
+    <RecurrenceInfo />
+    <ReminderInfo />
+  </EventItem>
+  <EventItem>
+    <Type xsi:type="xsd:int">0</Type>
+    <StartTime xsi:type="xsd:dateTime">2016-07-13T10:00:00</StartTime>
+    <EndTime xsi:type="xsd:dateTime">2016-07-15T17:00:00</EndTime>
+    <Description>Rent this car</Description>
+    <AllDay>false</AllDay>
+    <Label xsi:type="xsd:int">3</Label>
+    <Location>city</Location>
+    <ResourceId xsi:type="xsd:int">1</ResourceId>
+    <Status xsi:type="xsd:int">3</Status>
+    <Subject>Mr.White</Subject>
+    <Price xsi:type="xsd:double">0</Price>
+    <RecurrenceInfo />
+    <ReminderInfo />
+  </EventItem>
+  <EventItem>
+    <Type xsi:type="xsd:int">0</Type>
+    <StartTime xsi:type="xsd:dateTime">2016-07-15T19:45:00</StartTime>
+    <EndTime xsi:type="xsd:dateTime">2016-07-15T22:45:00</EndTime>
+    <Description>Check up after maintenance</Description>
+    <AllDay>false</AllDay>
+    <Label xsi:type="xsd:int">2</Label>
+    <Location>Service Center</Location>
+    <ResourceId xsi:type="xsd:int">1</ResourceId>
+    <Status xsi:type="xsd:int">4</Status>
+    <Subject>Check up</Subject>
+    <Price xsi:type="xsd:double">0</Price>
+    <RecurrenceInfo />
+    <ReminderInfo />
+  </EventItem>
+  <EventItem>
+    <Type xsi:type="xsd:int">0</Type>
+    <StartTime xsi:type="xsd:dateTime">2016-07-11T00:00:00</StartTime>
+    <EndTime xsi:type="xsd:dateTime">2016-07-12T00:00:00</EndTime>
+    <Description>Rent this car for the all day</Description>
+    <AllDay>true</AllDay>
+    <Label xsi:type="xsd:int">3</Label>
+    <Location>city</Location>
+    <ResourceId xsi:type="xsd:int">1</ResourceId>
+    <Status xsi:type="xsd:int">3</Status>
+    <Subject>Mr.Green</Subject>
+    <Price xsi:type="xsd:double">0</Price>
+    <RecurrenceInfo />
+    <ReminderInfo />
+  </EventItem>
+  <EventItem>
+    <Type xsi:type="xsd:int">0</Type>
+    <StartTime xsi:type="xsd:dateTime">2016-07-11T10:00:00</StartTime>
+    <EndTime xsi:type="xsd:dateTime">2016-07-12T11:45:00</EndTime>
+    <Description>Rent this car</Description>
+    <AllDay>false</AllDay>
+    <Label xsi:type="xsd:int">3</Label>
+    <Location>out-of-town</Location>
+    <ResourceId xsi:type="xsd:int">3</ResourceId>
+    <Status xsi:type="xsd:int">3</Status>
+    <Subject>Mrs.Black</Subject>
+    <Price xsi:type="xsd:double">0</Price>
+    <RecurrenceInfo />
+    <ReminderInfo />
+  </EventItem>
+  <EventItem>
+    <Type xsi:type="xsd:int">0</Type>
+    <StartTime xsi:type="xsd:dateTime">2016-07-12T13:00:00</StartTime>
+    <EndTime xsi:type="xsd:dateTime">2016-07-12T14:30:00</EndTime>
+    <Description>Rent this car</Description>
+    <AllDay>false</AllDay>
+    <Label xsi:type="xsd:int">3</Label>
+    <Location>out-of-town</Location>
+    <ResourceId xsi:type="xsd:int">3</ResourceId>
+    <Status xsi:type="xsd:int">3</Status>
+    <Subject>Mrs.Black</Subject>
+    <Price xsi:type="xsd:double">0</Price>
+    <RecurrenceInfo />
+    <ReminderInfo />
+  </EventItem>
+  <EventItem>
+    <Type xsi:type="xsd:int">0</Type>
+    <StartTime xsi:type="xsd:dateTime">2016-07-13T15:30:00</StartTime>
+    <EndTime xsi:type="xsd:dateTime">2016-07-14T14:00:00</EndTime>
+    <Description>Rent this car</Description>
+    <AllDay>false</AllDay>
+    <Label xsi:type="xsd:int">3</Label>
+    <Location>out-of-town</Location>
+    <ResourceId xsi:type="xsd:int">3</ResourceId>
+    <Status xsi:type="xsd:int">3</Status>
+    <Subject>Mrs.Black</Subject>
+    <Price xsi:type="xsd:double">0</Price>
+    <RecurrenceInfo />
+    <ReminderInfo />
+  </EventItem>
+  <EventItem>
+    <Type xsi:type="xsd:int">1</Type>
+    <StartTime xsi:type="xsd:dateTime">2016-07-05T16:40:00</StartTime>
+    <EndTime xsi:type="xsd:dateTime">2016-07-05T17:50:00</EndTime>
+    <Description>Wash this car in the garage</Description>
+    <AllDay>false</AllDay>
+    <Label xsi:type="xsd:int">1</Label>
+    <Location>Garage</Location>
+    <ResourceId xsi:type="xsd:int">1</ResourceId>
+    <Status xsi:type="xsd:int">1</Status>
+    <Subject>Wash</Subject>
+    <Price xsi:type="xsd:double">0</Price>
+    <RecurrenceInfo>&lt;RecurrenceInfo Start="07/05/2016 16:30:00" End="08/01/2016 00:00:00" WeekOfMonth="0" WeekDays="62" Id="975889a8-ea37-4625-a1ec-0fb2806199e2" Month="12" Range="2" Type="1" /&gt;</RecurrenceInfo>
+    <ReminderInfo />
+  </EventItem>
+  <EventItem>
+    <Type xsi:type="xsd:int">1</Type>
+    <StartTime xsi:type="xsd:dateTime">2016-07-11T07:30:00</StartTime>
+    <EndTime xsi:type="xsd:dateTime">2016-07-11T08:45:00</EndTime>
+    <Description>Wash this car in the garage</Description>
+    <AllDay>false</AllDay>
+    <Label xsi:type="xsd:int">2</Label>
+    <Location>Garage</Location>
+    <ResourceId xsi:type="xsd:int">3</ResourceId>
+    <Status xsi:type="xsd:int">1</Status>
+    <Subject>Wash</Subject>
+    <Price xsi:type="xsd:double">0</Price>
+    <RecurrenceInfo>&lt;RecurrenceInfo Start="07/11/2016 07:00:00" End="08/24/2016 01:00:00" WeekOfMonth="0" WeekDays="42" Id="51c81018-53fa-4d10-925f-2ed7f8408c75" Month="12" Range="2" Type="1" /&gt;</RecurrenceInfo>
+    <ReminderInfo />
+  </EventItem>
+</ArrayOfEventItem>

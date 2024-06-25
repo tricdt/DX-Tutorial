@@ -1,0 +1,45 @@
+﻿<local:MapDemoModule x:Class="MapDemo.WebMapService"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                     xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+                     xmlns:local="clr-namespace:MapDemo"
+                     mc:Ignorable="d"
+                     d:DesignHeight="557"
+                     d:DesignWidth="2643">
+    <local:MapDemoModule.Resources>
+        <local:DemoValuesProvider x:Key="DemoValuesProvider" />
+    </local:MapDemoModule.Resources>
+    <DockPanel>
+
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <GroupBox Header="Available layers" Margin="12,5,12,12" MinWidth="210">
+                <dxe:ListBoxEdit Name="lbWmsLayers" Background="{x:Null}" SelectedIndex="0" ShowBorder="False" DisplayMember="Name" />
+            </GroupBox>
+        </ScrollViewer>
+
+        <Grid>
+            <dxm:MapControl ZoomLevel="4" FlowDirection="LeftToRight" IsManipulationEnabled="True"
+                            CenterPoint="34.5, -91.5" EnableRotation="False">
+                <dxm:ImageLayer>
+                    <dxm:WmsDataProvider x:Name="Provider"
+                                         ServerUri="http://ows.mundialis.de/services/service"
+                                         ActiveLayerName="{Binding ElementName=lbWmsLayers, Path=SelectedItem.Name}"
+                                         ResponseCapabilities="OnResponseCapabilities" />
+                </dxm:ImageLayer>
+                <dxm:MapControl.ScalePanelOptions>
+                    <dxm:ScalePanelOptions Margin="10,10,10,39" />
+                </dxm:MapControl.ScalePanelOptions>
+            </dxm:MapControl>
+            <local:CopyrightControl ProviderName="Osm" />
+        </Grid>
+    </DockPanel>
+</local:MapDemoModule>

@@ -1,0 +1,235 @@
+﻿<local:PivotGridDemoModule x:Class="PivotGridDemo.ChartsIntegration"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                           xmlns:local="clr-namespace:PivotGridDemo"
+                           xmlns:dxpg="http://schemas.devexpress.com/winfx/2008/xaml/pivotgrid"
+                           xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                           xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+                           xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                           xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                           xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                           ModuleLoaded="PivotGridDemoModule_Loaded">
+    <local:PivotGridDemoModule.Resources>
+        <Style x:Key="seriesStyle" TargetType="{x:Type dxc:XYSeries2D}">
+            <Setter Property="ArgumentDataMember" Value="Arguments" />
+            <Setter Property="ValueDataMember" Value="Values" />
+            <Setter Property="CrosshairLabelPattern" Value="{}{S} : {V:c}" />
+        </Style>
+    </local:PivotGridDemoModule.Resources>
+    <DockPanel>
+        <local:PivotGridDemoRibbon DockPanel.Dock="Top" ExportPivotGrid="{x:Reference pivotGrid}"/>
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12">
+                <GroupBox Header="Chart Appearance" Margin="0,5,0,0">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Margin="4,3,7,0" VerticalAlignment="Center" FlowDirection="LeftToRight">Chart Type:</TextBlock>
+                            <dxe:ComboBoxEdit Name="cbChartType"
+                                              Grid.Column="1"
+                                              SelectedIndex="0"
+                                              DisplayMember="DisplayName"
+                                              ValueMember="Content"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Stretch"
+                                              IsTextEditable="False"
+                                              Margin="4,0,0,4"
+                                              TabIndex="1">
+                                <!--#region Chart Series-->
+                                <local:ValueSelectorItem DisplayName="Bar Series">
+                                    <local:ValueSelectorItem.Content>
+                                        <dxc:BarSideBySideSeries2D Style="{StaticResource seriesStyle}"
+                                                                   LabelsVisibility="{Binding Source={x:Reference ceShowPointsLabels}, Path=IsChecked}">
+                                            <dxc:BarSideBySideSeries2D.Model>
+                                                <dxc:FlatGlassBar2DModel />
+                                            </dxc:BarSideBySideSeries2D.Model>
+                                        </dxc:BarSideBySideSeries2D>
+                                    </local:ValueSelectorItem.Content>
+                                </local:ValueSelectorItem>
+                                <local:ValueSelectorItem DisplayName="Bar Full-Stacked Series">
+                                    <local:ValueSelectorItem.Content>
+                                        <dxc:BarFullStackedSeries2D Style="{StaticResource seriesStyle}"
+                                                                    LabelsVisibility="{Binding Source={x:Reference ceShowPointsLabels}, Path=IsChecked}">
+                                            <dxc:BarFullStackedSeries2D.Model>
+                                                <dxc:FlatGlassBar2DModel />
+                                            </dxc:BarFullStackedSeries2D.Model>
+                                        </dxc:BarFullStackedSeries2D>
+                                    </local:ValueSelectorItem.Content>
+                                </local:ValueSelectorItem>
+                                <local:ValueSelectorItem DisplayName="Line Series">
+                                    <local:ValueSelectorItem.Content>
+                                        <dxc:LineSeries2D LabelsVisibility="{Binding Source={x:Reference ceShowPointsLabels}, Path=IsChecked}"
+                                                          Style="{StaticResource seriesStyle}"
+                                                          MarkerVisible="True">
+                                            <dxc:LineSeries2D.MarkerModel>
+                                                <dxc:CircleMarker2DModel />
+                                            </dxc:LineSeries2D.MarkerModel>
+                                        </dxc:LineSeries2D>
+                                    </local:ValueSelectorItem.Content>
+                                </local:ValueSelectorItem>
+                                <local:ValueSelectorItem DisplayName="Area Series">
+                                    <local:ValueSelectorItem.Content>
+                                        <dxc:AreaSeries2D LabelsVisibility="{Binding Source={x:Reference ceShowPointsLabels}, Path=IsChecked}"
+                                                          Style="{StaticResource seriesStyle}"
+                                                          MarkerVisible="True"
+                                                          Transparency="0.4">
+                                            <dxc:AreaSeries2D.MarkerModel>
+                                                <dxc:CircleMarker2DModel />
+                                            </dxc:AreaSeries2D.MarkerModel>
+                                        </dxc:AreaSeries2D>
+                                    </local:ValueSelectorItem.Content>
+                                </local:ValueSelectorItem>
+                                <local:ValueSelectorItem DisplayName="Area Stacked Series">
+                                    <local:ValueSelectorItem.Content>
+                                        <dxc:AreaStackedSeries2D LabelsVisibility="{Binding Source={x:Reference ceShowPointsLabels}, Path=IsChecked}"
+                                                                 Style="{StaticResource seriesStyle}"
+                                                                 Transparency="0.4" />
+                                    </local:ValueSelectorItem.Content>
+                                </local:ValueSelectorItem>
+                                <local:ValueSelectorItem DisplayName="Point Series">
+                                    <local:ValueSelectorItem.Content>
+                                        <dxc:PointSeries2D Style="{StaticResource seriesStyle}"
+                                                           LabelsVisibility="{Binding Source={x:Reference ceShowPointsLabels}, Path=IsChecked}" />
+                                    </local:ValueSelectorItem.Content>
+                                </local:ValueSelectorItem>
+                                <!--#endregion-->
+                            </dxe:ComboBoxEdit>
+                        </Grid>
+                        <dxe:CheckEdit Name="ceShowPointsLabels" IsChecked="False" Content="Show Point Labels" Margin="4,4,0,0" TabIndex="2" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Chart Orientation" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:ListBoxEdit x:Name="crChartDataVertical" ShowBorder="False" SelectedIndex="0" Background="{x:Null}" DisplayMember="DisplayName">
+                            <dxe:ListBoxEdit.StyleSettings>
+                                <dxe:RadioListBoxEditStyleSettings />
+                            </dxe:ListBoxEdit.StyleSettings>
+                            <local:ValueSelectorItem DisplayName="Generate Series From Columns" Content="False" />
+                            <local:ValueSelectorItem DisplayName="Generate Series From Rows" Content="True" />
+                        </dxe:ListBoxEdit>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Name="gbPivotOptions" Header="Pivot Grid Options" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit Name="ceChartSelectionOnly"
+                                       IsChecked="{Binding ElementName=pivotGrid, Path=ChartSelectionOnly, Mode=TwoWay}"
+                                       Content="Chart Selection Only"
+                                       Margin="4,4,0,4"
+                                       TabIndex="4" />
+                        <dxe:CheckEdit Name="ceChartShowColumnGrandTotals"
+                                       IsChecked="{Binding ElementName=pivotGrid, Path=ChartProvideColumnGrandTotals, Mode=TwoWay}"
+                                       Content="Show Column Grand Totals"
+                                       Margin="4,4,0,4"
+                                       TabIndex="5" />
+                        <dxe:CheckEdit Name="ceChartShowRowGrandTotals"
+                                       IsChecked="{Binding ElementName=pivotGrid, Path=ChartProvideRowGrandTotals, Mode=TwoWay}"
+                                       Content="Show Row Grand Totals"
+                                       Margin="4,4,0,0"
+                                       TabIndex="6" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="4,3,7,0" VerticalAlignment="Center" FlowDirection="LeftToRight">Chart Update Delay:</TextBlock>
+                            <dxe:SpinEdit Name="UpdateDelay"
+                                          Value="{Binding ElementName=pivotGrid, Path=ChartUpdateDelay, Mode=TwoWay}"
+                                          Mask="N00"
+                                          Width="60"
+                                          Margin="4,5,0,0"
+                                          Increment="100"
+                                          MaxValue="5000"
+                                          MinValue="0" />
+                        </StackPanel>
+
+                    </StackPanel>
+                </GroupBox>
+                <Grid Name="warningChart" Visibility="Collapsed" Margin="0,12,0,1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <dx:DXImage Source="/PivotGridDemo;component/Images/WarningIcon.svg" Width="48" Height="48" Grid.Column="0" />
+                    <TextBlock Name="warningTextBlock" TextWrapping="Wrap" Margin="6,6,6,0" Grid.Column="1">
+                        To chart Column or Row Grand Total values, enable the Show Column Grand Totals or Show Row Grand Totals
+                    </TextBlock>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <Grid>
+            <dxlc:LayoutControl x:Name="mainLayout" AllowItemSizing="True" Padding="12" Orientation="Vertical">
+                <dxlc:LayoutGroup dxlc:LayoutControl.AllowVerticalSizing="True" Margin="0,0,0,4" Height="300">
+                    <dxpg:PivotGridControl x:Name="pivotGrid"
+                                           DataProcessingEngine="Optimized"
+                                           DataSource="{x:Static dxdb:NWindDataProvider.SalesPersons}"
+                                           local:FieldAreaHelper.FixAreas="True"
+                                           RowTreeWidth="130"
+                                           ChartProvideDataByColumns="{Binding SelectedItem.Content, ElementName=crChartDataVertical}"
+                                           ChartSelectionOnly="True"
+                                           ChartProvideColumnGrandTotals="False"
+                                           ChartProvideRowGrandTotals="False"
+                                           ChartDataProvideMode="UseCustomSettings"
+                                           ChartProvideEmptyCells="False">
+                        <dxpg:PivotGridControl.Fields>
+                            <dxpg:PivotGridField x:Name="fieldCategoryName" DataBinding="{dxpg:DataSourceColumnBinding CategoryName}" Area="RowArea" AreaIndex="0" Caption="Category Name" Width="155" />
+                            <dxpg:PivotGridField x:Name="fieldExtendedPrice" DataBinding="{dxpg:DataSourceColumnBinding ExtendedPrice}" Area="DataArea" AreaIndex="0" CellFormat="c" />
+                            <dxpg:PivotGridField x:Name="fieldOrderMonth"
+                                                 DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateMonth}"
+                                                 Area="ColumnArea"
+                                                 AreaIndex="0"
+                                                 ShowGroupIntervalName="True"
+                                                 ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}"/>
+                            <dxpg:PivotGridField x:Name="fieldOrderYear"
+                                                 DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateYear}"
+                                                 Area="FilterArea"
+                                                 AreaIndex="0"
+                                                 FilterType="Included"
+                                                 ShowGroupIntervalName="True"
+                                                 ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}"
+                                                 ShowBlankFilterValues="False">
+                                <dxpg:PivotGridField.FieldFilterValues>
+                                    <x:Array Type="{x:Type sys:Int32}">
+                                        <sys:Int32>2016</sys:Int32>
+                                    </x:Array>
+                                </dxpg:PivotGridField.FieldFilterValues>
+                            </dxpg:PivotGridField>
+                        </dxpg:PivotGridControl.Fields>
+                    </dxpg:PivotGridControl>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup>
+                    <Grid Margin="0,4,0,0">
+                        <dxc:ChartControl Name="chartControl"
+                                          CrosshairEnabled="{DXBinding Expr='!@e(ceShowPointsLabels).IsChecked'}"
+                                          DataSource="{Binding ElementName=pivotGrid, Path=ChartDataSource}"
+                                          BoundDataChanged="chartControl_BoundDataChanged">
+                            <dxc:ChartControl.Diagram>
+                                <dxc:XYDiagram2D x:Name="diagram" SeriesDataMember="Series" SeriesTemplate="{Binding ElementName=cbChartType, Path=EditValue}">
+                                    <dxc:XYDiagram2D.AxisX>
+                                        <dxc:AxisX2D>
+                                            <dxc:AxisX2D.Label>
+                                                <dxc:AxisLabel Staggered="True" />
+                                            </dxc:AxisX2D.Label>
+                                        </dxc:AxisX2D>
+                                    </dxc:XYDiagram2D.AxisX>
+                                </dxc:XYDiagram2D>
+                            </dxc:ChartControl.Diagram>
+                            <dxc:ChartControl.CrosshairOptions>
+                                <dxc:CrosshairOptions ShowArgumentLine="False" />
+                            </dxc:ChartControl.CrosshairOptions>
+                            <dxc:ChartControl.Legend>
+                                <dxc:Legend ReverseItems="True" />
+                            </dxc:ChartControl.Legend>
+                        </dxc:ChartControl>
+                    </Grid>
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutControl>
+        </Grid>
+    </DockPanel>
+</local:PivotGridDemoModule>

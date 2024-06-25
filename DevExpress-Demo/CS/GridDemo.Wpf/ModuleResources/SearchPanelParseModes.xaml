@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate x:Key="searchPanelParseModeItemTemplate">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="370" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{Binding Mode}" FontWeight="Bold" />
+            <TextBlock Grid.Column="1" Text="{Binding Description}" TextWrapping="Wrap" />
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

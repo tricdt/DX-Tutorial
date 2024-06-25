@@ -1,0 +1,155 @@
+﻿<local:GaugesDemoModule x:Class="GaugesDemo.ViewTypes"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
+                        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                        xmlns:local="clr-namespace:GaugesDemo"
+                        mc:Ignorable="d"
+                        d:DesignHeight="557"
+                        d:DesignWidth="1000"
+                        DataContext="{dxmvvm:ViewModelSource Type={x:Type local:CurrentTimeViewModel}}"
+                        Loaded="{DXEvent Handler='Start()'}"
+                        Unloaded="{DXEvent Handler='Stop()'}">
+    <Grid Grid.Row="1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.32*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.15*" />
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <RadialGradientBrush Center="0.5,0.142" GradientOrigin="0.5,0.142" RadiusY="0.853" RadiusX="0.853">
+                <GradientStop Color="#FF2D333E" />
+                <GradientStop Color="#FF151720" Offset="1" />
+            </RadialGradientBrush>
+        </Grid.Background>
+        <TextBlock Grid.Row="0"
+                   Grid.ColumnSpan="2"
+                   Text="Current Time"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="22"
+                   Foreground="#FF54BCE3" />
+        <TextBlock Grid.Row="2"
+                   Grid.Column="0"
+                   Text="7 Segments"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="18"
+                   Foreground="#FF9E9EB6" />
+        <TextBlock Grid.Row="2"
+                   Grid.Column="1"
+                   Text="14 Segments"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="18"
+                   Foreground="#FF9E9EB6" />
+        <TextBlock Grid.Row="5"
+                   Grid.Column="0"
+                   Text="5x8 Matrix"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="18"
+                   Foreground="#FF9E9EB6" />
+        <TextBlock Grid.Row="5"
+                   Grid.Column="1"
+                   Text="8x14 Matrix"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="18"
+                   Foreground="#FF9E9EB6" />
+        <dxga:DigitalGaugeControl Text="{Binding CurrentTime}"
+                                  SymbolCount="8"
+                                  Grid.Row="1"
+                                  Grid.Column="0"
+                                  Margin="60,0,20,0"
+                                  FlowDirection="LeftToRight"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  TextDirection="RightToLeft">
+            <dxga:DigitalGaugeControl.Layers>
+                <dxga:DigitalGaugeLayer />
+            </dxga:DigitalGaugeControl.Layers>
+            <dxga:DigitalGaugeControl.Model>
+                <dxga:DigitalProgressiveModel />
+            </dxga:DigitalGaugeControl.Model>
+            <dxga:SevenSegmentsView>
+                    <dxga:SevenSegmentsView.Animation>
+                        <dxga:BlinkingAnimation RefreshTime="00:000:00.5" SymbolsStates="0 0 1 0 0 1 0 0" />
+                    </dxga:SevenSegmentsView.Animation>
+                </dxga:SevenSegmentsView>
+        </dxga:DigitalGaugeControl>
+        <dxga:DigitalGaugeControl Text="{Binding CurrentTime}"
+                                  SymbolCount="8"
+                                  Grid.Row="1"
+                                  Grid.Column="1"
+                                  Margin="20,0,60,0"
+                                  FlowDirection="LeftToRight"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  TextDirection="RightToLeft">
+            <dxga:DigitalGaugeControl.Layers>
+                <dxga:DigitalGaugeLayer />
+            </dxga:DigitalGaugeControl.Layers>
+            <dxga:DigitalGaugeControl.Model>
+                <dxga:DigitalProgressiveModel />
+            </dxga:DigitalGaugeControl.Model>
+            <dxga:FourteenSegmentsView>
+                <dxga:FourteenSegmentsView.Animation>
+                    <dxga:BlinkingAnimation RefreshTime="00:000:00.5" SymbolsStates="0 0 1 0 0 1 0 0" />
+                </dxga:FourteenSegmentsView.Animation>
+            </dxga:FourteenSegmentsView>
+        </dxga:DigitalGaugeControl>
+        <dxga:DigitalGaugeControl Text="{Binding CurrentTime}"
+                                  SymbolCount="8"
+                                  Grid.Row="4"
+                                  Grid.Column="0"
+                                  Margin="60,0,20,0"
+                                  FlowDirection="LeftToRight"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  TextDirection="RightToLeft">
+            <dxga:DigitalGaugeControl.Layers>
+                <dxga:DigitalGaugeLayer />
+            </dxga:DigitalGaugeControl.Layers>
+            <dxga:DigitalGaugeControl.Model>
+                <dxga:DigitalProgressiveModel />
+            </dxga:DigitalGaugeControl.Model>
+            <dxga:MatrixView5x8>
+                <dxga:MatrixView5x8.Animation>
+                    <dxga:BlinkingAnimation RefreshTime="00:000:00.5" SymbolsStates="0 0 1 0 0 1 0 0" />
+                </dxga:MatrixView5x8.Animation>
+            </dxga:MatrixView5x8>
+        </dxga:DigitalGaugeControl>
+        <dxga:DigitalGaugeControl Text="{Binding CurrentTime}"
+                                  SymbolCount="8"
+                                  Grid.Row="4"
+                                  Grid.Column="1"
+                                  Margin="20,0,60,0"
+                                  FlowDirection="LeftToRight"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  TextDirection="RightToLeft">
+            <dxga:DigitalGaugeControl.Layers>
+                <dxga:DigitalGaugeLayer />
+            </dxga:DigitalGaugeControl.Layers>
+            <dxga:DigitalGaugeControl.Model>
+                <dxga:DigitalProgressiveModel />
+            </dxga:DigitalGaugeControl.Model>
+            <dxga:MatrixView8x14>
+                <dxga:MatrixView8x14.Animation>
+                    <dxga:BlinkingAnimation RefreshTime="00:000:00.5" SymbolsStates="0 0 1 0 0 1 0 0" />
+                </dxga:MatrixView8x14.Animation>
+            </dxga:MatrixView8x14>
+        </dxga:DigitalGaugeControl>
+    </Grid>
+</local:GaugesDemoModule>

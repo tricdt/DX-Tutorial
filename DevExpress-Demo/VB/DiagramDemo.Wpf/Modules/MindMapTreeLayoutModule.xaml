@@ -1,0 +1,123 @@
+﻿<local:LayoutModuleBase x:Class="DiagramDemo.MindMapTreeLayoutModule"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                        xmlns:local="clr-namespace:DiagramDemo"
+                        xmlns:t="clr-namespace:DevExpress.Diagram.Demos"
+                        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                        xmlns:dxdiag="http://schemas.devexpress.com/winfx/2008/xaml/diagram"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        mc:Ignorable="d"
+                        d:DesignWidth="800"
+                        d:DesignHeight="600">
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <StackPanel.Resources>
+                    <Style x:Key="hierarchyTrackBar" TargetType="dxe:TrackBarEdit">
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="IsSnapToTickEnabled" Value="True" />
+                        <Setter Property="LargeStep" Value="30" />
+                        <Setter Property="Maximum" Value="300" />
+                        <Setter Property="Minimum" Value="80" />
+                        <Setter Property="SmallStep" Value="10" />
+                        <Setter Property="TickFrequency" Value="10" />
+                        <Setter Property="TickPlacement" Value="None" />
+                    </Style>
+                    <Style x:Key="nodeTrackBar" TargetType="dxe:TrackBarEdit">
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="IsSnapToTickEnabled" Value="True" />
+                        <Setter Property="LargeStep" Value="15" />
+                        <Setter Property="Maximum" Value="150" />
+                        <Setter Property="Minimum" Value="10" />
+                        <Setter Property="SmallStep" Value="5" />
+                        <Setter Property="TickFrequency" Value="10" />
+                        <Setter Property="TickPlacement" Value="None" />
+                    </Style>
+                    <Style TargetType="GroupBox">
+                        <Setter Property="Margin" Value="0,5,0,0" />
+                    </Style>
+                    <Style TargetType="dxe:ListBoxEdit">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="ShowBorder" Value="False" />
+                    </Style>
+                </StackPanel.Resources>
+                <GroupBox Header="Orientation">
+                    <dxe:ListBoxEdit x:Name="orientationListBox"
+                                     SelectedIndexChanged="SelectedIndexChanged"
+                                     EditValue="{Binding ElementName=diagramControl, Path=MindMapTreeLayoutOrientation, Mode=TwoWay}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type Orientation}" />
+                        </dxmvvm:Interaction.Behaviors>
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Sub Tree Alignment">
+                    <dxe:ListBoxEdit x:Name="subTreeAlignmentListBox"
+                                     SelectedIndexChanged="SelectedIndexChanged"
+                                     EditValue="{Binding ElementName=diagramControl, Path=MindMapTreeLayoutSubTreeAlignment, Mode=TwoWay}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type dxdiag:Alignment}" />
+                        </dxmvvm:Interaction.Behaviors>
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Sub Tree Default Split Mode">
+                    <dxe:ListBoxEdit x:Name="alignmentListBox"
+                                     SelectedIndexChanged="SelectedIndexChanged"
+                                     EditValue="{Binding ElementName=diagramControl, Path=MindMapTreeLayoutSubTreeDefaultSplitMode, Mode=TwoWay}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type dxdiag:SubTreeDefaultSplitMode}" />
+                        </dxmvvm:Interaction.Behaviors>
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Hierarchy Spacing">
+                    <dxe:TrackBarEdit x:Name="hierarchySpacingTrackBar"
+                                      Style="{StaticResource hierarchyTrackBar}"
+                                      EditValue="{Binding ElementName=diagramControl, Path=MindMapTreeLayoutHierarchySpacing, Mode=TwoWay}"
+                                      EditValueChanged="EditValueChanged" />
+                </GroupBox>
+                <GroupBox Header="Node Spacing">
+                    <dxe:TrackBarEdit x:Name="nodeSpacingTrackBar"
+                                      Style="{StaticResource nodeTrackBar}"
+                                      EditValue="{Binding ElementName=diagramControl, Path=MindMapTreeLayoutNodeSpacing, Mode=TwoWay}"
+                                      EditValueChanged="EditValueChanged" />
+                </GroupBox>
+                <GroupBox Header="Root Spacing">
+                    <dxe:TrackBarEdit x:Name="rootSpacingTrackBar"
+                                      Style="{StaticResource hierarchyTrackBar}"
+                                      EditValue="{Binding ElementName=diagramControl, Path=MindMapTreeLayoutRootSpacing, Mode=TwoWay}"
+                                      EditValueChanged="EditValueChanged" />
+                </GroupBox>
+                <Button Content="Add child"
+                        Click="CreateChild"
+                        IsEnabled="{Binding ElementName=diagramControl, Path=PrimarySelection, Converter={t:SelectedItemsConverter}}"
+                        Margin="0,12,0,0" />
+            </StackPanel>
+        </ScrollViewer>
+        <Grid>
+            <dxdiag:DiagramDesignerControl x:Name="diagramControl"
+                                           DockPanel.Dock="Right"
+                                           Theme="Linear"
+                                           ToolboxVisibility="Closed"
+                                           SelectedStencils="BasicShapes,ArrowShapes"
+                                           ZoomFactor="0.65"
+                                           LineJumpStyle="Bow"
+                                           AllowUndoRedo="False"/>
+        </Grid>
+    </DockPanel>
+</local:LayoutModuleBase>

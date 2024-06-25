@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProjectGuid>{B04E1BE0-A056-09CF-27CC-3B8E43CEF675}</ProjectGuid>
+    <EnableDefaultItems>False</EnableDefaultItems>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <Configurations>Debug;Release;DebugTest</Configurations>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    <EmbeddedResourceUseDependentUponConvention>False</EmbeddedResourceUseDependentUponConvention>
+    <RootNamespace>VisualStudioDocking</RootNamespace>
+    <AssemblyName>VisualStudioDocking</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>WinExe</OutputType>
+    <WarningLevel>4</WarningLevel>
+    <IntermediateOutputPath>obj.NCD</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;WPF;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputPath>.\bin\ClickOnce DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\ClickOnce ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;WPF;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktopTest\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DEBUGTEST;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Images\AppIcon.ico" />
+    <Resource Include="Images\Docking\Run.svg" />
+    <Resource Include="Images\Docking\About.svg" />
+    <Resource Include="Images\Docking\CloseSolution.svg" />
+    <Resource Include="Images\Docking\Copy.svg" />
+    <Resource Include="Images\Docking\Cut.svg" />
+    <Resource Include="Images\Docking\Error.svg" />
+    <Resource Include="Images\Docking\File.svg" />
+    <Resource Include="Images\Docking\Find.svg" />
+    <Resource Include="Images\Docking\FindInFilesWindow.svg" />
+    <Resource Include="Images\Docking\Info.svg" />
+    <Resource Include="Images\Docking\LoadLayout.svg" />
+    <Resource Include="Images\Docking\OpenFile.svg" />
+    <Resource Include="Images\Docking\Output.svg" />
+    <Resource Include="Images\Docking\Paste.svg" />
+    <Resource Include="Images\Docking\PropertiesWindow.svg" />
+    <Resource Include="Images\Docking\Redo.svg" />
+    <Resource Include="Images\Docking\Refresh.svg" />
+    <Resource Include="Images\Docking\Save.svg" />
+    <Resource Include="Images\Docking\SaveAll.svg" />
+    <Resource Include="Images\Docking\SaveLayout.svg" />
+    <Resource Include="Images\Docking\ShowAllFiles.svg" />
+    <Resource Include="Images\Docking\SolutionExplorer.svg" />
+    <Resource Include="Images\Docking\TaskList.svg" />
+    <Resource Include="Images\Docking\Toolbox.svg" />
+    <Resource Include="Images\Docking\Undo.svg" />
+    <Resource Include="Images\Docking\Warning.svg" />
+    <Resource Include="Images\Docking\FileCS.svg" />
+    <Resource Include="Images\Docking\FileXaml.svg" />
+    <Resource Include="Images\Docking\FindInFiles.svg" />
+    <Resource Include="Images\Docking\References.svg" />
+    <Resource Include="Images\Docking\Replace.svg" />
+    <Resource Include="Images\Docking\NewProject.svg" />
+    <Resource Include="Images\General\Button.svg" />
+    <Resource Include="Images\General\CheckBox.svg" />
+    <Resource Include="Images\General\CheckBoxList.svg" />
+    <Resource Include="Images\General\ComboBox.svg" />
+    <Resource Include="Images\General\DataGrid.svg" />
+    <Resource Include="Images\General\GroupBox.svg" />
+    <Resource Include="Images\General\Label.svg" />
+    <Resource Include="Images\General\ListBox.svg" />
+    <Resource Include="Images\General\ListView.svg" />
+    <Resource Include="Images\General\Panel.svg" />
+    <Resource Include="Images\General\RadioButton.svg" />
+    <Resource Include="Images\General\SplitContainerControl.svg" />
+    <Resource Include="Images\General\SplitterControl.svg" />
+    <Resource Include="Images\General\TabControl.svg" />
+    <Resource Include="Images\General\TableLayoutPanel.svg" />
+    <Resource Include="Images\DX\BarCodeEdit.svg" />
+    <Resource Include="Images\DX\ButtonEdit.svg" />
+    <Resource Include="Images\DX\Calculator.svg" />
+    <Resource Include="Images\DX\CheckEdit.svg" />
+    <Resource Include="Images\DX\ColorEdit.svg" />
+    <Resource Include="Images\DX\DateEdit.svg" />
+    <Resource Include="Images\DX\ImageEdit.svg" />
+    <Resource Include="Images\DX\ListBoxEdit.svg" />
+    <Resource Include="Images\DX\MemoEdit.svg" />
+    <Resource Include="Images\DX\PopupBaseEdit.svg" />
+    <Resource Include="Images\DX\RangeControl.svg" />
+    <Resource Include="Images\DX\TextEdit.svg" />
+    <Resource Include="Images\DX\ToggleSwitch.svg" />
+    <Resource Include="Images\DX\ToggleSwitchEdit.svg" />
+    <Resource Include="Images\DX\ChartControl.svg" />
+    <Resource Include="Images\DX\GridControl.svg" />
+    <Resource Include="Images\DX\LookUpEdit.svg" />
+    <Resource Include="Images\DX\PDFViewer.svg" />
+    <Resource Include="Images\DX\PivotGridControl.svg" />
+    <Resource Include="Images\DX\SchedulerControl.svg" />
+    <Resource Include="Images\DX\SpreadsheetControl.svg" />
+    <PackageReference Include="DevExpress.Wpf.Demos" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="22.2.3" />
+    
+    
+    
+    
+    
+    
+    
+    
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="BarTemplateSelector.cs" />
+    <Compile Include="MainViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs" />
+    <Compile Include="Properties\Settings.Designer.cs" />
+    <Compile Include="Services\DockingSerializationDialogService.cs" />
+    <Compile Include="SplashScreen\SplashScreenWindow.xaml.cs">
+      <DependentUpon>SplashScreenWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SplashScreen\SplashScreenWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Docking\SplashScreenBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Docking\OpenSolution.svg" />
+  </ItemGroup>
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent"><ItemGroup><Resource Include="@(Page)" /></ItemGroup><ItemGroup><Resource Include="@(Compile)" /></ItemGroup></Target>
+  <ItemGroup></ItemGroup>
+</Project>

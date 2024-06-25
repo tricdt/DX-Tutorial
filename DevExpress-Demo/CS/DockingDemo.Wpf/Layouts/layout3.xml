@@ -1,0 +1,70 @@
+﻿<XtraSerializer version="1.0" application="DockLayoutManager">
+  <property name="#LayoutVersion" isnull="true" />
+  <property name="$DockLayoutManager" iskey="true" value="DockLayoutManager">
+    <property name="Items" iskey="true" value="8">
+      <property name="Item1" isnull="true" iskey="true">
+        <property name="TypeName">LayoutGroup</property>
+        <property name="ParentName" isnull="true" />
+        <property name="ParentCollectionName" isnull="true" />
+        <property name="Name">dockItem1</property>
+      </property>
+      <property name="Item2" isnull="true" iskey="true">
+        <property name="Caption">Panel5</property>
+        <property name="TypeName">LayoutPanel</property>
+        <property name="ParentName">dockItem1</property>
+        <property name="ParentCollectionName" isnull="true" />
+        <property name="Name">panel0</property>
+        <property name="Width">*</property>
+        <property name="Height">*</property>
+        <property name="ShowCaption">false</property>
+        <property name="ShowBorder">false</property>
+      </property>
+      <property name="Item3" isnull="true" iskey="true">
+        <property name="ParentCollectionName">$AutoHideGroups</property>
+        <property name="ParentName" isnull="true" />
+        <property name="Name">dockItem2</property>
+        <property name="TypeName">AutoHideGroup</property>
+        <property name="AutoHideSize">200,200</property>
+        <property name="DockType">Right</property>
+      </property>
+      <property name="Item4" isnull="true" iskey="true">
+        <property name="Caption">Panel3</property>
+        <property name="TypeName">LayoutPanel</property>
+        <property name="ParentName">dockItem2</property>
+        <property name="ParentCollectionName" isnull="true" />
+        <property name="Name">panel3</property>
+      </property>
+      <property name="Item5" isnull="true" iskey="true">
+        <property name="Caption">Panel4</property>
+        <property name="TypeName">LayoutPanel</property>
+        <property name="ParentName">dockItem2</property>
+        <property name="ParentCollectionName" isnull="true" />
+        <property name="Name">panel4</property>
+        <property name="FloatSize">200,200</property>
+      </property>
+      <property name="Item6" isnull="true" iskey="true">
+        <property name="ParentCollectionName">$AutoHideGroups</property>
+        <property name="ParentName" isnull="true" />
+        <property name="Name">dockItem3</property>
+        <property name="TypeName">AutoHideGroup</property>
+        <property name="AutoHideSize">200,200</property>
+        <property name="DockType">Left</property>
+      </property>
+      <property name="Item7" isnull="true" iskey="true">
+        <property name="Caption">Panel1</property>
+        <property name="TypeName">LayoutPanel</property>
+        <property name="ParentName">dockItem3</property>
+        <property name="ParentCollectionName" isnull="true" />
+        <property name="Name">panel1</property>
+      </property>
+      <property name="Item8" isnull="true" iskey="true">
+        <property name="Caption">Panel2</property>
+        <property name="TypeName">LayoutPanel</property>
+        <property name="ParentName">dockItem3</property>
+        <property name="ParentCollectionName" isnull="true" />
+        <property name="Name">panel2</property>
+        <property name="FloatSize">200,200</property>
+      </property>
+    </property>
+  </property>
+</XtraSerializer>

@@ -1,0 +1,198 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.RealTimeChartDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:ChartsDemo"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{dxmvvm:ViewModelSource Type=local:RealTimeChartViewModel}"
+    ModuleUnloaded="{DXEvent '@c.Unload()'}">
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+
+    <DockPanel>
+        <!--#region ChartsDemoRibbon-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}" />
+        <!--#endregion-->
+
+        <dxc:ChartControl IsDirectXSurfaceRendering ="True"
+            x:Name="chart"
+            DataSource="{Binding DataSource}"
+            AutoLayout="False"
+            CrosshairEnabled="False"
+            LegendItemsSource="{Binding Panes}"
+            Palette="{Binding Palette, Mode=OneWayToSource}">
+            <dxc:ChartControl.LegendItemTemplate>
+                <DataTemplate>
+                    <dxc:Legend
+                        HorizontalPosition="Left"
+                        DockTarget="{Binding}"
+                        MarkerMode="None"
+                        IndentFromDiagram="5,5,0,0">
+                        <dxc:Legend.CustomItems>
+                            <dxc:CustomLegendItem
+                                Text="{Binding Name}">
+                            </dxc:CustomLegendItem>
+                        </dxc:Legend.CustomItems>
+                    </dxc:Legend>
+                </DataTemplate>
+            </dxc:ChartControl.LegendItemTemplate>
+            <!--#region Titles-->
+            <dxc:ChartControl.Titles>
+                <dxc:Title
+                    Content="Live Sensors Data (8 series, 10 000 points per series)"
+                    FontSize="18"
+                    Margin="0"
+                    HorizontalAlignment="Center"/>
+                <dxc:Title
+                    Content="{Binding FPS}"
+                    FontSize="14"
+                    Margin="0"
+                    HorizontalAlignment="Left"/>
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+            <dxc:XYDiagram2D
+                PaneItemsSource="{Binding Panes}"
+                SeriesItemsSource="{Binding SensorDataSeries}"
+                SecondaryAxisYItemsSource="{Binding Panes}"
+                EnableAxisXNavigation="True"
+                BeforeZoom="{DXEvent '@c.LimitZoom(@args)'}">
+                <dxc:XYDiagram2D.NavigationOptions>
+                    <dxc:NavigationOptions
+                        AxisXMaxZoomPercent="1000" />
+                </dxc:XYDiagram2D.NavigationOptions>
+                <dxc:XYDiagram2D.AxisX>
+                    <dxc:AxisX2D
+                        StickToEdge="True"
+                        VisibilityInPaneItemsSource="{Binding Panes}">
+                        <dxc:AxisX2D.DateTimeScaleOptions>
+                            <dxc:ContinuousDateTimeScaleOptions />
+                        </dxc:AxisX2D.DateTimeScaleOptions>
+                        <!--#region Ranges-->
+                        <dxc:AxisX2D.WholeRange>
+                            <dxc:Range
+                                SideMarginsValue="0" />
+                        </dxc:AxisX2D.WholeRange>
+                        <!--#endregion-->
+                        <!--#region Label-->
+                        <dxc:AxisX2D.Label>
+                            <dxc:AxisLabel>
+                                <dxc:Axis2D.ResolveOverlappingOptions>
+                                    <dxc:AxisLabelResolveOverlappingOptions
+                                        AllowHide="False"
+                                        AllowRotate="False"
+                                        AllowStagger="False" />
+                                </dxc:Axis2D.ResolveOverlappingOptions>
+                            </dxc:AxisLabel>
+                        </dxc:AxisX2D.Label>
+                        <!--#endregion-->
+                        <dxc:AxisX2D.VisibilityInPaneItemTemplate>
+                            <DataTemplate>
+                                <dxc:VisibilityInPane
+                                    Pane="{Binding}"
+                                    Visible="{Binding AxisXVisible}" />
+                            </DataTemplate>
+                        </dxc:AxisX2D.VisibilityInPaneItemTemplate>
+                    </dxc:AxisX2D>
+                </dxc:XYDiagram2D.AxisX>
+                <dxc:XYDiagram2D.AxisY>
+                    <dxc:AxisY2D
+                        Visible="False"
+                        GridLinesVisible="False"
+                        Interlaced="False" />
+                </dxc:XYDiagram2D.AxisY>
+                <dxc:XYDiagram2D.DefaultPane>
+                    <dxc:Pane
+                        Visibility="Collapsed" />
+                </dxc:XYDiagram2D.DefaultPane>
+                <dxc:XYDiagram2D.PaneItemTemplate>
+                    <DataTemplate>
+                        <dxc:Pane
+                            Padding="0,-3,0,-3">
+                            <dxc:Pane.AxisXScrollBarOptions>
+                                <dxc:ScrollBarOptions
+                                    Visible="{Binding AxisXVisible}" />
+                            </dxc:Pane.AxisXScrollBarOptions>
+                        </dxc:Pane>
+                    </DataTemplate>
+                </dxc:XYDiagram2D.PaneItemTemplate>
+                <dxc:XYDiagram2D.SecondaryAxisYItemTemplate>
+                    <DataTemplate>
+                        <dxc:SecondaryAxisY2D
+                            GridLinesVisible="True"
+                            TickmarksMinorVisible="False">
+                            <dxc:SecondaryAxisY2D.NumericScaleOptions>
+                                <dxc:ContinuousNumericScaleOptions
+                                    AutoGrid="False"
+                                    GridSpacing="20"/>
+                            </dxc:SecondaryAxisY2D.NumericScaleOptions>
+                                <dxc:SecondaryAxisY2D.WholeRange>
+                                <dxc:Range
+                                    dxc:AxisY2D.AlwaysShowZeroLevel="False" />
+                            </dxc:SecondaryAxisY2D.WholeRange>
+                        </dxc:SecondaryAxisY2D>
+                    </DataTemplate>
+                </dxc:XYDiagram2D.SecondaryAxisYItemTemplate>
+                <dxc:XYDiagram2D.SeriesItemTemplate>
+                    <DataTemplate>
+                        <dxc:LineSeries2D
+                            ArgumentDataMember="TimeStamp"
+                            ValueDataMember="{Binding ValueDataMember}"
+                            Pane="{Binding Pane}"
+                            AxisY="{Binding Pane}"
+                            DisplayName="1"
+                            ArgumentScaleType="DateTime"
+                            Brush="{Binding Brush}">
+                            <dxc:LineSeries2D.LineStyle>
+                                <dxc:LineStyle
+                                    LineJoin="Miter"
+                                    Thickness="1" />
+                            </dxc:LineSeries2D.LineStyle>
+                        </dxc:LineSeries2D>
+                    </DataTemplate>
+                </dxc:XYDiagram2D.SeriesItemTemplate>
+            </dxc:XYDiagram2D>
+            <dxc:ChartControl.Legend>
+                <dxc:Legend
+                    VerticalPosition="BottomOutside"
+                    HorizontalPosition="Center"
+                    Orientation="Horizontal">
+                    <dxc:Legend.Resources>
+                        <DataTemplate
+                            x:Key="legendMarkerTemplate">
+                            <Rectangle
+                                Height="1"
+                                Width="16"
+                                Fill="{Binding MarkerBrush}" />
+                        </DataTemplate>
+                    </dxc:Legend.Resources>
+                    <dxc:Legend.CustomItems>
+                        <dxc:CustomLegendItem
+                            Text="Sensor Set 1"
+                            MarkerBrush="{Binding SensorSet1Brush}"
+                            MarkerTemplate="{StaticResource legendMarkerTemplate}" />
+                        <dxc:CustomLegendItem
+                            Text="Sensor Set 2"
+                            MarkerBrush="{Binding SensorSet2Brush}"
+                            MarkerTemplate="{StaticResource legendMarkerTemplate}" />
+                    </dxc:Legend.CustomItems>
+                </dxc:Legend>
+            </dxc:ChartControl.Legend>
+        </dxc:ChartControl>
+    </DockPanel>
+</local:ChartsDemoModule>

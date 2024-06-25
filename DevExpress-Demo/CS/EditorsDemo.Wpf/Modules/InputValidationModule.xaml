@@ -1,0 +1,195 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.InputValidationModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                         xmlns:local="clr-namespace:EditorsDemo">
+
+    <local:EditorsDemoModule.DataContext>
+        <local:InputValidationViewModel/>
+    </local:EditorsDemoModule.DataContext>
+
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService/>
+    </dxmvvm:Interaction.Behaviors>
+
+    <UserControl.Resources>
+        <Thickness x:Key="Height" Left="0" Top="4" Right="0" Bottom="0"/>
+    </UserControl.Resources>
+
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <local:ValidationSettings Margin="12" x:Name="settings" MinWidth="280" DataContext="{x:Null}"/>
+        </ScrollViewer>
+
+        <StackPanel Margin="12,60,12,12" MaxWidth="350"
+                    x:Name="validationContainer"
+                    dxe:ValidationService.IsValidationContainer="True"
+                    dxe:ValidationService.AllowAccessibilityAlerts="True">
+            <GroupBox Header="Login Information">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Login:" x:Name="loginLabel"/>
+                    <dxe:TextEdit Grid.Column="1"
+                                  InvalidValueBehavior="AllowLeaveEditor"
+                                  EditValue="{Binding Login}"
+                                  GotFocus="OnGotFocus"
+                                  AutomationProperties.LabeledBy="{Binding ElementName=loginLabel}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EventToCommand Command="{Binding ValidateLoginCommand}"
+                                                   EventArgsConverter="{local:ValidationEventArgsConverter}"
+                                                   EventName="Validate"/>
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:TextEdit>
+                    <TextBlock Margin="{StaticResource Height}" Grid.Row="1" Text="E-mail:" x:Name="emailLabel"/>
+                    <dxe:TextEdit Margin="{StaticResource Height}" Grid.Column="1" Grid.Row="1"
+                                  InvalidValueBehavior="AllowLeaveEditor"
+                                  EditValue="{Binding Mail, UpdateSourceTrigger=PropertyChanged}"
+                                  EditValueChanged="OnMailChanged"
+                                  GotFocus="OnGotFocus"
+                                  MaskType="RegEx"
+                                  Mask="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+                                  MaskIgnoreBlank="False"
+                                  AutomationProperties.LabeledBy="{Binding ElementName=emailLabel}"/>
+                    <TextBlock Margin="{StaticResource Height}" Grid.Row="2" Text="Confirm e-mail:" x:Name="confirmEmailLabel"/>
+                    <dxe:TextEdit Margin="{StaticResource Height}" Grid.Column="1" Grid.Row="2"
+                                  InvalidValueBehavior="AllowLeaveEditor"
+                                  EditValue="{Binding ConfirmMail}"
+                                  x:Name="txtConfirmMail"
+                                  GotFocus="OnGotFocus"
+                                  MaskType="RegEx"
+                                  Mask="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+                                  MaskIgnoreBlank="False"
+                                  AutomationProperties.LabeledBy="{Binding ElementName=confirmEmailLabel}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EventToCommand Command="{Binding ValidateMailCommand}"
+                                                   EventArgsConverter="{local:ValidationEventArgsConverter}"
+                                                   EventName="Validate"/>
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:TextEdit>
+                </Grid>
+            </GroupBox>
+            <GroupBox Margin="0,12" Header="Contact Information">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="First name:" x:Name="firstNameLabel"/>
+                    <dxe:TextEdit Grid.Column="1"
+                                  InvalidValueBehavior="AllowLeaveEditor"
+                                  EditValue="{Binding FirstName}"
+                                  GotFocus="OnGotFocus"
+                                  AutomationProperties.LabeledBy="{Binding ElementName=firstNameLabel}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EventToCommand Command="{Binding ValidateNameCommand}"
+                                                   EventArgsConverter="{local:ValidationEventArgsConverter}"
+                                                   EventName="Validate"/>
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:TextEdit>
+                    <TextBlock Margin="{StaticResource Height}" Grid.Row="1" Text="Last name:" x:Name="lastNameLabel"/>
+                    <dxe:TextEdit Margin="{StaticResource Height}" Grid.Column="1" Grid.Row="1"
+                                  InvalidValueBehavior="AllowLeaveEditor"
+                                  EditValue="{Binding LastName}"
+                                  GotFocus="OnGotFocus"
+                                  AutomationProperties.LabeledBy="{Binding ElementName=lastNameLabel}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EventToCommand Command="{Binding ValidateNameCommand}"
+                                                   EventArgsConverter="{local:ValidationEventArgsConverter}"
+                                                   EventName="Validate"/>
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:TextEdit>
+                    <TextBlock Margin="0,12" Grid.Row="2" Text="Age:" x:Name="ageLabel"/>
+                    <dxe:SpinEdit Margin="0,12" Grid.Column="1" Grid.Row="2"
+                                  InvalidValueBehavior="AllowLeaveEditor"
+                                  EditValue="{Binding Age}"
+                                  GotFocus="OnGotFocus"
+                                  IsFloatValue="False"
+                                  MinValue="20"
+                                  MaxValue="201"
+                                  AutomationProperties.LabeledBy="{Binding ElementName=ageLabel}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EventToCommand Command="{Binding ValidateAgeCommand}"
+                                                   EventArgsConverter="{local:ValidationEventArgsConverter}"
+                                                   EventName="Validate"/>
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:SpinEdit>
+                    <TextBlock Grid.Row="3" Text="Card type:" x:Name="cardTypeLabel"/>
+                    <dxe:ComboBoxEdit Grid.Column="1" Grid.Row="3"
+                                      InvalidValueBehavior="AllowLeaveEditor"
+                                      EditValue="{Binding CardType, UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{x:Static local:ValidationViewModelBase.Cards}"
+                                      DisplayMember="DisplayName"
+                                      ValueMember="Name"
+                                      GotFocus="OnGotFocus"
+                                      IsTextEditable="False"
+                                      SelectedIndex="0"
+                                      SelectedIndexChanged="OnCardTypeChanged"
+                                      AutomationProperties.LabeledBy="{Binding ElementName=cardTypeLabel}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EventToCommand Command="{Binding ValidateCardTypeCommand}"
+                                                   EventArgsConverter="{local:ValidationEventArgsConverter}"
+                                                   EventName="Validate"/>
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:ComboBoxEdit>
+                    <TextBlock Margin="{StaticResource Height}" Grid.Row="4" Text="Card number:" x:Name="cardNumberLabel"/>
+                    <dxe:TextEdit Margin="{StaticResource Height}" Grid.Column="1" Grid.Row="4"
+                                  InvalidValueBehavior="AllowLeaveEditor"
+                                  EditValue="{Binding CardNumber}"
+                                  x:Name="txtCardNumber"
+                                  GotFocus="OnGotFocus"
+                                  MaskType="RegEx"
+                                  Mask="[0-9]*"
+                                  MaskShowPlaceHolders="False"
+                                  MaskUseAsDisplayFormat="True"
+                                  AutomationProperties.LabeledBy="{Binding ElementName=cardNumberLabel}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EventToCommand Command="{Binding ValidateCardNumberCommand}"
+                                                   EventArgsConverter="{local:ValidationEventArgsConverter}"
+                                                   EventName="Validate"/>
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:TextEdit>
+                    <TextBlock Margin="{StaticResource Height}" Grid.Row="5" Text="Card exp. date:" x:Name="cardExpDateLabel"/>
+                    <dxe:DateEdit Margin="{StaticResource Height}" Grid.Column="1" Grid.Row="5"
+                                  InvalidValueBehavior="AllowLeaveEditor"
+                                  DateTime="{Binding CardExpDate}"
+                                  GotFocus="OnGotFocus"
+                                  AllowNullInput="false"
+                                  AutomationProperties.LabeledBy="{Binding ElementName=cardExpDateLabel}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EventToCommand Command="{Binding ValidateCardExpDateCommand}"
+                                                   EventArgsConverter="{local:ValidationEventArgsConverter}"
+                                                   EventName="Validate"/>
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:DateEdit>
+                </Grid>
+            </GroupBox>
+            <Button Width="100"
+                    Content="Join"
+                    Command="{Binding ShowMessageCommand}"
+                    IsEnabled="{Binding Path=(dxe:ValidationService.HasValidationError), ElementName=validationContainer, Converter={dx:NegationConverter}}"/>
+        </StackPanel>
+    </DockPanel>
+</local:EditorsDemoModule>

@@ -1,0 +1,120 @@
+﻿<local:ControlsDemoModule x:Class="ControlsDemo.TileNavPaneModule"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:local="clr-namespace:ControlsDemo"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+                          xmlns:dxnav="http://schemas.devexpress.com/winfx/2008/xaml/navigation"
+                          xmlns:dxwuin="http://schemas.devexpress.com/winfx/2008/xaml/windowsui/navigation"
+                          xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                          xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm">
+    <local:ControlsDemoModule.DataContext>
+        <local:TileNavPaneViewModel />
+    </local:ControlsDemoModule.DataContext>
+    <local:ControlsDemoModule.Resources>
+        <dxmvvm:ObjectToObjectConverter x:Key="dockSideToDockConverter">
+            <dxmvvm:MapItem Source="Top" Target="Top" />
+            <dxmvvm:MapItem Source="Bottom" Target="Bottom" />
+        </dxmvvm:ObjectToObjectConverter>
+        <dxmvvm:ObjectToObjectConverter x:Key="dockSideToFlyoutShowDirectionConverter">
+            <dxmvvm:MapItem Source="Top" Target="Default" />
+            <dxmvvm:MapItem Source="Bottom" Target="Inverted" />
+        </dxmvvm:ObjectToObjectConverter>
+    </local:ControlsDemoModule.Resources>
+    <dxmvvm:Interaction.Triggers>
+        <dxmvvm:EventToCommand EventName="ModuleUnloaded" Command="{Binding ViewUnloadedCommand}" />
+    </dxmvvm:Interaction.Triggers>
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+    </dxmvvm:Interaction.Behaviors>
+    <DockPanel LastChildFill="True">
+        <dxnav:TileNavPane DockPanel.Dock="{Binding ElementName=DockCombo, Path=SelectedItem.Id, Converter={StaticResource dockSideToDockConverter}}"
+                           FlyoutShowDirection="{Binding ElementName=DockCombo, Path=SelectedItem.Id, Converter={StaticResource dockSideToFlyoutShowDirectionConverter}}"
+                           CategoriesSource="{Binding Categories}"
+                           x:Name="tileNavPane">
+            <dxnav:TileNavPane.NavButtons>
+                <dxnav:NavButton Glyph="/ControlsDemo;component/Images/Home.svg" AllowGlyphTheming="True" Command="{Binding BackCommand}" />
+                <dxnav:NavButton Content="Categories" IsMain="True" />
+                <dxnav:NavButton Content="Actions" HorizontalAlignment="Right" ItemsSource="{Binding Actions}">
+                    <dxnav:NavButton.ItemTemplate>
+                        <DataTemplate>
+                            <dxnav:TileNavItem Content="{Binding DisplayName}"
+                                               Size="{Binding Size}"
+                                               TileGlyph="{Binding Image}"
+                                               AllowGlyphTheming="True"
+                                               Padding="8,6,8,6"
+                                               Command="{Binding Path=ShowNotificationCommand}"
+                                               CommandParameter="clicked" />
+                        </DataTemplate>
+                    </dxnav:NavButton.ItemTemplate>
+                </dxnav:NavButton>
+            </dxnav:TileNavPane.NavButtons>
+            <dxnav:TileNavPane.CategoryTemplate>
+                <DataTemplate>
+                    <dxnav:TileNavCategory Content="{Binding DisplayName}"
+                                           ItemsSource="{Binding Items}"
+                                           IsSelected="{Binding IsSelected, Mode=TwoWay}"
+                                           TileGlyph="{Binding Image}"
+                                           AllowGlyphTheming="True"
+                                           Padding="8,4,8,4">
+                        <dxnav:TileNavCategory.ItemTemplate>
+                            <DataTemplate>
+                                <dxnav:TileNavItem Content="{Binding DisplayName}"
+                                                   ItemsSource="{Binding Items}"
+                                                   IsSelected="{Binding IsSelected, Mode=TwoWay}"
+                                                   TileGlyph="{Binding Image}"
+                                                   AllowGlyphTheming="True"
+                                                   Padding="8,4,8,4">
+                                    <dxnav:TileNavItem.ItemTemplate>
+                                        <DataTemplate>
+                                            <dxnav:TileNavSubItem Content="{Binding DisplayName}"
+                                                                  IsSelected="{Binding IsSelected, Mode=TwoWay}"
+                                                                  TileGlyph="{Binding Image}"
+                                                                  AllowGlyphTheming="True"
+                                                                  Padding="8,6,8,6" />
+                                        </DataTemplate>
+                                    </dxnav:TileNavItem.ItemTemplate>
+                                </dxnav:TileNavItem>
+                            </DataTemplate>
+                        </dxnav:TileNavCategory.ItemTemplate>
+                    </dxnav:TileNavCategory>
+                </DataTemplate>
+            </dxnav:TileNavPane.CategoryTemplate>
+        </dxnav:TileNavPane>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,5,12,12" Orientation="Vertical" MinWidth="210">
+                <GroupBox Header="TileNavPane properties">
+                    <StackPanel>
+                        <dxe:CheckEdit IsChecked="{Binding ElementName=tileNavPane, Path=ContinuousNavigation}" Content="Continuous navigation" />
+                        <dxe:CheckEdit IsChecked="{Binding ElementName=tileNavPane, Path=CloseOnOuterClick}"
+                                       Content="Close drop-down on outer mouse click"
+                                       Margin="0,5" />
+                        <dxe:CheckEdit IsChecked="{Binding ElementName=tileNavPane, Path=ShowItemShadow}" Content="Show items shadow" Margin="0,5" />
+                    </StackPanel>
+                </GroupBox>
+                <dxlc:LayoutItem Label="Dock" AddColonToLabel="True" Margin="0,12,0,0">
+                    <dxe:ComboBoxEdit x:Name="DockCombo" SelectedIndex="0">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EnumItemsSourceBehavior EnumType="local:DockSide" />
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:ComboBoxEdit>
+                </dxlc:LayoutItem>
+            </StackPanel>
+        </ScrollViewer>
+        <dxwui:NavigationFrame x:Name="frame" Source="TileNavPaneHomeView" BackNavigationMode="Root" AnimationType="SlideHorizontal">
+            <dxmvvm:Interaction.Behaviors>
+                <dxwuin:FrameNavigationService>
+                    <dxwuin:FrameNavigationService.ViewLocator>
+                        <local:TileNavViewLocator />
+                    </dxwuin:FrameNavigationService.ViewLocator>
+                </dxwuin:FrameNavigationService>
+            </dxmvvm:Interaction.Behaviors>
+        </dxwui:NavigationFrame>
+    </DockPanel>
+</local:ControlsDemoModule>

@@ -1,0 +1,286 @@
+<UserControl x:Class="DevExpress.VideoRent.Wpf.MovieEditView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    xmlns:resources="clr-namespace:DevExpress.VideoRent.Resources;assembly=DevExpress.VideoRent.Resources"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/EditsStyles.xaml" />
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/CommonTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dx:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <helpers:DataSource x:Key="DataSource" />
+            <resources:ImagesSourceHelper x:Key="ImagesHelper" />
+            <helpers:ImageCollectionImageSource x:Key="AddButtonImageSource" ImageCollection="{Binding Source={StaticResource ImagesHelper}, Path=BarIcons}" ImageIndex="0" />
+            <helpers:ImageCollectionImageSource x:Key="DeleteButtonImageSource" ImageCollection="{Binding Source={StaticResource ImagesHelper}, Path=BarIcons}" ImageIndex="2" />
+            <helpers:ImageCollectionImageSource x:Key="AllowEditingButtonImageSource" ImageCollection="{Binding Source={StaticResource ImagesHelper}, Path=BarIcons}" ImageIndex="5" />
+            <local:MovieGenreEnumToIListConverter x:Key="MovieGenreEnumToIListConverter"/>
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore"/>
+            <local:MovieFormatChartSourceGenerator x:Key="MovieFormatChartSourceGenerator"/>
+            <helpers:ValidationRuleIsNotBlank x:Key="ValidationRuleIsNotBlank" Message="{helpers:ConstString ID=RuleIsNotBlankWarning}" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}" DoValidateSignalSlot="{Binding DoValidateSignal}" IsValid="{Binding IsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <helpers:BindingInfo ElementName="resource:ElementLayoutDataStore" Property="{x:Static local:ElementLayoutDataStore.DisposeSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="TitleEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="PhotoEdit" Property="{x:Static dxe:ImageEdit.SourceProperty}" Value="{Binding EditObject.VideoRentObject.Photo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DrawingImageToImageSourceConverter}}" />
+            <helpers:BindingInfo ElementName="ReleaseDateEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.ReleaseDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="RatingEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Rating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="RatingEdit" Property="{x:Static dxe:LookUpEditBase.ItemsSourceProperty}" Value="{Binding MovieRatingEditData.List}" />
+            <helpers:BindingInfo ElementName="GenreEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Genre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource MovieGenreEnumToIListConverter}}" />
+            <helpers:BindingInfo ElementName="GenreEdit" Property="{x:Static dxe:LookUpEditBase.ItemsSourceProperty}" Value="{Binding MovieGenreEditData.List}" />
+            <helpers:BindingInfo ElementName="GenreEdit" Property="{x:Static dxe:BaseEdit.NullTextProperty}" Value="{Binding MovieGenreEditData.NullValueText}" />
+            <helpers:BindingInfo ElementName="PlotEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Plot, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="TaglineEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Tagline, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="AwardsEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Awards, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="AspectRatioEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.AspectRatio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="CountriesEdit" Property="{x:Static helpers:CustomComboBoxEdit.EditCollectionProperty}" Value="{Binding EditObject.VideoRentObject.Countries}" />
+            <helpers:BindingInfo ElementName="CountriesEdit" Property="{x:Static dxe:LookUpEditBase.ItemsSourceProperty}" Value="{Binding CountryEditData.List}" />
+            <helpers:BindingInfo ElementName="RunTimeEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.RunTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="RunTimeEdit" Property="{x:Static helpers:CommandHelper.Command0Property}" Value="{Binding EditObject.CommandUpRunTime}" />
+            <helpers:BindingInfo ElementName="RunTimeEdit" Property="{x:Static helpers:CommandHelper.Command1Property}" Value="{Binding EditObject.CommandDownRunTime}" />
+            <helpers:BindingInfo ElementName="LanguageEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Language!, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="LanguageEdit" Property="{x:Static dxe:LookUpEditBase.ItemsSourceProperty}" Value="{Binding LanguageEditData.List}" />
+            <helpers:BindingInfo ElementName="WebSiteEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.WebSite, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="WebSiteEdit" Property="{x:Static helpers:CustomEventCommandHelper.DefaultButtonClickProperty}" Value="{Binding CommandGoToWebSite}" />
+            <helpers:BindingInfo ElementName="IsColorEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.IsColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="CompaniesAssociationsGrid" Property="{x:Static helpers:CustomEventCommandHelper.AddItemClickProperty}" Value="{Binding Detail.CommandAddCompany}" />
+            <helpers:BindingInfo ElementName="CompaniesAssociationsGrid" Property="{x:Static helpers:CustomEventCommandHelper.DeleteItemClickProperty}" Value="{Binding CommandDeleteCurrentCompany}" />
+            <helpers:BindingInfo ElementName="CompaniesAssociationsGrid" Property="{x:Static helpers:AddDeleteBar.AllowDeleteProperty}" Value="{Binding CurrentCompany.AllowDelete}" />
+            <helpers:BindingInfo ElementName="CompaniesGrid" Property="{x:Static dxg:GridControl.ItemsSourceProperty}" Value="{Binding EditObject.VideoRentObject.Companies}" />
+            <helpers:BindingInfo ElementName="CompaniesGridView" Property="{x:Static dxg:GridViewBase.FocusedRowProperty}" Value="{Binding CurrentCompany, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="CompaniesGridCompanyEditSettings" Property="{x:Static dxe:LookUpEditSettingsBase.ItemsSourceProperty}" Value="{Binding CompanyEditData.List}" />
+            <helpers:BindingInfo ElementName="DirectorsView" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.Directors}"/>
+            <helpers:BindingInfo ElementName="ArtistsAssociationsGrid" Property="{x:Static helpers:CustomEventCommandHelper.AddItemClickProperty}" Value="{Binding Detail.CommandAddArtist}" />
+            <helpers:BindingInfo ElementName="ArtistsAssociationsGrid" Property="{x:Static helpers:CustomEventCommandHelper.DeleteItemClickProperty}" Value="{Binding CommandDeleteCurrentArtist}" />
+            <helpers:BindingInfo ElementName="ArtistsAssociationsGrid" Property="{x:Static helpers:AddDeleteBar.AllowDeleteProperty}" Value="{Binding CurrentArtist.AllowDelete}" />
+            <helpers:BindingInfo ElementName="ArtistsGrid" Property="{x:Static dxg:GridControl.ItemsSourceProperty}" Value="{Binding EditObject.VideoRentObject.Artists}" />
+            <helpers:BindingInfo ElementName="ArtistsGridView" Property="{x:Static dxg:GridViewBase.FocusedRowProperty}" Value="{Binding CurrentArtist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="ArtistsGridArtistEditSettings" Property="{x:Static dxe:LookUpEditSettingsBase.ItemsSourceProperty}" Value="{Binding ArtistEditData.List}" />
+            <helpers:BindingInfo ElementName="ArtistsGridLineEditSettings" Property="{x:Static dxe:LookUpEditSettingsBase.ItemsSourceProperty}" Value="{Binding MovieArtistLineEditData.List}" />
+            <helpers:BindingInfo ElementName="CategoryEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Category!, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="CategoryEdit" Property="{x:Static dxe:LookUpEditBase.ItemsSourceProperty}" Value="{Binding MovieCategoryEditData.List}" />
+            <helpers:BindingInfo ElementName="CategoryEditButtonInfo" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandAddNewCategory}" />
+            <helpers:BindingInfo ElementName="LastRentedOnView" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding LastRentedOn, Mode=OneWay}"/>
+            <helpers:BindingInfo ElementName="FormatsTabs" Property="{x:Static ItemsControl.ItemsSourceProperty}" Value="{Binding FormatTabsItemsSource}"/>
+            <helpers:BindingInfo ElementName="resource:MovieFormatChartSourceGenerator" Property="{x:Static local:MovieFormatChartSourceGenerator.FormatsItemSourceProperty}" Value="{Binding Source={StaticResource DataSource}, Path=DataObject.FormatsChartSource}" />
+            <helpers:BindingInfo ElementName="resource:MovieFormatChartSourceGenerator" Property="{x:Static local:MovieFormatChartSourceGenerator.RentalsItemSourceProperty}" Value="{Binding Source={StaticResource DataSource}, Path=DataObject.RentalsChartSource}" />
+            <helpers:ValidationInfo EditName0="TitleEdit" Rule="{StaticResource ValidationRuleIsNotBlank}" />
+            <helpers:ElementLayoutInfo ElementName="MainLayoutControl" StoreFolder="LayoutControl:MovieEdit-MainLayoutControl" Store="{StaticResource ElementLayoutDataStore}" />
+            <helpers:ElementLayoutInfo ElementName="ArtistsGrid" StoreFolder="GridControl:MovieEdit-ArtistsGrid" Store="{StaticResource ElementLayoutDataStore}" />
+            <helpers:ElementLayoutInfo ElementName="CompaniesGrid" StoreFolder="GridControl:MovieEdit-CompaniesGrid" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <dxlc:LayoutControl x:Name="MainLayoutControl" helpers:ImageEditHelper.ImageEdit="{Binding ElementName=PhotoEdit}" Padding="0">
+        <dxlc:LayoutGroup x:Name="PhotoLayoutGroup" dxlc:LayoutControl.AllowHorizontalSizing="True" Orientation="Vertical" Width="300">
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=TitleLabel}" LabelPosition="Top">
+                <dxe:TextEdit x:Name="TitleEdit" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem VerticalAlignment="Stretch">
+                <helpers:CustomImageEdit x:Name="PhotoEdit" Style="{StaticResource MoviePhotoImageEdit}" />
+            </dxlc:LayoutItem>
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup View="Tabs">
+            <dxlc:LayoutGroup Header="{helpers:ConstString ID=GeneralInfo}" Orientation="Vertical">
+                <dxlc:LayoutGroup>
+                    <dxlc:LayoutItem Label="{helpers:ConstString ID=ReleaseDateLabel}">
+                        <dxe:DateEdit x:Name="ReleaseDateEdit" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="{helpers:ConstString ID=RatingLabel}">
+                        <dxe:ComboBoxEdit x:Name="RatingEdit" Style="{StaticResource RatingComboBoxEdit}" />
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutItem Label="{helpers:ConstString ID=GenreLabel}">
+                    <helpers:CustomComboBoxEdit x:Name="GenreEdit" Style="{StaticResource ListComboBoxEdit}" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="{helpers:ConstString ID=PlotLabel}" VerticalAlignment="Stretch">
+                    <dxe:TextEdit x:Name="PlotEdit" Style="{StaticResource MultilineTextEdit}" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="{helpers:ConstString ID=TaglineLabel}" VerticalAlignment="Stretch">
+                    <dxe:TextEdit x:Name="TaglineEdit" Style="{StaticResource MultilineTextEdit}" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="{helpers:ConstString ID=AwardsLabel}">
+                    <dxe:TextEdit x:Name="AwardsEdit" />
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup Header="{helpers:ConstString ID=AdditionalDetails}" Orientation="Vertical">
+                <dxlc:LayoutGroup>
+                    <dxlc:LayoutGroup Orientation="Vertical">
+                        <dxlc:LayoutItem Label="{helpers:ConstString ID=AspectRatioLabel}">
+                            <dxe:TextEdit x:Name="AspectRatioEdit" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="{helpers:ConstString ID=CountriesLabel}">
+                            <helpers:CustomComboBoxEdit x:Name="CountriesEdit" Style="{StaticResource CountriesComboBoxEdit}" />
+                        </dxlc:LayoutItem>
+                    </dxlc:LayoutGroup>
+                    <dxlc:LayoutGroup Orientation="Vertical">
+                        <dxlc:LayoutItem Label="{helpers:ConstString ID=RunTimeLabel}">
+                            <dxe:ButtonEdit x:Name="RunTimeEdit" Style="{StaticResource TimeButtonEdit}" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="{helpers:ConstString ID=LanguageLabel}">
+                            <dxe:ComboBoxEdit x:Name="LanguageEdit" Style="{StaticResource LanguageComboBoxEdit}" />
+                        </dxlc:LayoutItem>
+                    </dxlc:LayoutGroup>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutItem Label="{helpers:ConstString ID=WebSiteLabel}">
+                    <dxe:ButtonEdit x:Name="WebSiteEdit" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem>
+                    <dxe:CheckEdit x:Name="IsColorEdit" Content="{helpers:ConstString ID=Color}" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutGroup View="GroupBox" Header="{helpers:ConstString ID=Companies}" VerticalAlignment="Stretch" Padding="-11">
+                    <helpers:AssociationsGrid x:Name="CompaniesAssociationsGrid" AddItemContent="{helpers:ConstString ID=Add}" DeleteItemContent="{helpers:ConstString ID=Delete}" AllowEditingItemContent="{helpers:ConstString ID=AllowEditing}" AddItemGlyph="{Binding Source={StaticResource AddButtonImageSource}, Path=ImageSource}" DeleteItemGlyph="{Binding Source={StaticResource DeleteButtonImageSource}, Path=ImageSource}" AllowEditingItemGlyph="{Binding Source={StaticResource AllowEditingButtonImageSource}, Path=ImageSource}">
+                        <helpers:AssociationsGrid.MainContent>
+                            <dxg:GridControl x:Name="CompaniesGrid" ShowBorder="False" MaxHeight="{Binding ElementName=CompaniesAssociationsGrid, Path=ActualHeight}">
+                                <dxg:GridControl.View>
+                                    <dxg:TableView x:Name="CompaniesGridView" />
+                                </dxg:GridControl.View>
+                                <dxg:GridControl.Columns>
+                                    <dxg:GridColumn x:Name="CompanyColumn" Header="{helpers:ConstString ID=Company}" FieldName="Company!" SortIndex="0" SortOrder="Ascending">
+                                        <dxg:GridColumn.EditSettings>
+                                            <dxg:LookUpEditSettings x:Name="CompaniesGridCompanyEditSettings" helpers:StyleConverter.Style="{StaticResource CompanyLookUpEdit}" />
+                                        </dxg:GridColumn.EditSettings>
+                                    </dxg:GridColumn>
+                                    <dxg:GridColumn x:Name="DescriptionColumn" Header="{helpers:ConstString ID=Description}" FieldName="Description">
+                                        <dxg:GridColumn.EditSettings>
+                                            <dxe:MemoEditSettings helpers:StyleConverter.Style="{StaticResource MemoEdit}" />
+                                        </dxg:GridColumn.EditSettings>
+                                    </dxg:GridColumn>
+                                </dxg:GridControl.Columns>
+                            </dxg:GridControl>
+                        </helpers:AssociationsGrid.MainContent>
+                    </helpers:AssociationsGrid>
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup Header="{helpers:ConstString ID=ActorsCrew}" Orientation="Vertical">
+                <dxlc:LayoutItem Label="{helpers:ConstString ID=DirectorsLabel}">
+                    <dxe:TextEdit x:Name="DirectorsView" IsReadOnly="True" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutGroup View="GroupBox" Header="{helpers:ConstString ID=ActorsCrew}" VerticalAlignment="Stretch" Padding="-11">
+                    <helpers:AssociationsGrid x:Name="ArtistsAssociationsGrid" AddItemContent="{helpers:ConstString ID=Add}" DeleteItemContent="{helpers:ConstString ID=Delete}" AllowEditingItemContent="{helpers:ConstString ID=AllowEditing}" AddItemGlyph="{Binding Source={StaticResource AddButtonImageSource}, Path=ImageSource}" DeleteItemGlyph="{Binding Source={StaticResource DeleteButtonImageSource}, Path=ImageSource}" AllowEditingItemGlyph="{Binding Source={StaticResource AllowEditingButtonImageSource}, Path=ImageSource}">
+                        <helpers:AssociationsGrid.MainContent>
+                            <dxg:GridControl x:Name="ArtistsGrid" ShowBorder="False" MaxHeight="{Binding ElementName=ArtistsAssociationsGrid, Path=ActualHeight}">
+                                <dxg:GridControl.View>
+                                    <dxg:TableView x:Name="ArtistsGridView" helpers:ImmediateCellValueSavingHelper.FieldName="Artist!,Line!" />
+                                </dxg:GridControl.View>
+                                <dxg:GridControl.Columns>
+                                    <dxg:GridColumn x:Name="ArtistColumn" Header="{helpers:ConstString ID=Artist}" FieldName="Artist!" SortIndex="1" SortOrder="Ascending">
+                                        <dxg:GridColumn.EditSettings>
+                                            <dxg:LookUpEditSettings x:Name="ArtistsGridArtistEditSettings" helpers:StyleConverter.Style="{StaticResource ArtistLookUpEdit}" />
+                                        </dxg:GridColumn.EditSettings>
+                                    </dxg:GridColumn>
+                                    <dxg:GridColumn x:Name="LineColumn" Header="{helpers:ConstString ID=Line}" FieldName="Line!" SortIndex="0" SortOrder="Ascending">
+                                        <dxg:GridColumn.EditSettings>
+                                            <dxe:ComboBoxEditSettings x:Name="ArtistsGridLineEditSettings" helpers:StyleConverter.Style="{StaticResource SelectComboBoxEdit}" />
+                                        </dxg:GridColumn.EditSettings>
+                                    </dxg:GridColumn>
+                                    <dxg:GridColumn x:Name="ArtistDescriptionColumn" Header="{helpers:ConstString ID=Description}" FieldName="Description">
+                                        <dxg:GridColumn.EditSettings>
+                                            <dxe:TextEditSettings />
+                                        </dxg:GridColumn.EditSettings>
+                                    </dxg:GridColumn>
+                                </dxg:GridControl.Columns>
+                            </dxg:GridControl>
+                        </helpers:AssociationsGrid.MainContent>
+                    </helpers:AssociationsGrid>
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup Header="{helpers:ConstString ID=RentalSalesInfo}" Orientation="Vertical">
+                <dxlc:LayoutItem Label="{helpers:ConstString ID=RentalCategoryLabel}">
+                    <dxe:ComboBoxEdit x:Name="CategoryEdit" Style="{StaticResource CategoryComboBoxEdit}">
+                        <dxe:ComboBoxEdit.Buttons>
+                            <dxe:ButtonInfo x:Name="CategoryEditButtonInfo" GlyphKind="Plus" />
+                        </dxe:ComboBoxEdit.Buttons>
+                    </dxe:ComboBoxEdit>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="{helpers:ConstString ID=LastRentedOnLabel}">
+                    <dxe:TextEdit x:Name="LastRentedOnView" IsReadOnly="True" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem VerticalAlignment="Stretch">
+                    <dx:DXTabControl x:Name="FormatsTabs" ItemHeaderTemplate="{StaticResource MovieFormatTabItemHeaderTemplate}" SelectedIndex="{Binding Source={StaticResource MovieFormatChartSourceGenerator}, Path=SelectedFormatIndex,Mode=OneWayToSource}">
+                        <dx:DXTabControl.ItemTemplate>
+                            <DataTemplate>
+                                <dxlc:LayoutControl Orientation="Vertical" Padding="0">
+                                    <dxlc:LayoutItem>
+                                        <dx:DocumentPresenter Background="Transparent" Document="{Binding TotalCount}" />
+                                    </dxlc:LayoutItem>
+                                    <dxlc:LayoutItem>
+                                        <dx:DocumentPresenter Background="Transparent" Document="{Binding DetailCounts}" />
+                                    </dxlc:LayoutItem>
+                                    <dxlc:LayoutItem Label="{helpers:ConstString ID=DefaultRentalDaysLabel}"
+                                        Visibility="{Binding DetailControlsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+                                        <dxe:TextEdit Text="{Binding DefaultRentalDays}"  HorizontalContentAlignment="Right" IsReadOnly="True" />
+                                    </dxlc:LayoutItem>
+                                    <dxlc:LayoutItem Label="{helpers:ConstString ID=DefaultLateFeeLabel}"
+                                        Visibility="{Binding DetailControlsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+                                        <dxe:TextEdit Text="{Binding DefaultLateFee}"  HorizontalContentAlignment="Right" IsReadOnly="True" />
+                                    </dxlc:LayoutItem>
+                                </dxlc:LayoutControl>
+                            </DataTemplate>
+                        </dx:DXTabControl.ItemTemplate>
+                    </dx:DXTabControl>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem VerticalAlignment="Bottom">
+                    <dxc:ChartControl x:Name="MovieFormatChart" Height="270" local:GeneratorToChartAttacher.ChartSeriesGenerator="{StaticResource MovieFormatChartSourceGenerator}">
+                        <dxc:ChartControl.Diagram>
+                            <dxc:SimpleDiagram2D>
+                                <dxc:SimpleDiagram2D.Series>
+                                    <dxc:PieSeries2D DisplayName="{helpers:ConstString ID=MediaFormats}" ArgumentDataMember="Region" ValueDataMember="Product" AnimationAutoStartMode="SetStartState"
+                                                          LabelsVisibility="True" ToolTipEnabled="False">
+                                        <dxc:PieSeries2D.PointAnimation>
+                                            <dxc:Pie2DFlyInAnimation Duration="0:0:1" PointOrder="Random" />
+                                        </dxc:PieSeries2D.PointAnimation>
+                                        <dxc:PieSeries2D.PointOptions>
+                                            <dxc:PointOptions Pattern=" {A}: {V}">
+                                                <dxc:PieSeries2D.PercentOptions>
+                                                    <dxc:PercentOptions ValueAsPercent="False"/>
+                                                </dxc:PieSeries2D.PercentOptions>
+                                            </dxc:PointOptions>
+                                        </dxc:PieSeries2D.PointOptions>
+                                        <dxc:PieSeries2D.Titles>
+                                            <dxc:Title Content="{helpers:ConstString ID=MediaFormats}" HorizontalAlignment="Center"/>
+                                        </dxc:PieSeries2D.Titles>
+                                        <dxc:PieSeries2D.Model>
+                                            <dxc:GlassPie2DModel />
+                                        </dxc:PieSeries2D.Model>
+                                        <dxc:PieSeries2D.Label>
+                                            <dxc:SeriesLabel dxc:PieSeries.LabelPosition="Inside" RenderMode="RectangleConnectedToCenter" />
+                                        </dxc:PieSeries2D.Label>
+                                    </dxc:PieSeries2D>
+                                    <dxc:PieSeries2D DisplayName="{helpers:ConstString ID=UnitAllocation}" ArgumentDataMember="Region" ValueDataMember="Product" AnimationAutoStartMode="SetStartState"
+                                                          LabelsVisibility="True" ToolTipEnabled="False">
+                                        <dxc:PieSeries2D.PointAnimation>
+                                            <dxc:Pie2DFlyInAnimation Duration="0:0:1" PointOrder="Random" />
+                                        </dxc:PieSeries2D.PointAnimation>
+                                        <dxc:PieSeries2D.PointOptions>
+                                            <dxc:PointOptions Pattern=" {A}: {V}">
+                                                <dxc:PieSeries2D.PercentOptions>
+                                                    <dxc:PercentOptions ValueAsPercent="False"/>
+                                                </dxc:PieSeries2D.PercentOptions>
+                                            </dxc:PointOptions>
+                                        </dxc:PieSeries2D.PointOptions>
+                                        <dxc:PieSeries2D.Model>
+                                            <dxc:GlassPie2DModel />
+                                        </dxc:PieSeries2D.Model>
+                                        <dxc:PieSeries2D.Label>
+                                            <dxc:SeriesLabel dxc:PieSeries.LabelPosition="Inside" RenderMode="RectangleConnectedToCenter" />
+                                        </dxc:PieSeries2D.Label>
+                                    </dxc:PieSeries2D>
+                                </dxc:SimpleDiagram2D.Series>
+                            </dxc:SimpleDiagram2D>
+                        </dxc:ChartControl.Diagram>
+                    </dxc:ChartControl>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</UserControl>

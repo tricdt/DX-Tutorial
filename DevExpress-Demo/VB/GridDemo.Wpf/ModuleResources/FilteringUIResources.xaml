@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                    xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing">
+    <DataTemplate x:Key="cardTemplate">
+        <StackPanel DataContext="{Binding Row}">
+            <Image Source="{Binding Photo}" HorizontalAlignment="Center" Width="190" Height="100" />
+            <TextBlock Text="{Binding Price, StringFormat=C}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="cardHeaderTemplate">
+        <TextBlock Text="{Binding Value}" HorizontalAlignment="Center"/>
+    </DataTemplate>
+    <DataTemplate x:Key="printCardViewItemTemplate">
+        <StackPanel dxp:ExportSettings.TargetType="Panel" dxp:ExportSettings.BorderColor="#FF989898" dxp:ExportSettings.BorderThickness="1">
+            <ContentControl  Content="{Binding Path=CardHeaderData, Mode=OneWay}" ContentTemplate="{Binding Path=(dxg:CardViewPrintingHelper.PrintCardInfo).PrintCardHeaderTemplate}"/>
+            <StackPanel DataContext="{Binding Row}" Margin="8,4">
+                <dxe:ImageEdit Width="200" Height="160" IsPrintingMode="True" EditValue="{Binding Photo, Mode=OneWay}" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <dxe:TextEdit EditValue="{Binding Price, Mode=OneWay}" EditMode="InplaceInactive" DisplayFormatString="c" IsPrintingMode="True" dxp:TextExportSettings.TextTrimming="None"
+                              VerticalContentAlignment="Top" TextTrimming="None" PrintTextWrapping="Wrap" HorizontalAlignment="Center" Height="20" HorizontalContentAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="printCardHeaderTemplate">
+        <dxe:TextEdit IsPrintingMode="True" EditValue="{Binding Path=Value, Mode=OneWay}" Padding="7,3,7,3" AllowUpdateTextBlockWhenPrinting="False" BorderBrush="#FF989898"
+                      BorderThickness="0,0,0,1" Background="#FFDCDCDC" dxp:ExportSettings.Background="#FFDCDCDC" HorizontalContentAlignment="Center"/>
+    </DataTemplate>
+</ResourceDictionary>

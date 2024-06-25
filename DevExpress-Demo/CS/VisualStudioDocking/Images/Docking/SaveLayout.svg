@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+    <style type="text/css">
+        .Black {
+            fill: #727272;
+        }
+        .White {
+            fill: #ffffff;
+        }
+        .Blue {
+            fill: #1177D7;
+        }
+        .Yellow {
+            fill: #FFB115;
+        }
+        .Green {
+            fill: #039C23;
+        }
+        .Red {
+            fill: #D11C1C;
+        }
+    </style>
+    <title>Save</title>
+    <rect class="White" width="32" height="28"/>
+    <polygon class="Black" points="2 2 2 19 4 19 4 8 28 8 28 24 17 24 17 26 30 26 30 2 2 2"/>
+    <rect class="White" y="12" width="20" height="20"/>
+    <path class="Black" d="M16,14H14v6H6V14H2V30H18V16A2,2,0,0,0,16,14Z"/>
+    <rect class="Black" x="10" y="14" width="2" height="4"/>
+</svg>

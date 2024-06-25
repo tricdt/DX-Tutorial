@@ -1,0 +1,674 @@
+﻿<local:DiagramDemoModule xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                         xmlns:local="clr-namespace:DiagramDemo"
+                         xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                         xmlns:dxdiag="http://schemas.devexpress.com/winfx/2008/xaml/diagram"
+                         xmlns:dxdiagi="http://schemas.devexpress.com/winfx/2008/xaml/diagram/internal"
+                         xmlns:dxdiagt="http://schemas.devexpress.com/winfx/2008/xaml/diagram/themekeys"
+                         xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
+                         xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         mc:Ignorable="d"
+                         x:Class="DiagramDemo.OrgChartModule"
+                         d:DesignWidth="800"
+                         d:DesignHeight="600">
+    <local:DiagramDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DiagramDemo;component/Resources/OrgChartModuleResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="diagramContainerStyle" TargetType="{x:Type dxdiag:DiagramContainer}">
+                <Setter Property="Anchors" Value="Left, Top"/>
+                <Setter Property="ConnectionPoints" Value="0,0.5 0.5,0 1,0.5 0.5,1"/>
+                <Setter Property="CanAddItems" Value="False"/>
+                <Setter Property="DragMode" Value="ByAnyPoint"/>
+                <Setter Property="Height" Value="190"/>
+                <Setter Property="Width" Value="320"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="ItemsCanChangeParent" Value="False"/>
+                <Setter Property="ItemsCanAttachConnectorEndPoint" Value="False"/>
+                <Setter Property="ItemsCanAttachConnectorBeginPoint" Value="False"/>
+                <Setter Property="ItemsCanSelect" Value="False"/>
+                <Setter Property="ItemsCanEdit" Value="False"/>
+                <Setter Property="ItemsCanCopyWithoutParent" Value="False"/>
+                <Setter Property="ItemsCanMove" Value="False"/>
+                <Setter Property="ItemsCanRotate" Value="False"/>
+                <Setter Property="ItemsCanSnapToOtherItems" Value="False"/>
+                <Setter Property="ItemsCanDeleteWithoutParent" Value="False"/>
+                <Setter Property="ItemsCanSnapToThisItem" Value="False"/>
+                <Setter Property="ItemsCanResize" Value="False"/>
+                <Setter Property="Shape" Value="StandardContainers.Plain"/>
+                <Setter Property="ThemeStyleId" Value="Variant2"/>
+            </Style>
+        </ResourceDictionary>
+    </local:DiagramDemoModule.Resources>
+    <DockPanel>
+        <dxr:RibbonControl DockPanel.Dock="Top" RibbonStyle="Office2010" x:Name="ribbonControl">
+            <dxr:RibbonControl.ToolbarItems>
+                <dxb:BarButtonItem Command="{Binding Path=Commands.Undo, ElementName=diagramControl}"
+                                   Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=UndoCommandItemStyle}}" />
+                <dxb:BarButtonItem Command="{Binding Path=Commands.Redo, ElementName=diagramControl}"
+                                   Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=RedoCommandItemStyle}}" />
+            </dxr:RibbonControl.ToolbarItems>
+            <dxr:RibbonControl.ApplicationMenu>
+                <dxr:ApplicationMenu>
+                    <dxb:BarButtonItem Command="{Binding Path=Commands.OpenFile, ElementName=diagramControl}"
+                                       Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=OpenFileCommandItemStyle}}" />
+                    <dxb:BarButtonItem Command="{Binding Path=Commands.SaveFile, ElementName=diagramControl}"
+                                       Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=SaveFileCommandItemStyle}}" />
+                    <dxb:BarButtonItem Command="{Binding Path=Commands.SaveFileAs, ElementName=diagramControl}"
+                                       Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=SaveFileAsCommandItemStyle}}" />
+                    <dxb:BarItemSeparator CustomizationContent="{dxdiag:DiagramControlLocalizedString SeparatorName}"
+                                          Style="{DynamicResource {dxdiagt:DiagramDesignerControlThemeKeys ResourceKey=MenuSeparatorStyle}}" />
+                    <dxb:BarButtonItem Command="{Binding Path=Commands.ShowPrintPreview, ElementName=diagramControl}"
+                                       Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=ShowPrintPreviewCommandItemStyle}}" />
+                    <dxb:BarSplitButtonItem Command="{Binding Path=Commands.Print, ElementName=diagramControl}"
+                                            Style="{DynamicResource {dxdiagt:DiagramDesignerControlThemeKeys ResourceKey=PrintMenuStyle}}">
+                        <dxb:PopupMenu>
+                            <dxb:BarButtonItem Command="{Binding Path=Commands.Print, ElementName=diagramControl}"
+                                               Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=PrintCommandItemStyle}}" />
+                            <dxb:BarButtonItem Command="{Binding Path=Commands.QuickPrint, ElementName=diagramControl}"
+                                               Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=QuickPrintCommandItemStyle}}" />
+                        </dxb:PopupMenu>
+                    </dxb:BarSplitButtonItem>
+                    <dxb:BarSplitButtonItem Command="{Binding Path=Commands.ExportDiagram, ElementName=diagramControl}"
+                                            Style="{DynamicResource {dxdiagt:DiagramDesignerControlThemeKeys ResourceKey=ExportAsStyle}}">
+                        <dxb:PopupMenu>
+                            <dxb:BarButtonItem Command="{Binding Path=Commands.ExportDiagram, ElementName=diagramControl}"
+                                               Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=ExportDiagram_PNGCommandItemStyle}}" />
+                            <dxb:BarButtonItem Command="{Binding Path=Commands.ExportDiagram, ElementName=diagramControl}"
+                                               Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=ExportDiagram_JPEGCommandItemStyle}}" />
+                            <dxb:BarButtonItem Command="{Binding Path=Commands.ExportDiagram, ElementName=diagramControl}"
+                                               Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=ExportDiagram_BMPCommandItemStyle}}" />
+                            <dxb:BarButtonItem Command="{Binding Path=Commands.ExportDiagram, ElementName=diagramControl}"
+                                               Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=ExportDiagram_GIFCommandItemStyle}}" />
+                            <dxb:BarButtonItem Command="{Binding Path=Commands.ExportToSvg, ElementName=diagramControl}"
+                                               Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=ExportToSvgCommandItemStyle}}" />
+                            <dxb:BarButtonItem Command="{Binding Path=Commands.ExportToPdf, ElementName=diagramControl}"
+                                               Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=ExportToPdfCommandItemStyle}}" />
+                        </dxb:PopupMenu>
+                    </dxb:BarSplitButtonItem>
+                </dxr:ApplicationMenu>
+            </dxr:RibbonControl.ApplicationMenu>
+            <dxr:RibbonPage Caption="Org Chart">
+                <dxr:RibbonPageGroup Caption="{dxdiag:DiagramControlLocalizedString RibbonPageGroup_TreeLayout}">
+                    <dxb:BarSubItem Style="{DynamicResource {dxdiagt:DiagramDesignerControlThemeKeys ResourceKey=ReLayoutStyle}}">
+                        <dxb:BarItemLinkMenuHeader Style="{DynamicResource {dxdiagt:DiagramDesignerControlThemeKeys ResourceKey=ReLayoutTreeStyle}}" />
+                        <dxb:BarButtonItem Command="{Binding Path=Commands.TreeLayout, ElementName=diagramControl}"
+                                           Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=TreeLayout_DownCommandItemStyle}}" />
+                        <dxb:BarButtonItem Command="{Binding Path=Commands.TreeLayout, ElementName=diagramControl}"
+                                           Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=TreeLayout_UpCommandItemStyle}}" />
+                        <dxb:BarButtonItem Command="{Binding Path=Commands.TreeLayout, ElementName=diagramControl}"
+                                           Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=TreeLayout_RightCommandItemStyle}}" />
+                        <dxb:BarButtonItem Command="{Binding Path=Commands.TreeLayout, ElementName=diagramControl}"
+                                           Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=TreeLayout_LeftCommandItemStyle}}" />
+                        <dxb:BarItemLinkMenuHeader Style="{DynamicResource {dxdiagt:DiagramDesignerControlThemeKeys ResourceKey=ReLayoutTipOverTreeHeaderStyle}}" />
+                        <dxb:BarButtonItem Command="{Binding Path=Commands.TipOverTreeLayout, ElementName=diagramControl}"
+                                           Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=TipOverTreeLayout_LeftToRightCommandItemStyle}}" />
+                        <dxb:BarButtonItem Command="{Binding Path=Commands.TipOverTreeLayout, ElementName=diagramControl}"
+                                           Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=TipOverTreeLayout_RightToLeftCommandItemStyle}}" />
+                        <dxb:BarItemLinkMenuHeader Style="{DynamicResource {dxdiagt:DiagramDesignerControlThemeKeys ResourceKey=ReLayoutSugiyamaStyle}}" />
+                        <dxb:BarButtonItem Command="{Binding Path=Commands.SugiyamaLayout, ElementName=diagramControl}"
+                                           Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=SugiyamaLayout_DownCommandItemStyle}}" />
+                        <dxb:BarButtonItem Command="{Binding Path=Commands.SugiyamaLayout, ElementName=diagramControl}"
+                                           Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=SugiyamaLayout_UpCommandItemStyle}}" />
+                        <dxb:BarButtonItem Command="{Binding Path=Commands.SugiyamaLayout, ElementName=diagramControl}"
+                                           Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=SugiyamaLayout_RightCommandItemStyle}}" />
+                        <dxb:BarButtonItem Command="{Binding Path=Commands.SugiyamaLayout, ElementName=diagramControl}"
+                                           Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=SugiyamaLayout_LeftCommandItemStyle}}" />
+                        <dxb:BarItemLinkMenuHeader Style="{DynamicResource {dxdiagt:DiagramDesignerControlThemeKeys ResourceKey=ReLayoutCircularHeaderStyle}}" />
+                        <dxb:BarButtonItem Command="{Binding Path=Commands.CircularLayout, ElementName=diagramControl}"
+                                           Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=CircularLayoutCommandItemStyle}}" />
+                    </dxb:BarSubItem>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="Print and Export">
+                    <dxb:BarButtonItem Command="{Binding Path=Commands.ShowPrintPreview, ElementName=diagramControl}"
+                                       Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=ShowPrintPreviewCommandItemStyle}}" />
+                    <dxb:BarSplitButtonItem Command="{Binding Path=Commands.Print, ElementName=diagramControl}"
+                                            Style="{DynamicResource {dxdiagt:DiagramDesignerControlThemeKeys ResourceKey=PrintMenuStyle}}">
+                        <dxb:PopupMenu>
+                            <dxb:BarButtonItem Command="{Binding Path=Commands.Print, ElementName=diagramControl}"
+                                               Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=PrintCommandItemStyle}}" />
+                            <dxb:BarButtonItem Command="{Binding Path=Commands.QuickPrint, ElementName=diagramControl}"
+                                               Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=QuickPrintCommandItemStyle}}" />
+                        </dxb:PopupMenu>
+                    </dxb:BarSplitButtonItem>
+                    <dxb:BarSplitButtonItem Command="{Binding Path=Commands.ExportDiagram, ElementName=diagramControl}"
+                                            Style="{DynamicResource {dxdiagt:DiagramDesignerControlThemeKeys ResourceKey=ExportAsStyle}}">
+                        <dxb:PopupMenu>
+                            <dxb:BarButtonItem Command="{Binding Path=Commands.ExportDiagram, ElementName=diagramControl}"
+                                               Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=ExportDiagram_PNGCommandItemStyle}}" />
+                            <dxb:BarButtonItem Command="{Binding Path=Commands.ExportDiagram, ElementName=diagramControl}"
+                                               Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=ExportDiagram_JPEGCommandItemStyle}}" />
+                            <dxb:BarButtonItem Command="{Binding Path=Commands.ExportDiagram, ElementName=diagramControl}"
+                                               Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=ExportDiagram_BMPCommandItemStyle}}" />
+                            <dxb:BarButtonItem Command="{Binding Path=Commands.ExportDiagram, ElementName=diagramControl}"
+                                               Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=ExportDiagram_GIFCommandItemStyle}}" />
+                            <dxb:BarButtonItem Command="{Binding Path=Commands.ExportToSvg, ElementName=diagramControl}"
+                                               Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=ExportToSvgCommandItemStyle}}" />
+                            <dxb:BarButtonItem Command="{Binding Path=Commands.ExportToPdf, ElementName=diagramControl}"
+                                               Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=ExportToPdfCommandItemStyle}}" />
+                        </dxb:PopupMenu>
+                    </dxb:BarSplitButtonItem>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="{dxdiag:DiagramControlLocalizedString RibbonPageGroup_Themes}">
+                    <dxr:RibbonGalleryBarItem Content="{dxdiag:DiagramControlLocalizedString RibbonPageGroup_Themes}"
+                                              CustomizationGlyph="{dxdiag:DiagramSvgImage Path=Images/Svg/FillForeground.svg}">
+                        <dxr:RibbonGalleryBarItem.Gallery>
+                            <dxb:Gallery FirstCheckedItem="{Binding Path=RootToolsModel[Theme], ElementName=diagramControl, Mode=TwoWay}"
+                                         ColCount="4"
+                                         Style="{StaticResource themeGalleryStyle}">
+                                <dxb:GalleryItemGroup ItemsSource="{x:Static dxdiag:ThemeRegistrator.Themes}"
+                                                      ItemTemplate="{StaticResource themeGalleryControlItemTemplate}" />
+                            </dxb:Gallery>
+                        </dxr:RibbonGalleryBarItem.Gallery>
+                        <dxr:RibbonGalleryBarItem.DropDownGallery>
+                            <dxb:Gallery FirstCheckedItem="{Binding Path=RootToolsModel[Theme], ElementName=diagramControl, Mode=TwoWay}"
+                                         Style="{StaticResource themeGalleryStyle}">
+                                <dxb:GalleryItemGroup ItemsSource="{x:Static dxdiag:ThemeRegistrator.Themes}"
+                                                      ItemTemplate="{StaticResource themeGalleryControlItemTemplate}" />
+                            </dxb:Gallery>
+                        </dxr:RibbonGalleryBarItem.DropDownGallery>
+                    </dxr:RibbonGalleryBarItem>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="Templates">
+                    <dxr:RibbonGalleryBarItem Content="Templates">
+                        <dxr:RibbonGalleryBarItem.Gallery>
+                            <dxb:Gallery FirstCheckedItem="{Binding SelectedTemplate, Mode=TwoWay}" ColCount="5" Style="{StaticResource templateGalleryStyle}">
+                                <dxb:GalleryItemGroup ItemsSource="{Binding Templates}" ItemTemplate="{StaticResource templateGalleryControlItemTemplate}" />
+                            </dxb:Gallery>
+                        </dxr:RibbonGalleryBarItem.Gallery>
+                        <dxr:RibbonGalleryBarItem.DropDownGallery>
+                            <dxb:Gallery FirstCheckedItem="{Binding SelectedTemplate, Mode=TwoWay}" ColCount="5" Style="{StaticResource templateGalleryStyle}">
+                                <dxb:GalleryItemGroup ItemsSource="{Binding Templates}" ItemTemplate="{StaticResource templateGalleryControlItemTemplate}" />
+                            </dxb:Gallery>
+                        </dxr:RibbonGalleryBarItem.DropDownGallery>
+                    </dxr:RibbonGalleryBarItem>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="View">
+                    <dxb:BarButtonItem RibbonStyle="SmallWithText"
+                                       Command="{Binding Path=Commands.FitToDrawing, ElementName=diagramControl}"
+                                       Style="{DynamicResource {dxdiagt:DesignerControlCommandsThemeKeys ResourceKey=FitToDrawingCommandItemStyle}}" />
+                    <dxb:BarEditItem EditValue="{Binding ShowGrid, ElementName=diagramControl}"
+                                     Style="{DynamicResource {dxdiagt:DiagramDesignerControlThemeKeys ResourceKey=ShowGridItemStyle}}">
+                        <dxb:BarEditItem.EditSettings>
+                            <dxe:CheckEditSettings Content="{dxdiag:DiagramControlLocalizedString ShowGrid}" />
+                        </dxb:BarEditItem.EditSettings>
+                    </dxb:BarEditItem>
+                </dxr:RibbonPageGroup>
+            </dxr:RibbonPage>
+        </dxr:RibbonControl>
+        <dxr:RibbonStatusBarControl DockPanel.Dock="Bottom"
+                                    dxdiag:DiagramDesignerControl.BarItemName="{x:Static dxdiag:DefaultBarItemNames.StatusBar}">
+            <dxr:RibbonStatusBarControl.RightItems>
+                <dxb:BarEditItem Content="{Binding ZoomFactor, ElementName=diagramControl, Converter={dxmvvm:FormatStringConverter FormatString=P0}}"
+                                 dxdiag:DiagramDesignerControl.BarItemName="{x:Static dxdiag:DefaultBarItemNames.StatusBarZoomEditor}"
+                                 CustomizationContent="{dxdiag:DiagramControlLocalizedString StatusBarZoomEditor}"
+                                 EditStyle="{StaticResource ZoomTrackBarEditStyle}"
+                                 EditValue="{Binding ZoomFactor, ElementName=diagramControl, Converter={dxdiagi:NonlinearZoomConverter}, Mode=TwoWay}"
+                                 EditWidth="100">
+                    <dxb:BarEditItem.EditSettings>
+                        <dxe:TrackBarEditSettings />
+                    </dxb:BarEditItem.EditSettings>
+                </dxb:BarEditItem>
+            </dxr:RibbonStatusBarControl.RightItems>
+        </dxr:RibbonStatusBarControl>
+        <dxdo:DockLayoutManager>
+            <dxdo:LayoutGroup>
+                <dxdo:LayoutPanel dxb:MergingProperties.ElementMergingBehavior="All" ShowCaption="False" ShowBorder="False">
+                    <dxdiag:DiagramControl x:Name="diagramControl"
+                                           ToolboxVisibility="Closed"
+                                           SelectedStencils="BasicShapes,ArrowShapes"
+                                           ShowGrid="False"
+                                           ShowPageBreaks="False"
+                                           ShowRulers="False"
+                                           CanvasSizeMode="Fill">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxdiag:DiagramOrgChartBehavior x:Name="orgChartBehavior"
+                                                            KeyMember="Id"
+                                                            ParentMember="ParentId"
+                                                            ItemsSource="{Binding Employees}"
+                                                            GenerateItem="GenerateOrgChartItem">
+                                <dxdiag:DiagramOrgChartBehavior.TemplateDiagram>
+                                    <dxdiag:DiagramControl PageSize="616,928" SelectedStencils="TemplateDesigner">
+                                        <dxdiag:DiagramConnector BeginPoint="25,490"
+                                                                 CanDelete="False"
+                                                                 CanEdit="False"
+                                                                 CanCopyWithoutParent="False"
+                                                                 CanMove="False"
+                                                                 CanSelect="False"
+                                                                 CanDeleteWithoutParent="False"
+                                                                 CanCopy="False"
+                                                                 EndPoint="340,490"
+                                                                 Points="(Empty)"
+                                                                 ThemeStyleId="ConnectorId.Subtle1"
+                                                                 Type="Straight" />
+                                        <dxdiag:DiagramContainer Position="28,25"
+                                                                 StrokeId="Accent1"
+                                                                 StrokeThickness="2"
+                                                                 CustomStyleId="diagramContainerStyle"
+                                                                 ThemeStyleId="Variant1"
+                                                                 TemplateName="Right Text Template">
+                                            <dxdiag:DiagramImage Anchors="All"
+                                                                 Background="Transparent"
+                                                                 ForegroundId="Accent1"
+                                                                 Height="192"
+                                                                 Position="0,0"
+                                                                 Stroke="Transparent"
+                                                                 StretchMode="UniformToFill"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="Variant1"
+                                                                 Width="142">
+                                                <dxdiag:DiagramImage.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="ImageData" PropertyName="Image" />
+                                                </dxdiag:DiagramImage.Bindings>
+                                            </dxdiag:DiagramImage>
+                                            <dxdiag:DiagramShape Anchors="Top, Right"
+                                                                 Background="#005B9BD5"
+                                                                 FontWeight="Normal"
+                                                                 FontSize="16"
+                                                                 FontFamily="Segoe UI"
+                                                                 Height="54"
+                                                                 Position="153,15"
+                                                                 Stroke="Transparent"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="Variant1"
+                                                                 TextAlignment="Left"
+                                                                 VerticalContentAlignment="Top"
+                                                                 Width="169">
+                                                <dxdiag:DiagramShape.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="JobTitle" PropertyName="Content" />
+                                                </dxdiag:DiagramShape.Bindings>
+                                            </dxdiag:DiagramShape>
+                                            <dxdiag:DiagramShape Anchors="Right, Bottom"
+                                                                 Background="#005B9BD5"
+                                                                 FontFamily="Segoe UI"
+                                                                 Height="20"
+                                                                 Position="153,137"
+                                                                 Stroke="Transparent"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="Variant1"
+                                                                 TextAlignment="Left"
+                                                                 VerticalContentAlignment="Top"
+                                                                 Width="169">
+                                                <dxdiag:DiagramShape.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="FirstName" PropertyName="Content" />
+                                                </dxdiag:DiagramShape.Bindings>
+                                            </dxdiag:DiagramShape>
+                                            <dxdiag:DiagramShape Anchors="Right, Bottom"
+                                                                 Background="#005B9BD5"
+                                                                 FontFamily="Segoe UI"
+                                                                 Height="20"
+                                                                 Position="153,157"
+                                                                 Stroke="Transparent"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="Variant1"
+                                                                 TextAlignment="Left"
+                                                                 VerticalContentAlignment="Top"
+                                                                 Width="169">
+                                                <dxdiag:DiagramShape.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="LastName" PropertyName="Content" />
+                                                </dxdiag:DiagramShape.Bindings>
+                                            </dxdiag:DiagramShape>
+                                        </dxdiag:DiagramContainer>
+                                        <dxdiag:DiagramContainer BackgroundId="White"
+                                                                 CustomStyleId="diagramContainerStyle"
+                                                                 Position="400,26"
+                                                                 TemplateName="Right Text Template 1">
+                                            <dxdiag:DiagramImage Anchors="All"
+                                                                 Background="Transparent"
+                                                                 ForegroundId="Accent1"
+                                                                 Height="110"
+                                                                 Position="8,8"
+                                                                 StrokeId="Accent1"
+                                                                 StretchMode="UniformToFill"
+                                                                 StrokeThickness="1"
+                                                                 ThemeStyleId="Variant1"
+                                                                 Width="110">
+                                                <dxdiag:DiagramImage.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="ImageData" PropertyName="Image" />
+                                                </dxdiag:DiagramImage.Bindings>
+                                            </dxdiag:DiagramImage>
+                                            <dxdiag:DiagramShape Anchors="Top, Right"
+                                                                 Background="#005B9BD5"
+                                                                 FontWeight="Normal"
+                                                                 FontSize="16"
+                                                                 FontFamily="Segoe UI"
+                                                                 Height="39"
+                                                                 Position="140,15"
+                                                                 Stroke="Transparent"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="ShapeId.Subtle1"
+                                                                 TextAlignment="Left"
+                                                                 VerticalContentAlignment="Top"
+                                                                 Width="180">
+                                                <dxdiag:DiagramShape.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="FullName" PropertyName="Content" />
+                                                </dxdiag:DiagramShape.Bindings>
+                                            </dxdiag:DiagramShape>
+                                            <dxdiag:DiagramShape Anchors="Top, Right"
+                                                                 Background="#005B9BD5"
+                                                                 FontSize="12.6666669845581"
+                                                                 FontFamily="Segoe UI"
+                                                                 Height="20"
+                                                                 Position="140,56"
+                                                                 Stroke="Transparent"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="ShapeId.Subtle1"
+                                                                 TextAlignment="Left"
+                                                                 VerticalContentAlignment="Top"
+                                                                 Width="180">
+                                                <dxdiag:DiagramShape.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="JobTitle" PropertyName="Content" />
+                                                </dxdiag:DiagramShape.Bindings>
+                                            </dxdiag:DiagramShape>
+                                            <dxdiag:DiagramShape Anchors="Top, Right"
+                                                                 Background="#005B9BD5"
+                                                                 FontSize="12.6666669845581"
+                                                                 FontFamily="Segoe UI"
+                                                                 Height="20"
+                                                                 Position="140,76"
+                                                                 Stroke="Transparent"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="ShapeId.Subtle1"
+                                                                 TextAlignment="Left"
+                                                                 VerticalContentAlignment="Top"
+                                                                 Width="180">
+                                                <dxdiag:DiagramShape.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="EmailAddress" PropertyName="Content" />
+                                                </dxdiag:DiagramShape.Bindings>
+                                            </dxdiag:DiagramShape>
+                                            <dxdiag:DiagramShape Anchors="Top, Right, Bottom"
+                                                                 Background="#005B9BD5"
+                                                                 FontFamily="Segoe UI"
+                                                                 Height="74"
+                                                                 Position="140,116"
+                                                                 Stroke="Transparent"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="ShapeId.Subtle1"
+                                                                 TextAlignment="Left"
+                                                                 VerticalContentAlignment="Top"
+                                                                 Width="180">
+                                                <dxdiag:DiagramShape.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="GroupName" PropertyName="Content" />
+                                                </dxdiag:DiagramShape.Bindings>
+                                            </dxdiag:DiagramShape>
+                                        </dxdiag:DiagramContainer>
+                                        <dxdiag:DiagramContainer CustomStyleId="diagramContainerStyle"
+                                                                 Height="190"
+                                                                 Width="260"
+                                                                 Position="400,252"
+                                                                 StrokeThickness="2"
+                                                                 TemplateName="Bottom Text Template">
+                                            <dxdiag:DiagramImage Anchors="All"
+                                                                 Background="Transparent"
+                                                                 ForegroundId="Accent1"
+                                                                 Height="130"
+                                                                 Position="0,0"
+                                                                 Stroke="Transparent"
+                                                                 StretchMode="UniformToFill"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="Variant1"
+                                                                 Width="260">
+                                                <dxdiag:DiagramImage.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="CroppedImageData" PropertyName="Image" />
+                                                </dxdiag:DiagramImage.Bindings>
+                                            </dxdiag:DiagramImage>
+                                            <dxdiag:DiagramContainer Anchors="Left, Right, Bottom"
+                                                                     ConnectionPoints="0,0.5 0.5,0 1,0.5 0.5,1"
+                                                                     ItemsCanChangeParent="False"
+                                                                     ItemsCanAttachConnectorEndPoint="False"
+                                                                     ItemsCanAttachConnectorBeginPoint="False"
+                                                                     ItemsCanSelect="False"
+                                                                     ItemsCanEdit="False"
+                                                                     ItemsCanCopyWithoutParent="False"
+                                                                     ItemsCanMove="False"
+                                                                     ItemsCanRotate="False"
+                                                                     ItemsCanSnapToOtherItems="False"
+                                                                     ItemsCanDeleteWithoutParent="False"
+                                                                     ItemsCanSnapToThisItem="False"
+                                                                     ItemsCanResize="False"
+                                                                     Height="60"
+                                                                     Position="0,130"
+                                                                     Stroke="Transparent"
+                                                                     Shape="StandardContainers.Plain"
+                                                                     StrokeThickness="0"
+                                                                     ThemeStyleId="Variant1"
+                                                                     Width="260">
+                                                <dxdiag:DiagramShape Anchors="Left, Right, Bottom"
+                                                                     Background="#005B9BD5"
+                                                                     CanSnapToThisItem="False"
+                                                                     CanResize="False"
+                                                                     CanEdit="False"
+                                                                     CanCopyWithoutParent="False"
+                                                                     CanMove="False"
+                                                                     CanSnapToOtherItems="False"
+                                                                     CanSelect="False"
+                                                                     CanRotate="False"
+                                                                     CanCopy="False"
+                                                                     FontSize="16"
+                                                                     FontFamily="Segoe UI"
+                                                                     Height="20"
+                                                                     Position="0,0"
+                                                                     Stroke="Transparent"
+                                                                     StrokeThickness="0"
+                                                                     ThemeStyleId="Variant1"
+                                                                     TextAlignment="Center"
+                                                                     VerticalContentAlignment="Center"
+                                                                     Width="260">
+                                                    <dxdiag:DiagramShape.Bindings>
+                                                        <dxdiag:DiagramBinding Expression="FullName" PropertyName="Content" />
+                                                    </dxdiag:DiagramShape.Bindings>
+                                                </dxdiag:DiagramShape>
+                                                <dxdiag:DiagramShape Anchors="Left, Right, Bottom"
+                                                                     Background="#005B9BD5"
+                                                                     FontFamily="Segoe UI"
+                                                                     Height="20"
+                                                                     Position="0,20"
+                                                                     Stroke="Transparent"
+                                                                     StrokeThickness="0"
+                                                                     ThemeStyleId="Variant1"
+                                                                     TextAlignment="Center"
+                                                                     VerticalContentAlignment="Center"
+                                                                     Width="260">
+                                                    <dxdiag:DiagramShape.Bindings>
+                                                        <dxdiag:DiagramBinding Expression="JobTitle" PropertyName="Content" />
+                                                    </dxdiag:DiagramShape.Bindings>
+                                                </dxdiag:DiagramShape>
+                                                <dxdiag:DiagramShape Anchors="Left, Right, Bottom"
+                                                                     Angle="0"
+                                                                     Background="#005B9BD5"
+                                                                     FontFamily="Segoe UI"
+                                                                     Height="20"
+                                                                     Position="0,40"
+                                                                     Stroke="Transparent"
+                                                                     StrokeThickness="0"
+                                                                     ThemeStyleId="Variant1"
+                                                                     TextAlignment="Center"
+                                                                     VerticalContentAlignment="Center"
+                                                                     Width="260">
+                                                    <dxdiag:DiagramShape.Bindings>
+                                                        <dxdiag:DiagramBinding Expression="Phone" PropertyName="Content" />
+                                                    </dxdiag:DiagramShape.Bindings>
+                                                </dxdiag:DiagramShape>
+                                            </dxdiag:DiagramContainer>
+                                        </dxdiag:DiagramContainer>
+                                        <dxdiag:DiagramContainer CustomStyleId="diagramContainerStyle"
+                                                                 BackgroundId="White"
+                                                                 Position="30,252"
+                                                                 TemplateName="Belt Template">
+                                            <dxdiag:DiagramImage Anchors="All"
+                                                                 Angle="0"
+                                                                 Background="Transparent"
+                                                                 Height="159.5"
+                                                                 Position="0.5,0.5"
+                                                                 Stroke="Transparent"
+                                                                 StretchMode="UniformToFill"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="Variant1"
+                                                                 Width="139.5">
+                                                <dxdiag:DiagramImage.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="ImageData" PropertyName="Image" />
+                                                </dxdiag:DiagramImage.Bindings>
+                                            </dxdiag:DiagramImage>
+                                            <dxdiag:DiagramShape Anchors="Top, Right"
+                                                                 Angle="0"
+                                                                 Background="#005B9BD5"
+                                                                 FontWeight="Normal"
+                                                                 FontSize="16"
+                                                                 FontFamily="Segoe UI"
+                                                                 Height="54"
+                                                                 Position="153,15"
+                                                                 Stroke="Transparent"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="ShapeId.Subtle1"
+                                                                 TextAlignment="Left"
+                                                                 VerticalContentAlignment="Top"
+                                                                 Width="167">
+                                                <dxdiag:DiagramShape.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="JobTitle" PropertyName="Content" />
+                                                </dxdiag:DiagramShape.Bindings>
+                                            </dxdiag:DiagramShape>
+                                            <dxdiag:DiagramShape Anchors="Left, Right"
+                                                                 Angle="0"
+                                                                 FontSize="16"
+                                                                 Height="30"
+                                                                 Position="0,160"
+                                                                 StrokeId="Accent1"
+                                                                 ThemeStyleId="Variant1"
+                                                                 TextAlignment="Center"
+                                                                 VerticalContentAlignment="Center"
+                                                                 Width="320">
+                                                <dxdiag:DiagramShape.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="FullName" PropertyName="Content" />
+                                                </dxdiag:DiagramShape.Bindings>
+                                            </dxdiag:DiagramShape>
+                                            <dxdiag:DiagramShape Anchors="Top, Right"
+                                                                 Angle="0"
+                                                                 Background="#005B9BD5"
+                                                                 FontSize="12.6666669845581"
+                                                                 FontFamily="Segoe UI"
+                                                                 Height="20"
+                                                                 Position="153,70"
+                                                                 Stroke="Transparent"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="ShapeId.Subtle1"
+                                                                 TextAlignment="Left"
+                                                                 VerticalContentAlignment="Top"
+                                                                 Width="167">
+                                                <dxdiag:DiagramShape.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="EmailAddress" PropertyName="Content" />
+                                                </dxdiag:DiagramShape.Bindings>
+                                            </dxdiag:DiagramShape>
+                                            <dxdiag:DiagramShape Anchors="Top, Right, Bottom"
+                                                                 Angle="0"
+                                                                 Background="#005B9BD5"
+                                                                 FontSize="12.6666669845581"
+                                                                 FontFamily="Segoe UI"
+                                                                 Height="20"
+                                                                 Position="153,90"
+                                                                 Stroke="Transparent"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="ShapeId.Subtle1"
+                                                                 TextAlignment="Left"
+                                                                 VerticalContentAlignment="Top"
+                                                                 Width="167">
+                                                <dxdiag:DiagramShape.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="Phone" PropertyName="Content" />
+                                                </dxdiag:DiagramShape.Bindings>
+                                            </dxdiag:DiagramShape>
+                                        </dxdiag:DiagramContainer>
+                                        <dxdiag:DiagramContainer CustomStyleId="diagramContainerStyle"
+                                                                 CanCollapse="True"
+                                                                 BackgroundId="White"
+                                                                 ForegroundId="Dark"
+                                                                 ShowHeader="True"
+                                                                 Position="30,252"
+                                                                 TemplateName="Collapsible Template">
+                                            <dxdiag:DiagramContainer.Bindings>
+                                                <dxdiag:DiagramBinding Expression="FullName" PropertyName="Header" />
+                                            </dxdiag:DiagramContainer.Bindings>
+                                            <dxdiag:DiagramImage Anchors="All"
+                                                                 Angle="0"
+                                                                 Background="Transparent"
+                                                                 Height="159.5"
+                                                                 Position="0.5,0.5"
+                                                                 Stroke="Transparent"
+                                                                 StretchMode="UniformToFill"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="Variant1"
+                                                                 Width="139.5">
+                                                <dxdiag:DiagramImage.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="ImageData" PropertyName="Image" />
+                                                </dxdiag:DiagramImage.Bindings>
+                                            </dxdiag:DiagramImage>
+                                            <dxdiag:DiagramShape Anchors="Top, Right"
+                                                                 Angle="0"
+                                                                 Background="#005B9BD5"
+                                                                 FontWeight="Normal"
+                                                                 FontSize="16"
+                                                                 FontFamily="Segoe UI"
+                                                                 Height="54"
+                                                                 Position="153,15"
+                                                                 Stroke="Transparent"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="ShapeId.Subtle1"
+                                                                 TextAlignment="Left"
+                                                                 VerticalContentAlignment="Top"
+                                                                 Width="167">
+                                                <dxdiag:DiagramShape.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="JobTitle" PropertyName="Content" />
+                                                </dxdiag:DiagramShape.Bindings>
+                                            </dxdiag:DiagramShape>
+                                            <dxdiag:DiagramShape Anchors="Top, Right"
+                                                                 Angle="0"
+                                                                 Background="#005B9BD5"
+                                                                 FontSize="12.6666669845581"
+                                                                 FontFamily="Segoe UI"
+                                                                 Height="20"
+                                                                 Position="153,70"
+                                                                 Stroke="Transparent"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="ShapeId.Subtle1"
+                                                                 TextAlignment="Left"
+                                                                 VerticalContentAlignment="Top"
+                                                                 Width="167">
+                                                <dxdiag:DiagramShape.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="EmailAddress" PropertyName="Content" />
+                                                </dxdiag:DiagramShape.Bindings>
+                                            </dxdiag:DiagramShape>
+                                            <dxdiag:DiagramShape Anchors="Top, Right, Bottom"
+                                                                 Angle="0"
+                                                                 Background="#005B9BD5"
+                                                                 FontSize="12.6666669845581"
+                                                                 FontFamily="Segoe UI"
+                                                                 Height="20"
+                                                                 Position="153,0"
+                                                                 Stroke="Transparent"
+                                                                 StrokeThickness="0"
+                                                                 ThemeStyleId="ShapeId.Subtle1"
+                                                                 TextAlignment="Left"
+                                                                 VerticalContentAlignment="Top"
+                                                                 Width="167">
+                                                <dxdiag:DiagramShape.Bindings>
+                                                    <dxdiag:DiagramBinding Expression="Phone" PropertyName="Content" />
+                                                </dxdiag:DiagramShape.Bindings>
+                                            </dxdiag:DiagramShape>
+                                        </dxdiag:DiagramContainer>
+                                    </dxdiag:DiagramControl>
+                                </dxdiag:DiagramOrgChartBehavior.TemplateDiagram>
+                            </dxdiag:DiagramOrgChartBehavior>
+                            <local:DiagramSelectionBehavior SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}" />
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxdiag:DiagramControl>
+                </dxdo:LayoutPanel>
+                <dxdo:LayoutPanel MaxWidth="220" Caption="Employees" AllowClose="False" AllowDrag="False" AllowFloat="False">
+                    <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource orgChartDetailsTemplate}" />
+                </dxdo:LayoutPanel>
+            </dxdo:LayoutGroup>
+        </dxdo:DockLayoutManager>
+    </DockPanel>
+</local:DiagramDemoModule>

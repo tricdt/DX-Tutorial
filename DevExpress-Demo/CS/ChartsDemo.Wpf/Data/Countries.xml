@@ -1,0 +1,1103 @@
+<?xml version="1.0" standalone="yes"?>
+<Countries>
+  <Country>
+    <Name>Afghanistan</Name>
+    <OfficialName>Islamic State of Afghanistan</OfficialName>
+    <Area>652.1</Area>
+  </Country>
+  <Country>
+    <Name>Albania</Name>
+    <OfficialName>Republic of Albania</OfficialName>
+    <Area>27.4</Area>
+  </Country>
+  <Country>
+    <Name>Algeria</Name>
+    <OfficialName>Democratic &amp; Popular Republic of Algiers</OfficialName>
+    <Area>2382</Area>
+  </Country>
+  <Country>
+    <Name>American Samoa</Name>
+    <OfficialName>American Samoa</OfficialName>
+    <Area>0.19</Area>
+  </Country>
+  <Country>
+    <Name>Andorra</Name>
+    <OfficialName>Principality of Andorra</OfficialName>
+    <Area>0.5</Area>
+  </Country>
+  <Country>
+    <Name>Angola</Name>
+    <OfficialName>Republic of Angola </OfficialName>
+    <Area>1246.7</Area>
+  </Country>
+  <Country>
+    <Name>Antigua and Barbuda</Name>
+    <OfficialName>Antigua and Barbuda</OfficialName>
+    <Area>0</Area>
+  </Country>
+  <Country>
+    <Name>Argentina</Name>
+    <OfficialName>Argentine Republic</OfficialName>
+    <Area>2780.4</Area>
+  </Country>
+  <Country>
+    <Name>Armenia</Name>
+    <OfficialName>Republic of Armenia</OfficialName>
+    <Area>28.4</Area>
+  </Country>
+  <Country>
+    <Name>Aruba</Name>
+    <OfficialName>Aruba</OfficialName>
+    <Area>0</Area>
+  </Country>
+  <Country>
+    <Name>Australia</Name>
+    <OfficialName>Commonwealth of Australia</OfficialName>
+    <Area>7741.2</Area>
+  </Country>
+  <Country>
+    <Name>Austria</Name>
+    <OfficialName>Republic of Austria</OfficialName>
+    <Area>83.9</Area>
+  </Country>
+  <Country>
+    <Name>Azerbaijan</Name>
+    <OfficialName>epublic of Azerbaijan</OfficialName>
+    <Area>86.6</Area>
+  </Country>
+  <Country>
+    <Name>Bahamas</Name>
+    <OfficialName>Commonwealth of the Bahamas</OfficialName>
+    <Area>10</Area>
+  </Country>
+  <Country>
+    <Name>Bahrain</Name>
+    <OfficialName>State of Bahrian</OfficialName>
+    <Area>0.7</Area>
+  </Country>
+  <Country>
+    <Name>Bangladesh</Name>
+    <OfficialName>People's Republic of Bangladesh</OfficialName>
+    <Area>130.2</Area>
+  </Country>
+  <Country>
+    <Name>Barbados</Name>
+    <OfficialName>Barbados</OfficialName>
+    <Area>0.4</Area>
+  </Country>
+  <Country>
+    <Name>Belarus</Name>
+    <OfficialName>Republic of Belarus</OfficialName>
+    <Area>207.6</Area>
+  </Country>
+  <Country>
+    <Name>Belgium</Name>
+    <OfficialName>Kingdom of Belgium</OfficialName>
+    <Area>32.8</Area>
+  </Country>
+  <Country>
+    <Name>Belize</Name>
+    <OfficialName>Belize</OfficialName>
+    <Area>22.8</Area>
+  </Country>
+  <Country>
+    <Name>Benin</Name>
+    <OfficialName>Republic of Benin</OfficialName>
+    <Area>110.6</Area>
+  </Country>
+  <Country>
+    <Name>Bermuda</Name>
+    <OfficialName>Bermuda</OfficialName>
+    <Area>0.005</Area>
+  </Country>
+  <Country>
+    <Name>Bhutan</Name>
+    <OfficialName>Kingdom of Bhutan</OfficialName>
+    <Area>47</Area>
+  </Country>
+  <Country>
+    <Name>Bolivia</Name>
+    <OfficialName>Republic of Bolivia</OfficialName>
+    <Area>1084</Area>
+  </Country>
+  <Country>
+    <Name>Bosnia and Herzegovina</Name>
+    <OfficialName>Republic of Bosnia and Herzegovina</OfficialName>
+    <Area>51</Area>
+  </Country>
+  <Country>
+    <Name>Botswana</Name>
+    <OfficialName>Republic of Botswana </OfficialName>
+    <Area>566.7</Area>
+  </Country>
+  <Country>
+    <Name>Brazil</Name>
+    <OfficialName>Federative Republic of Brazil</OfficialName>
+    <Area>8514.9</Area>
+  </Country>
+  <Country>
+    <Name>British Virgin Islands</Name>
+    <OfficialName>British Virgin Islands</OfficialName>
+    <Area>0</Area>
+  </Country>
+  <Country>
+    <Name>Brunei Darussalam</Name>
+    <OfficialName>The Sultanate of Brunei</OfficialName>
+    <Area>5.2</Area>
+  </Country>
+  <Country>
+    <Name>Bulgaria</Name>
+    <OfficialName>Republic of Bulgaria</OfficialName>
+    <Area>110.6</Area>
+  </Country>
+  <Country>
+    <Name>Burkina Faso</Name>
+    <OfficialName>Burkina </OfficialName>
+    <Area>273.8</Area>
+  </Country>
+  <Country>
+    <Name>Burundi</Name>
+    <OfficialName>Republic of Burundi </OfficialName>
+    <Area>25.7</Area>
+  </Country>
+  <Country>
+    <Name>Cambodia</Name>
+    <OfficialName>State of Cambodia</OfficialName>
+    <Area>176.5</Area>
+  </Country>
+  <Country>
+    <Name>Cameroon</Name>
+    <OfficialName>Republic of Cameroon </OfficialName>
+    <Area>465.4</Area>
+  </Country>
+  <Country>
+    <Name>Canada</Name>
+    <OfficialName>Canada</OfficialName>
+    <Area>9970.6</Area>
+  </Country>
+  <Country>
+    <Name>Cape Verde</Name>
+    <OfficialName>Republic of Cape Verde </OfficialName>
+    <Area>4</Area>
+  </Country>
+  <Country>
+    <Name>Central African Republic</Name>
+    <OfficialName>Central African Republic </OfficialName>
+    <Area>623</Area>
+  </Country>
+  <Country>
+    <Name>Chad</Name>
+    <OfficialName>Republic of Chad</OfficialName>
+    <Area>1284</Area>
+  </Country>
+  <Country>
+    <Name>Chile</Name>
+    <OfficialName>Republic of Chile</OfficialName>
+    <Area>748.8</Area>
+  </Country>
+  <Country>
+    <Name>China</Name>
+    <OfficialName>People's Republic of China</OfficialName>
+    <Area>9598.1</Area>
+  </Country>
+  <Country>
+    <Name>Colombia</Name>
+    <OfficialName>Republic of Colombia</OfficialName>
+    <Area>1039</Area>
+  </Country>
+  <Country>
+    <Name>Comoros</Name>
+    <OfficialName>Federal Islamic Republic of the Comoros</OfficialName>
+    <Area>2.2</Area>
+  </Country>
+  <Country>
+    <Name>Congo</Name>
+    <OfficialName>Republic of the Congo</OfficialName>
+    <Area>341.5</Area>
+  </Country>
+  <Country>
+    <Name>Cook Islands</Name>
+    <OfficialName>Cook Islands</OfficialName>
+    <Area>0.24</Area>
+  </Country>
+  <Country>
+    <Name>Costa Rica</Name>
+    <OfficialName>The Republic of Costa Rica</OfficialName>
+    <Area>51</Area>
+  </Country>
+  <Country>
+    <Name>Cote d'Ivoire</Name>
+    <OfficialName>Republic of Cote d'Ivoire</OfficialName>
+    <Area>318</Area>
+  </Country>
+  <Country>
+    <Name>Croatia</Name>
+    <OfficialName>Republic of Croatia</OfficialName>
+    <Area>56.4</Area>
+  </Country>
+  <Country>
+    <Name>Cuba</Name>
+    <OfficialName>Cuba</OfficialName>
+    <Area>109.8</Area>
+  </Country>
+  <Country>
+    <Name>Cyprus</Name>
+    <OfficialName>Republic of Cyprus</OfficialName>
+    <Area>9.2</Area>
+  </Country>
+  <Country>
+    <Name>Czech Republic</Name>
+    <OfficialName>Czech Republic</OfficialName>
+    <Area>79</Area>
+  </Country>
+  <Country>
+    <Name>Democratic People's Republic of Korea</Name>
+    <OfficialName>Democratic People's Republic of Korea</OfficialName>
+    <Area>120.4</Area>
+  </Country>
+  <Country>
+    <Name>DR Congo</Name>
+    <OfficialName>Democratic Republic of Congo</OfficialName>
+    <Area>2344.8</Area>
+  </Country>
+  <Country>
+    <Name>Denmark</Name>
+    <OfficialName>Kingdom of Denmark</OfficialName>
+    <Area>43.1</Area>
+  </Country>
+  <Country>
+    <Name>Djibouti</Name>
+    <OfficialName>Republic of Djibouti</OfficialName>
+    <Area>23.2</Area>
+  </Country>
+  <Country>
+    <Name>Dominica</Name>
+    <OfficialName>Commonwealth of Dominica</OfficialName>
+    <Area>0.8</Area>
+  </Country>
+  <Country>
+    <Name>Dominican Republic</Name>
+    <OfficialName>Dominican Republic</OfficialName>
+    <Area>0</Area>
+  </Country>
+  <Country>
+    <Name>Ecuador</Name>
+    <OfficialName>Republic of Ecuador</OfficialName>
+    <Area>276.8</Area>
+  </Country>
+  <Country>
+    <Name>Egypt</Name>
+    <OfficialName>Arab Republic of Egypt</OfficialName>
+    <Area>995.5</Area>
+  </Country>
+  <Country>
+    <Name>El Salvador</Name>
+    <OfficialName>Republic of El Salvador</OfficialName>
+    <Area>21</Area>
+  </Country>
+  <Country>
+    <Name>Equatorial Guinea</Name>
+    <OfficialName>Republic of Equatorial Guinea</OfficialName>
+    <Area>28</Area>
+  </Country>
+  <Country>
+    <Name>Eritrea</Name>
+    <OfficialName>State of Eritrea</OfficialName>
+    <Area>93.7</Area>
+  </Country>
+  <Country>
+    <Name>Estonia</Name>
+    <OfficialName>Republic of Estonia</OfficialName>
+    <Area>45.2</Area>
+  </Country>
+  <Country>
+    <Name>Ethiopia</Name>
+    <OfficialName>Ethiopia</OfficialName>
+    <Area>1101</Area>
+  </Country>
+  <Country>
+    <Name>Falkland Islands (Malvinas)</Name>
+    <OfficialName>Falkland Islands</OfficialName>
+    <Area>12.2</Area>
+  </Country>
+  <Country>
+    <Name>Fiji</Name>
+    <OfficialName>Republic of Fiji</OfficialName>
+    <Area>18.3</Area>
+  </Country>
+  <Country>
+    <Name>Finland</Name>
+    <OfficialName>Republic of Finland</OfficialName>
+    <Area>304.6</Area>
+  </Country>
+  <Country>
+    <Name>France</Name>
+    <OfficialName>The French Republic</OfficialName>
+    <Area>550.1</Area>
+  </Country>
+  <Country>
+    <Name>French Polynesia</Name>
+    <OfficialName>French Polynesia</OfficialName>
+    <Area>243.5</Area>
+  </Country>
+  <Country>
+    <Name>Gabon</Name>
+    <OfficialName>The Gabonese Republic</OfficialName>
+    <Area>257.7</Area>
+  </Country>
+  <Country>
+    <Name>Gambia</Name>
+    <OfficialName>Republic of The Gambia</OfficialName>
+    <Area>10</Area>
+  </Country>
+  <Country>
+    <Name>Georgia</Name>
+    <OfficialName>Republic of Georgia</OfficialName>
+    <Area>69.7</Area>
+  </Country>
+  <Country>
+    <Name>Germany</Name>
+    <OfficialName>Federal Republic of Germany</OfficialName>
+    <Area>349.3</Area>
+  </Country>
+  <Country>
+    <Name>Ghana</Name>
+    <OfficialName>Republic of Ghana</OfficialName>
+    <Area>227.5</Area>
+  </Country>
+  <Country>
+    <Name>Gibraltar</Name>
+    <OfficialName>Gibraltar</OfficialName>
+    <Area>0.006</Area>
+  </Country>
+  <Country>
+    <Name>Greece</Name>
+    <OfficialName>Hellenic Republic</OfficialName>
+    <Area>128.9</Area>
+  </Country>
+  <Country>
+    <Name>Greenland</Name>
+    <OfficialName>Greenland, a self-governing territory of Denmark, claimed in 1380.</OfficialName>
+    <Area>2175.6</Area>
+  </Country>
+  <Country>
+    <Name>Grenada</Name>
+    <OfficialName>Grenada</OfficialName>
+    <Area>0.3</Area>
+  </Country>
+  <Country>
+    <Name>Guadeloupe</Name>
+    <OfficialName>Guadeloupe, a French overseas</OfficialName>
+    <Area>0</Area>
+  </Country>
+  <Country>
+    <Name>Guatemala</Name>
+    <OfficialName>Republic of Guatemala</OfficialName>
+    <Area>108.4</Area>
+  </Country>
+  <Country>
+    <Name>Guinea</Name>
+    <OfficialName>Republic of Guinea</OfficialName>
+    <Area>245.9</Area>
+  </Country>
+  <Country>
+    <Name>Guinea-Bissau</Name>
+    <OfficialName>Republic of Guinea-Bissau</OfficialName>
+    <Area>28.1</Area>
+  </Country>
+  <Country>
+    <Name>Guyana</Name>
+    <OfficialName>Co-operative Republic of Guyana</OfficialName>
+    <Area>196.8</Area>
+  </Country>
+  <Country>
+    <Name>Haiti</Name>
+    <OfficialName>Republic of Haiti</OfficialName>
+    <Area>27.6</Area>
+  </Country>
+  <Country>
+    <Name>Honduras</Name>
+    <OfficialName>Republic of Honduras</OfficialName>
+    <Area>111.9</Area>
+  </Country>
+  <Country>
+    <Name>Hong Kong Special Administrative</Name>
+    <OfficialName>Hong Kong, special administrative</OfficialName>
+    <Area>1</Area>
+  </Country>
+  <Country>
+    <Name>Hungary</Name>
+    <OfficialName>Republic of Hungary</OfficialName>
+    <Area>92.3</Area>
+  </Country>
+  <Country>
+    <Name>Iceland</Name>
+    <OfficialName>Republic of Iceland</OfficialName>
+    <Area>100.3</Area>
+  </Country>
+  <Country>
+    <Name>India</Name>
+    <OfficialName>Republic of India</OfficialName>
+    <Area>3166.4</Area>
+  </Country>
+  <Country>
+    <Name>Indonesia</Name>
+    <OfficialName>Republic of Indonesia</OfficialName>
+    <Area>1904.6</Area>
+  </Country>
+  <Country>
+    <Name>Iran</Name>
+    <OfficialName>Islamic Republic of Iran</OfficialName>
+    <Area>1636</Area>
+  </Country>
+  <Country>
+    <Name>Iraq</Name>
+    <OfficialName>Republic of Iraq</OfficialName>
+    <Area>437.4</Area>
+  </Country>
+  <Country>
+    <Name>Ireland</Name>
+    <OfficialName>Republic of Ireland</OfficialName>
+    <Area>68.9</Area>
+  </Country>
+  <Country>
+    <Name>Israel</Name>
+    <OfficialName>State of Israel</OfficialName>
+    <Area>20.3</Area>
+  </Country>
+  <Country>
+    <Name>Italy</Name>
+    <OfficialName>Italian Republic</OfficialName>
+    <Area>294</Area>
+  </Country>
+  <Country>
+    <Name>Jamaica</Name>
+    <OfficialName>Jamaica</OfficialName>
+    <Area>10.8</Area>
+  </Country>
+  <Country>
+    <Name>Japan</Name>
+    <OfficialName>Japan</OfficialName>
+    <Area>376.5</Area>
+  </Country>
+  <Country>
+    <Name>Jordan</Name>
+    <OfficialName>Kingdom of Jordan</OfficialName>
+    <Area>88.9</Area>
+  </Country>
+  <Country>
+    <Name>Kazakhstan</Name>
+    <OfficialName>Republic of Kazakhstan</OfficialName>
+    <Area>2724.9</Area>
+  </Country>
+  <Country>
+    <Name>Kenya</Name>
+    <OfficialName>Republic of Kenya</OfficialName>
+    <Area>569.7</Area>
+  </Country>
+  <Country>
+    <Name>Kiribati</Name>
+    <OfficialName>Republic of Kiribati</OfficialName>
+    <Area>0.7</Area>
+  </Country>
+  <Country>
+    <Name>Kosovo</Name>
+    <OfficialName>Republic of Kosovo</OfficialName>
+    <Area>10.9</Area>
+  </Country>
+  <Country>
+    <Name>Kuwait</Name>
+    <OfficialName>State of Kuwait</OfficialName>
+    <Area>17.8</Area>
+  </Country>
+  <Country>
+    <Name>Kyrgyzstan</Name>
+    <OfficialName>Kyrgyz Republic</OfficialName>
+    <Area>198.5</Area>
+  </Country>
+  <Country>
+    <Name>Lao People's Democratic Republic</Name>
+    <OfficialName>Lao People's Democratic Republic</OfficialName>
+    <Area>230.8</Area>
+  </Country>
+  <Country>
+    <Name>Latvia</Name>
+    <OfficialName>Republic of Latvia</OfficialName>
+    <Area>64.6</Area>
+  </Country>
+  <Country>
+    <Name>Lebanon</Name>
+    <OfficialName>Republic of Lebanon</OfficialName>
+    <Area>10.2</Area>
+  </Country>
+  <Country>
+    <Name>Lesotho</Name>
+    <OfficialName>Kingdom of Lesotho</OfficialName>
+    <Area>30.4</Area>
+  </Country>
+  <Country>
+    <Name>Liberia</Name>
+    <OfficialName>The Republic of Liberia</OfficialName>
+    <Area>96.8</Area>
+  </Country>
+  <Country>
+    <Name>Libya</Name>
+    <OfficialName>State of Libya</OfficialName>
+    <Area>1759.5</Area>
+  </Country>
+  <Country>
+    <Name>Liechtenstein</Name>
+    <OfficialName>Principality of Liechtenstein</OfficialName>
+    <Area>0.16</Area>
+  </Country>
+  <Country>
+    <Name>Lithuania</Name>
+    <OfficialName>Republic of Lithuania</OfficialName>
+    <Area>65.3</Area>
+  </Country>
+  <Country>
+    <Name>Luxembourg</Name>
+    <OfficialName>Grand Duchy of Luxembourg</OfficialName>
+    <Area>2.6</Area>
+  </Country>
+  <Country>
+    <Name>Macau</Name>
+    <OfficialName>Macau, special administrative region</OfficialName>
+    <Area>0.002</Area>
+  </Country>
+  <Country>
+    <Name>Macedonia</Name>
+    <OfficialName>Republic of Macedonia</OfficialName>
+    <Area>25.7</Area>
+  </Country>
+  <Country>
+    <Name>Madagascar</Name>
+    <OfficialName>Republic of Madagascar</OfficialName>
+    <Area>581.5</Area>
+  </Country>
+  <Country>
+    <Name>Malawi</Name>
+    <OfficialName>Republic of Malawi</OfficialName>
+    <Area>94.1</Area>
+  </Country>
+  <Country>
+    <Name>Malaysia</Name>
+    <OfficialName>Malaysia</OfficialName>
+    <Area>328.6</Area>
+  </Country>
+  <Country>
+    <Name>Maldives</Name>
+    <OfficialName>Republic of Maldives</OfficialName>
+    <Area>0.3</Area>
+  </Country>
+  <Country>
+    <Name>Mali</Name>
+    <OfficialName>Republic of Mali</OfficialName>
+    <Area>1220.2</Area>
+  </Country>
+  <Country>
+    <Name>Malta</Name>
+    <OfficialName>Republic of Malta</OfficialName>
+    <Area>0.3</Area>
+  </Country>
+  <Country>
+    <Name>Marshall Islands</Name>
+    <OfficialName>Republic of the Marshall Islands</OfficialName>
+    <Area>0.18</Area>
+  </Country>
+  <Country>
+    <Name>Martinique</Name>
+    <OfficialName>Martinique, a French overseas</OfficialName>
+    <Area>1.1</Area>
+  </Country>
+  <Country>
+    <Name>Mauritania</Name>
+    <OfficialName>Islamic Republic of Mauritania</OfficialName>
+    <Area>1025.2</Area>
+  </Country>
+  <Country>
+    <Name>Mauritius</Name>
+    <OfficialName>Mauritius</OfficialName>
+    <Area>2</Area>
+  </Country>
+  <Country>
+    <Name>Mexico</Name>
+    <OfficialName>United States of Mexico</OfficialName>
+    <Area>1958.2</Area>
+  </Country>
+  <Country>
+    <Name>Micronesia, Federated States of</Name>
+    <OfficialName>Federated States of Micronesia</OfficialName>
+    <Area>0.7</Area>
+  </Country>
+  <Country>
+    <Name>Monaco</Name>
+    <OfficialName>Principality of Monaco</OfficialName>
+    <Area>0.002</Area>
+  </Country>
+  <Country>
+    <Name>Mongolia</Name>
+    <OfficialName>Mongolia</OfficialName>
+    <Area>1566.5</Area>
+  </Country>
+  <Country>
+    <Name>Montenegro</Name>
+    <OfficialName>Montenegro</OfficialName>
+    <Area>13.8</Area>
+  </Country>
+  <Country>
+    <Name>Montserrat</Name>
+    <OfficialName>Montserrat</OfficialName>
+    <Area>0</Area>
+  </Country>
+  <Country>
+    <Name>Morocco</Name>
+    <OfficialName>Kingdom of Morocco</OfficialName>
+    <Area>446.3</Area>
+  </Country>
+  <Country>
+    <Name>Mozambique</Name>
+    <OfficialName>Republic of Mozambique</OfficialName>
+    <Area>784.1</Area>
+  </Country>
+  <Country>
+    <Name>Myanmar</Name>
+    <OfficialName>Union of Myanmar</OfficialName>
+    <Area>657.54</Area>
+  </Country>
+  <Country>
+    <Name>Namibia</Name>
+    <OfficialName>The Republic of Namibia</OfficialName>
+    <Area>823.3</Area>
+  </Country>
+  <Country>
+    <Name>Nauru</Name>
+    <OfficialName>The Republic of Nauru</OfficialName>
+    <Area>0.02</Area>
+  </Country>
+  <Country>
+    <Name>Nepal</Name>
+    <OfficialName>Kingdom of Nepal</OfficialName>
+    <Area>136.8</Area>
+  </Country>
+  <Country>
+    <Name>Netherlands</Name>
+    <OfficialName>Kingdom of the Netherlands</OfficialName>
+    <Area>33.9</Area>
+  </Country>
+  <Country>
+    <Name>Netherlands Antilles</Name>
+    <OfficialName>Netherlands Antilles</OfficialName>
+    <Area>0</Area>
+  </Country>
+  <Country>
+    <Name>New Caledonia</Name>
+    <OfficialName>New Caledonia, a French overseas</OfficialName>
+    <Area>18.5</Area>
+  </Country>
+  <Country>
+    <Name>New Zealand</Name>
+    <OfficialName>The Dominion of New Zealand</OfficialName>
+    <Area>268</Area>
+  </Country>
+  <Country>
+    <Name>Nicaragua</Name>
+    <OfficialName>Republic of Nicaragua</OfficialName>
+    <Area>118.7</Area>
+  </Country>
+  <Country>
+    <Name>Niger</Name>
+    <OfficialName>Republic of Niger</OfficialName>
+    <Area>1266.7</Area>
+  </Country>
+  <Country>
+    <Name>Nigeria</Name>
+    <OfficialName>Federal Republic of Nigeria</OfficialName>
+    <Area>910.8</Area>
+  </Country>
+  <Country>
+    <Name>Niue</Name>
+    <OfficialName>Niue</OfficialName>
+    <Area>0.02</Area>
+  </Country>
+  <Country>
+    <Name>Norfolk Island</Name>
+    <OfficialName>Norfolk Islands</OfficialName>
+    <Area>0.034</Area>
+  </Country>
+  <Country>
+    <Name>Northern Mariana Islands</Name>
+    <OfficialName>Northern Mariana Islands, a commonwealth territory of the United States, claimed 1947</OfficialName>
+    <Area>0.44</Area>
+  </Country>
+  <Country>
+    <Name>Norway</Name>
+    <OfficialName>Kingdom of Norway</OfficialName>
+    <Area>306.8</Area>
+  </Country>
+  <Country>
+    <Name>Oman</Name>
+    <OfficialName>Sultanate of Oman</OfficialName>
+    <Area>212.5</Area>
+  </Country>
+  <Country>
+    <Name>Pakistan</Name>
+    <OfficialName>Islamic Republic of Pakistan</OfficialName>
+    <Area>770.9</Area>
+  </Country>
+  <Country>
+    <Name>Palau</Name>
+    <OfficialName>Palau</OfficialName>
+    <Area>0.5</Area>
+  </Country>
+  <Country>
+    <Name>Panama</Name>
+    <OfficialName>Republic of Panama</OfficialName>
+    <Area>76</Area>
+  </Country>
+  <Country>
+    <Name>Papua New Guinea</Name>
+    <OfficialName>Independent State of Papua New Guinea</OfficialName>
+    <Area>452.9</Area>
+  </Country>
+  <Country>
+    <Name>Paraguay</Name>
+    <OfficialName>Republic of Paraguay</OfficialName>
+    <Area>397.3</Area>
+  </Country>
+  <Country>
+    <Name>Peru</Name>
+    <OfficialName>Republic of Peru</OfficialName>
+    <Area>1280</Area>
+  </Country>
+  <Country>
+    <Name>Philippines</Name>
+    <OfficialName>Republic of the Philippines</OfficialName>
+    <Area>298.2</Area>
+  </Country>
+  <Country>
+    <Name>Pitcairn</Name>
+    <OfficialName>Pitcairn Islands</OfficialName>
+    <Area>0.04</Area>
+  </Country>
+  <Country>
+    <Name>Poland</Name>
+    <OfficialName>Republic of Poland</OfficialName>
+    <Area>304.5</Area>
+  </Country>
+  <Country>
+    <Name>Portugal</Name>
+    <OfficialName>Republic of Portugal</OfficialName>
+    <Area>92</Area>
+  </Country>
+  <Country>
+    <Name>Puerto Rico</Name>
+    <OfficialName>Puerto Rico, Commonwealth territory</OfficialName>
+    <Area>8.9</Area>
+  </Country>
+  <Country>
+    <Name>Qatar</Name>
+    <OfficialName>State of Qatar</OfficialName>
+    <Area>11</Area>
+  </Country>
+  <Country>
+    <Name>Republic of Korea</Name>
+    <OfficialName>Republic of Korea</OfficialName>
+    <Area>98.7</Area>
+  </Country>
+  <Country>
+    <Name>Republic of Moldova</Name>
+    <OfficialName>Republic of Moldova</OfficialName>
+    <Area>33.7</Area>
+  </Country>
+  <Country>
+    <Name>Romania</Name>
+    <OfficialName>Romania</OfficialName>
+    <Area>230.3</Area>
+  </Country>
+  <Country>
+    <Name>Russia</Name>
+    <OfficialName>Russian Federation</OfficialName>
+    <Area>17075.4</Area>
+  </Country>
+  <Country>
+    <Name>Rwanda</Name>
+    <OfficialName>Republic of Rwanda</OfficialName>
+    <Area>24.7</Area>
+  </Country>
+  <Country>
+    <Name>Saint Kitts and Nevis</Name>
+    <OfficialName>Federation of Saint Kitts and Nevis</OfficialName>
+    <Area>0</Area>
+  </Country>
+  <Country>
+    <Name>Saint Lucia</Name>
+    <OfficialName>Saint Lucia</OfficialName>
+    <Area>0.6</Area>
+  </Country>
+  <Country>
+    <Name>Saint Pierre and Miquelon</Name>
+    <OfficialName>St. Martin, a subprefecture of Guadaloupe</OfficialName>
+    <Area>0</Area>
+  </Country>
+  <Country>
+    <Name>Saint Vincent and the Grenadines</Name>
+    <OfficialName>Saint Vincent and the Grenadines</OfficialName>
+    <Area>0</Area>
+  </Country>
+  <Country>
+    <Name>Samoa</Name>
+    <OfficialName>Independent State of Samoa</OfficialName>
+    <Area>2.83</Area>
+  </Country>
+  <Country>
+    <Name>San Marino</Name>
+    <OfficialName>Republic of San Marino</OfficialName>
+    <Area>0.061</Area>
+  </Country>
+  <Country>
+    <Name>Sao Tome and Principe</Name>
+    <OfficialName>Republic of Sao Tome and Principe</OfficialName>
+    <Area>1</Area>
+  </Country>
+  <Country>
+    <Name>Saudi Arabia</Name>
+    <OfficialName>Kingdom of Saudi Arabia</OfficialName>
+    <Area>2149.7</Area>
+  </Country>
+  <Country>
+    <Name>Senegal</Name>
+    <OfficialName>Republic of Senegal</OfficialName>
+    <Area>192.5</Area>
+  </Country>
+  <Country>
+    <Name>Serbia</Name>
+    <OfficialName>Republic of Serbia</OfficialName>
+    <Area>77.47</Area>
+  </Country>
+  <Country>
+    <Name>Seychelles</Name>
+    <OfficialName>Republic of the Seychelles</OfficialName>
+    <Area>0.3</Area>
+  </Country>
+  <Country>
+    <Name>Sierra Leone</Name>
+    <OfficialName>Republic of Sierra Leone</OfficialName>
+    <Area>71.6</Area>
+  </Country>
+  <Country>
+    <Name>Singapore</Name>
+    <OfficialName>Republic of Singapore</OfficialName>
+    <Area>0.6</Area>
+  </Country>
+  <Country>
+    <Name>Slovakia</Name>
+    <OfficialName>Slovak Republic</OfficialName>
+    <Area>48.7</Area>
+  </Country>
+  <Country>
+    <Name>Slovenia</Name>
+    <OfficialName>Republic of Slovenia</OfficialName>
+    <Area>20</Area>
+  </Country>
+  <Country>
+    <Name>Solomon Islands</Name>
+    <OfficialName>Solomon Islands</OfficialName>
+    <Area>28</Area>
+  </Country>
+  <Country>
+    <Name>Somalia</Name>
+    <OfficialName>Somali Democratic Republic</OfficialName>
+    <Area>672.3</Area>
+  </Country>
+  <Country>
+    <Name>South Africa</Name>
+    <OfficialName>Republic of South Africa</OfficialName>
+    <Area>1221</Area>
+  </Country>
+  <Country>
+    <Name>Spain</Name>
+    <OfficialName>Kingdom of Spain</OfficialName>
+    <Area>499.4</Area>
+  </Country>
+  <Country>
+    <Name>Sri Lanka</Name>
+    <OfficialName>Democratic Socialist Republic of Sri Lanka</OfficialName>
+    <Area>64.6</Area>
+  </Country>
+  <Country>
+    <Name>Sudan</Name>
+    <OfficialName>Republic of Sudan</OfficialName>
+    <Area>2505.8</Area>
+  </Country>
+  <Country>
+    <Name>Suriname</Name>
+    <OfficialName>Republic of Suriname</OfficialName>
+    <Area>156</Area>
+  </Country>
+  <Country>
+    <Name>Swaziland</Name>
+    <OfficialName>Kingdom of Swaziland</OfficialName>
+    <Area>17.2</Area>
+  </Country>
+  <Country>
+    <Name>Sweden</Name>
+    <OfficialName>Kingdom of Sweden</OfficialName>
+    <Area>411.6</Area>
+  </Country>
+  <Country>
+    <Name>Switzerland</Name>
+    <OfficialName>Swiss Confederation</OfficialName>
+    <Area>39.8</Area>
+  </Country>
+  <Country>
+    <Name>Syrian Arab Republic</Name>
+    <OfficialName>Syrian Arab Republic</OfficialName>
+    <Area>184</Area>
+  </Country>
+  <Country>
+    <Name>Taiwan Province of China</Name>
+    <OfficialName>Republic of China (Taiwan)</OfficialName>
+    <Area>32.2</Area>
+  </Country>
+  <Country>
+    <Name>Tajikistan</Name>
+    <OfficialName>Republic of Tajikistan</OfficialName>
+    <Area>143.1</Area>
+  </Country>
+  <Country>
+    <Name>Thailand</Name>
+    <OfficialName>Kingdom of Thailand</OfficialName>
+    <Area>510.9</Area>
+  </Country>
+  <Country>
+    <Name>Togo</Name>
+    <OfficialName>Togolese Republic</OfficialName>
+    <Area>54.4</Area>
+  </Country>
+  <Country>
+    <Name>Tokelau</Name>
+    <OfficialName>Tokelau</OfficialName>
+    <Area>0.01</Area>
+  </Country>
+  <Country>
+    <Name>Tonga</Name>
+    <OfficialName>Kingdom of Tonga</OfficialName>
+    <Area>0.72</Area>
+  </Country>
+  <Country>
+    <Name>Trinidad and Tobago</Name>
+    <OfficialName>Republic of Trinidad and Tobago</OfficialName>
+    <Area>0</Area>
+  </Country>
+  <Country>
+    <Name>Tunisia</Name>
+    <OfficialName>Republic of Tunisia</OfficialName>
+    <Area>155.4</Area>
+  </Country>
+  <Country>
+    <Name>Turkey</Name>
+    <OfficialName>Republic of Turkey</OfficialName>
+    <Area>769.6</Area>
+  </Country>
+  <Country>
+    <Name>Turkmenistan</Name>
+    <OfficialName>Republic of Turkmenistan</OfficialName>
+    <Area>488.1</Area>
+  </Country>
+  <Country>
+    <Name>Turks and Caicos Islands</Name>
+    <OfficialName>Turks &amp; Caicos Islands</OfficialName>
+    <Area>0</Area>
+  </Country>
+  <Country>
+    <Name>Tuvalu</Name>
+    <OfficialName>Tuvalu</OfficialName>
+    <Area>0.02</Area>
+  </Country>
+  <Country>
+    <Name>Uganda</Name>
+    <OfficialName>Republic of Uganda</OfficialName>
+    <Area>199.6</Area>
+  </Country>
+  <Country>
+    <Name>Ukraine</Name>
+    <OfficialName>Ukriane</OfficialName>
+    <Area>603.7</Area>
+  </Country>
+  <Country>
+    <Name>United Arab Emirates</Name>
+    <OfficialName>United Arab Emirates</OfficialName>
+    <Area>83.6</Area>
+  </Country>
+  <Country>
+    <Name>United Kingdom</Name>
+    <OfficialName>United Kingdom of Great Britain</OfficialName>
+    <Area>241.6</Area>
+  </Country>
+  <Country>
+    <Name>United Republic of Tanzania</Name>
+    <OfficialName>United Republic of Tanzania</OfficialName>
+    <Area>886</Area>
+  </Country>
+  <Country>
+    <Name>United States</Name>
+    <OfficialName>United States of America</OfficialName>
+    <Area>9629.1</Area>
+  </Country>
+  <Country>
+    <Name>United States Virgin Islands</Name>
+    <OfficialName>US Virgin Islands, unincorporated territory </OfficialName>
+    <Area>0.352</Area>
+  </Country>
+  <Country>
+    <Name>Uruguay</Name>
+    <OfficialName>Republic of Uruguay</OfficialName>
+    <Area>174.8</Area>
+  </Country>
+  <Country>
+    <Name>Uzbekistan</Name>
+    <OfficialName>Republic of Uzbekistan</OfficialName>
+    <Area>447.4</Area>
+  </Country>
+  <Country>
+    <Name>Vanuatu</Name>
+    <OfficialName>Republic of Vanuatu</OfficialName>
+    <Area>12.2</Area>
+  </Country>
+  <Country>
+    <Name>Venezuela</Name>
+    <OfficialName>Republic of Venezuela</OfficialName>
+    <Area>882.1</Area>
+  </Country>
+  <Country>
+    <Name>Viet Nam</Name>
+    <OfficialName>Socialist Republic of Viet-Nam</OfficialName>
+    <Area>325.5</Area>
+  </Country>
+  <Country>
+    <Name>Wallis and Futuna Islands</Name>
+    <OfficialName>Wallis and Futuna, a French overseas</OfficialName>
+    <Area>0.27</Area>
+  </Country>
+  <Country>
+    <Name>Yemen</Name>
+    <OfficialName>Republic of Yemen</OfficialName>
+    <Area>528</Area>
+  </Country>
+  <Country>
+    <Name>Zambia</Name>
+    <OfficialName>Republic of Zambia</OfficialName>
+    <Area>743.4</Area>
+  </Country>
+  <Country>
+    <Name>Zimbabwe</Name>
+    <OfficialName>Republic of Zimbabwe</OfficialName>
+    <Area>386.7</Area>
+  </Country>
+  <Country>
+    <Name>Holy See</Name>
+    <OfficialName>State of the Vatican City (Holy See)</OfficialName>
+    <Area>0</Area>
+  </Country>
+</Countries>

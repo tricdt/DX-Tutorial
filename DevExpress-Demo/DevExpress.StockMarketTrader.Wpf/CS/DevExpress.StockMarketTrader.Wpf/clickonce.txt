@@ -1,0 +1,5 @@
+DevExpress.Charts.v{DXVersion}.Core
+DevExpress.Charts.Designer.v{DXVersion}
+DevExpress.Xpf.Charts.v{DXVersion}
+DevExpress.Xpf.Gauges.v{DXVersion}
+DevExpress.Xpf.PropertyGrid.v{DXVersion}

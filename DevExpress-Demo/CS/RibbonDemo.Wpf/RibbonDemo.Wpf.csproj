@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7CE58B34-3C1F-4240-A742-A5C8710D3380}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <BaseIntermediateOutputPath>obj.Wpf</BaseIntermediateOutputPath>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RibbonDemo</RootNamespace>
+    <AssemblyName>RibbonDemo</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ConvertToNet6Windows />
+  </PropertyGroup>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+	<ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;WPF;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+	<ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Debug\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;CLICKONCE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Release\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Release\</OutputPath>
+    <DefineConstants>TRACE;WPF;CLICKONCE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugTest\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DEBUGTEST</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>demoicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\Home_16x16.svg" />
+    <Resource Include="Images\Icons\New_16x16.svg" />
+    <Resource Include="Images\Icons\Open_16x16.svg" />
+    <Resource Include="Images\Icons\AlignCenter_20x20.svg" />
+    <Resource Include="Images\Icons\AlignLeft_20x20.svg" />
+    <Resource Include="Images\Icons\AlignRight_20x20.svg" />
+    <Resource Include="Images\Icons\Bold_20x20.svg" />
+    <Resource Include="Images\Icons\Bullets-Box-76x76.png" />
+    <Resource Include="Images\Icons\Bullets-Circle-76x76.png" />
+    <Resource Include="Images\Icons\Bullets-Decimal-76x76.png" />
+    <Resource Include="Images\Icons\Bullets-Disc-76x76.png" />
+    <Resource Include="Images\Icons\Bullets-LowerLatin-76x76.png" />
+    <Resource Include="Images\Icons\Bullets-LowerRoman-76x76.png" />
+    <Resource Include="Images\Icons\Bullets-None-76x76.png" />
+    <Resource Include="Images\Icons\Bullets-Square-76x76.png" />
+    <Resource Include="Images\Icons\Bullets-UpperLatin-76x76.png" />
+    <Resource Include="Images\Icons\Bullets-UpperRoman-76x76.png" />
+    <Resource Include="Images\Icons\ChangeFontStyle_20x20.svg" />
+    <Resource Include="Images\Icons\ClearAll_20x20.svg" />
+    <Resource Include="Images\Icons\Cut_20x20.svg" />
+    <Resource Include="Images\Icons\Find_20x20.svg" />
+    <Resource Include="Images\Icons\FontColor_20x20.svg" />
+    <Resource Include="Images\Icons\FontSizeDecrease_20x20.svg" />
+    <Resource Include="Images\Icons\FontSizeIncrease_20x20.svg" />
+    <Resource Include="Images\Icons\Highlight_20x20.svg" />
+    <Resource Include="Images\Icons\Icon_Scale_20x20.svg" />
+    <Resource Include="Images\Icons\IndentDecrease_20x20.svg" />
+    <Resource Include="Images\Icons\IndentIncrease_20x20.svg" />
+    <Resource Include="Images\Icons\InsertImage_20x20.svg" />
+    <Resource Include="Images\Icons\Italic_20x20.svg" />
+    <Resource Include="Images\Icons\ListBullets_20x20.svg" />
+    <Resource Include="Images\Icons\New_20x20.svg" />
+    <Resource Include="Images\Icons\Open_20x20.svg" />
+    <Resource Include="Images\Icons\PageSetup_20x20.svg" />
+    <Resource Include="Images\Icons\Palette_20x20.svg" />
+    <Resource Include="Images\Icons\Paste_20x20.svg" />
+    <Resource Include="Images\Icons\SelectAll_20x20.svg" />
+    <Resource Include="Images\Icons\Underline_20x20.svg" />
+    <Resource Include="Images\Icons\Thickness.svg" />
+    <Resource Include="Images\Icons\Thickness_20x20.svg" />
+    <Resource Include="Images\Icons\Copy_20x20.svg" />
+    <Resource Include="Images\Icons\BorderStyle_20x20.svg" />
+    <Reference Include="DevExpress.Data.Desktop.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Data.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.DemoData.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Images.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Core.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Printing.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="nunit.framework" Condition=" '$(Configuration)' == 'DebugTest' ">
+      <HintPath></HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    <Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Ribbon.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.DemoBase.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Docking.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Mvvm.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="System"><Private>False</Private></Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations"><Private>False</Private></Reference>
+    <Reference Include="System.Data"><Private>False</Private></Reference>
+    <Reference Include="System.Drawing"><Private>False</Private></Reference>
+    <Reference Include="System.Xml"><Private>False</Private></Reference>
+    <Reference Include="System.Windows.Forms"><Private>False</Private></Reference>
+    <Reference Include="System.Core"><Private>False</Private></Reference>
+    <Reference Include="System.Xml.Linq"><Private>False</Private></Reference>
+    <Reference Include="System.Data.DataSetExtensions"><Private>False</Private></Reference>
+    <Reference Include="System.Xaml"><Private>False</Private></Reference>
+    <Reference Include="UIAutomationProvider"><Private>False</Private></Reference>
+    <Reference Include="UIAutomationTypes"><Private>False</Private></Reference>
+    <Reference Include="WindowsBase"><Private>False</Private></Reference>
+    <Reference Include="PresentationCore"><Private>False</Private></Reference>
+    <Reference Include="PresentationFramework"><Private>False</Private></Reference>
+  </ItemGroup>
+  <!--Main-->
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DemoTextBox.cs" />
+    <Compile Include="Controls\InlineImage.cs" />
+    <Compile Include="Controls\PaintControl.xaml.cs">
+      <DependentUpon>PaintControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\EditWidthConverter.cs" />
+    <Compile Include="Helpers\GlyphHelper.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\MVVMRibbon\ViewModels\MVVMRibbonServices.cs" />
+    <Compile Include="Modules\MVVMRibbon\Views\MVVMRibbon.xaml.cs">
+      <DependentUpon>MVVMRibbon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RibbonMerging\Converters\PointToStringConverter.cs" />
+    <Compile Include="Modules\RibbonMerging\ViewModels\PaintPanelViewModel.cs" />
+    <Compile Include="Modules\RibbonMerging\ViewModels\PanelViewModel.cs" />
+    <Compile Include="Modules\RibbonMerging\ViewModels\RibbonMergingViewModel.cs" />
+    <Compile Include="Modules\RibbonMerging\ViewModels\TextPanelViewModel.cs" />
+    <Compile Include="Modules\RibbonMerging\Views\PaintUserControl.xaml.cs">
+      <DependentUpon>PaintUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RibbonMerging\Views\RibbonMergingUserControl.xaml.cs">
+      <DependentUpon>RibbonMergingUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RibbonMerging\Views\TextUserControl.xaml.cs">
+      <DependentUpon>TextUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RibbonSimplePad\Converters\EnumValueToDisplayValueConverter.cs" />
+    <Compile Include="Modules\RibbonSimplePad\Converters\ImageScaleValueConverter.cs" />
+    <Compile Include="Modules\RibbonSimplePad\Converters\EnumValueToImageSourceConverter.cs" />
+    <Compile Include="Modules\RibbonSimplePad\Services\BackstageViewService.cs" />
+    <Compile Include="Modules\RibbonSimplePad\Services\DemoRichControlService.cs" />
+    <Compile Include="Modules\RibbonSimplePad\TemplateSelectors\InlineImageContentTemplateSelector.cs" />
+    <Compile Include="Modules\RibbonSimplePad\TemplateSelectors\TemplateSelectorDictionary.cs" />
+    <Compile Include="Modules\RibbonSimplePad\TemplateSelectors\TextMarkerStyleTemplateSelector.cs" />
+    <Compile Include="Modules\RibbonSimplePad\ViewModels\InlineImageViewModel.cs" />
+    <Compile Include="Modules\RibbonSimplePad\ViewModels\RecentItemViewModel.cs" />
+    <Compile Include="Modules\RibbonSimplePad\ViewModels\SimplePadViewModel.cs" />
+    <Compile Include="Modules\RibbonSimplePad\Views\RibbonSimplePad.xaml.cs">
+      <DependentUpon>RibbonSimplePad.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RibbonWindow\Services\CloseWindowService.cs" />
+    <Compile Include="Modules\RibbonWindow\ViewModels\PainterWindowViewModel.cs" />
+    <Compile Include="Modules\MVVMRibbon\ViewModels\MVVMRibbonCommands.cs" />
+    <Compile Include="Modules\MVVMRibbon\ViewModels\MVVMRibbonViewModel.cs" />
+    <Compile Include="Helpers\SelectedTextBehavior.cs" />
+    <Compile Include="Modules\RibbonWindow\Views\RibbonWindow.xaml.cs">
+      <DependentUpon>RibbonWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RibbonWindow\Views\PainterWindow.xaml.cs">
+      <DependentUpon>PainterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DemoTesting\Fixtures.cs" />
+    <EmbeddedResource Include="clickonce.txt">
+      <netcore3ignore />
+    </EmbeddedResource>
+  </ItemGroup>
+  <!--Controls-->
+  <ItemGroup>
+    <Compile Include="Controls\DemoModuleControl.cs" />
+    <Compile Include="Controls\DemoRichTextBox.cs" />
+  </ItemGroup>
+  <!--Demo modules-->
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Controls\PaintControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\MVVMRibbon\Views\MVVMRibbon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RibbonMerging\Views\PaintUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RibbonMerging\Views\RibbonMergingUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RibbonMerging\Views\TextUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RibbonSimplePad\Views\BackstageViewCommonStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RibbonSimplePad\Views\BackstageViewPanes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RibbonSimplePad\Views\RibbonSimplePad.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RibbonSimplePad\Views\TemplateSelectors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RibbonWindow\Views\RibbonWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\RibbonWindow\Views\PainterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <None Include="app.config">
+      <netcore3ignore />
+    </None>
+	
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Clipart\caCompClient.png" />
+    <Resource Include="Images\Clipart\caCompClientEnabled.png" />
+    <Resource Include="Images\Clipart\caDatabaseBlue.png" />
+    <Resource Include="Images\Clipart\caDataBaseDisabled.png" />
+    <Resource Include="Images\Clipart\caDatabaseGreen.png" />
+    <Resource Include="Images\Clipart\caDataBaseViolet.png" />
+    <Resource Include="Images\Clipart\caInet.png" />
+    <Resource Include="Images\Clipart\caInetSearch.png" />
+    <Resource Include="Images\Clipart\caModem.png" />
+    <Resource Include="Images\Clipart\caModemEnabled.png" />
+    <Resource Include="Images\Clipart\caNetCard.png" />
+    <Resource Include="Images\Clipart\caNetwork.png" />
+    <Resource Include="Images\Clipart\caNetworkEnabled.png" />
+    <Resource Include="Images\Clipart\caServer.png" />
+    <Resource Include="Images\Clipart\caServerEnabled.png" />
+    <Resource Include="Images\Clipart\caWebCam.png" />
+    <Resource Include="Images\ribbon-application-32x32.png" />
+    <Resource Include="Images\Shapes\ShapeCircle.png" />
+    <Resource Include="Images\Shapes\ShapeDownArrow.png" />
+    <Resource Include="Images\Shapes\ShapeLeftArrow.png" />
+    <Resource Include="Images\Shapes\ShapeNone.png" />
+    <Resource Include="Images\Shapes\ShapeRectangle.png" />
+    <Resource Include="Images\Shapes\ShapeRightArrow.png" />
+    <Resource Include="Images\Shapes\ShapeStar.png" />
+    <Resource Include="Images\Shapes\ShapeTriangle.png" />
+    <Resource Include="Images\Shapes\ShapeUpArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent"><ItemGroup><Resource Include="@(Page)" /></ItemGroup><ItemGroup><Resource Include="@(Compile)" /></ItemGroup></Target>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+	<GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+	<ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3
+    <Import Project="Demo.targets" />
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3 
+    <Import Project="Themes.WPF.NetCore.targets" />
+  ONLY NETCORE3-->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    
+  </PropertyGroup>
+</Project>

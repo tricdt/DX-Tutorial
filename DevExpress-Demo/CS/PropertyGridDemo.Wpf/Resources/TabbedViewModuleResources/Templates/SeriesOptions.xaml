@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                    xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+                    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+                    xmlns:local="clr-namespace:PropertyGridDemo"
+                    xmlns:dxprgt="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid/themekeys">
+    <DataTemplate x:Key="Options">
+        <dxprg:PropertyDefinition Path="Options" HeaderShowMode="Hidden" PostOnEditValueChanged="True" AllowExpanding="Never">
+            <dxprg:PropertyDefinition.CellTemplate>
+                <DataTemplate>
+                    <dxprg:CellEditorPresenter Path="Model" PathMode="Relative"/>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.CellTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="Options.Model">
+        <dxprg:PropertyDefinition Path="Model" PostOnEditValueChanged="True" AllowExpanding="Never">
+            <dxprg:PropertyDefinition.CellTemplate>
+                <DataTemplate>
+                    <DockPanel LastChildFill="True">
+                        <Border Width="{DynamicResource ResourceKey={dxprgt:DataRowThemeKey ResourceKey=ExpanderWidth}}" DockPanel.Dock="Left"/>
+                        <dxe:ListBoxEdit ItemsSource="{DXBinding $dxc:Bar2DModel.GetPredefinedKinds()}" ShowBorder="False" x:Name="PART_Editor" DockPanel.Dock="Right"/>
+                    </DockPanel>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.CellTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+</ResourceDictionary>

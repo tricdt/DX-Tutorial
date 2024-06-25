@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProjectGuid>{50213988-734E-0FE0-3F4F-C726CC6B5576}</ProjectGuid>
+    <EnableDefaultItems>False</EnableDefaultItems>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <Configurations>Debug;Release;DebugTest</Configurations>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    <EmbeddedResourceUseDependentUponConvention>False</EmbeddedResourceUseDependentUponConvention>
+    <RootNamespace>DevExpress.WindowsMailClient.Wpf</RootNamespace>
+    <AssemblyName>DevExpress.WindowsMailClient.Wpf</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>WinExe</OutputType>
+    <WarningLevel>4</WarningLevel>
+    <ApplicationIcon>Images\AppIcon\AppIcon.ico</ApplicationIcon>
+    <IntermediateOutputPath>obj.NCD</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\ClickOnce DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\ClickOnce ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\x86\DebugNetCoreDesktopTest\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;DEBUGTEST;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Themes.WPF.NetCore.targets" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Wpf.Demos" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Document.Processor" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Win.RichEdit" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="22.2.3" />
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Data\DataProvider\IDataProvider.cs" />
+    <Compile Include="Data\DataProvider\MailDataProviderBase.cs" />
+    <Compile Include="Data\DataProvider\XmlMailDataProvider.cs" />
+    <Compile Include="Data\MailFolders.cs" />
+    <Compile Include="Data\MailMessage.cs" />
+    <Compile Include="Utils\Helpers\DataHelper.cs" />
+    <Compile Include="Utils\Helpers\EmailValidationHelper.cs" />
+    <Compile Include="Utils\Helpers\FilePathHelper.cs" />
+    <Compile Include="ViewModel\Base\CommandViewModel.cs" />
+    <Compile Include="ViewModel\Base\ContentViewModel.cs" />
+    <Compile Include="ViewModel\Base\EmptyItemViewModel.cs" />
+    <Compile Include="ViewModel\Mail\AddNewMailCommandViewModel.cs" />
+    <Compile Include="ViewModel\MailHamburgerMenu\MailHamburgerMenuViewModel.cs" />
+    <Compile Include="ViewModel\Mail\MailAccountCollectionViewModel.cs" />
+    <Compile Include="ViewModel\Mail\MailAccountsSettingsViewModel.cs" />
+    <Compile Include="Utils\Helpers\MailMessageHelper.cs" />
+    <Compile Include="ViewModel\Mail\MailAccountViewModel.cs" />
+    <Compile Include="ViewModel\Mail\MailFolderCollectionViewModel.cs" />
+    <Compile Include="ViewModel\Mail\MailFolderViewModel.cs" />
+    <Compile Include="ViewModel\ModuleInjection\Bootstrapper.cs" />
+    <Compile Include="Data\DataProvider\DesignTimeMailDataProvider.cs" />
+    <Compile Include="Utils\Helpers\ExceptionHelper.cs" />
+    <Compile Include="Utils\Helpers\ImageSourceHelper.cs" />
+    <Compile Include="ViewModel\ModuleInjection\Messages\MailAccountsSettingsViewModelInjectedMessage.cs" />
+    <Compile Include="View\MailMessageReadControl.xaml.cs">
+      <DependentUpon>MailMessageReadControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\HamburgerMenuServices\HamburgerMenuStrategy.cs" />
+    <Compile Include="Utils\HamburgerMenuServices\HamburgerMenuWrapper.cs" />
+    <Compile Include="ViewModel\Mail\MailMessageViewModel.cs" />
+    <Compile Include="View\Converters.cs" />
+    <Compile Include="ViewModel\Mail\MailViewModel.cs" />
+    <Compile Include="ViewModel\Mail\MailAccountSettingsViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ModuleInjection\Modules.cs" />
+    <Compile Include="ViewModel\ModuleInjection\ModuleType.cs" />
+    <Compile Include="ViewModel\ModuleInjection\Regions.cs" />
+    <Compile Include="View\MailView.xaml.cs">
+      <DependentUpon>MailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MailMessageEditControl.xaml.cs">
+      <DependentUpon>MailMessageEditControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MailAccountSettingsView.xaml.cs">
+      <DependentUpon>MailAccountSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="View\MailMessageReadControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MailMessageEditControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MailAccountSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Mail\Unknown-user.png" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)' == 'ClickOnce Debug' OR '$(Configuration)' == 'ClickOnce Release'" />
+  <ItemGroup>
+    <Resource Include="Images\AppIcon\AppIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Mail\Add.svg" />
+    <Resource Include="Images\Mail\Customer.svg" />
+    <Resource Include="Images\Mail\Delete.svg" />
+    <Resource Include="Images\Mail\Folders.svg" />
+    <Resource Include="Images\Mail\Mail.svg" />
+    <Resource Include="Images\Mail\Reply.svg" />
+    <Resource Include="Images\Mail\Set_flag.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Mail\Archive.svg" />
+    <Resource Include="Images\Mail\Forward.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Mail\Send.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
+  </ItemGroup>
+  <ItemGroup></ItemGroup>
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

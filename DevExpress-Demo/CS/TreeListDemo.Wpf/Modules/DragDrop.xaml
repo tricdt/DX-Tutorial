@@ -1,0 +1,110 @@
+﻿<local:TreeListDemoModule x:Class="TreeListDemo.DragDrop"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                          xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                          xmlns:local="clr-namespace:TreeListDemo"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          mc:Ignorable="d"
+                          DataContext="{dxmvvm:ViewModelSource local:DragDropViewModel}"
+                          d:DesignHeight="400"
+                          d:DesignWidth="800">
+    <local:TreeListDemoModule.Resources>
+        <local:EmployeeCategoryImageSelector x:Key="categoryImageSelector" />
+        <DataTemplate x:Key="listBoxItemTemplate">
+            <StackPanel Orientation="Vertical" Margin="0,0,0,8">
+                <TextBlock Text="{Binding}" FontWeight="Bold" />
+                <TextBlock Text="{Binding JobTitle}" />
+            </StackPanel>
+        </DataTemplate>
+    </local:TreeListDemoModule.Resources>
+    <DockPanel>
+        <local:TreeListDemoRibbon DockPanel.Dock="Top" ExportTreeList="{x:Reference treeList}" />
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Margin="0,12,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit x:Name="showDragDropHintCheckEdit" Content="Show Drag Drop Hint" IsChecked="True" />
+                        <dxe:CheckEdit x:Name="showTargetInfoInDragDropHintCheckEdit"
+                                       Content="Show Target Info In Drag Drop Hint"
+                                       IsChecked="False"
+                                       IsEnabled="{Binding Path=IsChecked, ElementName=showDragDropHintCheckEdit}" />
+                        <dxe:CheckEdit x:Name="allowDropInside" Content="Allow Drop Inside Node" IsChecked="True" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Margin="0,12,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit Margin="0,0,0,6"
+                                       Content="Allow Sorted Data Drag Drop"
+                                       IsChecked="{Binding Path=AllowSortedDataDragDrop, ElementName=view, Mode=TwoWay}" />
+                        <TextBlock TextWrapping="Wrap"
+                                   MaxWidth="230"
+                                   Text="By default, the sorted TreeList doesn't allow dropping records on some positions, which are defined by value of column by which the control is sorted. Selecting this option allows the TreeList to modify record data in such columns to insert the dropped record on a required position." />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxlc:LayoutControl Orientation="Horizontal" StretchContentVertically="True" StretchContentHorizontally="True">
+            <dxlc:LayoutGroup>
+                <dxlc:LayoutItem VerticalAlignment="Stretch">
+                    <dxg:TreeListControl x:Name="treeList" ItemsSource="{Binding Path=ActiveEmployees}" SelectionMode="Row">
+                        <!--#region Columns-->
+                        <dxg:TreeListControl.Columns>
+                            <dxg:TreeListColumn FieldName="JobTitle" Width="*" />
+                            <dxg:TreeListColumn FieldName="FullName" UnboundDataType="{x:Type sys:String}" UnboundExpression="[FirstName] + ' ' + [LastName]" ReadOnly="True" Width="*" />
+                            <dxg:TreeListColumn FieldName="AddressLine1" Header="Address" Width="2*" />
+                            <dxg:TreeListColumn FieldName="Phone" Width="*" />
+                        </dxg:TreeListControl.Columns>
+                        <!--#endregion-->
+                        <!--#region Total Summary-->
+                        <dxg:TreeListControl.TotalSummary>
+                            <dxg:TreeListSummaryItem SummaryType="Count" Alignment="Right" />
+                        </dxg:TreeListControl.TotalSummary>
+                        <!--#endregion-->
+                        <dxg:TreeListControl.View>
+                            <dxg:TreeListView x:Name="view"
+                                              NodeImageSelector="{StaticResource categoryImageSelector}"
+                                              ShowNodeImages="True"
+                                              PrintNodeImages="True"
+                                              ParentFieldName="ParentId"
+                                              KeyFieldName="Id"
+                                              AutoExpandAllNodes="True"
+                                              ShowFixedTotalSummary="True"
+                                              NavigationStyle="Row"
+                                              AllowDragDrop="True"
+                                              DragRecordOver="OnDragRecordOver"
+                                              ShowDragDropHint="{Binding ElementName=showDragDropHintCheckEdit, Path=IsChecked}"
+                                              ShowTargetInfoInDragDropHint="{Binding  Path=IsChecked, ElementName=showTargetInfoInDragDropHintCheckEdit}" />
+                        </dxg:TreeListControl.View>
+                    </dxg:TreeListControl>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup>
+                <dxlc:LayoutItem VerticalAlignment="Stretch" HorizontalAlignment="Left">
+                    <!--#region ListBoxEdit-->
+                    <dxe:ListBoxEdit ItemsSource="{Binding NewEmployees}"
+                                     VerticalAlignment="Stretch"
+                                     MinWidth="160"
+                                     ItemTemplate="{StaticResource listBoxItemTemplate}"
+                                     dx:ListBoxDragDropBehavior.AllowDragDrop="True"
+                                     dx:ListBoxDragDropBehavior.DragRecordOver="OnDragRecordOver"
+                                     dx:ListBoxDragDropBehavior.ShowDragDropHint="{Binding ElementName=showDragDropHintCheckEdit, Path=IsChecked}"
+                                     dx:ListBoxDragDropBehavior.ShowTargetInfoInDragDropHint="{Binding  Path=IsChecked, ElementName=showTargetInfoInDragDropHintCheckEdit}" />
+                    <!--#endregion-->
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutControl>
+    </DockPanel>
+</local:TreeListDemoModule>

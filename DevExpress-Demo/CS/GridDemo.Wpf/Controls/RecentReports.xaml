@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="GridDemo.RecentReports"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:local="clr-namespace:GridDemo"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="300" x:Name="root">
+    <UserControl.Resources>
+        <Style x:Key="reportButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="60" />
+            <Setter Property="Height" Value="85" />
+            <Setter Property="Margin" Value="3,0,0,0" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+        <Style x:Key="showReportButtonStyle" BasedOn="{StaticResource reportButtonStyle}" TargetType="Button">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel>
+                            <dx:DXImage Stretch="None" Source="pack://application:,,,/GridDemo;component/Images/Ribbon/Designer.svg" Width="32" Height="32"/>
+                            <TextBlock Text="{Binding}" TextWrapping="Wrap" TextAlignment="Center" FontWeight="{TemplateBinding TextBlock.FontWeight}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="previewButtonStyle" BasedOn="{StaticResource reportButtonStyle}" TargetType="Button">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel>
+                            <dx:DXImage Stretch="None" Source="pack://application:,,,/GridDemo;component/Images/Ribbon/Preview.svg" Width="32" Height="32"/>
+                            <TextBlock Text="{Binding}" TextWrapping="Wrap" TextAlignment="Center" FontWeight="{TemplateBinding TextBlock.FontWeight}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="deleteButtonStyle" BasedOn="{StaticResource reportButtonStyle}" TargetType="Button">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel>
+                            <dx:DXImage Stretch="None" Source="pack://application:,,,/GridDemo;component/Images/Ribbon/Delete.svg" Width="32" Height="32"/>
+                            <TextBlock Text="{Binding}" TextWrapping="Wrap" TextAlignment="Center" FontWeight="{TemplateBinding TextBlock.FontWeight}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <GroupBox Header="Recent Reports" x:Name="frame" Width="210" Visibility="{Binding ReportService.ViewModel.Reports.Count, RelativeSource={RelativeSource AncestorType=local:RecentReports}, Converter={dxmvvm:NumericToVisibilityConverter}}" Margin="0,5,0,0">
+        <StackPanel>
+            <TextBlock Margin="0,0,0,12" TextWrapping="Wrap">
+                Select one of the previously saved reports to edit it via the report designer, preview the print output or remove it from the list.
+            </TextBlock>
+            <dxe:ListBoxEdit x:Name="lbSelectedReport" SelectedIndex="0" DisplayMember="Info.Name" Height="140" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch"
+                             ItemsSource="{Binding ReportService.ViewModel.Reports, RelativeSource={RelativeSource AncestorType=local:RecentReports}}">
+                <dxe:ListBoxEdit.ItemContainerStyle>
+                    <Style TargetType="{x:Type dxe:ListBoxEditItem}">
+                        <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <ItemsControl>
+                                        <dxmvvm:EventToCommand EventName="MouseDoubleClick" Command="{Binding PreviewCommand}"/>
+                                        <dxmvvm:KeyToCommand KeyGesture="Enter" Command="{Binding PreviewCommand}"/>
+                                        <dxmvvm:KeyToCommand KeyGesture="Delete" Command="{Binding DeleteCommand}"/>
+                                    </ItemsControl>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </dxe:ListBoxEdit.ItemContainerStyle>
+            </dxe:ListBoxEdit>
+            <WrapPanel HorizontalAlignment="Center" Margin="-3,3,0,0" DataContext="{Binding Path=SelectedItem, ElementName=lbSelectedReport}">
+                <Button Command="{Binding Path=ShowCommand}" Style="{StaticResource showReportButtonStyle}" Content="Show Designer" IsEnabled="{Binding Converter={dxmvvm:ObjectToBooleanConverter}}"/>
+                <Button Command="{Binding Path=PreviewCommand}" Style="{StaticResource previewButtonStyle}" Content="Show Preview" IsEnabled="{Binding Converter={dxmvvm:ObjectToBooleanConverter}}"/>
+                <Button Command="{Binding Path=DeleteCommand}" Style="{StaticResource deleteButtonStyle}" Content="Delete Report" IsEnabled="{Binding Converter={dxmvvm:ObjectToBooleanConverter}}"/>
+            </WrapPanel>
+        </StackPanel>
+    </GroupBox>
+</UserControl>

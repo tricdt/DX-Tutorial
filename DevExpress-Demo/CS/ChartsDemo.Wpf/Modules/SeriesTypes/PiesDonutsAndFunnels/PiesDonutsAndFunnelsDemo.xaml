@@ -1,0 +1,68 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.PiesDonutsAndFunnelsDemo"
+    x:Name="demoModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:ChartsDemo"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{dxmvvm:ViewModelSource Type=local:TabbedModuleViewModel}">
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:OptionsConverter
+                x:Key="optionsConverter" />
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+
+    <DockPanel>
+        <!--#region Options-->
+        <ScrollViewer
+            Name="PART_Options"
+            Style="{StaticResource optionsScrollViewerStyle}"
+            Content="{Binding SelectedTab, Converter={StaticResource optionsConverter}}">
+        </ScrollViewer>
+        <!--#endregion-->
+
+        <dx:DXTabControl
+            SelectedTabItem="{Binding SelectedTab, Mode=TwoWay}"
+            Style="{StaticResource moduleTabControlStyle}">
+            <dx:DXTabControl.View>
+                <dx:TabControlScrollView
+                    ShowHeaderMenu="True" />
+            </dx:DXTabControl.View>
+            <dx:DXTabItem
+                Header="Pie"
+                Glyph="{dx:SvgImageSource Uri='../../../Images/SeriesViews/ChartTypes_Pie.svg', Size='16,16'}">
+                <local:PieTab
+                    IsModuleLoaded="{Binding ElementName=demoModule, Path=IsModuleLoaded}" />
+            </dx:DXTabItem>
+            <dx:DXTabItem
+                Header="Nested Donut"
+                Glyph="{dx:SvgImageSource Uri='../../../Images/SeriesViews/ChartTypes_NestedDoughnut.svg', Size='16,16'}">
+                <local:NestedDonutTab />
+            </dx:DXTabItem>
+            <dx:DXTabItem
+                Header="3D Pie"
+                Glyph="{dx:SvgImageSource Uri='../../../Images/SeriesViews/ChartTypes_Pie3D.svg', Size='16,16'}">
+                <local:Pie3DTab />
+            </dx:DXTabItem>
+            <dx:DXTabItem
+                Header="Funnel"
+                Glyph="{dx:SvgImageSource Uri='../../../Images/SeriesViews/ChartTypes_Funnel.svg', Size='16,16'}">
+                <local:FunnelTab />
+            </dx:DXTabItem>
+        </dx:DXTabControl>
+
+    </DockPanel>
+</local:ChartsDemoModule>

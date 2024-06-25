@@ -1,0 +1,347 @@
+﻿<ResourceDictionary
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                    xmlns:dxmt="http://schemas.devexpress.com/winfx/2008/xaml/map/themekeys"
+                    xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+                    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:MapDemo"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/MapDemo;component/Themes/Controls/PhotoGallery/PhotoGalleryButton.xaml"/>
+        <ResourceDictionary Source="/MapDemo;component/Themes/Controls/PhotoGallery/PhotoGalleryControl.xaml"/>
+        <ResourceDictionary Source="/MapDemo;component/Themes/Controls/PhotoGallery/PhotoGalleryItemControl.xaml"/>
+        <ResourceDictionary Source="/MapDemo;component/Themes/Controls/PhotoGallery/PlaceInfoControl.xaml"/>
+        <ResourceDictionary Source="/MapDemo;component/Themes/Controls/PhotoGallery/CityInformationControl.xaml"/>
+        <ResourceDictionary Source="/MapDemo;component/Themes/Controls/PhotoGallery/LabelControl.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <local:DoubleToTimeSpanConvert x:Key="DoubleToTimeConverter"/>
+    <local:DoubleToRenderTransforOffsetConverter x:Key="doubleToRenderTransforOffsetConverter"/>
+    <local:ProviderNameToCopyrightTextConverter x:Key="ProviderNameToCopyrightTextConverter"/>
+    <local:ProviderNameToImageVisibilityConverter x:Key="ProviderNameToImageVisibilityConverter"/>
+    <local:SelectedItemToVisibilityConverter x:Key="SelectedItemToVisibilityConverter"/>
+    <local:CountryToFlagConverter x:Key="CountryToFlagConverter"/>
+    <Style TargetType="local:PlaneInfoPanel">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:PlaneInfoPanel">
+                    <Grid x:Name="grid" Opacity="0">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="VisibleStates">
+                                <VisualState x:Name="Visible">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <EasingDoubleKeyFrame KeyTime="00:00:00.15" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Invisible">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <EasingDoubleKeyFrame KeyTime="00:00:00.5" Value="0" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00.5">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid x:Name="Back" Opacity="0.75">
+                            <Border Background="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=OverlayElementForeground}}" Opacity="0.25" CornerRadius="4" />
+                            <Border Background="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=OverlayBackground}}" Margin="1" CornerRadius="3"/>
+                        </Grid>
+                        <StackPanel x:Name="Content" Margin="12,12,12,24">
+                            <Image Source="{Binding Path=SelectedPlaneInfo.ImagePath}" Stretch="None" HorizontalAlignment="Right" Margin="0,0,0,12"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                <TextBlock TextWrapping="Wrap" Text="Name:" Margin="0" MinWidth="100" Opacity="0.8"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path=SelectedPlaneInfo.Name}" FontWeight="Bold"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0">
+                                <TextBlock TextWrapping="Wrap" Text="Flight number:" Margin="0" MinWidth="100" Opacity="0.8" />
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path=SelectedPlaneInfo.PlaneID}" FontWeight="Bold"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock TextWrapping="Wrap" Text="From:" Margin="0" MinWidth="100" Opacity="0.8"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path=SelectedPlaneInfo.StartPointName}" FontWeight="Bold"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                <TextBlock TextWrapping="Wrap" Text="To:" Margin="0" MinWidth="100" Opacity="0.8"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path=SelectedPlaneInfo.EndPointName}" FontWeight="Bold"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock TextWrapping="Wrap" Text="Current time:" Margin="0" MinWidth="100" Opacity="0.8"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path=SelectedPlaneInfo.CurrentFlightTime, Converter={StaticResource DoubleToTimeConverter}}" FontWeight="Bold"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,6">
+                                <TextBlock TextWrapping="Wrap" Text="Flight time:" Margin="0" MinWidth="100" Opacity="0.8"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path=SelectedPlaneInfo.TotalFlightTime, Converter={StaticResource DoubleToTimeConverter}}" FontWeight="Bold"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock TextWrapping="Wrap" Text="Speed:" Margin="0" MinWidth="100" Opacity="0.8"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path=SelectedPlaneInfo.SpeedKmH}" FontWeight="Bold"/>
+                                <TextBlock TextWrapping="Wrap" Text=" km/h" FontWeight="Bold"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock TextWrapping="Wrap" Text="Altitude:" Margin="0" MinWidth="100" Opacity="0.8"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path=SelectedPlaneInfo.FlightAltitude}" FontWeight="Bold"/>
+                                <TextBlock TextWrapping="Wrap" Text=" m" FontWeight="Bold"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=OverlayElementForeground}}"/>
+    </Style>
+    <Style TargetType="local:GpxStatisticPanel">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:GpxStatisticPanel">
+                    <Grid>
+                        <Grid x:Name="Back">
+                            <Border Background="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=OverlayElementForeground}}" Opacity="0.25" CornerRadius="4" />
+                            <Border Background="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=OverlayBackground}}" Margin="1" CornerRadius="3"/>
+                        </Grid>
+                        <Grid Margin="10,8,8,5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <dx:DXImage Source="pack://application:,,,/MapDemo;component/Images/SportStatistic/clock.svg" Width="32" Height="32" Grid.Row="0" Grid.Column="0" Stretch="None"/>
+                            <dx:DXImage Source="pack://application:,,,/MapDemo;component/Images/SportStatistic/ruler.svg" Width="32" Height="32" Grid.Row="1" Grid.Column="0" Stretch="None" VerticalAlignment="Center"/>
+                            <dx:DXImage Source="pack://application:,,,/MapDemo;component/Images/SportStatistic/heart.svg" Width="32" Height="32" Grid.Row="2" Grid.Column="0" Stretch="None" VerticalAlignment="Center"
+                                        Visibility="{Binding Path=AverageHeartRate, Converter={dxmvvm:NumericToVisibilityConverter}}"/>
+                            <dx:DXImage Source="pack://application:,,,/MapDemo;component/Images/SportStatistic/speed.svg" Width="32" Height="32" Grid.Row="3" Grid.Column="0" Stretch="None" VerticalAlignment="Center"/>
+                            <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" Margin="5,5,0,5">
+                                <TextBlock Text="Duration"/>
+                                <TextBlock Text="{Binding Path=Duration}" FontWeight="Bold" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="5,5,0,5">
+                                <TextBlock Text="Distance"/>
+                                <TextBlock Text="{Binding Path=Distance, StringFormat={}{0:N3} km}" FontWeight="Bold"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="5,5,0,5" Visibility="{Binding Path=AverageHeartRate, Converter={dxmvvm:NumericToVisibilityConverter}}">
+                                <TextBlock Text="Average heart rate"/>
+                                <TextBlock Text="{Binding Path=AverageHeartRate, StringFormat={}{0} BMP}" FontWeight="Bold"/>
+                                <TextBlock Text="{DXBinding '$string.Format(`(Max {0} | Min {1})`, MaxHeartRate, MinHeartRate)'}">
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1" Margin="5,5,0,5">
+                                <TextBlock Text="Average pace"/>
+                                <TextBlock Text="{Binding Path=AveragePace, StringFormat={}{0:mm\\:ss}/km}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Path=MaxPace, StringFormat=(Max {0:mm\\:ss})}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="local:MapShapeTooltip">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:MapShapeTooltip">
+                    <Canvas IsHitTestVisible="False" FlowDirection="LeftToRight">
+                        <Border Canvas.Left="{Binding Path=Left, RelativeSource={RelativeSource Mode=TemplatedParent}}" Canvas.Top="{Binding Path=Top, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0,5,0" CornerRadius="3" IsHitTestVisible="False">
+                            <TextBlock Text="{TemplateBinding Text}" Height="Auto" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="local:HotelLabel">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:HotelLabel">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Hidden</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ColorAnimation Storyboard.TargetName="text" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" To="#FFFF7500" Duration="0:0:0"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <StackPanel>
+                            <TextBlock x:Name="text" Text="{Binding Name}" Foreground="White" FontSize="16" >
+                                <TextBlock.Effect>
+                                    <DropShadowEffect Color="Black" ShadowDepth="2" BlurRadius="5"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <Grid>
+                                <Image x:Name="highlightedImage" Source="{Binding HighlightedImageUri}"/>
+                                <Image x:Name="image" Source="{Binding ImageUri}"/>
+                            </Grid>
+                        </StackPanel>
+                        <Grid.RenderTransform >
+                            <TranslateTransform>
+                                <TranslateTransform.X>
+                                    <Binding Path="ActualWidth" RelativeSource="{RelativeSource AncestorType={x:Type Grid}}" Converter="{StaticResource doubleToRenderTransforOffsetConverter}">
+                                        <Binding.ConverterParameter>
+                                            <sys:Double>-2</sys:Double>
+                                        </Binding.ConverterParameter>
+                                    </Binding>
+                                </TranslateTransform.X>
+                                <TranslateTransform.Y>
+                                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource AncestorType={x:Type Grid}}" Converter="{StaticResource doubleToRenderTransforOffsetConverter}">
+                                        <Binding.ConverterParameter>
+                                            <sys:Double>-1</sys:Double>
+                                        </Binding.ConverterParameter>
+                                    </Binding>
+                                </TranslateTransform.Y>
+                            </TranslateTransform>
+                        </Grid.RenderTransform>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="local:ShapesExporterControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <dxe:PopupBaseEdit x:Name="popupEdit" IsPopupOpen="{Binding PopupOpened, Mode=TwoWay}" EditValue="{Binding SelectedFileType}">
+                        <dxe:PopupBaseEdit.Template>
+                            <ControlTemplate TargetType="dxe:PopupBaseEdit">
+                                <ContentControl>
+                                    <Grid x:Name="ButtonEditGrid" SnapsToDevicePixels="True">
+                                        <Button x:Name="button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                                    Content="{Binding EditValue, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" >
+                                            <Button.Triggers>
+                                                <EventTrigger RoutedEvent="Button.Click">
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="DataContext.Pressed">
+                                                                <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True"/>
+                                                            </BooleanAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                            </Button.Triggers>
+                                        </Button>
+                                        <dxe:ButtonsControl ItemsSource="{TemplateBinding RightButtons}" HorizontalAlignment="Right" />
+                                    </Grid>
+                                </ContentControl>
+                            </ControlTemplate>
+                        </dxe:PopupBaseEdit.Template>
+                        <dxe:PopupBaseEdit.PopupContentTemplate>
+                            <ControlTemplate>
+                                <dxe:ListBoxEdit x:Name="listBox" SelectedItem="{Binding SelectedFileType, Mode=OneWayToSource}">
+                                    <dxe:ListBoxEdit.Triggers>
+                                        <EventTrigger RoutedEvent="dxe:ListBoxEdit.SelectedIndexChanged">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="DataContext.PopupOpened">
+                                                        <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="False"/>
+                                                    </BooleanAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </dxe:ListBoxEdit.Triggers>
+                                    <dxe:ListBoxEditItem Content=".shp-file"/>
+                                    <dxe:ListBoxEditItem Content=".kml-file"/>
+                                    <dxe:ListBoxEditItem Content=".svg-file"/>
+                                </dxe:ListBoxEdit>
+                            </ControlTemplate>
+                        </dxe:PopupBaseEdit.PopupContentTemplate>
+                    </dxe:PopupBaseEdit>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="local:CopyrightControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:CopyrightControl">
+                    <Grid Margin="6,4,6,4" VerticalAlignment="Bottom" MaxHeight="43">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="2" HorizontalAlignment="Left">
+                            <Border Background="#ADFFFFFF" CornerRadius="3"/>
+                            <Image Source="/MapDemo;component/Images/BingLogo.png" Stretch="None" Visibility="{Binding Path=ProviderName, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ProviderNameToImageVisibilityConverter}}"/>
+                        </Grid>
+                        <Grid Grid.Column="2" Margin="2" HorizontalAlignment="Right">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="1" Background="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=OverlayBackground}}" CornerRadius="3"  MaxHeight="20"/>
+                                <Label Grid.Row="1" Content="{Binding Path=ProviderName, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ProviderNameToCopyrightTextConverter}}"
+                                       Foreground="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=OverlayElementForeground}}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,0,16,0"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="local:PuzzleGameInfoControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:PuzzleGameInfoControl">
+                    <StackPanel Orientation="Vertical" Margin="10,10,10,40" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <Grid Visibility="{Binding ActiveItem, Converter={StaticResource SelectedItemToVisibilityConverter}}">
+                            <Border Background="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=OverlayBackground}}" Margin="2" CornerRadius="3"/>
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="{Binding Path=Name, Converter={StaticResource CountryToFlagConverter}}" Stretch="None" HorizontalAlignment="Center" Margin="6"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="6,6,6,0">
+                                    <TextBlock FontSize="16" TextWrapping="Wrap" Text="Name:" MinWidth="80" Opacity="0.8"/>
+                                    <TextBlock FontSize="16" TextWrapping="Wrap" Text="{Binding Path=Name}" FontWeight="Bold"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="6,0,6,6">
+                                    <TextBlock FontSize="16" TextWrapping="Wrap" Text="Capital:" Margin="0" MinWidth="80" Opacity="0.8" />
+                                    <TextBlock FontSize="16" TextWrapping="Wrap" Text="{Binding Path=Capital}" FontWeight="Bold"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Margin="0,5,0,0">
+                            <Border Background="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=OverlayBackground}}" Margin="2" CornerRadius="3"/>
+                            <StackPanel Orientation="Horizontal" Margin="16,0,16,0">
+                                <Label Content="Solved countries: "
+                                   Foreground="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=OverlayElementForeground}}"
+                                   FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Label Content="{TemplateBinding SolvedCountriesCount}"
+                                   Foreground="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=OverlayElementForeground}}"
+                                   FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

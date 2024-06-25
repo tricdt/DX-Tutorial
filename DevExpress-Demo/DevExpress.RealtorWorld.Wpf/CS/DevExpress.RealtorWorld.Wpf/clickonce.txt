@@ -1,0 +1,6 @@
+DevExpress.Charts.v{DXVersion}.Core
+DevExpress.PivotGrid.v{DXVersion}.Core
+DevExpress.Xpf.Core.v{DXVersion}.Extensions
+DevExpress.Xpf.Charts.v{DXVersion}
+DevExpress.Xpf.PivotGrid.v{DXVersion}
+DevExpress.Xpf.Themes.MetropolisDark.v{DXVersion}

@@ -1,0 +1,117 @@
+﻿<local:TreeListDemoModule x:Class="TreeListDemo.ScrollBarAnnotations"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:local="clr-namespace:TreeListDemo"
+                          mc:Ignorable="d"
+                          d:DesignHeight="400"
+                          d:DesignWidth="800">
+    <local:TreeListDemoModule.Resources>
+        <local:SalesDataViewModel x:Key="salesDataViewModel" />
+        <local:ToScrollBarAnnotationsModeConverter x:Key="ToScrollBarAnnotationsModeConverter" />
+        <local:ColorAnnotationConverter x:Key="ColorAnnotationConverter" />
+        <DataTemplate x:Key="AnnotationItemTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="{Binding Name}" />
+                <Border x:Name="border" Width="12" Height="12" Margin="5,0,0,0">
+                    <Border.Background>
+                        <MultiBinding Converter="{StaticResource ColorAnnotationConverter}">
+                            <Binding Path="ResourceKey" />
+                            <Binding Path="(dx:ThemeManager.TreeWalker)" RelativeSource="{RelativeSource AncestorType=Window}" />
+                            <Binding ElementName="border" />
+                            <Binding Path="CustomColor" />
+                        </MultiBinding>
+                    </Border.Background>
+                </Border>
+            </StackPanel>
+        </DataTemplate>
+    </local:TreeListDemoModule.Resources>
+
+    <DockPanel>
+        <local:TreeListDemoRibbon DockPanel.Dock="Top" ExportTreeList="{x:Reference treeList}" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <GroupBox Header="Show Annotations for" Margin="12,5,12,12" MinWidth="210" VerticalAlignment="Top">
+                <dxe:ListBoxEdit Loaded="listAnnotaions_Loaded"
+                                     Name="listAnnotaions"
+                                     ShowBorder="False"
+                                     HorizontalContentAlignment="Right"
+                                     FlowDirection="RightToLeft"
+                                     ItemsSource="{Binding AnnotationsItems}"
+                                     ItemTemplate="{StaticResource AnnotationItemTemplate}">
+                    <dxe:ListBoxEdit.DataContext>
+                        <local:AnnotationsDataContext />
+                    </dxe:ListBoxEdit.DataContext>
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:CheckedListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+        </ScrollViewer>
+        <dxg:TreeListControl x:Name="treeList"
+                             DataContext="{StaticResource salesDataViewModel}"
+                             ItemsSource="{Binding Path=SalesData}"
+                             SelectionMode="Row">
+            <dxg:TreeListControl.Bands>
+                <dxg:TreeListControlBand Header="Sales">
+                    <dxg:TreeListColumn FieldName="Region" />
+                    <dxg:TreeListColumn FieldName="MarchSales" Header="March" />
+                    <dxg:TreeListColumn FieldName="SeptemberSales" Header="September" />
+                </dxg:TreeListControlBand>
+                <dxg:TreeListControlBand Header="Change From Prior Year">
+                    <dxg:TreeListColumn FieldName="MarchFromPriorYear"
+                                        Header="March"
+                                        UnboundDataType="{x:Type sys:Decimal}"
+                                        UnboundExpression="([MarchSales] - [MarchSalesPrev]) / [MarchSales]"
+                                        ReadOnly="True">
+                        <dxg:TreeListColumn.EditSettings>
+                            <dxe:TextEditSettings DisplayFormat="p" />
+                        </dxg:TreeListColumn.EditSettings>
+                    </dxg:TreeListColumn>
+                    <dxg:TreeListColumn FieldName="SeptemberFromPriorYear"
+                                        Header="September"
+                                        UnboundDataType="{x:Type sys:Decimal}"
+                                        UnboundExpression="([SeptemberSales] - [SeptemberSalesPrev]) / [SeptemberSales]"
+                                        ReadOnly="True">
+                        <dxg:TreeListColumn.EditSettings>
+                            <dxe:TextEditSettings DisplayFormat="p" />
+                        </dxg:TreeListColumn.EditSettings>
+                    </dxg:TreeListColumn>
+                </dxg:TreeListControlBand>
+                <dxg:TreeListControlBand Header="Current Market Share">
+                    <dxg:TreeListColumn FieldName="MarketShare" Header="Market Share">
+                        <dxg:TreeListColumn.EditSettings>
+                            <dxe:TextEditSettings DisplayFormat="p0" />
+                        </dxg:TreeListColumn.EditSettings>
+                    </dxg:TreeListColumn>
+                </dxg:TreeListControlBand>
+            </dxg:TreeListControl.Bands>
+            <dxg:TreeListControl.View>
+                <dxg:TreeListView x:Name="view"
+                                  KeyFieldName="ID"
+                                  ParentFieldName="RegionID"
+                                  AutoExpandAllNodes="True"
+                                  AutoWidth="True"
+                                  AllowEditing="True"
+                                  ShowSearchPanelMode="Always"
+                                  SearchPanelAllowFilter="False"
+                                  ShowSearchPanelNavigationButtons="True"
+                                  ValidateCell="view_ValidateCell"
+                                  ScrollBarAnnotationsCreating="view_ScrollBarAnnotationsCreating"
+                                  NodeChanged="view_NodeChanged"
+                                  AllowLeaveInvalidEditor="True"
+                                  SearchString="Republic"
+                                  ScrollBarAnnotationMode="{Binding EditValue, ElementName=listAnnotaions, Mode=TwoWay, Converter={StaticResource ToScrollBarAnnotationsModeConverter}}" />
+            </dxg:TreeListControl.View>
+        </dxg:TreeListControl>
+    </DockPanel>
+</local:TreeListDemoModule>

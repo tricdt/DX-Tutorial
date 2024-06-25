@@ -1,0 +1,165 @@
+﻿<dxdb:DemoModule x:Class="ControlsDemo.SplashScreenManagerModule"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                 xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                 xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                 xmlns:controlsdemo="clr-namespace:ControlsDemo"
+                 xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                 xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                 xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                 mc:Ignorable="d"
+                 d:DesignHeight="450" d:DesignWidth="800"
+                 DataContext="{dxmvvm:ViewModelSource Type={x:Type controlsdemo:SplashScreenMainViewModel}}">
+
+    <!--#region Resources-->
+    <dxdb:DemoModule.Resources>
+        <Style TargetType="Hyperlink" x:Key="showDelayHyperlinkStyle">
+            <Setter Property="ToolTipService.ShowDuration" Value="{x:Static sys:Int32.MaxValue}"/>
+            <Setter Property="ToolTip">
+                <Setter.Value>
+                    <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="280">
+The delay after which the splash screen is shown. If the associated operation completes faster than the <Bold>showDelay</Bold> value, the splash screen will not be displayed.
+                    </TextBlock>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Hyperlink" x:Key="minDurationHyperlinkStyle">
+            <Setter Property="ToolTipService.ShowDuration" Value="{x:Static sys:Int32.MaxValue}"/>
+            <Setter Property="ToolTip">
+                <Setter.Value>
+                    <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="280">
+The splash screen is shown for at least the value of this parameter.
+                    </TextBlock>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Hyperlink" x:Key="inputRestrictionHyperlinkStyle">
+            <Setter Property="ToolTipService.ShowDuration" Value="{x:Static sys:Int32.MaxValue}"/>
+            <Setter Property="ToolTip">
+                <Setter.Value>
+                    <TextBlock TextWrapping="WrapWithOverflow" MaxWidth="280">
+Select the input restriction mode.
+<LineBreak/>
+<LineBreak/>
+<Bold>None</Bold>
+<LineBreak/>Interaction will be allowed.
+<LineBreak/>
+<LineBreak/>
+<Bold>Owner</Bold>
+<LineBreak/>Interaction will be blocked for this demo module. You will not be able to click the Show Splash button.
+<LineBreak/>
+<LineBreak/>
+<Bold>Window</Bold>
+<LineBreak/>Input will be blocked for the entire window including the menu on the left.
+<LineBreak/>
+<LineBreak/>
+<Bold>WindowContent</Bold>
+<LineBreak/>Mouse and keyboard input will be blocked for this demo module. The window can still be moved and minimized/maximized.
+                    </TextBlock>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Hyperlink" x:Key="trackOwnerHyperlinkStyle">
+            <Setter Property="ToolTipService.ShowDuration" Value="{x:Static sys:Int32.MaxValue}"/>
+            <Setter Property="ToolTip">
+                <Setter.Value>
+                    <TextBlock MaxWidth="280" TextWrapping="WrapWithOverflow">
+When this option is enabled and the <Bold>Startup Location</Bold> is set to Center Owner, the SplashScreen is always displayed on top of the parent window even when you move the window around.
+                    </TextBlock>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </dxdb:DemoModule.Resources>
+    <!--#endregion-->
+
+    <DockPanel>
+        <!--#region Options-->
+        <dxlc:LayoutControl Name="PART_Options" Orientation="Vertical" DockPanel.Dock="Right" Margin="5,5,10,0" MinWidth="300">
+            <dxlc:LayoutItem Label="Style:">
+                <dxe:ComboBoxEdit VerticalAlignment="Center"
+                                  IsTabStop="False"
+                                  IsTextEditable="False"
+                                  ItemsSource="{dxe:EnumItemsSource EnumType=dx:PredefinedSplashScreenType}"
+                                  EditValue="{Binding SplashScreenType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Startup Location:">
+                <dxe:ComboBoxEdit VerticalAlignment="Center"
+                                  IsTabStop="False"
+                                  IsTextEditable="False"
+                                  ItemsSource="{dxe:EnumItemsSource EnumType=WindowStartupLocation}"
+                                  EditValue="{Binding StartupLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem>
+                <dxlc:LayoutItem.Label>
+                    <TextBlock>
+                        Show Delay (ms) <Hyperlink Style="{StaticResource showDelayHyperlinkStyle}">[i]</Hyperlink>:
+                    </TextBlock>
+                </dxlc:LayoutItem.Label>
+                <dxe:SpinEdit IsTabStop="False"
+                              IsFloatValue="False"
+                              MinValue="0"
+                              MaxValue="5000"
+                              Increment="100"
+                              MaskUseAsDisplayFormat="True"
+                              AllowRoundOutOfRangeValue="True"
+                              Value="{Binding ShowDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem>
+                <dxlc:LayoutItem.Label>
+                    <TextBlock>
+                        Min Duration (ms) <Hyperlink Style="{StaticResource minDurationHyperlinkStyle}">[i]</Hyperlink>:
+                    </TextBlock>
+                </dxlc:LayoutItem.Label>
+                <dxe:SpinEdit IsTabStop="False"
+                              IsFloatValue="False"
+                              MinValue="0"
+                              MaxValue="10000"
+                              Increment="100"
+                              MaskUseAsDisplayFormat="True"
+                              AllowRoundOutOfRangeValue="True"
+                              Value="{Binding MinDuration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem>
+                <dxlc:LayoutItem.Label>
+                    <TextBlock>
+                        Input Block Mode <Hyperlink Style="{StaticResource inputRestrictionHyperlinkStyle}">[i]</Hyperlink>:
+                    </TextBlock>
+                </dxlc:LayoutItem.Label>
+                <dxe:ComboBoxEdit VerticalAlignment="Center"
+                                  IsTabStop="False"
+                                  IsTextEditable="False"
+                                  ItemsSource="{dxe:EnumItemsSource EnumType=dx:InputBlockMode}"
+                                  EditValue="{Binding InputBlock, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem >
+                <dxlc:LayoutItem.Label>
+                    <TextBlock>
+                        Track Owner Position <Hyperlink Style="{StaticResource trackOwnerHyperlinkStyle}">[i]</Hyperlink>:
+                    </TextBlock>
+                </dxlc:LayoutItem.Label>
+                <dxe:CheckEdit VerticalAlignment="Center"
+                               IsEnabled="{Binding IsTrackOwnerPositionEnabled}"
+                               IsTabStop="False"
+                               IsThreeState="False"
+                               EditValue="{Binding TrackOwnerPosition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem>
+                <TextBlock>
+                    <Hyperlink Click="OnCloseHyperlinkClick">Close Splash Screens</Hyperlink>
+                </TextBlock>
+            </dxlc:LayoutItem>
+        </dxlc:LayoutControl>
+        <!--#endregion-->
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="pack://application:,,,/ControlsDemo;component/Images/Background.jpg" Stretch="UniformToFill"/>
+            </Grid.Background>
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="50" FontSize="22">
+                <Hyperlink Foreground="White" Click="OnShowHyperlinkClick">Show Splash Screen</Hyperlink>
+            </TextBlock>
+        </Grid>
+    </DockPanel>
+</dxdb:DemoModule>

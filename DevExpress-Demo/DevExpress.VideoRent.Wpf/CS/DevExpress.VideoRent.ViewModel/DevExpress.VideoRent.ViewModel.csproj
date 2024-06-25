@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E2ACD1A2-B73F-466A-8282-101F846ED8FA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DevExpress.VideoRent.ViewModel</RootNamespace>
+    <AssemblyName>DevExpress.VideoRent.ViewModel</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DebugTest</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore"><Private>False</Private></Reference>
+    <Reference Include="System"><Private>False</Private></Reference>
+    <Reference Include="System.Data"><Private>False</Private></Reference>
+    <Reference Include="System.Drawing"><Private>False</Private></Reference>
+    <Reference Include="System.Xml"><Private>False</Private></Reference>
+    <Reference Include="nunit.framework"><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Data.Desktop.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Data.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Drawing.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Printing.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Utils.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpo.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.XtraReports.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="WindowsBase"><Private>False</Private></Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Announcer\Announcer.cs" />
+    <Compile Include="ArtistDetail\ArtistAddMovieEdit.cs" />
+    <Compile Include="ArtistDetail\ArtistAddMovieEditObject.cs" />
+    <Compile Include="ArtistDetail\ArtistDetail.cs" />
+    <Compile Include="ArtistDetail\ArtistDetailObject.cs" />
+    <Compile Include="ArtistDetail\ArtistEdit.cs" />
+    <Compile Include="ArtistDetail\ArtistEditObject.cs" />
+    <Compile Include="ArtistsList\ArtistPicturesEdit.cs" />
+    <Compile Include="ArtistsList\ArtistPicturesEditObject.cs" />
+    <Compile Include="ArtistsList\ArtistsEdit.cs" />
+    <Compile Include="ArtistsList\ArtistsEditObject.cs" />
+    <Compile Include="ArtistsList\ArtistsList.cs" />
+    <Compile Include="ArtistsList\ArtistsViewOptionsEdit.cs" />
+    <Compile Include="ArtistsList\ArtistsViewOptionsEditObject.cs" />
+    <Compile Include="ArtistsList\ArtitsListEditObject.cs" />
+    <Compile Include="CompaniesList\CompaniesEdit.cs" />
+    <Compile Include="CompaniesList\CompaniesEditObject.cs" />
+    <Compile Include="CompaniesList\CompaniesList.cs" />
+    <Compile Include="CompaniesList\CompaniesListObject.cs" />
+    <Compile Include="CompaniesList\CompaniesViewOptionsEdit.cs" />
+    <Compile Include="CompaniesList\CompaniesViewOptionsEditObject.cs" />
+    <Compile Include="CompaniesList\CompanyMoviesEdit.cs" />
+    <Compile Include="CompaniesList\CompanyMoviesEditObject.cs" />
+    <Compile Include="CompanyDetail\CompanyAddMovieEdit.cs" />
+    <Compile Include="CompanyDetail\CompanyAddMovieEditObject.cs" />
+    <Compile Include="CompanyDetail\CompanyDetail.cs" />
+    <Compile Include="CompanyDetail\CompanyDetailObject.cs" />
+    <Compile Include="CompanyDetail\CompanyEdit.cs" />
+    <Compile Include="CompanyDetail\CompanyEditObject.cs" />
+    <Compile Include="CurrentCustomerRents\CurrentCustomerRentsDetail.cs" />
+    <Compile Include="CurrentCustomerRents\CurrentCustomerRentsDetailObject.cs" />
+    <Compile Include="CurrentCustomerRents\CurrentCustomerRentsEdit.cs" />
+    <Compile Include="CurrentCustomerRents\CurrentCustomerRentsEditObject.cs" />
+    <Compile Include="CurrentCustomerRents\RentsPeriodEdit.cs" />
+    <Compile Include="CurrentCustomerRents\RentsPeriodEditObject.cs" />
+    <Compile Include="CurrentCustomerRents\RentsViewOptionsEdit.cs" />
+    <Compile Include="CurrentCustomerRents\RentsViewOptionsEditObject.cs" />
+    <Compile Include="CustomerDetail\CustomerDetail.cs" />
+    <Compile Include="CustomerDetail\CustomerDetailObject.cs" />
+    <Compile Include="CustomerDetail\CustomerEdit.cs" />
+    <Compile Include="CustomerDetail\CustomerEditObject.cs" />
+    <Compile Include="CustomersList\CustomersEdit.cs" />
+    <Compile Include="CustomersList\CustomersEditObject.cs" />
+    <Compile Include="CustomersList\CustomersList.cs" />
+    <Compile Include="CustomersList\CustomersListObject.cs" />
+    <Compile Include="CustomersList\CustomersViewOptionsEdit.cs" />
+    <Compile Include="CustomersList\CustomersViewOptionsEditObject.cs" />
+    <Compile Include="EditData.cs" />
+    <Compile Include="FindCustomer\FindCustomerDetail.cs" />
+    <Compile Include="FindCustomer\FindCustomerDetailObject.cs" />
+    <Compile Include="FindCustomer\FindCustomerEdit.cs" />
+    <Compile Include="FindCustomer\FindCustomerEditObject.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="Helpers\BindingAndDisposable.cs" />
+    <Compile Include="Helpers\CommandEventHandler.cs" />
+    <Compile Include="Helpers\SaveLoadLayoutDataEventHandler.cs" />
+    <Compile Include="LayoutData.cs" />
+    <Compile Include="MovieCategoriesList\MovieCategoriesEdit.cs" />
+    <Compile Include="MovieCategoriesList\MovieCategoriesEditObject.cs" />
+    <Compile Include="MovieCategoriesList\MovieCategoriesList.cs" />
+    <Compile Include="MovieCategoriesList\MovieCategoriesListObject.cs" />
+    <Compile Include="MovieCategoryDetail\MovieCategoryDetail.cs" />
+    <Compile Include="MovieCategoryDetail\MovieCategoryDetailObject.cs" />
+    <Compile Include="MovieCategoryDetail\MovieCategoryEdit.cs" />
+    <Compile Include="MovieCategoryDetail\MovieCategoryEditObject.cs" />
+    <Compile Include="MovieCategoryDetail\MovieCategoryPriceEdit.cs" />
+    <Compile Include="MovieCategoryDetail\MovieCategoryPriceEditObject.cs" />
+    <Compile Include="MovieDetail\MovieAddArtistEdit.cs" />
+    <Compile Include="MovieDetail\MovieAddArtistEditObject.cs" />
+    <Compile Include="MovieDetail\MovieAddCompanyEdit.cs" />
+    <Compile Include="MovieDetail\MovieAddCompanyEditObject.cs" />
+    <Compile Include="MovieDetail\MovieAddItemsEdit.cs" />
+    <Compile Include="MovieDetail\MovieAddItemsEditObject.cs" />
+    <Compile Include="MovieDetail\MovieDetail.cs" />
+    <Compile Include="MovieDetail\MovieDetailObject.cs" />
+    <Compile Include="MovieDetail\MovieEdit.cs" />
+    <Compile Include="MovieDetail\MovieEditObject.cs" />
+    <Compile Include="MovieDetail\MovieItemsEdit.cs" />
+    <Compile Include="MovieDetail\MovieItemsEditObject.cs" />
+    <Compile Include="MovieFormatInfo.cs" />
+    <Compile Include="MoviesList\MoviePicturesEdit.cs" />
+    <Compile Include="MoviesList\MoviePicturesEditObject.cs" />
+    <Compile Include="MoviesList\MoviesEdit.cs" />
+    <Compile Include="MoviesList\MoviesEditObject.cs" />
+    <Compile Include="MoviesList\MoviesList.cs" />
+    <Compile Include="MoviesList\MoviesListObject.cs" />
+    <Compile Include="MoviesList\MoviesViewOptionsEdit.cs" />
+    <Compile Include="MoviesList\MoviesViewOptionsEditObject.cs" />
+    <Compile Include="Platform\Win\Helpers\ItemsSourceHelpers.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers.cs" />
+    <Compile Include="Registration.cs" />
+    <Compile Include="Reports\LatefeeReceipt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\LatefeeReceipt.designer.cs">
+      <DependentUpon>LatefeeReceipt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StringConstants.cs" />
+    <Compile Include="Tests\CatalogModulesTests.cs" />
+    <Compile Include="Tests\RentModulesTests.cs" />
+    <Compile Include="Tests\ViewModelTests.cs" />
+    <Compile Include="VideoRentObjectDetailList\VRObjectBaseObject.Designer.cs" />
+    <Compile Include="VideoRentObjectDetailList\VRObjectDetail.cs" />
+    <Compile Include="VideoRentObjectDetailList\VRObjectDetailObject.cs" />
+    <Compile Include="VideoRentObjectDetailList\VRObjectEdit.cs" />
+    <Compile Include="VideoRentObjectDetailList\VRObjectEditObject.cs" />
+    <Compile Include="VideoRentObjectDetailList\VRObjectsEdit.cs" />
+    <Compile Include="VideoRentObjectDetailList\VRObjectsEditObject.cs" />
+    <Compile Include="VideoRentObjectDetailList\VRObjectsList.cs" />
+    <Compile Include="VideoRentObjectDetailList\VRObjectsListObject.cs" />
+    <Compile Include="ViewModelBase\EditableObject.cs" />
+    <Compile Include="ViewModelBase\LayoutManager.cs" />
+    <Compile Include="ViewModelBase\HelperViews.cs" />
+    <Compile Include="ViewModelBase\ObjectHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DevExpress.VideoRent.Resources\DevExpress.VideoRent.Resources.csproj">
+      <Project>{30E7937A-0651-4865-B8AE-97C2A8D405F8}</Project>
+      <Name>DevExpress.VideoRent.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DevExpress.VideoRent\DevExpress.VideoRent.csproj">
+      <Project>{64358044-1010-4E3D-A18D-ACB7755C40FA}</Project>
+      <Name>DevExpress.VideoRent</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\LatefeeReceipt.resx">
+      <DependentUpon>LatefeeReceipt.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

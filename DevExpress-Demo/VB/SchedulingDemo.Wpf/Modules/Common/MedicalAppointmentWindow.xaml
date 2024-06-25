@@ -1,0 +1,129 @@
+﻿<dx:ThemedWindow x:Class="SchedulingDemo.MedicalAppointmentWindow"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                    xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduling"
+                    xmlns:dxscht="http://schemas.devexpress.com/winfx/2008/xaml/scheduling/themekeys"
+                    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                    mc:Ignorable="d"
+                    Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=ThemedWindow}}"
+                    Title="Medical Appointment"
+                    x:Name="window">
+    <dx:ThemedWindow.Resources>
+        <Style x:Key="{dxscht:AppointmentWindowThemeKey ResourceKey=ThemedWindow}"
+               BasedOn="{StaticResource {dxscht:AppointmentWindowThemeKey ResourceKey=ThemedWindow}}"
+               TargetType="dx:ThemedWindow">
+            <Setter Property="Width" Value="630" />
+            <Setter Property="Height" Value="550" />
+            <Style.Triggers>
+                <Trigger Property="dx:ThemeManager.IsTouchEnabled" Value="True">
+                    <Setter Property="Width" Value="830" />
+                    <Setter Property="Height" Value="920" />
+                </Trigger>
+                <Trigger Property="dx:ThemeManager.IsTouchlineTheme" Value="True">
+                    <Setter Property="Width" Value="830" />
+                    <Setter Property="Height" Value="920" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </dx:ThemedWindow.Resources>
+    <dx:ThemedWindow.HeaderContent>
+        <dxb:ToolBarControl>
+            <dxb:BarButtonItem x:Name="toolbar_barItemSave" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Actions_Save}}" />
+            <dxb:BarButtonItem x:Name="barItemSaveAndClose" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Actions_SaveAndClose}}" />
+            <dxb:BarButtonItem x:Name="barItemDelete" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Actions_Delete}}" />
+            <dxb:BarCheckItem x:Name="barItemRecurrence" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Options_Recurrence}}" />
+            <dxb:BarEditItem x:Name="barItemReminder" Style="{DynamicResource {dxscht:AppointmentWindowCommandBarThemeKey ResourceKey=Items_Options_Reminder}}" />
+        </dxb:ToolBarControl>
+    </dx:ThemedWindow.HeaderContent>
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:CurrentWindowService ClosingCommand="{Binding WindowClosingCommand}" />
+        <dxmvvm:KeyToCommand KeyGesture="Esc" EventName="KeyDown" MarkRoutedEventsAsHandled="True" Command="{DXCommand Execute='@ElementName(window).Close()'}" />
+    </dxmvvm:Interaction.Behaviors>
+    <DockPanel>
+        <dxlc:LayoutControl x:Name="validationContainer" Orientation="Vertical" dxe:ValidationService.IsValidationContainer="True">
+            <dxlc:LayoutGroup Orientation="Horizontal">
+                <dxlc:LayoutGroup Orientation="Vertical" HorizontalAlignment="Stretch">
+                    <dxlc:LayoutItem Label="Doctor Name">
+                        <dxsch:AppointmentResourceEdit Scheduler="{Binding Path='(dxsch:SchedulerControl.Scheduler)', RelativeSource={RelativeSource Self}}"
+                                                       EditValue="{Binding Resource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                       ShowEmptyResource="False">
+                            <dxmvvm:Interaction.Behaviors>
+                                <dxmvvm:FocusBehavior />
+                            </dxmvvm:Interaction.Behaviors>
+                        </dxsch:AppointmentResourceEdit>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Phone">
+                        <dxe:TextEdit EditValue="{Binding Resource.CustomFields.Phone}" IsReadOnly="True" />
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Patient Name" Margin="0,10,0,0">
+                        <dxg:LookUpEdit EditValue="{Binding Patient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        ItemsSource="{Binding Patients}"
+                                        DisplayMember="Name"
+                                        IsPopupAutoWidth="False"
+                                        IncrementalFiltering="True"
+                                        ImmediatePopup="True">
+                            <dxg:LookUpEdit.PopupContentTemplate>
+                                <ControlTemplate>
+                                    <dxg:GridControl Name="PART_GridControl">
+                                        <dxg:GridControl.Columns>
+                                            <dxg:GridColumn FieldName="Name" />
+                                            <dxg:GridColumn FieldName="Phone" />
+                                            <dxg:GridColumn FieldName="BirthDate" />
+                                        </dxg:GridControl.Columns>
+                                        <dxg:GridControl.View>
+                                            <dxg:TableView AutoWidth="True" />
+                                        </dxg:GridControl.View>
+                                    </dxg:GridControl>
+                                </ControlTemplate>
+                            </dxg:LookUpEdit.PopupContentTemplate>
+                        </dxg:LookUpEdit>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Purpose">
+                        <dxe:TextEdit EditValue="{Binding Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Location">
+                        <dxe:ComboBoxEdit EditValue="{Binding CustomFields.LocationId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Locations}" ValueMember="Id" DisplayMember="Caption"/>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Phone">
+                        <dxe:TextEdit EditValue="{Binding Patient.Phone}" IsReadOnly="True" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Birthdate">
+                        <dxe:DateEdit EditValue="{Binding Patient.BirthDate}" IsReadOnly="True" ShowEditorButtons="False" />
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Margin="0,10,0,0" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=LayoutItem_StartTime}}">
+                        <DockPanel>
+                            <dxe:DateEdit x:Name="editorStartDate" DockPanel.Dock="Left" MinWidth="120" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_StartDate}}" />
+                            <dxe:TextEdit x:Name="editorStartTime" DockPanel.Dock="Left" Margin="4,0,0,0" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_StartTime}}" />
+                        </DockPanel>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=LayoutItem_EndTime}}">
+                        <DockPanel>
+                            <dxe:DateEdit x:Name="editorEndDate" DockPanel.Dock="Left" MinWidth="120" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_EndDate}}" />
+                            <dxe:TextEdit x:Name="editorEndTime" DockPanel.Dock="Left" Margin="4,0,0,0" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_EndTime}}" />
+                        </DockPanel>
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8,0,0,0">
+                    <Image Width="160" Height="160" RenderOptions.BitmapScalingMode="HighQuality" Source="{Binding Resource.CustomFields.Photo}" />
+                    <TextBlock Text="{Binding Resource.Caption}" TextAlignment="Center" FontWeight="Bold" Margin="0,4,0,0" />
+                    <TextBlock Text="{Binding Resource.CustomFields.DepartmentName}" TextAlignment="Center" FontWeight="Bold" Margin="0,4,0,0" Opacity="0.6" />
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup Margin="0,10,0,0" Orientation="Vertical" HorizontalAlignment="Stretch">
+                <dxlc:LayoutItem Label="Additional Information:" />
+                <dxlc:LayoutItem Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=LayoutItem_Description}}">
+                    <dxe:TextEdit x:Name="editorDescription" Style="{DynamicResource {dxscht:AppointmentWindowThemeKey ResourceKey=Editor_Description}}" />
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutControl>
+    </DockPanel>
+</dx:ThemedWindow>

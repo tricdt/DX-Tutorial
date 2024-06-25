@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="ControlsDemo.NewJumpTaskWindow"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:ControlsDemo"
+        mc:Ignorable="d">
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:ApplicationJumpListService />
+    </dxmvvm:Interaction.Behaviors>
+    <Grid MinWidth="420">
+        <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+            <dxlc:LayoutItem Label="Custom Category">
+                <dxe:TextEdit EditValue="{Binding CustomCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Title">
+                <dxe:TextEdit EditValue="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Description">
+                <dxe:TextEdit EditValue="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Icon">
+                <dxe:ComboBoxEdit ItemsSource="{Binding Path=Icons}" DisplayMember="Caption"
+                                  SelectedItem="{Binding Icon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Message Text">
+                <dxe:TextEdit EditValue="{Binding MessageText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </dxlc:LayoutItem>
+        </dxlc:LayoutControl>
+    </Grid>
+</UserControl>

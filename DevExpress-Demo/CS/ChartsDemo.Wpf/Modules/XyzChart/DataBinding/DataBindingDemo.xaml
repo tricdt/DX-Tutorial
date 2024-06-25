@@ -1,0 +1,51 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.DataBindingDemo"
+    x:Name="demoModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ChartsDemo"
+    DataContext="{dxmvvm:ViewModelSource Type=local:TabbedModuleViewModel}">
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:OptionsConverter
+                x:Key="optionsConverter" />
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+
+    <DockPanel>
+
+        <!--#region Options-->
+        <ScrollViewer
+            Name="PART_Options"
+            Style="{StaticResource optionsScrollViewerStyle}"
+            Content="{Binding SelectedTab, Converter={StaticResource optionsConverter}}">
+        </ScrollViewer>
+        <!--#endregion-->
+
+        <dx:DXTabControl
+            SelectedTabItem="{Binding SelectedTab, Mode=TwoWay}"
+            Style="{StaticResource moduleTabControlStyle}">
+            <dx:DXTabControl.View>
+                <dx:TabControlScrollView
+                    ShowHeaderMenu="True" />
+            </dx:DXTabControl.View>
+            <dx:DXTabItem
+                Header="Regular Grid Data">
+                <local:RegularGridDataTab />
+            </dx:DXTabItem>
+            <dx:DXTabItem
+                Header="3D Data Point Binding">
+                <local:DataPoint3DBindingTab />
+            </dx:DXTabItem>
+        </dx:DXTabControl>
+
+    </DockPanel>
+</local:ChartsDemoModule>

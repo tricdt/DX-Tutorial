@@ -1,0 +1,201 @@
+﻿<local:DiagramDemoModule x:Class="DiagramDemo.ProductFlowDiagramModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                         xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                         xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+                         xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+                         xmlns:local="clr-namespace:DiagramDemo"
+                         xmlns:dxdiag="http://schemas.devexpress.com/winfx/2008/xaml/diagram"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         mc:Ignorable="d"
+                         d:DesignWidth="800"
+                         d:DesignHeight="600">
+    <DockPanel>
+        <Border Width="300"
+                DockPanel.Dock="Right"
+                BorderThickness="1,0,0,0"
+                BorderBrush="{dxi:ThemeResource {dxgt:GridRowThemeKey ResourceKey=GridDataRowDelimiterBrush}}">
+            <dxg:GridControl x:Name="gridControl"
+                             Width="300"
+                             DockPanel.Dock="Right"
+                             ItemsSource="{Binding Orders}"
+                             AutoExpandAllGroups="True"
+                             ShowBorder="False"
+                             dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap">
+                <dxg:GridControl.View>
+                    <dxg:TableView AutoWidth="True" ShowGroupPanel="False" ShowIndicator="False" />
+                </dxg:GridControl.View>
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn FieldName="Category.Name" Header="Category" />
+                    <dxg:GridColumn FieldName="Customer.Name" Header="Customer" />
+                    <dxg:GridColumn FieldName="ProductName" Header="Product" />
+                    <dxg:GridColumn FieldName="Quantity" Header="Quantity" />
+                </dxg:GridControl.Columns>
+            </dxg:GridControl>
+        </Border>
+        <dxdiag:DiagramControl x:Name="diagramControl"
+                                       Theme="Linear"
+                                       SelectionChanged="SelectionChanged"
+                                       PageSize="800,700"
+                                       ItemsChanged="DiagramControl_ItemsChanged">
+            <dxmvvm:Interaction.Behaviors>
+                <dxdiag:DiagramDataBindingBehavior x:Name="dataBindingBehavior"
+                                                   ItemsSource="{Binding Items}"
+                                                   ConnectorsSource="{Binding ProductFlows}"
+                                                   ConnectorFromMember="Customer"
+                                                   ConnectorToMember="Category"
+                                                   ConnectorsZOrder="InFrontOfItems"
+                                                   GenerateItem="dataBindingBehavior_GenerateItem"
+                                                   CustomLayoutItems="dataBindingBehavior_CustomLayoutItems"
+                                                   UpdateConnector="dataBindingBehavior_UpdateConnector"
+                                                   ItemsGenerated="dataBindingBehavior_ItemsGenerated">
+                    <dxdiag:DiagramDataBindingBehavior.TemplateDiagram>
+                        <dxdiag:DiagramControl CanvasSizeMode="Fill" SelectedStencils="TemplateDesigner, BasicShapes" ShowPageBreaks="false" Theme="Linear">
+                            <dxdiag:DiagramContainer Anchors="Left, Top"
+                                                     CanDelete="False"
+                                                     CanCopyWithoutParent="True"
+                                                     ConnectionPoints="0.5,0 1,0.5 0.5,1 0,0.5"
+                                                     CanAddItems="False"
+                                                     CanCopy="False"
+                                                     DragMode="ByAnyPoint"
+                                                     Height="105"
+                                                     ItemsCanChangeParent="False"
+                                                     ItemsCanAttachConnectorEndPoint="False"
+                                                     ItemsCanAttachConnectorBeginPoint="False"
+                                                     ItemsCanSelect="False"
+                                                     ItemsCanEdit="False"
+                                                     ItemsCanCopyWithoutParent="False"
+                                                     ItemsCanMove="False"
+                                                     ItemsCanRotate="False"
+                                                     ItemsCanSnapToOtherItems="False"
+                                                     ItemsCanDeleteWithoutParent="False"
+                                                     ItemsCanSnapToThisItem="False"
+                                                     ItemsCanResize="False"
+                                                     Position="350,30"
+                                                     ThemeStyleId="Variant1"
+                                                     TemplateName="CategoryTemplate"
+                                                     Width="150">
+                                <dxdiag:DiagramShape Anchors="Left, Right, Bottom"
+                                                     Background="#001BA1E2"
+                                                     FontSize="9.33333301544189"
+                                                     Height="45"
+                                                     Position="10,60"
+                                                     StrokeThickness="0"
+                                                     VerticalContentAlignment="Top"
+                                                     Width="130">
+                                    <dxdiag:DiagramShape.Bindings>
+                                        <dxdiag:DiagramBinding Expression="Description" PropertyName="Content" />
+                                    </dxdiag:DiagramShape.Bindings>
+                                </dxdiag:DiagramShape>
+                                <dxdiag:DiagramShape Anchors="Left, Right, Bottom"
+                                                     Background="#001BA1E2"
+                                                     FontSize="12"
+                                                     Height="17"
+                                                     Position="10,36"
+                                                     StrokeThickness="0"
+                                                     Width="130">
+                                    <dxdiag:DiagramShape.Bindings>
+                                        <dxdiag:DiagramBinding Expression="Name" PropertyName="Content" />
+                                    </dxdiag:DiagramShape.Bindings>
+                                </dxdiag:DiagramShape>
+                                <dxdiag:DiagramImage Anchors="Left, Top, Right"
+                                                     Background="#001BA1E2"
+                                                     CanAttachConnectorBeginPoint="False"
+                                                     CanResize="False"
+                                                     CanCopyWithoutParent="False"
+                                                     CanChangeParent="False"
+                                                     CanMove="False"
+                                                     CanAttachConnectorEndPoint="False"
+                                                     CanSelect="False"
+                                                     CanDeleteWithoutParent="False"
+                                                     CanRotate="False"
+                                                     ForegroundId="Black"
+                                                     Height="17"
+                                                     Position="10,18"
+                                                     Stroke="Transparent"
+                                                     Width="130">
+                                    <dxdiag:DiagramImage.Bindings>
+                                        <dxdiag:DiagramBinding Expression="Picture" PropertyName="Image" />
+                                    </dxdiag:DiagramImage.Bindings>
+                                </dxdiag:DiagramImage>
+                            </dxdiag:DiagramContainer>
+                            <dxdiag:DiagramContainer Anchors="Left, Top"
+                                                     CanDelete="False"
+                                                     CanCopyWithoutParent="True"
+                                                     ConnectionPoints="0.5,0 1,0.5 0.5,1 0,0.5"
+                                                     CanAddItems="False"
+                                                     CanCopy="False"
+                                                     DragMode="ByAnyPoint"
+                                                     Height="105"
+                                                     ItemsCanChangeParent="False"
+                                                     ItemsCanAttachConnectorEndPoint="False"
+                                                     ItemsCanAttachConnectorBeginPoint="False"
+                                                     ItemsCanSelect="False"
+                                                     ItemsCanEdit="False"
+                                                     ItemsCanCopyWithoutParent="False"
+                                                     ItemsCanMove="False"
+                                                     ItemsCanRotate="False"
+                                                     ItemsCanSnapToOtherItems="False"
+                                                     ItemsCanDeleteWithoutParent="False"
+                                                     ItemsCanSnapToThisItem="False"
+                                                     ItemsCanResize="False"
+                                                     Position="60,30"
+                                                     ThemeStyleId="Variant1"
+                                                     TemplateName="CustomerTemplate"
+                                                     Width="150">
+                                <dxdiag:DiagramShape Anchors="Left, Top, Right"
+                                                     Background="#001BA1E2"
+                                                     FontSize="12"
+                                                     Height="43"
+                                                     Position="10,10"
+                                                     StrokeThickness="0"
+                                                     Width="130">
+                                    <dxdiag:DiagramShape.Bindings>
+                                        <dxdiag:DiagramBinding Expression="CompanyName" PropertyName="Content" />
+                                    </dxdiag:DiagramShape.Bindings>
+                                </dxdiag:DiagramShape>
+                                <dxdiag:DiagramShape Anchors="Left, Right, Bottom"
+                                                     Background="#001BA1E2"
+                                                     FontSize="9.33333301544189"
+                                                     Height="17"
+                                                     Position="10,55"
+                                                     StrokeThickness="0"
+                                                     Width="130">
+                                    <dxdiag:DiagramShape.Bindings>
+                                        <dxdiag:DiagramBinding Expression="City" PropertyName="Content" />
+                                    </dxdiag:DiagramShape.Bindings>
+                                </dxdiag:DiagramShape>
+                                <dxdiag:DiagramShape Anchors="Left, Right, Bottom"
+                                                     Background="#001BA1E2"
+                                                     FontSize="9.33333301544189"
+                                                     Height="17"
+                                                     Position="10,71"
+                                                     StrokeThickness="0"
+                                                     Width="130">
+                                    <dxdiag:DiagramShape.Bindings>
+                                        <dxdiag:DiagramBinding Expression="PhoneNumber" PropertyName="Content" />
+                                    </dxdiag:DiagramShape.Bindings>
+                                </dxdiag:DiagramShape>
+                            </dxdiag:DiagramContainer>
+                            <dxdiag:DiagramConnector BeginPoint="64,208"
+                                                     BeginItemPointIndex="1"
+                                                     CanDelete="False"
+                                                     CanDragBeginPoint="False"
+                                                     CanChangeRoute="False"
+                                                     CanDragEndPoint="False"
+                                                     CanCopy="False"
+                                                     EndItemPointIndex="3"
+                                                     EndArrow="{x:Null}"
+                                                     EndPoint="154,298"
+                                                     Points="154,208"
+                                                     Type="Curved" />
+                        </dxdiag:DiagramControl>
+                    </dxdiag:DiagramDataBindingBehavior.TemplateDiagram>
+                </dxdiag:DiagramDataBindingBehavior>
+            </dxmvvm:Interaction.Behaviors>
+        </dxdiag:DiagramControl>
+    </DockPanel>
+</local:DiagramDemoModule>

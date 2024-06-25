@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="MVVMDemo.Converters.ObjectToBooleanConverterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <TextBlock VerticalAlignment="Top">If the input object is null, the converter returns False; otherwise, it returns True.</TextBlock>
+        <ListBox x:Name="listBox" SelectionMode="Multiple" VerticalAlignment="Top">
+            <ListBoxItem>One</ListBoxItem>
+            <ListBoxItem>Two</ListBoxItem>
+            <ListBoxItem>Three</ListBoxItem>
+        </ListBox>
+        <!--#region !-->
+        <Button IsEnabled="{Binding SelectedItem, ElementName=listBox, Converter={dxmvvm:ObjectToBooleanConverter}}" VerticalAlignment="Top">
+            This button is enabled when there is an item selected in the list box
+        </Button>
+        <!--#endregion-->
+    </dxlc:LayoutControl>
+</UserControl>

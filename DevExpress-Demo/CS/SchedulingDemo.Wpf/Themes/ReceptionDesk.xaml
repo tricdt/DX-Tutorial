@@ -1,0 +1,41 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DataTemplate x:Key="Doctor.Template">
+        <StackPanel Orientation="Horizontal">
+            <Image Width="40" Height="40" Source="{Binding Path=Photo}">
+                <Image.Clip>
+                    <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20" />
+                </Image.Clip>
+            </Image>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5, 0, 0, 0">
+                <TextBlock Text="{Binding Name}"/>
+                <TextBlock Text="{Binding Department.Name}" Opacity="0.6"/>
+            </StackPanel>
+        </StackPanel>
+    </DataTemplate>
+    <Style x:Key="DoctorsList.Style" TargetType="dxe:ListBoxEdit">
+        <Setter Property="dx:ScrollBarExtensions.ScrollBarMode" Value="TouchOverlap"/>
+        <Setter Property="AllowCollectionView" Value="True"/>
+        <Setter Property="SelectionMode" Value="Multiple"/>
+        <Setter Property="ItemTemplate" Value="{StaticResource Doctor.Template}"/>
+    </Style>
+
+    <Style x:Key="PatientsGridControl.Style" TargetType="dxg:GridControl">
+        <Setter Property="dx:ScrollBarExtensions.ScrollBarMode" Value="TouchOverlap"/>
+    </Style>
+    <Style x:Key="PatientsTableView.Style" TargetType="dxg:TableView">
+        <Setter Property="ShowGroupPanel" Value="False"/>
+        <Setter Property="AutoWidth" Value="True"/>
+        <Setter Property="AllowEditing" Value="False"/>
+        <Setter Property="ShowIndicator" Value="False"/>
+        <Setter Property="AllowDragDrop" Value="True"/>
+        <Setter Property="ShowDragDropHint" Value="False"/>
+        <Setter Property="DropMarkerTemplate" Value="{x:Null}"/>
+    </Style>
+
+</ResourceDictionary>

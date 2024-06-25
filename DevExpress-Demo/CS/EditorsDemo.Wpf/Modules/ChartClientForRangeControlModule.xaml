@@ -1,0 +1,193 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.ChartClientForRangeControlModule"
+                         Height="532.316"
+                         Width="800"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxcr="http://schemas.devexpress.com/winfx/2008/xaml/charts/rangecontrolclient"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:local="clr-namespace:EditorsDemo">
+    <local:EditorsDemoModule.Resources>
+        <local:ChartViewTypeConverter x:Key="ChartViewTypeConverter" />
+    </local:EditorsDemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12" MinWidth="210">
+                <StackPanel>
+                    <TextBlock>Sparkline view:</TextBlock>
+                    <dxe:ComboBoxEdit x:Name="cbSparklineViewType" IsTextEditable="False" Margin="0,6,0,0">
+                        <dxe:ComboBoxEditItem Content="Bar" Tag="{x:Static local:ChartViewType.Bar}" />
+                        <dxe:ComboBoxEditItem Content="Area" Tag="{x:Static local:ChartViewType.Area}" />
+                        <dxe:ComboBoxEditItem Content="Line" Tag="{x:Static local:ChartViewType.Line}" IsSelected="True" />
+                    </dxe:ComboBoxEdit>
+                </StackPanel>
+                <GroupBox Header="Numerical Chart Settings" Margin="0,12,0,0">
+                    <StackPanel>
+                        <TextBlock>Grid Spacing</TextBlock>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="5" HorizontalAlignment="Left" />
+                            <TextBlock Grid.Column="1" Text="10" HorizontalAlignment="Center" />
+                            <TextBlock Grid.Column="2" Text="15" HorizontalAlignment="Right" />
+                        </Grid>
+                        <dxe:TrackBarEdit Name="slNumericalGridSpacing" Value="10" Minimum="5" Maximum="15">
+                            <dxe:TrackBarEdit.TickPlacement>None</dxe:TrackBarEdit.TickPlacement>
+                        </dxe:TrackBarEdit>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Date-Time Chart Settings" Margin="0,12,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0">Grid Alignment</TextBlock>
+                        <dxe:ListBoxEdit Name="lbDTGridAlignment"
+                                         Background="{x:Null}"
+                                         ShowBorder="False"
+                                         Margin="0,2,0,0"
+                                         Grid.Row="1"
+                                         SelectedItem="{Binding ChartClientModel.DateTimeGridAlignment, Mode=OneWayToSource}">
+                            <dxe:ListBoxEdit.Items>
+                                <dxe:ListBoxEditItem Tag="{x:Static dxcr:DateTimeGridAlignment.Auto}">Auto</dxe:ListBoxEditItem>
+                                <dxe:ListBoxEditItem Tag="{x:Static dxcr:DateTimeGridAlignment.Day}">Day</dxe:ListBoxEditItem>
+                                <dxe:ListBoxEditItem Tag="{x:Static dxcr:DateTimeGridAlignment.Week}">Week</dxe:ListBoxEditItem>
+                                <dxe:ListBoxEditItem Tag="{x:Static dxcr:DateTimeGridAlignment.Month}">Month</dxe:ListBoxEditItem>
+                            </dxe:ListBoxEdit.Items>
+                            <dxe:ListBoxEdit.StyleSettings>
+                                <dxe:RadioListBoxEditStyleSettings />
+                            </dxe:ListBoxEdit.StyleSettings>
+                        </dxe:ListBoxEdit>
+                        <Grid Name="ghDTGridSpacing" Margin="0,10" Grid.Row="2" Visibility="{Binding ChartClientModel.DateTimeGridSpacingVisibility}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0">Grid Spacing</TextBlock>
+                            <StackPanel Grid.Row="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding ChartClientModel.MinimumDateTimeGridSpacing}" HorizontalAlignment="Left" />
+                                    <TextBlock Grid.Column="1" Text="{Binding ChartClientModel.MiddleDateTimeGridSpacing}" HorizontalAlignment="Center" />
+                                    <TextBlock Grid.Column="2" Text="{Binding ChartClientModel.MaximumDateTimeGridSpacing}" HorizontalAlignment="Right" />
+                                </Grid>
+                                <dxe:TrackBarEdit Name="slDTGridSpacing"
+                                                  Value="{Binding ChartClientModel.MiddleDateTimeGridSpacing}"
+                                                  Minimum="{Binding ChartClientModel.MinimumDateTimeGridSpacing}"
+                                                  Maximum="{Binding ChartClientModel.MaximumDateTimeGridSpacing}">
+                                    <dxe:TrackBarEdit.TickPlacement>None</dxe:TrackBarEdit.TickPlacement>
+                                </dxe:TrackBarEdit>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Time-Span Chart Settings" Margin="0,12,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0">Grid Alignment</TextBlock>
+                        <dxe:ListBoxEdit Name="lbTSGridAlignment"
+                                         Background="{x:Null}"
+                                         ShowBorder="False"
+                                         Margin="0,2,0,0"
+                                         Grid.Row="1"
+                                         SelectedItem="{Binding ChartClientModel.TimeSpanGridAlignment, Mode=OneWayToSource}">
+                            <dxe:ListBoxEdit.Items>
+                                <dxe:ListBoxEditItem Tag="{x:Static dxcr:TimeSpanGridAlignment.Auto}">Auto</dxe:ListBoxEditItem>
+                                <dxe:ListBoxEditItem Tag="{x:Static dxcr:TimeSpanGridAlignment.Hour}">Hour</dxe:ListBoxEditItem>
+                                <dxe:ListBoxEditItem Tag="{x:Static dxcr:TimeSpanGridAlignment.Minute}">Minute</dxe:ListBoxEditItem>
+                            </dxe:ListBoxEdit.Items>
+                            <dxe:ListBoxEdit.StyleSettings>
+                                <dxe:RadioListBoxEditStyleSettings />
+                            </dxe:ListBoxEdit.StyleSettings>
+                        </dxe:ListBoxEdit>
+                        <Grid Name="ghTSGridSpacing" Margin="0,10" Grid.Row="2" Visibility="{Binding ChartClientModel.TimeSpanGridSpacingVisibility}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0">Grid Spacing</TextBlock>
+                            <StackPanel Grid.Row="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding ChartClientModel.MinimumTimeSpanGridSpacing}" HorizontalAlignment="Left" />
+                                    <TextBlock Grid.Column="1" Text="{Binding ChartClientModel.MiddleTimeSpanGridSpacing}" HorizontalAlignment="Center" />
+                                    <TextBlock Grid.Column="2" Text="{Binding ChartClientModel.MaximumTimeSpanGridSpacing}" HorizontalAlignment="Right" />
+                                </Grid>
+                                <dxe:TrackBarEdit Name="slTSGridSpacing"
+                                                  Value="{Binding ChartClientModel.MiddleTimeSpanGridSpacing}"
+                                                  Minimum="{Binding ChartClientModel.MinimumTimeSpanGridSpacing}"
+                                                  Maximum="{Binding ChartClientModel.MaximumTimeSpanGridSpacing}">
+                                    <dxe:TrackBarEdit.TickPlacement>None</dxe:TrackBarEdit.TickPlacement>
+                                </dxe:TrackBarEdit>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="150" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="150" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="150" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <dxe:RangeControl x:Name="numericalRangeControl"
+                              Margin="20,5"
+                              Grid.Row="1"
+                              Grid.ColumnSpan="4"
+                              ShowNavigationButtons="True"
+                              ShowRangeBar="True">
+                <dxcr:NumericChartRangeControlClient x:Name="rangeControlClient"
+                                                     GridAlignment="1"
+                                                     GridSpacing="{Binding ElementName=slNumericalGridSpacing, Path=Value}"
+                                                     ItemsSource="{Binding ChartClientModel.NumericItemsSource}"
+                                                     View="{Binding ElementName=cbSparklineViewType, Path=SelectedItem.Tag, Converter={StaticResource ChartViewTypeConverter}}" />
+            </dxe:RangeControl>
+
+            <dxe:RangeControl x:Name="dateTimeRangeControl" Margin="20,5" Grid.Row="3" Grid.ColumnSpan="4" ShowRangeBar="True">
+                <dxcr:DateTimeChartRangeControlClient x:Name="dateTimeRangeControlClient"
+                                                      ArgumentDataMember="Argument"
+                                                      ValueDataMember="Value"
+                                                      GridAlignment="{Binding ElementName=lbDTGridAlignment, Path=SelectedItem.Tag}"
+                                                      GridSpacing="{Binding ElementName=slDTGridSpacing, Path=Value}"
+                                                      ItemsSource="{Binding ChartClientModel.DateTimeItemsSource}"
+                                                      View="{Binding ElementName=cbSparklineViewType, Path=SelectedItem.Tag, Converter={StaticResource ChartViewTypeConverter}}" />
+            </dxe:RangeControl>
+            <dxe:RangeControl x:Name="timeSpanRangeControl" Margin="20,5" Grid.Row="5" Grid.ColumnSpan="4" ShowRangeBar="True">
+                <dxcr:TimeSpanChartRangeControlClient x:Name="timeSpanRangeControlClient"
+                                                      ArgumentDataMember="Argument"
+                                                      ValueDataMember="Value"
+                                                      GridAlignment="{Binding ElementName=lbTSGridAlignment, Path=SelectedItem.Tag}"
+                                                      GridSpacing="{Binding ElementName=slTSGridSpacing, Path=Value}"
+                                                      ItemsSource="{Binding ChartClientModel.TimeSpanItemsSource}"
+                                                      View="{Binding ElementName=cbSparklineViewType, Path=SelectedItem.Tag, Converter={StaticResource ChartViewTypeConverter}}" />
+            </dxe:RangeControl>
+        </Grid>
+    </DockPanel>
+</local:EditorsDemoModule>

@@ -1,0 +1,134 @@
+﻿<local:MapDemoModule x:Class="MapDemo.PhotoGallery"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+                     xmlns:local="clr-namespace:MapDemo"
+                     mc:Ignorable="d"
+                     d:DesignHeight="557"
+                     d:DesignWidth="2643">
+    <local:MapDemoModule.Resources>
+        <local:ViewTypeToBoolConverter x:Key="viewTypeToBoolConverter" />
+        <local:ViewTypeToVisibilityConverter x:Key="viewTypeToVisibilityConverter" />
+        <local:DemoValuesProvider x:Key="DemoValuesProvider" />
+    </local:MapDemoModule.Resources>
+    <Grid x:Name="LayoutRoot">
+        <dxm:MapControl x:Name="map"
+                        Background="#FF2D2D2D"
+                        EnableZooming="True"
+                        ZoomLevel="{Binding ZoomLevel, Mode=OneWay}"
+                        CenterPoint="{Binding CenterPoint, Mode=TwoWay}"
+                        MinZoomLevel="{Binding MinZoomLevel, Mode=TwoWay}"
+                        MaxZoomLevel="{Binding MaxZoomLevel, Mode=TwoWay}"
+                        FlowDirection="LeftToRight"
+                        IsManipulationEnabled="True"
+                        SelectionMode="Single">
+            <dxm:MapControl.MiniMap>
+                <dxm:MiniMap Width="256"
+                             Height="256"
+                             Alignment="TopLeft"
+                             Visibility="{Binding Path=ViewType, Converter={StaticResource viewTypeToVisibilityConverter}, ConverterParameter={x:Static local:ViewType.Map}}">
+                    <dxm:MiniMap.Behavior>
+                        <dxm:FixedMiniMapBehavior ZoomLevel="0.5" />
+                    </dxm:MiniMap.Behavior>
+                    <dxm:MiniMapImageTilesLayer>
+                        <dxm:BingMapDataProvider Kind="Area" BingKey="{Binding DevexpressBingKey, Source={StaticResource DemoValuesProvider}}" />
+                    </dxm:MiniMapImageTilesLayer>
+                    <dxm:MiniMapVectorLayer>
+                        <dxm:ListSourceDataAdapter DataSource="{Binding CitiesMini}">
+                            <dxm:ListSourceDataAdapter.Mappings>
+                                <dxm:MapItemMappingInfo Latitude="Location.Latitude" Longitude="Location.Longitude" />
+                            </dxm:ListSourceDataAdapter.Mappings>
+                            <dxm:ListSourceDataAdapter.ItemSettings>
+                                <dxm:MapCustomElementSettings>
+                                    <dxm:MapCustomElementSettings.ContentTemplate>
+                                        <DataTemplate>
+                                            <Image Source="/MapDemo;component/Images/PhotoGallery/CitySmallIcon.png" Stretch="Uniform" Width="12" Height="12">
+                                                <Image.RenderTransform>
+                                                    <TranslateTransform X="-6" Y="-6" />
+                                                </Image.RenderTransform>
+                                            </Image>
+                                        </DataTemplate>
+                                    </dxm:MapCustomElementSettings.ContentTemplate>
+                                </dxm:MapCustomElementSettings>
+                            </dxm:ListSourceDataAdapter.ItemSettings>
+                        </dxm:ListSourceDataAdapter>
+                    </dxm:MiniMapVectorLayer>
+                </dxm:MiniMap>
+            </dxm:MapControl.MiniMap>
+            <dxm:MapControl.ZoomTrackbarOptions>
+                <dxm:ZoomTrackbarOptions Visible="False" />
+            </dxm:MapControl.ZoomTrackbarOptions>
+            <dxm:MapControl.ScrollButtonsOptions>
+                <dxm:ScrollButtonsOptions Visible="False" />
+            </dxm:MapControl.ScrollButtonsOptions>
+            <dxm:ImageLayer x:Name="tileLayer">
+                <dxm:BingMapDataProvider Kind="Area" BingKey="{Binding DevexpressBingKey, Source={StaticResource DemoValuesProvider}}" />
+            </dxm:ImageLayer>
+            <dxm:VectorLayer Visibility="{Binding Path=ViewType, Converter={StaticResource viewTypeToVisibilityConverter}, ConverterParameter={x:Static local:ViewType.Map}}"
+                             SelectedItem="{Binding SelectedCity, Mode=TwoWay}">
+                <dxm:ListSourceDataAdapter DataSource="{Binding Cities}">
+                    <dxm:ListSourceDataAdapter.Mappings>
+                        <dxm:MapItemMappingInfo Latitude="Location.Latitude" Longitude="Location.Longitude" />
+                    </dxm:ListSourceDataAdapter.Mappings>
+                    <dxm:ListSourceDataAdapter.ItemSettings>
+                        <dxm:MapCustomElementSettings>
+                            <dxm:MapCustomElementSettings.ContentTemplate>
+                                <DataTemplate>
+                                    <local:CityInformationControl CityInfo="{Binding}" />
+                                </DataTemplate>
+                            </dxm:MapCustomElementSettings.ContentTemplate>
+                        </dxm:MapCustomElementSettings>
+                    </dxm:ListSourceDataAdapter.ItemSettings>
+                </dxm:ListSourceDataAdapter>
+            </dxm:VectorLayer>
+            <dxm:VectorLayer>
+                <dxm:MapItemStorage>
+                    <dxm:MapCustomElement x:Name="placePointer"
+                                          IsHitTestVisible="False"
+                                          Location="{Binding Content.SelectedPlace.Location, RelativeSource={RelativeSource Self}}">
+                        <dxm:MapCustomElement.ContentTemplate>
+                            <DataTemplate>
+                                <local:LabelControl Visible="{Binding Path=ViewType, Converter={StaticResource viewTypeToBoolConverter}, ConverterParameter={x:Static local:ViewType.Detail}}" />
+                            </DataTemplate>
+                        </dxm:MapCustomElement.ContentTemplate>
+                    </dxm:MapCustomElement>
+                </dxm:MapItemStorage>
+            </dxm:VectorLayer>
+            <dxm:MapControl.ScalePanelOptions>
+                <dxm:ScalePanelOptions Visible="False"/>
+            </dxm:MapControl.ScalePanelOptions>
+            <dxm:MapControl.CoordinatesPanelOptions>
+                <dxm:CoordinatesPanelOptions Margin="10,10,10,53" />
+            </dxm:MapControl.CoordinatesPanelOptions>
+        </dxm:MapControl>
+        <local:CopyrightControl ProviderName="Bing" />
+        <local:PhotoGalleryControl x:Name="photoGallery"
+                                   AnchorPoint="{Binding CityPoint}"
+                                   ItemsSource="{Binding Path=SelectedCity.Places}"
+                                   Title="{Binding Path=SelectedCity.Name}"
+                                   MouseLeftButtonUp="photoGallery_MouseLeftButtonUp"
+                                   Visible="{Binding Path=ViewType, Converter={StaticResource viewTypeToBoolConverter}, ConverterParameter={x:Static local:ViewType.Gallery}}">
+            <local:PhotoGalleryControl.ItemTemplate>
+                <DataTemplate>
+                    <local:PhotoGalleryItemControl Margin="15" Click="GalleryItemClick" />
+                </DataTemplate>
+            </local:PhotoGalleryControl.ItemTemplate>
+        </local:PhotoGalleryControl>
+        <local:PlaceInfoControl x:Name="placeControl"
+                                Margin="10,10,10,80"
+                                HorizontalAlignment="Right"
+                                PlaceInfo="{Binding SelectedPlace}"
+                                ShowNextPlace="placeControl_ShowNextSight"
+                                ShowPrevPlace="placeControl_ShowPreviousSight"
+                                Visible="{Binding Path=ViewType, Converter={StaticResource viewTypeToBoolConverter}, ConverterParameter={x:Static local:ViewType.Detail}}" />
+        <StackPanel Margin="15" HorizontalAlignment="Left" Orientation="Horizontal" VerticalAlignment="Top">
+            <local:PhotoGalleryButton x:Name="backButton"
+                                      Click="OnBackClick"
+                                      Visible="{Binding Path=ViewType, Converter={StaticResource viewTypeToBoolConverter}, ConverterParameter={x:Static local:ViewType.Detail}}">
+                <Image Source="/MapDemo;component/Images/PhotoGallery/BackButton.png" Stretch="None" />
+            </local:PhotoGalleryButton>
+        </StackPanel>
+    </Grid>
+</local:MapDemoModule>

@@ -1,0 +1,472 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{41AC40CE-EBE8-4545-80C3-3DB2E65F47F4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <BaseIntermediateOutputPath>obj.Wpf</BaseIntermediateOutputPath>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>
+    </RootNamespace>
+    <AssemblyName>GaugesDemo</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ConvertToNet6Windows />
+  </PropertyGroup>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,WPF,</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE,WPF,</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Debug\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Debug\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,WPF,CLICKONCE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Release\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Release\</OutputPath>
+    <DefineConstants>TRACE,WPF,CLICKONCE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugTest\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,WPF,DEBUGTEST</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>demoicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Printing.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.Desktop.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.DemoData.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.framework" Condition=" '$(Configuration)' == 'DebugTest' ">
+      <HintPath></HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Charts.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Gauges.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.DemoBase.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="PresentationUI">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xaml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UIAutomationProvider">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UIAutomationTypes">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CarDashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CircularIndicators.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CircularModels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CircularRanges.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CircularScales.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DigitalModels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\IntegrationWithAnalogGauges.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\StateIndicatorModels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SymbolAnimation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CustomSymbolMapping.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewTypes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\LinearIndicators.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\LinearModels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\LinearRanges.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\LinearScales.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\IndicatorAnimation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Interactivity.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\CustomStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Common.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.vb">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CarDashboardBackgroundControl.vb" />
+    <Compile Include="Controls\OscilloscopeBackgroundControl.vb" />
+    <Compile Include="Controls\TrafficLightsBackgroundControl.vb" />
+    <Compile Include="Controls\TurnCoordinatorBackgroundControl.vb" />
+    <Compile Include="GaugesDemoModuleControl.vb" />
+    <Compile Include="DemoTesting\Fixtures.vb" />
+    <Compile Include="MainWindow.xaml.vb">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CarDashboard.xaml.vb">
+      <DependentUpon>CarDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CarDashboardViewModel.vb" />
+    <Compile Include="Modules\CircularIndicators.xaml.vb">
+      <DependentUpon>CircularIndicators.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CircularModels.xaml.vb">
+      <DependentUpon>CircularModels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CircularRanges.xaml.vb">
+      <DependentUpon>CircularRanges.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CircularScales.xaml.vb">
+      <DependentUpon>CircularScales.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DigitalModels.xaml.vb">
+      <DependentUpon>DigitalModels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\IntegrationWithAnalogGauges.xaml.vb">
+      <DependentUpon>IntegrationWithAnalogGauges.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\StateIndicatorModels.xaml.vb">
+      <DependentUpon>StateIndicatorModels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SymbolAnimation.xaml.vb">
+      <DependentUpon>SymbolAnimation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CustomSymbolMapping.xaml.vb">
+      <DependentUpon>CustomSymbolMapping.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewTypes.xaml.vb">
+      <DependentUpon>ViewTypes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\LinearIndicators.xaml.vb">
+      <DependentUpon>LinearIndicators.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\LinearModels.xaml.vb">
+      <DependentUpon>LinearModels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\LinearRanges.xaml.vb">
+      <DependentUpon>LinearRanges.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\LinearScales.xaml.vb">
+      <DependentUpon>LinearScales.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\IndicatorAnimation.xaml.vb">
+      <DependentUpon>IndicatorAnimation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Interactivity.xaml.vb">
+      <DependentUpon>Interactivity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Utils.vb" />
+    <Compile Include="ViewModels\ElectricityViewModel.vb" />
+    <Compile Include="ViewModels\EqualizerViewModel.vb" />
+    <Compile Include="ViewModels\GaugeModelsSource.vb" />
+    <Compile Include="ViewModels\GaugeRandomDataGenerator.vb" />
+    <Compile Include="ViewModels\OscilloscopeViewModel.vb" />
+    <Compile Include="ViewModels\PlayerViewModel.vb" />
+    <Compile Include="ViewModels\TrafficLightsViewModel.vb" />
+    <Compile Include="ViewModels\WeatherViewModel.vb" />
+    <Compile Include="ViewModels\WorldTimeViewModel.vb" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>GaugesDemo.Properties</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="clickonce.txt">
+      <netcore3ignore />
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <netcore3ignore />
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LogoUrl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CircularRanges\Cloudy.png" />
+    <Resource Include="Images\CircularRanges\Rainy.png" />
+    <Resource Include="Images\CircularRanges\Snowy.png" />
+    <Resource Include="Images\CircularRanges\Sunny.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CircularScales\IconLondon.png" />
+    <Resource Include="Images\CircularScales\IconMoscow.png" />
+    <Resource Include="Images\CircularScales\IconNewYork.png" />
+    <Resource Include="Images\CircularScales\Shadow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CircularIndicators\Screw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CarDashboard\Danger.png" />
+    <Resource Include="Images\CarDashboard\Fuel.png" />
+    <Resource Include="Images\CarDashboard\Left.png" />
+    <Resource Include="Images\CarDashboard\Right.png" />
+    <Resource Include="Images\CarDashboard\Temperature.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Interactivity\Shadow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Interactivity\Arrows.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LinearRanges\Cloudy.png" />
+    <Resource Include="Images\LinearRanges\Rainy.png" />
+    <Resource Include="Images\LinearRanges\Snowy.png" />
+    <Resource Include="Images\LinearRanges\Sunny.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SymbolAnimation\First.png" />
+    <Resource Include="Images\SymbolAnimation\Knob.png" />
+    <Resource Include="Images\SymbolAnimation\Last.png" />
+    <Resource Include="Images\SymbolAnimation\Marker.png" />
+    <Resource Include="Images\SymbolAnimation\Next.png" />
+    <Resource Include="Images\SymbolAnimation\Pause.png" />
+    <Resource Include="Images\SymbolAnimation\Play.png" />
+    <Resource Include="Images\SymbolAnimation\Previous.png" />
+    <Resource Include="Images\SymbolAnimation\Volume.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent">
+    <ItemGroup>
+      <Resource Include="@(Page)" />
+    </ItemGroup>
+    <ItemGroup>
+      <Resource Include="@(Compile)" />
+    </ItemGroup>
+  </Target>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+	<GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+	<ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3
+    <Import Project="Demo.targets" />
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3 
+    <Import Project="Themes.WPF.NetCore.targets" />
+  ONLY NETCORE3-->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+  </PropertyGroup>
+</Project>

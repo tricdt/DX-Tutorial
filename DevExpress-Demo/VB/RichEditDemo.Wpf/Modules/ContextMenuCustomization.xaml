@@ -1,0 +1,69 @@
+﻿<local:RichEditDemoModule x:Class="RichEditDemo.ContextMenuCustomization"
+                          Height="400"
+                          Width="800"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit"
+                          xmlns:dxrecore="clr-namespace:DevExpress.XtraRichEdit.Commands;assembly=DevExpress.RichEdit.v22.2.Core"
+                          xmlns:local="clr-namespace:RichEditDemo">
+    <local:RichEditDemoModule.Resources>
+        <dxre:RichEditUICommand x:Key="commands" />
+    </local:RichEditDemoModule.Resources>
+    <DockPanel>
+        <!--#region OptionsContent-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <GroupBox Header="Context Menu Items:" Margin="12,5,12,12" MinWidth="210">
+                <StackPanel>
+                    <dxe:CheckEdit x:Name="ceBoldText" Content="Bold Text" />
+                    <dxe:CheckEdit x:Name="ceClearFormatting" Content="Clear Formatting" />
+                    <dxe:CheckEdit x:Name="ceShowGridlines" Content="Show Gridlines" IsChecked="True" />
+                </StackPanel>
+            </GroupBox>
+        </ScrollViewer>
+        <!--#endregion OptionsContent-->
+        <dxb:BarManager x:Name="barManager1" ToolbarGlyphSize="Small">
+            <dxb:BarManager.Items>
+                <dxb:BarButtonItem x:Name="customInsertHeaderMenuItem"
+                                   Content="Custom Insert Header"
+                                   Command="{Binding InsertHeader, Mode=OneTime, Source={StaticResource commands}}" />
+                <dxb:BarButtonItem x:Name="customInsertFooterMenuItem"
+                                   Content="Custom Insert Footer"
+                                   Command="{Binding InsertFooter, Mode=OneTime, Source={StaticResource commands}}" />
+                <dxb:BarButtonItem x:Name="customSetAllBordersMenuItem"
+                                   Content="Custom Set All Borders"
+                                   Command="{Binding TableToggleAllBorders, Mode=OneTime, Source={StaticResource commands}}" />
+            </dxb:BarManager.Items>
+            <Grid>
+                <dxre:RichEditControl x:Name="richEdit"
+                                      BarManager="{Binding ElementName=barManager1, Mode=OneTime}"
+                                      CommandBarStyle="Ribbon"
+                                      ShowBorder="False"
+                                      PopupMenuShowing="RichEditControl_PopupMenuShowing"
+                                      DocumentSource="{DXBinding '$local:DemoUtils.GetRelativePath(`MovieRentals.docx`)'}">
+                    <dxre:RichEditControl.MenuCustomizations>
+                        <dxre:RichEditMenuCustomization>
+                            <dxb:BarButtonItemLink BarItemName="customInsertHeaderMenuItem" />
+                            <dxb:BarButtonItemLink BarItemName="customInsertFooterMenuItem" />
+                        </dxre:RichEditMenuCustomization>
+                        <dxre:RichEditMenuCustomization MenuType="InlinePicture">
+                            <dxre:RemoveRichEditCommandAction Id="{x:Static MemberType=dxrecore:RichEditCommandId, Member=CutSelection}" />
+                        </dxre:RichEditMenuCustomization>
+                        <dxre:RichEditMenuCustomization MenuType="TableCell">
+                            <dxre:RemoveRichEditCommandAction Id="{x:Static MemberType=dxrecore:RichEditCommandId, Member=ShowDeleteTableCellsFormMenuItem}" />
+                            <dxre:RemoveRichEditCommandAction Id="{x:Static MemberType=dxrecore:RichEditCommandId, Member=ShowTablePropertiesFormMenuItem}" />
+                            <dxb:BarButtonItemLink BarItemName="customSetAllBordersMenuItem" />
+                        </dxre:RichEditMenuCustomization>
+                    </dxre:RichEditControl.MenuCustomizations>
+                </dxre:RichEditControl>
+            </Grid>
+        </dxb:BarManager>
+    </DockPanel>
+</local:RichEditDemoModule>

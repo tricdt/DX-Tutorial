@@ -1,0 +1,63 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.AutoSuggestEditModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:local="clr-namespace:EditorsDemo"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
+    <local:EditorsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../ModuleResources/AutoSuggestEditTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:EditorsDemoModule.Resources>
+    <DockPanel>
+        <Grid Width="400"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Top"
+              Margin="0,120,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,24">
+                <Label Content="Search by a single column (StartsWith)" />
+                <dxe:AutoSuggestEdit x:Name="countries"
+                                     ImmediatePopup="True"
+                                     SelectAllOnMouseUp="True"
+                                     SelectAllOnGotFocus="True"
+                                     AllowPopupTextHighlighting="True"
+                                     PopupHighlightedTextCriteria="StartsWith"
+                                     NullText="Search by countries"
+                                     QuerySubmitted="Countries_OnQuerySubmitted">
+                </dxe:AutoSuggestEdit>
+            </StackPanel>
+            <StackPanel Margin="0,24" Grid.Row="1">
+                <Label Content="Search by a single column (Regex)" />
+                <dxe:AutoSuggestEdit x:Name="products"
+                                     ImmediatePopup="True"
+                                     SelectAllOnMouseUp="True"
+                                     SelectAllOnGotFocus="True"
+                                     AllowPopupTextHighlighting="True"
+                                     DisplayMember="ProductName"
+                                     TextMember="ProductName"
+                                     PopupHighlightedTextCriteria="Regex"
+                                     NullText="Search by products"
+                                     QuerySubmitted="Products_OnQuerySubmitted">
+                </dxe:AutoSuggestEdit>
+            </StackPanel>
+            <StackPanel Margin="0,24" Grid.Row="2">
+                <Label Content="Search by multiple columns" />
+                <dxe:AutoSuggestEdit x:Name="lookup"
+                                     ImmediatePopup="True"
+                                     TextMember="ProductName"
+                                     SelectAllOnMouseUp="True"
+                                     SelectAllOnGotFocus="True"
+                                     PopupContentTemplate="{StaticResource gridTemplate}"
+                                     NullText="Search by products, price or quantity"
+                                     QuerySubmitted="LookUp_OnQuerySubmitted">
+                </dxe:AutoSuggestEdit>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</local:EditorsDemoModule>

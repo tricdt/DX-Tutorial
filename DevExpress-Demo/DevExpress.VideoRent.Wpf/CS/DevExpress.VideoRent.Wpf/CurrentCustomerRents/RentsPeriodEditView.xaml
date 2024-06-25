@@ -1,0 +1,49 @@
+<mb:CustomShowUserControl x:Class="DevExpress.VideoRent.Wpf.RentsPeriodEditView"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:mb="clr-namespace:DevExpress.VideoRent.Wpf.ModulesBase"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    ShowMethodType="{DynamicResource ShowType}" MinWidth="300" helpers:ElementHelper.FixMinHeight="True">
+
+    <mb:CustomShowUserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/EditsStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <helpers:DataSource x:Key="DataSource" />
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore" />
+            <mb:PopupShowType x:Key="ShowType" Title="{helpers:ConstString ID=SpecifyDateIntervals}" />
+        </ResourceDictionary>
+    </mb:CustomShowUserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding DataObject, Source={StaticResource DataSource}}">
+            <helpers:BindingInfo ElementName="resource:ElementLayoutDataStore" Property="{x:Static local:ElementLayoutDataStore.DisposeSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static mb:ShowType.CloseSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static helpers:CustomEventCommandHelper.ClosingProperty}" Value="{Binding CommandDispose}" />
+            <helpers:BindingInfo ElementName="PeriodEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding Detail.CurrentCustomerRentsEdit.Period, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            <helpers:BindingInfo ElementName="PeriodEdit" Property="{x:Static dxe:LookUpEditBase.ItemsSourceProperty}" Value="{Binding RentsPeriodEditData.List}" />
+            <helpers:BindingInfo ElementName="StartDateEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding Detail.CurrentCustomerRentsEdit.StartDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            <helpers:BindingInfo ElementName="StartDateEdit" Property="{x:Static dxe:DateEdit.MaxValueProperty}" Value="{Binding Detail.CurrentCustomerRentsEdit.EndDate}" />
+            <helpers:BindingInfo ElementName="EndDateEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding Detail.CurrentCustomerRentsEdit.EndDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            <helpers:BindingInfo ElementName="EndDateEdit" Property="{x:Static dxe:DateEdit.MinValueProperty}" Value="{Binding Detail.CurrentCustomerRentsEdit.StartDate}" />
+            <helpers:ElementLayoutInfo ElementName="MainLayoutControl" StoreFolder="LayoutControl:RentsPeriodEdit-MainLayoutControl" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <dxlc:LayoutControl x:Name="MainLayoutControl">
+        <dxlc:LayoutGroup Orientation="Vertical">
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=PeriodLabel}">
+                <dxe:ComboBoxEdit x:Name="PeriodEdit" Style="{StaticResource RentsPeriodEdit}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=StartDateLabel}">
+                <dxe:DateEdit x:Name="StartDateEdit"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=EndDateLabel}">
+                <dxe:DateEdit x:Name="EndDateEdit" />
+            </dxlc:LayoutItem>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</mb:CustomShowUserControl>

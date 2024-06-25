@@ -1,0 +1,35 @@
+﻿<local:SpellCheckerDemoModule x:Class="SpellCheckerDemo.DXRichEdit"
+                              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                              xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit"
+                              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                              xmlns:dxspch="http://schemas.devexpress.com/winfx/2008/xaml/spellchecker"
+                              xmlns:local="clr-namespace:SpellCheckerDemo">
+    <DockPanel>
+        <StackPanel Name="PART_Options" DockPanel.Dock="Right" Margin="12,8,12,12" MinWidth="210">
+            <dxe:CheckEdit x:Name="edtCheckAsYouType" Content="CheckAsYouType Mode" IsChecked="True" Margin="0,0,0,8" />
+            <Button Content="Check Spelling" Click="{DXEvent '@e(spellChecker).Check()'}" />
+        </StackPanel>
+        <dxre:RichEditControl x:Name="richEdit"
+                              VerticalAlignment="Stretch"
+                              DocumentSource="{DXBinding '$local:DocumentLoadHelper.Load(`SpellChecker.rtf`)'}">
+            <dxmvvm:Interaction.Behaviors>
+                <dxspch:RichEditSpellChecker x:Name="spellChecker"
+                                             SpellingFormType="Word"
+                                             Culture="en-us"
+                                             CheckAsYouType="{DXBinding '@e(edtCheckAsYouType).IsChecked'}"
+                                             IgnoreUpperCaseWords="{DXBinding '@e(edtIgnoreUppercase).IsChecked'}">
+                    <dxspch:RichEditSpellChecker.Dictionaries>
+                        <dxspch:SpellCheckerISpellDictionary Culture="en-US"
+                                                             DictionaryUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/american.xlg"
+                                                             GrammarUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/english.aff" />
+                        <dxspch:SpellCheckerCustomDictionary Culture="en-US"
+                                                             DictionaryUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/CustomEnglish.dic"
+                                                             AlphabetUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/EnglishAlphabet.txt" />
+                    </dxspch:RichEditSpellChecker.Dictionaries>
+                </dxspch:RichEditSpellChecker>
+            </dxmvvm:Interaction.Behaviors>
+        </dxre:RichEditControl>
+    </DockPanel>
+</local:SpellCheckerDemoModule>

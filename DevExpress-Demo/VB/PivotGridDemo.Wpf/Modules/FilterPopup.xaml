@@ -1,0 +1,110 @@
+﻿<local:PivotGridDemoModule x:Class="PivotGridDemo.FilterPopup"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:local="clr-namespace:PivotGridDemo"
+                           xmlns:dxpg="http://schemas.devexpress.com/winfx/2008/xaml/pivotgrid"
+                           xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                           xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                           xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase">
+
+    <DockPanel>
+        <local:PivotGridDemoRibbon DockPanel.Dock="Top" ExportPivotGrid="{x:Reference pivotGrid}"/>
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <dxe:CheckEdit IsChecked="{Binding Path=ShowOnlyAvailableFilterItems, ElementName=pivotGrid, Mode=TwoWay}"
+                               Content="Show Only Available Filter Items"
+                               Margin="0,8,0,0" />
+                <GroupBox Header="Group Filter Mode" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit ItemsSource="{dxe:EnumItemsSource EnumType=dxpg:GroupFilterMode}"
+                                     EditValue="{Binding ElementName=pivotGrid, Path=GroupFilterMode}"
+                                     ShowBorder="False">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxpg:PivotGridControl x:Name="pivotGrid"
+                               DataProcessingEngine="Optimized"
+                               DataSource="{x:Static dxdb:NWindDataProvider.SalesPersons}"
+                               local:FieldAreaHelper.FixAreas="True"
+                               RowTreeWidth="180" ShowDateTimeGroupIntervalItems="None"
+                               ShowBorder="False"
+                               ShowOnlyAvailableFilterItems="True">
+            <dxpg:PivotGridControl.Fields>
+                <dxpg:PivotGridField x:Name="fieldCategory"
+                                     DataBinding="{dxpg:DataSourceColumnBinding CategoryName}"
+                                     Area="RowArea"
+                                     Width="100"
+                                     Caption="Category"
+                                     Group="{Binding ElementName=PivotGridGroup1}" />
+                <dxpg:PivotGridField x:Name="fieldProduct"
+                                     DataBinding="{dxpg:DataSourceColumnBinding ProductName}"
+                                     Area="RowArea"
+                                     Width="200"
+                                     Caption="Product"
+                                     Group="{Binding ElementName=PivotGridGroup1}" />
+                <dxpg:PivotGridField x:Name="fieldYear"
+                                     DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateYear}"
+                                     Area="ColumnArea"
+                                     Caption="Year"
+                                     Width="80"
+                                     Group="{Binding ElementName=PivotGridGroup2}" />
+                <dxpg:PivotGridField x:Name="fieldQuarter"
+                                     DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateQuarter}"
+                                     Area="ColumnArea"
+                                     Caption="Quarter"
+                                     ExpandedInFieldsGroup="False"
+                                     Width="80"
+                                     ValueFormat="Quarter {0}"
+                                     Group="{Binding ElementName=PivotGridGroup2}" />
+                <dxpg:PivotGridField x:Name="fieldMonth"
+                                     DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateMonth}"
+                                     Area="ColumnArea"
+                                     Caption="Month"
+                                     Width="80"
+                                     Group="{Binding ElementName=PivotGridGroup2}" />
+                <dxpg:PivotGridField x:Name="fieldExtendedPrice"
+                                     DataBinding="{dxpg:DataSourceColumnBinding ExtendedPrice}"
+                                     Area="DataArea"
+                                     Width="100"
+                                     Caption="Order Amount"
+                                     ExpandedInFieldsGroup="False" />
+            </dxpg:PivotGridControl.Fields>
+            <dxpg:PivotGridControl.Groups>
+                <dxpg:PivotGridGroup x:Name="PivotGridGroup1" FilterType="Included">
+                    <dxpg:PivotGridGroup.GroupFilterValues>
+                        <dxpg:GroupFilterValue Value="Beverages" />
+                    </dxpg:PivotGridGroup.GroupFilterValues>
+                </dxpg:PivotGridGroup>
+                <dxpg:PivotGridGroup x:Name="PivotGridGroup2" FilterType="Included">
+                    <dxpg:PivotGridGroup.GroupFilterValues>
+                        <dxpg:GroupFilterValue Value="{local:Int32 2014}">
+                            <dxpg:GroupFilterValue.ChildValues>
+                                <dxpg:GroupFilterValue Value="{local:Int32 3}">
+                                    <dxpg:GroupFilterValue.ChildValues>
+                                        <dxpg:GroupFilterValue Value="{local:Int32 9}" />
+                                    </dxpg:GroupFilterValue.ChildValues>
+                                </dxpg:GroupFilterValue>
+                            </dxpg:GroupFilterValue.ChildValues>
+                        </dxpg:GroupFilterValue>
+                        <dxpg:GroupFilterValue Value="{local:Int32 2015}">
+                            <dxpg:GroupFilterValue.ChildValues>
+                                <dxpg:GroupFilterValue Value="{local:Int32 1}" />
+                                <dxpg:GroupFilterValue Value="{local:Int32 4}" />
+                            </dxpg:GroupFilterValue.ChildValues>
+                        </dxpg:GroupFilterValue>
+                    </dxpg:PivotGridGroup.GroupFilterValues>
+                </dxpg:PivotGridGroup>
+            </dxpg:PivotGridControl.Groups>
+        </dxpg:PivotGridControl>
+    </DockPanel>
+</local:PivotGridDemoModule>

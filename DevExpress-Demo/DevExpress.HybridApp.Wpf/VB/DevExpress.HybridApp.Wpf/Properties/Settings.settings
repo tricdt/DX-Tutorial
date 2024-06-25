@@ -1,0 +1,156 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DevExpress.DevAV.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="EmployeesStaticFilters" Type="DevExpress.DevAV.ViewModels.FilterInfoList" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfFilterInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;All&lt;/Name&gt;
+    &lt;ImageUri&gt;Resources/Employees/All.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;Salaried&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[Status] = ##Enum#DevExpress.DevAV.EmployeeStatus,Salaried#&lt;/FilterCriteria&gt;
+    &lt;ImageUri&gt;Resources/Employees/Salaried.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;Commission&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[Status] = ##Enum#DevExpress.DevAV.EmployeeStatus,Commission#&lt;/FilterCriteria&gt;
+    &lt;ImageUri&gt;Resources/Employees/Commission.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;Contract&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[Status] = ##Enum#DevExpress.DevAV.EmployeeStatus,Contract#&lt;/FilterCriteria&gt;
+    &lt;ImageUri&gt;Resources/Employees/Probation.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;Terminated&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[Status] = ##Enum#DevExpress.DevAV.EmployeeStatus,Terminated#&lt;/FilterCriteria&gt;
+    &lt;ImageUri&gt;Resources/Employees/Terminated.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;On Leave&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[Status] = ##Enum#DevExpress.DevAV.EmployeeStatus,OnLeave#&lt;/FilterCriteria&gt;
+    &lt;ImageUri&gt;Resources/Employees/OnLeave.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+&lt;/ArrayOfFilterInfo&gt;</Value>
+    </Setting>
+    <Setting Name="CustomersCustomFilters" Type="DevExpress.DevAV.ViewModels.FilterInfoList" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfFilterInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;All Customers&lt;/Name&gt;
+    &lt;FilterCriteria /&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;My Account&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[HomeOffice.State] = ##Enum#DevExpress.DevAV.StateEnum,CA#&lt;/FilterCriteria&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;John's Account&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[HomeOffice.State] = ##Enum#DevExpress.DevAV.StateEnum,WA#&lt;/FilterCriteria&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;Top Stores&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[AnnualRevenue] &amp;gt;= 90000000000.0m&lt;/FilterCriteria&gt;
+  &lt;/FilterInfo&gt;
+&lt;/ArrayOfFilterInfo&gt;</Value>
+    </Setting>
+    <Setting Name="ProductsCustomFilters" Type="DevExpress.DevAV.ViewModels.FilterInfoList" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfFilterInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;HD Video player&lt;/Name&gt;
+    &lt;FilterCriteria&gt;Contains([Name], 'HD') And Category = 'VideoPlayers'&lt;/FilterCriteria&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;50inch Plasma&lt;/Name&gt;
+    &lt;FilterCriteria&gt;Contains([Name], '50') And Category = 'Televisions'&lt;/FilterCriteria&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;21inch Monitor&lt;/Name&gt;
+    &lt;FilterCriteria&gt;Contains([Name], '21') And Category = 'Monitors'&lt;/FilterCriteria&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;Remote Control&lt;/Name&gt;
+    &lt;FilterCriteria&gt;Contains([Name], 'Remote') And Category = 'Automation'&lt;/FilterCriteria&gt;
+  &lt;/FilterInfo&gt;
+&lt;/ArrayOfFilterInfo&gt;</Value>
+    </Setting>
+    <Setting Name="ProductsStaticFilters" Type="DevExpress.DevAV.ViewModels.FilterInfoList" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfFilterInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;All&lt;/Name&gt;
+    &lt;ImageUri&gt;Resources/Products/All.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;Video Players&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[Category] = ##Enum#DevExpress.DevAV.ProductCategory,VideoPlayers#&lt;/FilterCriteria&gt;
+    &lt;ImageUri&gt;Resources/Products/VideoPlayers.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;Automation&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[Category] = ##Enum#DevExpress.DevAV.ProductCategory,Automation#&lt;/FilterCriteria&gt;
+    &lt;ImageUri&gt;Resources/Products/Automation.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;Monitors&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[Category] = ##Enum#DevExpress.DevAV.ProductCategory,Monitors#&lt;/FilterCriteria&gt;
+    &lt;ImageUri&gt;Resources/Products/Monitors.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;Projectors&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[Category] = ##Enum#DevExpress.DevAV.ProductCategory,Projectors#&lt;/FilterCriteria&gt;
+    &lt;ImageUri&gt;Resources/Products/Projectors.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;Televisions&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[Category] = ##Enum#DevExpress.DevAV.ProductCategory,Televisions#&lt;/FilterCriteria&gt;
+    &lt;ImageUri&gt;Resources/Products/TVs.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+&lt;/ArrayOfFilterInfo&gt;</Value>
+    </Setting>
+    <Setting Name="TasksStaticFilters" Type="DevExpress.DevAV.ViewModels.FilterInfoList" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfFilterInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;All Tasks&lt;/Name&gt;
+    &lt;FilterCriteria /&gt;
+    &lt;ImageUri&gt;Resources/Tasks/InProgress.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;In Progress&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[Status] = ##Enum#DevExpress.DevAV.EmployeeTaskStatus,InProgress#&lt;/FilterCriteria&gt;
+    &lt;ImageUri&gt;Resources/Tasks/InProgress.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;Not Started&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[Status] = ##Enum#DevExpress.DevAV.EmployeeTaskStatus,NotStarted#&lt;/FilterCriteria&gt;
+    &lt;ImageUri&gt;Resources/Tasks/NotStarted.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;Deferred&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[Status] = ##Enum#DevExpress.DevAV.EmployeeTaskStatus,Deferred#&lt;/FilterCriteria&gt;
+    &lt;ImageUri&gt;Resources/Tasks/Deferred.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;Completed&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[Status] = ##Enum#DevExpress.DevAV.EmployeeTaskStatus,Completed#&lt;/FilterCriteria&gt;
+    &lt;ImageUri&gt;Resources/Tasks/Completed.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;High Priority&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[Priority] = ##Enum#DevExpress.DevAV.EmployeeTaskPriority,High#&lt;/FilterCriteria&gt;
+    &lt;ImageUri&gt;Resources/Tasks/HighPriority.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;Urgent&lt;/Name&gt;
+    &lt;FilterCriteria&gt;[Priority] = ##Enum#DevExpress.DevAV.EmployeeTaskPriority,Urgent#&lt;/FilterCriteria&gt;
+    &lt;ImageUri&gt;Resources/Tasks/Urgent.svg&lt;/ImageUri&gt;
+  &lt;/FilterInfo&gt;
+&lt;/ArrayOfFilterInfo&gt;</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

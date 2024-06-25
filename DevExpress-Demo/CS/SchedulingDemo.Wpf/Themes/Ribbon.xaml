@@ -1,0 +1,1087 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+    xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduling"
+    xmlns:dxschcore="http://schemas.devexpress.com/winfx/2008/xaml/scheduling/core"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:local="clr-namespace:SchedulingDemo"
+    xmlns:col="clr-namespace:System.Collections;assembly=mscorlib">
+
+    <Style x:Key="Options.RibbonPage" TargetType="dxr:RibbonPage">
+        <Setter Property="Caption" Value="Options"/>
+        <Setter Property="MergeOrder" Value="1"/>
+    </Style>
+    <Style x:Key="PrintingOptions.RibbonPage" TargetType="dxr:RibbonPage">
+        <Setter Property="Caption" Value="Options"/>
+        <Setter Property="MergeOrder" Value="1"/>
+    </Style>
+
+    <Style x:Key="Options.BarItem" TargetType="dxb:BarItem" x:Shared="False">
+        <Setter Property="Tag" Value="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"/>
+    </Style>
+    <Style x:Key="Options.BarCheckItem" TargetType="dxb:BarCheckItem" x:Shared="False"
+           BasedOn="{StaticResource Options.BarItem}">
+    </Style>
+    <Style x:Key="Options.BarEditItem" TargetType="dxb:BarEditItem" x:Shared="False"
+           BasedOn="{StaticResource Options.BarItem}">
+        <Setter Property="EditHorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <DataTemplate x:Key="Options.BarSubItem.ItemTemplateChecked">
+        <dxb:BarCheckItem
+            Style="{StaticResource Options.BarCheckItem}"
+            Content="{Binding Value}" IsChecked="{Binding IsChecked}"/>
+    </DataTemplate>
+    <DataTemplate x:Key="Options.BarSplitButtonItem.AppointmentDisplay.PopupTemplate">
+        <dxb:PopupControlContainer>
+            <dxlc:LayoutControl Orientation="Vertical">
+                <dxlc:LayoutGroup Orientation="Horizontal">
+                    <dxlc:LayoutGroup Orientation="Vertical" VerticalAlignment="Top">
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Status"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.ShowAppointmentStatus', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Location"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.ShowAppointmentLocation', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Description"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.ShowAppointmentDescription', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Interval"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.ShowAppointmentInterval', Mode=TwoWay}"/>
+                    </dxlc:LayoutGroup>
+                    <dxlc:LayoutGroup Orientation="Vertical" VerticalAlignment="Top">
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Arrows"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.ShowAppointmentArrowImages', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Recurrence"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.ShowAppointmentRecurrenceImage', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Reminder"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.ShowAppointmentReminderImage', Mode=TwoWay}"/>
+                    </dxlc:LayoutGroup>
+                </dxlc:LayoutGroup>
+
+                <dxlc:LayoutItem Label="Interval String Format: " LabelPosition="Top">
+                    <dxe:TextEdit
+                        Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                        Text="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.AppointmentIntervalStringFormat', Mode=TwoWay, ValidatesOnExceptions=True}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Full Interval String Format: " LabelPosition="Top">
+                    <dxe:TextEdit
+                        Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                        Text="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.AppointmentFullIntervalStringFormat', Mode=TwoWay, ValidatesOnExceptions=True}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Left Arrow Text String Format: " LabelPosition="Top">
+                    <dxe:TextEdit
+                        Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                        Text="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.AppointmentLeftArrowTextStringFormat', Mode=TwoWay, ValidatesOnExceptions=True}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Right Arrow Text String Format: " LabelPosition="Top">
+                    <dxe:TextEdit
+                        Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                        Text="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.AppointmentRightArrowTextStringFormat', Mode=TwoWay, ValidatesOnExceptions=True}"/>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutControl>
+        </dxb:PopupControlContainer>
+    </DataTemplate>
+    <DataTemplate x:Key="Options.BarSplitButtonItem.AllDayAppointmentDisplay.PopupTemplate">
+        <dxb:PopupControlContainer>
+            <dxlc:LayoutControl Orientation="Vertical">
+                <dxlc:LayoutGroup Orientation="Horizontal">
+                    <dxlc:LayoutGroup Orientation="Vertical" VerticalAlignment="Top">
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Status"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.ShowAllDayAppointmentStatus', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Location"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.ShowAllDayAppointmentLocation', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Description"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.ShowAllDayAppointmentDescription', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Interval"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.ShowAllDayAppointmentInterval', Mode=TwoWay}"/>
+                    </dxlc:LayoutGroup>
+                    <dxlc:LayoutGroup Orientation="Vertical" VerticalAlignment="Top">
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Arrows"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.ShowAllDayAppointmentArrowImages', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Recurrence"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.ShowAllDayAppointmentRecurrenceImage', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Reminder"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.ShowAllDayAppointmentReminderImage', Mode=TwoWay}"/>
+                    </dxlc:LayoutGroup>
+                </dxlc:LayoutGroup>
+
+                <dxlc:LayoutItem Label="Interval String Format: " LabelPosition="Top">
+                    <dxe:TextEdit
+                        Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                        Text="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.AllDayAppointmentIntervalStringFormat', Mode=TwoWay, ValidatesOnExceptions=True}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Full Interval String Format: " LabelPosition="Top">
+                    <dxe:TextEdit
+                        Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                        Text="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.AllDayAppointmentFullIntervalStringFormat', Mode=TwoWay, ValidatesOnExceptions=True}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Left Arrow Text String Format: " LabelPosition="Top">
+                    <dxe:TextEdit
+                        Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                        Text="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.AllDayAppointmentLeftArrowTextStringFormat', Mode=TwoWay, ValidatesOnExceptions=True}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Right Arrow Text String Format: " LabelPosition="Top">
+                    <dxe:TextEdit
+                        Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                        Text="{DXBinding '@s.Tag.ActiveView.SchedulerViewBase.AllDayAppointmentRightArrowTextStringFormat', Mode=TwoWay, ValidatesOnExceptions=True}"/>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutControl>
+        </dxb:PopupControlContainer>
+    </DataTemplate>
+    <DataTemplate x:Key="Options.BarSplitButtonItem.AgendaAppointmentDisplay.PopupTemplate">
+        <dxb:PopupControlContainer>
+            <dxlc:LayoutControl Orientation="Vertical">
+                <dxlc:LayoutGroup Orientation="Horizontal">
+                    <dxlc:LayoutGroup Orientation="Vertical" VerticalAlignment="Top">
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Status"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.AgendaView.ShowAppointmentStatus', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Label"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.AgendaView.ShowAppointmentLabel', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Location"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.AgendaView.ShowAppointmentLocation', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Description"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.AgendaView.ShowAppointmentDescription', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Interval"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.AgendaView.ShowAppointmentInterval', Mode=TwoWay}"/>
+                    </dxlc:LayoutGroup>
+                    <dxlc:LayoutGroup Orientation="Vertical" VerticalAlignment="Top">
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Resource"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.AgendaView.ShowAppointmentResource', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Arrows"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.AgendaView.ShowAppointmentArrowImages', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Recurrence"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.AgendaView.ShowAppointmentRecurrenceImage', Mode=TwoWay}"/>
+                        <dxe:CheckEdit
+                            Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                            Content="Show Reminder"
+                            IsChecked="{DXBinding '@s.Tag.ActiveView.AgendaView.ShowAppointmentReminderImage', Mode=TwoWay}"/>
+                    </dxlc:LayoutGroup>
+                </dxlc:LayoutGroup>
+
+                <dxlc:LayoutItem Label="Interval String Format: " LabelPosition="Top">
+                    <dxe:TextEdit
+                        Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                        Text="{DXBinding '@s.Tag.ActiveView.AgendaView.AppointmentIntervalStringFormat', Mode=TwoWay, ValidatesOnExceptions=True}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Full Interval String Format: " LabelPosition="Top">
+                    <dxe:TextEdit
+                        Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                        Text="{DXBinding '@s.Tag.ActiveView.AgendaView.AppointmentFullIntervalStringFormat', Mode=TwoWay, ValidatesOnExceptions=True}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Left Arrow Text String Format: " LabelPosition="Top">
+                    <dxe:TextEdit
+                        Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                        Text="{DXBinding '@s.Tag.ActiveView.AgendaView.AppointmentLeftArrowTextStringFormat', Mode=TwoWay, ValidatesOnExceptions=True}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Right Arrow Text String Format: " LabelPosition="Top">
+                    <dxe:TextEdit
+                        Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                        Text="{DXBinding '@s.Tag.ActiveView.AgendaView.AppointmentRightArrowTextStringFormat', Mode=TwoWay, ValidatesOnExceptions=True}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="All Day Text: " LabelPosition="Top">
+                    <dxe:TextEdit
+                        Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                        Text="{DXBinding '@s.Tag.ActiveView.AgendaView.AppointmentAllDayText', Mode=TwoWay}"/>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutControl>
+        </dxb:PopupControlContainer>
+    </DataTemplate>
+    <DataTemplate x:Key="Options.BarSplitButtonItem.AppointmentRendering.PopupTemplate">
+        <dxb:PopupControlContainer>
+            <dxlc:LayoutControl Orientation="Vertical">
+                <dxe:CheckEdit
+                    Content="Appointments Opacity Animation"
+                    Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                    IsChecked="{DXBinding '@Self.Tag.ActiveView.SchedulerViewBase.IsAppointmentsOpacityAnimationEnabled', Mode=TwoWay}" />
+                <dxe:CheckEdit
+                    Content="Deferred Appointments Rendering"
+                    Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                    IsChecked="{DXBinding '@Self.Tag.ActiveView.SchedulerViewBase.AppointmentsDeferredRendering', Mode=TwoWay}" />
+                <dxlc:LayoutItem Label="Deferred Appointments Rendering Range: " LabelPosition="Top">
+                    <dxe:SpinEdit
+                        Tag="{Binding Path=(dxsch:SchedulerControl.Scheduler), RelativeSource={RelativeSource Mode=Self}}"
+                        Value="{DXBinding '@Self.Tag.ActiveView.SchedulerViewBase.AppointmentsDeferredRenderingRange', Mode=TwoWay}"
+                        MinValue="1" MaxValue="100" IsFloatValue="False" />
+                </dxlc:LayoutItem>
+            </dxlc:LayoutControl>
+        </dxb:PopupControlContainer>
+    </DataTemplate>
+    <DataTemplate x:Key="PrintingOptions.BarSplitButtonItem.ResourcesToPrint.PopupTemplate">
+        <dxb:PopupControlContainer Closed="{DXEvent Handler='UpdateReport()'}">
+            <dxsch:ResourceTreeControl
+                Scheduler="{Binding Path='(dxsch:SchedulerControl.Scheduler)', RelativeSource={RelativeSource Mode=Self}}"
+                ItemCheckBoxFieldName="SourceObject.Tag"
+                ShowBorder="False"
+                MaxHeight="800"/>
+        </dxb:PopupControlContainer>
+    </DataTemplate>
+
+    <Style x:Key="Options.BarSubItem.WorkDays" x:Shared="False"
+           BasedOn="{StaticResource Options.BarItem}"
+           TargetType="dxb:BarSubItem">
+        <Setter Property="Content" Value="Work Days"/>
+        <Setter Property="RibbonStyle" Value="Large"/>
+        <Setter Property="Glyph" Value="{dx:ImageSelector Source={dx:DXImage Image=ShowWorkTimeOnly_16x16.png}, SvgSource={dxsch:SchedulerSvgImage Path='Scheduling/ShowWorkTimeOnly.svg'}}"/>
+        <Setter Property="LargeGlyph" Value="{dx:ImageSelector Source={dx:DXImage Image=ShowWorkTimeOnly_32x32.png}, SvgSource={dxsch:SchedulerSvgImage Path='Scheduling/ShowWorkTimeOnly.svg'}}"/>
+        <Setter Property="ItemTemplate" Value="{StaticResource Options.BarSubItem.ItemTemplateChecked}"/>
+        <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentControl>
+                        <local:BarSubItem_WorkDaysEditBehavior/>
+                    </ContentControl>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarEditItem.StartWorkTime" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="Content" Value="Work Time Start"/>
+        <Setter Property="EditHorizontalAlignment" Value="Right"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:TextEditSettings MaskType="DateTimeAdvancingCaret" Mask="HH:mm" MaskUseAsDisplayFormat="True" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentControl>
+                        <local:BarEditItem_WorkTimeEditBehavior/>
+                    </ContentControl>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarEditItem.EndWorkTime" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="Content" Value="Work Time End"/>
+        <Setter Property="EditHorizontalAlignment" Value="Right"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:TextEditSettings MaskType="DateTimeAdvancingCaret" Mask="HH:mm" MaskUseAsDisplayFormat="True" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentControl>
+                        <local:BarEditItem_WorkTimeEditBehavior Mode="End"/>
+                    </ContentControl>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarSubItem.FirstDayOfWeek" x:Shared="False"
+           BasedOn="{StaticResource Options.BarItem}"
+           TargetType="dxb:BarSubItem">
+        <Setter Property="Content" Value="First Day Of Week"/>
+        <Setter Property="RibbonStyle" Value="SmallWithText"/>
+        <Setter Property="ItemTemplate" Value="{StaticResource Options.BarSubItem.ItemTemplateChecked}"/>
+        <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentControl>
+                        <local:BarSubItem_FirstDayOfWeek/>
+                    </ContentControl>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Options.BarCheckItem.ShowDayHeaders" x:Shared="False"
+           BasedOn="{StaticResource Options.BarCheckItem}"
+           TargetType="dxb:BarCheckItem">
+        <Setter Property="Content" Value="Show Day Headers"/>
+        <Setter Property="IsChecked" Value="{DXBinding '@Self.Tag.ActiveView.SchedulerViewBase.ShowDayHeaders'}"/>
+    </Style>
+    <Style x:Key="Options.BarCheckItem.ShowResourceHeaders" x:Shared="False"
+           BasedOn="{StaticResource Options.BarCheckItem}"
+           TargetType="dxb:BarCheckItem">
+        <Setter Property="Content" Value="Show Resource Headers"/>
+        <Setter Property="IsChecked" Value="{DXBinding '@Self.Tag.ActiveView.SchedulerViewBase.ShowResourceHeaders'}"/>
+        <Setter Property="IsEnabled" Value="{DXBinding '@Self.Tag.GroupType != $dxschcore:SchedulerGroupType.None'}"/>
+    </Style>
+    <Style x:Key="Options.BarSubItem.HeadersVisibility" x:Shared="False"
+           BasedOn="{StaticResource Options.BarItem}"
+           TargetType="dxb:BarSubItem">
+        <Setter Property="Content" Value="Headers Visibility"/>
+        <Setter Property="ItemLinksSource">
+            <Setter.Value>
+                <col:ArrayList>
+                    <dxb:BarCheckItem Style="{StaticResource Options.BarCheckItem.ShowDayHeaders}"/>
+                    <dxb:BarCheckItem Style="{StaticResource Options.BarCheckItem.ShowResourceHeaders}"/>
+                </col:ArrayList>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarSubItem.NavigationButtonsVisibility" x:Shared="False"
+           BasedOn="{StaticResource Options.BarItem}"
+           TargetType="dxb:BarSubItem">
+        <Setter Property="Content" Value="Navigation Buttons Visibility"/>
+        <Setter Property="RibbonStyle" Value="SmallWithText"/>
+        <Setter Property="ItemTemplate" Value="{StaticResource Options.BarSubItem.ItemTemplateChecked}"/>
+        <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentControl>
+                        <local:BarSubItem_NavigationButtonsVisibility/>
+                    </ContentControl>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarSubItem.MoreButtonsVisibility" x:Shared="False"
+           TargetType="dxb:BarSubItem"
+           BasedOn="{StaticResource Options.BarItem}">
+        <Setter Property="Content" Value="More Buttons Visibility"/>
+        <Setter Property="RibbonStyle" Value="SmallWithText"/>
+        <Setter Property="ItemTemplate" Value="{StaticResource Options.BarSubItem.ItemTemplateChecked}"/>
+        <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentControl>
+                        <local:BarSubItem_MoreButtonsVisibility/>
+                    </ContentControl>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Options.BarSplitButtonItem.AppointmentDisplay" x:Shared="False"
+           BasedOn="{StaticResource Options.BarItem}"
+           TargetType="dxb:BarSplitButtonItem">
+        <Setter Property="Content" Value="Appointment Display"/>
+        <Setter Property="ActAsDropDown" Value="True"/>
+        <Setter Property="PopupControl"
+                Value="{dxmvvm:ValueFactory ValueTemplate={StaticResource Options.BarSplitButtonItem.AppointmentDisplay.PopupTemplate}}"/>
+    </Style>
+    <Style x:Key="Options.BarSplitButtonItem.AllDayAppointmentDisplay" x:Shared="False"
+           BasedOn="{StaticResource Options.BarItem}"
+           TargetType="dxb:BarSplitButtonItem">
+        <Setter Property="Content" Value="All Day Appointment Display"/>
+        <Setter Property="ActAsDropDown" Value="True"/>
+        <Setter Property="PopupControl"
+                Value="{dxmvvm:ValueFactory ValueTemplate={StaticResource Options.BarSplitButtonItem.AllDayAppointmentDisplay.PopupTemplate}}"/>
+    </Style>
+    <Style x:Key="Options.BarSplitButtonItem.AgendaAppointmentDisplay" x:Shared="False"
+           BasedOn="{StaticResource Options.BarItem}"
+           TargetType="dxb:BarSplitButtonItem">
+        <Setter Property="Content" Value="Appointment Display"/>
+        <Setter Property="ActAsDropDown" Value="True"/>
+        <Setter Property="PopupControl"
+                Value="{dxmvvm:ValueFactory ValueTemplate={StaticResource Options.BarSplitButtonItem.AgendaAppointmentDisplay.PopupTemplate}}"/>
+    </Style>
+    <Style x:Key="Options.BarSplitButtonItem.AppointmentRendering" x:Shared="False"
+           BasedOn="{StaticResource Options.BarItem}"
+           TargetType="dxb:BarSplitButtonItem">
+        <Setter Property="Content" Value="Appointment Rendering"/>
+        <Setter Property="ActAsDropDown" Value="True"/>
+        <Setter Property="PopupControl"
+                Value="{dxmvvm:ValueFactory ValueTemplate={StaticResource Options.BarSplitButtonItem.AppointmentRendering.PopupTemplate}}"/>
+    </Style>
+
+    <Style x:Key="Options.BarEditItem.ShowWorkTimeOnly" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ActiveView.SchedulerViewBase.ShowWorkTimeOnly'}"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:CheckEditSettings Content="Show Work Time Only"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarEditItem.ShowAllDayArea" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ActiveView.SchedulerViewBase.ShowAllDayArea'}"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:CheckEditSettings Content="Show All Day Area"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarEditItem.ShowResourceNavigator" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ActiveView.SchedulerViewBase.ShowResourceNavigator'}"/>
+        <Setter Property="IsEnabled" Value="{DXBinding '@Self.Tag.GroupType != $dxschcore:SchedulerGroupType.None'}"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:CheckEditSettings Content="Show Resource Navigator"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarEditItem.MonthWeekCount" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="Content" Value="Week Count"/>
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ActiveView.MonthView.WeekCount'}"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:SpinEditSettings MinValue="1" MaxValue="100" IsFloatValue="False"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarSubItem.OneMonthDispalyUnit" x:Shared="False"
+           BasedOn="{StaticResource Options.BarItem}"
+           TargetType="dxb:BarSubItem">
+        <Setter Property="Content" Value="Display Unit"/>
+        <Setter Property="RibbonStyle" Value="SmallWithText"/>
+        <Setter Property="ItemTemplate" Value="{StaticResource Options.BarSubItem.ItemTemplateChecked}"/>
+        <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentControl>
+                        <local:BarSubItem_DisplayUnit/>
+                    </ContentControl>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarEditItem.OneMonthWeekCount" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="Content" Value="Week Count"/>
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ActiveView.MonthView.WeekCount'}"/>
+        <Setter Property="EditHorizontalAlignment" Value="Right"/>
+        <Setter Property="EditWidth" Value="35"/>
+        <Setter Property="IsVisible" Value="{DXBinding '@Self.Tag.ActiveView.MonthView.DisplayUnit == $dxsch:MonthViewDisplayUnit.Week'}"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:SpinEditSettings MinValue="1" MaxValue="100" IsFloatValue="False"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarEditItem.OneMonthMonthCount" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="Content" Value="Month Count"/>
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ActiveView.MonthView.MonthCount'}"/>
+        <Setter Property="EditHorizontalAlignment" Value="Right"/>
+        <Setter Property="EditWidth" Value="35"/>
+        <Setter Property="IsVisible" Value="{DXBinding '@Self.Tag.ActiveView.MonthView.DisplayUnit == $dxsch:MonthViewDisplayUnit.Month'}"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:SpinEditSettings MinValue="1" MaxValue="12" IsFloatValue="False"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarEditItem.OneMonthAppointmentMinHeight" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="Content" Value="Appointment Min Height"/>
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ActiveView.MonthView.AppointmentMinHeight'}"/>
+        <Setter Property="EditHorizontalAlignment" Value="Right"/>
+        <Setter Property="EditWidth" Value="50"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:SpinEditSettings IsFloatValue="False"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarEditItem.OneMonthWeekMinHeight" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="Content" Value="Week Min Height"/>
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ActiveView.MonthView.WeekMinHeight'}"/>
+        <Setter Property="EditHorizontalAlignment" Value="Right"/>
+        <Setter Property="EditWidth" Value="50"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:SpinEditSettings MinValue="20" IsFloatValue="False"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarEditItem.OneMonthWeekMaxHeight" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="Content" Value="Week Max Height"/>
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ActiveView.MonthView.WeekMaxHeight'}"/>
+        <Setter Property="EditHorizontalAlignment" Value="Right"/>
+        <Setter Property="EditWidth" Value="50"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:SpinEditSettings MinValue="20" IsFloatValue="False"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarEditItem.MonthStretchAppointments" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ActiveView.MonthView.StretchAppointments'}"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:CheckEditSettings Content="Stretch Appointments"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Options.BarEditItem.TimelineAppointmentMinHeight" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="Content" Value="Appointment Min Height"/>
+        <Setter Property="EditHorizontalAlignment" Value="Right"/>
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ActiveView.TimelineView.AppointmentMinHeight'}"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:SpinEditSettings MinValue="1" IsFloatValue="False"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarEditItem.TimelineResourceMinHeight" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="Content" Value="Resource Min Height"/>
+        <Setter Property="EditHorizontalAlignment" Value="Right"/>
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ActiveView.TimelineView.ResourceMinHeight'}"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:SpinEditSettings MinValue="0"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarEditItem.TimelineResourceMaxHeight" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="Content" Value="Resource Max Height"/>
+        <Setter Property="EditHorizontalAlignment" Value="Right"/>
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ActiveView.TimelineView.ResourceMaxHeight'}"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:SpinEditSettings MinValue="0"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarEditItem.TimelineStretchAppointments" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ActiveView.TimelineView.StretchAppointments'}"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:CheckEditSettings Content="Stretch Appointments"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Options.BarEditItem.ListViewShowChangedOccurrences" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ActiveView.ListView.ShowChangedOccurrences'}"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:CheckEditSettings Content="Show Changed Occurrences"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Options.BarEditItem.ListViewShowDeletedOccurrences" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ActiveView.ListView.ShowDeletedOccurrences'}"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:CheckEditSettings Content="Show Deleted Occurrences"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Options.BarEditItem.ShowDateNavigationPanel" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{DXBinding '@Self.Tag.ShowDateNavigationPanel'}"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:CheckEditSettings Content="Show Date Navigation Panel"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PrintingOptions.BarSubItem.Template" x:Shared="False"
+           BasedOn="{StaticResource Options.BarItem}"
+           TargetType="dxb:BarSubItem">
+        <Setter Property="Content" Value="Print Template"/>
+        <Setter Property="RibbonStyle" Value="Large"/>
+        <Setter Property="Glyph" Value="{dxsch:SchedulerSvgImage Path='Print/Preview.svg'}"/>
+        <Setter Property="LargeGlyph" Value="{dxsch:SchedulerSvgImage Path='Print/Preview.svg'}"/>
+        <Setter Property="ItemTemplate" Value="{StaticResource Options.BarSubItem.ItemTemplateChecked}"/>
+        <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentControl>
+                        <local:BarSubItem_ReportTemplate ReportTemplate="{Binding ReportTemplate, Mode=TwoWay}"/>
+                    </ContentControl>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.PrintVisibleInterval" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding PrintVisibleInterval, Mode=TwoWay}"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:CheckEditSettings Content="Print Visible Interval"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.PrintStart" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="IsEnabled" Value="{DXBinding '!PrintVisibleInterval'}"/>
+        <Setter Property="Content" Value="Start"/>
+        <Setter Property="EditHorizontalAlignment" Value="Right"/>
+        <Setter Property="EditWidth" Value="100"/>
+        <Setter Property="EditTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <dxe:DateEdit
+                        DataContext="{Binding Path='Item.DataContext', RelativeSource={RelativeSource AncestorType=dxb:BarItemLinkInfo}}"
+                        HorizontalContentAlignment="Right"
+                        EditValue="{Binding PrintStart, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="dx:ThemeManager.IsTouchEnabled" Value="True">
+                <Setter Property="EditWidth" Value="180"/>
+            </Trigger>
+            <Trigger Property="dx:ThemeManager.IsTouchlineTheme" Value="True">
+                <Setter Property="EditWidth" Value="180"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.PrintEnd" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="IsEnabled" Value="{DXBinding '!PrintVisibleInterval'}"/>
+        <Setter Property="Content" Value="End"/>
+        <Setter Property="EditHorizontalAlignment" Value="Right"/>
+        <Setter Property="EditWidth" Value="100"/>
+        <Setter Property="EditTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <dxe:DateEdit
+                        DataContext="{Binding Path='Item.DataContext', RelativeSource={RelativeSource AncestorType=dxb:BarItemLinkInfo}}"
+                        HorizontalContentAlignment="Right"
+                        EditValue="{Binding PrintEnd, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="dx:ThemeManager.IsTouchEnabled" Value="True">
+                <Setter Property="EditWidth" Value="180"/>
+            </Trigger>
+            <Trigger Property="dx:ThemeManager.IsTouchlineTheme" Value="True">
+                <Setter Property="EditWidth" Value="180"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.PrintVisibleResources" x:Shared="False"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding PrintVisibleResources, Mode=TwoWay}"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:CheckEditSettings Content="Print Visible Resources"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="PrintingOptions.BarSplitButtonItem.ResourcesToPrint" x:Shared="False"
+           BasedOn="{StaticResource Options.BarItem}"
+           TargetType="dxb:BarSplitButtonItem">
+        <Setter Property="IsEnabled" Value="{DXBinding '!PrintVisibleResources'}"/>
+        <Setter Property="Content" Value="Resources To Print"/>
+        <Setter Property="ActAsDropDown" Value="True"/>
+        <Setter Property="RibbonStyle" Value="SmallWithText"/>
+        <Setter Property="PopupControl"
+                Value="{dxmvvm:ValueFactory ValueTemplate={StaticResource PrintingOptions.BarSplitButtonItem.ResourcesToPrint.PopupTemplate}}"/>
+    </Style>
+
+    <Style x:Key="PrintingOptions.BarEditItem.ShowCalendarBase"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:CheckEditSettings Content="Show Calendar"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.ShowIntervalBase"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:CheckEditSettings Content="Show Interval"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.DaysPerPageBase"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="Content" Value="Days Per Page"/>
+        <Setter Property="EditHorizontalAlignment" Value="Right"/>
+        <Setter Property="EditWidth" Value="40"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:SpinEditSettings MinValue="0" MaxValue="30"/>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="dx:ThemeManager.IsTouchEnabled" Value="True">
+                <Setter Property="EditWidth" Value="70"/>
+            </Trigger>
+            <Trigger Property="dx:ThemeManager.IsTouchlineTheme" Value="True">
+                <Setter Property="EditWidth" Value="70"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.ResourcesPerPageBase"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="Content" Value="Resources Per Page"/>
+        <Setter Property="EditHorizontalAlignment" Value="Right"/>
+        <Setter Property="EditWidth" Value="40"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:SpinEditSettings MinValue="0" MaxValue="30"/>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="dx:ThemeManager.IsTouchEnabled" Value="True">
+                <Setter Property="EditWidth" Value="70"/>
+            </Trigger>
+            <Trigger Property="dx:ThemeManager.IsTouchlineTheme" Value="True">
+                <Setter Property="EditWidth" Value="70"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.IntervalsPerPageBase"
+           BasedOn="{StaticResource Options.BarEditItem}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="Content" Value="Intervals Per Page"/>
+        <Setter Property="EditHorizontalAlignment" Value="Right"/>
+        <Setter Property="EditWidth" Value="40"/>
+        <Setter Property="EditSettings">
+            <Setter.Value>
+                <dxe:SpinEditSettings MinValue="0" MaxValue="30"/>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="dx:ThemeManager.IsTouchEnabled" Value="True">
+                <Setter Property="EditWidth" Value="70"/>
+            </Trigger>
+            <Trigger Property="dx:ThemeManager.IsTouchlineTheme" Value="True">
+                <Setter Property="EditWidth" Value="70"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.DailyReportShowCalendar"
+           BasedOn="{StaticResource PrintingOptions.BarEditItem.ShowCalendarBase}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding DailyReportShowCalendar}"/>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.DailyReportShowInterval"
+           BasedOn="{StaticResource PrintingOptions.BarEditItem.ShowIntervalBase}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding DailyReportShowInterval}"/>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.DailyReportDaysPerPage"
+           BasedOn="{StaticResource PrintingOptions.BarEditItem.DaysPerPageBase}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding DailyReportDaysPerPage, Converter={dxmvvm:TypeCastConverter}}"/>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.DailyReportResourcesPerPage"
+           BasedOn="{StaticResource PrintingOptions.BarEditItem.ResourcesPerPageBase}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding DailyReportResourcesPerPage, Converter={dxmvvm:TypeCastConverter}}"/>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.WeeklyReportShowCalendar"
+           BasedOn="{StaticResource PrintingOptions.BarEditItem.ShowCalendarBase}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding WeeklyReportShowCalendar}"/>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.WeeklyReportShowInterval"
+           BasedOn="{StaticResource PrintingOptions.BarEditItem.ShowIntervalBase}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding WeeklyReportShowInterval}"/>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.WeeklyReportResourcesPerPage"
+           BasedOn="{StaticResource PrintingOptions.BarEditItem.ResourcesPerPageBase}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding WeeklyReportResourcesPerPage, Converter={dxmvvm:TypeCastConverter}}"/>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.MonthlyReportShowCalendar"
+           BasedOn="{StaticResource PrintingOptions.BarEditItem.ShowCalendarBase}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding MonthlyReportShowCalendar}"/>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.MonthlyReportShowInterval"
+           BasedOn="{StaticResource PrintingOptions.BarEditItem.ShowIntervalBase}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding MonthlyReportShowInterval}"/>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.MonthlyReportResourcesPerPage"
+           BasedOn="{StaticResource PrintingOptions.BarEditItem.ResourcesPerPageBase}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding MonthlyReportResourcesPerPage, Converter={dxmvvm:TypeCastConverter}}"/>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.TimelineReportShowCalendar"
+           BasedOn="{StaticResource PrintingOptions.BarEditItem.ShowCalendarBase}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding TimelineReportShowCalendar}"/>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.TimelineReportShowInterval"
+           BasedOn="{StaticResource PrintingOptions.BarEditItem.ShowIntervalBase}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding TimelineReportShowInterval}"/>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.TimelineReportIntervalsPerPage"
+           BasedOn="{StaticResource PrintingOptions.BarEditItem.IntervalsPerPageBase}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding TimelineReportIntervalsPerPage, Converter={dxmvvm:TypeCastConverter}}"/>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.TimelineReportResourcesPerPage"
+           BasedOn="{StaticResource PrintingOptions.BarEditItem.ResourcesPerPageBase}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding TimelineReportResourcesPerPage, Converter={dxmvvm:TypeCastConverter}}"/>
+    </Style>
+    <Style x:Key="PrintingOptions.BarEditItem.TrifoldReportShowCalendar"
+           BasedOn="{StaticResource PrintingOptions.BarEditItem.ShowCalendarBase}"
+           TargetType="dxb:BarEditItem">
+        <Setter Property="EditValue" Value="{Binding TrifoldReportShowCalendar}"/>
+    </Style>
+
+    <DataTemplate x:Key="Options.DayViewBase.Ribbon">
+        <dxr:RibbonControl>
+            <dxr:RibbonPage Style="{StaticResource Options.RibbonPage}">
+                <dxr:RibbonPageGroup Caption="Scheduler Settings">
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.WorkDays}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.StartWorkTime}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.EndWorkTime}"/>
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.FirstDayOfWeek}"/>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="View Settings">
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.HeadersVisibility}"/>
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.NavigationButtonsVisibility}"/>
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.MoreButtonsVisibility}"/>
+                    <dxb:BarSplitButtonItem Style="{StaticResource Options.BarSplitButtonItem.AppointmentRendering}"/>
+                    <dxb:BarSplitButtonItem Style="{StaticResource Options.BarSplitButtonItem.AppointmentDisplay}"/>
+                    <dxb:BarSplitButtonItem Style="{StaticResource Options.BarSplitButtonItem.AllDayAppointmentDisplay}"/>
+                    <dxb:BarItemSeparator/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.ShowWorkTimeOnly}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.ShowAllDayArea}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.ShowResourceNavigator}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.ShowDateNavigationPanel}"/>
+                </dxr:RibbonPageGroup>
+            </dxr:RibbonPage>
+        </dxr:RibbonControl>
+    </DataTemplate>
+    <DataTemplate x:Key="Options.MonthView.Ribbon">
+        <dxr:RibbonControl>
+            <dxr:RibbonPage Style="{StaticResource Options.RibbonPage}">
+                <dxr:RibbonPageGroup Caption="Scheduler Settings">
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.WorkDays}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.StartWorkTime}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.EndWorkTime}"/>
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.FirstDayOfWeek}"/>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="View Settings">
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.HeadersVisibility}"/>
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.NavigationButtonsVisibility}"/>
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.MoreButtonsVisibility}"/>
+                    <dxb:BarSplitButtonItem Style="{StaticResource Options.BarSplitButtonItem.AppointmentRendering}"/>
+                    <dxb:BarSplitButtonItem Style="{StaticResource Options.BarSplitButtonItem.AppointmentDisplay}"/>
+                    <dxb:BarItemSeparator/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.ShowResourceNavigator}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.MonthStretchAppointments}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.MonthWeekCount}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.ShowDateNavigationPanel}"/>
+                </dxr:RibbonPageGroup>
+            </dxr:RibbonPage>
+        </dxr:RibbonControl>
+    </DataTemplate>
+    <DataTemplate x:Key="Options.OneMonthView.Ribbon">
+        <dxr:RibbonControl>
+            <dxr:RibbonPage Style="{StaticResource Options.RibbonPage}">
+                <dxr:RibbonPageGroup Caption="Scheduler Settings">
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.WorkDays}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.StartWorkTime}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.EndWorkTime}"/>
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.FirstDayOfWeek}"/>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="View Settings" IsVisible="{Binding ElementName=monthView, Path=IsActive}">
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.OneMonthDispalyUnit}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.OneMonthWeekCount}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.OneMonthMonthCount}"/>
+                    <dxb:BarItemSeparator/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.OneMonthAppointmentMinHeight}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.OneMonthWeekMinHeight}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.OneMonthWeekMaxHeight}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.MonthStretchAppointments}"/>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="View Settings" IsVisible="{Binding ElementName=unlimitedMonthView, Path=IsActive}">
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.HeadersVisibility}"/>
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.NavigationButtonsVisibility}"/>
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.MoreButtonsVisibility}"/>
+                    <dxb:BarSplitButtonItem Style="{StaticResource Options.BarSplitButtonItem.AppointmentRendering}"/>
+                    <dxb:BarSplitButtonItem Style="{StaticResource Options.BarSplitButtonItem.AppointmentDisplay}"/>
+                    <dxb:BarItemSeparator/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.ShowResourceNavigator}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.MonthStretchAppointments}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.MonthWeekCount}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.ShowDateNavigationPanel}"/>
+                </dxr:RibbonPageGroup>
+            </dxr:RibbonPage>
+        </dxr:RibbonControl>
+    </DataTemplate>
+    <DataTemplate x:Key="Options.TimelineView.Ribbon">
+        <dxr:RibbonControl>
+            <dxr:RibbonPage Style="{StaticResource Options.RibbonPage}">
+                <dxr:RibbonPageGroup Caption="Scheduler Settings">
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.WorkDays}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.StartWorkTime}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.EndWorkTime}"/>
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.FirstDayOfWeek}"/>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="View Settings">
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.HeadersVisibility}"/>
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.NavigationButtonsVisibility}"/>
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.MoreButtonsVisibility}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.TimelineAppointmentMinHeight}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.TimelineResourceMinHeight}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.TimelineResourceMaxHeight}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.TimelineStretchAppointments}"/>
+                </dxr:RibbonPageGroup>
+            </dxr:RibbonPage>
+        </dxr:RibbonControl>
+    </DataTemplate>
+    <DataTemplate x:Key="Options.AgendaView.Ribbon">
+        <dxr:RibbonControl>
+            <dxr:RibbonPage Style="{StaticResource Options.RibbonPage}">
+                <dxr:RibbonPageGroup Caption="Scheduler Settings">
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.WorkDays}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.StartWorkTime}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.EndWorkTime}"/>
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.FirstDayOfWeek}"/>
+                    <dxb:BarItemSeparator/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.ShowDateNavigationPanel}"/>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="Appointemt Settings">
+                    <dxb:BarSplitButtonItem Style="{StaticResource Options.BarSplitButtonItem.AgendaAppointmentDisplay}"/>
+                </dxr:RibbonPageGroup>
+            </dxr:RibbonPage>
+        </dxr:RibbonControl>
+    </DataTemplate>
+    <DataTemplate x:Key="Options.ListView.Ribbon">
+        <dxr:RibbonControl>
+            <dxr:RibbonPage Style="{StaticResource Options.RibbonPage}">
+                <dxr:RibbonPageGroup Caption="Scheduler Settings">
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.WorkDays}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.StartWorkTime}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.EndWorkTime}"/>
+                    <dxb:BarSubItem Style="{StaticResource Options.BarSubItem.FirstDayOfWeek}"/>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="View Settings">
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.ListViewShowChangedOccurrences}"/>
+                    <dxb:BarEditItem Style="{StaticResource Options.BarEditItem.ListViewShowDeletedOccurrences}"/>
+                </dxr:RibbonPageGroup>
+            </dxr:RibbonPage>
+        </dxr:RibbonControl>
+    </DataTemplate>
+    <DataTemplate x:Key="PrintingOptions.Ribbon">
+        <dxr:RibbonControl>
+            <dxr:RibbonPage Style="{StaticResource PrintingOptions.RibbonPage}" IsVisible="{Binding IsPreviewPageVisible}">
+                <dxr:RibbonPageGroup Caption="Printing Settings">
+                    <dxb:BarSubItem Style="{StaticResource PrintingOptions.BarSubItem.Template}"/>
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.PrintVisibleInterval}"/>
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.PrintStart}"/>
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.PrintEnd}"/>
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.PrintVisibleResources}"/>
+                    <dxb:BarSplitButtonItem Style="{StaticResource PrintingOptions.BarSplitButtonItem.ResourcesToPrint}"/>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="Daily Report Settings" IsVisible="{DXBinding 'ReportTemplate == $dxsch:ReportTemplate.DailyStyle'}">
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.DailyReportShowCalendar}"/>
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.DailyReportShowInterval}"/>
+                    <dxb:BarStaticItem/>
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.DailyReportDaysPerPage}"/>
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.DailyReportResourcesPerPage}"/>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="Weekly Report Settings" IsVisible="{DXBinding 'ReportTemplate == $dxsch:ReportTemplate.WeeklyStyle'}">
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.WeeklyReportShowCalendar}"/>
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.WeeklyReportShowInterval}"/>
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.WeeklyReportResourcesPerPage}"/>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="Monthly Report Settings" IsVisible="{DXBinding 'ReportTemplate == $dxsch:ReportTemplate.MonthlyStyle'}">
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.MonthlyReportShowCalendar}"/>
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.MonthlyReportShowInterval}"/>
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.MonthlyReportResourcesPerPage}"/>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="Timeline Report Settings" IsVisible="{DXBinding 'ReportTemplate == $dxsch:ReportTemplate.TimelineStyle'}">
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.TimelineReportShowCalendar}"/>
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.TimelineReportShowInterval}"/>
+                    <dxb:BarStaticItem/>
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.TimelineReportIntervalsPerPage}"/>
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.TimelineReportResourcesPerPage}"/>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="Trifold Report Settings" IsVisible="{DXBinding 'ReportTemplate == $dxsch:ReportTemplate.TrifoldStyle'}">
+                    <dxb:BarEditItem Style="{StaticResource PrintingOptions.BarEditItem.TrifoldReportShowCalendar}"/>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup>
+                    <dxb:BarButtonItem Content="Preview In New Window"
+                                       Glyph="{dxsch:SchedulerSvgImage Path='Miscellaneous/Windows.svg'}"
+                                       LargeGlyph="{dxsch:SchedulerSvgImage Path='Miscellaneous/Windows.svg'}"
+                                       Command="{Binding PreviewInNewWindowCommand}"/>
+                </dxr:RibbonPageGroup>
+            </dxr:RibbonPage>
+        </dxr:RibbonControl>
+    </DataTemplate>
+</ResourceDictionary>

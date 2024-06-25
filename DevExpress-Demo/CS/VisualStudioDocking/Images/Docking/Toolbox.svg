@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+    <style type="text/css">
+        .Black {
+            fill: #727272;
+        }
+        .White {
+            fill: #ffffff;
+        }
+        .Blue {
+            fill: #1177D7;
+        }
+        .Yellow {
+            fill: #FFB115;
+        }
+        .Green {
+            fill: #039C23;
+        }
+        .Red {
+            fill: #D11C1C;
+        }
+    </style>
+    <title>Portfolio</title>
+    <rect class="White" y="8" width="31" height="24" />
+    <rect class="White" x="8" width="16" height="16" />
+    <polygon class="Black" points="10 2 10 8 12 8 12 4 20 4 20 8 22 8 22 2 10 2"/>
+    <polygon class="Black" points="24 20 24 22 22 22 22 20 10 20 10 22 8 22 8 20 2 20 2 30 30 30 30 20 24 20"/>
+    <polygon class="Black" points="2 10 2 18 8 18 8 15 10 15 10 18 22 18 22 15 24 15 24 18 30 18 30 10 2 10"/>
+</svg>

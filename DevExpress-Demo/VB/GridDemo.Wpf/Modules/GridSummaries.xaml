@@ -1,0 +1,124 @@
+﻿<local:GridDemoModule x:Class="GridDemo.GridSummaries"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxrudex="http://schemas.devexpress.com/winfx/2008/xaml/reports/userdesignerextensions"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800">
+    <local:GridDemoModule.Resources>
+        <local:TotalSummaryPositionToBooleanConverter x:Key="TotalSummaryPositionToBooleanConverter" />
+        <local:TotalSummaryPanelsToBooleanConverter x:Key="TotalSummaryPanelsToBooleanConverter" />
+    </local:GridDemoModule.Resources>
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" ReportService="{x:Reference rmsGridSummaries}" />
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Header="Total Summary Position" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit Margin="0,0,0,0"
+                                     Background="{x:Null}"
+                                     ShowBorder="False"
+                                     x:Name="TotalSummaryPositionComboBox"
+                                     ItemsSource="{dxe:EnumItemsSource EnumType=dxg:TotalSummaryPosition}"
+                                     EditValue="{Binding Path=View.TotalSummaryPosition, Mode=TwoWay}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Total Summary" Margin="0,5,0,0">
+                    <StackPanel>
+                        <DockPanel Margin="0,0,0,4" IsEnabled="{Binding View.TotalSummaryPosition, Converter={StaticResource TotalSummaryPositionToBooleanConverter}}">
+                            <TextBlock Margin="0,3,4,0">Column:</TextBlock>
+                            <dxe:ComboBoxEdit x:Name="totalSummaryColumnSelector"
+                                              ItemsSource="{Binding View.VisibleColumns}"
+                                              SelectedIndex="2"
+                                              DisplayMember="FieldName"
+                                              IsTextEditable="False" />
+                        </DockPanel>
+                        <Button Command="{Binding View.Commands.ShowTotalSummaryEditor}"
+                                CommandParameter="{Binding SelectedItem, ElementName=totalSummaryColumnSelector}"
+                                IsEnabled="{Binding View.TotalSummaryPosition, Converter={StaticResource TotalSummaryPositionToBooleanConverter}}">
+                            Show Summary Editor
+                        </Button>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Fixed Total Summary" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit IsChecked="{Binding Path=View.ShowFixedTotalSummary, Mode=TwoWay}" Content="Show Fixed Total Summary Panel" Margin="0,0,0,4" />
+                        <Button Command="{Binding View.Commands.ShowFixedTotalSummaryEditor}" IsEnabled="{Binding View.ShowFixedTotalSummary}">Show Summary Editor</Button>
+                    </StackPanel>
+                </GroupBox>
+
+                <dxe:CheckEdit IsChecked="{Binding Path=View.IsTotalSummaryMenuEnabled, Mode=TwoWay}"
+                               Content="Summary Context Menu Enabled"
+                               Margin="0,8,0,0">
+                    <dxe:CheckEdit.IsEnabled>
+                        <MultiBinding Converter="{StaticResource TotalSummaryPanelsToBooleanConverter}">
+                            <Binding Path="View.TotalSummaryPosition"/>
+                            <Binding Path="View.ShowFixedTotalSummary"/>
+                        </MultiBinding>
+                    </dxe:CheckEdit.IsEnabled>
+                </dxe:CheckEdit>
+
+                <local:RecentReports ReportService="{x:Reference rmsGridSummaries}" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxg:GridControl Name="grid" ItemsSource="{x:Static dxdb:NWindDataProvider.Invoices}" ShowBorder="False">
+            <!--#region Columns-->
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="Country" MinWidth="80" Width="*" />
+                <dxg:GridColumn FieldName="City" MinWidth="100" Width="*" />
+                <dxg:GridColumn FieldName="UnitPrice" MinWidth="150" Width="1.5*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="$0.00" MaskType="Numeric" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Discount" MinWidth="130" Width="1.3*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="0%" MaskType="Numeric" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Total"
+                                UnboundDataType="{x:Type sys:Decimal}"
+                                MinWidth="130"
+                                Width="1.3*"
+                                UnboundExpression="([UnitPrice] * [Quantity]) * (1 - [Discount])">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="$0.00" MaskType="Numeric" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <!--#endregion-->
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+                <dxg:GridSummaryItem FieldName="UnitPrice" SummaryType="Min" ShowInColumn="UnitPrice" />
+                <dxg:GridSummaryItem FieldName="Discount" SummaryType="Max" ShowInColumn="Discount" />
+                <dxg:GridSummaryItem FieldName="Total" SummaryType="Sum" ShowInColumn="Total" />
+            </dxg:GridControl.TotalSummary>
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="view" NavigationStyle="Row" TotalSummaryPosition="None" ShowFixedTotalSummary="True">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxrudex:GridReportManagerService Name="rmsGridSummaries" />
+                    </dxmvvm:Interaction.Behaviors>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

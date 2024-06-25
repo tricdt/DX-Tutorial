@@ -1,0 +1,131 @@
+﻿<local:DockingDemoModule x:Class="DockingDemo.NWindLayout"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:local="clr-namespace:DockingDemo"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
+                         xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                         xmlns:dxdove="http://schemas.devexpress.com/winfx/2008/xaml/docking/visualelements"
+                         Height="300"
+                         Width="721">
+    <local:DockingDemoModule.Resources>
+        <Style TargetType="dxdo:LayoutGroup">
+            <Setter Property="LayoutItemInterval" Value="4" />
+            <Setter Property="LayoutGroupInterval" Value="4" />
+            <Setter Property="CaptionImageStyle">
+                <Setter.Value>
+                    <Style TargetType="dxdove:CaptionImage">
+                        <Setter Property="Width" Value="16"/>
+                        <Setter Property="Height" Value="16"/>
+                        <Setter Property="Stretch" Value="Fill"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </local:DockingDemoModule.Resources>
+    <dxdo:DockLayoutManager x:Name="dockManager" DataContext="{Binding SelectedItem, ElementName=list}">
+        <dxdo:LayoutGroup>
+            <dxdo:LayoutControlItem ItemWidth="Auto" ShowCaption="False" ItemHeight="*">
+                <dxe:ListBoxEdit x:Name="list" SelectedIndex="0" ItemsSource="{Binding Employees}">
+                    <dxe:ListBoxEdit.DataContext>
+                        <dxdb:NWindDataLoader />
+                    </dxe:ListBoxEdit.DataContext>
+                    <dxe:ListBoxEdit.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding FirstName}" />
+                                <TextBlock Text="{Binding LastName}" Margin="5,0,0,0" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </dxe:ListBoxEdit.ItemTemplate>
+                </dxe:ListBoxEdit>
+            </dxdo:LayoutControlItem>
+            <dxdo:LayoutSplitter />
+            <dxdo:LayoutGroup Orientation="Vertical">
+                <dxdo:LayoutGroup ItemHeight="Auto">
+                    <dxdo:LayoutControlItem ShowCaption="False" ItemWidth="Auto">
+                        <dxe:ImageEdit EditValue="{Binding Path=Photo}" ShowMenu="False" />
+                    </dxdo:LayoutControlItem>
+                    <dxdo:LayoutGroup Orientation="Vertical">
+                        <dxdo:LayoutGroup ItemHeight="Auto">
+                            <dxdo:LayoutControlItem Caption="Title">
+                                <dxe:TextEdit Text="{Binding TitleOfCourtesy}" />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:EmptySpaceItem />
+                        </dxdo:LayoutGroup>
+                        <dxdo:LayoutGroup ItemHeight="Auto">
+                            <dxdo:LayoutControlItem Caption="First name">
+                                <dxe:TextEdit Text="{Binding FirstName}" />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="Last name">
+                                <dxe:TextEdit Text="{Binding LastName}" />
+                            </dxdo:LayoutControlItem>
+                        </dxdo:LayoutGroup>
+                        <dxdo:LayoutControlItem Caption="Job title">
+                            <dxe:TextEdit Text="{Binding Title}" />
+                        </dxdo:LayoutControlItem>
+                        <dxdo:LayoutGroup ItemHeight="Auto">
+                            <dxdo:LayoutControlItem Caption="Birth date">
+                                <dxe:DateEdit DateTime="{Binding BirthDate}" />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="Hire date">
+                                <dxe:DateEdit DateTime="{Binding HireDate}" />
+                            </dxdo:LayoutControlItem>
+                        </dxdo:LayoutGroup>
+                    </dxdo:LayoutGroup>
+                </dxdo:LayoutGroup>
+                <dxdo:LayoutGroup GroupBorderStyle="Tabbed" CaptionAlignMode="AlignInGroup">
+                    <dxdo:LayoutGroup Caption="Address info"
+                                      Orientation="Vertical"
+                                      GroupBorderStyle="GroupBox"
+                                      ShowCaption="True"
+                                      CaptionImage="{dx:SvgImageSource Uri='pack://application:,,,/DevExpress.Images.v22.2;component/SvgImages/RichEdit/Font.svg'}">
+                        <dxdo:LayoutGroup ItemHeight="Auto">
+                            <dxdo:LayoutControlItem Caption="Country">
+                                <dxe:TextEdit Text="{Binding Country}" />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="Region">
+                                <dxe:TextEdit Text="{Binding Region}" />
+                            </dxdo:LayoutControlItem>
+                        </dxdo:LayoutGroup>
+                        <dxdo:LayoutGroup ItemHeight="Auto">
+                            <dxdo:LayoutControlItem Caption="City">
+                                <dxe:TextEdit Text="{Binding City}" />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="Postal code">
+                                <dxe:TextEdit Text="{Binding PostalCode}" />
+                            </dxdo:LayoutControlItem>
+                        </dxdo:LayoutGroup>
+                        <dxdo:LayoutGroup>
+                            <dxdo:LayoutControlItem Caption="Address">
+                                <dxe:TextEdit Text="{Binding Address}"
+                                              VerticalContentAlignment="Top"
+                                              AcceptsReturn="True"
+                                              VerticalScrollBarVisibility="Auto"
+                                              TextWrapping="Wrap" />
+                            </dxdo:LayoutControlItem>
+                        </dxdo:LayoutGroup>
+                        <dxdo:LayoutGroup ItemHeight="Auto">
+                            <dxdo:LayoutControlItem Caption="Home phone">
+                                <dxe:TextEdit Text="{Binding HomePhone}" />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="Extension">
+                                <dxe:TextEdit Text="{Binding Extension}" />
+                            </dxdo:LayoutControlItem>
+                        </dxdo:LayoutGroup>
+                    </dxdo:LayoutGroup>
+                    <dxdo:LayoutGroup Caption="Notes" GroupBorderStyle="GroupBox" ShowCaption="True" CaptionImage="{dx:SvgImageSource Uri='pack://application:,,,/DevExpress.Images.v22.2;component/SvgImages/Icon Builder/Actions_New.svg'}">
+                        <dxdo:LayoutControlItem Caption="Notes" ShowCaption="False">
+                            <dxe:TextEdit Text="{Binding Notes}"
+                                          TextWrapping="Wrap"
+                                          VerticalContentAlignment="Top"
+                                          AcceptsReturn="True"
+                                          VerticalScrollBarVisibility="Auto" />
+                        </dxdo:LayoutControlItem>
+                    </dxdo:LayoutGroup>
+                </dxdo:LayoutGroup>
+            </dxdo:LayoutGroup>
+        </dxdo:LayoutGroup>
+    </dxdo:DockLayoutManager>
+</local:DockingDemoModule>

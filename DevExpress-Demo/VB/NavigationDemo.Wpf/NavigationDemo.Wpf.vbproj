@@ -1,0 +1,510 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7D92DDEA-AA87-4E36-A6D3-1DD02D082C92}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>
+    </RootNamespace>
+    <AssemblyName>NavigationDemo</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <BaseIntermediateOutputPath>obj.WPF</BaseIntermediateOutputPath>
+    <ConvertToNet6Windows />
+  </PropertyGroup>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,WPF,</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE,WPF,</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Debug\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Debug\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,WPF,CLICKONCE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Release\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Release\</OutputPath>
+    <DefineConstants>TRACE,WPF,CLICKONCE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugTest\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,WPF,DEBUGTEST</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>demoicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Images\SolutionExplorer\Class.svg" />
+    <Resource Include="Images\SolutionExplorer\EnumElement.svg" />
+    <Resource Include="Images\SolutionExplorer\Enum.svg" />
+    <Resource Include="Images\SolutionExplorer\Event.svg" />
+    <Resource Include="Images\SolutionExplorer\Field.svg" />
+    <Resource Include="Images\SolutionExplorer\File.svg" />
+    <Resource Include="Images\SolutionExplorer\Method.svg" />
+    <Resource Include="Images\SolutionExplorer\Property.svg" />
+    <Resource Include="ViewModels\SolutionExplorer\CodeFiles\DataProvider.txt" />
+    <Resource Include="Images\Navigation\Calendar.svg" />
+    <Resource Include="Images\Navigation\Contacts.svg" />
+    <Resource Include="Images\Navigation\DeletedItems.svg" />
+    <Resource Include="Images\Navigation\Drafts.svg" />
+    <Resource Include="Images\Navigation\Find.svg" />
+    <Resource Include="Images\Navigation\FolderList.svg" />
+    <Resource Include="Images\Navigation\Inbox.svg" />
+    <Resource Include="Images\Navigation\Journal.svg" />
+    <Resource Include="Images\Navigation\Mail.svg" />
+    <Resource Include="Images\Navigation\Notes.svg" />
+    <Resource Include="Images\Navigation\Outbox.svg" />
+    <Resource Include="Images\Navigation\PersonalFolders.svg" />
+    <Resource Include="Images\Navigation\SentItems.svg" />
+    <Resource Include="Images\Navigation\Shortcuts.svg" />
+    <Resource Include="Images\Navigation\Tasks.svg" />
+    <Resource Include="Images\Navigation\TextBox.svg" />
+    <Resource Include="Images\Triangle_Down.svg" />
+    <Resource Include="Images\Triangle_Up.svg" />
+    <Resource Include="Images\Departments\Administration.svg" />
+    <Resource Include="Images\Departments\Group.svg" />
+    <Resource Include="Images\Departments\Inventory.svg" />
+    <Resource Include="Images\Departments\Manufacturing.svg" />
+    <Resource Include="Images\Departments\Quality.svg" />
+    <Resource Include="Images\Departments\Research.svg" />
+    <Resource Include="Images\Departments\Sales.svg" />
+    <Reference Include="DevExpress.Data.Desktop.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.DemoData.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Accordion.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Controls.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.DemoBase.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Docking.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.DocumentViewer.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v22.2.Drawing">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.PdfViewer.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.framework" Condition=" '$(Configuration)' == 'DebugTest' ">
+      <HintPath></HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Carousel.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Ribbon.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.TypedStyles.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\Bin\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="PresentationFramework.Luna">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47">
+      <HintPath>..\..\Bin\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.108.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47">
+      <HintPath>..\..\Bin\System.Data.SQLite.EF6.dll</HintPath>
+      <Private>True</Private>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="System.Xaml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UIAutomationProvider">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Modules\AutoTraderDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CollapseModeDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ReportLibraryDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CustomizedContentDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataBindingDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FileSearchDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SolutionExplorerDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\NavigationPaneDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\PhotoStudioDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Contacts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Info.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Journal.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Mail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Notes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Shortcuts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Tasks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.vb">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CarsContext.vb" />
+    <Compile Include="Controls\AccordionDemoModule.vb" />
+    <Compile Include="Data\CountriesData.vb" />
+    <Compile Include="Data\NavigationPaneData.vb" />
+    <Compile Include="MainWindow.xaml.vb">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AutoTraderDemoModule.xaml.vb">
+      <DependentUpon>AutoTraderDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CollapseModeDemoModule.xaml.vb">
+      <DependentUpon>CollapseModeDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CustomizedContentDemoModule.xaml.vb">
+      <DependentUpon>CustomizedContentDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataBindingDemoModule.xaml.vb">
+      <DependentUpon>DataBindingDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FileSearchDemoModule.xaml.vb">
+      <DependentUpon>FileSearchDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SolutionExplorerDemoModule.xaml.vb">
+      <DependentUpon>SolutionExplorerDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ReportLibraryDemoModule.xaml.vb">
+      <DependentUpon>ReportLibraryDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\NavigationPaneDemoModule.xaml.vb">
+      <DependentUpon>NavigationPaneDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PhotoStudioDemoModule.xaml.vb">
+      <DependentUpon>PhotoStudioDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="DemoTesting\Fixtures.vb" />
+    <Compile Include="Utils\Converters.vb" />
+    <Compile Include="Utils\Filters.vb" />
+    <Compile Include="Utils\HorizontalScrollingOnMouseWheelBehavior.vb" />
+    <Compile Include="Utils\ImageHelper.vb" />
+    <Compile Include="Utils\SuppressMouseWheelBehavior.vb" />
+    <Compile Include="ViewModels\DataBindingViewModel.vb" />
+    <Compile Include="ViewModels\AutoTraderViewModel.vb" />
+    <Compile Include="ViewModels\CollapseModeViewModel.vb" />
+    <Compile Include="ViewModels\CustomizedContentViewModel.vb" />
+    <Compile Include="ViewModels\FileSearchViewModel.vb" />
+    <Compile Include="ViewModels\FilterViewModel.vb" />
+    <Compile Include="ViewModels\NavigationPaneViewModel.vb" />
+    <Compile Include="ViewModels\NavigationPane\ContactsNavigationViewModel.vb" />
+    <Compile Include="ViewModels\NavigationPane\ContactsViewModel.vb" />
+    <Compile Include="ViewModels\NavigationPane\InfoViewModel.vb" />
+    <Compile Include="ViewModels\NavigationPane\MailViewModel.vb" />
+    <Compile Include="ViewModels\NavigationPane\ShortcutsViewModel.vb" />
+    <Compile Include="ViewModels\PhotoStudioViewModel.vb" />
+    <Resource Include="ViewModels\SolutionExplorer\CodeFiles\Activity.txt" />
+    <Resource Include="ViewModels\SolutionExplorer\CodeFiles\CategoryStat.txt" />
+    <Resource Include="ViewModels\SolutionExplorer\CodeFiles\CompanyStat.txt" />
+    <Resource Include="ViewModels\SolutionExplorer\CodeFiles\CustomAppointment.txt" />
+    <Resource Include="ViewModels\SolutionExplorer\CodeFiles\DataGenerator.txt" />
+    <Resource Include="ViewModels\SolutionExplorer\CodeFiles\KeywordStat.txt" />
+    <Resource Include="ViewModels\SolutionExplorer\CodeFiles\Opportunity.txt" />
+    <Resource Include="ViewModels\SolutionExplorer\CodeFiles\TeamMember.txt" />
+    <Compile Include="ViewModels\ReportLibraryViewModel.vb" />
+    <Compile Include="ViewModels\SolutionExplorer\SolutionExplorerBehavior.vb" />
+    <Compile Include="ViewModels\SolutionExplorer\SolutionExplorerViewModel.vb" />
+    <Compile Include="ViewModels\SolutionExplorer\SolutionExplorerModel.vb" />
+    <Compile Include="ViewModels\SolutionExplorer\SolutionNodeImageSelector.vb" />
+    <Compile Include="Views\Contacts.xaml.vb">
+      <DependentUpon>Contacts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Info.xaml.vb">
+      <DependentUpon>Info.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Journal.xaml.vb">
+      <DependentUpon>Journal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mail.xaml.vb">
+      <DependentUpon>Mail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Notes.xaml.vb">
+      <DependentUpon>Notes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shortcuts.xaml.vb">
+      <DependentUpon>Shortcuts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tasks.xaml.vb">
+      <DependentUpon>Tasks.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CustomToolNamespace>NavigationDemo.Properties</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="clickonce.txt">
+      <netcore3ignore />
+    </EmbeddedResource>
+    <None Include="App.config">
+      <netcore3ignore />
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent">
+    <ItemGroup>
+      <Resource Include="@(Page)" />
+    </ItemGroup>
+    <ItemGroup>
+      <Resource Include="@(Compile)" />
+    </ItemGroup>
+  </Target>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+	<GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+	<RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>	
+	<ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3
+    <Import Project="Demo.targets" />
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3 
+	<ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
+  </ItemGroup>
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3 
+    <Import Project="Themes.WPF.NetCore.targets" />
+  ONLY NETCORE3-->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+  </PropertyGroup>
+</Project>

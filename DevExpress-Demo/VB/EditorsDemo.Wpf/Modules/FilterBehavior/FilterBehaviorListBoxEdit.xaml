@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="EditorsDemo.FilterBehavior.FilterBehaviorListBoxEdit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxa="http://schemas.devexpress.com/winfx/2008/xaml/accordion"
+             xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:local="clr-namespace:EditorsDemo.FilterBehavior">
+    <UserControl.DataContext>
+        <local:FilterBehaviorListBoxEditViewModel />
+    </UserControl.DataContext>
+    <!--#region Resources-->
+    <UserControl.Resources>
+        <dxa:AccordionItemStyle x:Key="{x:Type dxa:AccordionItem}" FontSize="12"/>
+    </UserControl.Resources>
+    <!--#endregion-->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--#region !-->
+        <dxa:AccordionControl SelectionMode="None" Grid.Column="1">
+            <dxmvvm:Interaction.Behaviors>
+                <dxfui:FilterBehavior  x:Name="filterBehavior" ItemsSource="{Binding ElementName=listBoxEdit, Path=ItemsSource}">
+                    <dxfui:FilterField FieldName="Category.CategoryName">
+                        <dxe:ComboBoxEditSettings ItemsSource="{Binding Categories}"/>
+                    </dxfui:FilterField>
+                    <dxfui:FilterField FieldName="Category.Icon25"/>
+                    <dxfui:FilterField FieldName="UnitsInStock">
+                        <dxfui:FilterField.PredefinedFilters>
+                            <dxfui:PredefinedFilterCollection>
+                                <dxfui:PredefinedFilter Filter="?p > 0" Name="In stock" />
+                                <dxfui:PredefinedFilter Filter="?p = 0" Name="Out of stock" />
+                            </dxfui:PredefinedFilterCollection>
+                        </dxfui:FilterField.PredefinedFilters>
+                    </dxfui:FilterField>
+                </dxfui:FilterBehavior>
+            </dxmvvm:Interaction.Behaviors>
+                <dxfui:CheckedListFilterElement FieldName="Category.CategoryName">
+                    <dxfui:CheckedListFilterElement.Resources>
+                        <dxe:ListBoxEditStyle x:Key="{x:Type dxe:ListBoxEdit}" ShowBorder="False" />
+                    </dxfui:CheckedListFilterElement.Resources>
+                </dxfui:CheckedListFilterElement>
+            <dxfui:PredefinedFiltersElement FieldName="UnitsInStock">
+                <dxfui:PredefinedFiltersElement.Resources>
+                    <dxe:ListBoxEditStyle x:Key="{x:Type dxe:ListBoxEdit}" ShowBorder="False" />
+                </dxfui:PredefinedFiltersElement.Resources>
+            </dxfui:PredefinedFiltersElement>
+            <dxfui:CheckBoxFilterElement FieldName="Discontinued" Margin="4,0,0,0"/>
+        </dxa:AccordionControl>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Margin="4,4,0,0" FontWeight="DemiBold"
+                   Text="{DXBinding '@e(filterBehavior).FilterDisplayText ?? `No filter`'}"/>
+        <!--#endregion-->
+
+        <dxe:ListBoxEdit Name="listBoxEdit" ItemsSource="{Binding Products}"
+                         FilterCriteria="{Binding ElementName=filterBehavior, Path=ActualFilterCriteria}">
+            <!--#region ItemTemplate-->
+            <dxe:ListBoxEdit.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Image Source="{Binding Category.Icon25}" Stretch="None" Grid.RowSpan="2" Margin="0,0,4,0"/>
+                        <TextBlock Grid.Column="1" Text="{Binding ProductName}" />
+                        <TextBlock Grid.Column="1" Grid.Row="1" FontStyle="Italic">
+                            <Run Text="{Binding Category.CategoryName, Mode=OneWay}"/>, in stock:
+                            <Run Text="{Binding UnitsInStock, Mode=OneWay}"/>
+                            <Run Text="{DXBinding 'Discontinued ? `(Discontinued)` : ``', Mode=OneWay}"/>
+                        </TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </dxe:ListBoxEdit.ItemTemplate>
+            <!--#endregion-->
+        </dxe:ListBoxEdit>
+    </Grid>
+</UserControl>

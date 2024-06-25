@@ -1,0 +1,98 @@
+﻿<local:PivotGridDemoModule x:Class="PivotGridDemo.ServerMode"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:local="clr-namespace:PivotGridDemo"
+                           xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                           xmlns:dxpg="http://schemas.devexpress.com/winfx/2008/xaml/pivotgrid"
+                           xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                           xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                           xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                           DataContext="{dxmvvm:ViewModelSource local:ServerModeViewModel}"
+                           Height="300"
+                           Width="400"
+                           ModuleLoaded="{DXEvent 'OnLoaded()'}"
+                           ModuleUnloaded="{DXEvent 'OnUnloaded()'}">
+    <DockPanel>
+        <local:PivotGridDemoRibbon DockPanel.Dock="Top" ExportPivotGrid="{x:Reference pivotGrid}"/>
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="300" IsEnabled="{DXBinding 'GenerateViewModel == null'}">
+                <dxdb:FillDatabaseView Margin="0,5,0,12" />
+                <StackPanel>
+                    <TextBlock x:Name="tbTimeTakenCaption" Text="Data Recalculation Time (ms):" />
+                    <TextBlock x:Name="tbTimeTaken" Margin="4,0,0,0" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <Grid>
+            <dx:EntityServerModeDataSource x:Name="serverModeDataSource" KeyExpression="Id" QueryableSource="{Binding ServerModeQueryableSource}" />
+            <dxlc:LayoutControl Visibility="{DXBinding 'GenerateViewModel == null ? $Visibility.Visible : $Visibility.Collapsed'}"
+                                ItemSpace="12"
+                                Padding="12"
+                                StretchContentHorizontally="True">
+                <dxlc:LayoutGroup dxlc:LayoutControl.AllowHorizontalSizing="True">
+                    <dxpg:PivotGridControl local:FieldAreaHelper.FixAreas="True"
+                                           x:Name="pivotGrid"
+                                           RowTreeWidth="155"
+                                           DataSource="{Binding ElementName=serverModeDataSource, Path=Data}"
+                                           UseAsyncMode="True"
+                                           AsyncOperationStarting="pivotGrid_AsyncOperationStarting"
+                                           AsyncOperationCompleted="pivotGrid_AsyncOperationCompleted"
+                                           ColumnTotalsLocation="Near"
+                                           FieldListSplitterY="200"
+                                           FieldListStyle="Excel2007"
+                                           DataFieldWidth="80"
+                                           RowTreeOffset="20"
+                                           ShowDateTimeGroupIntervalItems="None"
+                                           AllowCustomizationForm="False"
+                                           ShowFilterHeaders="False"
+                                           ShowDataHeaders="False"
+                                           ShowColumnHeaders="False"
+                                           ShowRowHeaders="False">
+                        <dxpg:PivotGridControl.Fields>
+                            <dxpg:PivotGridField DataBinding="{dxpg:DataSourceColumnBinding Id}" Visible="False" Caption="OrderID" DisplayFolder="Order" />
+                            <dxpg:PivotGridField Area="DataArea"
+                                                 DataBinding="{dxpg:ExpressionDataBinding [UnitPrice]*[Quantity]}"
+                                                 Caption="Revenue"
+                                                 CellFormat="c"
+                                                 DisplayFolder="Order" />
+                            <dxpg:PivotGridField DataBinding="{dxpg:DataSourceColumnBinding Quantity}" Area="DataArea" Caption="Quantity" DisplayFolder="Order" />
+                            <dxpg:PivotGridField DataBinding="{dxpg:DataSourceColumnBinding UnitPrice}" Area="DataArea" Caption="Average Unit Price" SummaryType="Average" CellFormat="c" DisplayFolder="Order" />
+
+                            <dxpg:PivotGridField DataBinding="{dxpg:DataSourceColumnBinding CustomerName}" Visible="False" Caption="Customer" DisplayFolder="Customer" />
+
+                            <dxpg:PivotGridField DataBinding="{dxpg:DataSourceColumnBinding OrderDate}" Visible="False" Caption="Order Date" DisplayFolder="Order Date" />
+                            <dxpg:PivotGridField DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateYear}" Area="ColumnArea" Caption="Order Year" DisplayFolder="Order Date" />
+                            <dxpg:PivotGridField DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateQuarter}"
+                                                 Visible="False"
+                                                 Area="ColumnArea"
+                                                 Caption="Order Quarter"
+                                                 ValueFormat="Quarter {0}"
+                                                 DisplayFolder="Order Date" />
+                            <dxpg:PivotGridField DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateMonth}"
+                                                 Visible="False"
+                                                 Area="ColumnArea"
+                                                 Caption="Order Month"
+                                                 DisplayFolder="Order Date" />
+
+                            <dxpg:PivotGridField DataBinding="{dxpg:DataSourceColumnBinding ProductName}" Area="RowArea" Caption="Product" DisplayFolder="Product" />
+                            <dxpg:PivotGridField DataBinding="{dxpg:DataSourceColumnBinding CategoryName}" Visible="False" Caption="Category Name" DisplayFolder="Product" />
+
+                            <dxpg:PivotGridField DataBinding="{dxpg:DataSourceColumnBinding SalesPersonName}" Area="RowArea" Caption="Sales Person" DisplayFolder="Sales Person" />
+                        </dxpg:PivotGridControl.Fields>
+                    </dxpg:PivotGridControl>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup Width="300" dxlc:LayoutControl.AllowHorizontalSizing="True">
+                    <dxpg:PivotExcelFieldListControl x:Name="fieldList" Owner="{Binding ElementName=pivotGrid}" />
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutControl>
+            <dxdb:GenerateDataView DataContext="{Binding GenerateViewModel}" />
+        </Grid>
+    </DockPanel>
+</local:PivotGridDemoModule>

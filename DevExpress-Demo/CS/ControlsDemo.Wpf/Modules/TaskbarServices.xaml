@@ -1,0 +1,156 @@
+﻿<dxdb:DemoModule x:Class="ControlsDemo.TaskbarServices"
+                 xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                 xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                 xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                 xmlns:local="clr-namespace:ControlsDemo"
+                 mc:Ignorable="d"
+                 d:DesignHeight="477"
+                 d:DesignWidth="1024"
+                 DataContext="{dxmvvm:ViewModelSource Type=local:TaskbarServicesViewModel}">
+
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:TaskbarButtonService ProgressValue="{Binding Value, Source={x:Reference progressValue}}"
+                                     ProgressState="{Binding EditValue, Source={x:Reference progressStatesSelector}}"
+                                     OverlayIcon="{Binding SelectedItem.Icon, Source={x:Reference overlayIconSelector}}"
+                                     Description="{Binding EditValue, Source={x:Reference description}}" />
+        <dxmvvm:ApplicationJumpListService ShowFrequentCategory="True" ShowRecentCategory="True" />
+        <dx:DialogService DialogWindowStartupLocation="CenterScreen">
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="dx:ThemedWindow">
+                    <Setter Property="Icon" Value="/ControlsDemo;component/Images/logo.png" />
+                    <Setter Property="ResizeMode" Value="CanMinimize" />
+                    <Setter Property="SizeToContent" Value="WidthAndHeight" />
+                </Style>
+            </dx:DialogService.DialogStyle>
+        </dx:DialogService>
+        <dx:DXMessageBoxService />
+        <dxmvvm:EventToCommand EventName="ModuleLoaded" Command="{Binding OnLoadedCommand}" />
+    </dxmvvm:Interaction.Behaviors>
+
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="220">
+                <GroupBox Header="Taskbar button" Margin="0,5,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Progress value" />
+                        <dxe:TrackBarEdit x:Name="progressValue"
+                                          Grid.Row="0"
+                                          Grid.Column="1"
+                                          TickPlacement="BottomRight"
+                                          Height="20"
+                                          LargeStep="0.1"
+                                          Maximum="1"
+                                          SmallStep="0.05"
+                                          TickFrequency="0.05"
+                                          Value="0.3"
+                                          Margin="5,0,0,0" />
+                        <TextBlock Text="Progress state" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,5,0,0" />
+                        <dxe:ComboBoxEdit x:Name="progressStatesSelector" Grid.Row="1" Grid.Column="1" SelectedIndex="2" Margin="5,5,0,0" IsTextEditable="False">
+                            <dxmvvm:Interaction.Behaviors>
+                                <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type TaskbarItemProgressState}" />
+                            </dxmvvm:Interaction.Behaviors>
+                        </dxe:ComboBoxEdit>
+                        <TextBlock Text="Overlay icon" Margin="0,5,0,0" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
+                        <dxe:ComboBoxEdit x:Name="overlayIconSelector"
+                                          Grid.Row="2"
+                                          Grid.Column="1"
+                                          Margin="5,5,0,0"
+                                          IsTextEditable="False"
+                                          ItemsSource="{Binding Path=OverlayIcons}"
+                                          DisplayMember="Caption" />
+                        <TextBlock Text="Description" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" />
+                        <dxe:TextEdit x:Name="description" Grid.Row="3" Grid.Column="1" Margin="5,5,0,0" HorizontalAlignment="Stretch" EditValue="Hello" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Thumb buttons" Margin="0,5,0,0">
+                    <StackPanel Orientation="Vertical">
+                        <dxe:CheckEdit x:Name="createButtons"
+                                       VerticalAlignment="Top"
+                                       Margin="10,0,5,5"
+                                       IsChecked="{Binding ThumbButtonsCreate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                       Content="Add custom buttons" />
+                        <Border IsEnabled="{Binding ElementName=createButtons, Path=IsChecked}" Margin="10,5,0,0">
+                            <StackPanel>
+                                <TextBlock Text="Button properties:" FontStyle="Italic" Margin="0,0,0,5" />
+                                <dxe:CheckEdit IsChecked="{Binding ButtonProperties[0]}" Content="Enabled" />
+                                <dxe:CheckEdit IsChecked="{Binding ButtonProperties[1]}" Content="Interactive" />
+                                <dxe:CheckEdit IsChecked="{Binding ButtonProperties[2]}" Content="Background visible" />
+                                <dxe:CheckEdit IsChecked="{Binding ButtonProperties[3]}" Content="Dismiss when clicked" />
+                                <dxe:CheckEdit IsChecked="{Binding ButtonProperties[4]}" Content="Visible" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Thumbnail clip margin" Margin="0,5,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" VerticalAlignment="Center">
+                            <TextBlock Text="Left" HorizontalAlignment="Center" />
+                            <TextBlock Text="{Binding ThumbnailClipMargin.Left, StringFormat={}{0:F1}}" HorizontalAlignment="Center" />
+                        </StackPanel>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ThumbnailClipMargin.Top, StringFormat=Top: {0:F1}}" HorizontalAlignment="Center" />
+                        <dxe:TrackBarEdit Grid.Row="1"
+                                          Grid.Column="1"
+                                          TickPlacement="BottomRight"
+                                          VerticalAlignment="Center"
+                                          Value="{Binding ThumbnailClipMarginMultipliyer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding ThumbnailClipMargin.Bottom, StringFormat=Bottom: {0:F1}}" HorizontalAlignment="Center" />
+                        <StackPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" VerticalAlignment="Center">
+                            <TextBlock Text="Right" HorizontalAlignment="Center" />
+                            <TextBlock Text="{Binding ThumbnailClipMargin.Right, StringFormat={}{0:F1}}" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <dx:ThemedBorder>
+            <dx:ThemedBorder BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="64,48">
+                <dx:BackgroundPanel>
+                    <DockPanel Margin="64,48">
+                        <Button Command="{Binding OpenTaskWindowCommand}" Height="40" MinWidth="240" HorizontalAlignment="Center" Content="Add Jump List Task" DockPanel.Dock="Bottom" Margin="0,20,0,0" />
+                        <TextBlock FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap">
+                            • The taskbar button can indicate the progress of a custom operation and display an overlay icon. Use the options on the right
+                            to specify the progress type, progress value, an overlay icon and preview window description.<LineBreak /><LineBreak />
+                            • A thumbnail preview pops up when hovering over the application's taskbar button. It contains a live preview of the application,
+                            and can also display a toolbar with custom buttons. Button options allow you to hide and disable toolbar buttons, enable button
+                            interactivity, specify whether the thumbnail preview should be immediately closed on clicking the buttons, etc. In this example,
+                            clicking thumbnail buttons modifies the region of the application window that is used as a thumbnail in the thumbnail preview.<LineBreak /><LineBreak />
+                            • The Application Jump List is invoked when right-clicking the application's taskbar button. It contains application tasks
+                            (divided into categories) and shortcuts to recently and frequently used files. In this demo, you can create custom tasks in the
+                            Application Jump List by clicking the button below.
+                        </TextBlock>
+                    </DockPanel>
+                </dx:BackgroundPanel>
+            </dx:ThemedBorder>
+        </dx:ThemedBorder>
+    </DockPanel>
+</dxdb:DemoModule>

@@ -1,0 +1,53 @@
+﻿using System.ComponentModel;
+using System;
+using System.Drawing;
+
+namespace DevExpress.CrmDemo.Win.Data {
+    public class KeywordStat : INotifyPropertyChanged {
+        #region Public members
+
+        public string Keyword {
+            get { return _keyword; }
+            set {
+                _keyword = value;
+                InvokePropertyChanged("Keyword");
+            }
+        }
+
+        public int Total {
+            get { return _total; }
+            set {
+                _total = value;
+                InvokePropertyChanged("Total");
+            }
+        }
+
+        public Bitmap Image {
+            get { return _image; }
+            set {
+                _image = value;
+                InvokePropertyChanged("Image");
+            }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged implementation
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void InvokePropertyChanged(string name) {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if(handler != null) handler(this, new PropertyChangedEventArgs(name));
+        }
+        #endregion
+
+        #region Private data
+        private string _keyword;
+        private int _total;
+        private Bitmap _image;
+        #endregion
+
+    }
+
+    public class KeywordStatList : BindingList<KeywordStat> { }
+}

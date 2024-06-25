@@ -1,0 +1,122 @@
+﻿<local:GridDemoModule x:Class="GridDemo.DataAwareExport"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxrudex="http://schemas.devexpress.com/winfx/2008/xaml/reports/userdesignerextensions"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800">
+    <local:GridDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GridDemo;component/ModuleResources/SharedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:GridDemoModule.Resources>
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" ReportService="{x:Reference rmsDataAwareExport}" />
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Header="Rows" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit x:Name="rowCountEdit"
+                                     SelectedIndex="1"
+                                     ValueMember="Content"
+                                     ItemTemplate="{StaticResource countInfoTemplate}"
+                                     ShowBorder="False"
+                                     Background="{x:Null}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <local:ValueSelectorItem DisplayName="Small" Content="{local:Int32 5000}" />
+                        <local:ValueSelectorItem DisplayName="Medium" Content="{local:Int32 20000}" />
+                        <local:ValueSelectorItem DisplayName="Large" Content="{local:Int32 50000}" />
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Export Options" Margin="0,5,0,12">
+                    <StackPanel Orientation="Vertical">
+                        <dxe:CheckEdit IsChecked="{Binding Path=PrintColumnHeaders, Mode=TwoWay, ElementName=view}" Content="Export Column Headers" Margin="0,0,6,4" />
+                        <dxe:CheckEdit IsChecked="{Binding Path=PrintTotalSummary, Mode=TwoWay, ElementName=view}" Content="Export Total Summary" Margin="0,0,6,4" />
+                        <dxe:CheckEdit IsChecked="{Binding Path=PrintFixedTotalSummary, Mode=TwoWay, ElementName=view}"
+                                       Content="Export Fixed Total Summary"
+                                       Margin="0,0,6,4" />
+                        <dxe:CheckEdit IsChecked="{Binding Path=PrintAllGroups, Mode=TwoWay, ElementName=view}" Content="Expand All Groups" Margin="0,0,6,4" />
+                    </StackPanel>
+                </GroupBox>
+                <Button Content="Export to Excel" Command="{DXCommand '$local:DemoModuleExportHelper.ExportToXlsx(@e(view))'}" />
+                <local:RecentReports ReportService="{x:Reference rmsDataAwareExport}" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxg:GridControl x:Name="grid"
+                         ItemsSource="{DXBinding $local:ProductSaleDataGenerator.GenerateSales(@e(rowCountEdit).EditValue)}"
+                         ItemsSourceChanged="{DXEvent '@Self.ExpandGroupRow(-1)'}"
+                         Loaded="{DXEvent '@Self.ExpandGroupRow(-1)'}"
+                         ShowBorder="False">
+            <!--#region Summary-->
+            <dxg:GridControl.GroupSummary>
+                <dxg:GridSummaryItem FieldName="Sales" SummaryType="Average" />
+                <dxg:GridSummaryItem FieldName="Profit" SummaryType="Sum" />
+            </dxg:GridControl.GroupSummary>
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem FieldName="Sales" SummaryType="Average" />
+                <dxg:GridSummaryItem FieldName="Profit" SummaryType="Sum" />
+                <dxg:GridSummaryItem FieldName="MarketShare" SummaryType="Count" Alignment="Right" />
+            </dxg:GridControl.TotalSummary>
+            <!--#endregion-->
+            <!--#region Columns-->
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="Country" Width="*" IsSmart="True" GroupIndex="0" />
+                <dxg:GridColumn FieldName="ProductName" Width="200" IsSmart="True" SortIndex="0" Fixed="Left" AllowCellMerge="True" />
+                <dxg:GridColumn FieldName="Year" Width="*" />
+                <dxg:GridColumn FieldName="Sales" Width="*" IsSmart="True" />
+                <dxg:GridColumn FieldName="SalesVsTarget" IsSmart="True" FixedWidth="True" />
+                <dxg:GridColumn FieldName="Profit" Width="*" IsSmart="True" />
+                <dxg:GridColumn FieldName="CustomersSatisfaction" IsSmart="True" FixedWidth="True" />
+                <dxg:GridColumn FieldName="MarketShare" IsSmart="True" FixedWidth="True" />
+            </dxg:GridControl.Columns>
+            <!--#endregion-->
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="view" NavigationStyle="None" TotalSummaryPosition="Bottom" ShowFixedTotalSummary="True" AllowConditionalFormattingMenu="True">
+                    <!--#region FormatConditions-->
+                    <dxg:TableView.FormatConditions>
+                        <dxg:ColorScaleFormatCondition FieldName="Sales">
+                            <dx:ColorScaleFormat ColorMin="White" ColorMax="#FF83B5F1" />
+                        </dxg:ColorScaleFormatCondition>
+
+                        <dxg:FormatCondition FieldName="Profit" Expression="[Profit]&lt;0" PredefinedFormatName="RedText" />
+                        <dxg:FormatCondition FieldName="Profit" Expression="[Profit]&gt;=0" PredefinedFormatName="GreenText" />
+
+                        <dxg:FormatCondition FieldName="SalesVsTarget" Expression="[SalesVsTarget]&lt;0" PredefinedFormatName="RedText" />
+                        <dxg:FormatCondition FieldName="SalesVsTarget" Expression="[SalesVsTarget]&gt;=0" PredefinedFormatName="GreenText" />
+                        <dxg:IconSetFormatCondition FieldName="SalesVsTarget" PredefinedFormatName="PositiveNegativeTrianglesIconSet" />
+
+                        <dxg:FormatCondition FieldName="CustomersSatisfaction"
+                                             Expression="[CustomersSatisfaction]&gt;4"
+                                             PredefinedFormatName="GreenFillWithDarkGreenText" />
+                        <dxg:FormatCondition FieldName="CustomersSatisfaction"
+                                             Expression="[CustomersSatisfaction]&lt;3"
+                                             PredefinedFormatName="LightRedFillWithDarkRedText" />
+
+                        <dxg:IconSetFormatCondition PredefinedFormatName="Arrows3ColoredIconSet" FieldName="MarketShare" />
+                    </dxg:TableView.FormatConditions>
+                    <!--#endregion-->
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxrudex:GridReportManagerService Name="rmsDataAwareExport" />
+                    </dxmvvm:Interaction.Behaviors>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

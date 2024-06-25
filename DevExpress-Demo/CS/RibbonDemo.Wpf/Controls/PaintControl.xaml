@@ -1,0 +1,43 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:local="clr-namespace:RibbonDemo"
+             mc:Ignorable="d"
+             Loaded="OnLoaded"
+             Unloaded="OnUnloaded"
+             x:Class="RibbonDemo.PaintControl" x:Name="paintControl"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <dx:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
+    </UserControl.Resources>
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Canvas dx:FrameworkElementHelper.IsClipped="True"  x:Name="canvas" MouseLeftButtonDown="OnCanvasMouseDown" MouseMove="OnCanvasMouseMove" MouseLeftButtonUp="OnCanvasMouseUp" KeyDown="OnCanvasKeyDown" Background="White" FlowDirection="LeftToRight">
+            <Image x:Name="backgroundImage" Source="{Binding BackgroundImageSource, ElementName=paintControl}" Width="{Binding Width, ElementName=canvas, Mode=TwoWay}" Height="{Binding Height, ElementName=canvas, Mode=TwoWay}" />
+            <TextBox x:Name="textEdit"
+                BorderThickness="0"
+                BorderBrush="Transparent"
+                AcceptsReturn="True"
+                FontSize="{Binding TextFontSize, ElementName=paintControl}"
+                FontFamily="{Binding TextFontFamily, ElementName=paintControl}"
+                Visibility="{Binding IsTextEditing, Converter={StaticResource boolToVisibilityConverter}, ElementName=paintControl}"
+                Padding="0"
+                Margin="0"
+                Canvas.ZIndex="10000"
+                     >
+                <TextBox.Background>
+                    <SolidColorBrush Color="{Binding BackgroundTextColor, ElementName=paintControl}" />
+                </TextBox.Background>
+                <TextBox.Foreground>
+                    <SolidColorBrush Color="{Binding TextFontColor, ElementName=paintControl}" />
+                </TextBox.Foreground>
+            </TextBox>
+        </Canvas>
+    </Grid>
+</UserControl>

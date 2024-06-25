@@ -1,0 +1,116 @@
+﻿<local:LayoutModuleBase x:Class="DiagramDemo.OrgChartLayoutModule"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                        xmlns:local="clr-namespace:DiagramDemo"
+                        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                        xmlns:dxdiag="http://schemas.devexpress.com/winfx/2008/xaml/diagram"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        mc:Ignorable="d"
+                        d:DesignWidth="800"
+                        d:DesignHeight="600">
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <StackPanel.Resources>
+                    <Style TargetType="dxe:TrackBarEdit">
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="IsSnapToTickEnabled" Value="True" />
+                        <Setter Property="LargeStep" Value="15" />
+                        <Setter Property="Maximum" Value="150" />
+                        <Setter Property="Minimum" Value="0" />
+                        <Setter Property="SmallStep" Value="5" />
+                        <Setter Property="TickFrequency" Value="10" />
+                        <Setter Property="TickPlacement" Value="None" />
+                    </Style>
+                    <Style TargetType="GroupBox">
+                        <Setter Property="Margin" Value="0,5,0,0" />
+                    </Style>
+                    <Style TargetType="dxe:ListBoxEdit">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="ShowBorder" Value="False" />
+                    </Style>
+                </StackPanel.Resources>
+                <GroupBox Header="Direction">
+                    <dxe:ListBoxEdit x:Name="directionListBox"
+                                     SelectedIndexChanged="SelectedIndexChanged"
+                                     EditValue="{Binding ElementName=diagramControl, Path=OrgChartLayoutDirection, Mode=TwoWay}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type dxdiag:LayoutDirection}" />
+                        </dxmvvm:Interaction.Behaviors>
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Alignment">
+                    <dxe:ListBoxEdit x:Name="alignmentListBox"
+                                     SelectedIndexChanged="SelectedIndexChanged"
+                                     EditValue="{Binding ElementName=diagramControl, Path=OrgChartLayoutTreeAlignment, Mode=TwoWay}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type dxdiag:Alignment}" />
+                        </dxmvvm:Interaction.Behaviors>
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Tip Over Direction">
+                    <dxe:ListBoxEdit x:Name="tipOverDirectionListBox"
+                                     SelectedIndexChanged="SelectedIndexChanged"
+                                     EditValue="{Binding ElementName=diagramControl, Path=OrgChartLayoutTipOverDirection}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type dxdiag:TipOverDirection}" />
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Tip Over Offset Mode">
+                    <dxe:ListBoxEdit x:Name="tipOverOffsetModeListBox"
+                                     SelectedIndexChanged="SelectedIndexChanged"
+                                     EditValue="{Binding ElementName=diagramControl, Path=OrgChartLayoutTipOverOffsetMode}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type dxdiag:TipOverOffsetMode}" />
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Tree Level Count">
+                    <dxe:SpinEdit x:Name="treeLevelCountSpinEdit" IsTextEditable="False" MinValue="0" Increment="1"
+                                      Value="{Binding ElementName=diagramControl, Path=OrgChartLayoutTreeLevelCount, Mode=TwoWay}"
+                                      EditValueChanged="EditValueChanged" />
+                </GroupBox>
+                <GroupBox Header="Nodes Spacing">
+                    <dxe:TrackBarEdit x:Name="horSpacingTrackBar"
+                                      EditValue="{Binding ElementName=diagramControl, Path=OrgChartLayoutNodeSpacing, Mode=TwoWay}"
+                                      Minimum="20"
+                                      EditValueChanged="EditValueChanged" />
+                </GroupBox>
+                <GroupBox Header="Hierarchy Spacing">
+                    <dxe:TrackBarEdit x:Name="vertSpacingTrackBar"
+                                      EditValue="{Binding ElementName=diagramControl, Path=OrgChartLayoutHierarchySpacing, Mode=TwoWay}"
+                                      Minimum="20"
+                                      EditValueChanged="EditValueChanged" />
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid>
+            <dxdiag:DiagramDesignerControl x:Name="diagramControl"
+                                           DockPanel.Dock="Right"
+                                           Theme="Linear"
+                                           ToolboxVisibility="Compact"
+                                           SelectedStencils="BasicShapes,ArrowShapes" />
+        </Grid>
+    </DockPanel>
+</local:LayoutModuleBase>

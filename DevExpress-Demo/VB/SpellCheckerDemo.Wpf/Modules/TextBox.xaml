@@ -1,0 +1,37 @@
+﻿<local:SpellCheckerDemoModule x:Class="SpellCheckerDemo.TextBox"
+                              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              xmlns:local="clr-namespace:SpellCheckerDemo"
+                              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                              xmlns:dxspch="http://schemas.devexpress.com/winfx/2008/xaml/spellchecker"
+                              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                              mc:Ignorable="d"
+                              d:DesignHeight="400"
+                              d:DesignWidth="800">
+    <DockPanel>
+        <StackPanel Name="PART_Options" DockPanel.Dock="Right" Margin="12,8,12,12" MinWidth="210">
+            <dxe:CheckEdit Content="CheckAsYouType Mode" EditValue="{DXBinding '@e(spellChecker).CheckAsYouType'}" Margin="0,0,0,8" />
+            <Button Content="Check Spelling" Click="{DXEvent '@e(spellChecker).Check()'}" />
+        </StackPanel>
+        <TextBox x:Name="tb"
+                 AcceptsReturn="True"
+                 TextWrapping="Wrap"
+                 Text="The phenoamnal pweor of the hmuan mind.&#xA; &#xA; Accordnig to an englnsih unviersitry sutdy&#xA; the oredr of letetrs in a word dosen't mttaer,&#xA; the olny thnig thta's imporantt is&#xA; that the frsit and last ltteer of eevry word is in the crrecot psoition. &#xA; The rset can be jmbueld&#xA; and one is stlil able to read the txet withuot dificultfiy.&#xA; This is becusea the huamn mind does not read evrey lteter by itlsef, but the worrd as a whloe."
+                 Margin="10">
+            <dxmvvm:Interaction.Behaviors>
+                <dxspch:DXSpellChecker x:Name="spellChecker" Culture="en-US" CheckAsYouType="True" ShowSpellCheckMenu="True">
+                    <dxspch:DXSpellChecker.Dictionaries>
+                        <dxspch:SpellCheckerISpellDictionary Culture="en-US"
+                                                             DictionaryUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/american.xlg"
+                                                             GrammarUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/english.aff" />
+                        <dxspch:SpellCheckerCustomDictionary Culture="en-US"
+                                                             DictionaryUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/CustomEnglish.dic"
+                                                             AlphabetUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/EnglishAlphabet.txt" />
+                    </dxspch:DXSpellChecker.Dictionaries>
+                </dxspch:DXSpellChecker>
+            </dxmvvm:Interaction.Behaviors>
+        </TextBox>
+    </DockPanel>
+</local:SpellCheckerDemoModule>

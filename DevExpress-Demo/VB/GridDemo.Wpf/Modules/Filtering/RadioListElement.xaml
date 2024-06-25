@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="GridDemo.Filtering.RadioListElement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+             xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1" Margin="8,0,0,0">
+            <!--#region !-->
+            <dxfui:RadioListFilterElement x:Name="filterElement" FieldName="Country"
+                                          Context="{Binding ElementName=grid, Path=FilteringContext}"
+                                          Height="200" ShowCounts="True"/>
+            <CheckBox IsChecked="{Binding ElementName=filterElement, Path=ShowCounts}"
+                      Content="Show Counts" Margin="0,8,0,0"/>
+            <!--#endregion-->
+        </StackPanel>
+        <dxg:GridControl Name="grid" ItemsSource="{x:Static dxdb:NWindDataProvider.Invoices}">
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="view" ShowFixedTotalSummary="True" NavigationStyle="Row" />
+            </dxg:GridControl.View>
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="Country" Width="*" />
+                <dxg:GridColumn FieldName="City" Width="*" />
+                <dxg:GridColumn FieldName="Quantity" Width="*" />
+                <dxg:GridColumn FieldName="UnitPrice" Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="$0.00" MaskType="Numeric" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+            </dxg:GridControl.TotalSummary>
+        </dxg:GridControl>
+    </Grid>
+</UserControl>

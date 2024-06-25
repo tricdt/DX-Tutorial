@@ -1,0 +1,605 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A94428E8-CCD0-4B6A-80B6-E6CEF4A5D253}</ProjectGuid>
+    <BaseIntermediateOutputPath>obj.Wpf</BaseIntermediateOutputPath>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>
+    </RootNamespace>
+    <AssemblyName>SchedulingDemo</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ApplicationIcon>demoicon.ico</ApplicationIcon>
+    <ConvertToNet6Windows />
+  </PropertyGroup>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,WPF,</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE,WPF,</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Debug\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Debug\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,WPF,CLICKONCE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Release\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Release\</OutputPath>
+    <DefineConstants>TRACE,WPF,CLICKONCE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,WPF,DEBUGTEST</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cars\CheckUp.svg" />
+    <Resource Include="Images\Cars\Free.svg" />
+    <Resource Include="Images\Cars\Maintance.svg" />
+    <Resource Include="Images\Cars\Rent.svg" />
+    <Resource Include="Images\Cars\Wash.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\Dinner.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\CalendarPermission.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\Categorize.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\ChangeView.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\DataPanel.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\Export.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\FolderPanel.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\NextWeek.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\NoDate.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\PanelBottom.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\PanelOff.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\PanelRight.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\Print.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\ResetView.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\Today.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\CalendarGroup.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\Delete.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\Open.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\HighImportance.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\LowImportance.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\Save.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\SaveAndClose.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\NextRecord.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\PreviousRecord.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\Private.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\iCalendarExport.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\iCalendarImport.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\Import.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\OutlookExport.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\OutlookImport.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\Reminder.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\Forward.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\Properties.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\ViewSettings.svg" />
+    <Resource Include="Images\EmployeeWorkSchedule\PrivateAppointment.svg" />
+    <Reference Include="DevExpress.Data.Desktop.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Images.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.DemoData.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v22.2.ViewModel">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Accordion.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Docking.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.DocumentViewer.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2.Extensions">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.DemoBase.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.NavBar.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Printing.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Ribbon.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Scheduling.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v22.2.Extensions">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v22.2.Core.Desktop">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v22.2.Reporting">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationFramework.Luna">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xaml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UIAutomationProvider">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Services.Client">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.108.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\System.Data.SQLite.EF6.dll</HintPath>
+      <Private>True</Private>
+      <netcore3ignore />
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Customization\AppointmentCustomizationDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Customization\EndUserRestrictionsDemoModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Highlighted\OnDemandDataLoading.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Customization\TimeRegionsDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Highlighted\FilteringDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Common\OutlookExchangeOptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Modules\Highlighted\PrintingTemplatesDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Highlighted\TimeZonesDemoModel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\ViewTypes\ListViewDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewTypes\AgendaViewDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Highlighted\EmployeeWorkScheduleDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewTypes\OneMonthViewDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewTypes\TimelineViewDemoModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\ViewTypes\WeekViewDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Customization\CustomWindows\CustomAppointmentWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Customization\CustomWindows\CustomTimeRulerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Customization\CustomWindows\CustomGotoDateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Customization\WindowsCustomizationDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewTypes\WorkWeekViewDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Highlighted\ReceptionDeskDemoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewTypes\DayViewDemoModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Customization\TimeRulerDemoModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ReceptionDesk.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\EmployeeWorkSchedule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Common\MedicalAppointmentWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Ribbon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.vb">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Behaviors.vb" />
+    <Compile Include="Common\Converters.vb" />
+    <Compile Include="Common\Services.vb" />
+    <Compile Include="Common\SchedulingDemoModule.vb" />
+    <Compile Include="Data\EventData.vb" />
+    <Compile Include="Data\OnDemandDataLoading\DBInitializer.vb" />
+    <Compile Include="Data\OnDemandDataLoading\SchedulingContext.vb" />
+    <Compile Include="Data\WorkData.vb" />
+    <Compile Include="Data\CarsData.vb" />
+    <Compile Include="Data\GymData.vb" />
+    <Compile Include="Data\ReceptionDeskData.vb" />
+    <Compile Include="Data\SampleData.vb" />
+    <Compile Include="Data\TeamData.vb" />
+    <Compile Include="DemoTesting\Fixtures.vb" />
+    <Compile Include="MainWindow.xaml.vb">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Customization\AppointmentCustomizationDemoModule.xaml.vb">
+      <DependentUpon>AppointmentCustomizationDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Customization\CustomWindows\CustomTimeRulerWindow.xaml.vb">
+      <DependentUpon>CustomTimeRulerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Customization\CustomWindows\CustomGotoDateWindow.xaml.vb">
+      <DependentUpon>CustomGotoDateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Highlighted\OnDemandDataLoading.xaml.vb">
+      <DependentUpon>OnDemandDataLoading.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Customization\TimeRegionsDemoModule.xaml.vb">
+      <DependentUpon>TimeRegionsDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Highlighted\FilteringDemoModule.xaml.vb">
+      <DependentUpon>FilteringDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Common\OutlookExchangeOptionsWindow.xaml.vb">
+      <DependentUpon>OutlookExchangeOptionsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Highlighted\PrintingTemplatesDemoModule.xaml.vb">
+      <DependentUpon>PrintingTemplatesDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Highlighted\TimeZonesDemoModel.xaml.vb">
+      <DependentUpon>TimeZonesDemoModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewTypes\ListViewDemoModule.xaml.vb">
+      <DependentUpon>ListViewDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewTypes\AgendaViewDemoModule.xaml.vb">
+      <DependentUpon>AgendaViewDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Customization\EndUserRestrictionsDemoModule.xaml.vb">
+      <DependentUpon>EndUserRestrictionsDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Highlighted\EmployeeWorkScheduleDemoModule.xaml.vb">
+      <DependentUpon>EmployeeWorkScheduleDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewTypes\OneMonthViewDemoModule.xaml.vb">
+      <DependentUpon>OneMonthViewDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewTypes\TimelineViewDemoModule.xaml.vb">
+      <DependentUpon>TimelineViewDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewTypes\WeekViewDemoModule.xaml.vb">
+      <DependentUpon>WeekViewDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Customization\CustomWindows\CustomAppointmentWindow.xaml.vb">
+      <DependentUpon>CustomAppointmentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Customization\WindowsCustomizationDemoModule.xaml.vb">
+      <DependentUpon>WindowsCustomizationDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewTypes\WorkWeekViewDemoModule.xaml.vb">
+      <DependentUpon>WorkWeekViewDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Highlighted\ReceptionDeskDemoModule.xaml.vb">
+      <DependentUpon>ReceptionDeskDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewTypes\DayViewDemoModule.xaml.vb">
+      <DependentUpon>DayViewDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Customization\TimeRulerDemoModule.xaml.vb">
+      <DependentUpon>TimeRulerDemoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Highlighted\FilteringDemoViewModel.vb" />
+    <Compile Include="ViewModels\Highlighted\OnDemandDataLoadingViewModel.vb" />
+    <Compile Include="ViewModels\Customization\TimeRegionsDemoViewModel.vb" />
+    <Compile Include="ViewModels\Common\OutlookExchangeOptionsWindowViewModel.vb" />
+    <Compile Include="ViewModels\Highlighted\PrintingTemplatesDemoViewModel.vb" />
+    <Compile Include="ViewModels\Highlighted\TimeZonesDemoViewModel.vb" />
+    <Compile Include="ViewModels\ViewTypes\ListViewDemoViewModel.vb" />
+    <Compile Include="ViewModels\ViewTypes\AgendaViewDemoViewModel.vb" />
+    <Compile Include="ViewModels\ViewTypes\DayViewDemoViewModel.vb" />
+    <Compile Include="ViewModels\Highlighted\EmployeeWorkScheduleDemoViewModel.vb" />
+    <Compile Include="ViewModels\Customization\EndUserRestrictionsDemoViewModel.vb" />
+    <Compile Include="ViewModels\Performance\TimelineViewPerformanceDemoViewModel.vb" />
+    <Compile Include="ViewModels\ViewTypes\OneMonthViewDemoViewModel.vb" />
+    <Compile Include="ViewModels\ViewTypes\TimelineViewDemoViewModel.vb" />
+    <Compile Include="ViewModels\ViewTypes\WeekViewDemoViewModel.vb" />
+    <Compile Include="ViewModels\Customization\AppointmentCustomizationDemoViewModel.vb" />
+    <Compile Include="ViewModels\Customization\CustomWindows\CustomTimeRulerWindowViewModel.vb" />
+    <Compile Include="ViewModels\Customization\WindowsCustomizationDemoViewModel.vb" />
+    <Compile Include="ViewModels\ViewTypes\WorkWeekViewDemoViewModel.vb" />
+    <Compile Include="ViewModels\ViewTypes\MonthViewDemoViewModel.vb" />
+    <Compile Include="ViewModels\Common\MedicalAppointmentWindowViewModel.vb" />
+    <Compile Include="ViewModels\Performance\MonthViewPerformanceDemoViewModel.vb" />
+    <Compile Include="ViewModels\Highlighted\ReceptionDeskDemoViewModel.vb" />
+    <Compile Include="ViewModels\Performance\DayViewPerformanceDemoViewModel.vb" />
+    <Compile Include="ViewModels\Customization\TimeRulerDemoViewModel.vb" />
+    <Compile Include="Modules\Common\MedicalAppointmentWindow.xaml.vb">
+      <DependentUpon>MedicalAppointmentWindow.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="clickonce.txt">
+      <netcore3ignore />
+    </EmbeddedResource>
+    <Compile Include="Properties\AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CustomToolNamespace>SchedulingDemo.Properties</CustomToolNamespace>
+    </EmbeddedResource>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+      <netcore3ignore />
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent">
+    <ItemGroup>
+      <Resource Include="@(Page)" />
+    </ItemGroup>
+    <ItemGroup>
+      <Resource Include="@(Compile)" />
+    </ItemGroup>
+  </Target>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+	<GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+	<RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>	
+	<ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3
+    <Import Project="Demo.targets" />
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3 
+	<ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
+  </ItemGroup>
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3 
+    <Import Project="Themes.WPF.NetCore.targets" />
+  ONLY NETCORE3-->
+  <PropertyGroup>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

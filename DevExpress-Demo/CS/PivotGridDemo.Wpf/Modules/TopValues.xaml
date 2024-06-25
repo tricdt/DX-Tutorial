@@ -1,0 +1,76 @@
+﻿<local:PivotGridDemoModule x:Class="PivotGridDemo.TopValues"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:local="clr-namespace:PivotGridDemo"
+                           xmlns:dxpg="http://schemas.devexpress.com/winfx/2008/xaml/pivotgrid"
+                           xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                           xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                           xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                           xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                           Height="300"
+                           Width="300"
+                           DataContext="{dxmvvm:ViewModelSource Type=local:TopValuesViewModel}">
+    <DockPanel>
+        <local:PivotGridDemoRibbon DockPanel.Dock="Top" ExportPivotGrid="{x:Reference pivotGrid}"/>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <GroupBox Header="Set Top Values" Margin="12,5,12,12" VerticalAlignment="Top">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="0,0,7,0" VerticalAlignment="Center">Show top</TextBlock>
+                        <dxe:SpinEdit Name="seTopValuesCount"
+                                      EditValue="{Binding TopValueCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      MinValue="1"
+                                      MaxValue="30"
+                                      Mask="N00"
+                                      VerticalAlignment="Top"
+                                      Width="60"
+                                      EditValueChanged="{DXEvent '@e(pivotGrid).BestFit(true, false)'}" />
+                    </StackPanel>
+                    <TextBlock Text="values for the field:" Margin="0,5" HorizontalAlignment="Left" />
+                    <dxe:ComboBoxEdit Name="cbField"
+                                      ItemsSource="{Binding RowsAndColumns}"
+                                      DisplayMember="Caption"
+                                      EditValue="{Binding SelectedField, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      Width="120"
+                                      HorizontalAlignment="Left"
+                                      IsTextEditable="False"
+                                      EditValueChanged="{DXEvent '@e(pivotGrid).BestFit(true, false)'}" />
+                    <dxe:CheckEdit IsChecked="{Binding TopValueShowOthers, Mode=TwoWay}"
+                                   Name="checkTopValueShowOthers"
+                                   Content="Show Others Value"
+                                   Margin="0,10,0,0" />
+                </StackPanel>
+            </GroupBox>
+        </ScrollViewer>
+        <dxpg:PivotGridControl x:Name="pivotGrid"
+                               DataProcessingEngine="Optimized"
+                               DataSource="{x:Static dxdb:NWindDataProvider.SalesPersons}"
+                               local:FieldAreaHelper.FixAreas="True"
+                               ShowBorder="False"
+                               RowTreeWidth="200"
+                               FieldsSource="{Binding Fields}"
+                               Loaded="{DXEvent '@Self.BestFit(true, false)'}">
+            <dxpg:PivotGridControl.FieldGeneratorTemplate>
+                <DataTemplate>
+                    <ContentControl>
+                        <dxpg:PivotGridField Area="{Binding Area}"
+                                             AreaIndex="{Binding AreaIndex}"
+                                             Caption="{Binding Caption}"
+                                             Visible="{Binding Visible}"
+                                             TopValueCount="{Binding TopValueCount}"
+                                             TopValueShowOthers="{Binding TopValueShowOthers}" >
+                            <dxpg:PivotGridField.DataBinding>
+                                <dxpg:DataSourceColumnBinding ColumnName="{Binding DataContext.Name, RelativeSource={RelativeSource FindAncestor, AncestorType=dxpg:PivotGridField}}" />
+                            </dxpg:PivotGridField.DataBinding>
+                        </dxpg:PivotGridField>
+                    </ContentControl>
+                </DataTemplate>
+            </dxpg:PivotGridControl.FieldGeneratorTemplate>
+        </dxpg:PivotGridControl>
+    </DockPanel>
+</local:PivotGridDemoModule>

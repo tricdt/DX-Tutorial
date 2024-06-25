@@ -1,0 +1,559 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FCE56CE3-5025-4D65-9048-E0929BE6350D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <BaseIntermediateOutputPath>obj.Wpf</BaseIntermediateOutputPath>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DockingDemo</RootNamespace>
+    <AssemblyName>DockingDemo</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ConvertToNet6Windows />
+  </PropertyGroup>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;WPF;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Debug\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;CLICKONCE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Release\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Release\</OutputPath>
+    <DefineConstants>TRACE;WPF;CLICKONCE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugTest\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DEBUGTEST</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>demoicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Images\Triangles3_1.svg" />
+    <Resource Include="Images\Triangles3_3.svg" />
+    <Resource Include="Images\AddGroup.svg" />
+    <Resource Include="Images\Toolbox\Canvas.svg" />
+    <Resource Include="Images\Toolbox\Chart.svg" />
+    <Resource Include="Images\Toolbox\CheckBox.svg" />
+    <Resource Include="Images\Toolbox\Control.svg" />
+    <Resource Include="Images\Toolbox\Label.svg" />
+    <Resource Include="Images\Toolbox\Line.svg" />
+    <Resource Include="Images\Toolbox\Panel.svg" />
+    <Resource Include="Images\Toolbox\PictureBox.svg" />
+    <Resource Include="Images\Toolbox\RichText.svg" />
+    <Resource Include="Images\Toolbox\Shape.svg" />
+    <Resource Include="Images\Toolbox\Table.svg" />
+    <Resource Include="Images\Icons\Change.svg" />
+    <Resource Include="Images\Icons\Font.svg" />
+    <Resource Include="Images\Photos\Nature\01.JPG" />
+    <Resource Include="Images\Photos\Nature\02.JPG" />
+    <Resource Include="Images\Photos\Nature\03.JPG" />
+    <Resource Include="Images\Photos\Nature\04.JPG" />
+    <Resource Include="Images\Photos\Nature\05.JPG" />
+    <Resource Include="Images\Photos\Nature\06.JPG" />
+    <Resource Include="Images\Photos\Nature\07.JPG" />
+    <Resource Include="Images\Photos\Nature\08.JPG" />
+    <Resource Include="Images\Photos\Nature\09.JPG" />
+    <Resource Include="Images\Photos\Nature\10.JPG" />
+    <Resource Include="Images\AppIcon.ico" />
+    <Reference Include="DevExpress.Printing.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Data.Desktop.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Data.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.DemoData.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Accordion.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.DemoBase.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Core.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="nunit.framework" Condition=" '$(Configuration)' == 'DebugTest' ">
+      <HintPath></HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    <Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.PropertyGrid.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Docking.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Map.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Map.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Charts.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Charts.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Ribbon.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Mvvm.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Images.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="Accessibility"><Private>False</Private></Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\EntityFramework.dll</HintPath>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="System"><Private>False</Private></Reference>
+    <Reference Include="System.Configuration"><Private>False</Private></Reference>
+    <Reference Include="System.Data"><Private>False</Private></Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47">
+      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\System.Data.SQLite.dll</HintPath>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.108.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47">
+      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\System.Data.SQLite.EF6.dll</HintPath>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="System.Drawing"><Private>False</Private></Reference>
+    <Reference Include="System.Xml"><Private>False</Private></Reference>
+    <Reference Include="Microsoft.CSharp"><Private>False</Private></Reference>
+    <Reference Include="System.Core"><Private>False</Private></Reference>
+    <Reference Include="System.Xml.Linq"><Private>False</Private></Reference>
+    <Reference Include="System.Data.DataSetExtensions"><Private>False</Private></Reference>
+    <Reference Include="System.Xaml"><Private>False</Private></Reference>
+    <Reference Include="UIAutomationProvider"><Private>False</Private></Reference>
+    <Reference Include="UIAutomationTypes"><Private>False</Private></Reference>
+    <Reference Include="WindowsBase"><Private>False</Private></Reference>
+    <Reference Include="PresentationCore"><Private>False</Private></Reference>
+    <Reference Include="PresentationFramework"><Private>False</Private></Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations"><Private>False</Private></Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\DashboardDataHelper.cs" />
+    <Compile Include="Layouts\PaintControl.xaml.cs">
+      <DependentUpon>PaintControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\PaintUserControl.xaml.cs">
+      <DependentUpon>PaintUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\TextUserControl.xaml.cs">
+      <DependentUpon>TextUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Layouts\ChildWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="Layouts\ChildWindow.xaml.cs">
+      <DependentUpon>ChildWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ColorPalette.cs" />
+    <Compile Include="Helpers\ImagesHelper.cs" />
+    <Compile Include="Modules\ColorizedTabs.xaml.cs">
+      <DependentUpon>ColorizedTabs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DockLayoutManagerEvents.xaml.cs">
+      <DependentUpon>DockLayoutManagerEvents.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PinnedTabs.xaml.cs">
+      <DependentUpon>PinnedTabs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\DockLayoutManagerSerializationService.cs" />
+    <Compile Include="Services\DockLayoutManagerEventsService.cs" />
+    <Compile Include="Services\DockLayoutManagerLinkerService.cs" />
+    <Compile Include="ViewModels\ColorizedTabsViewModel.cs" />
+    <Compile Include="ViewModels\DockLayoutManagerEventsViewModel.cs" />
+    <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\MDIMenuMergingViewModel.cs" />
+    <Compile Include="ViewModels\PinnedTabsViewModel.cs" />
+    <Compile Include="ViewModels\SerializationViewModel.cs" />
+    <Compile Include="DemoControls.cs" />
+    <Compile Include="Modules\MVVMSerialization.xaml.cs">
+      <DependentUpon>MVVMSerialization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DragPanelsBetweenDockManagers.xaml.cs">
+      <DependentUpon>DragPanelsBetweenDockManagers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\MVVMGroupLayout.xaml.cs">
+      <DependentUpon>MVVMGroupLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DockLayout.xaml.cs">
+      <DependentUpon>DockLayout.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Layouts\ChildPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Layouts\ChildUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Layouts\PaintControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Layouts\PaintUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Layouts\TextUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\AutoHiddenPanels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\BarsIntegration.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ClosedPanels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\AppearanceProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ColorizedTabs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DockLayoutManagerEvents.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\MVVMSerialization.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DragPanelsBetweenDockManagers.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\PinnedTabs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\MVVMGroupLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DockHintsVisualizer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DocumentGroups.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DockLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ItemsVisibility.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Dashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\PanelOptions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FloatingPanels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\LayoutGroups.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\LayoutItems.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\LayoutPanels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\MDIMenuMerging.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\NWindLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\PanelGroups.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Serialization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SimpleDashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\MVVMGroupLayoutResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Common.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConvertersAndUtils.cs" />
+    <Compile Include="DockingDemoModuleControl.cs" />
+    <Compile Include="DemoTesting\Fixtures.cs" />
+    <Compile Include="Layouts\ChildPage.xaml.cs">
+      <DependentUpon>ChildPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\ChildUserControl.xaml.cs">
+      <DependentUpon>ChildUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AutoHiddenPanels.xaml.cs">
+      <DependentUpon>AutoHiddenPanels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\BarsIntegration.xaml.cs">
+      <DependentUpon>BarsIntegration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ClosedPanels.xaml.cs">
+      <DependentUpon>ClosedPanels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AppearanceProperties.xaml.cs">
+      <DependentUpon>AppearanceProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DockHintsVisualizer.xaml.cs">
+      <DependentUpon>DockHintsVisualizer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DocumentGroups.xaml.cs">
+      <DependentUpon>DocumentGroups.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ItemsVisibility.xaml.cs">
+      <DependentUpon>ItemsVisibility.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Dashboard.xaml.cs">
+      <DependentUpon>Dashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PanelOptions.xaml.cs">
+      <DependentUpon>PanelOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FloatingPanels.xaml.cs">
+      <DependentUpon>FloatingPanels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\LayoutGroups.xaml.cs">
+      <DependentUpon>LayoutGroups.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\LayoutItems.xaml.cs">
+      <DependentUpon>LayoutItems.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\LayoutPanels.xaml.cs">
+      <DependentUpon>LayoutPanels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\MDIMenuMerging.xaml.cs">
+      <DependentUpon>MDIMenuMerging.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\NWindLayout.xaml.cs">
+      <DependentUpon>NWindLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PanelGroups.xaml.cs">
+      <DependentUpon>PanelGroups.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Serialization.xaml.cs">
+      <DependentUpon>Serialization.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\SimpleDashboard.xaml.cs">
+      <DependentUpon>SimpleDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="clickonce.txt">
+      <netcore3ignore />
+    </EmbeddedResource>
+    <None Include="App.config">
+      <netcore3ignore />
+    </None>
+    
+    <Resource Include="Data\USA.dbf" />
+    <Resource Include="Data\USA.shp" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DSC_4405.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Layouts\layout1.xml" />
+    <EmbeddedResource Include="Layouts\layout2.xml" />
+    <EmbeddedResource Include="Layouts\layout3.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Layouts\layout4.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LayoutItemsVisibility\person2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LayoutItemsVisibility\person1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LayoutItemsVisibility\person3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Layouts\MVVMSerialization\savedworkspace1.xml" />
+    <EmbeddedResource Include="Layouts\MVVMSerialization\savedworkspace2.xml" />
+    <EmbeddedResource Include="Layouts\MVVMSerialization\savedworkspace3.xml" />
+    <EmbeddedResource Include="Layouts\MVVMSerialization\views1.xml" />
+    <EmbeddedResource Include="Layouts\MVVMSerialization\views2.xml" />
+    <EmbeddedResource Include="Layouts\MVVMSerialization\views3.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent"><ItemGroup><Resource Include="@(Page)" /></ItemGroup><ItemGroup><Resource Include="@(Compile)" /></ItemGroup></Target>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+	<GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+	<RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>	
+	<ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3
+    <Import Project="Demo.targets" />
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3 
+    <Import Project="Themes.WPF.NetCore.targets" />
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
+  </ItemGroup>
+  ONLY NETCORE3-->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    
+  </PropertyGroup>
+</Project>

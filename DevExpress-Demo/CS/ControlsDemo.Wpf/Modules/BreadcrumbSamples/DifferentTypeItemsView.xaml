@@ -1,0 +1,27 @@
+﻿<UserControl
+    x:Class="ControlsDemo.BreadcrumbSamples.DifferentTypeItemsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxco="http://schemas.devexpress.com/winfx/2008/xaml/controls"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:demo="clr-namespace:ControlsDemo.BreadcrumbSamples">
+
+    <dxlc:LayoutControl Padding="10,0,0,0">
+        <dxlc:LayoutGroup Orientation="Vertical">
+            <dxlc:LayoutItem>
+                <dxco:BreadcrumbControl x:Name="breadcrumb" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem AddColonToLabel="True" Label="SelectedItem">
+                <dxe:TextEdit EditValue="{DXBinding '$demo:NWindObjectHelper.GetCustomText(@e(breadcrumb).SelectedItem)', Mode=OneWay}" IsReadOnly="True" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem AddColonToLabel="True" Label="SelectedItemPath">
+                <dxe:TextEdit EditValue="{Binding ElementName=breadcrumb, Path=SelectedItemPath}" IsReadOnly="True" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem AddColonToLabel="True" Label="SelectedItemType">
+                <dxe:TextEdit EditValue="{DXBinding @e(breadcrumb).SelectedItem.GetType().BaseType.FullName, Mode=OneWay}" IsReadOnly="True" />
+            </dxlc:LayoutItem>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+
+</UserControl>

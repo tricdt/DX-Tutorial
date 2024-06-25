@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="MVVMDemo.Converters.ObjectToObjectConverterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.Converters"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
+    <UserControl.Resources>
+        <!--#region !-->
+        <dxmvvm:ObjectToObjectConverter x:Key="StartStateToBrushConverter">
+            <dxmvvm:MapItem Source="Ready" Target="Red"/>
+            <dxmvvm:MapItem Source="Steady" Target="Yellow"/>
+            <dxmvvm:MapItem Source="Go" Target="Green"/>
+        </dxmvvm:ObjectToObjectConverter>
+        <!--#endregion-->
+    </UserControl.Resources>
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <dxe:ListBoxEdit ItemsSource="{dxe:EnumItemsSource EnumType=local:StartState}" VerticalAlignment="Top" SelectedIndex="0" FontWeight="Bold"
+                         Background="{Binding EditValue, RelativeSource={RelativeSource Self}, Converter={StaticResource StartStateToBrushConverter}}">
+            <dxe:ListBoxEdit.StyleSettings>
+                <dxe:RadioListBoxEditStyleSettings/>
+            </dxe:ListBoxEdit.StyleSettings>
+        </dxe:ListBoxEdit>
+    </dxlc:LayoutControl>
+</UserControl>

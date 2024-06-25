@@ -1,0 +1,165 @@
+﻿<UserControl x:Class="EditorsDemo.SearchControlOptions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:EditorsDemo"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             mc:Ignorable="d"
+             Name="options"
+             d:DesignHeight="300" d:DesignWidth="300" Width="300">
+
+    <StackPanel x:Name="LayoutRoot">
+        <GroupBox Header="Appearance Properties" Margin="0,12,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <dxe:CheckEdit
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Content="Show MRU Button"
+                    Margin="0,0,0,6"
+                    EditValue="{Binding Path=FocusedControl.ShowMRUButton, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=options}" />
+                <dxe:CheckEdit
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Content="Immediate MRU Popup"
+                    Margin="0,0,0,6"
+                    EditValue="{Binding Path=FocusedControl.ImmediateMRUPopup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=options}" />
+
+                <dxe:CheckEdit
+                    x:Name="checkShowClearButton"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Content="Show Clear Button"
+                    Margin="0,0,0,6"
+                    EditValue="{Binding Path=FocusedControl.ShowClearButton, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=options}" />
+                <dxe:CheckEdit
+                    x:Name="checkShowCloseButton"
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Content="Show Close Button"
+                    Margin="0,0,0,6"
+                    EditValue="{Binding Path=FocusedControl.ShowCloseButton, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=options}" />
+                <dxe:CheckEdit
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    x:Name="ShowFindButtonCheckEdit"
+                    Content="Show Find Button"
+                    Margin="0,0,0,6"
+                    EditValue="{Binding Path=FocusedControl.ShowFindButton, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=options}" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Filter Properties" Margin="0,12,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Text="Filter Condition:"
+                    VerticalAlignment="Center"
+                    Margin="0,0,6,3"/>
+                <dxe:ComboBoxEdit
+                    x:Name="FilterConditionComboBox"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,0,0,6"
+                    IsTextEditable="False"
+                    EditValue="{Binding Path=FocusedControl.FilterCondition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=options}" />
+
+                <TextBlock
+                    Grid.Row="1"
+                    Text="Criteria Operator Type:"
+                    VerticalAlignment="Center"
+                    Margin="0,0,6,3"/>
+                <dxe:ComboBoxEdit
+                    x:Name="CriteriaOperatorTypeComboBox"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="0,0,0,6"
+                    IsTextEditable="False"
+                    EditValue="{Binding Path=FocusedControl.CriteriaOperatorType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=options}" />
+
+                <TextBlock
+                    Grid.Row="2"
+                    Text="Filter By Columns Mode:"
+                    VerticalAlignment="Center"
+                    Margin="0,0,6,3"/>
+                <dxe:ComboBoxEdit
+                    x:Name="FilterByColumnsModeComboBox"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="0,0,0,6"
+                    IsTextEditable="False"
+                    EditValueChanged="FilterByColumnsModeComboBoxEditValueChanged"
+                    EditValue="{Binding Path=FocusedControl.FilterByColumnsMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=options}" />
+
+                <TextBlock
+                    Grid.Row="3"
+                    Text="Custom Columns:"
+                    VerticalAlignment="Center"
+                    Margin="0,0,6,3"/>
+                <dxe:ComboBoxEdit
+                    x:Name="CustomColumnsComboBox"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="0,0,0,6"
+                    IsTextEditable="False"
+                    SelectedIndexChanged="CustomColumnsComboBoxSelectedIndexChanged"
+                    ItemsSource="{Binding Path=FocusedControl.ColumnProvider.AvailableColumns, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, ElementName=options}">
+                    <dxe:ComboBoxEdit.StyleSettings>
+                        <dxe:CheckedComboBoxStyleSettings></dxe:CheckedComboBoxStyleSettings>
+                    </dxe:ComboBoxEdit.StyleSettings>
+                </dxe:ComboBoxEdit>
+
+                <TextBlock
+                    Grid.Row="4"
+                    Text="Find Mode:"
+                    VerticalAlignment="Center"
+                    Margin="0,0,6,3"/>
+                <dxe:ComboBoxEdit
+                    x:Name="FindModeComboBox"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Margin="0,0,0,6"
+                    EditValueChanged="FindModeComboBoxEditValueChanged"
+                    IsTextEditable="False"
+                    EditValue="{Binding Path=FocusedControl.FindMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=options}" />
+                <dxe:TextEdit
+                    ShowNullText="True"
+                    NullText="Filter Criteria"
+                    IsReadOnly="True"
+                    MaxHeight="200"
+                    TextWrapping="Wrap"
+                    Grid.Row="5"
+                    Grid.ColumnSpan="2"
+                    ToolTipService.ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Mode=Self}}"
+                    EditValue="{Binding Path=FocusedControl.FilterCriteria, ElementName=options}"/>
+            </Grid>
+        </GroupBox>
+    </StackPanel>
+</UserControl>

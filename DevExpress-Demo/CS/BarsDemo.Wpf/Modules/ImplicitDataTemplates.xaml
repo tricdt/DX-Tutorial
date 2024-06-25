@@ -1,0 +1,40 @@
+﻿<local:BarsDemoModule x:Class="BarsDemo.ImplicitDataTemplates"
+                      xmlns:local="clr-namespace:BarsDemo"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      mc:Ignorable="d"
+                      d:DesignHeight="300"
+                      d:DesignWidth="300">
+    <local:BarsDemoModule.Resources>
+        <DataTemplate DataType="{x:Type local:CommandModel}">
+            <ContentControl>
+                <dxb:BarButtonItem Content="{Binding Caption}" Glyph="{Binding Glyph, Converter={local:DXImageConverter}}" />
+            </ContentControl>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:GroupModel}">
+            <ContentControl>
+                <dxb:BarSubItem Content="{Binding Caption}" Glyph="{Binding Glyph, Converter={local:DXImageConverter}}" ItemLinksSource="{Binding Commands}" />
+            </ContentControl>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:EditorModel}">
+            <ContentControl>
+                <dxb:BarEditItem Content="{Binding Caption}"
+                                 Glyph="{Binding Glyph, Converter={local:DXImageConverter}}"
+                                 EditValue="{Binding EditValue}"
+                                 EditSettings="{dxe:TextSettings}"
+                                 EditWidth="{Binding RelativeSource={RelativeSource Self}, Path=(dx:ThemeManager.TreeWalker), Converter={local:EditWidthConverter EditWidth=70}}" />
+            </ContentControl>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:LabelModel}">
+            <ContentControl>
+                <dxb:BarStaticItem Content="{Binding Content}" ShowBorder="False" />
+            </ContentControl>
+        </DataTemplate>
+    </local:BarsDemoModule.Resources>
+    <dxb:MainMenuControl BarItemDisplayMode="ContentAndGlyph" ItemsSource="{Binding}" />
+</local:BarsDemoModule>

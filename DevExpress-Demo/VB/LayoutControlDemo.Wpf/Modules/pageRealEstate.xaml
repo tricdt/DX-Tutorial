@@ -1,0 +1,144 @@
+﻿<local:LayoutControlDemoModule x:Class="LayoutControlDemo.pageRealEstate"
+                               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                               xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                               xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                               xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                               xmlns:local="clr-namespace:LayoutControlDemo"
+                               DataContext="{dxmvvm:ViewModelSource Type={x:Type local:RealEstateViewModel}}">
+    <local:LayoutControlDemoModule.Resources>
+        <Style x:Key="LayoutItemStyle" TargetType="dxlc:LayoutItem">
+            <Setter Property="AddColonToLabel" Value="True" />
+        </Style>
+        <DataTemplate x:Key="MainGroupHeaderTemplate">
+            <dxlc:LayoutControl Padding="2" ScrollBars="None" Background="Transparent">
+                <TextBlock Text="{Binding SelectedListing.Price, StringFormat=C0}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBlock Text="{Binding SelectedListing.Address}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
+                <Button Content="Prev"
+                        HorizontalAlignment="Right"
+                        Command="{Binding PreviousListingCommand}" />
+                <Button Content="Next"
+                        HorizontalAlignment="Right"
+                        Command="{Binding NextListingCommand}"/>
+            </dxlc:LayoutControl>
+        </DataTemplate>
+    </local:LayoutControlDemoModule.Resources>
+
+    <dxlc:LayoutControl x:Name="LayoutRoot"
+                        Orientation="Vertical"
+                        StretchContentVertically="False"
+                        Background="Transparent"
+                        ItemStyle="{StaticResource LayoutItemStyle}">
+        <dxlc:LayoutGroup Header="{Binding}"
+                          HeaderTemplate="{StaticResource MainGroupHeaderTemplate}"
+                          View="GroupBox"
+                          Height="235"
+                          ItemSpace="10"
+                          dxlc:LayoutControl.AllowVerticalSizing="True">
+            <Image Source="{Binding SelectedListing.ImageUri}" HorizontalAlignment="Left" />
+            <TextBlock Text="{Binding SelectedListing.Description}" TextWrapping="Wrap" />
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup>
+            <dxlc:LayoutGroup Header="Details"
+                              View="GroupBox"
+                              Width="220"
+                              Orientation="Vertical"
+                              VerticalAlignment="Stretch"
+                              dxlc:LayoutControl.AllowHorizontalSizing="True">
+                <dxlc:LayoutItem Label="Bedrooms">
+                    <TextBlock Text="{Binding SelectedListing.Bedrooms}" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Baths">
+                    <TextBlock Text="{Binding SelectedListing.Baths}" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Built">
+                    <TextBlock Text="{Binding SelectedListing.Built}" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Sq footage">
+                    <TextBlock Text="{Binding SelectedListing.SqFootage, StringFormat=N0}" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Price per sq ft">
+                    <TextBlock Text="{Binding SelectedListing.PricePerSqFoot, StringFormat=C0}" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Lot Size">
+                    <TextBlock Text="{Binding SelectedListing.LotSize, StringFormat=N0}" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="List Date">
+                    <TextBlock Text="{Binding SelectedListing.ListDate, StringFormat=d}" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="MLS #">
+                    <TextBlock Text="{Binding SelectedListing.MLS}" />
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup Orientation="Vertical">
+                <dxlc:LayoutGroup Header="Interior Features" View="GroupBox" Orientation="Vertical">
+                    <dxlc:LayoutItem Label="Kitchen" LabelVerticalAlignment="Top">
+                        <TextBlock Text="{Binding SelectedListing.Kitchen}" TextWrapping="Wrap" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Dining Room">
+                        <TextBlock Text="{Binding SelectedListing.DiningRoom}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Bedroom">
+                        <TextBlock Text="{Binding SelectedListing.Bedroom}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutGroup>
+                        <dxlc:LayoutItem Label="Living Room">
+                            <dxe:CheckEdit IsChecked="{Binding SelectedListing.LivingRoom, Mode=TwoWay}" IsTabStop="False" IsHitTestVisible="False" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Family Room">
+                            <dxe:CheckEdit IsChecked="{Binding SelectedListing.FamilyRoom, Mode=TwoWay}" IsTabStop="False" IsHitTestVisible="False" />
+                        </dxlc:LayoutItem>
+                    </dxlc:LayoutGroup>
+                    <dxlc:LayoutItem Label="Floor Coverings">
+                        <TextBlock Text="{Binding SelectedListing.FloorCoverings}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutGroup>
+                        <dxlc:LayoutItem Label="Laundry">
+                            <dxe:CheckEdit IsChecked="{Binding SelectedListing.Laundry, Mode=TwoWay}" IsTabStop="False" IsHitTestVisible="False" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Fireplace">
+                            <TextBlock Text="{Binding SelectedListing.Fireplace}" VerticalAlignment="Center" />
+                        </dxlc:LayoutItem>
+                    </dxlc:LayoutGroup>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup Header="Exterior Features" View="GroupBox" Orientation="Vertical">
+                    <dxlc:LayoutGroup>
+                        <dxlc:LayoutItem Label="Number of Stories">
+                            <TextBlock Text="{Binding SelectedListing.Stories}" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Roof Type">
+                            <TextBlock Text="{Binding SelectedListing.RoofType}" />
+                        </dxlc:LayoutItem>
+                    </dxlc:LayoutGroup>
+                    <dxlc:LayoutItem Label="Parking">
+                        <TextBlock Text="{Binding SelectedListing.Parking}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Yard/Grounds">
+                        <TextBlock Text="{Binding SelectedListing.Yard}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutGroup>
+                        <dxlc:LayoutItem Label="Pool Type">
+                            <TextBlock Text="{Binding SelectedListing.PoolType}" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Spa/Sauna">
+                            <TextBlock Text="{Binding SelectedListing.Spa}" />
+                        </dxlc:LayoutItem>
+                    </dxlc:LayoutGroup>
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup Header="Additional Information" View="GroupBox" ItemLabelsAlignment="Local" IsCollapsible="True">
+            <dxlc:LayoutItem Label="Amenities" LabelVerticalAlignment="Top">
+                <TextBlock Text="{Binding SelectedListing.Amenities}" TextWrapping="Wrap" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutGroup Orientation="Vertical">
+                <dxlc:LayoutItem Label="HOA Fee">
+                    <TextBlock Text="{Binding SelectedListing.HOAFee, StringFormat=C0}" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="HOA Fee Includes">
+                    <TextBlock Text="{Binding SelectedListing.HOAFeeIncludes}" />
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</local:LayoutControlDemoModule>

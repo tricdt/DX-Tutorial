@@ -1,0 +1,163 @@
+﻿<UserControl x:Class="DevExpress.WindowsMailClient.Wpf.View.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+             xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+             xmlns:dxwuii="http://schemas.devexpress.com/winfx/2008/xaml/windowsui/internal"
+             xmlns:viewmodel="clr-namespace:DevExpress.WindowsMailClient.Wpf.ViewModel"
+             mc:Ignorable="d"
+             dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+             d:DesignHeight="392" d:DesignWidth="699">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type dxwui:HamburgerSubMenuPreviewNavigationButton}" x:Key="PreviewItemStyle">
+            <Setter Property="ShowSelectionIndicator" Value="True" />
+        </Style>
+        <DataTemplate x:Key="{dxt:DXTabControlThemeKey ResourceKey=Background, IsThemeIndependent=true}">
+            <Border Background="Transparent"
+                    BorderBrush="Transparent"
+                    BorderThickness="0" />
+        </DataTemplate>
+        <DataTemplate x:Key="HamburgerMenuHeaderTemplate">
+            <TextBlock FontWeight="SemiBold"
+                       Text="{Binding}"
+                       FontSize="18"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:EmptyItemViewModel}">
+            <dxwui:HamburgerMenuItemSeparator>
+                <dxwui:HamburgerMenuItemSeparator.Template>
+                    <ControlTemplate>
+                        <Border Background="Transparent" Height="12"/>
+                    </ControlTemplate>
+                </dxwui:HamburgerMenuItemSeparator.Template>
+            </dxwui:HamburgerMenuItemSeparator>
+        </DataTemplate>
+        <DataTemplate x:Key="HamburgerMenuSubItemContentTemplate">
+            <TextBlock Text="{Binding}"
+                       FontSize="15"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:AddNewMailCommandViewModel}">
+            <dxwui:HamburgerMenuNavigationButton Content="{Binding Content}"
+                                                 Command="{Binding Command}"
+                                                 Glyph="{Binding Glyph}"
+                                                 AllowGlyphTheming="True"
+                                                 GlyphWidth="24"
+                                                 GlyphHeight="24"
+                                                 ContentTemplate="{StaticResource HamburgerMenuHeaderTemplate}"
+                                                 />
+        </DataTemplate>
+        <DataTemplate x:Key="AccountInfoTemplate">
+            <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding Company}"
+                               FontSize="16" />
+                    <TextBlock Text="{Binding Email}"
+                               FontSize="14" FontWeight="Normal" />
+                </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:MailAccountViewModel}" x:Key="AccountsSubMenuItemTemplate">
+            <dxwui:HamburgerSubMenuNavigationButton Content="{Binding }"
+                                                    Command="{Binding Command}"
+                                                    PreviewContentTemplate="{StaticResource AccountInfoTemplate}"
+                                                    RightContent="{DXBinding 'MailCount == 0 ? `` : MailCount'}"
+                                                    RightContentTemplate="{StaticResource HamburgerMenuSubItemContentTemplate}"
+                                                    ShowInPreview="True"
+                                                    PreviewItemStyle="{StaticResource PreviewItemStyle}"
+                                                    IsSelected="{Binding IsSelected}"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:MailAccountCollectionViewModel}">
+            <dxwui:HamburgerSubMenu Content="{Binding Content}"
+                                    ContentTemplate="{StaticResource HamburgerMenuHeaderTemplate}"
+                                    Glyph="{Binding Glyph}"
+                                    AllowGlyphTheming="True"
+                                    GlyphWidth="24"
+                                    GlyphHeight="24"
+                                    UseDefaultSubMenuImageColorizer="True"
+                                    ItemsSource="{Binding Accounts}"
+                                    FlyoutDisplayMode="Disabled"
+                                    ItemTemplate="{StaticResource AccountsSubMenuItemTemplate}"
+                                    IsStandaloneSelectionItemMode="True">
+                <dxwui:HamburgerSubMenu.Resources>
+                    <Style TargetType="dxwuii:HamburgerSubMenuButton">
+                        <Setter Property="Command" Value="{Binding Command}" />
+                    </Style>
+                </dxwui:HamburgerSubMenu.Resources>
+            </dxwui:HamburgerSubMenu>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodel:MailFolderViewModel}" x:Key="FoldersSubMenuItemTemplate">
+            <dxwui:HamburgerSubMenuNavigationButton Content="{Binding Content}"
+                                                    ContentTemplate="{StaticResource HamburgerMenuSubItemContentTemplate}"
+                                                    RightContent="{DXBinding 'MailCount == 0 ? `` : MailCount'}"
+                                                    RightContentTemplate="{StaticResource HamburgerMenuSubItemContentTemplate}"
+                                                    ShowInPreview="{Binding IsFavorite}"
+                                                    PreviewItemStyle="{StaticResource PreviewItemStyle}"
+                                                    IsSelected="{Binding IsSelected, Mode=TwoWay}"/>
+        </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:MailFolderCollectionViewModel}">
+            <dxwui:HamburgerSubMenu Content="{Binding Content}"
+                                    ContentTemplate="{StaticResource HamburgerMenuHeaderTemplate}"
+                                    FlyoutHeader="{Binding Header}"
+                                    FlyoutHeaderTemplate="{StaticResource HamburgerMenuHeaderTemplate}"
+                                    Glyph="{Binding Glyph}"
+                                    AllowGlyphTheming="True"
+                                    GlyphWidth="24"
+                                    GlyphHeight="24"
+                                    FlyoutPaneWidth="300"
+                                    UseDefaultSubMenuImageColorizer="True"
+                                    ItemsSource="{Binding Folders}"
+                                    ItemTemplate="{StaticResource FoldersSubMenuItemTemplate}"
+                                    IsStandaloneSelectionItemMode="True"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+    </dxmvvm:Interaction.Behaviors>
+    <Grid>
+        <dxlc:LayoutControl Padding="0" Margin="0">
+            <dxwui:HamburgerMenu ViewState="CompactInline"
+                                 AvailableViewStates="Inline"
+                                 dxmvvm:UIRegion.Region="{x:Static viewmodel:Regions.Navigation}"
+                                 OpenPaneWidth="265"
+                                 ShowRevealHighlightEffect="True">
+                <dxwui:HamburgerMenu.BottomBarItemTemplate>
+                    <DataTemplate>
+                        <dxwui:HamburgerMenuBottomBarRadioButton Glyph="{dx:SvgImageSource Uri=../Images/Mail/Mail.svg}"
+                                                                 GroupName="bottombuttonsgroup"
+                                                                 AllowGlyphTheming="True" />
+                    </DataTemplate>
+                </dxwui:HamburgerMenu.BottomBarItemTemplate>
+                <dxwui:HamburgerMenu.Content>
+                    <dxwuii:SplitView DisplayMode="Overlay"
+                                      PanePlacement="Right"
+                                      CompactPaneWidth="0"
+                                      IsPaneOpen="{Binding ShowAccountsSplitView, Mode=TwoWay}">
+                        <dx:DXTabControl AllowMerging="True" MinWidth="400"
+                                         TabContentCacheMode="CacheAllTabs"
+                                         dxmvvm:UIRegion.Region="{x:Static viewmodel:Regions.Documents}"
+                                         Padding="0"
+                                         dxi:WindowChrome.IsHitTestVisibleInChrome="False">
+                            <dx:DXTabControl.View>
+                                <dx:TabControlScrollView HeaderLocation="None" />
+                            </dx:DXTabControl.View>
+                        </dx:DXTabControl>
+                        <dxwuii:SplitView.Pane>
+                            <ContentControl dxmvvm:UIRegion.Region="{x:Static viewmodel:Regions.Settings}"
+                                            Margin="10,0,0,0">
+                                <FrameworkElement.Effect>
+                                    <DropShadowEffect Direction="180"
+                                                      Opacity="0.2"
+                                                      ShadowDepth="2"/>
+                                </FrameworkElement.Effect>
+                            </ContentControl>
+                        </dxwuii:SplitView.Pane>
+                    </dxwuii:SplitView>
+                </dxwui:HamburgerMenu.Content>
+            </dxwui:HamburgerMenu>
+        </dxlc:LayoutControl>
+    </Grid>
+</UserControl>

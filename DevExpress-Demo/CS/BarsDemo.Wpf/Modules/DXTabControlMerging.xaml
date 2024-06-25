@@ -1,0 +1,16 @@
+﻿<local:BarsDemoModule x:Class="BarsDemo.DXTabControlMerging"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:local="clr-namespace:BarsDemo"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core">
+    <local:RootView ClipToBounds="True">
+        <dx:DXTabControl AllowMerging="True" TabContentCacheMode="None" Margin="-1,0,-1,-1">
+            <dx:DXTabItem Header="Font Settings">
+                <local:FontSettingsView />
+            </dx:DXTabItem>
+            <dx:DXTabItem Header="Alignment">
+                <local:AlignmentView />
+            </dx:DXTabItem>
+        </dx:DXTabControl>
+    </local:RootView>
+</local:BarsDemoModule>

@@ -1,0 +1,80 @@
+﻿<mb:DemoModule x:Class="DevExpress.VideoRent.Wpf.CurrentCustomerRentsDetailView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:mb="clr-namespace:DevExpress.VideoRent.Wpf.ModulesBase"
+    ShowMethodType="{DynamicResource ShowType}">
+
+    <mb:DemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/CommonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <helpers:DataSource x:Key="DataSource" />
+            <mb:ClassicShowType x:Key="ShowType" Category="{x:Static local:WpfViewsManager.CategoryCurrentCustomerRents}" Select="False" />
+        </ResourceDictionary>
+    </mb:DemoModule.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}">
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static mb:ShowType.CloseSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static mb:ClassicShowType.SelectSignalSlotProperty}" Value="{Binding FocusSignal}" />
+            <helpers:BindingInfo ElementName="BbiView" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding CommandChangeViewOptions}" />
+            <helpers:BindingInfo ElementName="BbiReceiptPeriod" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding CommandChangePeriod}" />
+            <helpers:BindingInfo ElementName="BbiReturn" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding CommandReturnRents}" />
+            <helpers:BindingInfo ElementName="BbiReturn" Property="{x:Static ContentElement.IsEnabledProperty}" Value="{Binding ListEdit.CanReturnItems}" />
+            <helpers:BindingInfo ElementName="BbiCheckActive" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding ListEdit.CommandCheckAllActiveRents}" />
+            <helpers:BindingInfo ElementName="BbiCheckActive" Property="{x:Static ContentElement.IsEnabledProperty}" Value="{Binding ListEdit.CanCheckActiveRents}" />
+            <helpers:BindingInfo ElementName="BbiChangeCustomer" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding CommandChangeCustomer}" />
+            <helpers:BindingInfo ElementName="BbiFlipLayout" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding ListEdit.CommandFlipLayout}" />
+            <helpers:BindingInfo ElementName="BbiRefresh" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding EditObject.CommandReload}" />
+            <helpers:BindingInfo ElementName="BbiCloseDetails" Property="{x:Static ContentElement.IsEnabledProperty}" Value="{Binding HasDetailsToClose}" />
+            <helpers:BindingInfo ElementName="BbiCloseDetails" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding CommandCloseDetails}"/>
+            <helpers:BindingInfo ElementName="CurrentCustomerRentsEditViewPresenter" Property="{x:Static ContentControl.ContentProperty}" Value="{Binding ListEdit.View}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <dxb:BarManager>
+            <dxb:BarManager.Items>
+                <dxb:BarButtonItem x:Name="BbiRentSell" local:ImagesHelper.VideoRentImage="Order" Content="{helpers:ConstString ID=RentSell}" IsEnabled="False" />
+                <dxb:BarButtonItem x:Name="BbiReturn" local:ImagesHelper.VideoRentImage="Return" Content="{helpers:ConstString ID=Return}" />
+                <dxb:BarButtonItem x:Name="BbiCheckActive" local:ImagesHelper.VideoRentImage="ActiveRents" Content="{helpers:ConstString ID=CheckActiveRentals}" />
+                <dxb:BarButtonItem x:Name="BbiChangeCustomer" local:ImagesHelper.VideoRentImage="UserKey" Content="{helpers:ConstString ID=ChangeCustomer}" />
+                <dxb:BarButtonItem x:Name="BbiReceiptPeriod" local:ImagesHelper.VideoRentImage="Period" Content="{helpers:ConstString ID=ReceiptPeriod}" />
+                <dxb:BarButtonItem x:Name="BbiView" local:ImagesHelper.VideoRentImage="View" Content="{helpers:ConstString ID=ViewOptions}" />
+                <dxb:BarButtonItem x:Name="BbiFlipLayout" local:ImagesHelper.VideoRentImage="LayoutFlip" Content="{helpers:ConstString ID=FlipLayout}" />
+                <dxb:BarButtonItem x:Name="BbiRefresh" local:ImagesHelper.VideoRentImage="Refresh" Content="{helpers:ConstString ID=Refresh}" />
+                <dxb:BarButtonItem x:Name="BbiCloseDetails" local:ImagesHelper.VideoRentImage="CloseDetails" Content="{helpers:ConstString ID=CloseDetailViews}" />
+            </dxb:BarManager.Items>
+            <dxr:RibbonControl>
+                <dxr:RibbonDefaultPageCategory>
+                    <dxr:RibbonPage Caption="{helpers:ConstString ID=Home}">
+                        <dxr:RibbonPageGroup Caption="{helpers:ConstString ID=RentalRecordManagement}">
+                            <dxb:BarButtonItemLink BarItemName="BbiRentSell" RibbonStyle="Large" />
+                            <dxb:BarButtonItemLink BarItemName="BbiReturn" RibbonStyle="Large" />
+                            <dxb:BarButtonItemLink BarItemName="BbiCheckActive" RibbonStyle="Large" />
+                            <dxb:BarItemLinkSeparator />
+                            <dxb:BarButtonItemLink BarItemName="BbiChangeCustomer" RibbonStyle="Large" />
+                            <dxb:BarButtonItemLink BarItemName="BbiReceiptPeriod" RibbonStyle="Large" />
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{helpers:ConstString ID=Options}">
+                            <dxb:BarButtonItemLink BarItemName="BbiFlipLayout" RibbonStyle="Large" />
+                            <dxb:BarButtonItemLink BarItemName="BbiView" RibbonStyle="Large" />
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{helpers:ConstString ID=Details}">
+                            <dxb:BarButtonItemLink BarItemName="BbiCloseDetails" RibbonStyle="Large" />
+                        </dxr:RibbonPageGroup>
+                    </dxr:RibbonPage>
+                </dxr:RibbonDefaultPageCategory>
+            </dxr:RibbonControl>
+        </dxb:BarManager>
+        <ContentControl Grid.Row="1" x:Name="CurrentCustomerRentsEditViewPresenter" Style="{StaticResource ModulePresenter}" />
+    </Grid>
+</mb:DemoModule>

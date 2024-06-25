@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="ProductsDemo.Modules.SchedulerModule"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduling"
+             xmlns:local="clr-namespace:ProductsDemo.Modules"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <local:SchedulerModuleViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <dxsch:SchedulerControl CommandBarStyle="Ribbon" Name="schedulerControl1" ActiveViewType="WeekView">
+            <dxsch:SchedulerControl.DataSource>
+                <dxsch:DataSource AppointmentsSource="{Binding Appointments}" ResourceSharing="True">
+                    <dxsch:DataSource.AppointmentMappings>
+                        <dxsch:AppointmentMappings Start="StartDate"
+                                                    End="EndDate"
+                                                    AllDay="AllDay"
+                                                    Description="Description"
+                                                    LabelId="Label"
+                                                    Location="Location"
+                                                    Subject="Subject"
+                                                    RecurrenceInfo="RecurrenceInfo"
+                                                    StatusId="Status"
+                                                    Type="EventType"/>
+                    </dxsch:DataSource.AppointmentMappings>
+                </dxsch:DataSource>
+            </dxsch:SchedulerControl.DataSource>
+        </dxsch:SchedulerControl>
+        <dxe:DateNavigator Grid.Column="1" >
+            <dxe:DateNavigator.StyleSettings>
+                <dxsch:SchedulerDateNavigatorStyleSettings Scheduler="{Binding ElementName=schedulerControl1}">
+                </dxsch:SchedulerDateNavigatorStyleSettings>
+            </dxe:DateNavigator.StyleSettings>
+        </dxe:DateNavigator>
+    </Grid>
+</UserControl>

@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" standalone="yes"?>
+<Sales>
+  <Shop>
+    <ShopName>Shop A</ShopName>
+    <ShopAddr>Sunset Blvd 847, San Francisco, CA</ShopAddr>
+    <ShopPhone>+1-415-000-0000</ShopPhone>
+    <ShopFax>+1-415-000-0003</ShopFax>
+    <Latitude>37.748</Latitude>
+    <Longitude>-122.496</Longitude>
+    <ShopStatistics>
+      <Statistic>
+        <ProductsGroupName>Baby Supplies</ProductsGroupName>
+        <ProductGroupSales>4002</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Beverages</ProductsGroupName>
+        <ProductGroupSales>15643</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Baked Goods</ProductsGroupName>
+        <ProductGroupSales>5193</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Frozen Foods</ProductsGroupName>
+        <ProductGroupSales>8675</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Fruits</ProductsGroupName>
+        <ProductGroupSales>9843</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Grains &amp; Cereals</ProductsGroupName>
+        <ProductGroupSales>7543</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Household Goods</ProductsGroupName>
+        <ProductGroupSales>6820</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Meat &amp; Poultry</ProductsGroupName>
+        <ProductGroupSales>14723</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Milk &amp; Dairy</ProductsGroupName>
+        <ProductGroupSales>11245</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Seafood</ProductsGroupName>
+        <ProductGroupSales>10854</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Spices</ProductsGroupName>
+        <ProductGroupSales>3790</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Vegetables</ProductsGroupName>
+        <ProductGroupSales>8654</ProductGroupSales>
+      </Statistic>
+    </ShopStatistics>
+  </Shop>
+
+  <Shop>
+    <ShopName>Shop B</ShopName>
+    <ShopAddr>Garcia Ave 978, San Francisco, CA</ShopAddr>
+    <ShopPhone>+1-415-000-0001</ShopPhone>
+    <ShopFax>+1-415-000-0004</ShopFax>
+    <Latitude>37.745</Latitude>
+    <Longitude>-122.459</Longitude>
+    <ShopStatistics>
+      <Statistic>
+        <ProductsGroupName>Baby Supplies</ProductsGroupName>
+        <ProductGroupSales>4801</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Beverages</ProductsGroupName>
+        <ProductGroupSales>17209</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Baked Goods</ProductsGroupName>
+        <ProductGroupSales>5341</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Frozen Foods</ProductsGroupName>
+        <ProductGroupSales>9843</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Fruits</ProductsGroupName>
+        <ProductGroupSales>10505</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Grains &amp; Cereals</ProductsGroupName>
+        <ProductGroupSales>8812</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Household Goods</ProductsGroupName>
+        <ProductGroupSales>9345</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Meat &amp; Poultry</ProductsGroupName>
+        <ProductGroupSales>16141</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Milk &amp; Dairy</ProductsGroupName>
+        <ProductGroupSales>11995</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Seafood</ProductsGroupName>
+        <ProductGroupSales>12556</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Spices</ProductsGroupName>
+        <ProductGroupSales>4504</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Vegetables</ProductsGroupName>
+        <ProductGroupSales>10935</ProductGroupSales>
+      </Statistic>
+    </ShopStatistics>
+  </Shop>
+
+  <Shop>
+    <ShopName>Shop C</ShopName>
+    <ShopAddr>Portero Ave 1543, San Francisco, CA</ShopAddr>
+    <ShopPhone>+1-415-000-0002</ShopPhone>
+    <ShopFax>+1-415-000-0005</ShopFax>
+    <Latitude>37.751</Latitude>
+    <Longitude>-122.405</Longitude>
+    <ShopStatistics>
+      <Statistic>
+        <ProductsGroupName>Baby Supplies</ProductsGroupName>
+        <ProductGroupSales>4353</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Beverages</ProductsGroupName>
+        <ProductGroupSales>12310</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Baked Goods</ProductsGroupName>
+        <ProductGroupSales>4009</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Frozen Foods</ProductsGroupName>
+        <ProductGroupSales>6541</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Fruits</ProductsGroupName>
+        <ProductGroupSales>7540</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Grains &amp; Cereals</ProductsGroupName>
+        <ProductGroupSales>8241</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Household Goods</ProductsGroupName>
+        <ProductGroupSales>6043</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Meat &amp; Poultry</ProductsGroupName>
+        <ProductGroupSales>15233</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Milk &amp; Dairy</ProductsGroupName>
+        <ProductGroupSales>14587</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Seafood</ProductsGroupName>
+        <ProductGroupSales>9874</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Spices</ProductsGroupName>
+        <ProductGroupSales>4201</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Vegetables</ProductsGroupName>
+        <ProductGroupSales>9856</ProductGroupSales>
+      </Statistic>
+    </ShopStatistics>
+  </Shop>
+
+  <Shop>
+    <ShopName>Shop D</ShopName>
+    <ShopAddr>Lombard St. 1021, San Francisco, CA</ShopAddr>
+    <ShopPhone>+1-415-000-0006</ShopPhone>
+    <ShopFax>+1-415-000-0008</ShopFax>
+    <Latitude>37.7998</Latitude>
+    <Longitude>-122.438</Longitude>
+    <ShopStatistics>
+      <Statistic>
+        <ProductsGroupName>Baby Supplies</ProductsGroupName>
+        <ProductGroupSales>4211</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Beverages</ProductsGroupName>
+        <ProductGroupSales>16097</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Baked Goods</ProductsGroupName>
+        <ProductGroupSales>4998</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Frozen Foods</ProductsGroupName>
+        <ProductGroupSales>7911</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Fruits</ProductsGroupName>
+        <ProductGroupSales>8052</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Grains &amp; Cereals</ProductsGroupName>
+        <ProductGroupSales>8100</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Household Goods</ProductsGroupName>
+        <ProductGroupSales>7917</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Meat &amp; Poultry</ProductsGroupName>
+        <ProductGroupSales>15811</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Milk &amp; Dairy</ProductsGroupName>
+        <ProductGroupSales>13206</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Seafood</ProductsGroupName>
+        <ProductGroupSales>11105</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Spices</ProductsGroupName>
+        <ProductGroupSales>4011</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Vegetables</ProductsGroupName>
+        <ProductGroupSales>11807</ProductGroupSales>
+      </Statistic>
+    </ShopStatistics>
+  </Shop>
+
+  <Shop>
+    <ShopName>Shop E</ShopName>
+    <ShopAddr>El Camino Real 958, San Francisco, CA</ShopAddr>
+    <ShopPhone>+1-415-000-0007</ShopPhone>
+    <ShopFax>+1-415-000-0009</ShopFax>
+    <Latitude>37.607</Latitude>
+    <Longitude>-122.395</Longitude>
+    <ShopStatistics>
+      <Statistic>
+        <ProductsGroupName>Baby Supplies</ProductsGroupName>
+        <ProductGroupSales>4907</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Beverages</ProductsGroupName>
+        <ProductGroupSales>17125</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Baked Goods</ProductsGroupName>
+        <ProductGroupSales>5358</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Frozen Foods</ProductsGroupName>
+        <ProductGroupSales>10023</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Fruits</ProductsGroupName>
+        <ProductGroupSales>9970</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Grains &amp; Cereals</ProductsGroupName>
+        <ProductGroupSales>8754</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Household Goods</ProductsGroupName>
+        <ProductGroupSales>9592</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Meat &amp; Poultry</ProductsGroupName>
+        <ProductGroupSales>16552</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Milk &amp; Dairy</ProductsGroupName>
+        <ProductGroupSales>13752</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Seafood</ProductsGroupName>
+        <ProductGroupSales>14725</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Spices</ProductsGroupName>
+        <ProductGroupSales>3746</ProductGroupSales>
+      </Statistic>
+      <Statistic>
+        <ProductsGroupName>Vegetables</ProductsGroupName>
+        <ProductGroupSales>11001</ProductGroupSales>
+      </Statistic>
+    </ShopStatistics>
+  </Shop>
+</Sales>

@@ -1,0 +1,51 @@
+﻿<mb:CustomShowUserControl x:Class="DevExpress.VideoRent.Wpf.ArtistsViewOptionsEditView"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:mb="clr-namespace:DevExpress.VideoRent.Wpf.ModulesBase"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    ShowMethodType="{DynamicResource ShowType}" helpers:ElementHelper.FixMinHeight="True" MinWidth="300" helpers:PopupWindow.FixedSize="True">
+
+    <mb:CustomShowUserControl.Resources>
+        <ResourceDictionary>
+            <helpers:DataSource x:Key="DataSource" />
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore" />
+            <mb:PopupShowType x:Key="ShowType" Title="{helpers:ConstString ID=ListViewOptions}" />
+        </ResourceDictionary>
+    </mb:CustomShowUserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding DataObject, Source={StaticResource DataSource}}">
+            <helpers:BindingInfo ElementName="resource:ElementLayoutDataStore" Property="{x:Static local:ElementLayoutDataStore.DisposeSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static mb:ShowType.CloseSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static helpers:CustomEventCommandHelper.ClosingProperty}" Value="{Binding CommandDispose}" />
+            <helpers:BindingInfo ElementName="AllowPerPixelScrolling" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding Detail.ArtistsEdit.GridUIOptions.AllowPerPixelScrolling, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="AllowCascadeUpdate" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding Detail.ArtistsEdit.GridUIOptions.AllowCascadeUpdate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="AllowEditing" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding Detail.ArtistsEdit.GridUIOptions.AllowEditing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="ShowTheAutoFilterRow" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding Detail.ArtistsEdit.GridUIOptions.ShowTheAutoFilterRow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="ShowVerticalLines" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding Detail.ArtistsEdit.GridUIOptions.ShowVerticalLines, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:ElementLayoutInfo ElementName="MainLayoutControl" StoreFolder="LayoutControl:ArtistsViewOptionsEdit-MainLayoutControl" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <dxlc:LayoutControl x:Name="MainLayoutControl">
+        <dxlc:LayoutGroup Orientation="Vertical">
+            <dxlc:LayoutItem>
+                <dxe:CheckEdit x:Name="AllowPerPixelScrolling" Content="{helpers:ConstString ID=AllowPerPixelScrolling}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem>
+                <dxe:CheckEdit x:Name="AllowCascadeUpdate" Content="{helpers:ConstString ID=AllowCascadeUpdate}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem>
+                <dxe:CheckEdit x:Name="AllowEditing" Content="{helpers:ConstString ID=AllowDataEditingViaListViews}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem>
+                <dxe:CheckEdit x:Name="ShowTheAutoFilterRow" Content="{helpers:ConstString ID=ShowTheAutoFilterRow}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem>
+                <dxe:CheckEdit x:Name="ShowVerticalLines" Content="{helpers:ConstString ID=ShowVerticalLines}" />
+            </dxlc:LayoutItem>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</mb:CustomShowUserControl>

@@ -1,0 +1,3 @@
+DevExpress.Dialogs.v{DXVersion}.Core
+DevExpress.Xpf.Dialogs.v{DXVersion}
+DevExpress.Xpf.TypedStyles.v{DXVersion}

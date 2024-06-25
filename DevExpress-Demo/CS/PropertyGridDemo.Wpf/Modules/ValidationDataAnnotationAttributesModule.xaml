@@ -1,0 +1,29 @@
+﻿<local:PropertyGridDemoModule xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                              xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                              xmlns:local="clr-namespace:PropertyGridDemo"
+                              xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+                              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                              mc:Ignorable="d"
+                              x:Class="PropertyGridDemo.ValidationDataAnnotationAttributesModule"
+                              d:DesignHeight="400"
+                              d:DesignWidth="600"
+                              DataContext="{dxmvvm:ViewModelSource Type={x:Type local:ValidationDataAnnotationAttributesViewModel}}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <dxdb:CodeViewer CodePath="Data" CurrentItem="{Binding Data}" />
+        <dxprg:PropertyGridControl Grid.Column="1"
+                                   x:Name="pGrid"
+                                   Margin="12"
+                                   ExpandCategoriesWhenSelectedObjectChanged="True"
+                                   ShowCategories="True"
+                                   SelectedObject="{Binding Data}"
+                                   dxe:ValidationService.AllowAccessibilityAlerts="True"/>
+    </Grid>
+</local:PropertyGridDemoModule>

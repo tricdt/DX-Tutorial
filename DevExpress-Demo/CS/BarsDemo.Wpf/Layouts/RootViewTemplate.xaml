@@ -1,0 +1,49 @@
+﻿<ResourceDictionary
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:local="clr-namespace:BarsDemo">
+    <Style TargetType="{x:Type local:RootView}">
+        <Setter Property="dxb:MergingProperties.ToolBarMergeStyle" Value="All"/>
+        <Setter Property="dxb:MergingProperties.ElementMergingBehavior" Value="InternalWithExternal"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:RootView}">
+                    <Grid x:Name="rootGrid" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <dxb:MainMenuControl BarItemDisplayMode="ContentAndGlyph" Caption="MainMenu" AllowCustomizationMenu="False">
+                            <dxb:BarSubItem Content="File" Glyph="{dx:DXImage SvgImages/Icon Builder/Actions_Home.svg}">
+                                <dxb:BarButtonItem Content="New" Glyph="{dx:DXImage SvgImages/Outlook Inspired/New.svg}"/>
+                                <dxb:BarButtonItem Content="Open" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Open.svg}"/>
+                                <dxb:BarButtonItem Content="Save" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Save.svg}"/>
+                            </dxb:BarSubItem>
+                            <dxb:BarSubItem dxb:MergingProperties.Name="settings" Content="Settings" Glyph="{dx:DXImage SvgImages/Scheduling/ViewSettings.svg}"/>
+                            <dxb:BarEditItem x:Name="bMergeStyle" Content="Merge Style:" Alignment="Far" EditValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(dxb:MergingProperties.ToolBarMergeStyle), Mode=TwoWay}">
+                                <dxb:BarEditItem.EditSettings>
+                                    <dxe:ComboBoxEditSettings>
+                                        <dxe:ComboBoxEditSettings.Items>
+                                            <dxb:ToolBarMergeStyle>All</dxb:ToolBarMergeStyle>
+                                            <dxb:ToolBarMergeStyle>MainMenuAndStatusBar</dxb:ToolBarMergeStyle>
+                                            <dxb:ToolBarMergeStyle>None</dxb:ToolBarMergeStyle>
+                                        </dxe:ComboBoxEditSettings.Items>
+                                    </dxe:ComboBoxEditSettings>
+                                </dxb:BarEditItem.EditSettings>
+                            </dxb:BarEditItem>
+                            <dxb:BarCheckItem x:Name="bAllowMerging" Content="AllowMerging" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(dxb:MergingProperties.ElementMergingBehavior), Mode=TwoWay}" Alignment="Far"/>
+                        </dxb:MainMenuControl>
+                        <dxb:ToolBarControl Grid.Row="1" Caption="ToolBar" HideWhenEmpty="True" AllowCustomizationMenu="False" AllowQuickCustomization="False"/>
+                        <ContentPresenter Grid.Row="2"/>
+                        <dxb:StatusBarControl Grid.Row="3" HideWhenEmpty="True" Caption="StatusBar" AllowCustomizationMenu="False"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

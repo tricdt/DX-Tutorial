@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="GridDemo.Filtering.RangeElementRangeControlTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxcr="http://schemas.devexpress.com/winfx/2008/xaml/charts/rangecontrolclient"
+             xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <!--#region !-->
+        <dxfui:RangeFilterElement Grid.Row="1" Margin="0,8,0,0" FieldName="Quantity"
+                                  Context="{Binding ElementName=grid, Path=FilteringContext}">
+            <dxfui:RangeFilterElement.FilterModelTemplate>
+                <DataTemplate>
+                    <dxe:RangeControl RangeEnd="{Binding Max}" RangeStart="{Binding Min}"
+                                      SelectionRangeEnd="{DXBinding 'To', BackExpr='($double)@value', Mode=TwoWay}"
+                                      SelectionRangeStart="{DXBinding 'From', BackExpr='($double)@value', Mode=TwoWay}">
+                        <dxcr:NumericChartRangeControlClient x:Name="rangeControlClient" GridAlignment="1" ShowGridLines="False"
+                                                             ItemsSource="{Binding FilterValues}" ValueDataMember="Count" ArgumentDataMember="Value">
+                            <dxcr:NumericChartRangeControlClient.View>
+                                <dxcr:RangeControlClientBarView />
+                            </dxcr:NumericChartRangeControlClient.View>
+                        </dxcr:NumericChartRangeControlClient>
+                    </dxe:RangeControl>
+                </DataTemplate>
+            </dxfui:RangeFilterElement.FilterModelTemplate>
+        </dxfui:RangeFilterElement>
+        <!--#endregion-->
+        <dxg:GridControl Name="grid" FilterString="[Quantity] Between(5, 15)">
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="view" NavigationStyle="Row" />
+            </dxg:GridControl.View>
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="ProductName" Width="*" />
+                <dxg:GridColumn FieldName="UnitPrice" Width="*" />
+                <dxg:GridColumn FieldName="Quantity" Width="*" />
+                <dxg:GridColumn FieldName="ShipCity" Width="*" />
+            </dxg:GridControl.Columns>
+        </dxg:GridControl>
+    </Grid>
+</UserControl>

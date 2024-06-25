@@ -1,0 +1,87 @@
+﻿<local:SchedulingDemoModule x:Class="SchedulingDemo.WindowsCustomizationDemoModule"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                            xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                            xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                            xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                            xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduling"
+                            xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                            xmlns:local="clr-namespace:SchedulingDemo"
+                            xmlns:vm="clr-namespace:SchedulingDemo.ViewModels"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:dxscht="http://schemas.devexpress.com/winfx/2008/xaml/scheduling/themekeys"
+                            mc:Ignorable="d"
+                            d:DesignWidth="800"
+                            d:DesignHeight="600"
+                            DataContext="{dxmvvm:ViewModelSource vm:WindowsCustomizationDemoViewModel}">
+
+    <local:SchedulingDemoModule.Resources>
+        <Style x:Key="{dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Appointment_Options_LabelAs}"
+               TargetType="{x:Type dxb:BarSubItem}"
+               BasedOn="{StaticResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Appointment_Options_LabelAs}}">
+            <Setter Property="IsVisible" Value="False"/>
+        </Style>
+        <Style x:Key="{dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Appointment_Options_ShowTimeAs}"
+               TargetType="{x:Type dxb:BarSubItem}"
+               BasedOn="{StaticResource {dxscht:SchedulerCommandBarThemeKey ResourceKey=Items_Appointment_Options_ShowTimeAs}}">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+    </local:SchedulingDemoModule.Resources>
+    <DockPanel>
+        <!--#region Options-->
+        <dxlc:LayoutControl Name="PART_Options" DockPanel.Dock="Right" Orientation="Vertical" Padding="12,4,12,12" MinWidth="210" dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap">
+            <GroupBox Header="Custom Windows" VerticalAlignment="Top" Margin="0,1,0,0">
+                <dxlc:LayoutControl Padding="0" Orientation="Vertical">
+                    <dxe:CheckEdit x:Name="customAppointmentWindow" Content="Custom Appointment Window" IsChecked="True" />
+                    <dxe:CheckEdit x:Name="customGotoDateWindow" Content="Custom Go To Date Window" IsChecked="True" />
+                    <dxe:CheckEdit x:Name="customTimeRulerWindow" Content="Custom Time Ruler Window" IsChecked="True" />
+                </dxlc:LayoutControl>
+            </GroupBox>
+        </dxlc:LayoutControl>
+        <!--#endregion Options-->
+        <dxsch:SchedulerControl x:Name="scheduler"
+                                ShowBorder="False"
+                                WorkTime="{dxsch:TimeSpanRange Start=8:0:0, End=22:0:0}"
+                                TimeRulerWindowShowing="OnTimeRulerWindowShowing"
+                                InitNewAppointment="{DXEvent Handler='InitNewAppointment(@args.Appointment)'}"
+                                CommandBarStyle="Ribbon">
+            <dxsch:SchedulerControl.OptionsWindows>
+                <dxsch:OptionsWindows AppointmentWindowType="{DXBinding '@ElementName(customAppointmentWindow).IsChecked ? typeof($local:CustomAppointmentWindow) : null'}"
+                                      GotoDateWindowType="{DXBinding '@ElementName(customGotoDateWindow).IsChecked ? typeof($local:CustomGotoDateWindow) : null'}"
+                                      TimeRulerWindowType="{DXBinding '@ElementName(customTimeRulerWindow).IsChecked ? typeof($local:CustomTimeRulerWindow) : null'}" />
+            </dxsch:SchedulerControl.OptionsWindows>
+            <dxsch:DayView x:Name="dayView"
+                           SnapToCellsMode="Never"
+                           TimeScale="00:30:00"
+                           DayCount="7"
+                           ShowWorkTimeOnly="True"
+                           ShowAppointmentStatus="False"
+                           ShowAppointmentLocation="False"
+                           ShowAllDayAppointmentStatus="False"
+                           ShowAllDayAppointmentLocation="False"/>
+            <dxsch:SchedulerControl.DataSource>
+                <dxsch:DataSource AppointmentsSource="{Binding GymEvents}"
+                                  ResourcesSource="{Binding Trainers}">
+                    <dxsch:DataSource.AppointmentMappings>
+                        <dxsch:AppointmentMappings Id="Id"
+                                                   AllDay="AllDay"
+                                                   Type="Type"
+                                                   Start="StartTime"
+                                                   End="EndTime"
+                                                   Subject="Caption"
+                                                   ResourceId="TrainerId"
+                                                   Location="Room"
+                                                   Description="Description"
+                                                   RecurrenceInfo="RecurrenceInfo"
+                                                   Reminder="ReminderInfo" />
+                    </dxsch:DataSource.AppointmentMappings>
+                    <dxsch:DataSource.ResourceMappings>
+                        <dxsch:ResourceMappings Id="Id" Caption="Name" />
+                    </dxsch:DataSource.ResourceMappings>
+                </dxsch:DataSource>
+            </dxsch:SchedulerControl.DataSource>
+        </dxsch:SchedulerControl>
+    </DockPanel>
+</local:SchedulingDemoModule>

@@ -1,0 +1,273 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.LegendsDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ChartsDemo">
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+    <DockPanel>
+        <!--#region ChartsDemoRibbon & Options-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}" />
+
+        <ScrollViewer
+            Name="PART_Options"
+            Style="{StaticResource optionsScrollViewerStyle}">
+            <StackPanel
+                Style="{StaticResource optionsRootStackPanelStyle}">
+                <GroupBox
+                    Header="Marker Mode">
+                    <dxe:ListBoxEdit
+                        Name="lbMarkerMode"
+                        SelectedIndex="1">
+                        <dxe:ListBoxEdit.Items>
+                            <dxe:ListBoxEditItem
+                                Content="Marker"
+                                Tag="{x:Static dxc:LegendMarkerMode.Marker}" />
+                            <dxe:ListBoxEditItem
+                                Content="Check Box"
+                                Tag="{x:Static dxc:LegendMarkerMode.CheckBox}" />
+                            <dxe:ListBoxEditItem
+                                Content="Marker and Check Box"
+                                Tag="{x:Static dxc:LegendMarkerMode.MarkerAndCheckBox}" />
+                            <dxe:ListBoxEditItem
+                                Content="Check Box and Marker"
+                                Tag="{x:Static dxc:LegendMarkerMode.CheckBoxAndMarker}" />
+                            <dxe:ListBoxEditItem
+                                Content="None"
+                                Tag="{x:Static dxc:LegendMarkerMode.None}" />
+                        </dxe:ListBoxEdit.Items>
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox
+                    Header="Legend Mode">
+                    <dxe:ListBoxEdit
+                        Name="lbLegendMode"
+                        SelectedIndex="2">
+                        <dxe:ListBoxEdit.Items>
+                            <dxe:ListBoxEditItem
+                                Content="Single Legend"
+                                Tag="{x:Static local:LegendMode.Common}" />
+                            <dxe:ListBoxEditItem
+                                Content="Multiple Pane Bound, Out of Panes"
+                                Tag="{x:Static local:LegendMode.SeparateOutsidePane}" />
+                            <dxe:ListBoxEditItem
+                                Content="Multiple Pane Bound, Within Panes"
+                                Tag="{x:Static local:LegendMode.SeparateInsidePane}" />
+                        </dxe:ListBoxEdit.Items>
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox
+                    Header="Crosshair Content Mode">
+                    <dxe:ListBoxEdit
+                        x:Name="lbeCrosshairContentMode"
+                        ItemsSource="{dxe:EnumItemsSource EnumType=dxc:CrosshairContentShowMode}"
+                        SelectedIndex="0">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+
+        <dxc:ChartControl
+            Name="chart"
+            AnimationMode="OnLoad"
+            AutoLayout="False">
+            <dxc:ChartControl.DataSource>
+                <local:ResourceUsageData />
+            </dxc:ChartControl.DataSource>
+            <dxc:ChartControl.Diagram>
+                <dxc:XYDiagram2D>
+                    <!--#region Panes-->
+                    <dxc:XYDiagram2D.DefaultPane>
+                        <dxc:Pane
+                            x:Name="defaultPane" />
+                    </dxc:XYDiagram2D.DefaultPane>
+                    <dxc:XYDiagram2D.Panes>
+                        <dxc:Pane
+                            x:Name="additionalPane"
+                            Padding="0,10,0,0" />
+                    </dxc:XYDiagram2D.Panes>
+                    <!--#endregion-->
+                    <!--#region Axes-->
+                    <dxc:XYDiagram2D.AxisX>
+                        <dxc:AxisX2D>
+                            <dxc:AxisX2D.VisibilityInPanes>
+                                <dxc:VisibilityInPane
+                                    Pane="{Binding ElementName=defaultPane}"
+                                    Visible="False" />
+                            </dxc:AxisX2D.VisibilityInPanes>
+                            <dxc:AxisX2D.WholeRange>
+                                <dxc:Range
+                                    AutoSideMargins="False"
+                                    SideMarginsValue="0"
+                                    MinValue="00:00:01"
+                                    MaxValue="0:0:59"/>
+                            </dxc:AxisX2D.WholeRange>
+                            <dxc:AxisX2D.Label>
+                                <dxc:AxisLabel
+                                    TextPattern="{}{A:%s} sec" />
+                            </dxc:AxisX2D.Label>
+                        </dxc:AxisX2D>
+                    </dxc:XYDiagram2D.AxisX>
+                    <dxc:XYDiagram2D.AxisY>
+                        <dxc:AxisY2D>
+                            <dxc:AxisY2D.WholeRange>
+                                <dxc:Range
+                                    SideMarginsValue="0"
+                                    MinValue="0"
+                                    MaxValue="0.6" />
+                            </dxc:AxisY2D.WholeRange>
+                            <dxc:AxisY2D.Label>
+                                <dxc:AxisLabel
+                                    TextPattern="{}{V:P0}" />
+                            </dxc:AxisY2D.Label>
+                        </dxc:AxisY2D>
+                    </dxc:XYDiagram2D.AxisY>
+                    <dxc:XYDiagram2D.SecondaryAxesY>
+                        <dxc:SecondaryAxisY2D
+                            x:Name="additionalPaneAxisY"
+                            Alignment="Near"
+                            Interlaced="True"
+                            GridLinesVisible="True">
+                            <dxc:SecondaryAxisY2D.WholeRange>
+                                <dxc:Range
+                                    SideMarginsValue="0"
+                                    MinValue="0"
+                                    MaxValue="172" />
+                            </dxc:SecondaryAxisY2D.WholeRange>
+                            <dxc:SecondaryAxisY2D.Label>
+                                <dxc:AxisLabel
+                                    TextPattern="{}{V}MiB" />
+                            </dxc:SecondaryAxisY2D.Label>
+                        </dxc:SecondaryAxisY2D>
+                    </dxc:XYDiagram2D.SecondaryAxesY>
+                    <!--#endregion-->
+                    <!--#region Series-->
+                    <dxc:LineSeries2D
+                        x:Name="process1CpuUsage"
+                        DisplayName="Process 1"
+                        ArgumentDataMember="Second"
+                        ValueDataMember="Process1CpuUsage"
+                        Pane="{Binding ElementName=defaultPane}"
+                        Legend="{DXBinding '@e(lbLegendMode).SelectedItem.Tag != $local:LegendMode.Common ? @e(defaultPaneLegend) : null'}"
+                        LegendTextPattern="{DXBinding '@e(lbLegendMode).SelectedItem.Tag == $local:LegendMode.Common ? `{S} CPU Usage` : `{S}`'}"
+                        CrosshairLabelPattern="{DXBinding '@e(lbeCrosshairContentMode).EditValue == $dxc:CrosshairContentShowMode.Legend ? `{V:P0}` : `{S}: {V:P0}`'}"
+                        AnimationAutoStartMode="SetStartState" />
+                    <dxc:LineSeries2D
+                        x:Name="process2CpuUsage"
+                        DisplayName="Process 2"
+                        ArgumentDataMember="Second"
+                        ValueDataMember="Process2CpuUsage"
+                        Pane="{Binding ElementName=defaultPane}"
+                        Legend="{DXBinding '@e(lbLegendMode).SelectedItem.Tag != $local:LegendMode.Common ? @e(defaultPaneLegend) : null'}"
+                        LegendTextPattern="{DXBinding '@e(lbLegendMode).SelectedItem.Tag == $local:LegendMode.Common ? `{S} CPU Usage` : `{S}`'}"
+                        CrosshairLabelPattern="{DXBinding '@e(lbeCrosshairContentMode).EditValue == $dxc:CrosshairContentShowMode.Legend ? `{V:P0}` : `{S}: {V:P0}`'}"
+                        AnimationAutoStartMode="SetStartState" />
+                    <dxc:LineSeries2D
+                        x:Name="process3CpuUsage"
+                        DisplayName="Process 3"
+                        ArgumentDataMember="Second"
+                        ValueDataMember="Process3CpuUsage"
+                        Pane="{Binding ElementName=defaultPane}"
+                        Legend="{DXBinding '@e(lbLegendMode).SelectedItem.Tag != $local:LegendMode.Common ? @e(defaultPaneLegend) : null'}"
+                        LegendTextPattern="{DXBinding '@e(lbLegendMode).SelectedItem.Tag == $local:LegendMode.Common ? `{S} CPU Usage` : `{S}`'}"
+                        CrosshairLabelPattern="{DXBinding '@e(lbeCrosshairContentMode).EditValue == $dxc:CrosshairContentShowMode.Legend ? `{V:P0}` : `{S}: {V:P0}`'}"
+                        AnimationAutoStartMode="SetStartState" />
+                    <dxc:AreaStackedSeries2D
+                        x:Name="process1Memory"
+                        Transparency="0.5"
+                        ArgumentDataMember="Second"
+                        DisplayName="Process 1"
+                        ValueDataMember="Process1Memory"
+                        AxisY="{Binding ElementName=additionalPaneAxisY}"
+                        Pane="{Binding ElementName=additionalPane}"
+                        Legend="{DXBinding '@e(lbLegendMode).SelectedItem.Tag != $local:LegendMode.Common ? @e(additionalPaneLegend) : null'}"
+                        LegendTextPattern="{DXBinding '@e(lbLegendMode).SelectedItem.Tag == $local:LegendMode.Common ? `{S} Memory Utilization` : `{S}`'}"
+                        CrosshairLabelPattern="{DXBinding '@e(lbeCrosshairContentMode).EditValue == $dxc:CrosshairContentShowMode.Legend ? `{V}MiB` : `{S}: {V}MiB`'}"
+                        AnimationAutoStartMode="SetStartState" />
+                    <dxc:AreaStackedSeries2D
+                        x:Name="process2Memory"
+                        Transparency="0.5"
+                        DisplayName="Process 2"
+                        ArgumentDataMember="Second"
+                        ValueDataMember="Process2Memory"
+                        AxisY="{Binding ElementName=additionalPaneAxisY}"
+                        Pane="{Binding ElementName=additionalPane}"
+                        Legend="{DXBinding '@e(lbLegendMode).SelectedItem.Tag != $local:LegendMode.Common ? @e(additionalPaneLegend) : null'}"
+                        LegendTextPattern="{DXBinding '@e(lbLegendMode).SelectedItem.Tag == $local:LegendMode.Common ? `{S} Memory Utilization` : `{S}`'}"
+                        CrosshairLabelPattern="{DXBinding '@e(lbeCrosshairContentMode).EditValue == $dxc:CrosshairContentShowMode.Legend ? `{V}MiB` : `{S}: {V}MiB`'}"
+                        AnimationAutoStartMode="SetStartState" />
+                    <dxc:AreaStackedSeries2D
+                        x:Name="process3Memory"
+                        Transparency="0.5"
+                        DisplayName="Process 3"
+                        ArgumentDataMember="Second"
+                        ValueDataMember="Process3Memory"
+                        AxisY="{Binding ElementName=additionalPaneAxisY}"
+                        Pane="{Binding ElementName=additionalPane}"
+                        Legend="{DXBinding '@e(lbLegendMode).SelectedItem.Tag != $local:LegendMode.Common ? @e(additionalPaneLegend) : null'}"
+                        LegendTextPattern="{DXBinding '@e(lbLegendMode).SelectedItem.Tag == $local:LegendMode.Common ? `{S} Memory Utilization` : `{S}`'}"
+                        CrosshairLabelPattern="{DXBinding '@e(lbeCrosshairContentMode).EditValue == $dxc:CrosshairContentShowMode.Legend ? `{V}MiB` : `{S}: {V}MiB`'}"
+                        AnimationAutoStartMode="SetStartState" />
+                    <!--#endregion-->
+                </dxc:XYDiagram2D>
+            </dxc:ChartControl.Diagram>
+            <dxc:ChartControl.Legends>
+                <dxc:Legend
+                    x:Name="commonLegend"
+                    MarkerMode="{Binding ElementName=lbMarkerMode, Path=SelectedItem.Tag}"
+                    MaxCrosshairContentWidth="35" />
+                <dxc:Legend
+                    HorizontalAlignment="Left"
+                    x:Name="defaultPaneLegend"
+                    MarkerMode="{Binding ElementName=lbMarkerMode, Path=SelectedItem.Tag}"
+                    DockTarget="{Binding ElementName=defaultPane}"
+                    HorizontalPosition="{DXBinding '@e(lbLegendMode).SelectedItem.Tag == $local:LegendMode.SeparateOutsidePane ? $dxc:HorizontalPosition.RightOutside : $dxc:HorizontalPosition.Left'}"
+                    MaxCrosshairContentWidth="35" />
+                <dxc:Legend
+                    x:Name="additionalPaneLegend"
+                    MarkerMode="{Binding ElementName=lbMarkerMode, Path=SelectedItem.Tag}"
+                    DockTarget="{Binding ElementName=additionalPane}"
+                    HorizontalPosition="{DXBinding '@e(lbLegendMode).SelectedItem.Tag == $local:LegendMode.SeparateOutsidePane ? $dxc:HorizontalPosition.RightOutside : $dxc:HorizontalPosition.Left'}"
+                    MaxCrosshairContentWidth="35" />
+            </dxc:ChartControl.Legends>
+            <!--#region Titles-->
+            <dxc:ChartControl.Titles>
+                <dxc:Title
+                    Content="Resource Usage"
+                    HorizontalAlignment="Center" />
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+            <!--#region CrosshairOptions-->
+            <dxc:ChartControl.CrosshairOptions>
+                <dxc:CrosshairOptions
+                    ShowOnlyInFocusedPane="False"
+                    GroupHeaderPattern="{}{A:%s} seconds:"
+                    ContentShowMode="{Binding ElementName=lbeCrosshairContentMode, Path=EditValue}" />
+            </dxc:ChartControl.CrosshairOptions>
+            <!--#endregion-->
+        </dxc:ChartControl>
+
+    </DockPanel>
+</local:ChartsDemoModule>

@@ -1,0 +1,68 @@
+﻿<dx:ThemedWindow x:Class="GridDemo.SQLConnectionWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    Title="Configuration Window" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow" ShowInTaskbar="False" ResizeMode="NoResize">
+    <Border Padding="12">
+        <StackPanel>
+            <TextBlock Width="500" FontSize="13" Name="tbDescription" TextWrapping="Wrap" Margin="0,0,0,32" />
+            <Grid Name="DBSettings" HorizontalAlignment="Center" Margin="0,0,0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="6" />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="4" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Name="label1">SQL Server:</Label>
+                <dxe:TextEdit Grid.Column="2" Grid.Row="0" Name="tbServer" />
+                <Label Grid.Column="0" Grid.Row="2" Name="label2">Database:</Label>
+                <dxe:TextEdit Grid.Column="2" Grid.Row="2" Name="cbDatabase" IsReadOnly="True" />
+            </Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,24">
+                <GroupBox Name="stackPanel1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,12,0">
+                    <StackPanel Orientation="Vertical">
+                        <RadioButton Name="rbWindowsAuthentication" IsChecked="True" Margin="0,0,0,4" GroupName="AutentificationGroup">Windows authentication</RadioButton>
+                        <RadioButton Name="rbSQLServerAuthentication" GroupName="AutentificationGroup">SQL Server authentication</RadioButton>
+                    </StackPanel>
+                </GroupBox>
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="6" />
+                        <ColumnDefinition Width="150" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="4" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Name="label6">Login name:</Label>
+                    <dxe:TextEdit Grid.Column="2" Grid.Row="0" Text="sa" Name="tbLogin" IsEnabled="True" />
+                    <Label Grid.Column="0" Grid.Row="2" Name="label7">Password:</Label>
+                    <dxe:PasswordBoxEdit Grid.Column="2" Grid.Row="2" Name="tbPassword" IsEnabled="True" />
+                </Grid>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" Width="{Binding Path=ActualWidth, ElementName=DBSettings}" Margin="0,0,0,32">
+                <Label Name="lRecords" Background="Transparent" HorizontalAlignment="Right" FontSize="11"></Label>
+                <DockPanel LastChildFill="True" Margin="0,0,0,8">
+                    <Label Name="label5" Margin="0,0,6,0">Record count:</Label>
+                    <dxe:TextEdit x:Name="tbRecords"
+                        EditValue="100000"
+                        MaskType="Numeric"
+                        Mask="n0" MaskUseAsDisplayFormat="True">
+                    </dxe:TextEdit>
+                </DockPanel>
+                <Button Name="bGenerateDB" Content="Generate table and " Margin="0,0,0,4"></Button>
+                <Button Name="bAddRecords" Content="Add records and " Margin="0,0,0,4"></Button>
+                <Button Name="bExit"></Button>
+                <Button IsCancel="True" Width="0" Height="0" />
+            </StackPanel>
+            <ProgressBar Height="13" Margin="0,0,0,0" Name="progressBarCore" Maximum="99" Minimum="0" />
+        </StackPanel>
+    </Border>
+</dx:ThemedWindow>

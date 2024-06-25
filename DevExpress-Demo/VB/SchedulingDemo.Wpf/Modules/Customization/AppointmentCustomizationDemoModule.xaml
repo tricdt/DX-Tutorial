@@ -1,0 +1,170 @@
+﻿<local:SchedulingDemoModule x:Class="SchedulingDemo.AppointmentCustomizationDemoModule"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                            xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                            xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                            xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                            xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduling"
+                            xmlns:dxschv="http://schemas.devexpress.com/winfx/2008/xaml/scheduling/visual"
+                            xmlns:dxscht="http://schemas.devexpress.com/winfx/2008/xaml/scheduling/themekeys"
+                            xmlns:local="clr-namespace:SchedulingDemo"
+                            xmlns:vm="clr-namespace:SchedulingDemo.ViewModels"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            mc:Ignorable="d"
+                            d:DesignWidth="800"
+                            d:DesignHeight="600"
+                            DataContext="{dxmvvm:ViewModelSource vm:AppointmentCustomizationDemoViewModel}">
+
+    <!--#region Resources-->
+    <local:SchedulingDemoModule.Resources>
+        <DataTemplate x:Key="appointmentFlyoutContentTemplate">
+            <dxlc:LayoutControl Orientation="Vertical" IsHitTestVisible="False" Width="250" MinHeight="150" Padding="11">
+                <StackPanel Orientation="Vertical">
+                    <Border Panel.ZIndex="1" Background="{Binding StatusBrush}" Height="5" VerticalAlignment="Top" Margin="1,0,1,-1" />
+                    <dxschv:DayAppointmentControl Panel.ZIndex="0"
+                                                  Content="{Binding}"
+                                                  Style="{DynamicResource {dxscht:SchedulerFlyoutThemeKey ResourceKey=Appointment}}"
+                                                  VerticalAlignment="Top"
+                                                  ShowStatus="False"
+                                                  MinHeight="35"
+                                                  ShowRecurrenceImage="True"
+                                                  ShowReminderImage="True" />
+                </StackPanel>
+                <dxlc:LayoutControl Orientation="Vertical" Padding="0" VerticalAlignment="Top" Margin="0,5,0,0">
+                    <dxlc:LayoutItem Style="{DynamicResource {dxscht:SchedulerFlyoutThemeKey ResourceKey=LayoutItem_Start}}" />
+                    <dxlc:LayoutItem Style="{DynamicResource {dxscht:SchedulerFlyoutThemeKey ResourceKey=LayoutItem_End}}" />
+                </dxlc:LayoutControl>
+                <dxlc:LayoutControl Orientation="Vertical" Padding="0" VerticalAlignment="Top" Margin="0,5,0,0">
+                    <dxlc:LayoutItem Style="{DynamicResource {dxscht:SchedulerFlyoutThemeKey ResourceKey=LayoutItem_Location}}" />
+                    <dxlc:LayoutItem Style="{DynamicResource {dxscht:SchedulerFlyoutThemeKey ResourceKey=LayoutItem_Reminder}}" />
+                    <dxlc:LayoutItem Style="{DynamicResource {dxscht:SchedulerFlyoutThemeKey ResourceKey=LayoutItem_Resources}}" />
+                    <dxlc:LayoutItem Style="{DynamicResource {dxscht:SchedulerFlyoutThemeKey ResourceKey=LayoutItem_Description}}" />
+                </dxlc:LayoutControl>
+                <Image Source="{Binding CustomFields.Image}" Stretch="None" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+            </dxlc:LayoutControl>
+        </DataTemplate>
+        <DataTemplate x:Key="appointmentContentTemplate">
+            <DockPanel LastChildFill="False">
+                <DockPanel DockPanel.Dock="Left" Margin="0,3,0,3" LastChildFill="False">
+                    <Image DockPanel.Dock="Top" Source="{Binding CustomFields.Image}" Stretch="None" />
+                    <dxschv:AppointmentImagesPanel DockPanel.Dock="Top" Margin="0,3,0,0" />
+                </DockPanel>
+                <dxlc:GroupSeparator DockPanel.Dock="Left" Orientation="Vertical" />
+                <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+                    <dxschv:AppointmentIntervalSubjectPresenter DockPanel.Dock="Top" FontWeight="Bold" WordWrap="True" />
+                    <dxschv:AppointmentLocationPresenter DockPanel.Dock="Top" WordWrap="True" />
+                    <dxschv:AppointmentDescriptionPresenter DockPanel.Dock="Top" Margin="0,1,0,0" WordWrap="True" />
+                </DockPanel>
+            </DockPanel>
+        </DataTemplate>
+
+        <Style x:Key="schedulerStyle" TargetType="dxsch:SchedulerControl">
+            <Setter Property="ShowBorder" Value="False" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CustomFlyout}" Value="True">
+                    <Setter Property="FlyoutContentTemplate" Value="{StaticResource appointmentFlyoutContentTemplate}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="appointmentStyle" TargetType="dxschv:AppointmentControl">
+            <Setter Property="Tag" Value="{Binding Path='(dxsch:SchedulerControl.Scheduler).DataContext', RelativeSource={RelativeSource Self}}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{DXBinding '@Self.Tag.CustomTemplate'}" Value="True">
+                    <Setter Property="ContentTemplate" Value="{StaticResource appointmentContentTemplate}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="allDayAppointmentStyle" TargetType="dxschv:AppointmentControl">
+            <Setter Property="Tag" Value="{Binding Path='(dxsch:SchedulerControl.Scheduler).DataContext', RelativeSource={RelativeSource Self}}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{DXBinding '@Self.Tag.CustomTemplate_AllDay'}" Value="True">
+                    <Setter Property="ContentTemplate" Value="{StaticResource appointmentContentTemplate}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </local:SchedulingDemoModule.Resources>
+    <!--#endregion Resources-->
+
+    <DockPanel>
+        <!--#region Options-->
+        <dxlc:LayoutControl Name="PART_Options" DockPanel.Dock="Right" Orientation="Vertical" Padding="12,8,12,12" MinWidth="210" dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap">
+            <dxe:CheckEdit Content="Custom Flyout" IsChecked="{Binding CustomFlyout, Mode=TwoWay}" VerticalAlignment="Top" />
+            <dxe:CheckEdit Content="Custom Appointment Template" IsChecked="{Binding CustomTemplate, Mode=TwoWay}" VerticalAlignment="Top" />
+            <dxe:CheckEdit Content="Custom AllDay Appointment Template" IsChecked="{Binding CustomTemplate_AllDay, Mode=TwoWay}" VerticalAlignment="Top" />
+            <dxlc:LayoutItem Label="AllDay Appointment Min Height">
+                <dxe:SpinEdit MinValue="5"
+                                  MaxValue="100"
+                                  Value="{DXBinding '@ElementName(dayView).AllDayAppointmentMinHeight', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </dxlc:LayoutItem>
+            <GroupBox Header="Appointment" VerticalAlignment="Top" Margin="0,1,0,0">
+                <dxlc:LayoutControl Padding="0" Orientation="Vertical">
+                    <dxe:CheckEdit Content="Show Status" IsChecked="{Binding ShowStatus, Mode=TwoWay}" />
+                    <dxe:CheckEdit Content="Show Location" IsChecked="{Binding ShowLocation, Mode=TwoWay}" />
+                    <dxe:CheckEdit Content="Show Description" IsChecked="{Binding ShowDescription, Mode=TwoWay}" />
+                    <dxe:CheckEdit Content="Show Interval" IsChecked="{Binding ShowInterval, Mode=TwoWay}" />
+                    <dxe:CheckEdit Content="Show Arrows" IsChecked="{Binding ShowArrows, Mode=TwoWay}" />
+                </dxlc:LayoutControl>
+            </GroupBox>
+            <GroupBox Header="AllDay Appointment" VerticalAlignment="Top" Margin="0,1,0,0">
+                <dxlc:LayoutControl Padding="0" Orientation="Vertical">
+                    <dxe:CheckEdit Content="Show Status" IsChecked="{Binding ShowStatus_AllDay, Mode=TwoWay}" />
+                    <dxe:CheckEdit Content="Show Location" IsChecked="{Binding ShowLocation_AllDay, Mode=TwoWay}" />
+                    <dxe:CheckEdit Content="Show Description" IsChecked="{Binding ShowDescription_AllDay, Mode=TwoWay}" />
+                    <dxe:CheckEdit Content="Show Interval" IsChecked="{Binding ShowInterval_AllDay, Mode=TwoWay}" />
+                    <dxe:CheckEdit Content="Show Arrows" IsChecked="{Binding ShowArrows_AllDay, Mode=TwoWay}" />
+                </dxlc:LayoutControl>
+            </GroupBox>
+        </dxlc:LayoutControl>
+        <!--#endregion Options-->
+        <dxsch:SchedulerControl ShowBorder="False" Style="{StaticResource schedulerStyle}">
+            <dxsch:DayView
+                x:Name="dayView"
+                SnapToCellsMode="Always"
+                TimeScale="01:00:00"
+                DayCount="5"
+                AllDayAppointmentMinHeight="46"
+
+                ShowAppointmentStatus="{Binding ShowStatus}"
+                ShowAppointmentLocation="{Binding ShowLocation}"
+                ShowAppointmentDescription="{Binding ShowDescription}"
+                ShowAppointmentInterval="{Binding ShowInterval}"
+                ShowAppointmentArrowImages="{Binding ShowArrows}"
+
+                ShowAllDayAppointmentStatus="{Binding ShowStatus_AllDay}"
+                ShowAllDayAppointmentLocation="{Binding ShowLocation_AllDay}"
+                ShowAllDayAppointmentDescription="{Binding ShowDescription_AllDay}"
+                ShowAllDayAppointmentInterval="{Binding ShowInterval_AllDay}"
+                ShowAllDayAppointmentArrowImages="{Binding ShowArrows_AllDay}"
+
+                AppointmentStyle="{StaticResource appointmentStyle}"
+                AllDayAppointmentStyle="{StaticResource allDayAppointmentStyle}"
+                 />
+            <dxsch:SchedulerControl.DataSource>
+                <dxsch:DataSource AppointmentsSource="{Binding Events}" ResourcesSource="{Binding Cars}">
+                    <dxsch:DataSource.AppointmentMappings>
+                        <dxsch:AppointmentMappings Id="Id"
+                                                   Start="StartTime"
+                                                   End="EndTime"
+                                                   AllDay="AllDay"
+                                                   Description="Description"
+                                                   StatusId="Status"
+                                                   LabelId="Label"
+                                                   Type="EventType"
+                                                   Location="Location"
+                                                   Subject="Subject"
+                                                   RecurrenceInfo="RecurrenceInfo"
+                                                   Reminder="ReminderInfo"
+                                                   ResourceId="CarId">
+                            <dxsch:CustomFieldMapping Mapping="Image" />
+                        </dxsch:AppointmentMappings>
+                    </dxsch:DataSource.AppointmentMappings>
+                    <dxsch:DataSource.ResourceMappings>
+                        <dxsch:ResourceMappings Id="Id" Caption="Caption" />
+                    </dxsch:DataSource.ResourceMappings>
+                </dxsch:DataSource>
+            </dxsch:SchedulerControl.DataSource>
+        </dxsch:SchedulerControl>
+    </DockPanel>
+</local:SchedulingDemoModule>

@@ -1,0 +1,11 @@
+﻿<dx:ThemedWindow x:Class="ProductsDemo.Controls.EditContactWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:view="clr-namespace:ProductsDemo.Controls"
+        Title="Contact" Height="650" Width="800" Icon="/DevExpress.ProductsDemo.Wpf;component/demoicon.ico" ResizeMode="NoResize">
+    <dx:ThemedWindow.WindowStartupLocation>
+        <WindowStartupLocation>CenterScreen</WindowStartupLocation>
+    </dx:ThemedWindow.WindowStartupLocation>
+    <view:EditContactContent/>
+</dx:ThemedWindow>

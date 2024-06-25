@@ -1,0 +1,140 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.WaterfallDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:local="clr-namespace:ChartsDemo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800">
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+
+    <DockPanel>
+        <!--#region ChartsDemoRibbon-->
+        <local:ChartsDemoRibbon
+            Chart="{x:Reference chart}"
+            DockPanel.Dock="Top"
+            ShowPaletteButton="False" />
+        <!--#endregion-->
+        <ScrollViewer Name="PART_Options" Style="{StaticResource optionsScrollViewerStyle}">
+            <StackPanel Style="{StaticResource optionsRootStackPanelStyle}">
+                <GroupBox VerticalAlignment="Top" Header="Data Representation Type">
+                    <dxe:ListBoxEdit Name="lbDataType" SelectedIndex="0">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.Items>
+                            <dxe:ListBoxEditItem x:Name="aggregatedDataItem" Content="Aggregated Data" />
+                            <dxe:ListBoxEditItem x:Name="detailedDataItem" Content="Detailed Data" />
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <dxc:ChartControl
+            x:Name="chart"
+            AnimationMode="OnDataChanged"
+            DataSource="{Binding}">
+            <!--#region Titles-->
+            <dxc:ChartControl.Titles>
+                <dxc:Title
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Content="Global Carbon Balance"
+                    Dock="Top" />
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+            <dxc:ChartControl.Palette>
+                <dxc:CustomPalette>
+                    <dxc:CustomPalette.Colors>
+                        <Color>#40446c</Color>
+                        <Color>#da5859</Color>
+                        <Color>#c4dcff</Color>
+                        <Color>#5484d5</Color>
+                        <Color>#92ceb5</Color>
+                        <Color>#567E6D</Color>
+                    </dxc:CustomPalette.Colors>
+                </dxc:CustomPalette>
+            </dxc:ChartControl.Palette>
+            <dxc:ChartControl.CalculatedFields>
+                <dxc:ChartCalculatedField
+                    DisplayName="Calculated Contribution"
+                    Expression="IIF([Factor] == 'Fuel/Industry' Or [Factor] == 'Land-Use Emissions' Or [Factor] == 'Imbalance', [Contribution], -1 * [Contribution])"
+                    FieldName="CalculatedContribution"
+                    FieldType="Double" />
+            </dxc:ChartControl.CalculatedFields>
+            <dxc:ChartControl.Legend>
+                <dxc:Legend
+                    HorizontalPosition="Right"
+                    VerticalPosition="BottomOutside"
+                    Orientation="Horizontal"
+                    Padding="3"
+                    Visible="{DXBinding '@e(lbDataType).SelectedIndex != 0'}" />
+            </dxc:ChartControl.Legend>
+            <dxc:XYDiagram2D SeriesDataMember="Factor">
+                <dxc:WaterfallSeries2D.ValueOptions>
+                    <dxc:WaterfallRelativeValueOptions
+                        StartBarLabel="1989"
+                        StartBarValue="2766"
+                        TotalLabel="2020">
+                        <dxc:Subtotal Label="Kyoto Protocol Adopted" PointIndex="7" />
+                        <dxc:Subtotal Label="Clean Development Mechanism Opens" PointIndex="16" />
+                        <dxc:Subtotal Label="Paris Agreement Adopted" PointIndex="26" />
+                    </dxc:WaterfallRelativeValueOptions>
+                </dxc:WaterfallSeries2D.ValueOptions>
+                <dxc:XYDiagram2D.SeriesTemplate>
+                    <dxc:WaterfallSeries2D
+                        AnimationAutoStartMode="SetStartState"
+                        ArgumentDataMember="Year"
+                        ArgumentScaleType="Qualitative"
+                        FallingBarBrush="{DXBinding '@e(lbDataType).SelectedIndex == 0 ? `#92CEB5` : null'}"
+                        FilterCriteria="{Binding Path=SelectedItem.Tag, ElementName=lbDataType}"
+                        RisingBarBrush="{DXBinding '@e(lbDataType).SelectedIndex == 0 ? `#DA5859` : null'}"
+                        ValueDataMember="CalculatedContribution" />
+                </dxc:XYDiagram2D.SeriesTemplate>
+                <dxc:XYDiagram2D.AxisX>
+                    <dxc:AxisX2D>
+                        <dxc:AxisX2D.CustomLabels>
+                            <dxc:CustomAxisLabel Value="1989" Content="1989" />
+                            <dxc:CustomAxisLabel Value="Kyoto Protocol Adopted">
+                                <dxc:CustomAxisLabel.Content>
+                                    <TextBlock Text="1997&#x0a;Kyoto Protocol" TextAlignment="Center" />
+                                </dxc:CustomAxisLabel.Content>
+                            </dxc:CustomAxisLabel>
+                            <dxc:CustomAxisLabel Value="Clean Development Mechanism Opens">
+                                <dxc:CustomAxisLabel.Content>
+                                    <TextBlock Text="2006&#x0a;Clean Development Mechanism Opens" TextAlignment="Center" />
+                                </dxc:CustomAxisLabel.Content>
+                            </dxc:CustomAxisLabel>
+                            <dxc:CustomAxisLabel Value="Paris Agreement Adopted">
+                                <dxc:CustomAxisLabel.Content>
+                                    <TextBlock Text="2016&#x0a;Paris Agreement Adopted" TextAlignment="Center" />
+                                </dxc:CustomAxisLabel.Content>
+                            </dxc:CustomAxisLabel>
+                            <dxc:CustomAxisLabel Value="2020" Content="2020" />
+                        </dxc:AxisX2D.CustomLabels>
+                    </dxc:AxisX2D>
+                </dxc:XYDiagram2D.AxisX>
+                <dxc:XYDiagram2D.AxisY>
+                    <dxc:AxisY2D>
+                        <dxc:AxisY2D.WholeRange>
+                            <dxc:Range dxc:AxisY2D.AlwaysShowZeroLevel="False" />
+                        </dxc:AxisY2D.WholeRange>
+                        <dxc:AxisY2D.Title>
+                            <dxc:AxisTitle Content="Emissions and Sinks, BtC" />
+                        </dxc:AxisY2D.Title>
+                    </dxc:AxisY2D>
+                </dxc:XYDiagram2D.AxisY>
+            </dxc:XYDiagram2D>
+        </dxc:ChartControl>
+    </DockPanel>
+</local:ChartsDemoModule>

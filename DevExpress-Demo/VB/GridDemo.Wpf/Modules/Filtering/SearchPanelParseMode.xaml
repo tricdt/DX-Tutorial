@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="GridDemo.Filtering.SearchPanelParseMode"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dxdata="clr-namespace:DevExpress.Data.Filtering;assembly=DevExpress.Data.v22.2"
+                      xmlns:local="clr-namespace:GridDemo.ModuleResources"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GridDemo;component/ModuleResources/SearchPanelParseModes.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--#region !-->
+        <StackPanel Orientation="Horizontal" Margin="8">
+            <Label Margin="0,0,4,0">Parse Mode:</Label>
+            <dxe:ComboBoxEdit EditValue="{Binding Path=SearchPanelParseMode, Mode=TwoWay, ElementName=view, UpdateSourceTrigger=PropertyChanged}" ValueMember="Mode" DisplayMember="Mode" ItemsSource="{Binding Source={x:Static local:SearchPanelParseModes.Items}}" Margin="0,0,8,0" IsTextEditable="False" Width="100" ItemTemplate="{StaticResource searchPanelParseModeItemTemplate}" />
+            <Label Margin="0,0,4,0">Filter Condition:</Label>
+            <dxe:ComboBoxEdit EditValue="{Binding SearchPanelFindFilter, Mode=TwoWay, ElementName=view, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{dxe:EnumItemsSource EnumType={x:Type dxdata:FilterCondition}}" Margin="0,0,8,0" IsTextEditable="False" Width="100" />
+        </StackPanel>
+        <!--#endregion-->
+        <dxg:GridControl Grid.Row="1" Name="grid" ItemsSource="{x:Static dxdb:NWindDataProvider.Customers}">
+            <dxg:GridControl.View>
+                <!--#region !-->
+                <dxg:TableView x:Name="view" ShowFixedTotalSummary="True" SearchString="ana tr" NavigationStyle="Row" />
+                <!--#endregion-->
+            </dxg:GridControl.View>
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="CompanyName" Width="*" />
+                <dxg:GridColumn FieldName="ContactTitle" Width="*" />
+                <dxg:GridColumn FieldName="ContactName" Width="*" />
+                <dxg:GridColumn FieldName="Country" Width="*" />
+                <dxg:GridColumn FieldName="City" Width="*" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+            </dxg:GridControl.TotalSummary>
+        </dxg:GridControl>
+    </Grid>
+</UserControl>

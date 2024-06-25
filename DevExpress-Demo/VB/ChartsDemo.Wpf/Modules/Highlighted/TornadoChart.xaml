@@ -1,0 +1,192 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.TornadoChartDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:local="clr-namespace:ChartsDemo"
+    DataContext="{dxmvvm:ViewModelSource Type=local:TornadoChartViewModel}">
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ChartsDemo;component/Themes/Common.xaml" />
+                <ResourceDictionary Source="/ChartsDemo;component/Modules/SeriesTypes/Bars/CustomBarModel.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:Bar2DKindToTickmarksLengthConverter x:Key="Bar2DKindToTickmarksLengthConverter" />
+            <dxmvvm:BooleanNegationConverter x:Key="InvertedBoolConverter" />
+            <local:NegativeValueConverter x:Key="converter" />
+            <local:ColorToBrushConverter x:Key="colorToBrushConverter"/>
+            <DataTemplate x:Key="NegativeValueTextTemplate">
+                <ContentPresenter Content="{Binding Path=Text, Converter={StaticResource converter}}" />
+            </DataTemplate>
+            <DataTemplate x:Key="NegativeValueContentTemplate">
+                <ContentPresenter Content="{Binding Path=Content, Converter={StaticResource converter}}" />
+            </DataTemplate>
+            <DataTemplate x:Key="NegativeValueLabelTemplate">
+                <ContentPresenter Content="{Binding Path=LabelText, Converter={StaticResource converter}}" />
+            </DataTemplate>
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+    <DockPanel
+        LastChildFill="True">
+        <!--#region ChartsRibbon-->
+        <local:ChartsDemoRibbon
+            Chart="{x:Reference chart}"
+            DockPanel.Dock="Top" />
+        <!--#endregion-->
+        <!--#region Options-->
+        <ScrollViewer
+            Name="PART_Options"
+            Style="{StaticResource optionsScrollViewerStyle}">
+            <StackPanel
+                Style="{StaticResource optionsRootStackPanelStyle}">
+                <dxe:CheckEdit
+                    Content="Show Labels"
+                    IsChecked="{Binding IsShowLabelsChecked, Mode=TwoWay}"
+                    Name="cheShowLabels" />
+                <dxe:CheckEdit
+                    x:Name="cheShowTotalLabels"
+                    Margin="0,4,0,0"
+                    Content="Show Total Labels"
+                    IsChecked="{Binding IsShowTotalLabelsChecked, Mode=TwoWay}" />
+                <GroupBox
+                    Header="Model"
+                    Margin="0,5,0,0">
+                    <dxe:ListBoxEdit
+                        Name="lbModel"
+                        DisplayMember="ModelName"
+                        EditValue="{x:Reference simpleBarModel}"
+                        SelectedItem="{Binding SelectedModel, Mode=TwoWay}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.Items>
+                            <dxc:SteelColumnBar2DModel />
+                            <dxc:TransparentBar2DModel />
+                            <dxc:GradientBar2DModel />
+                            <dxc:BorderlessGradientBar2DModel />
+                            <dxc:FlatBar2DModel />
+                            <dxc:FlatGlassBar2DModel />
+                            <dxc:OutsetBar2DModel />
+                            <dxc:SimpleBar2DModel
+                                x:Name="simpleBarModel" />
+                            <dxc:BorderlessSimpleBar2DModel />
+                            <dxc:Quasi3DBar2DModel />
+                            <dxc:GlassCylinderBar2DModel />
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxc:ChartControl
+            x:Name="chart"
+            AnimationMode="OnLoad"
+            CrosshairEnabled="False"
+            Palette="{Binding Palette, Mode=OneWayToSource}"
+            LegendItemsSource="{Binding Legends}">
+            <dxc:ChartControl.CalculatedFields>
+                <dxc:ChartCalculatedField
+                    FieldName="CalculatedPopulation"
+                    DisplayName="Calculated Population"
+                    FieldType="Double"
+                    Expression="IIF ([Gender] == 'Male', [Population] * -1, [Population])"/>
+            </dxc:ChartControl.CalculatedFields>
+            <!--#region Legend-->
+            <dxc:ChartControl.LegendItemTemplate>
+                <DataTemplate>
+                    <dxc:Legend
+                        HorizontalPosition="Center"
+                        VerticalPosition="BottomOutside"
+                        Orientation="Horizontal"
+                        DockTarget="{Binding Pane}"
+                        Margin="0,0,0,2"/>
+                </DataTemplate>
+            </dxc:ChartControl.LegendItemTemplate>
+            <!--#endregion-->
+            <dxc:ChartControl.Diagram>
+                <dxc:XYDiagram2D
+                    x:Name="diagram"
+                    BarDistance="0.04"
+                    Rotated="True"
+                    SeriesItemsSource="{Binding GenderAgeItems}"
+                    PaneItemsSource="{Binding Panes}">
+                    <!--#region DefaultPane-->
+                    <dxc:XYDiagram2D.DefaultPane>
+                        <dxc:Pane Visibility="Collapsed"/>
+                    </dxc:XYDiagram2D.DefaultPane>
+                    <!--#endregion-->
+                    <!--#region Pane-->
+                    <dxc:XYDiagram2D.PaneItemTemplate>
+                        <DataTemplate>
+                            <dxc:Pane>
+                                <dxc:BarStackedSeries2D.TotalLabel>
+                                    <dxc:StackedBarTotalLabel
+                                        TextPattern="{}{TV:0,,.0} M"
+                                        ResolveOverlappingMode="Default"
+                                        Visible="{Binding IsShowTotalLabelsChecked}"
+                                        ElementTemplate="{StaticResource ResourceKey=NegativeValueTextTemplate}"/>
+                                </dxc:BarStackedSeries2D.TotalLabel>
+                            </dxc:Pane>
+                        </DataTemplate>
+                    </dxc:XYDiagram2D.PaneItemTemplate>
+                    <!--#endregion-->
+                    <!--#region Axes-->
+                    <dxc:XYDiagram2D.AxisX>
+                        <dxc:AxisX2D
+                            Reverse="True"
+                            TickmarksLength="{Binding ElementName=lbModel, Path=SelectedItem, Converter={StaticResource Bar2DKindToTickmarksLengthConverter}}"/>
+                    </dxc:XYDiagram2D.AxisX>
+                    <dxc:XYDiagram2D.AxisY>
+                        <dxc:AxisY2D>
+                            <dxc:AxisY2D.Title>
+                                <dxc:AxisTitle
+                                    Content="Population (Millions)" />
+                            </dxc:AxisY2D.Title>
+                            <dxc:AxisY2D.Label>
+                                <dxc:AxisLabel
+                                    TextPattern="{}{V:0,,}"
+                                    ElementTemplate="{StaticResource ResourceKey=NegativeValueContentTemplate}" />
+                            </dxc:AxisY2D.Label>
+                        </dxc:AxisY2D>
+                    </dxc:XYDiagram2D.AxisY>
+                    <!--#endregion-->
+                    <dxc:XYDiagram2D.SeriesItemTemplate>
+                        <DataTemplate>
+                            <dxc:BarStackedSeries2D
+                                DisplayName="{Binding Name}"
+                                DataSource="{Binding Items}"
+                                ArgumentDataMember="Country"
+                                ValueDataMember="CalculatedPopulation"
+                                Brush="{Binding Path=Color, Converter={StaticResource colorToBrushConverter}}"
+                                AnimationAutoStartMode="SetStartState"
+                                LabelsVisibility="{Binding IsShowLabelsChecked, Mode=TwoWay}"
+                                ToolTipEnabled="{Binding IsShowToolTipsChecked, Mode=TwoWay}"
+                                ToolTipPointPattern="{}{A} {S} - {PopulationString} million"
+                                Pane="{Binding Pane}"
+                                Model="{Binding Model}"
+                                Legend="{Binding Legend}">
+                                <dxc:BarStackedSeries2D.Label>
+                                    <dxc:SeriesLabel
+                                        ElementTemplate="{StaticResource ResourceKey=NegativeValueTextTemplate}"
+                                        ResolveOverlappingMode="Default"
+                                        TextPattern="{}{V:0,,}"/>
+                                </dxc:BarStackedSeries2D.Label>
+                            </dxc:BarStackedSeries2D>
+                        </DataTemplate>
+                    </dxc:XYDiagram2D.SeriesItemTemplate>
+                </dxc:XYDiagram2D>
+            </dxc:ChartControl.Diagram>
+            <!--#region Titles-->
+            <dxc:ChartControl.Titles>
+                <dxc:Title HorizontalAlignment="Center" Dock="Top">Population: Age Structure</dxc:Title>
+                <dxc:Title HorizontalAlignment="Center" Dock="Top" FontSize="16">Data estimate for 2020</dxc:Title>
+                <dxc:Title Margin="0,10,0,0" HorizontalAlignment="Right" Dock="Bottom" FontSize="12" Foreground="Silver">From www.cia.gov</dxc:Title>
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+        </dxc:ChartControl>
+    </DockPanel>
+</local:ChartsDemoModule>

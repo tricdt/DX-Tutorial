@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<ViewModels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Infos>
+    <SerializationInfo>
+      <DisplayName>Model 0 [Workspace2]</DisplayName>
+      <Content xsi:type="xsd:int">0</Content>
+      <Name>Model0</Name>
+    </SerializationInfo>
+    <SerializationInfo>
+      <DisplayName>Model 1 [Workspace2]</DisplayName>
+      <Content xsi:type="xsd:int">1</Content>
+      <Name>Model1</Name>
+    </SerializationInfo>
+    <SerializationInfo>
+      <DisplayName>Model 2 [Workspace2]</DisplayName>
+      <Content xsi:type="xsd:int">2</Content>
+      <Name>Model2</Name>
+    </SerializationInfo>
+    <SerializationInfo>
+      <DisplayName>Model 3 [Workspace2]</DisplayName>
+      <Content xsi:type="xsd:int">3</Content>
+      <Name>Model3</Name>
+    </SerializationInfo>
+    <SerializationInfo>
+      <DisplayName>Model 4 [Workspace2]</DisplayName>
+      <Content xsi:type="xsd:int">4</Content>
+      <Name>Model4</Name>
+    </SerializationInfo>
+  </Infos>
+</ViewModels>

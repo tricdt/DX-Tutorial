@@ -1,0 +1,82 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                    xmlns:local="clr-namespace:DiagramDemo"
+                    xmlns:dxdiag="http://schemas.devexpress.com/winfx/2008/xaml/diagram">
+    <Style TargetType="{x:Type dxb:Gallery}" x:Key="galleryStyleBase">
+        <Setter Property="ItemGlyphVerticalAlignment" Value="Center" />
+        <Setter Property="ItemGlyphHorizontalAlignment" Value="Center" />
+        <Setter Property="ItemAutoHeight" Value="True" />
+        <Setter Property="AllowToolTips" Value="False" />
+        <Setter Property="IsItemDescriptionVisible" Value="False" />
+        <Setter Property="IsItemCaptionVisible" Value="False" />
+        <Setter Property="IsGroupCaptionVisible" Value="False" />
+        <Setter Property="AllowFilter" Value="False" />
+        <Setter Property="MinColCount" Value="4" />
+        <Setter Property="AutoHideGallery" Value="False" />
+        <Setter Property="ItemCheckMode" Value="Single" />
+        <Setter Property="SizeMode" Value="None" />
+    </Style>
+    <Style TargetType="{x:Type dxb:Gallery}" x:Key="themeGalleryStyle" BasedOn="{StaticResource galleryStyleBase}">
+        <Setter Property="ItemGlyphBorderTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <dxdiag:ThemePresenter DataContext="{Binding Path=Item.Caption, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type dxb:GalleryItemControl}}}" DiagramTheme="{Binding}" ToolTip="{Binding Name}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <DataTemplate x:Key="themeGalleryControlItemTemplate">
+        <ContentControl>
+            <dxb:GalleryItem Caption="{Binding}">
+                <dxb:GalleryItem.Glyph>
+                    <DrawingImage/>
+                </dxb:GalleryItem.Glyph>
+            </dxb:GalleryItem>
+        </ContentControl>
+    </DataTemplate>
+    <DataTemplate x:Key="templateGalleryControlItemTemplate">
+        <ContentControl>
+            <dxb:GalleryItem Glyph="{Binding Image}" />
+        </ContentControl>
+    </DataTemplate>
+    <Style x:Key="templateGalleryStyle" TargetType="{x:Type dxb:Gallery}" BasedOn="{StaticResource galleryStyleBase}">
+        <Setter Property="ItemGlyphSize" Value="74,44" />
+        <Setter Property="ColCount" Value="4" />
+    </Style>
+    <DataTemplate x:Key="orgChartDetailsTemplate">
+        <dxg:TreeListControl
+            ItemsSource="{Binding Employees}"
+            SelectedItem="{Binding SelectedEmployee}"
+            ShowBorder="False"
+            Margin="0,3,0,0"
+            dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap">
+            <dxg:TreeListControl.Columns>
+                <dxg:TreeListColumn FieldName="FullName" />
+            </dxg:TreeListControl.Columns>
+            <dxg:TreeListControl.View>
+                <dxg:TreeListView
+                    AutoWidth="True"
+                    ShowIndicator="False"
+                    ShowHorizontalLines="False"
+                    ShowVerticalLines="False"
+                    ShowColumnHeaders="False"
+                    KeyFieldName="Id"
+                    ParentFieldName="ParentId"
+                    AllowEditing="False"
+                    NavigationStyle="Row"
+                    AutoExpandAllNodes="True" />
+            </dxg:TreeListControl.View>
+        </dxg:TreeListControl>
+    </DataTemplate>
+    <Style x:Key="ZoomTrackBarEditStyle" TargetType="{x:Type dxe:TrackBarEdit}">
+        <Setter Property="Minimum" Value="-3600"/>
+        <Setter Property="Maximum" Value="3600"/>
+        <Setter Property="SmallStep" Value="120"/>
+        <Setter Property="LargeStep" Value="240"/>
+        <Setter Property="TickFrequency" Value="3600"/>
+    </Style>
+</ResourceDictionary>

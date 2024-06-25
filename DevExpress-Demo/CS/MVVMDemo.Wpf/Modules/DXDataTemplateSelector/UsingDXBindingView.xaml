@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="MVVMDemo.DXDataTemplateSelector.UsingDXBindingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:local="clr-namespace:MVVMDemo.DXDataTemplateSelector">
+    <!--#region templates-->
+    <UserControl.Resources>
+        <DataTemplate x:Key="adminTemplate">
+            <DockPanel>
+                <dx:DXImage Source="pack://application:,,,/MVVMDemo;component/Modules/Behaviors/Images/Admin.svg" Width="16" Height="16" Margin="0,0,4,0"/>
+                <TextBlock FontWeight="Bold" Text="{Binding FullName}"/>
+            </DockPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="moderatorTemplate">
+            <DockPanel>
+                <dx:DXImage Source="pack://application:,,,/MVVMDemo;component/Modules/Behaviors/Images/Moderator.svg" Width="16" Height="16" Margin="0,0,4,0"/>
+                <TextBlock Text="{Binding FullName}"/>
+            </DockPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="userTemplate">
+            <TextBlock Text="{Binding FullName}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <!--#endregion-->
+    <ListBox ItemsSource="{x:Static local:UserRoleInfo.UserRoles}">
+        <ListBox.ItemTemplateSelector>
+            <!--#region !-->
+            <DXDataTemplateSelector>
+                <DXDataTemplateTrigger Binding="{DXBinding 'IsAdmin()'}" Value="True"
+                                       Template="{StaticResource adminTemplate}"/>
+                <DXDataTemplateTrigger Binding="{DXBinding 'UserRole == $local:UserRole.Moderator'}" Value="True"
+                                       Template="{StaticResource moderatorTemplate}"/>
+                <DXDataTemplateTrigger Template="{StaticResource userTemplate}"/>
+            </DXDataTemplateSelector>
+            <!--#endregion-->
+        </ListBox.ItemTemplateSelector>
+    </ListBox>
+</UserControl>

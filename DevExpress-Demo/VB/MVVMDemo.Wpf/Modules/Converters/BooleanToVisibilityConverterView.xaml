@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="MVVMDemo.Converters.BooleanToVisibilityConverterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <dxlc:LayoutGroup Header="Boolean to Visibility conversion" Orientation="Vertical" View="GroupBox" VerticalAlignment="Top">
+            <CheckBox x:Name="straghtConversionCheckBox" IsChecked="True">Is visible</CheckBox>
+            <!--#region !-->
+            <Button Visibility="{Binding IsChecked, ElementName=straghtConversionCheckBox, 
+                Converter={dxmvvm:BooleanToVisibilityConverter}}">Test Button</Button>
+            <!--#endregion-->
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup Header="Boolean to Visibility inverse conversion" Orientation="Vertical" View="GroupBox" VerticalAlignment="Top">
+            <CheckBox x:Name="inverseConversionCheckBox" IsChecked="True">Is collapsed</CheckBox>
+            <!--#region !-->
+            <Button Visibility="{Binding IsChecked, ElementName=inverseConversionCheckBox, 
+                Converter={dxmvvm:BooleanToVisibilityConverter Inverse=True}}">Test Button</Button>
+            <!--#endregion-->
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup Header="Hidden instead of Collapsed" Orientation="Vertical" View="GroupBox" VerticalAlignment="Top">
+            <CheckBox x:Name="hiddenInsteadOfCollapsedCheckBox" IsChecked="True">Is visible</CheckBox>
+            <!--#region !-->
+            <Button Visibility="{Binding IsChecked, ElementName=hiddenInsteadOfCollapsedCheckBox, 
+                Converter={dxmvvm:BooleanToVisibilityConverter HiddenInsteadOfCollapsed=True}}">Test Button</Button>
+            <!--#endregion-->
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</UserControl>

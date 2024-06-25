@@ -1,0 +1,2 @@
+DevExpress.Xpf.DocumentViewer.v{DXVersion}.Core
+DevExpress.Xpf.PdfViewer.v{DXVersion}

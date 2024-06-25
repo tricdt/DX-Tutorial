@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="GridDemo.Filtering.SearchPanelHighlightMode"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <!--#region !-->
+            <dxe:CheckEdit Content="Show Result Info" Margin="8"
+                           IsChecked="{Binding ShowSearchPanelResultInfo, Mode=TwoWay, ElementName=view}" />
+            <dxe:CheckEdit Content="Show Navigation Buttons" Margin="8"
+                           IsChecked="{Binding ShowSearchPanelNavigationButtons, Mode=TwoWay, ElementName=view}" />
+            <!--#endregion-->
+        </StackPanel>
+        <dxg:GridControl Grid.Row="1" Name="grid" ItemsSource="{x:Static dxdb:NWindDataProvider.Invoices}">
+            <dxg:GridControl.View>
+                <!--#region !-->
+                <dxg:TableView x:Name="view" ShowFixedTotalSummary="True" NavigationStyle="Row"
+                               SearchString="Brazil France" SearchPanelAllowFilter="False" ShowSearchPanelNavigationButtons ="True"
+                               ScrollBarAnnotationMode="SearchResult" ShowSearchPanelResultInfo="True"/>
+                <!--#endregion-->
+            </dxg:GridControl.View>
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="Country" Width="*" />
+                <dxg:GridColumn FieldName="City" Width="*" />
+                <dxg:GridColumn FieldName="Quantity" Width="*" />
+                <dxg:GridColumn FieldName="UnitPrice" Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="$0.00" MaskType="Numeric" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Discount" Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="0%" MaskType="Numeric" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+            </dxg:GridControl.TotalSummary>
+        </dxg:GridControl>
+    </Grid>
+</UserControl>

@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="MVVMDemo.EnumItemsSource.ListBoxEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.EnumItemsSource"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <!--#region !-->
+        <dxe:ListBoxEdit x:Name="listBox" ItemsSource="{dxe:EnumItemsSource EnumType=local:UserRole, ImageSize='16,16'}"
+                         SelectedIndex="0" VerticalAlignment="Top" />
+        <!--#endregion-->
+        <dxlc:LayoutItem Label="Selected Value:" VerticalAlignment="Top">
+            <TextBlock Text="{Binding EditValue, ElementName=listBox}"/>
+        </dxlc:LayoutItem>
+    </dxlc:LayoutControl>
+</UserControl>

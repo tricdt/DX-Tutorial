@@ -1,0 +1,38 @@
+﻿<mb:CustomShowUserControl x:Class="DevExpress.VideoRent.Wpf.MovieCategoryDetailView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:mb="clr-namespace:DevExpress.VideoRent.Wpf.ModulesBase"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    ShowMethodType="{DynamicResource ShowType}"
+    MinWidth="475" helpers:ElementHelper.FixMinHeight="True">
+
+    <mb:CustomShowUserControl.Resources>
+        <ResourceDictionary>
+            <helpers:DataSource x:Key="DataSource" />
+            <mb:PopupShowType x:Key="ShowType" Title="{helpers:ConstString ID=NewMovieCategory}" />
+        </ResourceDictionary>
+    </mb:CustomShowUserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}">
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static mb:ShowType.CloseSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static helpers:CustomEventCommandHelper.ClosingProperty}" Value="{Binding CommandDispose}" />
+            <helpers:BindingInfo ElementName="OKButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandSaveAndDispose}" />
+            <helpers:BindingInfo ElementName="CancelButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandClose}" />
+            <helpers:BindingInfo ElementName="MovieCategoryEditViewPresenter" Property="{x:Static ContentControl.ContentProperty}" Value="{Binding MovieCategoryEdit.View}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ContentControl x:Name="MovieCategoryEditViewPresenter" Margin="12" />
+        <dx:UniformStackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="12,0,12,12">
+            <Button x:Name="OKButton" Content="{helpers:ConstString ID=OK}" MinWidth="120" />
+            <Button x:Name="CancelButton" Content="{helpers:ConstString ID=Cancel}" MinWidth="120" />
+        </dx:UniformStackPanel>
+    </Grid>
+</mb:CustomShowUserControl>

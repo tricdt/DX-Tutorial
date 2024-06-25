@@ -1,0 +1,88 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.ColorEditModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:local="clr-namespace:EditorsDemo"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
+    <local:EditorsDemoModule.Resources>
+        <dx:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+        <local:PaletteCollectionConverter x:Key="PaletteCollectionConverter" />
+        <Style x:Key="paletteColorsStyle" TargetType="ListBox">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Margin" Value="1,0,1,0" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Fill="{Binding Converter={StaticResource ColorToBrushConverter}}" Width="12" Height="12" Stroke="Gray" StrokeThickness="1" />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </local:EditorsDemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <Grid Margin="12" MinWidth="250" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <dxe:CheckEdit x:Name="chkReset"
+                                   Content="Show &quot;Automatic&quot; button"
+                                   Grid.Row="0"
+                                   Grid.ColumnSpan="2"
+                                    Margin="0,0,0,6"
+                                   IsChecked="True" />
+                <dxe:CheckEdit x:Name="chkNoColor"
+                                   Content="Show &quot;No Color&quot; button"
+                                   Grid.Row="1"
+                                   Grid.ColumnSpan="2"
+                                    Margin="0,0,0,6"
+                                   IsChecked="False" />
+                <dxe:CheckEdit x:Name="chkMoreColors"
+                                   Content="Show &quot;More Colors&quot; button"
+                                   Grid.Row="2"
+                                   Grid.ColumnSpan="2"
+                                    Margin="0,0,0,6"
+                                   IsChecked="True" />
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Chip size:" VerticalAlignment="Center"  Margin="0,0,6,3" />
+                <dxe:ComboBoxEdit x:Name="chkChipSize"
+                                      Grid.Row="3"
+                                      Grid.Column="1"
+                                      IsTextEditable="False"
+                                       Margin="0,0,0,6"
+                                      SelectedIndex="0"
+                                      ItemsSource="{dxe:EnumItemsSource EnumType=dxe:ChipSize}" />
+            </Grid>
+        </ScrollViewer>
+        <Grid>
+            <local:PaintControl ShowAutomaticButton="{Binding ElementName=chkReset, Path=IsChecked, Mode=OneWay}"
+                                ShowMoreColorsButton="{Binding ElementName=chkMoreColors, Path=IsChecked, Mode=OneWay}"
+                                ShowNoColorButton="{Binding ElementName=chkNoColor, Path=IsChecked, Mode=OneWay}"
+                                ChipSize="{Binding ElementName=chkChipSize, Path=EditValue, Mode=OneWay}" />
+        </Grid>
+    </DockPanel>
+</local:EditorsDemoModule>

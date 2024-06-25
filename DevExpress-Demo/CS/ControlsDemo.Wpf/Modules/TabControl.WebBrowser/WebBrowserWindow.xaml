@@ -1,0 +1,35 @@
+﻿<dx:ThemedWindow x:Class="CommonDemo.TabControl.WebBrowser.WebBrowserWindow"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                mc:Ignorable="d"
+                xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                xmlns:helpers="clr-namespace:CommonDemo.Helpers"
+                d:DesignHeight="500" d:DesignWidth="600"
+                Height="800" Width="1000" ShowIcon="False" ShowTitle="False">
+    <dx:ThemedWindow.HeaderItems>
+        <dxb:ToolBarControl BackgroundTemplate="{x:Null}" GlyphSize="Small" ShowDragWidget="False" AllowCollapse="False" AllowCustomizationMenu="False" AllowHide="False" AllowQuickCustomization="False" AllowRename="False">
+            <dxb:BarSubItem Content="Options">
+                <dxb:BarSubItem Content="Themes">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxb:BarSubItemThemeSelectorBehavior />
+                    </dxmvvm:Interaction.Behaviors>
+                </dxb:BarSubItem>
+                <dxb:BarCheckItem Content="Show Window Title">
+                    <dxb:BarCheckItem.IsChecked>
+                        <MultiBinding>
+                            <MultiBinding.Converter>
+                                <helpers:WindowShowTitleAndIconConverter/>
+                            </MultiBinding.Converter>
+                            <Binding RelativeSource="{RelativeSource AncestorType=dx:ThemedWindow}" Path="ShowTitle"/>
+                            <Binding RelativeSource="{RelativeSource AncestorType=dx:ThemedWindow}" Path="ShowIcon"/>
+                        </MultiBinding>
+                    </dxb:BarCheckItem.IsChecked>
+                </dxb:BarCheckItem>
+            </dxb:BarSubItem>
+        </dxb:ToolBarControl>
+    </dx:ThemedWindow.HeaderItems>
+</dx:ThemedWindow>

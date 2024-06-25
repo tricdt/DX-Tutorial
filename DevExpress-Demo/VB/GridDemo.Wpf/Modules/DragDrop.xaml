@@ -1,0 +1,120 @@
+﻿<local:GridDemoModule x:Class="GridDemo.DragDrop"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxrudex="http://schemas.devexpress.com/winfx/2008/xaml/reports/userdesignerextensions"
+                      mc:Ignorable="d"
+                      DataContext="{dxmvvm:ViewModelSource local:DragDropViewModel}"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800">
+    <!--#region Resources-->
+    <local:GridDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GridDemo;component/ModuleResources/DragDropTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:GridDemoModule.Resources>
+    <!--#endregion-->
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" ReportService="{x:Reference rmsDragDrop}" />
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Margin="0,12,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit x:Name="showDragDropHintCheckEdit" Content="Show Drag Drop Hint" IsChecked="True" />
+                        <dxe:CheckEdit x:Name="showTargetInfoInDragDropHintCheckEdit"
+                                       Content="Show Target Info In Drag Drop Hint"
+                                       IsChecked="False"
+                                       IsEnabled="{Binding Path=IsChecked, ElementName=showDragDropHintCheckEdit}" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Margin="0,12,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit Margin="0,0,0,6"
+                                       Content="Allow Sorted Data Drag Drop"
+                                       IsChecked="{Binding Path=AllowSortedDataDragDrop, ElementName=view, Mode=TwoWay}" />
+                        <TextBlock TextWrapping="Wrap"
+                                   MaxWidth="230"
+                                   Text="By default, the sorted or grouped GridControl doesn't allow dropping records on some positions, which are defined by value of column by which the control is sorted (grouped). Selecting this option allows the GridControl to modify record data in such columns to insert the dropped record on a required position." />
+                    </StackPanel>
+                </GroupBox>
+                <local:RecentReports ReportService="{x:Reference rmsDragDrop}" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxlc:LayoutControl Orientation="Horizontal" StretchContentVertically="True" StretchContentHorizontally="True">
+            <dxlc:LayoutGroup Margin="0,0,4,0">
+                <dxlc:LayoutItem VerticalAlignment="Stretch">
+                    <dxg:GridControl x:Name="grid" ItemsSource="{Binding ActiveEmployees}" SelectionMode="Row" ShowBorder="True">
+                        <!--#region Columns-->
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn Width="32"
+                                            FixedWidth="True"
+                                            FieldName="GroupName"
+                                            Header="{x:Static sys:String.Empty}"
+                                            CellTemplate="{StaticResource colGroupNameCellTemplate}"
+                                            SortMode="Value"
+                                            AllowEditing="False"
+                                            AllowGrouping="False"
+                                            AllowPrinting="False"
+                                            AllowColumnFiltering="False" />
+                            <dxg:GridColumn FieldName="JobTitle" Width="6*" />
+                            <dxg:GridColumn FieldName="FullName" UnboundDataType="{x:Type sys:String}" UnboundExpression="[FirstName] + ' ' + [LastName]" ReadOnly="True" Width="4*" />
+                            <dxg:GridColumn FieldName="AddressLine1" Header="Address" Width="6*" />
+                            <dxg:GridColumn FieldName="Phone" Width="4*" />
+                        </dxg:GridControl.Columns>
+                        <!--#endregion-->
+                        <!--#region Total Summary-->
+                        <dxg:GridControl.TotalSummary>
+                            <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+                        </dxg:GridControl.TotalSummary>
+                        <!--#endregion-->
+                        <dxg:GridControl.View>
+                            <dxg:TableView x:Name="view"
+                                           ShowFixedTotalSummary="True"
+                                           NavigationStyle="Row"
+                                           ShowGroupPanel="False"
+                                           AllowDragDrop="True"
+                                           DragRecordOver="OnDragRecordOver"
+                                           ShowDragDropHint="{Binding  Path=IsChecked, ElementName=showDragDropHintCheckEdit}"
+                                           ShowTargetInfoInDragDropHint="{Binding  Path=IsChecked, ElementName=showTargetInfoInDragDropHintCheckEdit}">
+                                <dxmvvm:Interaction.Behaviors>
+                                    <dxrudex:GridReportManagerService Name="rmsDragDrop" />
+                                </dxmvvm:Interaction.Behaviors>
+                            </dxg:TableView>
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup>
+                <dxlc:LayoutItem VerticalAlignment="Stretch" HorizontalAlignment="Left">
+                    <!--#region ListBoxEdit-->
+                    <dxe:ListBoxEdit ItemsSource="{Binding NewEmployees}"
+                                     VerticalAlignment="Stretch"
+                                     MinWidth="160"
+                                     ItemTemplate="{StaticResource listBoxItemTemplate}"
+                                     dx:ListBoxDragDropBehavior.AllowDragDrop="True"
+                                     dx:ListBoxDragDropBehavior.DragRecordOver="OnDragRecordOver"
+                                     dx:ListBoxDragDropBehavior.ShowDragDropHint="{Binding ElementName=showDragDropHintCheckEdit, Path=IsChecked}"
+                                     dx:ListBoxDragDropBehavior.ShowTargetInfoInDragDropHint="{Binding  Path=IsChecked, ElementName=showTargetInfoInDragDropHintCheckEdit}" />
+                    <!--#endregion-->
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutControl>
+    </DockPanel>
+</local:GridDemoModule>

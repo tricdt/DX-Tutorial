@@ -1,0 +1,138 @@
+﻿<local:TabItemModule
+    x:Class="ChartsDemo.PolarAreaTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:ChartsDemo"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{DXBinding Expr='$local:ChartViewModelFactory.CreatePolarViewModel()'}">
+    <!--#region Resources-->
+    <local:TabItemModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:TabItemModule.Resources>
+    <!--#endregion-->
+
+    <!--#region Options-->
+    <local:TabItemModule.Options>
+        <StackPanel
+            Style="{StaticResource optionsRootStackPanelStyle}">
+            <GroupBox
+                Header="Function"
+                Margin="0,5,0,0">
+                <dxe:ListBoxEdit
+                    Name="lbeFunction"
+                    ItemsSource="{Binding Sources}"
+                    SelectedItem="{Binding SelectedSource}"
+                    DisplayMember="Description">
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+            <GroupBox
+                Header="Shape Style"
+                Margin="0,5,0,0">
+                <dxe:ListBoxEdit
+                    Name="lbeShapeStyle"
+                    ItemsSource="{dxe:EnumItemsSource EnumType=dxc:CircularDiagramShapeStyle}"
+                    EditValue="{x:Static dxc:CircularDiagramShapeStyle.Circle}">
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+            <GroupBox
+                Header="Rotation Direction"
+                Margin="0,5,0,0">
+                <dxe:ListBoxEdit
+                    Name="lbeRotationDirection"
+                    ItemsSource="{dxe:EnumItemsSource EnumType=dxc:CircularDiagramRotationDirection}"
+                    EditValue="{x:Static dxc:CircularDiagramRotationDirection.Counterclockwise}">
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+            <GroupBox
+                Header="Start Angle"
+                Margin="0,5,0,0">
+                <StackPanel
+                    MinWidth="150">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Text="0"
+                            HorizontalAlignment="Left" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="180"
+                            HorizontalAlignment="Center" />
+                        <TextBlock
+                            Grid.Column="2"
+                            Text="360"
+                            HorizontalAlignment="Right" />
+                    </Grid>
+                    <dxe:TrackBarEdit
+                        Name="tbeStartAngle"
+                        Value="0"
+                        Minimum="0"
+                        Maximum="360"
+                        TickPlacement="None" />
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </local:TabItemModule.Options>
+    <!--#endregion-->
+
+    <DockPanel
+        Loaded="{DXEvent '@e(chart).Animate()'}">
+
+        <!--#region ChartsRibbon-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}" />
+        <!--#endregion-->
+
+        <dxc:ChartControl
+            Name="chart"
+            AnimationMode="OnLoad">
+            <dxmvvm:Interaction.Behaviors>
+                <local:ChartAnimationService />
+            </dxmvvm:Interaction.Behaviors>
+            <dxc:PolarDiagram2D
+                StartAngle="{Binding ElementName=tbeStartAngle, Path=Value}"
+                ShapeStyle="{Binding ElementName=lbeShapeStyle, Path=EditValue}"
+                RotationDirection="{Binding ElementName=lbeRotationDirection, Path=EditValue}">
+                <dxc:PolarAreaSeries2D
+                    DataSource="{Binding SelectedSource.DataSource}"
+                    ArgumentDataMember="X"
+                    ValueDataMember="Y1"
+                    Transparency="0.6"
+                    AnimationAutoStartMode="SetStartState" />
+            </dxc:PolarDiagram2D>
+            <!--#region Titles-->
+            <dxc:ChartControl.Titles>
+                <dxc:Title
+                    HorizontalAlignment="Center">Function in polar coordinates</dxc:Title>
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+        </dxc:ChartControl>
+
+    </DockPanel>
+</local:TabItemModule>

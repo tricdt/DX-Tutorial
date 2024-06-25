@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="EditorsDemo.FilterBehavior.FilterBehaviorViewModelData"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxa="http://schemas.devexpress.com/winfx/2008/xaml/accordion"
+             xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:local="clr-namespace:EditorsDemo.FilterBehavior">
+    <UserControl.DataContext>
+        <local:FilterBehaviorViewModelDataViewModel />
+    </UserControl.DataContext>
+    <!--#region Resources-->
+    <UserControl.Resources>
+        <dxa:AccordionItemStyle x:Key="{x:Type dxa:AccordionItem}" FontSize="12"/>
+    </UserControl.Resources>
+    <!--#endregion-->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--#region !-->
+        <dxa:AccordionControl SelectionMode="None">
+            <dxmvvm:Interaction.Behaviors>
+                <dxfui:FilterBehavior  x:Name="filterBehavior" ItemsSource="{x:Type local:ProductInfo}"
+                                       CustomUniqueValues="filterBehavior_CustomUniqueValues"
+                                       ActualFilterCriteriaChanged="filterBehavior_ActualFilterCriteriaChanged"/>
+            </dxmvvm:Interaction.Behaviors>
+            <dxfui:CheckedListFilterElement FieldName="CategoryName" ShowCounts="False"/>
+            <dxfui:CheckBoxFilterElement FieldName="Discontinued" Margin="4,0,0,0"/>
+            <TextBlock>Products found: <Run Text="{Binding ProductsCount, Mode=OneWay}"/></TextBlock>
+            <Button Command="{Binding ShowProductsCommand}">Show products</Button>
+        </dxa:AccordionControl>
+        <!--#endregion-->
+
+        <dxe:ListBoxEdit Name="listBoxEdit" Grid.Column="1" ItemsSource="{Binding Products}">
+            <!--#region ItemTemplate-->
+            <dxe:ListBoxEdit.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Image Source="{Binding CategoryPicture}" Stretch="None" Grid.RowSpan="2" Margin="0,0,4,0"/>
+                        <TextBlock Grid.Column="1" Text="{Binding ProductName}" />
+                        <TextBlock Grid.Column="1" Grid.Row="1" FontStyle="Italic">
+                            <Run Text="{Binding CategoryName, Mode=OneWay}"/>
+                            <Run Text="{DXBinding 'Discontinued ? `(Discontinued)` : ``', Mode=OneWay}"/>
+                        </TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </dxe:ListBoxEdit.ItemTemplate>
+            <!--#endregion-->
+        </dxe:ListBoxEdit>
+    </Grid>
+</UserControl>

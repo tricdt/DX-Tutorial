@@ -1,0 +1,75 @@
+﻿<dx:ThemedWindow x:Class="WindowsUIDemo.FluentDesignCalculatorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:dxet="http://schemas.devexpress.com/winfx/2008/xaml/editors/themekeys"
+        xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+        mc:Ignorable="d"
+        dx:ThemeManager.ThemeName="Office2019Colorful"
+        WindowStartupLocation="CenterOwner"
+        TitleAlignment="Left"
+        ShowIcon="False"
+        UseLayoutRounding="True"
+        EnableAcrylic="True"
+        Title="Calculator"
+        MinHeight="350"
+        MinWidth="525"
+        Height="350"
+        Width="525"
+        >
+    <Grid>
+        <Grid.Resources>
+            <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
+                <Grid Background="Transparent">
+                    <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            dxwui:RevealHighlightOptions.Mode="BackgroundAndBorder"
+                            dxwui:RevealHighlightOptions.BorderColor="#60000000"
+                            dxwui:RevealHighlightOptions.BackgroundColor="#0CFFFFFF"
+                            >
+                    </Border>
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="Border" Property="Background" Value="#30606060" />
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter TargetName="Border" Property="Background" Value="#30000000" />
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+            <ControlTemplate x:Key="{dxet:CalculatorThemeKey ResourceKey=BorderTemplate, IsThemeIndependent=True}" TargetType="{x:Type ContentControl}">
+                <ContentPresenter />
+            </ControlTemplate>
+            <ControlTemplate x:Key="{dxet:CalculatorThemeKey ResourceKey=DisplayTemplate, IsThemeIndependent=True}" TargetType="{x:Type ContentControl}">
+                <ContentControl dx:FocusHelper2.Focusable="False" Template="{DynamicResource {dxet:CalculatorThemeKey ResourceKey=DisplayContentTemplate}}"/>
+            </ControlTemplate>
+            <Style x:Key="CalculatorButtonBaseStyle" TargetType="{x:Type Button}">
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="dx:FocusHelper2.Focusable" Value="False"/>
+                <Setter Property="Template" Value="{StaticResource ButtonTemplate}" />
+            </Style>
+            <Style x:Key="{dxet:CalculatorThemeKey ResourceKey=ButtonOperationStyle, IsThemeIndependent=True}" TargetType="{x:Type Button}" BasedOn="{StaticResource CalculatorButtonBaseStyle}">
+                <Setter Property="Background" Value="#50FFFFFF"/>
+                <Setter Property="BorderBrush" Value="#50FFFFFF"/>
+            </Style>
+            <Style x:Key="{dxet:CalculatorThemeKey ResourceKey=ButtonCEStyle, IsThemeIndependent=True}" TargetType="{x:Type Button}" BasedOn="{StaticResource CalculatorButtonBaseStyle}">
+                <Setter Property="Background" Value="#90FFFFFF"/>
+                <Setter Property="BorderBrush" Value="#90FFFFFF"/>
+                <Setter Property="Foreground" Value="Red" />
+            </Style>
+            <Style x:Key="{dxet:CalculatorThemeKey ResourceKey=ButtonDigitStyle, IsThemeIndependent=True}" TargetType="{x:Type Button}" BasedOn="{StaticResource CalculatorButtonBaseStyle}">
+                <Setter Property="Background" Value="#D0FFFFFF"/>
+                <Setter Property="BorderBrush" Value="#D0FFFFFF"/>
+                <Setter Property="FontWeight" Value="Bold" />
+            </Style>
+        </Grid.Resources>
+        <dxe:Calculator></dxe:Calculator>
+    </Grid>
+</dx:ThemedWindow>

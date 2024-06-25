@@ -1,0 +1,56 @@
+﻿<local:PivotGridDemoModule x:Class="PivotGridDemo.Filter"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:local="clr-namespace:PivotGridDemo"
+                           xmlns:dxpg="http://schemas.devexpress.com/winfx/2008/xaml/pivotgrid"
+                           xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                           xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                           mc:Ignorable="d"
+                           d:DesignHeight="300"
+                           d:DesignWidth="500"
+                           DataContext="{dxmvvm:ViewModelSource Type=local:FilterViewModel}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <local:PivotGridDemoRibbon DockPanel.Dock="Top" ExportPivotGrid="{x:Reference pivotGrid}"/>
+        <dxpg:PivotGridControl x:Name="pivotGrid"
+                               DataProcessingEngine="Optimized"
+                               DataSource="{Binding SalesPersons}"
+                               FilterCriteria="{Binding FilterCriteria, Mode=TwoWay}"
+                               local:FieldAreaHelper.FixAreas="True"
+                               VerticalAlignment="Stretch"
+                               RowTreeWidth="202"
+                               Margin="8">
+            <dxpg:PivotGridControl.Fields>
+                <dxpg:PivotGridField x:Name="fieldQuantity" DataBinding="{dxpg:DataSourceColumnBinding Quantity}" Area="DataArea" AreaIndex="0" Caption="Quantity" />
+                <dxpg:PivotGridField x:Name="fieldOrderDate"
+                                     DataBinding="{dxpg:DataSourceColumnBinding OrderDate}"
+                                     Area="ColumnArea"
+                                     AreaIndex="0"
+                                     Caption="Order Date"
+                                     ValueFormat="d"
+                                     Width="75" />
+                <dxpg:PivotGridField x:Name="fieldProductName" DataBinding="{dxpg:DataSourceColumnBinding ProductName}" Area="RowArea" AreaIndex="0" Caption="Product Name" />
+            </dxpg:PivotGridControl.Fields>
+        </dxpg:PivotGridControl>
+        <dxe:RangeControl Grid.Row="1"
+                          Margin="8,0,8,8"
+                          Height="100"
+                          SelectionRangeEnd="{Binding SelectionEnd, Mode=TwoWay}"
+                          SelectionRangeStart="{Binding SelectionStart, Mode=TwoWay}"
+                          RangeEnd="{Binding EndDate}"
+                          RangeStart="{Binding StartDate}">
+            <dxe:CalendarClient FontSize="12">
+                <dxe:CalendarClient.IntervalFactories>
+                    <dxe:QuarterIntervalFactory />
+                    <dxe:MonthIntervalFactory />
+                    <dxe:DayIntervalFactory />
+                </dxe:CalendarClient.IntervalFactories>
+            </dxe:CalendarClient>
+        </dxe:RangeControl>
+    </Grid>
+</local:PivotGridDemoModule>

@@ -1,0 +1,115 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.ButtonEditModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:local="clr-namespace:EditorsDemo">
+    <local:EditorsDemoModule.Resources>
+        <ControlTemplate x:Key="buttonInfoControlTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <dxe:CheckEdit Content="Is left" IsChecked="{Binding Path=IsLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,4" />
+                <dxe:CheckEdit Grid.Row="1"
+                               Content="Is enabled"
+                               IsChecked="{Binding Path=IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                               Margin="0,0,0,8" />
+                <TextBlock Grid.Row="2" Text="Click mode:" Margin="0,0,6,0" VerticalAlignment="Center" />
+                <dxe:ComboBoxEdit x:Name="cbClickMode"
+                                  Grid.Row="2"
+                                  Grid.Column="1"
+                                  IsTextEditable="False"
+                                  EditValue="{Binding Path=ClickMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ClickMode>Release</ClickMode>
+                    <ClickMode>Press</ClickMode>
+                    <ClickMode>Hover</ClickMode>
+                </dxe:ComboBoxEdit>
+            </Grid>
+        </ControlTemplate>
+    </local:EditorsDemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12" MinWidth="250">
+                <GroupBox Header="Sample 1 Properties">
+                    <StackPanel>
+                        <dxe:ListBoxEdit ShowBorder="False" Background="{x:Null}" SelectedIndex="0" x:Name="lbButtonIndex" Margin="0,0,0,6">
+                            <dxe:ListBoxEditItem Content="Button 1" />
+                            <dxe:ListBoxEditItem Content="Button 2" Margin="6,0,0,0" />
+                            <dxe:ListBoxEditItem Content="Button 3" Margin="6,0,0,0" />
+                            <dxe:ListBoxEdit.StyleSettings>
+                                <dxe:RadioListBoxEditStyleSettings />
+                            </dxe:ListBoxEdit.StyleSettings>
+                            <dxe:ListBoxEdit.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </dxe:ListBoxEdit.ItemsPanel>
+                        </dxe:ListBoxEdit>
+                        <dxi:MultiContentControl VisibleChildIndex="{Binding Path=SelectedIndex, ElementName=lbButtonIndex}"
+                                                 x:Name="multiContentControl"
+                                                 HorizontalAlignment="Stretch">
+                            <ContentControl Template="{StaticResource buttonInfoControlTemplate}"
+                                            DataContext="{Binding ElementName=editor1, Path=Buttons[0]}"
+                                            Foreground="{Binding Foreground, ElementName=multiContentControl}" />
+                            <ContentControl Template="{StaticResource buttonInfoControlTemplate}"
+                                            DataContext="{Binding ElementName=editor1, Path=Buttons[1]}"
+                                            Foreground="{Binding Foreground, ElementName=multiContentControl}" />
+                            <ContentControl Template="{StaticResource buttonInfoControlTemplate}"
+                                            DataContext="{Binding ElementName=editor1, Path=Buttons[2]}"
+                                            Foreground="{Binding Foreground, ElementName=multiContentControl}" />
+                        </dxi:MultiContentControl>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Button Click Log" Margin="0,12,0,0">
+                    <StackPanel>
+                        <dxe:TextEdit x:Name="log" Focusable="False" IsReadOnly="True" Height="150" VerticalContentAlignment="Top"  VerticalScrollBarVisibility="Auto" />
+                        <Button x:Name="clearButton" Margin="0,6" Width="100" Content="Clear" Click="ClearButtonClick" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Grid.Row="1" MaxWidth="400" Margin="0,60,0,0">
+            <dxe:ButtonEdit Margin="16,12,16,16" x:Name="editor1" IsTextEditable="True" AllowDefaultButton="False" Text="Button edit sample">
+                <dxe:ButtonInfo x:Name="regular" GlyphKind="Regular" ToolTipService.ToolTip="Button 1" />
+                <dxe:ButtonInfo x:Name="undo" GlyphKind="Undo" ToolTipService.ToolTip="Button 2" />
+                <dxe:ButtonInfo x:Name="redo" GlyphKind="Redo" ToolTipService.ToolTip="Button 3" />
+            </dxe:ButtonEdit>
+            <dxe:ButtonEdit Margin="16,12,16,16" x:Name="editor2" IsTextEditable="False" AllowDefaultButton="False">
+                <dxe:ButtonInfo x:Name="left" ButtonKind="Repeat" GlyphKind="Left" IsLeft="True" Click="LeftButtonClick" ToolTipService.ToolTip="Previous" />
+                <dxe:ButtonInfo x:Name="right" ButtonKind="Repeat" GlyphKind="Right" IsLeft="False" Click="RightButtonClick" ToolTipService.ToolTip="Next" />
+            </dxe:ButtonEdit>
+            <dxe:ButtonEdit Margin="16,12,16,16" x:Name="editor3" ShowText="False" AllowDefaultButton="False">
+                <dxe:ButtonInfo x:Name="refresh" GlyphKind="Refresh" ToolTipService.ToolTip="Refresh" />
+                <dxe:ButtonInfo x:Name="search" GlyphKind="Search" ToolTipService.ToolTip="Search" />
+                <dxe:ButtonInfo x:Name="apply" GlyphKind="Apply" ToolTipService.ToolTip="Apply" />
+                <dxe:ButtonInfo x:Name="cancel" GlyphKind="Cancel" ToolTipService.ToolTip="Cancel" />
+            </dxe:ButtonEdit>
+            <dxe:ButtonEdit Margin="16,12,16,16" AllowDefaultButton="false" EditValue="MVVM Buttons sample" ButtonsSource="{Binding}">
+                <dxe:ButtonEdit.ButtonTemplate>
+                    <DataTemplate>
+                        <ContentControl>
+                            <dxe:ButtonInfo GlyphKind="{Binding GlyphKind}" ToolTip="{Binding ToolTip}" IsLeft="{Binding IsLeft}" Index="{Binding Index}" />
+                        </ContentControl>
+                    </DataTemplate>
+                </dxe:ButtonEdit.ButtonTemplate>
+            </dxe:ButtonEdit>
+            <dxe:ButtonEdit Margin="16,12,16,16" EditValue="Image Button Sample" AllowDefaultButton="False">
+                <dxe:ImageButtonInfo Glyph="/EditorsDemo;component/Images/CheckEdit/CheckEdit1Checked.svg" />
+            </dxe:ButtonEdit>
+            <dxe:ButtonEdit Margin="16,12,16,16" AllowDefaultButton="false" EditValue="Delete Button Sample" NullValueButtonPlacement="EditBox" />
+        </StackPanel>
+    </DockPanel>
+</local:EditorsDemoModule>

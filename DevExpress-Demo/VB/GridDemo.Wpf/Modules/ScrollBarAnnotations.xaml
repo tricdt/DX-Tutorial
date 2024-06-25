@@ -1,0 +1,145 @@
+﻿<local:GridDemoModule x:Class="GridDemo.ScrollBarAnnotations"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+                      xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+                      xmlns:dxrudex="http://schemas.devexpress.com/winfx/2008/xaml/reports/userdesignerextensions"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800">
+    <!--#region Resources-->
+    <local:GridDemoModule.Resources>
+        <DataTemplate x:Key="AnnotationItemTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="{Binding DisplayName}" />
+                <Border x:Name="border"
+                        Width="12"
+                        Height="12"
+                        Margin="5,0,0,0"
+                        Background="{Binding Tag, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=dxe:ListBoxEditItem}}" />
+            </StackPanel>
+        </DataTemplate>
+    </local:GridDemoModule.Resources>
+    <!--#endregion-->
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" ReportService="{x:Reference rmsScrollBarAnnotations}" />
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,5,12,12" MinWidth="210">
+                <GroupBox Header="Show Annotations for">
+                    <dxe:ListBoxEdit Name="listAnnotaions"
+                                     ShowBorder="False"
+                                     HorizontalContentAlignment="Right"
+                                     FlowDirection="RightToLeft">
+                        <dxe:ListBoxEdit.Items>
+                            <dxe:ListBoxEditItem ContentTemplate="{StaticResource AnnotationItemTemplate}"
+                                                 Tag="{DXBinding '@e(AnnotationFocusedRowBrushBorder).Background'}">
+                                <local:ValueSelectorItem DisplayName="Focused Row">
+                                    <dxg:ScrollBarAnnotationMode>FocusedRow</dxg:ScrollBarAnnotationMode>
+                                </local:ValueSelectorItem>
+                            </dxe:ListBoxEditItem>
+                            <dxe:ListBoxEditItem ContentTemplate="{StaticResource AnnotationItemTemplate}"
+                                                 Tag="{DXBinding '@e(AnnotationSelectionBrushBorder).Background'}">
+                                <local:ValueSelectorItem DisplayName="Selected Rows">
+                                    <dxg:ScrollBarAnnotationMode>Selected</dxg:ScrollBarAnnotationMode>
+                                </local:ValueSelectorItem>
+                            </dxe:ListBoxEditItem>
+                            <dxe:ListBoxEditItem ContentTemplate="{StaticResource AnnotationItemTemplate}"
+                                                 Tag="{DXBinding '@e(AnnotationSearchBrushBorder).Background'}">
+                                <local:ValueSelectorItem DisplayName="Search Results">
+                                    <dxg:ScrollBarAnnotationMode>SearchResult</dxg:ScrollBarAnnotationMode>
+                                </local:ValueSelectorItem>
+                            </dxe:ListBoxEditItem>
+                            <dxe:ListBoxEditItem ContentTemplate="{StaticResource AnnotationItemTemplate}"
+                                                 Tag="{DXBinding '@e(AnnotationErrorBrushBorder).Background'}">
+                                <local:ValueSelectorItem DisplayName="Invalid Cells">
+                                    <dxg:ScrollBarAnnotationMode>InvalidCells</dxg:ScrollBarAnnotationMode>
+                                </local:ValueSelectorItem>
+                            </dxe:ListBoxEditItem>
+                            <dxe:ListBoxEditItem ContentTemplate="{StaticResource AnnotationItemTemplate}">
+                                <local:ValueSelectorItem DisplayName="Modified Rows">
+                                    <dxg:ScrollBarAnnotationMode>Custom</dxg:ScrollBarAnnotationMode>
+                                </local:ValueSelectorItem>
+                                <dxe:ListBoxEditItem.Tag>
+                                    <SolidColorBrush>Green</SolidColorBrush>
+                                </dxe:ListBoxEditItem.Tag>
+                            </dxe:ListBoxEditItem>
+                        </dxe:ListBoxEdit.Items>
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:CheckedListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <local:RecentReports ReportService="{x:Reference rmsScrollBarAnnotations}" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <Grid>
+            <dxg:GridControl x:Name="grid" ItemsSource="{x:Static dxdb:NWindDataProvider.ObservableInvoices200}" SelectionMode="Row" ShowBorder="False">
+                <!--#region Columns-->
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn FieldName="Country" Width="*" />
+                    <dxg:GridColumn FieldName="City" Width="*" />
+                    <dxg:GridColumn FieldName="Quantity" Width="*" />
+                    <dxg:GridColumn FieldName="UnitPrice" Width="*">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" MaskCulture="en-US" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn FieldName="Discount" Width="*">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="p0" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn FieldName="Total" UnboundDataType="{x:Type sys:Decimal}" UnboundExpression="([UnitPrice] * [Quantity]) * (1 - [Discount])" Width="*">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" MaskCulture="en-US" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                </dxg:GridControl.Columns>
+                <!--#endregion-->
+                <dxg:GridControl.View>
+                    <dxg:TableView x:Name="view"
+                                   ScrollBarAnnotationMode="{Binding EditValue, ElementName=listAnnotaions, Mode=TwoWay, Converter={local:ScrollBarAnnotationsModeConverter}}"
+                                   ShowGroupPanel="False"
+                                   ShowSearchPanelMode="Always"
+                                   SearchPanelAllowFilter="False"
+                                   ShowSearchPanelNavigationButtons="True"
+                                   AllowGrouping="False"
+                                   NavigationStyle="Cell"
+                                   ValidateCell="view_ValidateCell"
+                                   AllowLeaveInvalidEditor="True"
+                                   SearchString="Reims"
+                                   ScrollBarAnnotationsCreating="view_ScrollBarAnnotationsCreating"
+                                   RowUpdated="view_RowUpdated">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxrudex:GridReportManagerService Name="rmsScrollBarAnnotations" />
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxg:TableView>
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+            <StackPanel>
+                <Border x:Name="AnnotationFocusedRowBrushBorder"
+                        Background="{dxi:ThemeResource {dxgt:TableViewThemeKey ResourceKey=AnnotationFocusedRowBrush}}" />
+                <Border x:Name="AnnotationSelectionBrushBorder"
+                        Background="{dxi:ThemeResource {dxgt:TableViewThemeKey ResourceKey=AnnotationSelectionBrush}}" />
+                <Border x:Name="AnnotationSearchBrushBorder" Background="{dxi:ThemeResource {dxgt:TableViewThemeKey ResourceKey=AnnotationSearchBrush}}" />
+                <Border x:Name="AnnotationErrorBrushBorder" Background="{dxi:ThemeResource {dxgt:TableViewThemeKey ResourceKey=AnnotationErrorBrush}}" />
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</local:GridDemoModule>

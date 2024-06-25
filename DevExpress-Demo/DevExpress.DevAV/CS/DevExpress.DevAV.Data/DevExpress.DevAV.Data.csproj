@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AC076B58-635E-458A-AB2D-725B408ABE7F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DevExpress.DevAV</RootNamespace>
+    <AssemblyName>DevExpress.DevAV.v22.2.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseIntermediateOutputPath>obj_netFW</BaseIntermediateOutputPath>
+    <ConvertToNet6Windows />
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Bin\Framework4\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEVAV</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Bin\Framework4\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEVAV;DEBUGTEST;WPF;METASHARP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\Bin\Framework4\</OutputPath>
+    <DefineConstants>TRACE;DEVAV</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_CreateDatabase|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Bin\Framework4\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEVAV;ONGENERATEDATABASE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Bin\Framework4\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CLICKONCE;DEVAV</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>DevAV.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'RemoteDebug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\Bin\Framework4\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEVAV</DefineConstants>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+      <HintPath>..\..\..\Bin\EntityFramework.dll</HintPath>
+      <netcore3ignore />
+    <Private>False</Private></Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath></HintPath>
+      <netcore3ignore />
+    <Private>False</Private></Reference>
+    <Reference Include="PresentationCore"><Private>False</Private></Reference>
+    <Reference Include="PresentationFramework"><Private>False</Private></Reference>
+    <Reference Include="System"><Private>False</Private></Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations"><Private>False</Private></Reference>
+    <Reference Include="System.Core"><Private>False</Private></Reference>
+    <Reference Include="System.Data.Entity"><Private>False</Private></Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47">
+      <SpecificVersion>True</SpecificVersion>
+      <HintPath>..\..\..\Bin\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.108.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47">
+      <SpecificVersion>True</SpecificVersion>
+      <HintPath>..\..\..\Bin\System.Data.SQLite.EF6.dll</HintPath>
+      <Private>True</Private>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="System.Deployment"><Private>False</Private></Reference>
+    <Reference Include="System.Drawing"><Private>False</Private></Reference>
+    <Reference Include="System.Runtime.Serialization"><Private>False</Private></Reference>
+    <Reference Include="System.Xaml"><Private>False</Private></Reference>
+    <Reference Include="System.Xml.Linq"><Private>False</Private></Reference>
+    <Reference Include="System.Data.DataSetExtensions"><Private>False</Private></Reference>
+    <Reference Include="Microsoft.CSharp"><Private>False</Private></Reference>
+    <Reference Include="System.Data"><Private>False</Private></Reference>
+    <Reference Include="System.Xml"><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Data.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Data.Desktop.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="WindowsBase"><Private>False</Private></Reference>
+  </ItemGroup>
+  <!--ONLY NETCORE3 
+	<ItemGroup>
+  <Compile Include="NetCore\Address.cs" />
+  <Compile Include="NetCore\DataDirectoryHelper.cs" />
+  <Compile Include="NetCore\DevAVDb.cs" />
+  <Compile Include="NetCore\ObservableObject.cs" />  
+  </ItemGroup>
+  ONLY NETCORE3-->
+  <ItemGroup>
+    <Compile Include="AttachedFile.cs" />
+    <Compile Include="Chat\Commands\ChannelCommands.cs" />
+    <Compile Include="Chat\Commands\ContactCommands.cs" />
+    <Compile Include="Chat\Commands\MessageCommands.cs" />
+    <Compile Include="Chat\Contact.cs" />
+    <Compile Include="Chat\Events\ChannelEvent.cs" />
+    <Compile Include="Chat\Events\ContactEvents.cs" />
+    <Compile Include="Chat\Events\MessageEvents.cs" />
+    <Compile Include="Chat\Helpers\ImageHelper.cs" />
+    <Compile Include="Chat\Helpers\SecurityHelper.cs" />
+    <Compile Include="Chat\IMessageServer.cs" />
+    <Compile Include="Chat\Message.cs" />
+    <Compile Include="Chat\Server\Contacts.cs" />
+    <Compile Include="Chat\Server\DataGenerator.cs" />
+    <Compile Include="Chat\Server\DevAVEmployees.cs" />
+    <Compile Include="Chat\Server\InMemoryServer.cs" />
+    <Compile Include="Chat\Server\Messages.cs" />
+    <Compile Include="Chat\UserInfo.cs" />
+    <Compile Include="Common\DataDirectoryHelper.cs">
+      <netcore3ignore />
+    </Compile>
+    <Compile Include="Common\IDataErrorInfoHelper.cs" />
+    <Compile Include="Common\ValidationAttributes.cs" />
+    <Compile Include="Crest.cs" />
+    <Compile Include="CustomerComminication.cs" />
+    <Compile Include="CustomerStore.cs" />
+    <Compile Include="DemoDbContext.cs">
+      <netcore3ignore />
+    </Compile>
+    <Compile Include="DevAVDb.cs">
+      <netcore3ignore />
+    </Compile>
+    <Compile Include="Evaluation.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="OrderItem.cs" />
+    <Compile Include="Picture.cs" />
+    <Compile Include="Probation.cs" />
+    <Compile Include="ProductCatalog.cs" />
+    <Compile Include="ProductImage.cs" />
+    <Compile Include="Quote.cs" />
+    <Compile Include="QuoteItem.cs" />
+    <Compile Include="Queries.cs" />
+    <Compile Include="State.cs" />
+    <Compile Include="StateEnum.cs" />
+    <Compile Include="Address.cs">
+      <netcore3ignore />
+    </Compile>
+    <Compile Include="Customer.cs" />
+    <Compile Include="CustomerEmployee.cs" />
+    <Compile Include="DatabaseObject.cs" />
+    <Compile Include="Employee.cs" />
+    <Compile Include="Person.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="Task.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Unknown-user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DevAV.snk" />
+  </ItemGroup>
+  <!--ONLY NETCORE3 
+	<ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
+  </ItemGroup>
+ONLY NETCORE3-->
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,182 @@
+﻿<local:GaugesDemoModule x:Class="GaugesDemo.CircularIndicators"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                        xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
+                        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                        xmlns:local="clr-namespace:GaugesDemo"
+                        mc:Ignorable="d"
+                        d:DesignHeight="557"
+                        d:DesignWidth="887"
+                        Loaded="{DXEvent Handler='Start()'}"
+                        Unloaded="{DXEvent Handler='Stop()'}">
+    <local:GaugesDemoModule.DataContext>
+        <local:GaugeRandomDataGenerator MinValue="-100" MaxValue="100" UpdateInterval="1500"/>
+    </local:GaugesDemoModule.DataContext>
+    <dxdb:DemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GaugesDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </dxdb:DemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <GroupBox Header="Animation" Margin="12,5,12,12" VerticalAlignment="Top" MinWidth="210">
+                <StackPanel>
+                    <dxe:CheckEdit Name="needleAnimation" Content="Animate Needle" Margin="0,0,0,2" IsChecked="True" />
+                    <dxe:CheckEdit Name="markerAnimation" Content="Animate Marker" Margin="0,0,0,2" IsChecked="True" />
+                    <dxe:CheckEdit Name="rangeBarAnimation" Content="Animate Range Bar" Margin="0,0,0,2" IsChecked="True" />
+                </StackPanel>
+            </GroupBox>
+        </ScrollViewer>
+        <Border>
+            <Grid FlowDirection="LeftToRight">
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0,0" StartPoint="1,1">
+                        <GradientStop Color="#FF203035" Offset="0" />
+                        <GradientStop Color="#FF203035" Offset="1" />
+                        <GradientStop Color="#FF151A1C" Offset="0.5" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="7*" MinHeight="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="4*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                           Text="Turn Coordinator"
+                           Margin="0,3,0,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="22"
+                           Foreground="#FF00FAFD" />
+                <local:TurnCoordinatorBackgroundControl Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="430" Height="430" />
+                <dxga:CircularGaugeControl Grid.Row="1" Width="400" Height="400">
+                    <dxga:CircularGaugeControl.Model>
+                        <dxga:CircularCosmicModel />
+                    </dxga:CircularGaugeControl.Model>
+                    <dxga:ArcScale HorizontalAlignment="Center"
+                                   StartAngle="135"
+                                   EndAngle="225"
+                                   StartValue="-100"
+                                   EndValue="100"
+                                   MajorIntervalCount="4"
+                                   MinorIntervalCount="2"
+                                   ShowLabels="False" />
+                    <dxga:ArcScale HorizontalAlignment="Center"
+                                   StartAngle="-45"
+                                   EndAngle="45"
+                                   StartValue="-100"
+                                   EndValue="100"
+                                   MajorIntervalCount="4"
+                                   MinorIntervalCount="2"
+                                   ShowLabels="False" />
+                    <dxga:ArcScale HorizontalAlignment="Center"
+                                   StartAngle="60"
+                                   EndAngle="120"
+                                   StartValue="-100"
+                                   EndValue="100"
+                                   MajorIntervalCount="2"
+                                   MinorIntervalCount="4"
+                                   ShowLabels="False">
+                        <dxga:ArcScale.Layers>
+                            <dxga:ArcScaleLayer />
+                            <dxga:ArcScaleLayer>
+                                <dxga:ArcScaleLayer.Presentation>
+                                    <dxga:CustomArcScaleLayerPresentation>
+                                        <dxga:CustomArcScaleLayerPresentation.ScaleLayerTemplate>
+                                            <ControlTemplate>
+                                                <Grid RenderTransformOrigin="0.5, 0.5">
+                                                    <Ellipse StrokeThickness="0" Margin="24">
+                                                        <Ellipse.Fill>
+                                                            <RadialGradientBrush>
+                                                                <GradientStop Color="#FF08D2E5" />
+                                                                <GradientStop Color="#FF123850" Offset="1" />
+                                                            </RadialGradientBrush>
+                                                        </Ellipse.Fill>
+                                                    </Ellipse>
+                                                    <Ellipse StrokeThickness="1" Margin="32" Stroke="#FF058897" />
+                                                    <Ellipse StrokeThickness="1" Margin="73" Stroke="#FF058897" />
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </dxga:CustomArcScaleLayerPresentation.ScaleLayerTemplate>
+                                    </dxga:CustomArcScaleLayerPresentation>
+                                </dxga:ArcScaleLayer.Presentation>
+                            </dxga:ArcScaleLayer>
+                        </dxga:ArcScale.Layers>
+                        <dxga:ArcScale.MinorTickmarkOptions>
+                            <dxga:MinorTickmarkOptions Offset="-70" />
+                        </dxga:ArcScale.MinorTickmarkOptions>
+                        <dxga:ArcScale.MajorTickmarkOptions>
+                            <dxga:MajorTickmarkOptions Offset="-70" />
+                        </dxga:ArcScale.MajorTickmarkOptions>
+                        <dxga:ArcScale.Needles>
+                            <dxga:ArcScaleNeedle Value="{Binding NeedleValue}">
+                                <dxga:ArcScaleNeedle.Animation>
+                                    <dxga:IndicatorAnimation Enable="{Binding ElementName=needleAnimation, Path=IsChecked}" />
+                                </dxga:ArcScaleNeedle.Animation>
+                                <dxga:ArcScaleNeedle.Presentation>
+                                    <dxga:CustomArcScaleNeedlePresentation>
+                                        <dxga:CustomArcScaleNeedlePresentation.NeedleTemplate>
+                                            <ControlTemplate>
+                                                <Viewbox RenderTransformOrigin="0.5, 0.5" Margin="-100,0,-50,0">
+                                                    <Path RenderTransformOrigin="0.5, 0.5"
+                                                          Stretch="Fill"
+                                                          Fill="#FF00FCFF"
+                                                          Height="76"
+                                                          UseLayoutRounding="False"
+                                                          Width="256"
+                                                          Opacity="0.75"
+                                                          Data="F1 M 271.966,173.312L 274.632,173.312L 278.717,227.437C 282.664,228.632 286.058,231.099 288.422,234.362L 338.624,231.971L 338.624,                                                           233.304L 291.222,240.076C 291.705,241.735 291.964,243.488 291.964,245.303L 291.964,249.164L 443.945,241.303L 443.945,243.97L 338.766,255.757C 341.123,257.713 342.624,260.665 342.624,263.967C 342.624,269.857 337.849,274.633 331.958,274.633C 326.068,274.633 321.293,                                                           269.857 321.293,263.967C 321.293,261.521 322.117,259.267 323.502,257.467L 291.964,261.002L 291.964,261.301C 291.964,264.982 288.979,267.967 285.298,267.967L 284.439,267.912C 281.427,270.442 277.541,271.966 273.299,271.966C 269.057,271.966 265.172,270.442 262.159,                                                           267.912L 261.301,267.967C 257.619,267.967 254.635,264.982 254.635,261.301L 254.635,261.002L 223.097,257.467C 224.482,259.267 225.305,261.521 225.305,263.967C 225.305,269.857 220.53,274.632 214.64,274.632C 208.75,274.632 203.975,269.857 203.975,263.967C 203.975,                                                           260.665 205.475,257.713 207.832,255.757L 102.654,243.97L 102.654,241.303L 254.635,249.164L 254.635,245.302C 254.635,243.488 254.894,241.734 255.376,240.076L 207.974,233.304L 207.974,231.971L 258.176,234.362C 260.54,231.099 263.934,228.632 267.881,227.437L 271.966,173.312 Z ">
+                                                        <Path.RenderTransform>
+                                                            <RotateTransform Angle="-90" />
+                                                        </Path.RenderTransform>
+                                                    </Path>
+                                                </Viewbox>
+                                            </ControlTemplate>
+                                        </dxga:CustomArcScaleNeedlePresentation.NeedleTemplate>
+                                    </dxga:CustomArcScaleNeedlePresentation>
+                                </dxga:ArcScaleNeedle.Presentation>
+                            </dxga:ArcScaleNeedle>
+                        </dxga:ArcScale.Needles>
+                        <dxga:ArcScale.Markers>
+                            <dxga:ArcScaleMarker Value="{Binding MarkerValue}">
+                                <dxga:ArcScaleMarker.Options>
+                                    <dxga:ArcScaleMarkerOptions Offset="-75" />
+                                </dxga:ArcScaleMarker.Options>
+                                <dxga:ArcScaleMarker.Animation>
+                                    <dxga:IndicatorAnimation Enable="{Binding ElementName=markerAnimation, Path=IsChecked}" />
+                                </dxga:ArcScaleMarker.Animation>
+                            </dxga:ArcScaleMarker>
+                        </dxga:ArcScale.Markers>
+                        <dxga:ArcScale.RangeBars>
+                            <dxga:ArcScaleRangeBar Value="{Binding MarkerValue}">
+                                <dxga:ArcScaleRangeBar.Options>
+                                    <dxga:ArcScaleRangeBarOptions Offset="-52" Thickness="15" />
+                                </dxga:ArcScaleRangeBar.Options>
+                                <dxga:ArcScaleRangeBar.Animation>
+                                    <dxga:IndicatorAnimation Enable="{Binding ElementName=rangeBarAnimation, Path=IsChecked}" />
+                                </dxga:ArcScaleRangeBar.Animation>
+                            </dxga:ArcScaleRangeBar>
+                        </dxga:ArcScale.RangeBars>
+                        <dxga:ArcScale.CustomLabels>
+                            <dxga:ScaleCustomLabel Value="600" Offset="-60" RenderTransformOrigin="0.5, 0.5" FontSize="16" Foreground="#FF00FAFD" Content="PITCH" />
+                            <dxga:ScaleCustomLabel Value="-145" Offset="-100" RenderTransformOrigin="0.5, 0.5" FontSize="16" Foreground="#FF00FAFD" Content="R" />
+                            <dxga:ScaleCustomLabel Value="145" Offset="-100" RenderTransformOrigin="0.5, 0.5" FontSize="16" Foreground="#FF00FAFD" Content="L" />
+                            <dxga:ScaleCustomLabel Value="0" Offset="-125" RenderTransformOrigin="0.5, 0.5" FontSize="16" Foreground="#FF00FAFD" Content="TURN" />
+                        </dxga:ArcScale.CustomLabels>
+                    </dxga:ArcScale>
+                </dxga:CircularGaugeControl>
+            </Grid>
+        </Border>
+    </DockPanel>
+</local:GaugesDemoModule>

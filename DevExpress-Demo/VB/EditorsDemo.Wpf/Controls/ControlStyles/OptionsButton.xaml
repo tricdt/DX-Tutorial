@@ -1,0 +1,159 @@
+﻿<ResourceDictionary
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:EditorsDemo">
+    <ControlTemplate x:Key="AzureOptionsButton" TargetType="{x:Type ToggleButton}">
+        <ControlTemplate.Resources>
+            <Storyboard x:Key="Storyboard1">
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Path_Copy1" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00.2500000" Value="#FFFFFDCA" />
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Path_Copy1" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00.2500000" Value="#FFFFD925" />
+                </ColorAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="Storyboard2">
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Path_Copy1" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00.5000000" Value="#FFCEE4FF" />
+                </ColorAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Path_Copy1" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Offset)">
+                    <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1" />
+                </DoubleAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Path_Copy1" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00.5000000" Value="#FFDCEBFF" />
+                </ColorAnimationUsingKeyFrames>
+            </Storyboard>
+        </ControlTemplate.Resources>
+        <Grid SnapsToDevicePixels="True">
+            <Rectangle x:Name="Rectangle5" Stretch="Fill" Fill="#00000000" Margin="0,0,0,0" Width="19" Height="19" />
+            <Grid HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="19" Height="14" x:Name="grid">
+                <Path x:Name="Path" Stretch="Fill" Data="F1 M 584.622,566.523L 584.068,565.089L 582.981,566.176L 580.29,568.867C 580.175,568.982 580.039,569 579.969,569C 579.898,569 579.763,568.982 579.647,568.867L 579.132,568.353C 578.956,568.176 578.956,567.886 579.133,567.708L 581.824,565.019L 582.911,563.932L 581.477,563.378C 580.826,563.127 580.161,563 579.5,563C 576.467,563 574,565.467 574,568.5C 574,568.947 574.058,569.396 574.174,569.841L 571.718,572.295C 570.763,573.253 570.763,574.81 571.717,575.767L 572.233,576.282C 572.697,576.745 573.313,577 573.969,577C 574.624,577 575.241,576.745 575.704,576.282L 578.16,573.826C 578.604,573.942 579.053,574 579.5,574C 582.533,574 585,571.533 585,568.5C 585,567.839 584.873,567.174 584.622,566.523 Z " HorizontalAlignment="Stretch" Margin="0,0,5,0" VerticalAlignment="Stretch">
+                    <Path.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF062B63" Offset="0" />
+                            <GradientStop Color="#7E15376A" Offset="1" />
+                        </LinearGradientBrush>
+                    </Path.Fill>
+                </Path>
+                <Path x:Name="Path_Copy" Fill="#FFD5E7FF" Stretch="Fill" Data="F1 M 590,573L 585,573L 587,577L 588,577L 590,573 Z " HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="5" Height="4" />
+                <Path x:Name="Path_Copy1" Stretch="Fill" Data="F1 M 583.689,566.883L 580.998,569.574C 580.429,570.142 579.508,570.142 578.94,569.574L 578.425,569.06C 577.858,568.492 577.858,567.57 578.425,567.002L 581.117,564.312C 580.613,564.117 580.072,564 579.5,564C 577.015,564 575,566.015 575,568.5C 575,569.072 575.117,569.613 575.311,570.117L 572.425,573.002C 571.858,573.57 571.858,574.492 572.425,575.06L 572.94,575.574C 573.508,576.142 574.429,576.142 574.998,575.574L 577.883,572.688C 578.387,572.883 578.928,573 579.5,573C 581.985,573 584,570.985 584,568.5C 584,567.928 583.883,567.387 583.689,566.883 Z " HorizontalAlignment="Stretch" Margin="1,1,6,1" VerticalAlignment="Stretch">
+                    <Path.Fill>
+                        <LinearGradientBrush EndPoint="0.323,0.032" StartPoint="0.677,0.968">
+                            <GradientStop Color="#FFCEE4FF" Offset="0" />
+                            <GradientStop Color="#FFDCEBFF" Offset="1" />
+                        </LinearGradientBrush>
+                    </Path.Fill>
+                </Path>
+                <Rectangle x:Name="Rectangle" Stretch="Fill" Fill="#7F062B63" HorizontalAlignment="Right" Margin="0,0,0,4" VerticalAlignment="Bottom" Width="5" Height="1" />
+            </Grid>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.ExitActions>
+                    <BeginStoryboard Storyboard="{StaticResource Storyboard2}" x:Name="Storyboard2_BeginStoryboard" />
+                </MultiTrigger.ExitActions>
+                <MultiTrigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource Storyboard1}" x:Name="Storyboard1_BeginStoryboard" />
+                </MultiTrigger.EnterActions>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsChecked" Value="False" />
+                </MultiTrigger.Conditions>
+            </MultiTrigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Trigger.EnterActions>
+                    <RemoveStoryboard BeginStoryboardName="Storyboard2_BeginStoryboard" />
+                    <RemoveStoryboard BeginStoryboardName="Storyboard1_BeginStoryboard" />
+                </Trigger.EnterActions>
+                <Setter Property="Fill" TargetName="Path_Copy1">
+                    <Setter.Value>
+                        <LinearGradientBrush EndPoint="0.691,0.962" StartPoint="0.309,0.038">
+                            <GradientStop Color="#FFFFFDCA" Offset="0" />
+                            <GradientStop Color="#FFFFD925" Offset="1" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="EmeraldOptionsButton" TargetType="{x:Type ToggleButton}">
+        <ControlTemplate.Resources>
+            <Storyboard x:Key="Storyboard1">
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Path_Copy1" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00.2500000" Value="#FFFFFDCA" />
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Path_Copy1" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00.2500000" Value="#FFFFD925" />
+                </ColorAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="Storyboard2">
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Path_Copy1" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00.5000000" Value="#FFE9EFD0" />
+                </ColorAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Path_Copy1" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Offset)">
+                    <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1" />
+                </DoubleAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Path_Copy1" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00.5000000" Value="#FFD3E0A2" />
+                </ColorAnimationUsingKeyFrames>
+            </Storyboard>
+        </ControlTemplate.Resources>
+        <Grid SnapsToDevicePixels="True">
+            <Rectangle x:Name="Rectangle5" Stretch="Fill" Fill="#00000000" Margin="0,0,0,0" Width="19" Height="19" />
+            <Grid HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Width="19" Height="14" x:Name="grid">
+                <Path x:Name="Path" Stretch="Fill" Data="F1 M 584.622,566.523L 584.068,565.089L 582.981,566.176L 580.29,568.867C 580.175,568.982 580.039,569 579.969,569C 579.898,569 579.763,568.982 579.647,568.867L 579.132,568.353C 578.956,568.176 578.956,567.886 579.133,567.708L 581.824,565.019L 582.911,563.932L 581.477,563.378C 580.826,563.127 580.161,563 579.5,563C 576.467,563 574,565.467 574,568.5C 574,568.947 574.058,569.396 574.174,569.841L 571.718,572.295C 570.763,573.253 570.763,574.81 571.717,575.767L 572.233,576.282C 572.697,576.745 573.313,577 573.969,577C 574.624,577 575.241,576.745 575.704,576.282L 578.16,573.826C 578.604,573.942 579.053,574 579.5,574C 582.533,574 585,571.533 585,568.5C 585,567.839 584.873,567.174 584.622,566.523 Z " HorizontalAlignment="Stretch" Margin="0,0,5,0" VerticalAlignment="Stretch">
+                    <Path.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF203A11" Offset="0" />
+                            <GradientStop Color="#BD2F4D20" Offset="1" />
+                        </LinearGradientBrush>
+                    </Path.Fill>
+                </Path>
+                <Path x:Name="Path_Copy" Fill="#FF5C7142" Stretch="Fill" Data="F1 M 590,573L 585,573L 587,577L 588,577L 590,573 Z " HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="5" Height="4" />
+                <Path x:Name="Path_Copy1" Stretch="Fill" Data="F1 M 583.689,566.883L 580.998,569.574C 580.429,570.142 579.508,570.142 578.94,569.574L 578.425,569.06C 577.858,568.492 577.858,567.57 578.425,567.002L 581.117,564.312C 580.613,564.117 580.072,564 579.5,564C 577.015,564 575,566.015 575,568.5C 575,569.072 575.117,569.613 575.311,570.117L 572.425,573.002C 571.858,573.57 571.858,574.492 572.425,575.06L 572.94,575.574C 573.508,576.142 574.429,576.142 574.998,575.574L 577.883,572.688C 578.387,572.883 578.928,573 579.5,573C 581.985,573 584,570.985 584,568.5C 584,567.928 583.883,567.387 583.689,566.883 Z " HorizontalAlignment="Stretch" Margin="1,1,6,1" VerticalAlignment="Stretch">
+                    <Path.Fill>
+                        <LinearGradientBrush EndPoint="0.323,0.032" StartPoint="0.677,0.968">
+                            <GradientStop Color="#FFE9EFD0" Offset="0" />
+                            <GradientStop Color="#FFD3E0A2" Offset="1" />
+                        </LinearGradientBrush>
+                    </Path.Fill>
+                </Path>
+                <Rectangle x:Name="Rectangle" Stretch="Fill" Fill="#FF47573C" HorizontalAlignment="Right" Margin="0,0,0,4" VerticalAlignment="Bottom" Width="5" Height="1" />
+            </Grid>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.ExitActions>
+                    <BeginStoryboard Storyboard="{StaticResource Storyboard2}" x:Name="Storyboard2_BeginStoryboard" />
+                </MultiTrigger.ExitActions>
+                <MultiTrigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource Storyboard1}" x:Name="Storyboard1_BeginStoryboard" />
+                </MultiTrigger.EnterActions>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsChecked" Value="False" />
+                </MultiTrigger.Conditions>
+            </MultiTrigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Trigger.EnterActions>
+                    <RemoveStoryboard BeginStoryboardName="Storyboard2_BeginStoryboard" />
+                    <RemoveStoryboard BeginStoryboardName="Storyboard1_BeginStoryboard" />
+                </Trigger.EnterActions>
+                <Setter Property="Fill" TargetName="Path_Copy1">
+                    <Setter.Value>
+                        <LinearGradientBrush EndPoint="0.691,0.962" StartPoint="0.309,0.038">
+                            <GradientStop Color="#FFFFFDCA" Offset="0" />
+                            <GradientStop Color="#FFFFD925" Offset="1" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="OptionsButton" BasedOn="{x:Null}" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Template" Value="{DynamicResource AzureOptionsButton}" />
+    </Style>
+
+</ResourceDictionary>

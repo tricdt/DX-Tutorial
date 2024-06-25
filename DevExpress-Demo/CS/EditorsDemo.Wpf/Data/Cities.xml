@@ -1,0 +1,573 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Cities>
+  <City>Cheltenham</City>
+  <City>Kingsport</City>
+  <City>Suresnes</City>
+  <City>Baltimore</City>
+  <City>Reading</City>
+  <City>Fontana</City>
+  <City>Braunschweig</City>
+  <City>Sooke</City>
+  <City>Newark</City>
+  <City>Oxnard</City>
+  <City>Cheyenne</City>
+  <City>Modesto</City>
+  <City>Charlotte</City>
+  <City>Phoenix</City>
+  <City>Richmond Hill</City>
+  <City>Kansas City</City>
+  <City>Redwood City</City>
+  <City>Monrovia</City>
+  <City>Frankfurt</City>
+  <City>Plano</City>
+  <City>Eilenburg</City>
+  <City>Saginaw</City>
+  <City>Courbevoie</City>
+  <City>Royal Oak</City>
+  <City>Elk Grove</City>
+  <City>Sillery</City>
+  <City>Runcorn</City>
+  <City>North Randall</City>
+  <City>Kassel</City>
+  <City>Miami</City>
+  <City>Oxon</City>
+  <City>Round Rock</City>
+  <City>Newton</City>
+  <City>Chalk Riber</City>
+  <City>Norwood</City>
+  <City>Kittery</City>
+  <City>Kannapolis</City>
+  <City>Rhodes</City>
+  <City>Longview</City>
+  <City>Logansport</City>
+  <City>North Sydney</City>
+  <City>Sacramento</City>
+  <City>Saint Germain en Laye</City>
+  <City>Gold Bar</City>
+  <City>N. Vancouver</City>
+  <City>Newcastle upon Tyne</City>
+  <City>Ogden</City>
+  <City>Gilroy</City>
+  <City>Longmont</City>
+  <City>Englewood</City>
+  <City>Mansfield</City>
+  <City>Santa Ana</City>
+  <City>Redford</City>
+  <City>Grossmont</City>
+  <City>Mentor</City>
+  <City>Ville De'anjou</City>
+  <City>Fullerton</City>
+  <City>Irving</City>
+  <City>Denby</City>
+  <City>Raleigh</City>
+  <City>Merritt Island</City>
+  <City>Los Angeles</City>
+  <City>Gulfport</City>
+  <City>Gilbert</City>
+  <City>Waterloo</City>
+  <City>Sand City</City>
+  <City>La Marque</City>
+  <City>Corpus Christi</City>
+  <City>Index</City>
+  <City>Santa Cruz</City>
+  <City>Cerritos</City>
+  <City>Kingston</City>
+  <City>Nashua</City>
+  <City>Portland</City>
+  <City>Sandy</City>
+  <City>South Bend</City>
+  <City>Renton</City>
+  <City>Winston-Salem</City>
+  <City>Seattle</City>
+  <City>Austin</City>
+  <City>Etobicoke</City>
+  <City>Clackamas</City>
+  <City>Crossville</City>
+  <City>Oregon City</City>
+  <City>Newport Hills</City>
+  <City>Carol Stream</City>
+  <City>Parker</City>
+  <City>Escondido</City>
+  <City>Paris</City>
+  <City>Liverpool</City>
+  <City>Montreal</City>
+  <City>Westminster</City>
+  <City>Brisbane</City>
+  <City>Tucson</City>
+  <City>Pontiac</City>
+  <City>Oak Bay</City>
+  <City>Bluffton</City>
+  <City>Klamath Falls</City>
+  <City>Quebec</City>
+  <City>Lancaster</City>
+  <City>Lavender Bay</City>
+  <City>Boulogne-Billancourt</City>
+  <City>Salem</City>
+  <City>Albany</City>
+  <City>Basingstoke Hants</City>
+  <City>Minneapolis</City>
+  <City>Marietta</City>
+  <City>Kiel</City>
+  <City>Bury</City>
+  <City>Brampton</City>
+  <City>Atlanta</City>
+  <City>Las Cruces</City>
+  <City>Saint John</City>
+  <City>Greeley</City>
+  <City>Vista</City>
+  <City>Eureka</City>
+  <City>Southgate</City>
+  <City>Lakeland</City>
+  <City>Woonsocket</City>
+  <City>Stockton</City>
+  <City>Baytown</City>
+  <City>Yakima</City>
+  <City>Burien</City>
+  <City>Waterbury</City>
+  <City>Gateshead</City>
+  <City>Lake Oswego</City>
+  <City>Cedar Park</City>
+  <City>Caloundra</City>
+  <City>Sunrise</City>
+  <City>London</City>
+  <City>Olympia</City>
+  <City>Lake Elsinore</City>
+  <City>Kennewick</City>
+  <City>Saugus</City>
+  <City>Ballard</City>
+  <City>Riverton</City>
+  <City>San Jose</City>
+  <City>Altamonte Springs</City>
+  <City>Stamford</City>
+  <City>El Segundo</City>
+  <City>Michigan City</City>
+  <City>Woodland Hills</City>
+  <City>Virginia Beach</City>
+  <City>Pantin</City>
+  <City>Orly</City>
+  <City>Camarillo</City>
+  <City>Maryville</City>
+  <City>Palo Alto</City>
+  <City>Biloxi</City>
+  <City>Tooele</City>
+  <City>Southfield</City>
+  <City>Sherman Oaks</City>
+  <City>Les Ulis</City>
+  <City>Burbank</City>
+  <City>Issaquah</City>
+  <City>Spokane</City>
+  <City>Sequim</City>
+  <City>Sparks</City>
+  <City>Marysville</City>
+  <City>Berks</City>
+  <City>Weston</City>
+  <City>Casper</City>
+  <City>Melville</City>
+  <City>Altadena</City>
+  <City>Sandpoint</City>
+  <City>Tilton</City>
+  <City>North Miami Beach</City>
+  <City>Moline</City>
+  <City>De Witt</City>
+  <City>Morangis</City>
+  <City>San Diego</City>
+  <City>New York</City>
+  <City>Edina</City>
+  <City>Greensboro</City>
+  <City>Chula Vista</City>
+  <City>Bothell</City>
+  <City>Kelso</City>
+  <City>Villeneuve-d'Ascq</City>
+  <City>Daly City</City>
+  <City>Norwalk</City>
+  <City>Great Falls</City>
+  <City>Drancy</City>
+  <City>Ellensburg</City>
+  <City>Auburn</City>
+  <City>Gloucestershire</City>
+  <City>Denver</City>
+  <City>St. Louis</City>
+  <City>Rock Springs</City>
+  <City>Kanata</City>
+  <City>Endicott</City>
+  <City>Kent</City>
+  <City>Visalia</City>
+  <City>Monroe</City>
+  <City>Walnut Creek</City>
+  <City>Philadelphia</City>
+  <City>Rocky Mount</City>
+  <City>Wrentham</City>
+  <City>Sedro Woolley</City>
+  <City>Lincoln Acres</City>
+  <City>College Station</City>
+  <City>Arlington</City>
+  <City>Lane Cove</City>
+  <City>Markham</City>
+  <City>Shelton</City>
+  <City>Ontario</City>
+  <City>Abingdon</City>
+  <City>Townsville</City>
+  <City>Milwaukie</City>
+  <City>East Brisbane</City>
+  <City>Hayward</City>
+  <City>Pigeon Forge</City>
+  <City>Hanford</City>
+  <City>Warrington</City>
+  <City>Bell Gardens</City>
+  <City>San Antonio</City>
+  <City>Washougal</City>
+  <City>Vero Beach</City>
+  <City>Tigard</City>
+  <City>Plaistow</City>
+  <City>Lebanon</City>
+  <City>Oberlin</City>
+  <City>Leesburg</City>
+  <City>Everett</City>
+  <City>Houston</City>
+  <City>Chandler</City>
+  <City>Hooksett</City>
+  <City>La Grange</City>
+  <City>Springfield</City>
+  <City>Lille</City>
+  <City>Van Nuys</City>
+  <City>Reno</City>
+  <City>Geelong</City>
+  <City>Rockhampton</City>
+  <City>Aujan Mournede</City>
+  <City>Medford</City>
+  <City>Duluth</City>
+  <City>Barrie</City>
+  <City>Duesseldorf</City>
+  <City>Simi Valley</City>
+  <City>Randolph</City>
+  <City>Branch</City>
+  <City>Muehlheim</City>
+  <City>Malabar</City>
+  <City>Maidenhead</City>
+  <City>Roissy en Brie</City>
+  <City>Sydney</City>
+  <City>Woodbury</City>
+  <City>Port Huron</City>
+  <City>Lieusaint</City>
+  <City>Calgary</City>
+  <City>New Castle</City>
+  <City>Mcdonough</City>
+  <City>El Cajon</City>
+  <City>North York</City>
+  <City>Snohomish</City>
+  <City>Branson</City>
+  <City>Lake George</City>
+  <City>Aurora</City>
+  <City>Saint-Denis</City>
+  <City>Hannover</City>
+  <City>Alhambra</City>
+  <City>Bendigo</City>
+  <City>Springdale</City>
+  <City>Dorval</City>
+  <City>Warwick</City>
+  <City>Clay</City>
+  <City>Newport Beach</City>
+  <City>Downey</City>
+  <City>Boulogne-sur-Mer</City>
+  <City>Westland</City>
+  <City>Colma</City>
+  <City>Surprise</City>
+  <City>Milford</City>
+  <City>Lacey</City>
+  <City>Whittier</City>
+  <City>Sammamish</City>
+  <City>Torrance</City>
+  <City>Toronto</City>
+  <City>Offenbach</City>
+  <City>Shawnee</City>
+  <City>Novi</City>
+  <City>Braintree</City>
+  <City>Saarlouis</City>
+  <City>Langford</City>
+  <City>Mesa</City>
+  <City>City Of Commerce</City>
+  <City>Boston</City>
+  <City>La Vergne</City>
+  <City>Grevenbroich</City>
+  <City>Mill Valley</City>
+  <City>San Bruno</City>
+  <City>Hillsboro</City>
+  <City>Metz</City>
+  <City>Dallas</City>
+  <City>Huntsville</City>
+  <City>Canoga Park</City>
+  <City>Bracknell</City>
+  <City>Sunbury</City>
+  <City>Glendale</City>
+  <City>Newport News</City>
+  <City>Metchosin</City>
+  <City>West Sussex</City>
+  <City>Florence</City>
+  <City>Mosinee</City>
+  <City>Paris La Defense</City>
+  <City>Langley</City>
+  <City>Darlinghurst</City>
+  <City>Hobart</City>
+  <City>Birmingham</City>
+  <City>Woolston</City>
+  <City>Missoula</City>
+  <City>Richmond</City>
+  <City>Melton</City>
+  <City>Burlingame</City>
+  <City>Edmonton</City>
+  <City>Chantilly</City>
+  <City>Stoke-on-Trent</City>
+  <City>Cliffside</City>
+  <City>Bobigny</City>
+  <City>Essen</City>
+  <City>West Kingston</City>
+  <City>Madison Heights</City>
+  <City>Central Valley</City>
+  <City>Bellingham</City>
+  <City>San Carlos</City>
+  <City>Garland</City>
+  <City>Poing</City>
+  <City>Saint Ouen</City>
+  <City>Billericay</City>
+  <City>Anacortes</City>
+  <City>Bountiful</City>
+  <City>Irvine</City>
+  <City>Dunkerque</City>
+  <City>Federal Way</City>
+  <City>W. York</City>
+  <City>Campbellsville</City>
+  <City>Daleville</City>
+  <City>East Haven</City>
+  <City>Ottawa</City>
+  <City>Cambridge</City>
+  <City>Ferguson</City>
+  <City>Smithfield</City>
+  <City>Burnaby</City>
+  <City>Seaford</City>
+  <City>Rio Rancho</City>
+  <City>Bad Soden</City>
+  <City>New Hartford</City>
+  <City>Newport</City>
+  <City>High Wycombe</City>
+  <City>Watford</City>
+  <City>Tupelo</City>
+  <City>Myrtle Beach</City>
+  <City>Kendall</City>
+  <City>Decatur</City>
+  <City>Croix</City>
+  <City>Gaffney</City>
+  <City>San Gabriel</City>
+  <City>Milsons Point</City>
+  <City>Nepean</City>
+  <City>Verrieres Le Buisson</City>
+  <City>Bellflower</City>
+  <City>Idaho Falls</City>
+  <City>Jefferson City</City>
+  <City>Somerset</City>
+  <City>W. Linn</City>
+  <City>Goulburn</City>
+  <City>Peoria</City>
+  <City>Scarborough</City>
+  <City>Austell</City>
+  <City>Fort Worth</City>
+  <City>Carrollton</City>
+  <City>Winnipeg</City>
+  <City>San Mateo</City>
+  <City>Cincinnati</City>
+  <City>Joliet</City>
+  <City>Surrey</City>
+  <City>Killeen</City>
+  <City>Bordeaux</City>
+  <City>North Bend</City>
+  <City>Midland</City>
+  <City>Santa Monica</City>
+  <City>Saint Louis</City>
+  <City>Milwaukee</City>
+  <City>Esher-Molesey</City>
+  <City>Hamburg</City>
+  <City>Outremont</City>
+  <City>Roncq</City>
+  <City>Coffs Harbour</City>
+  <City>Clarkston</City>
+  <City>Johnson Creek</City>
+  <City>Springwood</City>
+  <City>Findon</City>
+  <City>Euclid</City>
+  <City>Sugar Land</City>
+  <City>Ascheim</City>
+  <City>Union Gap</City>
+  <City>Port Macquarie</City>
+  <City>National City</City>
+  <City>Troutdale</City>
+  <City>Colomiers</City>
+  <City>Clearwater</City>
+  <City>Ingolstadt</City>
+  <City>Cergy</City>
+  <City>Corvallis</City>
+  <City>Laredo</City>
+  <City>Silverwater</City>
+  <City>Vancouver</City>
+  <City>Cranbourne</City>
+  <City>Zeeland</City>
+  <City>Dresden</City>
+  <City>Vacaville</City>
+  <City>Concord</City>
+  <City>St. Leonards</City>
+  <City>Barstow</City>
+  <City>Erlangen</City>
+  <City>Salzgitter</City>
+  <City>Tremblay-en-France</City>
+  <City>Bradenton</City>
+  <City>Holland</City>
+  <City>Alpine</City>
+  <City>Montgomery</City>
+  <City>Stafford</City>
+  <City>Redmond</City>
+  <City>La Mesa</City>
+  <City>Roubaix</City>
+  <City>Hawthorne</City>
+  <City>Long Beach</City>
+  <City>Nashville</City>
+  <City>Sulzbach Taunus</City>
+  <City>Park City</City>
+  <City>Berkshire</City>
+  <City>Chicago</City>
+  <City>Elgin</City>
+  <City>North Ryde</City>
+  <City>Orlando</City>
+  <City>Salt Lake City</City>
+  <City>Spring Valley</City>
+  <City>Woodinville</City>
+  <City>Paderborn</City>
+  <City>Solingen</City>
+  <City>Versailles</City>
+  <City>Orleans</City>
+  <City>Hollywood</City>
+  <City>Kenmore</City>
+  <City>Fort Wayne</City>
+  <City>San Ramon</City>
+  <City>Bellevue</City>
+  <City>Indianapolis</City>
+  <City>Hull</City>
+  <City>Edmonds</City>
+  <City>Duvall</City>
+  <City>Baldwin Park</City>
+  <City>Saint Matthews</City>
+  <City>Frankfurt am Main</City>
+  <City>Lewiston</City>
+  <City>Wollongong</City>
+  <City>Wood Dale</City>
+  <City>Union City</City>
+  <City>Byron</City>
+  <City>Werne</City>
+  <City>Memphis</City>
+  <City>Cheektowaga</City>
+  <City>Las Vegas</City>
+  <City>Neunkirchen</City>
+  <City>Kirkland</City>
+  <City>Walla Walla</City>
+  <City>Alexandria</City>
+  <City>Saint Ann</City>
+  <City>Humble</City>
+  <City>Leipzig</City>
+  <City>Chehalis</City>
+  <City>Brossard</City>
+  <City>Scottsdale</City>
+  <City>Tampa</City>
+  <City>Milton Keynes</City>
+  <City>Cedar City</City>
+  <City>Destin</City>
+  <City>York</City>
+  <City>Cloverdale</City>
+  <City>Colombes</City>
+  <City>Berkeley</City>
+  <City>Imperial Beach</City>
+  <City>Odessa</City>
+  <City>Sainte-Foy</City>
+  <City>Tuscola</City>
+  <City>Howell</City>
+  <City>Lakewood</City>
+  <City>Hof</City>
+  <City>Milpitas</City>
+  <City>Bremerton</City>
+  <City>North Las Vegas</City>
+  <City>Falls Church</City>
+  <City>West Covina</City>
+  <City>Berlin</City>
+  <City>Heath</City>
+  <City>Peterborough</City>
+  <City>Detroit</City>
+  <City>San Francisco</City>
+  <City>Racine</City>
+  <City>Mesquite</City>
+  <City>Newcastle</City>
+  <City>Millington</City>
+  <City>La Jolla</City>
+  <City>Matraville</City>
+  <City>Port Hammond</City>
+  <City>Perth</City>
+  <City>Mobile</City>
+  <City>Beverly Hills</City>
+  <City>North Sioux City</City>
+  <City>Westport</City>
+  <City>Boise</City>
+  <City>Augusta</City>
+  <City>San Ysidro</City>
+  <City>Kirkby</City>
+  <City>Wenatchee</City>
+  <City>Bottrop</City>
+  <City>Bonn</City>
+  <City>Hixson</City>
+  <City>Stuttgart</City>
+  <City>Lemon Grove</City>
+  <City>Fremont</City>
+  <City>Columbus</City>
+  <City>Ithaca</City>
+  <City>Wokingham</City>
+  <City>Farmington</City>
+  <City>Pleasanton</City>
+  <City>Hamden</City>
+  <City>Culver City</City>
+  <City>Augsburg</City>
+  <City>Warrnambool</City>
+  <City>Woodburn</City>
+  <City>Nevada</City>
+  <City>Lynnwood</City>
+  <City>New Haven</City>
+  <City>Redlands</City>
+  <City>Victoria</City>
+  <City>Mississauga</City>
+  <City>Billings</City>
+  <City>Puyallup</City>
+  <City>Oakland</City>
+  <City>Coronado</City>
+  <City>Valley Stream</City>
+  <City>Loveland</City>
+  <City>Carson</City>
+  <City>Suwanee</City>
+  <City>Darmstadt</City>
+  <City>Hervey Bay</City>
+  <City>Oxford</City>
+  <City>West Chicago</City>
+  <City>Haney</City>
+  <City>Beaverton</City>
+  <City>Gold Coast</City>
+  <City>Fernley</City>
+  <City>Upland</City>
+  <City>Tacoma</City>
+  <City>Carnation</City>
+  <City>Leeds</City>
+  <City>Novato</City>
+  <City>Citrus Heights</City>
+  <City>Santa Fe</City>
+  <City>Chatou</City>
+  <City>Port Orchard</City>
+  <City>Pnot-Rouge</City>
+  <City>Melbourne</City>
+  <City>Savannah</City>
+  <City>Orange</City>
+  <City>Norridge</City>
+  <City>South Melbourne</City>
+  <City>Trabuco Canyon</City>
+  <City>Sarasota</City>
+</Cities>

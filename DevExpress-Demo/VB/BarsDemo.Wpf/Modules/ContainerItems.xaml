@@ -1,0 +1,121 @@
+﻿<local:BarsDemoModule x:Class="BarsDemo.ContainerItems"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:local="clr-namespace:BarsDemo"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <DockPanel LastChildFill="True">
+        <dxb:BarContainerControl DockPanel.Dock="Top">
+            <dxb:MainMenuControl Caption="MainMenu" x:Name="MainMenu" AllowCustomizationMenu="False">
+                <dxb:BarSubItem Name="bsFile" Content="File">
+                    <dxb:BarLinkContainerItemLink BarItemName="lcStandard" />
+                </dxb:BarSubItem>
+                <dxb:BarSubItem Name="bsToolBars" Content="Toolbars">
+                    <dxb:ToolbarListItem Name="toolbarListItemCore" Content="Toolbars" />
+                </dxb:BarSubItem>
+            </dxb:MainMenuControl>
+            <dxb:ToolBarControl Caption="Standard" AllowQuickCustomization="False">
+                <dxb:BarLinkContainerItem Name="lcStandard" Content="Item Container">
+                    <dxb:BarButtonItem Name="bNew"
+                                       Content="New"
+                                       Glyph="{dx:DXImage SvgImages/Outlook Inspired/New.svg}"
+                                       LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/New.svg}"
+                                       KeyGesture="Ctrl+N" />
+                    <dxb:BarButtonItem Name="bOpen"
+                                       Content="Open"
+                                       Glyph="{dx:DXImage SvgImages/Outlook Inspired/Open.svg}"
+                                       LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Open.svg}"
+                                       KeyGesture="Ctrl+O" />
+                    <dxb:BarButtonItem Name="bSave"
+                                       Content="Save"
+                                       Glyph="{dx:DXImage SvgImages/Outlook Inspired/Save.svg}"
+                                       LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Save.svg}"
+                                       KeyGesture="Ctrl+S" />
+                    <dxb:BarItemLinkSeparator />
+                    <dxb:BarButtonItem Name="bPrint"
+                                       Content="Print"
+                                       Glyph="{dx:DXImage SvgImages/Outlook Inspired/Print.svg}"
+                                       LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Print.svg}"
+                                       KeyGesture="Ctrl+P" />
+                </dxb:BarLinkContainerItem>
+            </dxb:ToolBarControl>
+            <dxb:ToolBarControl Caption="Format" IsMultiLine="True" AllowQuickCustomization="False">
+                <dxb:BarCheckItem Name="bBold" Content="Bold" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Bold.svg}" />
+                <dxb:BarCheckItem Name="bItalic" Content="Italic" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Italic.svg}" />
+                <dxb:BarCheckItem Name="bUnderline" Content="Underline" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Underline.svg}" />
+                <dxb:BarItemLinkSeparator />
+                <dxb:BarCheckItem Name="bLeft" Content="Left" GroupIndex="1" Glyph="{dx:DXImage SvgImages/Outlook Inspired/AlignLeft.svg}" />
+                <dxb:BarCheckItem Name="bCenter" Content="Center" GroupIndex="1" Glyph="{dx:DXImage SvgImages/Outlook Inspired/AlignCenter.svg}" />
+                <dxb:BarCheckItem Name="bRight" Content="Right" GroupIndex="1" Glyph="{dx:DXImage SvgImages/Outlook Inspired/AlignRight.svg}" />
+                <dxb:BarItemLinkSeparator />
+                <dxb:BarCheckItem Name="bBullets" Content="Bullets" Glyph="{dx:DXImage SvgImages/Outlook Inspired/ListBullets.svg}" />
+            </dxb:ToolBarControl>
+        </dxb:BarContainerControl>
+        <dxb:StatusBarControl Caption="Status Bar" DockPanel.Dock="Bottom" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <StackPanel.Resources>
+                    <Thickness x:Key="GroupMargin">0,5,0,0</Thickness>
+                    <Thickness x:Key="ElementMargin">0,4,0,0</Thickness>
+                    <sys:Double x:Key="GroupIndent">10.0</sys:Double>
+                    <sys:Double x:Key="ElementIndent">4.0</sys:Double>
+                </StackPanel.Resources>
+                <GroupBox Header="ToolBarListItem" MinWidth="150" Margin="{StaticResource GroupMargin}">
+                    <StackPanel>
+                        <dxe:CheckEdit Content="Is Visible"
+                                       Margin="{StaticResource ElementMargin}"
+                                       EditValue="{Binding Path=ToolbarListItem.IsVisible, Mode=TwoWay}" />
+                        <dxe:CheckEdit Content="Is Enabled"
+                                       Margin="{StaticResource ElementMargin}"
+                                       EditValue="{Binding Path=ToolbarListItem.IsEnabled, Mode=TwoWay}" />
+                        <StackPanel Margin="{StaticResource ElementMargin}">
+                            <TextBlock Text="List Item Type:" VerticalAlignment="Center" Margin="0,0,6,6" />
+                            <dxe:ComboBoxEdit x:Name="listItemTypeCombo" IsTextEditable="False" SelectedItem="{Binding Path=ToolbarListItem.ListItemType, Mode=TwoWay}">
+                                <dxb:ToolbarListItemType>ShowBars</dxb:ToolbarListItemType>
+                                <dxb:ToolbarListItemType>ShowBarsAndItems</dxb:ToolbarListItemType>
+                            </dxe:ComboBoxEdit>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="BarLinkContainerItem" MinWidth="150" Margin="{StaticResource GroupMargin}">
+                    <StackPanel>
+                        <dxe:CheckEdit Content="Is Visible"
+                                       EditValue="{Binding Path=BarLinkContainerItem.IsVisible, Mode=TwoWay}"
+                                       Margin="{StaticResource ElementMargin}" />
+                        <dxe:CheckEdit Content="Is Enabled"
+                                       EditValue="{Binding Path=BarLinkContainerItem.IsEnabled, Mode=TwoWay}"
+                                       Margin="{StaticResource ElementMargin}" />
+                        <StackPanel Margin="{StaticResource ElementMargin}">
+                            <TextBlock Text="Sub Items Glyph Size:" VerticalAlignment="Center" Margin="0,0,6,6" />
+                            <dxe:ComboBoxEdit Grid.Column="1"
+                                              x:Name="subItemsGlyphSize"
+                                              IsTextEditable="False"
+                                              SelectedItem="{Binding Path=BarLinkContainerItem.SubItemsGlyphSize, Mode=TwoWay}">
+                                <dxb:GlyphSize>Default</dxb:GlyphSize>
+                                <dxb:GlyphSize>Small</dxb:GlyphSize>
+                                <dxb:GlyphSize>Large</dxb:GlyphSize>
+                            </dxe:ComboBoxEdit>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Container Links" MinWidth="150" Margin="{StaticResource GroupMargin}">
+                    <StackPanel>
+                        <dxe:CheckEdit Content="New" Margin="{StaticResource ElementMargin}" EditValue="{Binding Path=NewItem.IsVisible, Mode=TwoWay}" />
+                        <dxe:CheckEdit Content="Open" Margin="{StaticResource ElementMargin}" EditValue="{Binding Path=OpenItem.IsVisible, Mode=TwoWay}" />
+                        <dxe:CheckEdit Content="Save" Margin="{StaticResource ElementMargin}" EditValue="{Binding Path=SaveItem.IsVisible, Mode=TwoWay}" />
+                        <dxe:CheckEdit Content="Print" Margin="{StaticResource ElementMargin}" EditValue="{Binding Path=PrintItem.IsVisible, Mode=TwoWay}" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid />
+    </DockPanel>
+</local:BarsDemoModule>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.Blue{fill:#1F68E8;}
+	.Black{fill:#070707;}
+	.st0{fill:#FEFEFF;}
+	.st1{fill:#000001;}
+	.st2{opacity:0.75;}
+	.st3{opacity:0.5;}
+</style>
+<polygon class="st0" points="20,10 12,10 8,16 16,16 "/>
+<polygon class="st1" points="20,22 12,22 8,16 16,16 "/>
+<g class="st2">
+	<polygon class="Blue" points="20,10 12,10 8,16 16,16 	"/>
+</g>
+<g class="st2">
+	<polygon class="Blue" points="20,22 12,22 8,16 16,16 	"/>
+</g>
+<polygon class="Blue" points="20,22 16,16 20,10 24,16 "/>
+<g class="st3">
+	<polygon class="Black" points="4,16 8,8 4,8 0,16 4,24 8,24 	"/>
+	<polygon class="Black" points="28,16 24,8 28,8 32,16 28,24 24,24 	"/>
+</g>
+</svg>

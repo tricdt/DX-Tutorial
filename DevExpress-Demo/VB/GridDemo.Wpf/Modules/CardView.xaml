@@ -1,0 +1,149 @@
+﻿<local:GridDemoModule x:Class="GridDemo.CardView"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800">
+
+    <local:GridDemoModule.Resources>
+        <local:TotalSummaryPositionToBooleanConverter x:Key="TotalSummaryPositionToBooleanConverter" Position="Top" />
+    </local:GridDemoModule.Resources>
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" />
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <ContentControl Margin="12,0,12,12" MinWidth="210">
+                <StackPanel>
+                    <GroupBox Header="Layout" Margin="0,5,0,0">
+                        <StackPanel>
+                            <Label Margin="0,0,0,0" Content="Cards Layout:" />
+                            <dxe:ListBoxEdit Margin="0,4,0,0"
+                                             ShowBorder="False"
+                                             ItemsSource="{dxe:EnumItemsSource EnumType=dxg:CardLayout}"
+                                             EditValue="{Binding Path=View.CardLayout, Mode=TwoWay}">
+                                <dxe:ListBoxEdit.StyleSettings>
+                                    <dxe:RadioListBoxEditStyleSettings />
+                                </dxe:ListBoxEdit.StyleSettings>
+                            </dxe:ListBoxEdit>
+                            <Label Margin="0,8,0,0" Content="Cards Alignment:" />
+                            <dxe:ListBoxEdit Margin="0,0,0,0"
+                                             ShowBorder="False"
+                                             ItemsSource="{dxe:EnumItemsSource EnumType=dx:Alignment}"
+                                             EditValue="{Binding Path=View.CardAlignment, Mode=TwoWay}">
+                                <dxe:ListBoxEdit.StyleSettings>
+                                    <dxe:RadioListBoxEditStyleSettings />
+                                </dxe:ListBoxEdit.StyleSettings>
+                            </dxe:ListBoxEdit>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Column/Row Size" Margin="0,5,0,0">
+                        <StackPanel>
+                            <dxe:CheckEdit x:Name="showCardsSeparatorCheckBox" Content="Show Cards Separator" IsChecked="True" Margin="0,0,0,4" />
+                            <dxe:CheckEdit x:Name="allowResizingCheckBox"
+                                           Content="Allow Resizing"
+                                           IsChecked="True"
+                                           IsEnabled="{Binding IsChecked, ElementName=showCardsSeparatorCheckBox}"
+                                           Margin="0,0,0,4" />
+                            <dxdb:SliderControl Header="Fixed Size"
+                                                EditValue="{Binding Path=View.FixedSize, Mode=TwoWay}"
+                                                Minimum="{Binding Path=View.MinFixedSize}"
+                                                Maximum="500"
+                                                ValueMinWidth="20"
+                                                SmallStep="10"
+                                                LargeStep="10"
+                                                Width="150" />
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Cards in a Column/Row" Margin="0,5,0,0">
+                        <StackPanel Orientation="Vertical">
+                            <RadioButton Name="autoCardsInRowRadioButton" Content="Auto" IsChecked="True" />
+                            <RadioButton Content="Single" />
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Navigation Style" Margin="0,5,0,0">
+                        <dxe:ListBoxEdit Background="{x:Null}"
+                                         SelectedIndex="0"
+                                         Margin="0,0,30,0"
+                                         ShowBorder="False"
+                                         x:Name="NavigationStyleComboBox"
+                                         DisplayMember="DisplayName">
+                            <dxe:ListBoxEdit.StyleSettings>
+                                <dxe:RadioListBoxEditStyleSettings />
+                            </dxe:ListBoxEdit.StyleSettings>
+                            <local:ValueSelectorItem DisplayName="By card cell">
+                                <dxg:GridViewNavigationStyle>Cell</dxg:GridViewNavigationStyle>
+                            </local:ValueSelectorItem>
+                            <local:ValueSelectorItem DisplayName="By card">
+                                <dxg:GridViewNavigationStyle>Row</dxg:GridViewNavigationStyle>
+                            </local:ValueSelectorItem>
+                            <local:ValueSelectorItem DisplayName="None">
+                                <dxg:GridViewNavigationStyle>None</dxg:GridViewNavigationStyle>
+                            </local:ValueSelectorItem>
+                        </dxe:ListBoxEdit>
+                    </GroupBox>
+                    <GroupBox Header="Customization Options" Margin="0,5,0,12">
+                        <StackPanel>
+                            <dxe:CheckEdit Margin="0,0,0,4" IsChecked="{Binding Path=View.ShowCardExpandButton, Mode=TwoWay}" Content="Allow Expand/Collapse Cards" />
+                            <dxe:CheckEdit Margin="0,0,0,4" IsChecked="{Binding Path=View.TotalSummaryPosition, Mode=TwoWay, Converter={StaticResource TotalSummaryPositionToBooleanConverter}}" Content="Show Total Summaries" />
+                            <dxe:CheckEdit Margin="0,0,0,4" IsChecked="{Binding Path=View.ShowColumnHeaders, Mode=TwoWay}" Content="Show Column Headers" />
+                            <dxe:CheckEdit Margin="0,0,0,4" IsChecked="{Binding Path=View.ShowGroupPanel, Mode=TwoWay}" Content="Show Group Panel" />
+                            <dxe:CheckEdit Margin="0,0,0,4" IsChecked="{Binding Path=View.AllowSorting, Mode=TwoWay}" Content="Allow Sorting" />
+                            <dxe:CheckEdit Margin="0" IsChecked="{Binding Path=View.AllowColumnMoving, Mode=TwoWay}" Content="Allow Moving" />
+                        </StackPanel>
+                    </GroupBox>
+                    <Button Command="{Binding View.Commands.ShowRibbonPrintPreview}">Show Print Preview</Button>
+                </StackPanel>
+            </ContentControl>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxg:GridControl Name="grid" ShowBorder="False">
+            <!--#region Columns-->
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn Header="Category" FieldName="Category.Name" />
+                <dxg:GridColumn Header="Trademark" FieldName="Trademark.Name" />
+                <dxg:GridColumn Header="Model" FieldName="Name" />
+                <dxg:GridColumn Header="Icon" FieldName="Image" AllowColumnFiltering="False" ReadOnly="True">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ImageEditSettings MaxWidth="127" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Price">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="$0" MaskType="Numeric" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn Header="Cyl" FieldName="Cylinders" />
+            </dxg:GridControl.Columns>
+            <!--#endregion-->
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem SummaryType="Count" FieldName="Name" />
+            </dxg:GridControl.TotalSummary>
+            <dxg:GridControl.View>
+                <dxg:CardView AllowEditing="True"
+                              ShowGroupPanel="False"
+                              ShowGroupedColumns="True"
+                              FixedSize="250"
+                              MinFixedSize="150"
+                              Name="view"
+                              CardHeaderBinding="{Binding Path=Name}"
+                              PrintAutoCardWidth="False"
+                              NavigationStyle="{Binding Path=SelectedItem.Content, ElementName=NavigationStyleComboBox}"
+                              AllowCardResizing="{DXBinding Expr='@e(showCardsSeparatorCheckBox).IsChecked and @e(allowResizingCheckBox).IsChecked'}"
+                              SeparatorThickness="{DXBinding Expr='@e(showCardsSeparatorCheckBox).IsChecked ? 2 : 0'}"
+                              MaxCardCountInRow="{DXBinding Expr='@e(autoCardsInRowRadioButton).IsChecked ? $int.MaxValue : 1'}" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

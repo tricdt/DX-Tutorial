@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="GanttDemo.Examples.EditLimits"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxgn="http://schemas.devexpress.com/winfx/2008/xaml/gantt"
+             xmlns:local="clr-namespace:GanttDemo.Examples"
+             DataContext="{dxmvvm:ViewModelSource Type={x:Type local:EditLimitsViewModel}}">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type dxgn:GanttTaskEditPreviewControl}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Row.EditState}" Value="Red">
+                    <Setter Property="Background" Value="#A0FF0000"/>
+                    <Setter Property="BorderBrush" Value="Red"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Row.EditState}" Value="Green">
+                    <Setter Property="Background" Value="#A000FF00"/>
+                    <Setter Property="BorderBrush" Value="Lime"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Row.EditState}" Value="Yellow">
+                    <Setter Property="Background" Value="#A0FFFF00"/>
+                    <Setter Property="BorderBrush" Value="Yellow"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <dxgn:GanttControl ItemsSource="{Binding Tasks}">
+        <dxgn:GanttControl.View>
+            <dxgn:GanttView
+                x:Name="ganttView"
+                AutoExpandAllNodes="True"
+                BeginTaskMove="{DXEvent Handler='UpdateLimits(@args.Node.Content)'}"
+                TaskMoving="{DXEvent Handler='@args.StartDate = StartDateChanging(@args.StartDate, @e(ganttView), @args.Node)'}"
+                TaskMoved="{DXEvent Handler='@args.StartDate = StartDateChanged(@args.StartDate, @e(ganttView), @args.Node)'}"
+                TaskMoveCanceled="{DXEvent Handler='UpdateLimits(null)'}"
+                AllowEditing="False"
+                AllowTaskMove="True"
+                TreeListWidth="Auto"
+                ScrollMargin="120"
+                StripLinesSource="{Binding Limits}">
+                <dxgn:GanttView.StripLineTemplate>
+                    <DataTemplate>
+                        <ContentControl>
+                            <dxgn:StripLine StartDate="{Binding Limit}" BorderThickness="2" BorderBrush="{Binding Color, Converter={dxmvvm:ColorToBrushConverter}}"/>
+                        </ContentControl>
+                    </DataTemplate>
+                </dxgn:GanttView.StripLineTemplate>
+                <dxgn:GanttView.WorkingTimeRules>
+                    <dxgn:WorkingTimeRule WorkingTime="0:0:0-24:0:0">
+                        <dxgn:Daily/>
+                    </dxgn:WorkingTimeRule>
+                </dxgn:GanttView.WorkingTimeRules>
+                <dxgn:GanttView.WorkdayRules>
+                    <dxgn:WorkdayRule IsWorkday="True">
+                        <dxgn:Daily/>
+                    </dxgn:WorkdayRule>
+                </dxgn:GanttView.WorkdayRules>
+                <dxgn:GanttView.TaskStyle>
+                    <Style TargetType="{x:Type dxgn:GanttTaskControl}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Row.State}" Value="Green">
+                                <Setter Property="Background" Value="#A000FF00"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Row.State}" Value="Yellow">
+                                <Setter Property="Background" Value="#A0FFFF00"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Row.State}" Value="Red">
+                                <Setter Property="Background" Value="#A0FF0000"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </dxgn:GanttView.TaskStyle>
+            </dxgn:GanttView>
+        </dxgn:GanttControl.View>
+        <dxgn:GanttColumn BindTo="StartDate"/>
+    </dxgn:GanttControl>
+</UserControl>

@@ -1,0 +1,5 @@
+DevExpress.Charts.v{DXVersion}.Core
+DevExpress.Xpf.Charts.v{DXVersion}
+DevExpress.Xpf.Gauges.v{DXVersion}
+DevExpress.SalesDemo.Model
+DevExpress.Xpf.Themes.Office2013.v{DXVersion}

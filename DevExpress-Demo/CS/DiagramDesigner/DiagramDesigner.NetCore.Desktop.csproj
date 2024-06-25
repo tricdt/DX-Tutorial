@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProjectGuid>{F38EDE94-B6FD-096B-03F0-6C5D4A990225}</ProjectGuid>
+    <EnableDefaultItems>False</EnableDefaultItems>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <Configurations>Debug;Release;DebugTest</Configurations>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    <EmbeddedResourceUseDependentUponConvention>False</EmbeddedResourceUseDependentUponConvention>
+    <RootNamespace>DiagramDesigner</RootNamespace>
+    <AssemblyName>DiagramDesigner</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>WinExe</OutputType>
+    <WarningLevel>4</WarningLevel>
+    <ApplicationIcon>demoicon.ico</ApplicationIcon>
+    <IntermediateOutputPath>obj.NCD</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputPath>.\bin\ClickOnce DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\ClickOnce ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;WPF;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Wpf.Demos" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Diagram" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Win.Design" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.DXStyle" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.LightGray" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.MetropolisLight" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.MetropolisDark" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.Office2007Black" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.Office2007Blue" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.Office2007Silver" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.Office2010Black" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.Office2010Blue" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.Office2010Silver" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.Office2013" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.Office2013DarkGray" Version="22.2.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  <ItemGroup><PackageReference Include="DevExpress.Wpf.Themes.Office2013LightGray" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.Office2016Black" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.Office2016BlackSE" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.Office2016Colorful" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.Office2016ColorfulSE" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.Office2016DarkGraySE" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.Office2016White" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.Office2016WhiteSE" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.Office2019Black" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.Office2019DarkGray" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.Office2019White" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.Office2019HighContrast" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.VS2017Blue" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.VS2017Dark" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.VS2017Light" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.VS2019Blue" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.Win10Light" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.Win10Dark" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.Win11Light" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.Win11Dark" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.VS2019Dark" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.VS2019Light" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.Seven" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.TouchlineDark" Version="22.2.3" /><PackageReference Include="DevExpress.Wpf.Themes.VS2010" Version="22.2.3" /></ItemGroup>
+</Project>

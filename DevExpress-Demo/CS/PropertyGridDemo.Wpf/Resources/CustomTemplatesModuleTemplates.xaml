@@ -1,0 +1,51 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:PropertyGridDemo"
+    xmlns:utils="clr-namespace:PropertyGridDemo.Utils"
+    xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid">
+    <DataTemplate x:Key="emptyTemplate"/>
+    <DataTemplate x:Key="photoContentTemplate">
+        <Image Source="{Binding EditableObject, Converter={dxprg:EditableObjectConverter Converter={utils:ResourceStringToImageSourceConverter}}}" Height="200"/>
+    </DataTemplate>
+    <DataTemplate x:Key="increaseRankTemplate">
+        <Button Content="+" Command="{Binding Value}"/>
+    </DataTemplate>
+    <DataTemplate x:Key="decreaseRankTemplate">
+        <Button Content="-" Command="{Binding Value}"/>
+    </DataTemplate>
+    <DataTemplate x:Key="rankContentTemplate">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <dxprg:CellEditorPresenter Grid.Column="0" Path="DecreaseRankCommand" PathMode="Absolute" HorizontalAlignment="Right"/>
+            <dxprg:CellEditorPresenter Grid.Column="1" MinWidth="20"/>
+            <dxprg:CellEditorPresenter Grid.Column="2" Path="IncreaseRankCommand" PathMode="Absolute" HorizontalAlignment="Left"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="careersElementsHeaderTemplate">
+        <dxprg:CellEditorPresenter Path="JobTitle" IsHitTestVisible="False" dxprg:NavigationManager.NavigationMode="None"/>
+    </DataTemplate>
+    <DataTemplate x:Key="careersElementsContentTemplate">
+        <StackPanel Orientation="Horizontal" IsHitTestVisible="False">
+            <TextBlock>(</TextBlock>
+            <dxprg:CellEditorPresenter Path="FromDate" IsHitTestVisible="False" dxprg:NavigationManager.NavigationMode="None"/>
+            <TextBlock>-</TextBlock>
+            <dxprg:CellEditorPresenter Path="ToDate" IsHitTestVisible="False" dxprg:NavigationManager.NavigationMode="None"/>
+            <TextBlock>)</TextBlock>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="addressContentTemplate">
+        <dxprg:PropertyGridControl SelectedObject="{Binding EditableObject, Converter={dxprg:EditableObjectConverter}}"
+                                                       ShowCategories="False"
+                                                       ShowSearchBox="False"
+                                                       ShowToolPanel="False"
+                                                       ShowMenuButtonInRows="False"
+                                                       ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                                       BorderThickness="0"
+                                                       />
+    </DataTemplate>
+</ResourceDictionary>

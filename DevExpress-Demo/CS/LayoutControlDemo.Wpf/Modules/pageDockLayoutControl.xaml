@@ -1,0 +1,126 @@
+﻿<local:LayoutControlDemoModule x:Class="LayoutControlDemo.pageDockLayoutControl"
+                               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                               xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                               xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                               xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                               xmlns:local="clr-namespace:LayoutControlDemo"
+                               mc:Ignorable="d"
+                               d:DesignHeight="350">
+    <DockPanel>
+
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <local:controlProperties Margin="10,6,2,4" x:Name="PropertiesControl" LayoutControl="{Binding ElementName=layoutItems}" MinWidth="210">
+                <local:controlProperties.LayoutControlProperties>
+                    <dxlc:FlowLayoutControl Padding="0" ScrollBars="None">
+                        <dxe:CheckEdit Content="AllowItemSizing" IsChecked="{Binding AllowItemSizing, Mode=TwoWay}" />
+                    </dxlc:FlowLayoutControl>
+                </local:controlProperties.LayoutControlProperties>
+
+                <local:controlProperties.ItemProperties>
+                    <dxlc:LayoutControl Orientation="Vertical" Padding="0" Background="Transparent">
+                        <dxlc:LayoutControl.Resources>
+                            <dx:EnumToBoolConverter x:Key="EnumToBoolConverter" />
+                        </dxlc:LayoutControl.Resources>
+
+                        <dxlc:LayoutGroup View="GroupBox" Header="Dock" Orientation="Vertical">
+                            <dxlc:LayoutGroup HorizontalAlignment="Left">
+                                <RadioButton Content="Left"
+                                             GroupName="1b"
+                                             Click="DockRadioButton_Click"
+                                             VerticalAlignment="Center"
+                                             IsChecked="{Binding Path=(dxlc:DockLayoutControl.Dock), Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Left, Mode=TwoWay}" />
+                                <dxlc:LayoutGroup Orientation="Vertical">
+                                    <RadioButton Content="Top"
+                                                 GroupName="1c"
+                                                 Click="DockRadioButton_Click"
+                                                 IsChecked="{Binding Path=(dxlc:DockLayoutControl.Dock), Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Top, Mode=TwoWay}" />
+                                    <RadioButton Content="Client"
+                                                 GroupName="1f"
+                                                 Click="DockRadioButton_Click"
+                                                 IsChecked="{Binding Path=(dxlc:DockLayoutControl.Dock), Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Client, Mode=TwoWay}" />
+                                    <RadioButton Content="Bottom"
+                                                 GroupName="1e"
+                                                 Click="DockRadioButton_Click"
+                                                 IsChecked="{Binding Path=(dxlc:DockLayoutControl.Dock), Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Bottom, Mode=TwoWay}" />
+                                </dxlc:LayoutGroup>
+                                <RadioButton Content="Right"
+                                             GroupName="1d"
+                                             Click="DockRadioButton_Click"
+                                             VerticalAlignment="Center"
+                                             IsChecked="{Binding Path=(dxlc:DockLayoutControl.Dock), Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Right, Mode=TwoWay}" />
+                            </dxlc:LayoutGroup>
+                            <RadioButton Content="None"
+                                         GroupName="1a"
+                                         Click="DockRadioButton_Click"
+                                         IsChecked="{Binding Path=(dxlc:DockLayoutControl.Dock), Converter={StaticResource EnumToBoolConverter}, ConverterParameter=None, Mode=TwoWay}" />
+                        </dxlc:LayoutGroup>
+
+                        <dxlc:LayoutGroup View="GroupBox" Header="Alignment" Orientation="Vertical">
+                            <dxlc:LayoutItem Label="Horizontal:">
+                                <dxe:ComboBoxEdit EditValue="{Binding HorizontalAlignment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  ItemsSource="{dxe:EnumItemsSource EnumType=HorizontalAlignment}" />
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="Vertical:">
+                                <dxe:ComboBoxEdit EditValue="{Binding VerticalAlignment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  ItemsSource="{dxe:EnumItemsSource EnumType=VerticalAlignment}" />
+                            </dxlc:LayoutItem>
+                        </dxlc:LayoutGroup>
+
+                        <dxe:CheckEdit Content="AllowHorizontalSizing" IsChecked="{Binding Path=(dxlc:DockLayoutControl.AllowHorizontalSizing), Mode=TwoWay}" />
+                        <dxe:CheckEdit Content="AllowVerticalSizing" IsChecked="{Binding Path=(dxlc:DockLayoutControl.AllowVerticalSizing), Mode=TwoWay}" />
+                        <dxe:CheckEdit Content="UseDesiredWidthAsMaxWidth"
+                                       IsChecked="{Binding Path=(dxlc:DockLayoutControl.UseDesiredWidthAsMaxWidth), Mode=TwoWay}" />
+                        <dxe:CheckEdit Content="UseDesiredHeightAsMaxHeight"
+                                       IsChecked="{Binding Path=(dxlc:DockLayoutControl.UseDesiredHeightAsMaxHeight), Mode=TwoWay}" />
+                    </dxlc:LayoutControl>
+                </local:controlProperties.ItemProperties>
+            </local:controlProperties>
+        </ScrollViewer>
+        <dxlc:DockLayoutControl x:Name="layoutItems" Padding="10" Background="White">
+            <local:SampleLayoutItem Caption="Item 1"
+                                    dxlc:DockLayoutControl.Dock="Top"
+                                    dxlc:DockLayoutControl.AllowHorizontalSizing="True"
+                                    dxlc:DockLayoutControl.AllowVerticalSizing="True" />
+            <local:SampleLayoutItem Caption="Item 2"
+                                    dxlc:DockLayoutControl.Dock="Bottom"
+                                    dxlc:DockLayoutControl.AllowHorizontalSizing="True"
+                                    dxlc:DockLayoutControl.AllowVerticalSizing="True" />
+            <local:SampleLayoutItem Caption="Item 3"
+                                    dxlc:DockLayoutControl.Dock="Left"
+                                    dxlc:DockLayoutControl.AllowHorizontalSizing="True"
+                                    dxlc:DockLayoutControl.AllowVerticalSizing="True" />
+            <local:SampleLayoutItem Caption="Item 4"
+                                    dxlc:DockLayoutControl.Dock="Right"
+                                    dxlc:DockLayoutControl.AllowHorizontalSizing="True"
+                                    dxlc:DockLayoutControl.AllowVerticalSizing="True" />
+            <local:SampleLayoutItem Caption="Item 5"
+                                    dxlc:DockLayoutControl.Dock="Top"
+                                    dxlc:DockLayoutControl.AllowHorizontalSizing="True"
+                                    dxlc:DockLayoutControl.AllowVerticalSizing="True" />
+            <local:SampleLayoutItem Caption="Item 6"
+                                    dxlc:DockLayoutControl.Dock="Left"
+                                    dxlc:DockLayoutControl.AllowHorizontalSizing="True"
+                                    dxlc:DockLayoutControl.AllowVerticalSizing="True" />
+            <local:SampleLayoutItem Caption="Item 7"
+                                    dxlc:DockLayoutControl.Dock="Bottom"
+                                    dxlc:DockLayoutControl.AllowHorizontalSizing="True"
+                                    dxlc:DockLayoutControl.AllowVerticalSizing="True" />
+            <local:SampleLayoutItem Caption="Item 8"
+                                    dxlc:DockLayoutControl.Dock="Right"
+                                    dxlc:DockLayoutControl.AllowHorizontalSizing="True"
+                                    dxlc:DockLayoutControl.AllowVerticalSizing="True" />
+            <local:SampleLayoutItem Caption="Item 9"
+                                    dxlc:DockLayoutControl.Dock="Client"
+                                    dxlc:DockLayoutControl.AllowHorizontalSizing="True"
+                                    dxlc:DockLayoutControl.AllowVerticalSizing="True" />
+        </dxlc:DockLayoutControl>
+    </DockPanel>
+</local:LayoutControlDemoModule>

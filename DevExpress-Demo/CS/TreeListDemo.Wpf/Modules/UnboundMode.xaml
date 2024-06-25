@@ -1,0 +1,108 @@
+﻿<local:TreeListDemoModule x:Class="TreeListDemo.UnboundMode"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                          xmlns:local="clr-namespace:TreeListDemo"
+                          mc:Ignorable="d"
+                          d:DesignHeight="400"
+                          d:DesignWidth="800">
+    <local:TreeListDemoModule.Resources>
+        <local:SummaryIconVisibilityConverter x:Key="summaryIconVisibilityConverter" />
+        <DataTemplate x:Key="summTemplate">
+            <dx:DXImage Source="/TreeListDemo;component/Images/Summary.svg"
+                   Width="16"
+                   Height="16"
+                   Visibility="{Binding RowData.Row, Converter={StaticResource summaryIconVisibilityConverter}}" />
+        </DataTemplate>
+        <dxdb:EmployeesData x:Key="EmployeesData" />
+        <DataTemplate x:Key="DateTemplate">
+            <Grid>
+                <dxe:DateEdit x:Name="PART_Editor" AllowNullInput="True" />
+                <ContentControl Content="{Binding}"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                ContentTemplate="{StaticResource summTemplate}" />
+            </Grid>
+        </DataTemplate>
+        <local:States x:Key="StateData" />
+        <DataTemplate x:Key="ComboBoxStateEdit">
+            <Grid>
+                <dxe:ComboBoxEdit Name="PART_Editor"
+                                  ItemsSource="{Binding Path=DataSource, Source={StaticResource StateData}}"
+                                  IsTextEditable="False"
+                                  ApplyItemTemplateToSelectedItem="True">
+                    <dxe:ComboBoxEdit.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <dx:DXImage Height="16" Width="16" Source="{Binding Image}" />
+                                <TextBlock Text="{Binding TextValue}" Margin="2,0,0,0" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </dxe:ComboBoxEdit.ItemTemplate>
+                </dxe:ComboBoxEdit>
+                <ContentControl Content="{Binding}"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                ContentTemplate="{StaticResource summTemplate}" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="ComboBoxExecutorItemTemplate">
+            <StackPanel Orientation="Horizontal">
+                <dx:DXImage Height="16" Width="16" Source="{Binding GroupName, Converter={local:GroupNameToImageConverter}}"/>
+                <TextBlock Text="{Binding BindsDirectlyToSource=True}" Margin="2,0,0,0" VerticalAlignment="Center"/>
+            </StackPanel>
+        </DataTemplate>
+    </local:TreeListDemoModule.Resources>
+    <DockPanel>
+        <local:TreeListDemoRibbon DockPanel.Dock="Top" ExportTreeList="{x:Reference treeList}" />
+        <dxg:TreeListControl x:Name="treeList">
+            <dxg:TreeListControl.Columns>
+                <dxg:TreeListColumn FieldName="NameValue" Header="Name" AllowSorting="True" Width="*" />
+                <dxg:TreeListColumn FieldName="Executor" AllowSorting="True" Width="*">
+                    <dxg:TreeListColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings
+                            ItemsSource="{Binding Path=DataSource, Source={StaticResource EmployeesData}}"
+                            IsTextEditable="False"
+                            ApplyItemTemplateToSelectedItem="True"
+                            ItemTemplate="{StaticResource ComboBoxExecutorItemTemplate}"/>
+                    </dxg:TreeListColumn.EditSettings>
+                </dxg:TreeListColumn>
+                <dxg:TreeListColumn FieldName="StartDate" UnboundDataType="{x:Type sys:DateTime}" Header="Start date" CellTemplate="{StaticResource DateTemplate}" Width="*" />
+                <dxg:TreeListColumn FieldName="EndDate" UnboundDataType="{x:Type sys:DateTime}" Header="End date" CellTemplate="{StaticResource DateTemplate}" Width="*" />
+                <dxg:TreeListColumn FieldName="State"
+                                    UnboundDataType="{x:Type sys:Object}"
+                                    CellTemplate="{StaticResource ComboBoxStateEdit}"
+                                    ColumnFilterMode="DisplayText"
+                                    AllowSorting="True"
+                                    Width="*" />
+            </dxg:TreeListControl.Columns>
+            <dxg:TreeListControl.View>
+                <dxg:TreeListView x:Name="view"
+                                  CustomUnboundColumnData="GetColumnData"
+                                  ShowingEditor="EditorVisibility"
+                                  ShowNodeImages="True"
+                                  CellValueChanging="CellValueChanging"
+                                  PrintNodeImages="True">
+                    <dxg:TreeListView.Nodes>
+                        <dxg:TreeListNode>
+                            <dxg:TreeListNode.Content>
+                                <local:ProjectObject NameValue="Project: Stantone" />
+                            </dxg:TreeListNode.Content>
+                        </dxg:TreeListNode>
+                        <dxg:TreeListNode>
+                            <dxg:TreeListNode.Content>
+                                <local:ProjectObject NameValue="Project: Betaron" />
+                            </dxg:TreeListNode.Content>
+                        </dxg:TreeListNode>
+                    </dxg:TreeListView.Nodes>
+                </dxg:TreeListView>
+            </dxg:TreeListControl.View>
+        </dxg:TreeListControl>
+    </DockPanel>
+</local:TreeListDemoModule>

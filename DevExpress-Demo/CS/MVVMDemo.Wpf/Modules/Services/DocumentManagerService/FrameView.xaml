@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="MVVMDemo.Services.DocumentManager.FrameView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.Services.DocumentManager"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+             xmlns:dxwuin="http://schemas.devexpress.com/winfx/2008/xaml/windowsui/navigation">
+    <dxwui:NavigationFrame AnimationType="SlideHorizontal">
+        <dxwui:NavigationFrame.Source>
+            <local:CollectionView>
+                <!--#region !-->
+                <dxmvvm:Interaction.Behaviors>
+                    <dxwuin:FrameDocumentUIService/>
+                </dxmvvm:Interaction.Behaviors>
+                <!--#endregion-->
+            </local:CollectionView>
+        </dxwui:NavigationFrame.Source>
+    </dxwui:NavigationFrame>
+</UserControl>

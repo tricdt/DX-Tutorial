@@ -1,0 +1,58 @@
+﻿<mb:CustomShowUserControl x:Class="DevExpress.VideoRent.Wpf.MovieAddCompanyEditView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mb="clr-namespace:DevExpress.VideoRent.Wpf.ModulesBase"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" 
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" 
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    ShowMethodType="{DynamicResource ShowType}" MinWidth="400" MinHeight="250">
+    
+    <mb:CustomShowUserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/EditsStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <helpers:DataSource x:Key="DataSource" />
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore" />
+            <mb:PopupShowType x:Key="ShowType" />
+            <helpers:ValidationRuleIsNotBlank x:Key="ValidationRuleIsNotBlank" Message="{helpers:ConstString ID=RuleIsNotBlankWarning}" />
+        </ResourceDictionary>
+    </mb:CustomShowUserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}" DoValidateSignalSlot="{Binding DoValidateSignal}" IsValid="{Binding IsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <helpers:BindingInfo ElementName="resource:ElementLayoutDataStore" Property="{x:Static local:ElementLayoutDataStore.DisposeSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static mb:ShowType.CloseSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static helpers:CustomEventCommandHelper.ClosingProperty}" Value="{Binding CommandDispose}" />
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static mb:PopupShowType.TitleProperty}" Value="{Binding EditObject.VideoRentObject.Movie!.Title}" />
+            <helpers:BindingInfo ElementName="CompanyEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Company!, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="CompanyEdit" Property="{x:Static dxg:LookUpEdit.ItemsSourceProperty}" Value="{Binding CompanyEditData.List}" />
+            <helpers:BindingInfo ElementName="DescriptionEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Description, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="AddButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandSaveAndDispose}" />
+            <helpers:BindingInfo ElementName="CancelButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandDispose}" />
+            <helpers:ValidationInfo EditName0="CompanyEdit" Rule="{StaticResource ValidationRuleIsNotBlank}" />
+            <helpers:ElementLayoutInfo ElementName="MainLayoutControl" StoreFolder="LayoutControl:MovieAddCompanyEdit-MainLayoutControl" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <dxlc:LayoutControl x:Name="MainLayoutControl" Orientation="Vertical">
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=CompanyLabel}">
+                <dxg:LookUpEdit x:Name="CompanyEdit" Style="{StaticResource CompanyLookUpEdit}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=DescriptionLabel}" LabelVerticalAlignment="Top" VerticalAlignment="Stretch">
+                <dxe:TextEdit x:Name="DescriptionEdit" Style="{StaticResource MultilineShortTextEdit}" />
+            </dxlc:LayoutItem>
+        </dxlc:LayoutControl>
+        <dx:UniformStackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="12,0,12,12">
+            <Button x:Name="AddButton" Content="{helpers:ConstString ID=Add}" MinWidth="120" />
+            <Button x:Name="CancelButton" Content="{helpers:ConstString ID=Cancel}" MinWidth="120" />
+        </dx:UniformStackPanel>
+    </Grid>
+</mb:CustomShowUserControl>

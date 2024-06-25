@@ -1,0 +1,153 @@
+﻿<local:PivotGridDemoModule x:Class="PivotGridDemo.SingleTotal"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:local="clr-namespace:PivotGridDemo"
+                           xmlns:dxpg="http://schemas.devexpress.com/winfx/2008/xaml/pivotgrid"
+                           xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                           xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                           xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                           xmlns:system="clr-namespace:System;assembly=mscorlib"
+                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                           mc:Ignorable="d"
+                           d:DesignHeight="360"
+                           d:DesignWidth="500">
+
+    <DockPanel>
+        <local:PivotGridDemoRibbon DockPanel.Dock="Top" ExportPivotGrid="{x:Reference pivotGrid}" />
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+                <GroupBox Header="View Options" Margin="12,0,12,12" MinWidth="240">
+                    <StackPanel>
+                        <dxe:CheckEdit IsChecked="{Binding ElementName=pivotGrid, Path=ShowColumnGrandTotalHeader, Mode=TwoWay}"
+                                       Content="Show Column Grand Total Header"
+                                       Name="ceShowColumnGrandTotalHeader"
+                                       Margin="0,0,0,4" />
+                        <dxe:CheckEdit IsChecked="{Binding ElementName=pivotGrid, Path=ShowColumnGrandTotals, Mode=TwoWay}"
+                                       Content="Show Column Grand Totals"
+                                       Name="ceShowColumnGrandTotals"
+                                       Margin="0,0,0,4" />
+                        <dxe:CheckEdit IsChecked="{Binding ElementName=pivotGrid, Path=ShowColumnTotals, Mode=TwoWay}"
+                                       Content="Show Column Totals"
+                                       Name="ceShowColumnTotals"
+                                       Margin="0,0,0,4" />
+
+                        <dxe:CheckEdit IsChecked="{Binding ElementName=pivotGrid, Path=ShowRowGrandTotalHeader, Mode=TwoWay}"
+                                       Content="Show Row Grand Total Header"
+                                       Name="ceShowRowGrandTotalHeader"
+                                       Margin="0,0,0,4" />
+                        <dxe:CheckEdit IsChecked="{Binding ElementName=pivotGrid, Path=ShowRowGrandTotals, Mode=TwoWay}"
+                                       Content="Show Row Grand Totals"
+                                       Name="ceShowRowGrandTotals"
+                                       Margin="0,0,0,4" />
+                        <dxe:CheckEdit IsChecked="{Binding ElementName=pivotGrid, Path=ShowRowTotals, Mode=TwoWay}"
+                                       Content="Show Row Totals"
+                                       Name="ceShowRowTotals"
+                                       Margin="0,0,0,4" />
+
+                        <dxe:CheckEdit IsChecked="{Binding ElementName=pivotGrid, Path=ShowGrandTotalsForSingleValues, Mode=TwoWay}"
+                                       Content="Show Grand Totals For Single Values"
+                                       Name="ceShowGrandTotalsForSingleValues"
+                                       Margin="0,0,0,4" />
+                        <dxe:CheckEdit IsChecked="{Binding ElementName=pivotGrid, Path=ShowTotalsForSingleValues, Mode=TwoWay}"
+                                       Content="Show Totals For Single Values"
+                                       Name="ceShowTotalsForSingleValues"
+                                       Margin="0,0,0,4" />
+                    </StackPanel>
+                </GroupBox>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxpg:PivotGridControl x:Name="pivotGrid"
+                               DataProcessingEngine="Optimized"
+                               DataSource="{x:Static dxdb:NWindDataProvider.SalesPersons}"
+                               local:FieldAreaHelper.FixAreas="True"
+                               RowTotalsLocation="Far"
+                               RowTreeWidth="305"
+                               ShowBorder="False"
+                               VerticalAlignment="Stretch"
+                               ShowColumnGrandTotals="False"
+                               ShowFilterHeaders="False"
+                               AllowCrossGroupVariation="False"
+                               DataFieldAreaIndex="2"
+                               DataFieldArea="ColumnArea"
+                               DataFieldCaption="Data"
+                               SummaryDataSourceFieldNaming="FieldName"
+                               Loaded="{DXEvent '@Self.BestFit($dxpg:FieldArea.ColumnArea, true, false)'}">
+            <dxpg:PivotGridControl.Fields>
+                <dxpg:PivotGridField x:Name="fieldProduct" DataBinding="{dxpg:DataSourceColumnBinding ProductName}" Area="RowArea" AreaIndex="1" Width="215" Caption="Product Name" />
+                <dxpg:PivotGridField x:Name="fieldCategory"
+                                     DataBinding="{dxpg:DataSourceColumnBinding CategoryName}"
+                                     Area="RowArea"
+                                     AreaIndex="0"
+                                     Width="130"
+                                     Caption="Category Name"
+                                     ShowBlankFilterValues="False"
+                                     FilterType="Included">
+                    <dxpg:PivotGridField.FieldFilterValues>
+                        <x:Array Type="{x:Type system:String}">
+                            <system:String>Beverages</system:String>
+                            <system:String>Condiments</system:String>
+                        </x:Array>
+                    </dxpg:PivotGridField.FieldFilterValues>
+                </dxpg:PivotGridField>
+                <dxpg:PivotGridField x:Name="fieldQuarter"
+                                     ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}"
+                                     DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateQuarter}"
+                                     AreaIndex="1"
+                                     Area="ColumnArea"
+                                     Width="80"
+                                     ShowGroupIntervalName="True" />
+                <dxpg:PivotGridField x:Name="fieldYear"
+                                     DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateYear}"
+                                     Area="ColumnArea"
+                                     AreaIndex="0"
+                                     Width="80"
+                                     ShowGroupIntervalName="True"
+                                     ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}"
+                                     ShowBlankFilterValues="False"
+                                     FilterType="Included">
+                    <dxpg:PivotGridField.FieldFilterValues>
+                        <x:Array Type="{x:Type system:Int32}">
+                            <system:Int32>2014</system:Int32>
+                            <system:Int32>2015</system:Int32>
+                        </x:Array>
+                    </dxpg:PivotGridField.FieldFilterValues>
+                </dxpg:PivotGridField>
+                <dxpg:PivotGridField x:Name="fieldQuantity"
+                                     DataBinding="{dxpg:DataSourceColumnBinding Quantity}"
+                                     AllowRuntimeSummaryChange="True"
+                                     SummaryType="Sum"
+                                     ShowSummaryTypeName="True"
+                                     AreaIndex="1"
+                                     Area="DataArea"
+                                     Width="70"
+                                     Caption="Quantity" />
+                <dxpg:PivotGridField x:Name="fieldDiscount"
+                                     DataBinding="{dxpg:DataSourceColumnBinding Discount}"
+                                     AllowRuntimeSummaryChange="True"
+                                     SummaryType="Average"
+                                     ShowSummaryTypeName="True"
+                                     AreaIndex="2"
+                                     Area="DataArea"
+                                     Width="70"
+                                     Caption="Discount"
+                                     CellFormat="{Binding SummaryType, RelativeSource={RelativeSource Self}, Mode=TwoWay, Converter = { x:Static local:SingleTotal.Converter } }"
+                                     ValueFormat="p" />
+                <dxpg:PivotGridField x:Name="fieldUnitPrice"
+                                     DataBinding="{dxpg:DataSourceColumnBinding UnitPrice}"
+                                     AllowRuntimeSummaryChange="True"
+                                     SummaryType="Max"
+                                     ShowSummaryTypeName="True"
+                                     AreaIndex="0"
+                                     Area="DataArea"
+                                     Width="130"
+                                     Caption="Unit Price" />
+            </dxpg:PivotGridControl.Fields>
+        </dxpg:PivotGridControl>
+    </DockPanel>
+</local:PivotGridDemoModule>

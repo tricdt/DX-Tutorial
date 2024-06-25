@@ -1,0 +1,323 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.Charting3dDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ChartsDemo">
+
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <local:StarAxisLabelDataToStringConverter
+                x:Key="starAxisLabelDataToStringConverter" />
+            <SolidColorBrush
+                Color="LightGray"
+                x:Key="ChartElementBrushKey" />
+            <SolidColorBrush
+                Color="#FF191919"
+                x:Key="ChartBackgroundBrushKey" />
+            <SolidColorBrush
+                Color="#E8191919"
+                x:Key="ChartBackgroundTransparentBrushKey" />
+            <DataTemplate
+                x:Key="AxisLabelTemplateKey">
+                <Border>
+                    <Label
+                        Content="{Binding Path=Content, Converter={StaticResource starAxisLabelDataToStringConverter}}"
+                        Foreground="{StaticResource ChartElementBrushKey}" />
+                </Border>
+            </DataTemplate>
+            <DataTemplate
+                x:Key="popupTemplate">
+                <Border
+                    Background="{StaticResource ChartBackgroundTransparentBrushKey}"
+                    Padding="10"
+                    Margin="16">
+                    <StackPanel
+                        Orientation="Horizontal">
+                        <Border
+                            Width="120"
+                            Height="120"
+                            Background="Transparent"
+                            Margin="0,0,10,0">
+                            <Border.Triggers>
+                                <EventTrigger
+                                    RoutedEvent="Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="Time"
+                                                Storyboard.TargetName="effect"
+                                                To="1"
+                                                Duration="0:0:10"
+                                                AutoReverse="True"
+                                                RepeatBehavior="Forever" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Border.Triggers>
+                            <Border.Effect>
+                                <local:StarEffect
+                                    x:Name="effect" />
+                            </Border.Effect>
+                            <Border
+                                Margin="10"
+                                CornerRadius="50">
+                                <Border.Background>
+                                    <RadialGradientBrush>
+                                        <GradientStopCollection>
+                                            <GradientStop
+                                                Color="White"
+                                                Offset="0.00" />
+                                            <GradientStop
+                                                Color="White"
+                                                Offset="0.25" />
+                                            <GradientStop
+                                                Color="{Binding Path=PresentationData[0].MarkerItem.MarkerBrush.Color}"
+                                                Offset="1.00" />
+                                        </GradientStopCollection>
+                                    </RadialGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition
+                                    Width="Auto" />
+                                <ColumnDefinition
+                                    Width="10" />
+                                <ColumnDefinition
+                                    Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition
+                                    Height="Auto" />
+                                <RowDefinition
+                                    Height="Auto" />
+                                <RowDefinition
+                                    Height="Auto" />
+                                <RowDefinition
+                                    Height="Auto" />
+                                <RowDefinition
+                                    Height="Auto" />
+                                <RowDefinition
+                                    Height="Auto" />
+                                <RowDefinition
+                                    Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Text="HIP ID:"
+                                Grid.Column="0"
+                                Grid.Row="0" />
+                            <TextBlock
+                                Text="{Binding Path=PresentationData[0].SeriesPoint.Tag.HipID}"
+                                Grid.Column="2"
+                                Grid.Row="0"
+                                HorizontalAlignment="Right" />
+                            <TextBlock
+                                Text="Spectr:"
+                                Grid.Column="0"
+                                Grid.Row="1" />
+                            <TextBlock
+                                Text="{Binding Path=PresentationData[0].SeriesPoint.Tag.Spectr}"
+                                Grid.Column="2"
+                                Grid.Row="1"
+                                HorizontalAlignment="Right" />
+                            <TextBlock
+                                Text="Color Index:"
+                                Grid.Column="0"
+                                Grid.Row="2" />
+                            <TextBlock
+                                Text="{Binding Path=PresentationData[0].SeriesPoint.Tag.CI, StringFormat=0.000}"
+                                Grid.Column="2"
+                                Grid.Row="2"
+                                HorizontalAlignment="Right" />
+                            <TextBlock
+                                Text="Luminosity:"
+                                Grid.Column="0"
+                                Grid.Row="3" />
+                            <TextBlock
+                                Text="{Binding Path=PresentationData[0].SeriesPoint.Tag.Lum, StringFormat=#\,##0\,K}"
+                                Grid.Column="2"
+                                Grid.Row="3"
+                                HorizontalAlignment="Right" />
+                            <TextBlock
+                                Text="X:"
+                                Grid.Column="0"
+                                Grid.Row="4" />
+                            <TextBlock
+                                Text="{Binding Path=PresentationData[0].SeriesPoint.Tag.X, StringFormat=0.00}"
+                                Grid.Column="2"
+                                Grid.Row="4"
+                                HorizontalAlignment="Right" />
+                            <TextBlock
+                                Text="Y:"
+                                Grid.Column="0"
+                                Grid.Row="5" />
+                            <TextBlock
+                                Text="{Binding Path=PresentationData[0].SeriesPoint.Tag.Y, StringFormat=0.00}"
+                                Grid.Column="2"
+                                Grid.Row="5"
+                                HorizontalAlignment="Right" />
+                            <TextBlock
+                                Text="Z:"
+                                Grid.Column="0"
+                                Grid.Row="6" />
+                            <TextBlock
+                                Text="{Binding Path=PresentationData[0].SeriesPoint.Tag.Z, StringFormat=0.00}"
+                                Grid.Column="2"
+                                Grid.Row="6"
+                                HorizontalAlignment="Right" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </DataTemplate>
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+
+    <DockPanel>
+        <local:ChartsDemoRibbon
+            Chart="{x:Reference chart}"
+            DockPanel.Dock="Top"
+            ShowPaletteButton="False"/>
+
+        <dxc:Chart3DControl
+            x:Name="chart"
+            Background="{StaticResource ChartBackgroundBrushKey}"
+            DomainBrush="Transparent"
+            Foreground="{StaticResource ChartElementBrushKey}"
+            VerticalScrollPercent="14"
+            ZoomPercent="120"
+            AspectRatio="0 0 0">
+            <!--#region Titles-->
+            <dxc:Chart3DControl.Titles>
+                <dxc:Title
+                    Content="Highest-Luminosity Stars"
+                    Dock="Top"
+                    HorizontalAlignment="Center"
+                    Foreground="{StaticResource ChartElementBrushKey}"
+                    Padding="0,20,0,0" />
+            </dxc:Chart3DControl.Titles>
+            <!--#endregion-->
+            <dxc:Series3DStorage>
+                <dxc:Series3D>
+                    <dxc:SeriesPoint3DDataSourceAdapter
+                        XArgumentDataMember="X"
+                        YArgumentDataMember="Y"
+                        ValueDataMember="Z"
+                        ColorDataMember="CI"
+                        DataSource="{DXBinding 'new $local:StarsData().Data'}" />
+                    <dxc:Series3D.View>
+                        <dxc:Point3DSeriesView
+                             MarkerSize="10">
+                            <dxc:Point3DSeriesView.MarkerModel>
+                                <dxc:Marker3DSpherePointModel
+                                    SphereDetalizationLevel="Low" />
+                            </dxc:Point3DSeriesView.MarkerModel>
+                            <dxc:Point3DSeriesView.Colorizer>
+                                <dxc:RangeColorizer3D
+                                    x:Name="RangeColorizer"
+                                    ShowInLegend="True"
+                                    RangeStops="-0.4 0.4 1.8 2.0"
+                                    ApproximateColors="True">
+                                    <dxc:RangeColorizer3D.Palette>
+                                        <dxc:CustomPalette>
+                                            <dxc:CustomPalette.Colors>
+                                                <Color>#9bb2ff</Color>
+                                                <Color>#fef9ff</Color>
+                                                <Color>#ffb765</Color>
+                                                <Color>#ff5200</Color>
+                                            </dxc:CustomPalette.Colors>
+                                        </dxc:CustomPalette>
+                                    </dxc:RangeColorizer3D.Palette>
+                                    <dxc:RangeColorizer3D.ValueProvider>
+                                        <dxc:ColorObjectValueProvider3D />
+                                    </dxc:RangeColorizer3D.ValueProvider>
+                                </dxc:RangeColorizer3D>
+                            </dxc:Point3DSeriesView.Colorizer>
+                        </dxc:Point3DSeriesView>
+                    </dxc:Series3D.View>
+                </dxc:Series3D>
+            </dxc:Series3DStorage>
+            <dxc:Chart3DControl.CrosshairOptions>
+                <dxc:Crosshair3DOptions
+                    ShowXArgumentLine="False"
+                    ShowYArgumentLine="False"
+                    ShowValueLine="False"
+                    ShowXArgumentLabel="False"
+                    ShowYArgumentLabel="False"
+                    ShowValueLabel="False"
+                    ShowMarker="True"
+                    PopupTemplate="{StaticResource popupTemplate}" />
+            </dxc:Chart3DControl.CrosshairOptions>
+            <!--#region Legend-->
+            <dxc:Chart3DControl.Legends>
+                <dxc:Legend
+                    HorizontalPosition="Left"
+                    VerticalPosition="Top"
+                    BorderBrush="Transparent"
+                    Background="{StaticResource ChartBackgroundTransparentBrushKey}"
+                    Opacity="0.9"
+                    Foreground="{StaticResource ChartElementBrushKey}">
+                    <dxc:Legend.Title>
+                        <dxc:LegendTitle
+                            Content="Color index"
+                            FontSize="14" />
+                    </dxc:Legend.Title>
+                </dxc:Legend>
+            </dxc:Chart3DControl.Legends>
+            <!--#endregion-->
+            <dxc:Chart3DControl.XAxis>
+                <dxc:XAxis3D
+                    Interlaced="False"
+                    GridLinesBrush="{StaticResource ChartElementBrushKey}">
+                    <dxc:XAxis3D.Title>
+                        <dxc:AxisTitle
+                            Content="x distance, ly"
+                            Foreground="{StaticResource ChartElementBrushKey}" />
+                    </dxc:XAxis3D.Title>
+                    <dxc:XAxis3D.Label>
+                        <dxc:AxisLabel
+                            ElementTemplate="{StaticResource AxisLabelTemplateKey}" />
+                    </dxc:XAxis3D.Label>
+                </dxc:XAxis3D>
+            </dxc:Chart3DControl.XAxis>
+            <dxc:Chart3DControl.YAxis>
+                <dxc:YAxis3D
+                    Interlaced="False"
+                    GridLinesBrush="{StaticResource ChartElementBrushKey}">
+                    <dxc:YAxis3D.Title>
+                        <dxc:AxisTitle
+                            Content="y distance, ly"
+                            Foreground="{StaticResource ChartElementBrushKey}" />
+                    </dxc:YAxis3D.Title>
+                    <dxc:YAxis3D.Label>
+                        <dxc:AxisLabel
+                            ElementTemplate="{StaticResource AxisLabelTemplateKey}" />
+                    </dxc:YAxis3D.Label>
+                </dxc:YAxis3D>
+            </dxc:Chart3DControl.YAxis>
+            <dxc:Chart3DControl.ZAxis>
+                <dxc:ZAxis3D
+                    Interlaced="False"
+                    GridLinesBrush="{StaticResource ChartElementBrushKey}">
+                    <dxc:ZAxis3D.Title>
+                        <dxc:AxisTitle
+                            Content="z distance, ly"
+                            Foreground="{StaticResource ChartElementBrushKey}" />
+                    </dxc:ZAxis3D.Title>
+                    <dxc:ZAxis3D.Label>
+                        <dxc:AxisLabel
+                            ElementTemplate="{StaticResource AxisLabelTemplateKey}" />
+                    </dxc:ZAxis3D.Label>
+                </dxc:ZAxis3D>
+            </dxc:Chart3DControl.ZAxis>
+        </dxc:Chart3DControl>
+    </DockPanel>
+</local:ChartsDemoModule>

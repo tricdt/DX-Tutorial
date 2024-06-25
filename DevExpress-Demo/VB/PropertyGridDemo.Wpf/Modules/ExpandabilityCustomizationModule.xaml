@@ -1,0 +1,46 @@
+﻿<local:PropertyGridDemoModule x:Class="PropertyGridDemo.ExpandabilityCustomizationModule"
+                              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                              xmlns:local="clr-namespace:PropertyGridDemo"
+                              xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid">
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <GroupBox Margin="12,5,12,12" MinWidth="210" Header="AllowExpanding" VerticalAlignment="Top">
+                <dxe:ListBoxEdit x:Name="optionsListBox"
+                                 ItemsSource="{dxe:EnumItemsSource EnumType={x:Type dxprg:AllowExpandingMode}}"
+                                 SelectedIndex="0"
+                                 ShowBorder="False">
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+        </ScrollViewer>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.15*" />
+                <RowDefinition />
+                <RowDefinition Height="0.15*" />
+            </Grid.RowDefinitions>
+            <dxprg:PropertyGridControl Grid.Column="1"
+                                       Grid.Row="1"
+                                       AllowExpanding="{Binding Path=EditValue, ElementName=optionsListBox}"
+                                       AllowInstanceInitializer="False"
+                                       SelectedObject="{Binding}"
+                                       ShowCategories="False"
+                                       CustomExpand="PropertyGridControl_OnCustomExpand" />
+        </Grid>
+    </DockPanel>
+</local:PropertyGridDemoModule>

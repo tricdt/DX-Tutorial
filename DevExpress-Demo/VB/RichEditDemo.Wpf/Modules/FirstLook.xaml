@@ -1,0 +1,122 @@
+﻿<local:RichEditDemoModule x:Class="RichEditDemo.FirstLook"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                          xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+                          xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit"
+                          xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                          xmlns:local="clr-namespace:RichEditDemo"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          mc:Ignorable="d"
+                          d:DesignHeight="400"
+                          d:DesignWidth="800"
+                          x:Name="FirstLookModule">
+    <local:RichEditDemoModule.Resources>
+        <DataTemplate x:Key="statisticsTemplate">
+            <dxlc:GroupBox x:Name ="gcStatistics" Margin="0,6,0,6" Header="Statistics">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Words" Margin="0,6,6,6" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0"/>
+                    <TextBlock Margin="0,6,6,6" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="2" Text="{Binding Statistics.WordCount}"/>
+                    <TextBlock Text="Characters (no spaces)" Margin="0,6,6,6" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0"/>
+                    <TextBlock Margin="0,6,6,6" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Grid.Column="2" Text="{Binding Statistics.NoSpacesCharacterCount}"/>
+                    <TextBlock Text="Characters (with spaces)" Margin="0,6,6,6" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" Grid.Column="0"/>
+                    <TextBlock x:Name="tbWithSpacesCharactersCount" Margin="0,6,6,6" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" Grid.Column="2" Text="{Binding Statistics.WithSpacesCharacterCount}"/>
+                    <TextBlock Text="Paragraphs" Margin="0,6,6,6" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="3" Grid.Column="0"/>
+                    <TextBlock Margin="0,6,6,6" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="3" Grid.Column="2" Text="{Binding Statistics.ParagraphCount}"/>
+                    <dxe:CheckEdit Margin="0,6,6,6" Content="Include textboxes" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="0" IsChecked="{Binding IncludeTextboxes}" />
+                </Grid>
+            </dxlc:GroupBox>
+        </DataTemplate>
+    </local:RichEditDemoModule.Resources>
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DialogService x:Name="dialogService" DialogWindowStartupLocation="CenterOwner" ViewTemplate="{StaticResource statisticsTemplate}">
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="dx:DXDialogWindow">
+                    <Setter Property="SizeToContent" Value="WidthAndHeight" />
+                    <Setter Property="WindowStyle" Value="ToolWindow" />
+                    <Setter Property="MinWidth" Value="300" />
+                </Style>
+            </dx:DialogService.DialogStyle>
+        </dx:DialogService>
+    </dxmvvm:Interaction.Behaviors>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <dxre:RichEditControl x:Name="richEdit"
+                          CommandBarStyle="Ribbon"
+                          ShowBorder="False"
+                          DocumentSource="{DXBinding '$local:DemoUtils.GetRelativePath(`FirstLook.docx`)'}"
+                          InvalidFormatException="RichEditControl_InvalidFormatException"
+                          DocumentClosing="RichEditControl_DocumentClosing"
+                          VisiblePagesChanged="RichEditControl_VisiblePagesChanged"
+                          SelectionChanged="RichEditControl_SelectionChanged"
+                          ContentChanged="RichEditControl_ContentChanged"
+                          ZoomChanged="RichEditControl_ZoomChanged">
+            <dxre:RichEditControl.CommentOptions>
+                <dxre:DXRichEditCommentOptions Visibility="Hidden" />
+            </dxre:RichEditControl.CommentOptions>
+            <dxre:RichEditControl.BehaviorOptions>
+                <dxre:DXRichEditBehaviorOptions MinZoomFactor="0.1" MaxZoomFactor="5"/>
+            </dxre:RichEditControl.BehaviorOptions>
+        </dxre:RichEditControl>
+        <dxr:RibbonStatusBarControl Grid.Row="1" IsSizeGripVisible="False">
+            <dxr:RibbonStatusBarControl.Resources>
+                <local:PageInfoConverter x:Key="PageInfoConverter" />
+            </dxr:RibbonStatusBarControl.Resources>
+            <dxr:RibbonStatusBarControl.LeftItems>
+                <dxb:BarStaticItem>
+                    <dxb:BarStaticItem.Content>
+                        <MultiBinding Converter="{StaticResource PageInfoConverter}" Mode="OneWay">
+                            <Binding Path="ActivePageNumber" ElementName="FirstLookModule" />
+                            <Binding Path="PageCount" ElementName="FirstLookModule" />
+                        </MultiBinding>
+                    </dxb:BarStaticItem.Content>
+                </dxb:BarStaticItem>
+                <dxb:BarButtonItem ItemClick="DocumentStatisticsBarButtonItem_ItemClick">
+                    <dxb:BarButtonItem.ContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=WordCount, ElementName=FirstLookModule, StringFormat={}{0} WORDS}"/>
+                        </DataTemplate>
+                    </dxb:BarButtonItem.ContentTemplate>
+                </dxb:BarButtonItem>
+            </dxr:RibbonStatusBarControl.LeftItems>
+            <dxr:RibbonStatusBarControl.RightItems>
+                <dxb:BarEditItem Name="edZoom"
+                                 EditWidth="150"
+                                 ShowScreenTip="False"
+                                 Content="{DXBinding '$string.Format(`{0:f0}%`, @e(FirstLookModule).ActiveViewZoom)', Mode=OneWay}">
+                    <dxb:BarEditItem.EditTemplate>
+                        <DataTemplate>
+                            <dxe:TrackBarEdit Width="150">
+                                <dxmvvm:Interaction.Behaviors>
+                                    <dxe:OfficeZoomTrackBarBehavior Value="{Binding ElementName=FirstLookModule, Path=ActiveViewZoom, Mode=TwoWay}" Minimum="10" Maximum="500" />
+                                </dxmvvm:Interaction.Behaviors>
+                                <dxe:TrackBarEdit.StyleSettings>
+                                    <dxe:TrackBarZoomStyleSettings />
+                                </dxe:TrackBarEdit.StyleSettings>
+                            </dxe:TrackBarEdit>
+                        </DataTemplate>
+                    </dxb:BarEditItem.EditTemplate>
+                </dxb:BarEditItem>
+            </dxr:RibbonStatusBarControl.RightItems>
+        </dxr:RibbonStatusBarControl>
+    </Grid>
+</local:RichEditDemoModule>

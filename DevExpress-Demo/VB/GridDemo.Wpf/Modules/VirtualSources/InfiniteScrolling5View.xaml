@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="GridDemo.VirtualSources.InfiniteScrolling5View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:local="clr-namespace:GridDemo"
+             xmlns:localvs="clr-namespace:GridDemo.VirtualSources"
+             mc:Ignorable="d">
+    <!--#region ViewModel-->
+    <UserControl.DataContext>
+        <localvs:InfiniteScrolling5ViewModel/>
+    </UserControl.DataContext>
+    <!--#endregion-->
+    <dxg:GridControl CriteriaConverter="{local:IssueFilterConverter}">
+        <!--#region Items Source-->
+        <dxg:GridControl.ItemsSource>
+            <dx:InfiniteAsyncSource ElementType="{x:Type local:IssueData}"
+                                    FetchRowsCommand="{Binding FetchIssuesCommand}"
+                                    GetTotalSummariesCommand="{Binding GetTotalSummariesCommand}"
+                                    GetUniqueValuesCommand="{Binding GetUniqueValuesCommand}"/>
+        </dxg:GridControl.ItemsSource>
+        <!--#endregion-->
+        <dxg:GridControl.Columns>
+            <!--#region !-->
+            <dxg:GridColumn FieldName="Subject" IsSmart="True" Width="2*" AllowEditing="true"/>
+            <dxg:GridColumn FieldName="UserId" Header="User" IsSmart="True" Width="*" AllowEditing="true">
+            <!--#endregion-->
+                <dxg:GridColumn.EditSettings>
+                    <dxe:ComboBoxEditSettings IsTextEditable="False" ValueMember="Id" DisplayMember="Name"
+                                              ItemsSource="{x:Static local:OutlookData.Users}"/>
+                </dxg:GridColumn.EditSettings>
+            </dxg:GridColumn>
+            <!--#region !-->
+            <dxg:GridColumn FieldName="Created" IsSmart="True" Width="*" AllowEditing="true"
+                            AllowSorting="True" AllowedSortOrders="Descending"
+                            AllowedDateTimeFilters="SingleDateRange" FilterPopupMode="DateSmart">
+            <!--#endregion-->
+                <dxg:GridColumn.EditSettings>
+                    <dxe:DateEditSettings Mask="g" MaskUseAsDisplayFormat="True"/>
+                </dxg:GridColumn.EditSettings>
+            </dxg:GridColumn>
+            <!--#region !-->
+            <dxg:GridColumn FieldName="Votes" IsSmart="True" Width="0.5*" AllowEditing="true"
+                            AllowSorting="True" DefaultSortOrder="Descending"
+                            AllowedBinaryFilters="GreaterOrEqual"/>
+            <dxg:GridColumn FieldName="Priority" IsSmart="True" Width="*" AllowEditing="true"
+                            AllowedBinaryFilters="Equals" FilterPopupMode="List"/>
+            <!--#endregion-->
+        </dxg:GridControl.Columns>
+        <!--#region Total Summary-->
+        <dxg:GridControl.TotalSummary>
+            <dxg:GridSummaryItem SummaryType="Count" Alignment="Right"/>
+            <dxg:GridSummaryItem SummaryType="Max" FieldName="Created" DisplayFormat="{}Last created: {0:g}" Alignment="Right"/>
+        </dxg:GridControl.TotalSummary>
+        <!--#endregion-->
+        <dxg:GridControl.View>
+            <!--#region !-->
+            <dxg:TableView ColumnSortClearMode="Click"
+                           ShowFixedTotalSummary="True"
+                           ShowUpdateRowButtons="OnCellValueChange"
+                           ValidateRowCommand="{Binding UpdateIssueCommand}"/>
+            <!--#endregion-->
+        </dxg:GridControl.View>
+    </dxg:GridControl>
+</UserControl>

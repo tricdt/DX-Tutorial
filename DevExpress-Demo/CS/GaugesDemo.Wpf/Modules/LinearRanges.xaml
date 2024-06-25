@@ -1,0 +1,244 @@
+﻿<local:GaugesDemoModule x:Class="GaugesDemo.LinearRanges"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
+                        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                        xmlns:local="clr-namespace:GaugesDemo"
+                        mc:Ignorable="d"
+                        d:DesignHeight="612"
+                        d:DesignWidth="844"
+                        DataContext="{dxmvvm:ViewModelSource Type={x:Type local:WeatherViewModel}}">
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Header="Values" Margin="0,5,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Pressure" />
+                        <dxe:TrackBarEdit x:Name="presureTrackBar" Minimum="720" Maximum="780" Value="750" />
+                        <TextBlock Text="Temperature" />
+                        <dxe:TrackBarEdit x:Name="temperatureTrackBar" Minimum="-40" Maximum="50" Value="0" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Pressure Ranges" Margin="0,5,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Start Value" />
+                        <dxe:TrackBarEdit x:Name="startValueTrackBar" Minimum="720" Maximum="735" Value="725" />
+                        <TextBlock Text="End Value" />
+                        <dxe:TrackBarEdit x:Name="endValueTrackBar" Minimum="765" Maximum="780" Value="775" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*" />
+                <RowDefinition Height="75*" />
+                <RowDefinition Height="10*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0"
+                       Grid.Column="1"
+                       Content="Weather Forecast"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Margin="0,5,0,0"
+                       FontSize="22"
+                       Opacity="0.9"/>
+            <dxga:LinearGaugeControl Grid.Row="1" Grid.Column="1" Width="500" Margin="10,0,10,0">
+                <dxga:LinearGaugeControl.ScalePanelTemplate>
+                    <ItemsPanelTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </dxga:LinearGaugeControl.ScalePanelTemplate>
+                <dxga:LinearGaugeControl.Model>
+                    <dxga:LinearRedThermometerModel />
+                </dxga:LinearGaugeControl.Model>
+                <dxga:LinearGaugeControl.Layers>
+                    <dxga:LinearGaugeLayer />
+                </dxga:LinearGaugeControl.Layers>
+                <dxga:LinearScale Grid.Column="0" StartValue="-40" EndValue="50" MinorIntervalCount="8" MajorIntervalCount="9" Margin="0,15,0,30">
+                    <dxga:LinearScale.Ranges>
+                        <dxga:LinearScaleRange StartValue="0%" EndValue="0">
+                            <dxga:LinearScaleRange.Presentation>
+                                <dxga:DefaultLinearScaleRangePresentation Fill="#FF80B9FF" />
+                            </dxga:LinearScaleRange.Presentation>
+                        </dxga:LinearScaleRange>
+                        <dxga:LinearScaleRange StartValue="0"
+                                               EndValue="100%"
+                                               IndicatorEnter="{DXEvent Handler='HighTemperatureIndicatorEnter()'}"
+                                               IndicatorLeave="{DXEvent Handler='HighTemperatureIndicatorLeave()'}" />
+                    </dxga:LinearScale.Ranges>
+                    <dxga:LinearScale.LevelBars>
+                        <dxga:LinearScaleLevelBar Value="{Binding ElementName=temperatureTrackBar, Path=Value}" />
+                    </dxga:LinearScale.LevelBars>
+                    <dxga:LinearScale.CustomLabels>
+                        <dxga:ScaleCustomLabel RenderTransformOrigin="0.5,0.5" Offset="-40" Value="-47" Content="°C" FontSize="16" Foreground="#FF484E5A" />
+                    </dxga:LinearScale.CustomLabels>
+                </dxga:LinearScale>
+                <dxga:LinearScale Grid.Column="0" StartValue="-40" EndValue="120" MajorIntervalCount="8" MinorIntervalCount="8" Margin="0,20,0,30">
+                    <dxga:LinearScale.Ranges>
+                        <dxga:LinearScaleRange StartValue="0%" EndValue="32">
+                            <dxga:LinearScaleRange.Presentation>
+                                <dxga:DefaultLinearScaleRangePresentation Fill="#FF80B9FF" />
+                            </dxga:LinearScaleRange.Presentation>
+                            <dxga:LinearScaleRange.Options>
+                                <dxga:RangeOptions Offset="16" Thickness="11" />
+                            </dxga:LinearScaleRange.Options>
+                        </dxga:LinearScaleRange>
+                        <dxga:LinearScaleRange StartValue="32" EndValue="100%">
+                            <dxga:LinearScaleRange.Options>
+                                <dxga:RangeOptions Offset="16" Thickness="11" />
+                            </dxga:LinearScaleRange.Options>
+                        </dxga:LinearScaleRange>
+                    </dxga:LinearScale.Ranges>
+                    <dxga:LinearScale.MajorTickmarkOptions>
+                        <dxga:MajorTickmarkOptions Offset="21" />
+                    </dxga:LinearScale.MajorTickmarkOptions>
+                    <dxga:LinearScale.MinorTickmarkOptions>
+                        <dxga:MinorTickmarkOptions Offset="17" />
+                    </dxga:LinearScale.MinorTickmarkOptions>
+                    <dxga:LinearScale.LabelOptions>
+                        <dxga:LinearScaleLabelOptions Offset="40" />
+                    </dxga:LinearScale.LabelOptions>
+                    <dxga:LinearScale.CustomLabels>
+                        <dxga:ScaleCustomLabel RenderTransformOrigin="0.5,0.5" Offset="38" Value="-52.3" Content="°F" FontSize="16" Foreground="#FF484E5A" />
+                    </dxga:LinearScale.CustomLabels>
+                </dxga:LinearScale>
+                <dxga:LinearScale Grid.Column="1" StartValue="720" EndValue="780" MajorIntervalCount="6" MinorIntervalCount="8" Margin="0,15,0,25">
+                    <dxga:LinearScale.Ranges>
+                        <dxga:LinearScaleRange StartValue="{Binding ElementName=startValueTrackBar, Path=Value}"
+                                               EndValue="40%"
+                                               IndicatorEnter="{DXEvent Handler='LowRangeIndicatorEnter()'}"
+                                               IndicatorLeave="{DXEvent Handler='LowRangeIndicatorLeave(@sender.StartValueAbsolute, @args.NewValue)'}" />
+                        <dxga:LinearScaleRange StartValue="40%" EndValue="60%"
+                                               IndicatorEnter="{DXEvent Handler='NormalRangeIndicatorEnter()'}"
+                                               IndicatorLeave="{DXEvent Handler='NormalRangeIndicatorLeave(@sender.StartValueAbsolute, @args.NewValue)'}" />
+                        <dxga:LinearScaleRange StartValue="60%"
+                                               EndValue="{Binding ElementName=endValueTrackBar, Path=Value}"
+                                               IndicatorEnter="{DXEvent Handler='HighRangeIndicatorEnter()'}"
+                                               IndicatorLeave="{DXEvent Handler='HighRangeIndicatorLeave(@sender.StartValueAbsolute, @args.NewValue)'}" />
+                    </dxga:LinearScale.Ranges>
+                    <dxga:LinearScale.LevelBars>
+                        <dxga:LinearScaleLevelBar Value="{Binding ElementName=presureTrackBar, Path=Value}" />
+                    </dxga:LinearScale.LevelBars>
+                    <dxga:LinearScale.CustomLabels>
+                        <dxga:ScaleCustomLabel RenderTransformOrigin="0.5,0.5" Offset="-40" Value="716" Content="mm" FontSize="16" Foreground="#FF484E5A" />
+                    </dxga:LinearScale.CustomLabels>
+                </dxga:LinearScale>
+                <dxga:LinearScale Grid.Column="1"
+                                  StartValue="720"
+                                  EndValue="780"
+                                  ShowLabels="False"
+                                  ShowMajorTickmarks="False"
+                                  ShowMinorTickmarks="False"
+                                  Margin="0,15,0,25">
+                    <dxga:LinearScale.Ranges>
+                        <dxga:LinearScaleRange StartValue="{Binding ElementName=startValueTrackBar, Path=Value}"
+                                               EndValue="40%">
+                            <dxga:LinearScaleRange.Options>
+                                <dxga:RangeOptions Offset="16" Thickness="11" />
+                            </dxga:LinearScaleRange.Options>
+                        </dxga:LinearScaleRange>
+                        <dxga:LinearScaleRange StartValue="40%" EndValue="60%">
+                            <dxga:LinearScaleRange.Options>
+                                <dxga:RangeOptions Offset="16" Thickness="11" />
+                            </dxga:LinearScaleRange.Options>
+                        </dxga:LinearScaleRange>
+                        <dxga:LinearScaleRange StartValue="60%"
+                                               EndValue="{Binding ElementName=endValueTrackBar, Path=Value}">
+                            <dxga:LinearScaleRange.Options>
+                                <dxga:RangeOptions Offset="16" Thickness="11" />
+                            </dxga:LinearScaleRange.Options>
+                        </dxga:LinearScaleRange>
+                    </dxga:LinearScale.Ranges>
+                </dxga:LinearScale>
+                <dxga:LinearScale Grid.Column="1" StartValue="960" EndValue="1040" MajorIntervalCount="8" MinorIntervalCount="8" Margin="0,15,0,25">
+                    <dxga:LinearScale.MajorTickmarkOptions>
+                        <dxga:MajorTickmarkOptions Offset="21" />
+                    </dxga:LinearScale.MajorTickmarkOptions>
+                    <dxga:LinearScale.MinorTickmarkOptions>
+                        <dxga:MinorTickmarkOptions Offset="17" />
+                    </dxga:LinearScale.MinorTickmarkOptions>
+                    <dxga:LinearScale.LabelOptions>
+                        <dxga:LinearScaleLabelOptions Offset="40" />
+                    </dxga:LinearScale.LabelOptions>
+                    <dxga:LinearScale.CustomLabels>
+                        <dxga:ScaleCustomLabel RenderTransformOrigin="0.5,0.5" Offset="40" Value="955" Content="mbars" FontSize="16" Foreground="#FF484E5A" />
+                    </dxga:LinearScale.CustomLabels>
+                </dxga:LinearScale>
+            </dxga:LinearGaugeControl>
+            <dxga:StateIndicatorControl Grid.Row="1"
+                                        Grid.Column="1"
+                                        Width="32"
+                                        Height="32"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        StateIndex="{Binding StateIndex}">
+                <dxga:StateIndicatorControl.AdditionalStates>
+                    <dxga:State>
+                        <dxga:State.Presentation>
+                            <dxga:CustomStatePresentation>
+                                <dxga:CustomStatePresentation.StateTemplate>
+                                    <ControlTemplate>
+                                        <Image VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="None" Source="../Images/LinearRanges/Cloudy.png" />
+                                    </ControlTemplate>
+                                </dxga:CustomStatePresentation.StateTemplate>
+                            </dxga:CustomStatePresentation>
+                        </dxga:State.Presentation>
+                    </dxga:State>
+                    <dxga:State>
+                        <dxga:State.Presentation>
+                            <dxga:CustomStatePresentation>
+                                <dxga:CustomStatePresentation.StateTemplate>
+                                    <ControlTemplate>
+                                        <Image VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="None" Source="../Images/LinearRanges/Snowy.png" />
+                                    </ControlTemplate>
+                                </dxga:CustomStatePresentation.StateTemplate>
+                            </dxga:CustomStatePresentation>
+                        </dxga:State.Presentation>
+                    </dxga:State>
+                    <dxga:State>
+                        <dxga:State.Presentation>
+                            <dxga:CustomStatePresentation>
+                                <dxga:CustomStatePresentation.StateTemplate>
+                                    <ControlTemplate>
+                                        <Image VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="None" Source="../Images/LinearRanges/Rainy.png" />
+                                    </ControlTemplate>
+                                </dxga:CustomStatePresentation.StateTemplate>
+                            </dxga:CustomStatePresentation>
+                        </dxga:State.Presentation>
+                    </dxga:State>
+                    <dxga:State>
+                        <dxga:State.Presentation>
+                            <dxga:CustomStatePresentation>
+                                <dxga:CustomStatePresentation.StateTemplate>
+                                    <ControlTemplate>
+                                        <Image VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="None" Source="../Images/LinearRanges/Sunny.png" />
+                                    </ControlTemplate>
+                                </dxga:CustomStatePresentation.StateTemplate>
+                            </dxga:CustomStatePresentation>
+                        </dxga:State.Presentation>
+                    </dxga:State>
+                </dxga:StateIndicatorControl.AdditionalStates>
+            </dxga:StateIndicatorControl>
+        </Grid>
+    </DockPanel>
+</local:GaugesDemoModule>

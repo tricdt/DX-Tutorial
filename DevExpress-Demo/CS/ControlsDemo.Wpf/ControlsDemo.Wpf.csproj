@@ -1,0 +1,639 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7EFC8E8A-09AC-4FEA-9335-55BFB7EF7A8B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <BaseIntermediateOutputPath>obj.Wpf</BaseIntermediateOutputPath>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ControlsDemo</RootNamespace>
+    <AssemblyName>ControlsDemo</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ConvertToNet6Windows />
+  </PropertyGroup>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;WPF;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Debug\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;CLICKONCE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Release\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Release\</OutputPath>
+    <DefineConstants>TRACE;WPF;CLICKONCE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>demoicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugTest\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DEBUGTEST</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Images\WizardControl\Logo.svg" />
+    <Resource Include="Images\GalleryPhotoViewer\RotateClockwise.svg" />
+    <Resource Include="Images\GalleryPhotoViewer\RotateCounterclockwise.svg" />
+    <Resource Include="Images\GalleryPhotoViewer\Next.svg" />
+    <Resource Include="Images\GalleryPhotoViewer\Play.svg" />
+    <Resource Include="Images\GalleryPhotoViewer\Previous.svg" />
+    <Resource Include="Images\GalleryPhotoViewer\Print.svg" />
+    <Resource Include="Images\GalleryPhotoViewer\Size_1x1.svg" />
+    <Resource Include="Images\GalleryPhotoViewer\Size_Auto.svg" />
+    <Resource Include="Images\GalleryPhotoViewer\Size_Horizontal.svg" />
+    <Resource Include="Images\TabControl\GroupIcon.svg" />
+    <Resource Include="Images\TaskbarServices\ZoomIn.svg" />
+    <Resource Include="Images\TaskbarServices\ZoomOut.svg" />
+    <Resource Include="Images\Moon.svg" />
+    <Resource Include="Images\Sun.svg" />
+    <Resource Include="Images\Calc.svg" />
+    <Resource Include="Images\Rates.svg" />
+    <Resource Include="Images\Research.svg" />
+    <Resource Include="Images\Statistics.svg" />
+    <Resource Include="Images\System.svg" />
+    <Resource Include="Images\UserManagment.svg" />
+    <Resource Include="Images\Home.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement01.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement02.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement03.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement04.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement05.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement06.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement07.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement08.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement09.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement10.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement11.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement12.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement13.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement14.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement15.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement16.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\subItemElement17.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement01.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement03.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement05.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement06.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement07.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement08.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement10.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement11.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement12.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement13.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement15.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement17.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement18.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement19.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement20.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement21.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement22.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement23.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement02.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement04.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement09.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement14.Glyph.svg" />
+    <Resource Include="Images\TileNavPane\itemElement16.Glyph.svg" />
+    <Resource Include="Images\Background.jpg" />
+    <EmbeddedResource Include="Modules\Badges\MailDevAv.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Resource Include="Images\logo.png" />
+    <Resource Include="Images\TabControl\Amazon.png" />
+    <Resource Include="Images\TabControl\Facebook.png" />
+    <Resource Include="Images\TabControl\Google.png" />
+    <Resource Include="Images\TabControl\Youtube.png" />
+    <Resource Include="Images\TabControl\Microsoft.png" />
+    <Resource Include="Images\TabControl\Stackoverflow.png" />
+    <Resource Include="Images\TabControl\Twitter.png" />
+    <Resource Include="Images\TabControl\VisualStudio.png" />
+    <Resource Include="Images\TabControl\Devexpress.png" />
+    <Resource Include="Images\WizardControl\Have-fun!.png" />
+    <Resource Include="Images\WizardControl\image-61x61.png" />
+    <Resource Include="Images\WizardControl\Not-so-fast!.png" />
+    <Resource Include="Images\WizardControl\wizard-image.png" />
+    <Resource Include="Images\WizardControl\devexpress123.png" />
+    <Reference Include="DevExpress.Data.Desktop.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Data.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.DemoData.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Dialogs.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Images.v22.2">
+      <Private>True</Private>
+    <HintPath></HintPath></Reference>
+    <Reference Include="DevExpress.Printing.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Controls.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Core.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.RichEdit.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.RichEdit.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Office.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.PropertyGrid.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Dialogs.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.DevAV.v22.2.Data"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="nunit.framework" Condition=" '$(Configuration)' == 'DebugTest' ">
+      <HintPath></HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    <Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.DemoBase.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\EntityFramework.dll</HintPath>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Ribbon.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47">
+      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\System.Data.SQLite.dll</HintPath>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.108.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47">
+      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\System.Data.SQLite.EF6.dll</HintPath>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Mvvm.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="System"><Private>False</Private></Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations"><Private>False</Private></Reference>
+    <Reference Include="System.Data"><Private>False</Private></Reference>
+    <Reference Include="System.Drawing"><Private>False</Private></Reference>
+    <Reference Include="System.Xml"><Private>False</Private></Reference>
+    <Reference Include="Microsoft.CSharp"><Private>False</Private></Reference>
+    <Reference Include="System.Core"><Private>False</Private></Reference>
+    <Reference Include="System.Xml.Linq"><Private>False</Private></Reference>
+    <Reference Include="System.Data.DataSetExtensions"><Private>False</Private></Reference>
+    <Reference Include="System.Xaml"><Private>False</Private></Reference>
+    <Reference Include="WindowsBase"><Private>False</Private></Reference>
+    <Reference Include="PresentationCore"><Private>False</Private></Reference>
+    <Reference Include="PresentationFramework"><Private>False</Private></Reference>
+    <Reference Include="System.Windows.Forms"><Private>False</Private></Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ControlsDemoModuleControl.cs" />
+    <Compile Include="DemoTesting\Fixtures.cs" />
+    <Compile Include="GalleryPhotoViewer\ControlPanel.xaml.cs">
+      <DependentUpon>ControlPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GalleryPhotoViewer\ImageViewer.xaml.cs">
+      <DependentUpon>ImageViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GalleryPhotoViewer\NavigationPanel.xaml.cs">
+      <DependentUpon>NavigationPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GalleryPhotoViewer\SlideViewer.xaml.cs">
+      <DependentUpon>SlideViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GalleryPhotoViewer\Splitter.xaml.cs">
+      <DependentUpon>Splitter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GalleryPhotoViewer\ZoomScroll.xaml.cs">
+      <DependentUpon>ZoomScroll.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ColorPalette.cs" />
+    <Compile Include="Helpers\ImagesHelper.cs" />
+    <Compile Include="Helpers\VisualPropertyBehavior.cs" />
+    <Compile Include="Helpers\WebBrowserSupressScriptErrorsBehavior.cs" />
+    <Compile Include="Helpers\WindowShowTitleAndIconConverter.cs" />
+    <Compile Include="Helpers\WizardDemoHelper.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleResources\CardViewFileExplorer\CardViewExplorerFileSource.cs" />
+    <Compile Include="ModuleResources\CardViewFileExplorer\CardViewExplorerIconManager.cs" />
+    <Compile Include="ModuleResources\CardViewFileExplorer\CardViewExplorerImageList.cs" />
+    <Compile Include="ModuleResources\CardViewFileExplorer\CardViewExplorerViewModel.cs" />
+    <Compile Include="ModuleResources\CardViewFileExplorer\DemoModuleControl.cs" />
+    <Compile Include="Modules\Badges\Badges.xaml.cs">
+      <DependentUpon>Badges.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Badges\BadgesDemoMail.cs" />
+    <Compile Include="Helpers\ImageNameConverter.cs" />
+    <Compile Include="Modules\BreadcrumbSamplesModule.cs" />
+    <Compile Include="Modules\BreadcrumbSamples\DifferentTypeItemsView.xaml.cs">
+      <DependentUpon>DifferentTypeItemsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\BreadcrumbSamples\NWindObjectHelper.cs" />
+    <Compile Include="Modules\BreadcrumbSamples\HierarchicalDataView.xaml.cs">
+      <DependentUpon>HierarchicalDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\BreadcrumbSamples\SelfReferentialDataView.xaml.cs">
+      <DependentUpon>SelfReferentialDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\BreadcrumbSamples\HierarchicalDataViewModel.cs" />
+    <Compile Include="Modules\BreadcrumbSamples\SelfReferentialDataViewModel.cs" />
+    <Compile Include="Modules\CardWinExplorer.xaml.cs">
+      <DependentUpon>CardWinExplorer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SplashScreenManager\SplashScreenMainViewModel.cs" />
+    <Compile Include="Modules\SplashScreenManager\SplashScreenManagerModule.xaml.cs">
+      <DependentUpon>SplashScreenManagerModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TabControl.ColorizedTabs\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TabControl.ColorizedTabs\MainViewModel.cs" />
+    <Compile Include="Modules\TabControl.CustomTheme\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TabControl.CustomTheme\MainViewModel.cs" />
+    <Compile Include="Modules\TabControl.PinnedTabs\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TabControl.PinnedTabs\MainViewModel.cs" />
+    <Compile Include="Modules\TabControl.Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TabControl.Views\MainViewModel.cs" />
+    <Compile Include="Modules\TabControl.WebBrowser\Helper.cs" />
+    <Compile Include="Modules\TabControl.WebBrowser\MainViewModel.cs" />
+    <Compile Include="Modules\TabControl.WebBrowser\WebBrowserWindow.xaml.cs">
+      <DependentUpon>WebBrowserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TabControl.WebBrowser\WebBrowserView.xaml.cs">
+      <DependentUpon>WebBrowserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TabControl.WebBrowser\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TabControl.WebBrowser\WebBrowserViewModel.cs" />
+    <Compile Include="Modules\TaskbarServices.xaml.cs">
+      <DependentUpon>TaskbarServices.xaml</DependentUpon>
+      <netcore3ignore />
+    </Compile>
+    <Compile Include="Modules\TileBarModule.xaml.cs">
+      <DependentUpon>TileBarModule.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\Views\NewJumpTaskWindow.xaml.cs">
+      <DependentUpon>NewJumpTaskWindow.xaml</DependentUpon>
+      <netcore3ignore />
+    </Compile>
+    <Compile Include="Modules\GalleryPhotoViewer.xaml.cs">
+      <DependentUpon>GalleryPhotoViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\MoonCalculator.cs" />
+    <Compile Include="Modules\SunCalculator.cs" />
+    <Compile Include="Modules\TileNavPaneModule.xaml.cs">
+      <DependentUpon>TileNavPaneModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Views\TileBarHomeView.xaml.cs">
+      <DependentUpon>TileBarHomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Views\TileNavPaneHomeView.xaml.cs">
+      <DependentUpon>TileNavPaneHomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Views\TileNavDetailsView.xaml.cs">
+      <DependentUpon>TileNavDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Wizard.Properties\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Wizard.WpfTour\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Wizard.WpfTour\MainViewModel.cs" />
+    <Compile Include="Modules\Wizard.WpfTour\WizardViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Services\TileBarService.cs" />
+    <Compile Include="ViewModels\TileNavBaseViewModel.cs" />
+    <Compile Include="ViewModels\TileBarViewModel.cs" />
+    <Compile Include="ViewModels\TileNavPaneViewModel.cs" />
+    <Compile Include="ViewModels\NewJumpTaskWindowViewModel.cs">
+      <netcore3ignore />
+    </Compile>
+    <Compile Include="ViewModels\TaskbarServicesViewModel.cs">
+      <netcore3ignore />
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="clickonce.txt">
+      <netcore3ignore />
+    </EmbeddedResource>
+    <None Include="app.config">
+      <netcore3ignore />
+    </None>
+    
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <Resource Include="demoicon.ico" />
+    <Resource Include="Images\Photos\Las Vegas\DSC_4405.jpg" />
+    <Resource Include="Images\Photos\Las Vegas\DSC_4498.jpg" />
+    <Resource Include="Images\Photos\Las Vegas\DSC_4647.jpg" />
+    <Resource Include="Images\Photos\Las Vegas\DSC_4721.jpg" />
+    <Resource Include="Images\Photos\Las Vegas\IMG_1216.jpg" />
+    <Resource Include="Images\Photos\Las Vegas\IMG_1280.jpg" />
+    <Resource Include="Images\Photos\Las Vegas\IMG_1285.jpg" />
+    <Resource Include="Images\Photos\Las Vegas\IMG_1321.jpg" />
+    <Resource Include="Images\Photos\Las Vegas\IMG_1327.jpg" />
+    <Resource Include="Images\Photos\Las Vegas\IMG_1345.jpg" />
+    <Resource Include="Images\Photos\Cars\0.jpg" />
+    <Resource Include="Images\Photos\Cars\1.jpg" />
+    <Resource Include="Images\Photos\Cars\10.jpg" />
+    <Resource Include="Images\Photos\Cars\2.jpg" />
+    <Resource Include="Images\Photos\Cars\3.jpg" />
+    <Resource Include="Images\Photos\Cars\4.jpg" />
+    <Resource Include="Images\Photos\Cars\5.jpg" />
+    <Resource Include="Images\Photos\Cars\6.jpg" />
+    <Resource Include="Images\Photos\Cars\7.jpg" />
+    <Resource Include="Images\Photos\Cars\8.jpg" />
+    <Resource Include="Images\Photos\Cars\9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="GalleryPhotoViewer\ControlPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GalleryPhotoViewer\ImageViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GalleryPhotoViewer\NavigationPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GalleryPhotoViewer\SlideViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GalleryPhotoViewer\Splitter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GalleryPhotoViewer\ZoomScroll.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ModuleResources\CardViewFileExplorer\CardViewExplorerTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Badges\Badges.xaml" />
+    <Page Include="Modules\BreadcrumbSamples\DifferentTypeItemsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\BreadcrumbSamples\HierarchicalDataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\BreadcrumbSamples\SelfReferentialDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\CardWinExplorer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SplashScreenManager\SplashScreenManagerModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\TabControl.ColorizedTabs\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TabControl.CustomTheme\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TabControl.PinnedTabs\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TabControl.Views\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TabControl.WebBrowser\WebBrowserWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TabControl.WebBrowser\WebBrowserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\TabControl.WebBrowser\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TaskbarServices.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <netcore3ignore />
+    </Page>
+    <Page Include="Modules\TileBarModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Views\NewJumpTaskWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <netcore3ignore />
+    </Page>
+    <Page Include="Modules\GalleryPhotoViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TileNavPaneModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Views\TileBarHomeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Views\TileNavPaneHomeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Views\TileNavDetailsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Wizard.Properties\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Wizard.WpfTour\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Wizard.WpfTour\Templates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\GalleryPhotoViewer\ControlPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\GalleryPhotoViewer\GalleryStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\GalleryPhotoViewer\NavigationPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\GalleryPhotoViewer\ScrollBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\GalleryPhotoViewer\ScrollViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\GalleryPhotoViewer\ZoomScroll.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Photos\Las Vegas\IMG_1369.jpg" />
+    <Resource Include="Images\Photos\Las Vegas\IMG_1385.jpg" />
+    <Resource Include="Images\Photos\Las Vegas\IMG_1391.jpg" />
+    <Resource Include="Images\Photos\Las Vegas\IMG_1397.jpg" />
+    <Resource Include="Images\Photos\Las Vegas\IMG_1403.jpg" />
+    <Resource Include="Images\Photos\Las Vegas\IMG_1407.jpg" />
+    <Resource Include="Images\Photos\Las Vegas\IMG_1409.jpg" />
+    <Resource Include="Images\Photos\Las Vegas\IMG_1445.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Photos\Nature\01.JPG" />
+    <Resource Include="Images\Photos\Nature\02.JPG" />
+    <Resource Include="Images\Photos\Nature\03.JPG" />
+    <Resource Include="Images\Photos\Nature\04.JPG" />
+    <Resource Include="Images\Photos\Nature\05.JPG" />
+    <Resource Include="Images\Photos\Nature\06.JPG" />
+    <Resource Include="Images\Photos\Nature\07.JPG" />
+    <Resource Include="Images\Photos\Nature\08.JPG" />
+    <Resource Include="Images\Photos\Nature\09.JPG" />
+    <Resource Include="Images\Photos\Nature\10.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Photos\Person\AnneDodsworth.jpg" />
+    <Resource Include="Images\Photos\Person\HannaMoos.jpg" />
+    <Resource Include="Images\Photos\Person\JanetLeverling.jpg" />
+    <Resource Include="Images\Photos\Person\LauraCallahan.jpg" />
+    <Resource Include="Images\Photos\Person\MargaretPeacock.jpg" />
+    <Resource Include="Images\Photos\Person\MichaelSuyama.jpg" />
+    <Resource Include="Images\Photos\Person\NancyDavolio.jpg" />
+    <Resource Include="Images\Photos\Person\RobertKing.jpg" />
+    <Resource Include="Images\Photos\Person\StevenBuchanan.jpg" />
+    <Resource Include="Images\Photos\Person\ThomasHardy.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent"><ItemGroup><Resource Include="@(Page)" /></ItemGroup><ItemGroup><Resource Include="@(Compile)" /></ItemGroup></Target>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+	<GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+	<RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>	
+	<ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3
+    <Import Project="Demo.targets" />
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3 
+	<ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
+  </ItemGroup>
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3 
+    <Import Project="Themes.WPF.NetCore.targets" />
+  ONLY NETCORE3-->
+  <PropertyGroup>
+    
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,125 @@
+﻿<local:DockingDemoModule x:Class="DockingDemo.LayoutPanels"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:local="clr-namespace:DockingDemo"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
+                         Height="332"
+                         Width="721">
+    <dxdo:DockLayoutManager x:Name="dockManager">
+        <dxdo:LayoutGroup>
+            <dxdo:LayoutPanel Caption="Panel (layout 1)">
+                <dxdo:LayoutGroup Orientation="Vertical">
+                    <dxdo:LayoutGroup Orientation="Vertical" GroupBorderStyle="Group" Caption="Login information" ShowCaption="True" ItemHeight="Auto">
+                        <dxdo:LayoutControlItem Caption="Login">
+                            <dxe:TextEdit />
+                        </dxdo:LayoutControlItem>
+                        <dxdo:LayoutControlItem Caption="Password">
+                            <dxe:TextEdit />
+                        </dxdo:LayoutControlItem>
+                        <dxdo:LayoutControlItem Caption="Confirm password">
+                            <dxe:TextEdit />
+                        </dxdo:LayoutControlItem>
+                    </dxdo:LayoutGroup>
+                    <dxdo:LayoutGroup Orientation="Vertical" GroupBorderStyle="Group" Caption="Personal information" ShowCaption="True" ItemHeight="Auto">
+                        <dxdo:LayoutControlItem Caption="First name">
+                            <dxe:TextEdit />
+                        </dxdo:LayoutControlItem>
+                        <dxdo:LayoutControlItem Caption="Last name">
+                            <dxe:TextEdit />
+                        </dxdo:LayoutControlItem>
+                        <dxdo:LayoutControlItem Caption="E-mail">
+                            <dxe:TextEdit />
+                        </dxdo:LayoutControlItem>
+                    </dxdo:LayoutGroup>
+                </dxdo:LayoutGroup>
+            </dxdo:LayoutPanel>
+            <dxdo:LayoutGroup Orientation="Vertical" ItemWidth="2*">
+                <dxdo:LayoutPanel Caption="Panel (layout 2)" ItemHeight="Auto">
+                    <dxdo:LayoutGroup Orientation="Horizontal">
+                        <dxdo:LayoutGroup Orientation="Vertical" GroupBorderStyle="Group" Caption="Login information" ShowCaption="True" ItemHeight="Auto">
+                            <dxdo:LayoutControlItem Caption="Login">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="Password">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="Confirm password">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                        </dxdo:LayoutGroup>
+                        <dxdo:LayoutGroup Orientation="Vertical" GroupBorderStyle="Group" Caption="Personal information" ShowCaption="True" ItemHeight="Auto">
+                            <dxdo:LayoutControlItem Caption="First name">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="Last name">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="E-mail">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                        </dxdo:LayoutGroup>
+                    </dxdo:LayoutGroup>
+                </dxdo:LayoutPanel>
+                <dxdo:TabbedGroup>
+                    <dxdo:LayoutPanel Caption="Login information">
+                        <dxdo:LayoutGroup Orientation="Vertical">
+                            <dxdo:LayoutControlItem Caption="Login">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="Password">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="Confirm password">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                        </dxdo:LayoutGroup>
+                    </dxdo:LayoutPanel>
+                    <dxdo:LayoutPanel Caption="Personal information">
+                        <dxdo:LayoutGroup Orientation="Vertical">
+                            <dxdo:LayoutControlItem Caption="First name">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="Last name">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="E-mail">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                        </dxdo:LayoutGroup>
+                    </dxdo:LayoutPanel>
+                </dxdo:TabbedGroup>
+            </dxdo:LayoutGroup>
+        </dxdo:LayoutGroup>
+        <dxdo:DockLayoutManager.AutoHideGroups>
+            <dxdo:AutoHideGroup ItemWidth="Auto" AutoHideSize="300,300">
+                <dxdo:LayoutPanel Caption="Auto-Hidden panel" ItemWidth="Auto">
+                    <dxdo:LayoutGroup Orientation="Vertical">
+                        <dxdo:LayoutGroup Orientation="Vertical" GroupBorderStyle="Group" Caption="Login information" ShowCaption="True" ItemHeight="Auto">
+                            <dxdo:LayoutControlItem Caption="Login">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="Password">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="Confirm password">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                        </dxdo:LayoutGroup>
+                        <dxdo:LayoutGroup Orientation="Vertical" GroupBorderStyle="Group" Caption="Personal information" ShowCaption="True" ItemHeight="Auto">
+                            <dxdo:LayoutControlItem Caption="First name">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="Last name">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                            <dxdo:LayoutControlItem Caption="E-mail">
+                                <dxe:TextEdit />
+                            </dxdo:LayoutControlItem>
+                        </dxdo:LayoutGroup>
+                    </dxdo:LayoutGroup>
+                </dxdo:LayoutPanel>
+            </dxdo:AutoHideGroup>
+        </dxdo:DockLayoutManager.AutoHideGroups>
+    </dxdo:DockLayoutManager>
+</local:DockingDemoModule>

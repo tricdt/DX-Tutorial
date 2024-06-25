@@ -1,0 +1,125 @@
+﻿<local:SchedulingDemoModule
+    x:Class="SchedulingDemo.OnDemandDataLoading"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduling"
+    xmlns:local="clr-namespace:SchedulingDemo"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:vm="clr-namespace:SchedulingDemo.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignWidth="1200"
+    d:DesignHeight="800"
+    DataContext="{dxmvvm:ViewModelSource vm:OnDemandDataLoadingViewModel}">
+    <DockPanel>
+        <dxlc:LayoutControl Name="PART_Options" DockPanel.Dock="Right" Orientation="Vertical" Padding="0" dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap">
+            <dxe:DateNavigator
+                ShowTodayButton="False" ShowWeekNumbers="False" IsMultiSelect="True"
+                VerticalAlignment="Top" dxlc:LayoutControl.AllowVerticalSizing="True">
+                <dxe:DateNavigator.StyleSettings>
+                    <dxsch:SchedulerDateNavigatorStyleSettings Scheduler="{Binding ElementName=scheduler}" />
+                </dxe:DateNavigator.StyleSettings>
+            </dxe:DateNavigator>
+            <dxsch:ResourceTreeControl Scheduler="{Binding ElementName=scheduler}" Margin="-1,0,-1,-1"/>
+        </dxlc:LayoutControl>
+
+        <dxlc:LayoutControl Padding="0" Orientation="Vertical">
+            <!--#region !-->
+            <dxsch:SchedulerControl
+                x:Name="scheduler" dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                ShowDateNavigationPanel="True" ShowBorder="True" CommandBarStyle="Empty" GroupType="Resource"
+                Margin="-1,-1,-1,0"
+                ShowWaitIndicator="False"
+                AppointmentAdded="{DXEvent 'ProcessChanges(@args)'}"
+                AppointmentEdited="{DXEvent 'ProcessChanges(@args)'}"
+                AppointmentRemoved="{DXEvent 'ProcessChanges(@args)'}"
+                AppointmentRestored="{DXEvent 'ProcessChanges(@args)'}">
+                <!--#endregion !-->
+                <dxsch:DayView
+                    x:Name="dayView"
+                    NavigationButtonsVisibility="Never"
+                    TimeIndicatorVisibility="TodayView"
+                    TimeMarkerVisibility="Always"
+                    SnapToCellsMode="Never"
+                    TimeRegionSnapToCellsMode="Never"
+                    TimeScale="00:30:00"
+                    ShowWorkTimeOnly="False"
+                    ShowResourceNavigator="True"
+                    ResourcesPerPage="4"
+                    DayCount="2"/>
+                <dxsch:WeekView ResourcesPerPage="2"/>
+                <dxsch:MonthView
+                    ViewMode="Standard"
+                    NavigationButtonsVisibility="Never"
+                    ShowResourceNavigator="True"
+                    TimeRegionVisibility="Never"
+                    ResourcesPerPage="2"/>
+                <dxsch:TimelineView
+                    NavigationButtonsVisibility="Never"
+                    ViewMode="Standard" />
+                <dxsch:SchedulerControl.DataSource>
+                    <!--#region !-->
+                    <dxsch:DataSource
+                        Name="dataSource" FetchRange="1:0:0:0"
+                        CreateSourceObject="{DXEvent 'CreateSourceObject(@args)'}"
+                        FetchAppointments="{DXEvent 'FetchAppointments(@args)'}"
+                        ResourcesSource="{Binding Resources}">
+                        <!--#endregion !-->
+                        <dxsch:DataSource.ResourceMappings>
+                            <dxsch:ResourceMappings Caption="Description" Id="Id" Group="Group" />
+                        </dxsch:DataSource.ResourceMappings>
+                        <dxsch:DataSource.AppointmentMappings>
+                            <dxsch:AppointmentMappings
+                                Description="Description"
+                                Id="Id"
+                                LabelId="Label"
+                                StatusId="Status"
+                                RecurrenceInfo="RecurrenceInfo"
+                                ResourceId="ResourceId"
+                                Start="Start" End="End"
+                                QueryStart="QueryStart" QueryEnd="QueryEnd"
+                                Subject="Subject"
+                                Location="Location"
+                                AllDay="AllDay"
+                                Reminder="ReminderInfo"
+                                Type="AppointmentType"
+                                TimeZoneId="TimeZoneId"/>
+                        </dxsch:DataSource.AppointmentMappings>
+                    </dxsch:DataSource>
+                </dxsch:SchedulerControl.DataSource>
+                <dxsch:SchedulerControl.DateNavigationPanelStyle>
+                    <Style TargetType="dxsch:DateNavigationPanel">
+                        <Setter Property="ShowViewSelector" Value="True"/>
+                    </Style>
+                </dxsch:SchedulerControl.DateNavigationPanelStyle>
+            </dxsch:SchedulerControl>
+
+            <!--#region Event Log & Options-->
+            <dxlc:LayoutGroup Padding="0" Orientation="Vertical" dxlc:LayoutControl.AllowVerticalSizing="True"
+                              VerticalAlignment="Bottom" Margin="-1,0,-1,-1" Height="150" ItemSpace="0">
+                <dxlc:LayoutGroup View="GroupBox" GroupBoxDisplayMode="Normal" Header="Event Log"
+                                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="-5,-8,-12,-12">
+                    <dxe:TextEdit ShowBorder="False" VerticalContentAlignment="Top" IsReadOnly="True" Focusable="True" IsTabStop="False"
+                                  VerticalScrollBarVisibility="Auto" dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                                  EditValueChanged="{DXEvent '@sender.EditCore.ScrollToEnd()'}" Name="logTextEdit"/>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup View="Group" GroupBoxDisplayMode="Normal" Margin="9,0,7,1" HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Bottom" Orientation="Horizontal" Height="34">
+                    <dxlc:LayoutItem Label="Fetch Range (in days): " VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <dxe:SpinEdit Name="spinEdit" MaxValue="100" MinValue="1" Width="54"
+                                      Value="{DXBinding '@e(dataSource).FetchRange.Days', BackExpr='@e(dataSource).FetchRange = $sys:TimeSpan.FromDays(($int)@value)', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </dxlc:LayoutItem>
+                    <Button Content="Refresh Data" VerticalAlignment="Center" Name="refreshData" HorizontalAlignment="Left" Width="99"/>
+                    <dxe:CheckEdit Content="Delay" IsChecked="{Binding Delay}" Margin="4,0,0,0"/>
+                    <Button Content="Clear Log" VerticalAlignment="Center" Click="ClearLog" HorizontalAlignment="Right" Width="96"/>
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+            <!--#endregion-->
+        </dxlc:LayoutControl>
+    </DockPanel>
+</local:SchedulingDemoModule>

@@ -1,0 +1,64 @@
+﻿<local:PropertyGridDemoModule xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                              xmlns:local="clr-namespace:PropertyGridDemo"
+                              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                              xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+                              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                              mc:Ignorable="d"
+                              x:Class="PropertyGridDemo.LayoutCustomizationModule"
+                              d:DesignHeight="400"
+                              d:DesignWidth="600"
+                              DataContext="{dxmvvm:ViewModelSource Type={x:Type local:LayoutCustomizationViewModel}}">
+    <local:PropertyGridDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/PropertyGridDemo;component/Resources/CustomTemplatesModuleTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:PropertyGridDemoModule.Resources>
+    <Grid>
+        <dxmvvm:Interaction.Behaviors>
+            <local:GridColumnHelper />
+        </dxmvvm:Interaction.Behaviors>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <dxprg:PropertyGridControl Margin="10"
+                                   Grid.Column="1"
+                                   SelectedObject="{Binding}"
+                                   ShowCategories="False"
+                                   ExpandCategoriesWhenSelectedObjectChanged="True"
+                                   ShowMenuButtonInRows="False"
+                                   ShowDescriptionIn="Panel"
+                                   ShowMenu="OnRightClick"
+                                   ShowProperties="WithPropertyDefinitions">
+            <dxprg:PropertyDefinition Path="IncreaseRankCommand" CellTemplate="{StaticResource increaseRankTemplate}" Visibility="Collapsed" />
+            <dxprg:PropertyDefinition Path="DecreaseRankCommand" CellTemplate="{StaticResource decreaseRankTemplate}" Visibility="Collapsed" />
+            <dxprg:PropertyDefinition Path="Photo" HeaderShowMode="Hidden" ContentTemplate="{StaticResource photoContentTemplate}" />
+            <dxprg:PropertyDefinition Path="Name" />
+            <dxprg:PropertyDefinition Path="Rank" ContentTemplate="{StaticResource rankContentTemplate}" />
+            <dxprg:CollectionDefinition Path="Careers" ContentTemplate="{StaticResource emptyTemplate}">
+                <dxprg:PropertyDefinition Path="*"
+                                          HeaderTemplate="{StaticResource careersElementsHeaderTemplate}"
+                                          Header="Job Title"
+                                          ContentTemplate="{StaticResource careersElementsContentTemplate}">
+                    <dxprg:PropertyDefinition Path="JobTitle" />
+                    <dxprg:PropertyDefinition Path="FromDate" />
+                    <dxprg:PropertyDefinition Path="ToDate" />
+                    <dxprg:CollectionDefinition Path="Skills" ContentTemplate="{StaticResource emptyTemplate}">
+                        <dxprg:PropertyDefinition Path="*" AllowExpanding="Never" />
+                    </dxprg:CollectionDefinition>
+                </dxprg:PropertyDefinition>
+            </dxprg:CollectionDefinition>
+            <dxprg:PropertyDefinition Path="Address"
+                                      AllowExpanding="Force"
+                                      ShowChildren="False"
+                                      ContentTemplate="{StaticResource addressContentTemplate}" />
+            <dxprg:PropertyDefinition Path="Notes" EditSettings="{dxe:TextSettings TextWrapping=Wrap}" HeaderShowMode="Top" />
+        </dxprg:PropertyGridControl>
+    </Grid>
+</local:PropertyGridDemoModule>

@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProjectGuid>{6EEC7ACE-371F-075E-3B95-8B39FF4B2FCC}</ProjectGuid>
+    <EnableDefaultItems>False</EnableDefaultItems>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <Configurations>Debug;Release;DebugTest</Configurations>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    <EmbeddedResourceUseDependentUponConvention>False</EmbeddedResourceUseDependentUponConvention>
+    <RootNamespace>GaugesDemo</RootNamespace>
+    <AssemblyName>GaugesDemo</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>WinExe</OutputType>
+    <WarningLevel>4</WarningLevel>
+    <IntermediateOutputPath>obj.NCD</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;WPF;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputPath>.\bin\ClickOnce DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\ClickOnce ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;WPF;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktopTest\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DEBUGTEST;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Wpf" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Demos" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="22.2.3" />
+    
+    
+    
+    
+    
+    
+    
+    
+  </ItemGroup>
+  <ItemGroup>
+    </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CarDashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CircularIndicators.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CircularModels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CircularRanges.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CircularScales.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DigitalModels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\IntegrationWithAnalogGauges.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\StateIndicatorModels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SymbolAnimation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CustomSymbolMapping.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewTypes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\LinearIndicators.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\LinearModels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\LinearRanges.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\LinearScales.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\IndicatorAnimation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Interactivity.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\CustomStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Common.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CarDashboardBackgroundControl.cs" />
+    <Compile Include="Controls\OscilloscopeBackgroundControl.cs" />
+    <Compile Include="Controls\TrafficLightsBackgroundControl.cs" />
+    <Compile Include="Controls\TurnCoordinatorBackgroundControl.cs" />
+    <Compile Include="GaugesDemoModuleControl.cs" />
+    <Compile Include="DemoTesting\Fixtures.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CarDashboard.xaml.cs">
+      <DependentUpon>CarDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CarDashboardViewModel.cs" />
+    <Compile Include="Modules\CircularIndicators.xaml.cs">
+      <DependentUpon>CircularIndicators.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CircularModels.xaml.cs">
+      <DependentUpon>CircularModels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CircularRanges.xaml.cs">
+      <DependentUpon>CircularRanges.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CircularScales.xaml.cs">
+      <DependentUpon>CircularScales.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DigitalModels.xaml.cs">
+      <DependentUpon>DigitalModels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\IntegrationWithAnalogGauges.xaml.cs">
+      <DependentUpon>IntegrationWithAnalogGauges.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\StateIndicatorModels.xaml.cs">
+      <DependentUpon>StateIndicatorModels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SymbolAnimation.xaml.cs">
+      <DependentUpon>SymbolAnimation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CustomSymbolMapping.xaml.cs">
+      <DependentUpon>CustomSymbolMapping.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewTypes.xaml.cs">
+      <DependentUpon>ViewTypes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\LinearIndicators.xaml.cs">
+      <DependentUpon>LinearIndicators.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\LinearModels.xaml.cs">
+      <DependentUpon>LinearModels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\LinearRanges.xaml.cs">
+      <DependentUpon>LinearRanges.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\LinearScales.xaml.cs">
+      <DependentUpon>LinearScales.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\IndicatorAnimation.xaml.cs">
+      <DependentUpon>IndicatorAnimation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Interactivity.xaml.cs">
+      <DependentUpon>Interactivity.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Utils.cs" />
+    <Compile Include="ViewModels\ElectricityViewModel.cs" />
+    <Compile Include="ViewModels\EqualizerViewModel.cs" />
+    <Compile Include="ViewModels\GaugeModelsSource.cs" />
+    <Compile Include="ViewModels\GaugeRandomDataGenerator.cs" />
+    <Compile Include="ViewModels\OscilloscopeViewModel.cs" />
+    <Compile Include="ViewModels\PlayerViewModel.cs" />
+    <Compile Include="ViewModels\TrafficLightsViewModel.cs" />
+    <Compile Include="ViewModels\WeatherViewModel.cs" />
+    <Compile Include="ViewModels\WorldTimeViewModel.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LogoUrl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CircularRanges\Cloudy.png" />
+    <Resource Include="Images\CircularRanges\Rainy.png" />
+    <Resource Include="Images\CircularRanges\Snowy.png" />
+    <Resource Include="Images\CircularRanges\Sunny.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CircularScales\IconLondon.png" />
+    <Resource Include="Images\CircularScales\IconMoscow.png" />
+    <Resource Include="Images\CircularScales\IconNewYork.png" />
+    <Resource Include="Images\CircularScales\Shadow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CircularIndicators\Screw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CarDashboard\Danger.png" />
+    <Resource Include="Images\CarDashboard\Fuel.png" />
+    <Resource Include="Images\CarDashboard\Left.png" />
+    <Resource Include="Images\CarDashboard\Right.png" />
+    <Resource Include="Images\CarDashboard\Temperature.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Interactivity\Shadow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Interactivity\Arrows.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LinearRanges\Cloudy.png" />
+    <Resource Include="Images\LinearRanges\Rainy.png" />
+    <Resource Include="Images\LinearRanges\Snowy.png" />
+    <Resource Include="Images\LinearRanges\Sunny.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SymbolAnimation\First.png" />
+    <Resource Include="Images\SymbolAnimation\Knob.png" />
+    <Resource Include="Images\SymbolAnimation\Last.png" />
+    <Resource Include="Images\SymbolAnimation\Marker.png" />
+    <Resource Include="Images\SymbolAnimation\Next.png" />
+    <Resource Include="Images\SymbolAnimation\Pause.png" />
+    <Resource Include="Images\SymbolAnimation\Play.png" />
+    <Resource Include="Images\SymbolAnimation\Previous.png" />
+    <Resource Include="Images\SymbolAnimation\Volume.png" />
+  </ItemGroup>
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent"><ItemGroup><Resource Include="@(Page)" /></ItemGroup><ItemGroup><Resource Include="@(Compile)" /></ItemGroup></Target>
+  <ItemGroup></ItemGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

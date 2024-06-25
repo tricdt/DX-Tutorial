@@ -1,0 +1,173 @@
+﻿<local:GridDemoModule x:Class="GridDemo.MultiRowSelection"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib"
+                      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch">
+    <local:GridDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GridDemo;component/ModuleResources/MultiSelectionTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dxdb:NWindDataLoader x:Key="NWindDataLoader" />
+            <dxg:TableView x:Key="tableView" TotalSummaryPosition="Bottom" IsTotalSummaryMenuEnabled="False" ShowGroupedColumns="True" NavigationStyle="Cell" />
+            <dxg:CardView x:Key="cardView"
+                          FixedSize="300"
+                          AllowCardResizing="False"
+                          TotalSummaryPosition="Bottom"
+                          IsTotalSummaryMenuEnabled="False"
+                          ShowGroupedColumns="True"
+                          NavigationStyle="Row">
+                <dxg:CardView.CardHeaderBinding>
+                    <Binding Path="OrderID">
+                        <Binding.Converter>
+                            <dx:FormatStringConverter FormatString="{}Order ID: {0}" />
+                        </Binding.Converter>
+                    </Binding>
+                </dxg:CardView.CardHeaderBinding>
+            </dxg:CardView>
+            <collections:ArrayList x:Key="Views">
+                <sys:String>Table View</sys:String>
+                <sys:String>Card View</sys:String>
+            </collections:ArrayList>
+        </ResourceDictionary>
+    </local:GridDemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,8,12,12" MinWidth="210">
+                <dxe:CheckEdit x:Name="checkShowSelectionRectangle"
+                               IsChecked="{Binding Path=View.ShowSelectionRectangle, Mode=TwoWay}"
+                               Content="Show Selection Rectangle">
+                    <dxe:CheckEdit.Style>
+                        <Style TargetType="{x:Type dxe:CheckEdit}">
+                            <Setter Property="IsEnabled" Value="False" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectionMode, ElementName=grid}" Value="Row">
+                                    <Setter Property="IsEnabled" Value="True" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </dxe:CheckEdit.Style>
+                </dxe:CheckEdit>
+                <GroupBox Header="Selection Mode" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit x:Name="selectionModeListBox"
+                                     SelectedIndexChanged="selectionModeListBox_SelectedIndexChanged"
+                                     ShowBorder="False"
+                                     Background="{x:Null}"
+                                     SelectedIndex="0"
+                                     EditValue="{Binding SelectionMode, ElementName=grid}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.Items>
+                            <dxe:CustomItem>
+                                <dxe:CustomItem.DisplayText>Single</dxe:CustomItem.DisplayText>
+                                <dxe:CustomItem.EditValue>
+                                    <dxg:MultiSelectMode>None</dxg:MultiSelectMode>
+                                </dxe:CustomItem.EditValue>
+                            </dxe:CustomItem>
+                            <dxe:CustomItem>
+                                <dxe:CustomItem.DisplayText>Extended</dxe:CustomItem.DisplayText>
+                                <dxe:CustomItem.EditValue>
+                                    <dxg:MultiSelectMode>Row</dxg:MultiSelectMode>
+                                </dxe:CustomItem.EditValue>
+                            </dxe:CustomItem>
+                            <dxe:CustomItem>
+                                <dxe:CustomItem.DisplayText>Multiple</dxe:CustomItem.DisplayText>
+                                <dxe:CustomItem.EditValue>
+                                    <dxg:MultiSelectMode>MultipleRow</dxg:MultiSelectMode>
+                                </dxe:CustomItem.EditValue>
+                            </dxe:CustomItem>
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="View Type" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit x:Name="viewsListBox"
+                                     ShowBorder="False"
+                                     Background="{x:Null}"
+                                     SelectedIndex="0"
+                                     ItemsSource="{Binding Source={StaticResource Views}}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <local:MultiSelectionOptionsControl x:Name="ProductsMultiSelectionOptionsControl"
+                                                    Header="Product"
+                                                    ComboBoxItemsSource="{Binding Path=Products, Source={StaticResource NWindDataLoader}}"
+                                                    ComboBoxDisplayMember="ProductName"
+                                                    ComboBoxValueMember="ProductID" />
+                <local:MultiSelectionOptionsControl x:Name="PriceMultiSelectionOptionsControl" Header="Price Range" />
+                <GroupBox Header="Selected Records" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit x:Name="SelectionRowsListBox"
+                                     Height="130"
+                                     Background="{x:Null}"
+                                     Width="200"
+                                     ItemsSource="{Binding Path=SelectedItems}"
+                                     ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                                     ItemTemplate="{StaticResource selectedRowItemTemplate}" />
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <dxg:GridControl x:Name="grid"
+                         ItemsSource="{Binding Path=Invoices, Source={StaticResource NWindDataLoader}}"
+                         SelectionMode="Row"
+                         ShowBorder="False">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn x:Name="colID" FieldName="OrderID" MinWidth="60" Width="60" AllowResizing="False" FixedWidth="true" Header="ID" />
+                <dxg:GridColumn x:Name="colProduct" FieldName="ProductID" Header="Product" MinWidth="200" Width="2*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings AutoComplete="True"
+                                                  ImmediatePopup="True"
+                                                  ValueMember="ProductID"
+                                                  DisplayMember="ProductName"
+                                                  ItemsSource="{Binding Path=Products, Source={StaticResource NWindDataLoader}}" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn x:Name="colUnitPrice" FieldName="UnitPrice" MinWidth="50" Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:SpinEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" MaskCulture="en-US" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn x:Name="colQuantity" FieldName="Quantity" MinWidth="50" Width="*" />
+                <dxg:GridColumn x:Name="colTotal"
+                                FieldName="Total"
+                                MinWidth="110"
+                                Width="1.5*"
+                                UnboundDataType="{x:Type sys:Decimal}"
+                                ReadOnly="True"
+                                UnboundExpression="[UnitPrice] * [Quantity]">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" MaskCulture="en-US" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="defaultView" TotalSummaryPosition="Bottom" IsTotalSummaryMenuEnabled="False" ShowGroupedColumns="True" NavigationStyle="Cell"/>
+            </dxg:GridControl.View>
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem FieldName="Total" SummaryType="Sum" ShowInColumn="Total" DisplayFormat="Selection Total=${0:N}" CalculationMode="SelectedRows" />
+                <dxg:GridSummaryItem FieldName="Total" SummaryType="Sum" ShowInColumn="Total" DisplayFormat="Total=${0:N}" />
+            </dxg:GridControl.TotalSummary>
+            <dxg:GridControl.GroupSummary>
+                <dxg:GridSummaryItem FieldName="Total" SummaryType="Sum" DisplayFormat="Grand Total=${0:N}" CalculationMode="SelectedRows" />
+            </dxg:GridControl.GroupSummary>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

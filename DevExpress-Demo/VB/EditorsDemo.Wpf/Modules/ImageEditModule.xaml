@@ -1,0 +1,124 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.ImageEditModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:local="clr-namespace:EditorsDemo"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
+    <local:EditorsDemoModule.Resources>
+        <Style TargetType="dxe:ImageEdit">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="ShowLoadDialogOnClickMode" Value="{Binding Path=EditValue, ElementName=cmbLoadDialogMode}" />
+            <Setter Property="ShowMenu" Value="{Binding Path=IsChecked, ElementName=chkShowMenu}" />
+            <Setter Property="Stretch" Value="{Binding Path=EditValue, ElementName=cmbStretch}" />
+        </Style>
+        <dx:WpfSvgPalette x:Key="iconPalette">
+            <SolidColorBrush x:Key="BlackColor" Color="#FF0078D4"/>
+        </dx:WpfSvgPalette>
+    </local:EditorsDemoModule.Resources>
+    <DockPanel>
+        <RenderOptions.BitmapScalingMode>HighQuality</RenderOptions.BitmapScalingMode>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <Grid  Margin="12" MinWidth="250" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Text="EditValue:" VerticalAlignment="Center"  Margin="0,0,6,3" />
+                <dxe:PopupImageEdit EditValue="{Binding Path=Photo, Mode=TwoWay}" Grid.Column="1"
+                                    Margin="0,0,0,6"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Stretch:" VerticalAlignment="Center"  Margin="0,0,6,3" />
+                <dxe:ComboBoxEdit x:Name="cbStretch" Grid.Row="1" Grid.Column="1" IsTextEditable="False"  Margin="0,0,0,6" SelectedIndex="0">
+                    <dxe:ComboBoxEdit.Items>
+                        <Stretch>Uniform</Stretch>
+                        <Stretch>UniformToFill</Stretch>
+                        <Stretch>Fill</Stretch>
+                    </dxe:ComboBoxEdit.Items>
+                </dxe:ComboBoxEdit>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Load image on click:" VerticalAlignment="Center"  Margin="0,0,6,3" />
+                <dxe:ComboBoxEdit x:Name="cbLoadDialogMode" Grid.Row="2" Grid.Column="1" IsTextEditable="False"  Margin="0,0,0,6" SelectedIndex="0">
+                    <dxe:ComboBoxEdit.Items>
+                        <dxe:ShowLoadDialogOnClickMode>Always</dxe:ShowLoadDialogOnClickMode>
+                        <dxe:ShowLoadDialogOnClickMode>Never</dxe:ShowLoadDialogOnClickMode>
+                        <dxe:ShowLoadDialogOnClickMode>Empty</dxe:ShowLoadDialogOnClickMode>
+                    </dxe:ComboBoxEdit.Items>
+                </dxe:ComboBoxEdit>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Show menu mode:" VerticalAlignment="Center"  Margin="0,0,6,3" />
+                <dxe:ComboBoxEdit x:Name="cbShowMenuMode" Grid.Row="3" Grid.Column="1" IsTextEditable="False"  Margin="0,0,0,6" SelectedIndex="1">
+                    <dxe:ComboBoxEdit.Items>
+                        <dxe:ShowMenuMode>Always</dxe:ShowMenuMode>
+                        <dxe:ShowMenuMode>Hover</dxe:ShowMenuMode>
+                    </dxe:ComboBoxEdit.Items>
+                </dxe:ComboBoxEdit>
+                <dxe:CheckEdit x:Name="chkShowMenu" Content="Show menu" Grid.Row="4" Grid.ColumnSpan="2"  Margin="0,0,0,6" IsChecked="True" />
+            </Grid>
+        </ScrollViewer>
+        <GroupBox Header="Profile" Padding="24"
+                      VerticalAlignment="Top"
+                      HorizontalAlignment="Center"
+                      Margin="0,120,0,0">
+            <Grid Height="200" Width="500">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
+                <dxe:ImageEdit x:Name="editor" EditValue="{Binding Path=Photo}"
+                               Stretch="{Binding Path=EditValue, ElementName=cbStretch}"
+                               ShowMenuMode="{Binding Path=EditValue, ElementName=cbShowMenuMode}"
+                               ShowLoadDialogOnClickMode="{Binding Path=EditValue, ElementName=cbLoadDialogMode}"
+                               ShowMenu="{Binding Path=IsChecked, ElementName=chkShowMenu}"/>
+                <Grid Grid.Column="1" Margin="12,0,0,0" TextElement.FontSize="14">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock FontSize="20" Text="{Binding FullName}"
+                           Margin="0,20,0,8"
+                           FontWeight="Bold"/>
+                    <Grid Margin="0,12,0,0" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="35*"/>
+                            <ColumnDefinition Width="65*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="Department:" Opacity="0.75"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Department}"  Margin="0,0,0,6"/>
+
+                        <TextBlock Grid.Row="1" Text="Position:" Opacity="0.75"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Title}"  Margin="0,0,0,6"/>
+
+                        <TextBlock Grid.Row="2" Text="Email:" Opacity="0.75" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Email}"  Margin="0,0,0,18"/>
+
+                        <dx:DXImage Grid.Row="3" Source="/DevExpress.Images.v22.2;component/SvgImages/Icon Builder/Electronics_PhoneIphone.svg"
+                                    Width="20" Height="20" HorizontalAlignment="Left"
+                                    Grid.ColumnSpan="2"
+                                    Margin="-4,2,0,0"
+                                    dx:WpfSvgPalette.Palette="{StaticResource iconPalette}"/>
+                        <Label Grid.Row="3" Grid.ColumnSpan="2" Content="{Binding MobilePhone}"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center" Margin="26,0,0,0"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </GroupBox>
+    </DockPanel>
+</local:EditorsDemoModule>

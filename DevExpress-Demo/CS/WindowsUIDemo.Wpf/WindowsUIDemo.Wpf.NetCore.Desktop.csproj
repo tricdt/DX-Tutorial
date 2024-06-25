@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProjectGuid>{A135BE42-5CB7-0527-10EE-720DBA821FBB}</ProjectGuid>
+    <EnableDefaultItems>False</EnableDefaultItems>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <Configurations>Debug;Release;DebugTest</Configurations>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    <EmbeddedResourceUseDependentUponConvention>False</EmbeddedResourceUseDependentUponConvention>
+    <RootNamespace>WindowsUIDemo</RootNamespace>
+    <AssemblyName>WindowsUIDemo</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>WinExe</OutputType>
+    <WarningLevel>4</WarningLevel>
+    <IntermediateOutputPath>obj.NCD</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;WPF;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputPath>.\bin\ClickOnce DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\ClickOnce ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;WPF;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktopTest\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DEBUGTEST;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Images\Calc.svg" />
+    <Resource Include="Images\Home.svg" />
+    <Resource Include="Images\Rates.svg" />
+    <Resource Include="Images\Statistics.svg" />
+    <Resource Include="Images\Research.svg" />
+    <Resource Include="Images\System.svg" />
+    <Resource Include="Images\UserManagment.svg" />
+    <Resource Include="Images\Hamburger\Mail\Attachment.svg" />
+    <Resource Include="Images\Hamburger\Mail\Delete.svg" />
+    <Resource Include="Images\Hamburger\Mail\Edit.svg" />
+    <Resource Include="Images\Hamburger\Mail\High.svg" />
+    <Resource Include="Images\Hamburger\Mail\Unread.svg" />
+    <EmbeddedResource Include="Data\MailDevAv.xml" />
+    <Resource Include="Images\notification-icon.png" />
+    <Resource Include="Images\demoicon.ico" />
+    <Resource Include="Images\Hamburger\Folders.png" />
+    <Resource Include="Images\Hamburger\ThemeSelector.png" />
+    <PackageReference Include="DevExpress.Wpf.Demos" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="22.2.3" />
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DevAVHelper.cs" />
+    <Compile Include="GalleryPhotoViewer\ImageViewer.xaml.cs">
+      <DependentUpon>ImageViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FluentDesignCalculatorModule\FluentDesignCalculatorWindow.xaml.cs">
+      <DependentUpon>FluentDesignCalculatorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\HamburgerMenuDemo\CompactModeConverters.cs" />
+    <Compile Include="Modules\HamburgerMenuDemo\CompactModeModel.cs" />
+    <Compile Include="Modules\HamburgerMenuDemo\MailItems.cs" />
+    <Compile Include="Modules\HamburgerMenuDemo\Controls\MailViewerControl.xaml.cs">
+      <DependentUpon>MailViewerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\HamburgerMenuDemo\ViewModels.cs">
+    </Compile>
+    <Compile Include="Modules\HamburgerMenuModule.xaml.cs">
+      <DependentUpon>HamburgerMenuModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FluentDesignCalculatorModule.xaml.cs">
+      <DependentUpon>FluentDesignCalculatorModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Views\LoanCalculatorView.xaml.cs">
+      <DependentUpon>LoanCalculatorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Views\MortgageRatesView.xaml.cs">
+      <DependentUpon>MortgageRatesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Views\ResearchView.xaml.cs">
+      <DependentUpon>ResearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Views\StatisticsView.xaml.cs">
+      <DependentUpon>StatisticsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Views\SystemInformationView.xaml.cs">
+      <DependentUpon>SystemInformationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Views\UserManagementView.xaml.cs">
+      <DependentUpon>UserManagementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Views\ZillowView.xaml.cs">
+      <DependentUpon>ZillowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowsUIDemoModuleControl.cs" />
+    <Compile Include="DemoTesting\Fixtures.cs" />
+    <Compile Include="Modules\AppBarCommands.xaml.cs">
+      <DependentUpon>AppBarCommands.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Notifications.xaml.cs">
+      <DependentUpon>Notifications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Windows8StyleMessageBox.xaml.cs">
+      <DependentUpon>Windows8StyleMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FrameNavigation.xaml.cs">
+      <DependentUpon>FrameNavigation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FlipViewItemsSource.xaml.cs">
+      <DependentUpon>FlipViewItemsSource.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Views\DashboardView.xaml.cs">
+      <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Views\NavigatorView.xaml.cs">
+      <DependentUpon>NavigatorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Views\SlideViewEmployeesDetailsView.xaml.cs">
+      <DependentUpon>SlideViewEmployeesDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Views\SlideViewEmployeesView.xaml.cs">
+      <DependentUpon>SlideViewEmployeesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SlideViewItemsSource.xaml.cs">
+      <DependentUpon>SlideViewItemsSource.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PageViewItemsSource.xaml.cs">
+      <DependentUpon>PageViewItemsSource.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="ViewModels\NotificationsViewModel.cs" />
+    <AppDesigner Include="Properties\" />
+    <Resource Include="demoicon.ico" />
+    <Resource Include="Images\sun.png" />
+    <Resource Include="Images\Photos\Cars\0.jpg" />
+    <Resource Include="Images\Photos\Cars\1.jpg" />
+    <Resource Include="Images\Photos\Cars\10.jpg" />
+    <Resource Include="Images\Photos\Cars\2.jpg" />
+    <Resource Include="Images\Photos\Cars\3.jpg" />
+    <Resource Include="Images\Photos\Cars\4.jpg" />
+    <Resource Include="Images\Photos\Cars\5.jpg" />
+    <Resource Include="Images\Photos\Cars\6.jpg" />
+    <Resource Include="Images\Photos\Cars\7.jpg" />
+    <Resource Include="Images\Photos\Cars\8.jpg" />
+    <Resource Include="Images\Photos\Cars\9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="GalleryPhotoViewer\ImageViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\AppBarCommands.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FluentDesignCalculatorModule\FluentDesignCalculatorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\HamburgerMenuDemo\CompactModeTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\HamburgerMenuDemo\Controls\MailViewerControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\HamburgerMenuModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Notifications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\FluentDesignCalculatorModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Views\LoanCalculatorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Views\MortgageRatesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Views\ResearchView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Views\StatisticsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Views\SystemInformationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Views\UserManagementView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Views\ZillowView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Windows8StyleMessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FrameNavigation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FlipViewItemsSource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Views\DashboardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Views\NavigatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Views\SlideViewEmployeesDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Views\SlideViewEmployeesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\SlideViewItemsSource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\PageViewItemsSource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Common.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\HamburgerMenu\CommonStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent"><ItemGroup><Resource Include="@(Page)" /></ItemGroup><ItemGroup><Resource Include="@(Compile)" /></ItemGroup></Target>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
+  </ItemGroup>
+  <ItemGroup></ItemGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,138 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.DrillDownDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ChartsDemo"
+    DataContext="{dxmvvm:ViewModelSource Type=local:DrillDownViewModel}">
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:DevAVSeriesTemplateSelector
+                x:Key="seriesTemplateSelector">
+                <local:DevAVSeriesTemplateSelector.BranchStackedBarTemplate>
+                    <DataTemplate>
+                        <dxc:BarStackedSeries2D
+                            DataSource="{Binding Categories}"
+                            ArgumentDataMember="Name"
+                            ValueDataMember="TotalIncome"
+                            DisplayName="{Binding Name}"
+                            ToolTipPointPattern="{}{S}: {V: $#,#.00}" />
+                    </DataTemplate>
+                </local:DevAVSeriesTemplateSelector.BranchStackedBarTemplate>
+                <local:DevAVSeriesTemplateSelector.BranchColorEachBarTemplate>
+                    <DataTemplate>
+                        <dxc:BarSideBySideSeries2D
+                            DataSource="{Binding Categories}"
+                            ColorEach="True"
+                            ArgumentDataMember="Name"
+                            ValueDataMember="TotalIncome"
+                            ShowInLegend="False"
+                            CrosshairLabelPattern="{}{A}: {V: $#,#.00}" />
+                    </DataTemplate>
+                </local:DevAVSeriesTemplateSelector.BranchColorEachBarTemplate>
+                <local:DevAVSeriesTemplateSelector.SingleProductTemplate>
+                    <DataTemplate>
+                        <dxc:SplineSeries2D
+                            DataSource="{Binding Sales}"
+                            ArgumentDataMember="Month"
+                            ValueDataMember="Income"
+                            CrosshairLabelPattern="{}{A: MMMM yyyy}: {V: $#,#.00}" />
+                    </DataTemplate>
+                </local:DevAVSeriesTemplateSelector.SingleProductTemplate>
+                <local:DevAVSeriesTemplateSelector.ProductTemplate>
+                    <DataTemplate>
+                        <dxc:SplineAreaStackedSeries2D
+                            DataSource="{Binding Sales}"
+                            ArgumentDataMember="Month"
+                            ValueDataMember="Income"
+                            DisplayName="{Binding Name}"
+                            Transparency="0.3"
+                            CrosshairLabelPattern="{}{S}: {V: $#,#.00}" />
+                    </DataTemplate>
+                </local:DevAVSeriesTemplateSelector.ProductTemplate>
+            </local:DevAVSeriesTemplateSelector>
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+
+    <DockPanel>
+        <!--#region ChartsDemoRibbon-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}" />
+        <!--#endregion-->
+
+        <dxc:ChartControl
+            x:Name="chart"
+            CrosshairEnabled="{Binding CrosshairEnabled}"
+            ToolTipEnabled="{Binding ToolTipEnabled}">
+            <!--#region Title-->
+            <dxc:ChartControl.Titles>
+                <dxc:Title
+                    Content="DevAV Sales"
+                    HorizontalAlignment="Center" />
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+
+            <dxc:XYDiagram2D
+                SeriesItemTemplateSelector="{StaticResource seriesTemplateSelector}"
+                Rotated="{Binding DiagramRotated}">
+                <dxmvvm:Interaction.Behaviors>
+                    <dxmvvm:EventToCommand
+                        EventName="DrillDownStateChanged"
+                        Command="{Binding OnDrillDownStateChangedCommand}">
+                        <dxmvvm:EventToCommand.EventArgsConverter>
+                            <local:DrillDownStateChangedEventArgsConverter />
+                        </dxmvvm:EventToCommand.EventArgsConverter>
+                    </dxmvvm:EventToCommand>
+                </dxmvvm:Interaction.Behaviors>
+                <dxc:XYDiagram2D.SeriesItemsSource>
+                    <dxc:HierarchicalDataAdapter
+                        ChildrenSelector="{local:ChildrenSelector}"
+                        DataSource="{Binding HierarchicalData}" />
+                </dxc:XYDiagram2D.SeriesItemsSource>
+                <dxc:XYDiagram2D.AxisX>
+                    <dxc:AxisX2D>
+                        <dxc:AxisX2D.QualitativeScaleOptions>
+                            <dxc:QualitativeScaleOptions
+                                AutoGrid="False" />
+                        </dxc:AxisX2D.QualitativeScaleOptions>
+                        <dxc:AxisX2D.DateTimeScaleOptions>
+                            <dxc:ManualDateTimeScaleOptions
+                                AggregateFunction="Sum"
+                                MeasureUnit="Month"/>
+                        </dxc:AxisX2D.DateTimeScaleOptions>
+                        <dxc:AxisX2D.WholeRange>
+                            <dxc:Range
+                                SideMarginsValue="{Binding SideMargins}" />
+                        </dxc:AxisX2D.WholeRange>
+                    </dxc:AxisX2D>
+                </dxc:XYDiagram2D.AxisX>
+                <dxc:XYDiagram2D.AxisY>
+                    <dxc:AxisY2D>
+                        <dxc:AxisY2D.WholeRange>
+                            <dxc:Range
+                                dxc:AxisY2D.AlwaysShowZeroLevel="{Binding ShowValuesZeroLevel}" />
+                        </dxc:AxisY2D.WholeRange>
+                        <dxc:AxisY2D.Label>
+                            <dxc:AxisLabel
+                                TextPattern="{Binding AxisYTextPattern}" />
+                        </dxc:AxisY2D.Label>
+                    </dxc:AxisY2D>
+                </dxc:XYDiagram2D.AxisY>
+            </dxc:XYDiagram2D>
+
+            <!--#region Legend-->
+            <dxc:ChartControl.Legend>
+                <dxc:Legend />
+            </dxc:ChartControl.Legend>
+            <!--#endregion-->
+        </dxc:ChartControl>
+    </DockPanel>
+</local:ChartsDemoModule>

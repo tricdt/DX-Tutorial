@@ -1,0 +1,56 @@
+﻿<local:GridDemoModule x:Class="GridDemo.MultiCellSelection"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800">
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,8,12,12" MinWidth="210">
+                <dxe:CheckEdit x:Name="checkEdit"
+                               Content="Calculate summary for selected cells only"
+                               IsChecked="True" />
+                <GroupBox Header="Select cells" Margin="0,5,0,0">
+                    <StackPanel>
+                        <Button Content="20 Best Selling" Click="Button_Click" />
+                        <Button Content="20 Worst Selling" Click="Button_Click_1" Margin="0,4,0,0" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <dxg:GridControl x:Name="grid"
+                         SelectionMode="Cell"
+                         AutoGenerateColumns="KeepOld"
+                         ShowBorder="False">
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="view"
+                               ShowGroupPanel="False"
+                               TotalSummaryPosition="Top"
+                               IsTotalSummaryMenuEnabled="False">
+                    <dxg:TableView.SummaryCalculationMode>
+                        <Binding Path="IsChecked" ElementName="checkEdit">
+                            <Binding.Converter>
+                                <dxmvvm:ObjectToObjectConverter DefaultTarget="AllRows">
+                                    <dxmvvm:MapItem Source="True" Target="SelectedRows" />
+                                </dxmvvm:ObjectToObjectConverter>
+                            </Binding.Converter>
+                        </Binding>
+                    </dxg:TableView.SummaryCalculationMode>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

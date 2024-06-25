@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="MVVMDemo.TypedStylesDemo.MarkupExtensionsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+    <UserControl.Resources>
+        <!--#region !-->
+        <SolidColorBrush x:Key="brush" Color="LightGreen" />
+        <BorderStyle x:Key="BorderStyle" Background="{StaticResource brush}"/>
+        <TextBoxStyle x:Key="TextBoxStyle" Background="{x:Null}"/>
+        <!--#endregion-->
+    </UserControl.Resources>
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <Border Style="{StaticResource BorderStyle}">
+            <TextBox Style="{StaticResource TextBoxStyle}">Transparent TextBox in green Border</TextBox>
+        </Border>
+    </dxlc:LayoutControl>
+</UserControl>

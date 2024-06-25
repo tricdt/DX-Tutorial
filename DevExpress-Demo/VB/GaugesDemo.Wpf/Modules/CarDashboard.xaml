@@ -1,0 +1,202 @@
+﻿<local:GaugesDemoModule x:Class="GaugesDemo.CarDashboard"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                        xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
+                        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                        xmlns:local="clr-namespace:GaugesDemo"
+                        mc:Ignorable="d"
+                        d:DesignHeight="775"
+                        d:DesignWidth="1865"
+                        Loaded="{DXEvent Handler='Start()'}"
+                        Unloaded="{DXEvent Handler='Stop()'}"
+                        DataContext="{dxmvvm:ViewModelSource Type=local:CarDashboardViewModel}">
+    <dxdb:DemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GaugesDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </dxdb:DemoModule.Resources>
+    <Border>
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStop Color="#FF14181f" Offset="1" />
+                <GradientStop Color="#FF2d323f" Offset="0" />
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid Margin="20,20,0,0" Width="800" Height="450" FlowDirection="LeftToRight">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <local:CarDashboardBackgroundControl Grid.ColumnSpan="4" Grid.RowSpan="5" />
+            <dxga:CircularGaugeControl Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="55,42,55,57">
+                <dxga:CircularGaugeControl.Model>
+                    <dxga:CircularProgressiveModel />
+                </dxga:CircularGaugeControl.Model>
+                <dxga:ArcScale StartAngle="-160"
+                               EndAngle="-20"
+                               MajorIntervalCount="2"
+                               MinorIntervalCount="6"
+                               StartValue="20"
+                               EndValue="{Binding MaxEngineTemperature}"
+                               ShowLabels="False"
+                               ShowSpindleCap="False"
+                               LayoutMode="Circle">
+                    <dxga:ArcScale.Layers>
+                        <dxga:ArcScaleLayer />
+                        <dxga:ArcScaleLayer />
+                    </dxga:ArcScale.Layers>
+                    <dxga:ArcScale.Ranges>
+                        <dxga:ArcScaleRange StartValue="0%" EndValue="15%">
+                            <dxga:ArcScaleRange.Presentation>
+                                <dxga:DefaultArcScaleRangePresentation>
+                                    <dxga:DefaultArcScaleRangePresentation.Fill>
+                                        <RadialGradientBrush RadiusY="1.003" RadiusX="1.003" Center="0.501,0.002" GradientOrigin="0.501,0.002">
+                                            <GradientStop Color="#FFB59B62" Offset="1" />
+                                            <GradientStop Color="#FFE0D49D" />
+                                        </RadialGradientBrush>
+                                    </dxga:DefaultArcScaleRangePresentation.Fill>
+                                </dxga:DefaultArcScaleRangePresentation>
+                            </dxga:ArcScaleRange.Presentation>
+                        </dxga:ArcScaleRange>
+                        <dxga:ArcScaleRange StartValue="15%" EndValue="85%">
+                            <dxga:ArcScaleRange.Presentation>
+                                <dxga:DefaultArcScaleRangePresentation>
+                                    <dxga:DefaultArcScaleRangePresentation.Fill>
+                                        <RadialGradientBrush RadiusY="1.003" RadiusX="1.003" Center="0.501,0.002" GradientOrigin="0.501,0.002">
+                                            <GradientStop Color="#FF008075" Offset="1" />
+                                            <GradientStop Color="#FF0F9C80" />
+                                        </RadialGradientBrush>
+                                    </dxga:DefaultArcScaleRangePresentation.Fill>
+                                </dxga:DefaultArcScaleRangePresentation>
+                            </dxga:ArcScaleRange.Presentation>
+                        </dxga:ArcScaleRange>
+                        <dxga:ArcScaleRange StartValue="85%" EndValue="100%" />
+                    </dxga:ArcScale.Ranges>
+                    <dxga:ArcScale.Markers>
+                        <dxga:ArcScaleMarker Value="{Binding CurrentEngineTemperature}" />
+                    </dxga:ArcScale.Markers>
+                    <dxga:ArcScale.CustomLabels>
+                        <dxga:ScaleCustomLabel RenderTransformOrigin="0.5,0.5" Value="20" Content="C" Offset="-55" Foreground="#FF3BC8D1" />
+                        <dxga:ScaleCustomLabel RenderTransformOrigin="0.5,0.5" Value="130" Content="H" Offset="-55" Foreground="#FF3BC8D1" />
+                        <dxga:ScaleCustomLabel RenderTransformOrigin="0.5,0.5" Value="72" Offset="-75">
+                            <Image Source="../Images/CarDashboard/Temperature.png" Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+                        </dxga:ScaleCustomLabel>
+                    </dxga:ArcScale.CustomLabels>
+                </dxga:ArcScale>
+                <dxga:ArcScale StartAngle="160"
+                               EndAngle="20"
+                               EndValue="1"
+                               MajorIntervalCount="2"
+                               MinorIntervalCount="4"
+                               ShowLabels="False"
+                               ShowSpindleCap="False">
+                    <dxga:ArcScale.Ranges>
+                        <dxga:ArcScaleRange StartValue="0%" EndValue="12%">
+                            <dxga:ArcScaleRange.Presentation>
+                                <dxga:DefaultArcScaleRangePresentation>
+                                    <dxga:DefaultArcScaleRangePresentation.Fill>
+                                        <RadialGradientBrush RadiusY="1.003" RadiusX="1.003" Center="0.501,0.002" GradientOrigin="0.501,0.002">
+                                            <GradientStop Color="#FF8D396C" Offset="1" />
+                                            <GradientStop Color="#FFA7547B" />
+                                        </RadialGradientBrush>
+                                    </dxga:DefaultArcScaleRangePresentation.Fill>
+                                </dxga:DefaultArcScaleRangePresentation>
+                            </dxga:ArcScaleRange.Presentation>
+                            <dxga:ArcScaleRange.Options>
+                                <dxga:RangeOptions Offset="-37" Thickness="14" ZIndex="20" />
+                            </dxga:ArcScaleRange.Options>
+                        </dxga:ArcScaleRange>
+                    </dxga:ArcScale.Ranges>
+                    <dxga:ArcScale.Markers>
+                        <dxga:ArcScaleMarker Value="{Binding FuelLevel}" />
+                    </dxga:ArcScale.Markers>
+                    <dxga:ArcScale.CustomLabels>
+                        <dxga:ScaleCustomLabel RenderTransformOrigin="0.5,0.5" Value="0.05" Content="E" Offset="-55" Foreground="#FF3BC8D1" />
+                        <dxga:ScaleCustomLabel RenderTransformOrigin="0.5,0.5" Value="0.5" Content="1/2" Offset="-55" Foreground="#FF3BC8D1" FontSize="8" />
+                        <dxga:ScaleCustomLabel RenderTransformOrigin="0.5,0.5" Value="0.95" Content="F" Offset="-55" Foreground="#FF3BC8D1" />
+                        <dxga:ScaleCustomLabel RenderTransformOrigin="0.5,0.5" Value="0.5" Offset="-72">
+                            <Image Source="../Images/CarDashboard/Fuel.png" Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+                        </dxga:ScaleCustomLabel>
+                    </dxga:ArcScale.CustomLabels>
+                </dxga:ArcScale>
+            </dxga:CircularGaugeControl>
+            <dxga:CircularGaugeControl Grid.Row="1" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="80,63,55,50" EnableAnimation="True">
+                <dxga:CircularGaugeControl.Model>
+                    <dxga:CircularProgressiveModel />
+                </dxga:CircularGaugeControl.Model>
+                <dxga:ArcScale EndValue="{Binding MaxSpeed}" MajorIntervalCount="12">
+                    <dxga:ArcScale.Layers>
+                        <dxga:ArcScaleLayer />
+                        <dxga:ArcScaleLayer />
+                    </dxga:ArcScale.Layers>
+                    <dxga:ArcScale.Needles>
+                        <dxga:ArcScaleNeedle Value="{Binding Speed}" />
+                    </dxga:ArcScale.Needles>
+                    <dxga:ArcScale.CustomLabels>
+                        <dxga:ScaleCustomLabel RenderTransformOrigin="0.5,0.5" Value="132" Content="MPH" Offset="-50" Foreground="#FF3BC8D1" />
+                    </dxga:ArcScale.CustomLabels>
+                </dxga:ArcScale>
+            </dxga:CircularGaugeControl>
+            <dxga:CircularGaugeControl Grid.Row="1" Grid.RowSpan="4" Grid.Column="2" Grid.ColumnSpan="2" Margin="53,63,82,50" EnableAnimation="True">
+                <dxga:CircularGaugeControl.Model>
+                    <dxga:CircularProgressiveModel />
+                </dxga:CircularGaugeControl.Model>
+                <dxga:ArcScale EndValue="{Binding TachometerMaxValue}" MajorIntervalCount="8">
+                    <dxga:ArcScale.Layers>
+                        <dxga:ArcScaleLayer />
+                        <dxga:ArcScaleLayer />
+                    </dxga:ArcScale.Layers>
+                    <dxga:ArcScale.Ranges>
+                        <dxga:ArcScaleRange StartValue="0%" EndValue="70%" />
+                        <dxga:ArcScaleRange StartValue="70%" EndValue="85%" />
+                        <dxga:ArcScaleRange StartValue="85%" EndValue="100%" />
+                    </dxga:ArcScale.Ranges>
+                    <dxga:ArcScale.LabelOptions>
+                        <dxga:ArcScaleLabelOptions Multiplier="0.001" Offset="-55" Orientation="LeftToRight" />
+                    </dxga:ArcScale.LabelOptions>
+                    <dxga:ArcScale.Needles>
+                        <dxga:ArcScaleNeedle Value="{Binding TachometerValue}" />
+                    </dxga:ArcScale.Needles>
+                    <dxga:ArcScale.CustomLabels>
+                        <dxga:ScaleCustomLabel RenderTransformOrigin="0.5,0.5" Value="8800" Content="x 1000 rpm" Offset="-50" Foreground="#FF3BC8D1" />
+                    </dxga:ArcScale.CustomLabels>
+                </dxga:ArcScale>
+            </dxga:CircularGaugeControl>
+            <Button Content="Brake"
+                    Style="{StaticResource CarControlButtonStyle}"
+                    Width="90"
+                    Height="40"
+                    Foreground="#FF79D8FF">
+                <dxmvvm:Interaction.Behaviors>
+                    <dxmvvm:ReadOnlyDependencyPropertyBindingBehavior Binding="{Binding IsBrakePressed, Mode=OneWayToSource}"
+                                                                  DependencyProperty="{x:Static Button.IsPressedProperty}" />
+                </dxmvvm:Interaction.Behaviors>
+            </Button>
+            <Button Content="Accelerate"
+                    Style="{StaticResource CarControlButtonStyle}"
+                    Grid.Column="3"
+                    Width="90"
+                    Height="40"
+                    Foreground="#FF79D8FF" >
+                <dxmvvm:Interaction.Behaviors>
+                    <dxmvvm:ReadOnlyDependencyPropertyBindingBehavior Binding="{Binding IsAcceleratePressed, Mode=OneWayToSource}"
+                                                                  DependencyProperty="{x:Static Button.IsPressedProperty}" />
+                </dxmvvm:Interaction.Behaviors>
+            </Button>
+        </Grid>
+    </Border>
+</local:GaugesDemoModule>

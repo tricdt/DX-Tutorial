@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="BarsDemo.AlignmentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+        xmlns:local="clr-namespace:BarsDemo"
+        dxb:BarNameScope.IsScopeOwner="True"
+        >
+    <Grid DataContext="{dxmvvm:ViewModelSource Type={x:Type local:AlignmentModel}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <dxb:MainMenuControl Visibility="Collapsed" Caption="MainMenu" AllowCustomizationMenu="False">
+            <dxb:BarSubItem dxb:MergingProperties.Name="settings" Content="Settings" Glyph="{dx:DXImage SvgImages/Outlook Inspired/AlignJustify.svg}" MergeType="MergeItems">
+                <dxb:BarItemMenuHeader Content="Alignment">
+                    <dxb:BarCheckItem x:Name="aLeft" Glyph="{dx:DXImage SvgImages/Outlook Inspired/AlignLeft.svg}" GroupIndex="1" IsChecked="{Binding IsLeft, Mode=TwoWay}" Content="Left"/>
+                    <dxb:BarCheckItem x:Name="aCenter" Glyph="{dx:DXImage SvgImages/Outlook Inspired/AlignCenter.svg}" GroupIndex="1" IsChecked="{Binding IsCenter, Mode=TwoWay}" Content="Center"/>
+                    <dxb:BarCheckItem x:Name="aRight" Glyph="{dx:DXImage SvgImages/Outlook Inspired/AlignRight.svg}" GroupIndex="1" IsChecked="{Binding IsRight, Mode=TwoWay}" Content="Right"/>
+                    <dxb:BarCheckItem x:Name="aJustify" Glyph="{dx:DXImage SvgImages/Outlook Inspired/AlignJustify.svg}" GroupIndex="1" IsChecked="{Binding IsJustify, Mode=TwoWay}" Content="Justify"/>
+                </dxb:BarItemMenuHeader>
+            </dxb:BarSubItem>
+        </dxb:MainMenuControl>
+        <dxb:ToolBarControl Grid.Row="1" Caption="ToolBar" AllowCustomizationMenu="False" AllowQuickCustomization="False">
+            <dxb:BarItemLink BarItemName="aLeft"/>
+            <dxb:BarItemLink BarItemName="aCenter"/>
+            <dxb:BarItemLink BarItemName="aRight"/>
+            <dxb:BarItemLink BarItemName="aJustify"/>
+        </dxb:ToolBarControl>
+        <TextBox Text="Select Font Settings to change main menu items" Grid.Row="2" TextAlignment="{Binding Alignment}" />
+        <dxb:StatusBarControl Grid.Row="3" Caption="StatusBar" AllowCustomizationMenu="False">
+            <dxb:BarStaticItem Content="Alignment:" ShowBorder="False"/>
+            <dxb:BarStaticItem IsVisible="{Binding ElementName=aLeft, Path=IsChecked}" Content="Left" ShowBorder="False"/>
+            <dxb:BarStaticItem IsVisible="{Binding ElementName=aCenter, Path=IsChecked}" Content="Center" ShowBorder="False"/>
+            <dxb:BarStaticItem IsVisible="{Binding ElementName=aRight, Path=IsChecked}" Content="Right" ShowBorder="False"/>
+            <dxb:BarStaticItem IsVisible="{Binding ElementName=aJustify, Path=IsChecked}" Content="Justify" ShowBorder="False"/>
+        </dxb:StatusBarControl>
+    </Grid>
+</UserControl>

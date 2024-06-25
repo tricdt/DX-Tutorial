@@ -1,0 +1,108 @@
+﻿<local:GridDemoModule x:Class="GridDemo.LookUpEditServerMode"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800"
+                      DataContext="{dxmvvm:ViewModelSource Type=local:LookUpInstantFeedbackModeViewModel}"
+                      ModuleLoaded="{DXEvent 'OnLoaded()'}"
+                      ModuleUnloaded="{DXEvent 'OnUnloaded()'}">
+    <local:GridDemoModule.Resources>
+        <!--#region Lookup grid popup template-->
+        <ControlTemplate x:Key="pesonGridTemplate">
+            <dxg:GridControl x:Name="PART_GridControl">
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn FieldName="FullName" />
+                    <dxg:GridColumn FieldName="Company" />
+                    <dxg:GridColumn FieldName="JobTitle" />
+                    <dxg:GridColumn FieldName="City" />
+                    <dxg:GridColumn FieldName="Address" />
+                    <dxg:GridColumn FieldName="Phone" />
+                    <dxg:GridColumn FieldName="Email" />
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.View>
+                    <dxg:TableView Name="view" TotalSummaryPosition="Bottom" />
+                </dxg:GridControl.View>
+                <dxg:GridControl.TotalSummary>
+                    <dxg:GridSummaryItem FieldName="FullName" SummaryType="Count" />
+                </dxg:GridControl.TotalSummary>
+            </dxg:GridControl>
+        </ControlTemplate>
+        <!--#endregion-->
+    </local:GridDemoModule.Resources>
+    <DockPanel>
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="300" IsEnabled="{DXBinding 'DataContext.GenerateViewModel == null'}">
+                <dxdb:FillDatabaseView Margin="0,5,0,0" DataContext="{Binding DataContext}" />
+                <GroupBox Header="Data processing mode" Margin="0,5,0,0">
+                    <StackPanel>
+                        <RadioButton Name="asyncModeRadioButton" IsChecked="true" Margin="0,0,0,4">InstantFeedback Mode (Asynchronous)</RadioButton>
+                        <RadioButton>Server Mode (Synchronous)</RadioButton>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Editor Properties" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit Content="Allow Incremental Filtering " Margin="0,0,0,4" Name="incrementalFilteringCheckBox" IsChecked="True" />
+                        <dxe:CheckEdit Content="Allow Immediate Popup" Margin="0,0,0,4" Name="immediatePopupCheckBox" IsChecked="True" />
+                        <dxe:CheckEdit Content="Allow Auto Complete" Name="autoCompleteCheckBox" IsChecked="True" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <Grid>
+            <dx:EntityServerModeDataSource x:Name="serverModeDataSource" KeyExpression="Id" QueryableSource="{Binding ServerModeQueryableSource}" />
+            <dxg:GridControl Name="grid"
+                             ShowBorder="False"
+                             ItemsSource="{Binding Orders}"
+                             Visibility="{DXBinding 'GenerateViewModel == null ? $Visibility.Visible : $Visibility.Collapsed'}">
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn FieldName="OrderId" Header="ID" Width="50" MinWidth="30" />
+                    <dxg:GridColumn FieldName="CustomerID" MinWidth="50" Width="3*" AllowSorting="False">
+                        <dxg:GridColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Customer" FontWeight="Bold" />
+                            </DataTemplate>
+                        </dxg:GridColumn.HeaderTemplate>
+                        <dxg:GridColumn.EditSettings>
+                            <dxg:LookUpEditSettings ItemsSource="{DXBinding '@e(asyncModeRadioButton).IsChecked ? InstantFeedbackSource : @e(serverModeDataSource).Data'}"
+                                                    PopupContentTemplate="{StaticResource pesonGridTemplate}"
+                                                    AutoPopulateColumns="False"
+                                                    IsPopupAutoWidth="False"
+                                                    ValueMember="Id"
+                                                    DisplayMember="FullName"
+                                                    IncrementalFiltering="{Binding Path=IsChecked, ElementName=incrementalFilteringCheckBox}"
+                                                    ImmediatePopup="{Binding Path=IsChecked, ElementName=immediatePopupCheckBox}"
+                                                    AutoComplete="{Binding Path=IsChecked, ElementName=autoCompleteCheckBox}" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn FieldName="ProductName" Width="2*" />
+                    <dxg:GridColumn FieldName="Price" Width="2*">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:SpinEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" MaskCulture="en-US" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn FieldName="OrderDate" Width="2*" />
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.View>
+                    <dxg:TableView Name="view" ShowSearchPanelMode="Never"/>
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+            <dxdb:GenerateDataView DataContext="{Binding GenerateViewModel}" />
+        </Grid>
+    </DockPanel>
+</local:GridDemoModule>

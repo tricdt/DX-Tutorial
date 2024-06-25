@@ -1,0 +1,56 @@
+﻿<local:LayoutControlDemoModule x:Class="LayoutControlDemo.pageImageGallery"
+                               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                               xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                               xmlns:local="clr-namespace:LayoutControlDemo"
+                               mc:Ignorable="d"
+                               d:DesignHeight="300"
+                               d:DesignWidth="400"
+                               DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+    <dxlc:FlowLayoutControl x:Name="layoutImages"
+                            ItemsSource="{Binding Images}"
+                            AllowItemMoving="True"
+                            AllowLayerSizing="True"
+                            AllowMaximizedElementMoving="True"
+                            AnimateItemMoving="True"
+                            DragScrolling="False"
+                            Background="White"
+                            ShowLayerSeparators="True"
+                            ItemsSizeChanged="layoutImagesItemsSizeChanged">
+        <dxlc:FlowLayoutControl.ItemTemplate>
+            <DataTemplate>
+                <local:ImageContainer Content="{Binding}" Width="280" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand">
+                    <local:ImageContainer.Template>
+                        <ControlTemplate TargetType="local:ImageContainer">
+                            <Image x:Name="root" Source="{TemplateBinding Content}" RenderTransformOrigin="0.5,0.5">
+                                <Image.RenderTransform>
+                                    <ScaleTransform />
+                                </Image.RenderTransform>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualStateGroup.Transitions>
+                                            <VisualTransition To="MouseOver" GeneratedDuration="0:0:0.075" />
+                                            <VisualTransition From="MouseOver" GeneratedDuration="0:0:0.05" />
+                                        </VisualStateGroup.Transitions>
+
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="MouseOver">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="root" Storyboard.TargetProperty="(RenderTransform).ScaleX" To="1.03" Duration="0" />
+                                                <DoubleAnimation Storyboard.TargetName="root" Storyboard.TargetProperty="(RenderTransform).ScaleY" To="1.03" Duration="0" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed" />
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </Image>
+                        </ControlTemplate>
+                    </local:ImageContainer.Template>
+                </local:ImageContainer>
+            </DataTemplate>
+        </dxlc:FlowLayoutControl.ItemTemplate>
+    </dxlc:FlowLayoutControl>
+</local:LayoutControlDemoModule>

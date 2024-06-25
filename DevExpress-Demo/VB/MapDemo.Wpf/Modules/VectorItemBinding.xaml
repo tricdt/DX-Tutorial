@@ -1,0 +1,80 @@
+﻿<local:MapDemoModule x:Class="MapDemo.VectorItemBinding"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+                     xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+                     xmlns:dxmt="http://schemas.devexpress.com/winfx/2008/xaml/map/themekeys"
+                     xmlns:local="clr-namespace:MapDemo">
+    <local:MapDemoModule.Resources>
+        <local:DemoValuesProvider x:Key="DemoValuesProvider" />
+        <DataTemplate x:Key="shipTemplate">
+            <Image Source="../Images/Ship.png" Width="40" Height="40">
+                <Image.RenderTransform>
+                    <TranslateTransform X="-20" Y="-20" />
+                </Image.RenderTransform>
+            </Image>
+        </DataTemplate>
+        <DataTemplate x:Key="toolTipTemplate">
+            <StackPanel Margin="12" Orientation="Vertical" MaxWidth="250">
+                <TextBlock Text="{Binding Item.Header}" Foreground="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=ToolTipForeground}}" FontSize="14" FontWeight="Bold" />
+                <TextBlock Text="{Binding Item.Description}" Foreground="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=ToolTipForeground}}" FontSize="12" TextWrapping="Wrap" />
+            </StackPanel>
+        </DataTemplate>
+    </local:MapDemoModule.Resources>
+    <Grid x:Name="infoGrid">
+        <dxm:MapControl FlowDirection="LeftToRight"
+                        ToolTipEnabled="True"
+                        CenterPoint="-36,145"
+                        ZoomLevel="6"
+                        SelectionMode="Single"
+                        EnableZooming="False"
+                        ScrollArea="137,-31.4,153.61,-41.12">
+            <dxm:MapControl.MiniMap>
+                <dxm:MiniMap Width="260" Height="200" Alignment="TopLeft">
+                    <dxm:MiniMap.Behavior>
+                        <dxm:FixedMiniMapBehavior ZoomLevel="2.7" CenterPoint="-28, 135" />
+                    </dxm:MiniMap.Behavior>
+                    <dxm:MiniMapImageTilesLayer>
+                        <dxm:BingMapDataProvider Kind="Hybrid" BingKey="{Binding DevexpressBingKey, Source={StaticResource DemoValuesProvider}}" />
+                    </dxm:MiniMapImageTilesLayer>
+                    <dxm:MiniMapVectorLayer ShapeFill="Red" ShapeStroke="White">
+                        <dxm:ListSourceDataAdapter DataSource="{Binding}">
+                            <dxm:ListSourceDataAdapter.Mappings>
+                                <dxm:MapItemMappingInfo Latitude="Location.Latitude" Longitude="Location.Longitude" />
+                            </dxm:ListSourceDataAdapter.Mappings>
+                            <dxm:ListSourceDataAdapter.ItemSettings>
+                                <dxm:MapDotSettings Size="8" />
+                            </dxm:ListSourceDataAdapter.ItemSettings>
+                        </dxm:ListSourceDataAdapter>
+                    </dxm:MiniMapVectorLayer>
+                </dxm:MiniMap>
+            </dxm:MapControl.MiniMap>
+            <dxm:MapControl.ScrollButtonsOptions>
+                <dxm:ScrollButtonsOptions Visible="False" />
+            </dxm:MapControl.ScrollButtonsOptions>
+            <dxm:MapControl.ZoomTrackbarOptions>
+                <dxm:ZoomTrackbarOptions Visible="False" />
+            </dxm:MapControl.ZoomTrackbarOptions>
+            <dxm:ImageLayer>
+                <dxm:BingMapDataProvider Kind="Hybrid" BingKey="{Binding DevexpressBingKey, Source={StaticResource DemoValuesProvider}}" />
+            </dxm:ImageLayer>
+            <dxm:VectorLayer ToolTipContentTemplate="{StaticResource toolTipTemplate}">
+                <dxm:ListSourceDataAdapter DataSource="{Binding}">
+                    <dxm:ListSourceDataAdapter.ItemSettings>
+                        <dxm:MapCustomElementSettings ContentTemplate="{StaticResource shipTemplate}" />
+                    </dxm:ListSourceDataAdapter.ItemSettings>
+                    <dxm:ListSourceDataAdapter.Mappings>
+                        <dxm:MapItemMappingInfo Latitude="Location.Latitude" Longitude="Location.Longitude" />
+                    </dxm:ListSourceDataAdapter.Mappings>
+                </dxm:ListSourceDataAdapter>
+            </dxm:VectorLayer>
+            <dxm:MapControl.CoordinatesPanelOptions>
+                <dxm:CoordinatesPanelOptions Margin="10,10,10,53" />
+            </dxm:MapControl.CoordinatesPanelOptions>
+            <dxm:MapControl.ScalePanelOptions>
+                <dxm:ScalePanelOptions Margin="10,10,10,39" />
+            </dxm:MapControl.ScalePanelOptions>
+        </dxm:MapControl>
+        <local:CopyrightControl ProviderName="Bing" />
+    </Grid>
+</local:MapDemoModule>

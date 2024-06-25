@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="GridDemo.Filtering.FilterEditorStandalone"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="1">
+            <!--#region !-->
+            <Button Width="150" Margin="0,4,0,8" Content="Apply Filter" DockPanel.Dock="Bottom" HorizontalAlignment="Center"
+                    Command="{Binding Commands.ApplyFilter, ElementName=filterEditor}" />
+            <dxfui:FilterEditorControl x:Name="filterEditor" Context="{Binding Path=FilteringContext, ElementName=filterGrid}" Margin="4"/>
+            <!--#endregion-->
+        </DockPanel>
+        <dxg:GridControl x:Name="filterGrid" ItemsSource="{x:Static dxdb:NWindDataProvider.Invoices}" FilterString="[OrderID] = 10248">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="OrderID" Header="ID" Width="*"/>
+                <dxg:GridColumn FieldName="ProductID" Header="Product" Width="2*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ValueMember="ProductID" DisplayMember="ProductName"
+                                                  ItemsSource="{x:Static dxdb:NWindDataProvider.Products}" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="UnitPrice" Width="*" />
+                <dxg:GridColumn FieldName="Quantity" Width="*" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView  NavigationStyle="Row" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </Grid>
+ </UserControl>

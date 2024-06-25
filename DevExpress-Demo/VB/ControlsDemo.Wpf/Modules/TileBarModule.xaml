@@ -1,0 +1,107 @@
+﻿<local:ControlsDemoModule x:Class="ControlsDemo.TileBarModule"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:local="clr-namespace:ControlsDemo"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+                          xmlns:dxnav="http://schemas.devexpress.com/winfx/2008/xaml/navigation"
+                          xmlns:dxwuin="http://schemas.devexpress.com/winfx/2008/xaml/windowsui/navigation"
+                          xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                          xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core">
+    <local:ControlsDemoModule.DataContext>
+        <local:TileBarViewModel />
+    </local:ControlsDemoModule.DataContext>
+    <local:ControlsDemoModule.Resources>
+        <dxmvvm:ObjectToObjectConverter x:Key="dockToOrientationConverter">
+            <dxmvvm:MapItem Source="Left" Target="Vertical" />
+            <dxmvvm:MapItem Source="Top" Target="Horizontal" />
+            <dxmvvm:MapItem Source="Right" Target="Vertical" />
+            <dxmvvm:MapItem Source="Bottom" Target="Horizontal" />
+        </dxmvvm:ObjectToObjectConverter>
+        <dxmvvm:ObjectToObjectConverter x:Key="dockToFlyoutShowDirectionConverter">
+            <dxmvvm:MapItem Source="Left" Target="Default" />
+            <dxmvvm:MapItem Source="Top" Target="Default" />
+            <dxmvvm:MapItem Source="Right" Target="Inverted" />
+            <dxmvvm:MapItem Source="Bottom" Target="Inverted" />
+        </dxmvvm:ObjectToObjectConverter>
+    </local:ControlsDemoModule.Resources>
+    <dxmvvm:Interaction.Triggers>
+        <dxmvvm:EventToCommand EventName="ModuleUnloaded" Command="{Binding ViewUnloadedCommand}" />
+    </dxmvvm:Interaction.Triggers>
+    <DockPanel LastChildFill="True">
+        <dxnav:TileBar ItemsSource="{Binding Categories}"
+                       DockPanel.Dock="{Binding ElementName=DockCombo, Path=SelectedItem.Id}"
+                       Orientation="{Binding ElementName=DockCombo, Path=SelectedItem.Id, Converter={StaticResource dockToOrientationConverter}}"
+                       FlyoutShowDirection="{Binding ElementName=DockCombo, Path=SelectedItem.Id, Converter={StaticResource dockToFlyoutShowDirectionConverter}}"
+                       FlyoutShowMode="{Binding ElementName=FlyoutShowModeCombo, Path=SelectedItem.Id}"
+                       x:Name="tileBar">
+            <dxmvvm:Interaction.Behaviors>
+                <local:TileBarService />
+            </dxmvvm:Interaction.Behaviors>
+            <dxnav:TileBar.ItemContainerStyle>
+                <Style TargetType="dxnav:TileBarItem">
+                    <Setter Property="AllowGlyphTheming" Value="True" />
+                    <Setter Property="Content" Value="{Binding DisplayName}" />
+                    <Setter Property="FlyoutContent" Value="{Binding}" />
+                    <Setter Property="FlyoutContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <dxnav:TileBar ItemsSource="{Binding Items}"
+                                               ItemColorMode="Inverted"
+                                               Orientation="{Binding ElementName=tileBar, Path=Orientation}"
+                                               ShowItemShadow="{Binding ElementName=tileBar, Path=ShowItemShadow}">
+                                    <dxnav:TileBar.ItemContainerStyle>
+                                        <Style TargetType="dxnav:TileBarItem">
+                                            <Setter Property="AllowGlyphTheming" Value="True" />
+                                            <Setter Property="Content" Value="{Binding DisplayName}" />
+                                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                                            <Setter Property="Padding" Value="8,6,8,6" />
+                                            <Setter Property="TileGlyph" Value="{Binding Image}" />
+                                        </Style>
+                                    </dxnav:TileBar.ItemContainerStyle>
+                                </dxnav:TileBar>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                    <Setter Property="Padding" Value="8,6,8,6" />
+                    <Setter Property="ShowFlyoutButton" Value="True" />
+                    <Setter Property="TileGlyph" Value="{Binding Image}" />
+                </Style>
+            </dxnav:TileBar.ItemContainerStyle>
+        </dxnav:TileBar>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Orientation="Vertical" Margin="12" MinWidth="210">
+                <dxlc:LayoutItem Label="Dock" AddColonToLabel="True">
+                    <dxe:ComboBoxEdit x:Name="DockCombo" SelectedIndex="1">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EnumItemsSourceBehavior EnumType="Dock" />
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:ComboBoxEdit>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="FlyoutShowMode" AddColonToLabel="True" Margin="0,4">
+                    <dxe:ComboBoxEdit x:Name="FlyoutShowModeCombo" SelectedIndex="0">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EnumItemsSourceBehavior EnumType="dxnav:FlyoutShowMode" />
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:ComboBoxEdit>
+                </dxlc:LayoutItem>
+            </StackPanel>
+        </ScrollViewer>
+        <dxwui:NavigationFrame x:Name="frame" Source="TileBarHomeView" BackNavigationMode="Root" AnimationType="SlideHorizontal">
+            <dxmvvm:Interaction.Behaviors>
+                <dxwuin:FrameNavigationService>
+                    <dxwuin:FrameNavigationService.ViewLocator>
+                        <local:TileNavViewLocator />
+                    </dxwuin:FrameNavigationService.ViewLocator>
+                </dxwuin:FrameNavigationService>
+            </dxmvvm:Interaction.Behaviors>
+        </dxwui:NavigationFrame>
+    </DockPanel>
+</local:ControlsDemoModule>

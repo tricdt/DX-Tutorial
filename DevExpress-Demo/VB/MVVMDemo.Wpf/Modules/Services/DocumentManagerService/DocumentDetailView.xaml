@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="MVVMDemo.Services.DocumentManager.DocumentDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.Services.DocumentManager"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             DataContext="{dxmvvm:ViewModelSource local:DetailViewModel}">
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <dxlc:LayoutItem Label="First Name:">
+            <dxe:TextEdit Text="{Binding Person.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem Label="Last Name:">
+            <dxe:TextEdit Text="{Binding Person.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+        </dxlc:LayoutItem>
+    </dxlc:LayoutControl>
+</UserControl>

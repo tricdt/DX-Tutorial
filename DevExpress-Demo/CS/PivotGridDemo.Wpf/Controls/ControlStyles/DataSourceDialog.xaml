@@ -1,0 +1,62 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:local="clr-namespace:PivotGridDemo">
+
+    <dx:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+
+    <Style TargetType="{x:Type local:DataSourceDialog}" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                     <Grid Margin="14,10,4,4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="28" />
+                            <RowDefinition Height="28" />
+                            <RowDefinition Height="28" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="62" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="20" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="1" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <RadioButton Content="Analysis server" Grid.Column="0" Grid.Row="0" IsChecked="True" Name="AnalysisServerRadio" />
+                            <RadioButton Content="Cube File" Grid.Column="1" Grid.Row="0" Name="CubeRadio" />
+                        </Grid>
+
+                        <TextBlock Text="Server" Margin="0,7,0,0" Grid.Row="1" Name="TextCubeFile"/>
+                        <TextBlock Text="Database" Grid.Row="2" Margin="0,6,0,0" />
+                        <TextBlock Text="Cube" Grid.Row="3" Margin="0,6,0,0" />
+
+
+
+                        <Grid Margin="0,4,0,4" Grid.Column="1" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="80" />
+                            </Grid.ColumnDefinitions>
+                            <dxe:ButtonEdit x:Name="CubeEdit" IsTextEditable="True" AllowDefaultButton="False" Grid.Row="1"></dxe:ButtonEdit>
+                            <Button Name="Connect" Content="Connect" Grid.Column="1" Margin="4,0,0,0" Grid.Row="1" />
+                        </Grid>
+                        <dxe:ComboBoxEdit x:Name="CatalogsCombo" Grid.Column="1" Grid.Row="2" Margin="0,4,0,4" IsTextEditable="False" />
+                        <dxe:ComboBoxEdit x:Name="CubesCombo" Grid.Column="1"  Grid.Row="3" Margin="0,4,0,4" IsTextEditable="False" />
+
+                        <dx:ColumnWaitIndicator Grid.Column="2" Grid.Row="2" Width="16" Height="16" Margin="4,0,0,0" Padding="0" Visibility="{Binding IsCatalogsRetriving, Converter={StaticResource booleanToVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <dx:ColumnWaitIndicator Grid.Column="2" Grid.Row="3" Width="16" Height="16" Margin="4,0,0,0" Padding="0" Visibility="{Binding IsCubesRetriving, Converter={StaticResource booleanToVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,84 @@
+﻿<local:BarsDemoModule x:Class="BarsDemo.Commands"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:local="clr-namespace:BarsDemo"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                      Height="300"
+                      Width="300">
+
+    <DockPanel>
+        <dxb:ToolBarControl x:Name="bar1" GlyphSize="Small" Caption="Text Box Commands" DockPanel.Dock="Top">
+            <dxb:BarButtonItem Name="bCut"
+                               Command="Cut"
+                               CommandTarget="{Binding ElementName=textBox}"
+                               Content="{Binding Command.Text, RelativeSource={RelativeSource Self}}"
+                               Glyph="{dx:DXImage SvgImages/Outlook Inspired/Cut.svg}" />
+            <dxb:BarButtonItem Name="bCopy"
+                               Command="Copy"
+                               CommandTarget="{Binding ElementName=textBox}"
+                               Content="{Binding Command.Text, RelativeSource={RelativeSource Self}}"
+                               Glyph="{dx:DXImage SvgImages/Outlook Inspired/Copy.svg}" />
+            <dxb:BarButtonItem Name="bPaste"
+                               Command="Paste"
+                               CommandTarget="{Binding ElementName=textBox}"
+                               Content="{Binding Command.Text, RelativeSource={RelativeSource Self}}"
+                               Glyph="{dx:DXImage SvgImages/Outlook Inspired/Paste.svg}" />
+            <dxb:BarItemLinkSeparator />
+            <dxb:BarButtonItem Name="bUndo"
+                               Command="Undo"
+                               CommandTarget="{Binding ElementName=textBox}"
+                               Content="{Binding Command.Text, RelativeSource={RelativeSource Self}}"
+                               Glyph="{dx:DXImage SvgImages/Outlook Inspired/Undo.svg}" />
+            <dxb:BarButtonItem Name="bRedo"
+                               Command="Redo"
+                               CommandTarget="{Binding ElementName=textBox}"
+                               Content="{Binding Command.Text, RelativeSource={RelativeSource Self}}"
+                               Glyph="{dx:DXImage SvgImages/Outlook Inspired/Redo.svg}" />
+            <dxb:BarItemLinkSeparator />
+            <dxb:BarButtonItem Name="bSelectAll"
+                               Command="SelectAll"
+                               CommandTarget="{Binding ElementName=textBox}"
+                               Content="{Binding Command.Text, RelativeSource={RelativeSource Self}}"
+                               Glyph="{dx:DXImage SvgImages/PDF Viewer/SelectAll.svg}"
+                               BarItemDisplayMode="ContentAndGlyph" />
+        </dxb:ToolBarControl>
+        <TextBox Name="textBox" Text="Use bar items to manipulate its text." Width="300" Margin="8" DockPanel.Dock="Top" HorizontalAlignment="Left" />
+
+        <dxb:ToolBarControl x:Name="bar2" Caption="Slider Commands" DockPanel.Dock="Top">
+            <dxb:BarButtonItem Name="bMinimize" Command="{x:Static Slider.MinimizeValue}" CommandTarget="{Binding ElementName=slider}" Content="Minimize" Glyph="{dx:DXImage SvgImages/Arrows/DoubleFirst.svg}"/>
+            <dxb:BarButtonItem Name="bDecreaseLarge"
+                               Command="{x:Static Slider.DecreaseLarge}"
+                               CommandTarget="{Binding ElementName=slider}"
+                               Content="Decrease Large"
+                               Glyph="{dx:DXImage SvgImages/Arrows/DoublePrev.svg}"/>
+            <dxb:BarButtonItem Name="bDecreaseSmall"
+                               Command="{x:Static Slider.DecreaseSmall}"
+                               CommandTarget="{Binding ElementName=slider}"
+                               Glyph="{dx:DXImage SvgImages/Arrows/Prev.svg}"
+                               Content="Decrease Small" />
+            <dxb:BarButtonItem Name="bIncreaseSmall"
+                               Command="{x:Static Slider.IncreaseSmall}"
+                               CommandTarget="{Binding ElementName=slider}"
+                               Glyph="{dx:DXImage SvgImages/Arrows/Next.svg}"
+                               Content="Increase Small" />
+            <dxb:BarButtonItem Name="bIncreaseLarge"
+                               Command="{x:Static Slider.IncreaseLarge}"
+                               CommandTarget="{Binding ElementName=slider}"
+                               Glyph="{dx:DXImage SvgImages/Arrows/DoubleNext.svg}"
+                               Content="Increase Large" />
+            <dxb:BarButtonItem Name="bMaximize" Command="{x:Static Slider.MaximizeValue}" CommandTarget="{Binding ElementName=slider}" Content="Maximize" Glyph="{dx:DXImage SvgImages/Arrows/DoubleLast.svg}"/>
+        </dxb:ToolBarControl>
+        <Slider Name="slider"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="300"
+                Margin="4"
+                Minimum="0"
+                Maximum="100"
+                SmallChange="1"
+                LargeChange="10"
+                Value="50"
+                DockPanel.Dock="Top" />
+    </DockPanel>
+</local:BarsDemoModule>

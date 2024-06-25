@@ -1,0 +1,154 @@
+<UserControl x:Class="DevExpress.VideoRent.Wpf.AnnouncerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="900">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/CommonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <helpers:DataSource x:Key="DataSource" />
+            <Style x:Key="ButtonLinkStyle" TargetType="Button">
+                <Setter Property="Margin">
+                    <Setter.Value>
+                        <Thickness>0,0,5,3</Thickness>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <TextBlock HorizontalAlignment="Left">
+                                <Hyperlink Foreground="#FF2545B0">
+                                    <TextBlock Text="{TemplateBinding Content}"/>
+                                </Hyperlink>
+                            </TextBlock>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <ControlTemplate x:Key="ButtonLinkWithImage" TargetType="Button">
+                <StackPanel Orientation="Vertical">
+                    <Image local:AboutImagesHelper.VideoRentImage="{TemplateBinding local:AboutImagesHelper.VideoRentImage}" Stretch="None" MaxHeight="32" MaxWidth="32"/>
+                    <TextBlock HorizontalAlignment="Center">
+                        <Hyperlink Foreground="#FF2545B0">
+                            <TextBlock Text="{TemplateBinding Content}"/>
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </ControlTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}">
+            <helpers:BindingInfo ElementName="LearnMoreButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandLearnMore}" />
+            <helpers:BindingInfo ElementName="DownloadButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandDownload}" />
+            <helpers:BindingInfo ElementName="BuyButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandBuy}" />
+            <helpers:BindingInfo ElementName="RentalsButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandOpenRentalsList}" />
+            <helpers:BindingInfo ElementName="MoviesButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandOpenMoviesList}" />
+            <helpers:BindingInfo ElementName="ActorsCrewButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandOpenActorsList}" />
+            <helpers:BindingInfo ElementName="CompaniesButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandOpenCompaniesList}" />
+            <helpers:BindingInfo ElementName="MovieCategories" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandOpenMovieCategoriesList}" />
+            <helpers:BindingInfo ElementName="MovieDetail" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandOpenMovieDetail}" />
+            <helpers:BindingInfo ElementName="MovieDetailEditorsButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandOpenMovieDetail}" />
+            <helpers:BindingInfo ElementName="ArtistDetailButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandOpenArtistDetail}" />
+            <helpers:BindingInfo ElementName="MoviesEditsButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandOpenMoviesList}" />
+            <helpers:BindingInfo ElementName="MovieDetailLayoutButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandOpenMovieDetail}" />
+            <helpers:BindingInfo ElementName="MovieCategoriesLayoutButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandOpenMovieCategoriesList}" />
+            <helpers:BindingInfo ElementName="MovieRentalsLayoutbutton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandOpenRentalsList}" />
+            <helpers:BindingInfo ElementName="ActorsLayoutButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandOpenArtistDetail}" />
+            <helpers:BindingInfo ElementName="ActorsBarsButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandOpenArtistDetail}" />
+            <helpers:BindingInfo ElementName="CompaniesBarsButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandOpenCompanyDetail}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="450" Width="750">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <dxlc:LayoutControl Orientation="Vertical" Padding="0">
+                <dxlc:LayoutGroup>
+                    <dxlc:LayoutGroup Orientation="Vertical">
+                        <TextBlock Text="{helpers:ConstString ID=WelcomeText1}" FontSize="22" TextWrapping="Wrap" />
+                        <TextBlock Text="{helpers:ConstString ID=WelcomeWpfText2}" TextWrapping="Wrap" />
+                    </dxlc:LayoutGroup>
+                    <dxlc:LayoutGroup MaxWidth="300" dxlc:LayoutControl.AllowHorizontalSizing="False" x:Name="ButtonsLayoutGroup">
+                        <Button x:Name="LearnMoreButton" Content="{helpers:ConstString ID=WelcomeLink1}" local:AboutImagesHelper.VideoRentImage="Learn-More" Template="{StaticResource ButtonLinkWithImage}"/>
+                        <Button x:Name="DownloadButton" Content="{helpers:ConstString ID=WelcomeLink2}" local:AboutImagesHelper.VideoRentImage="Download" Template="{StaticResource ButtonLinkWithImage}"/>
+                        <Button x:Name="BuyButton" Content="{helpers:ConstString ID=WelcomeLink3}" local:AboutImagesHelper.VideoRentImage="Buy" Template="{StaticResource ButtonLinkWithImage}"/>
+                    </dxlc:LayoutGroup>
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutControl>
+            <TextBlock Grid.Row="1" Margin="0,8,0,0" Text="{helpers:ConstString ID=WelcomeText3}" />
+            <Grid Grid.Row="2" Margin="0,4,0,0" MinHeight="450">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <dxlc:LayoutControl Orientation="Vertical" Padding="0" ItemSpace="0">
+                    <TextBlock Text="DXGrid" FontSize="16" VerticalAlignment="Top" />
+                    <Image Source="../Images/AboutIcons/Grid.png" Stretch="None" VerticalAlignment="Top" />
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,2,0,0" VerticalAlignment="Top">
+                        <Button x:Name="RentalsButton" Content="{helpers:ConstString ID=MovieRentals}" Style="{StaticResource ButtonLinkStyle}"/>
+                        <Button x:Name="MoviesButton" Content="{helpers:ConstString ID=Movies}" Style="{StaticResource ButtonLinkStyle}"/>
+                        <Button x:Name="ActorsCrewButton" Content="{helpers:ConstString ID=ActorsCrew}" Style="{StaticResource ButtonLinkStyle}"/>
+                        <Button x:Name="CompaniesButton" Content="{helpers:ConstString ID=Companies}" Style="{StaticResource ButtonLinkStyle}"/>
+                    </WrapPanel>
+                </dxlc:LayoutControl>
+                <dxlc:LayoutControl Orientation="Vertical" Grid.Column="4" Padding="0" ItemSpace="0">
+                    <TextBlock Text="DXEditors" FontSize="16" VerticalAlignment="Top" />
+                    <Image Source="../Images/AboutIcons/Editors.png" Stretch="None" VerticalAlignment="Top" />
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,2,0,0" VerticalAlignment="Top">
+                        <Button x:Name="MovieDetailEditorsButton" Content="{helpers:ConstString ID=MovieDetail}" Style="{StaticResource ButtonLinkStyle}"/>
+                        <Button x:Name="ArtistDetailButton" Content="{helpers:ConstString ID=ArtistDetail}" Style="{StaticResource ButtonLinkStyle}"/>
+                        <Button x:Name="MoviesEditsButton" Content="{helpers:ConstString ID=Movies}" Style="{StaticResource ButtonLinkStyle}"/>
+                    </WrapPanel>
+                </dxlc:LayoutControl>
+                <dxlc:LayoutControl Orientation="Vertical" Grid.Row="2" Padding="0" ItemSpace="0">
+                    <TextBlock Text="DXLayoutControl" FontSize="16" VerticalAlignment="Top" />
+                    <Image Source="../Images/AboutIcons/LayoutControl.png" Stretch="None" VerticalAlignment="Top" />
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,2,0,0" VerticalAlignment="Top">
+                        <Button x:Name="MovieDetailLayoutButton" Content="{helpers:ConstString ID=MovieDetail}" Style="{StaticResource ButtonLinkStyle}"/>
+                        <Button x:Name="MovieCategoriesLayoutButton" Content="{helpers:ConstString ID=MovieCategories}" Style="{StaticResource ButtonLinkStyle}"/>
+                        <Button x:Name="MovieRentalsLayoutbutton" Content="{helpers:ConstString ID=MovieRentals}" Style="{StaticResource ButtonLinkStyle}"/>
+                        <Button x:Name="ActorsLayoutButton" Content="{helpers:ConstString ID=ActorsCrew}" Style="{StaticResource ButtonLinkStyle}"/>
+                    </WrapPanel>
+                </dxlc:LayoutControl>
+                <dxlc:LayoutControl Orientation="Vertical" Grid.Column="2" Padding="0" ItemSpace="0">
+                    <TextBlock Text="XtraCharts" FontSize="16" VerticalAlignment="Top" />
+                    <Image Source="../Images/AboutIcons/Charts.png" Stretch="None" VerticalAlignment="Top" />
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,2,0,0" VerticalAlignment="Top">
+                        <Button x:Name="MovieCategories" Content="{helpers:ConstString ID=MovieCategories}" Style="{StaticResource ButtonLinkStyle}"/>
+                        <Button x:Name="MovieDetail" Content="{helpers:ConstString ID=MovieDetail}" Style="{StaticResource ButtonLinkStyle}"/>
+                    </WrapPanel>
+                </dxlc:LayoutControl>
+                <dxlc:LayoutControl Orientation="Vertical" Grid.Column="2" Grid.Row="2" Padding="0" ItemSpace="0">
+                    <TextBlock Text="DXBars" FontSize="16" VerticalAlignment="Top" />
+                    <Image Source="../Images/AboutIcons/Bars.png" Stretch="None" VerticalAlignment="Top" />
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,2,0,0" VerticalAlignment="Top">
+                        <Button x:Name="ActorsBarsButton" Content="{helpers:ConstString ID=ArtistDetail}" Style="{StaticResource ButtonLinkStyle}"/>
+                        <Button x:Name="CompaniesBarsButton" Content="{helpers:ConstString ID=CompanyDetails}" Style="{StaticResource ButtonLinkStyle}"/>
+                    </WrapPanel>
+                </dxlc:LayoutControl>
+            </Grid>
+            <TextBlock Grid.Row="3" HorizontalAlignment="Right" FontSize="10" Text="{helpers:ConstString ID=WelcomeText4}" />
+        </Grid>
+    </ScrollViewer>
+</UserControl>
+

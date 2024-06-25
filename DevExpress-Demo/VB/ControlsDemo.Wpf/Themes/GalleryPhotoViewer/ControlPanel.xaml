@@ -1,0 +1,136 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ControlsDemo;component/Themes/GalleryPhotoViewer/ZoomScroll.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="navigationButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.25">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <SineEase EasingMode="EaseOut" />
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Disabled" />
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Hover" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Hover" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="Hover" CornerRadius="4" Opacity="0">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#00CACCDA" />
+                                    <GradientStop Color="#19CACCDA" Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Border Background="#FF232532" CornerRadius="3" Margin="1">
+                                <Border CornerRadius="2" Margin="1">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FF393A4D" Offset="0" />
+                                            <GradientStop Color="#FF232735" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Border>
+                        </Border>
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="4" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="playButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.25">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <SineEase EasingMode="EaseOut" />
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Disabled" />
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0" To="#FF191A22" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="border" />
+                                        <ColorAnimation Duration="0" To="#FF3A3B50" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="border" />
+                                        <ColorAnimation Duration="0" To="#FF555879" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="border1" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0" To="#FF191A22" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="border" />
+                                        <ColorAnimation Duration="0" To="#FF3A3B50" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="border" />
+                                        <ColorAnimation Duration="0" To="#FF555879" Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="border1" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border CornerRadius="35">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF363745" Offset="0" />
+                                    <GradientStop Color="#FF212130" Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Border CornerRadius="35" Margin="1">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF686C85" Offset="0" />
+                                        <GradientStop Color="#FF323346" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Border x:Name="border1" CornerRadius="35" Margin="4">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FF1B1E28" Offset="0" />
+                                            <GradientStop Color="#FF5E617C" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <Border x:Name="border" CornerRadius="35" Margin="1">
+                                        <Border.Background>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="#FF22232E" />
+                                                <GradientStop Color="#FF4A4B62" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        <dx:DXImage Source="/ControlsDemo;component/Images/GalleryPhotoViewer/Play.svg" Width="24" Height="24" Margin="4,1,0,0"
+                                                    RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                                    dxb:ImageColorizer.IsEnabled="True" dxb:ImageColorizer.Color="#FFC0C0C0">
+                                        </dx:DXImage>
+                                    </Border>
+                                </Border>
+                            </Border>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

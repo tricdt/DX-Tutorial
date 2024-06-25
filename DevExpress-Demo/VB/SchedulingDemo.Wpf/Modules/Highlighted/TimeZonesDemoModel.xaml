@@ -1,0 +1,104 @@
+﻿<local:SchedulingDemoModule
+    x:Class="SchedulingDemo.TimeZonesDemoModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduling"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:SchedulingDemo"
+    xmlns:vm="clr-namespace:SchedulingDemo.ViewModels"
+    mc:Ignorable="d"
+    d:DesignWidth="1200"
+    d:DesignHeight="800"
+    DataContext="{dxmvvm:ViewModelSource vm:TimeZonesDemoViewModel}">
+
+    <!--#region Resources-->
+    <local:SchedulingDemoModule.Resources>
+        <DataTemplate x:Key="DataSourceFactory">
+            <dxsch:DataSource AppointmentsSource="{Binding UtcAppointments}">
+                <dxsch:DataSource.AppointmentMappings>
+                    <dxsch:AppointmentMappings
+                        Type="AppointmentType"
+                        Subject="Subject"
+                        Start="Start" End="End" AllDay="AllDay"
+                        QueryStart="QueryStart" QueryEnd="QueryEnd"
+                        TimeZoneId="TimeZoneId"
+                        RecurrenceInfo="RecurrenceInfo"
+                        Reminder="ReminderInfo"/>
+                </dxsch:DataSource.AppointmentMappings>
+            </dxsch:DataSource>
+        </DataTemplate>
+        <DataTemplate x:Key="DateTimeSavingMode.LabelTemplate">
+            <StackPanel Orientation="Horizontal">
+                <dx:DXImage Source="{dx:DXImage 'SvgImages/Icon Builder/Actions_Info.svg'}" Width="16" Height="16"
+                                        RenderOptions.BitmapScalingMode="HighQuality"/>
+                <TextBlock Text="{Binding}" Margin="2,0,0,0"/>
+                <StackPanel.ToolTip>
+                    <TextBlock>
+<Bold>SchedulerControl.DataSource.DateTimeSavingMode</Bold> specifies how to convert an appointment's DateTime value when storing data to an underlying data source.
+<LineBreak/>
+<Bold>Utc</Bold> - DateTime values are stored in UTC.
+<LineBreak/>
+<Bold>Storage</Bold> - DateTime values are stored in the time zone specified in <Bold>SchedulerControl.DataSource.TimeZone</Bold>.
+<LineBreak/>
+<Bold>Appointment</Bold> - DateTime values are stored in the time zone specified in appointments.
+                    </TextBlock>
+                </StackPanel.ToolTip>
+            </StackPanel>
+        </DataTemplate>
+    </local:SchedulingDemoModule.Resources>
+    <!--#endregion-->
+
+    <DockPanel>
+        <dxlc:LayoutControl Name="PART_Options" DockPanel.Dock="Right" Orientation="Vertical" Padding="12,8,12,12" dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap" Width="280">
+            <dxlc:LayoutItem Label="Scheduler Time Zone" LabelPosition="Top">
+                <dxsch:TimeZoneEdit x:Name="timeZone" EditValue="{x:Static sys:TimeZoneInfo.Local}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Date Time Saving Mode" LabelTemplate="{StaticResource DateTimeSavingMode.LabelTemplate}" LabelPosition="Top">
+                <dxe:ComboBoxEdit x:Name="dateTimeSavingMode" EditValueChanged="OnDateTimeSavingModeEditValueChanged" SelectedIndex="2"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Storage Time Zone" LabelPosition="Top" Visibility="{DXBinding '@e(dateTimeSavingMode).SelectedIndex == 1 ? $Visibility.Visible : $Visibility.Collapsed'}">
+                <dxsch:TimeZoneEdit x:Name="storageTimeZone" EditValueChanged="OnStorageTimeZoneEditValueChanged"/>
+            </dxlc:LayoutItem>
+            <GroupBox Header="Selected Appointment" VerticalAlignment="Top">
+                <TextBlock x:Name="aptInfo" TextWrapping="Wrap"/>
+            </GroupBox>
+            <GroupBox Header="Selected Appointment in Data Source" VerticalAlignment="Top">
+                <TextBlock x:Name="aptDbInfo" TextWrapping="Wrap"/>
+            </GroupBox>
+        </dxlc:LayoutControl>
+
+        <dxsch:SchedulerControl
+            x:Name="scheduler" ShowBorder="False"
+            ShowDateNavigationPanel="True" CommandBarStyle="Empty" dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+            TimeZone="{Binding ElementName=timeZone, Path=EditValue}">
+            <dxsch:DayView x:Name="dayView" DayCount="5">
+                <dxsch:DayView.TimeRulers>
+                    <dxsch:TimeRuler Caption="UTC" TimeZone="UTC"/>
+                    <dxsch:TimeRuler Caption="Local" TimeZone="{Binding ElementName=scheduler, Path=TimeZone}"/>
+                </dxsch:DayView.TimeRulers>
+            </dxsch:DayView>
+            <dxsch:WorkWeekView x:Name="workWeekView"/>
+            <dxsch:WeekView x:Name="weekView"/>
+            <dxsch:MonthView x:Name="monthView" ViewMode="Standard"/>
+            <dxsch:TimelineView
+                x:Name="timelineView"
+                ViewMode="Standard"
+                StretchAppointments="False"
+                SnapToCellsMode="Never"
+                TimeRegionVisibility="Never"
+                AppointmentMinHeight="36"
+                AppointmentMinWidth="40"
+                ResourceMinHeight="44"
+                ResourceMaxHeight="116"
+                NavigationButtonsVisibility="Never"/>
+            <dxsch:AgendaView x:Name="agendaView"/>
+            <dxsch:ListView x:Name="listView"/>
+        </dxsch:SchedulerControl>
+    </DockPanel>
+</local:SchedulingDemoModule>

@@ -1,0 +1,2144 @@
+<?xml version="1.0"?>
+<FileSystemItems xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FileSystemItemInfo>
+    <ChildItems>
+      <FileSystemItemInfo>
+        <ChildItems>
+          <FileSystemItemInfo>
+            <ChildItems />
+            <Name>Common Files</Name>
+            <Size>0</Size>
+            <IsDirectory>true</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems />
+            <Name>Internet Explorer</Name>
+            <Size>0</Size>
+            <IsDirectory>true</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>Web Platform Installer</Name>
+                <Size>0</Size>
+                <IsDirectory>true</IsDirectory>
+              </FileSystemItemInfo>
+            </ChildItems>
+            <Name>Microsoft</Name>
+            <Size>0</Size>
+            <IsDirectory>true</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems />
+            <Name>Microsoft.NET</Name>
+            <Size>0</Size>
+            <IsDirectory>true</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems />
+            <Name>Windows Live</Name>
+            <Size>0</Size>
+            <IsDirectory>true</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems />
+            <Name>Windows Mail</Name>
+            <Size>0</Size>
+            <IsDirectory>true</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems />
+            <Name>Windows Media Player</Name>
+            <Size>0</Size>
+            <IsDirectory>true</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems />
+            <Name>Windows NT</Name>
+            <Size>0</Size>
+            <IsDirectory>true</IsDirectory>
+          </FileSystemItemInfo>
+        </ChildItems>
+        <Name>Program Files</Name>
+        <Size>0</Size>
+        <IsDirectory>true</IsDirectory>
+      </FileSystemItemInfo>
+      <FileSystemItemInfo>
+        <ChildItems>
+          <FileSystemItemInfo>
+            <ChildItems />
+            <Name>Common Files</Name>
+            <Size>0</Size>
+            <IsDirectory>true</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems />
+            <Name>Microsoft</Name>
+            <Size>0</Size>
+            <IsDirectory>true</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems />
+            <Name>Microsoft.NET</Name>
+            <Size>0</Size>
+            <IsDirectory>true</IsDirectory>
+          </FileSystemItemInfo>
+        </ChildItems>
+        <Name>Program Files (x86)</Name>
+        <Size>0</Size>
+        <IsDirectory>true</IsDirectory>
+      </FileSystemItemInfo>
+      <FileSystemItemInfo>
+        <ChildItems>
+          <FileSystemItemInfo>
+            <ChildItems>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>12520437.cpx</Name>
+                <Size>2151</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>12520850.cpx</Name>
+                <Size>2233</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>7B296FB0-376B-497e-B012-9C450E1B7327-5P-0.C7483456-A289-439d-8115-601632D005A0</Name>
+                <Size>12416</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>7B296FB0-376B-497e-B012-9C450E1B7327-5P-1.C7483456-A289-439d-8115-601632D005A0</Name>
+                <Size>12416</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>aaclient.dll</Name>
+                <Size>130560</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>accessibilitycpl.dll</Name>
+                <Size>3727360</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>ACCTRES.dll</Name>
+                <Size>39424</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>acledit.dll</Name>
+                <Size>7680</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>aclui.dll</Name>
+                <Size>125440</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>acppage.dll</Name>
+                <Size>45568</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>acproxy.dll</Name>
+                <Size>9216</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>ActionCenter.dll</Name>
+                <Size>744448</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>ActionCenterCPL.dll</Name>
+                <Size>537600</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>ActionQueue.dll</Name>
+                <Size>178688</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>activeds.dll</Name>
+                <Size>202752</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>activeds.tlb</Name>
+                <Size>111616</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>actxprxy.dll</Name>
+                <Size>309248</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AdapterTroubleshooter.exe</Name>
+                <Size>38912</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>admparse.dll</Name>
+                <Size>73216</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AdmTmpl.dll</Name>
+                <Size>438272</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>admwprox.dll</Name>
+                <Size>50688</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>adprovider.dll</Name>
+                <Size>49664</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>adsldp.dll</Name>
+                <Size>186880</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>adsldpc.dll</Name>
+                <Size>202752</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>adsmsext.dll</Name>
+                <Size>77312</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>adsnt.dll</Name>
+                <Size>260608</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>adtschema.dll</Name>
+                <Size>680448</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>advapi32.dll</Name>
+                <Size>640000</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>advpack.dll</Name>
+                <Size>126464</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>aecache.dll</Name>
+                <Size>6656</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>aeevts.dll</Name>
+                <Size>23040</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>aeinv.dll</Name>
+                <Size>303104</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>aelupsvc.dll</Name>
+                <Size>62464</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>aepdu.dll</Name>
+                <Size>319488</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>aepic.dll</Name>
+                <Size>62464</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>ahadmin.dll</Name>
+                <Size>26624</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>aitagent.exe</Name>
+                <Size>120320</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>alg.exe</Name>
+                <Size>59392</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AltTab.dll</Name>
+                <Size>46592</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>amcompat.tlb</Name>
+                <Size>18432</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>amstream.dll</Name>
+                <Size>70656</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>amxread.dll</Name>
+                <Size>24064</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>ANSI.SYS</Name>
+                <Size>9029</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>apds.dll</Name>
+                <Size>1739776</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-console-l1-1-0.dll</Name>
+                <Size>3072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-datetime-l1-1-0.dll</Name>
+                <Size>3072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-debug-l1-1-0.dll</Name>
+                <Size>3072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-delayload-l1-1-0.dll</Name>
+                <Size>3072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-errorhandling-l1-1-0.dll</Name>
+                <Size>3072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-fibers-l1-1-0.dll</Name>
+                <Size>3072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-file-l1-1-0.dll</Name>
+                <Size>5120</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-handle-l1-1-0.dll</Name>
+                <Size>3072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-heap-l1-1-0.dll</Name>
+                <Size>3584</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-interlocked-l1-1-0.dll</Name>
+                <Size>3584</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-io-l1-1-0.dll</Name>
+                <Size>3072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-libraryloader-l1-1-0.dll</Name>
+                <Size>3584</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-localization-l1-1-0.dll</Name>
+                <Size>4096</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-localregistry-l1-1-0.dll</Name>
+                <Size>4096</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-memory-l1-1-0.dll</Name>
+                <Size>3584</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-misc-l1-1-0.dll</Name>
+                <Size>4096</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-namedpipe-l1-1-0.dll</Name>
+                <Size>3584</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-processenvironment-l1-1-0.dll</Name>
+                <Size>3584</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-processthreads-l1-1-0.dll</Name>
+                <Size>4608</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-profile-l1-1-0.dll</Name>
+                <Size>3072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-rtlsupport-l1-1-0.dll</Name>
+                <Size>3072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-string-l1-1-0.dll</Name>
+                <Size>3072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-synch-l1-1-0.dll</Name>
+                <Size>4096</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-sysinfo-l1-1-0.dll</Name>
+                <Size>4096</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-threadpool-l1-1-0.dll</Name>
+                <Size>4608</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-util-l1-1-0.dll</Name>
+                <Size>3072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-core-xstate-l1-1-0.dll</Name>
+                <Size>3584</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-security-base-l1-1-0.dll</Name>
+                <Size>6144</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-security-lsalookup-l1-1-0.dll</Name>
+                <Size>3584</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-security-sddl-l1-1-0.dll</Name>
+                <Size>3072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-service-core-l1-1-0.dll</Name>
+                <Size>2560</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-service-management-l1-1-0.dll</Name>
+                <Size>2560</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-service-management-l2-1-0.dll</Name>
+                <Size>2560</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>api-ms-win-service-winsvc-l1-1-0.dll</Name>
+                <Size>3584</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>apilogen.dll</Name>
+                <Size>15360</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>apircl.dll</Name>
+                <Size>221184</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>apisetschema.dll</Name>
+                <Size>6656</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>append.exe</Name>
+                <Size>12498</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>apphelp.dll</Name>
+                <Size>292352</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>Apphlpdm.dll</Name>
+                <Size>29696</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>appidapi.dll</Name>
+                <Size>50688</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>appidcertstorecheck.exe</Name>
+                <Size>16896</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>appidpolicyconverter.exe</Name>
+                <Size>96768</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AppIdPolicyEngineApi.dll</Name>
+                <Size>203264</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>appidsvc.dll</Name>
+                <Size>27648</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>appinfo.dll</Name>
+                <Size>46592</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>appmgmts.dll</Name>
+                <Size>149504</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>appmgr.dll</Name>
+                <Size>339456</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>appwiz.cpl</Name>
+                <Size>649216</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>apss.dll</Name>
+                <Size>200192</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>ARP.EXE</Name>
+                <Size>20992</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>asferror.dll</Name>
+                <Size>2048</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>aspnet_counters.dll</Name>
+                <Size>17760</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>asycfilt.dll</Name>
+                <Size>67072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>at.exe</Name>
+                <Size>24064</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AtBroker.exe</Name>
+                <Size>29184</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>atl.dll</Name>
+                <Size>70144</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>atl100.dll</Name>
+                <Size>138056</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>atmfd.dll</Name>
+                <Size>293888</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>atmlib.dll</Name>
+                <Size>34304</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>attrib.exe</Name>
+                <Size>16384</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>audiodev.dll</Name>
+                <Size>243712</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>audiodg.exe</Name>
+                <Size>100864</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AudioEng.dll</Name>
+                <Size>374784</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AUDIOKSE.dll</Name>
+                <Size>442880</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AudioSes.dll</Name>
+                <Size>195584</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>audiosrv.dll</Name>
+                <Size>473088</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>auditcse.dll</Name>
+                <Size>123392</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AuditNativeSnapIn.dll</Name>
+                <Size>217088</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>auditpol.exe</Name>
+                <Size>50176</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AuditPolicyGPInterop.dll</Name>
+                <Size>55296</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>auditpolmsg.dll</Name>
+                <Size>95232</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>authfwcfg.dll</Name>
+                <Size>334336</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AuthFWGP.dll</Name>
+                <Size>297472</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AuthFWSnapin.dll</Name>
+                <Size>5070848</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AuthFWWizFwk.dll</Name>
+                <Size>126976</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>authui.dll</Name>
+                <Size>1792000</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>authz.dll</Name>
+                <Size>98816</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>autochk.exe</Name>
+                <Size>668160</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>autoconv.exe</Name>
+                <Size>679936</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>autoexec.nt</Name>
+                <Size>1688</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>autofmt.exe</Name>
+                <Size>659456</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>autoplay.dll</Name>
+                <Size>146944</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AuxiliaryDisplayApi.dll</Name>
+                <Size>119808</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AuxiliaryDisplayClassInstaller.dll</Name>
+                <Size>131072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AuxiliaryDisplayCpl.dll</Name>
+                <Size>665600</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AuxiliaryDisplayDriverLib.dll</Name>
+                <Size>151552</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AuxiliaryDisplayServices.dll</Name>
+                <Size>112128</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>avicap.dll</Name>
+                <Size>69584</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>avicap32.dll</Name>
+                <Size>65024</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>avifil32.dll</Name>
+                <Size>91648</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>avifile.dll</Name>
+                <Size>109456</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>avrt.dll</Name>
+                <Size>14336</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AxInstSv.dll</Name>
+                <Size>88064</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AxInstUI.exe</Name>
+                <Size>57856</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>azman.msc</Name>
+                <Size>41587</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>azroles.dll</Name>
+                <Size>759296</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>azroleui.dll</Name>
+                <Size>314368</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>AzSqlExt.dll</Name>
+                <Size>27648</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>baaupdate.exe</Name>
+                <Size>108032</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>basecsp.dll</Name>
+                <Size>143936</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>basesrv.dll</Name>
+                <Size>44032</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>batmeter.dll</Name>
+                <Size>739840</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>batt.dll</Name>
+                <Size>101376</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bcdboot.exe</Name>
+                <Size>146432</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bcdedit.exe</Name>
+                <Size>294912</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bcdprov.dll</Name>
+                <Size>55808</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bcdsrv.dll</Name>
+                <Size>133120</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bcrypt.dll</Name>
+                <Size>80384</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bcryptprimitives.dll</Name>
+                <Size>249680</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bdaplgin.ax</Name>
+                <Size>74240</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>BdeHdCfg.exe</Name>
+                <Size>126464</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>BdeHdCfgLib.dll</Name>
+                <Size>88064</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bderepair.dll</Name>
+                <Size>62464</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bdesvc.dll</Name>
+                <Size>76800</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bdeui.dll</Name>
+                <Size>23040</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>BdeUISrv.exe</Name>
+                <Size>41984</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>BdeUnlockWizard.exe</Name>
+                <Size>97792</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>BFE.DLL</Name>
+                <Size>493568</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bidispl.dll</Name>
+                <Size>34304</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>biocpl.dll</Name>
+                <Size>428032</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>BioCredProv.dll</Name>
+                <Size>171520</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bios1.rom</Name>
+                <Size>28420</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bios4.rom</Name>
+                <Size>8191</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>BitLockerWizard.exe</Name>
+                <Size>99328</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>BitLockerWizardElev.exe</Name>
+                <Size>99328</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bitsadmin.exe</Name>
+                <Size>186368</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bitsigd.dll</Name>
+                <Size>39936</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bitsperf.dll</Name>
+                <Size>18944</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bitsprx2.dll</Name>
+                <Size>10752</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bitsprx3.dll</Name>
+                <Size>10240</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bitsprx4.dll</Name>
+                <Size>9216</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bitsprx5.dll</Name>
+                <Size>18432</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bitsprx6.dll</Name>
+                <Size>10240</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>blackbox.dll</Name>
+                <Size>743424</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>BlbEvents.dll</Name>
+                <Size>52224</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>blbres.dll</Name>
+                <Size>2048</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>blb_ps.dll</Name>
+                <Size>24576</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>boot.sdi</Name>
+                <Size>3170304</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bootcfg.exe</Name>
+                <Size>81408</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bootres.dll</Name>
+                <Size>2217536</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bootstr.dll</Name>
+                <Size>2560</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>BOOTVID.DLL</Name>
+                <Size>21584</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bopomofo.uce</Name>
+                <Size>22984</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>brcoinst.dll</Name>
+                <Size>17408</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>brdgcfg.dll</Name>
+                <Size>24576</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bridgeres.dll</Name>
+                <Size>2048</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bridgeunattend.exe</Name>
+                <Size>15872</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>browcli.dll</Name>
+                <Size>41472</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>browser.dll</Name>
+                <Size>102400</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>browseui.dll</Name>
+                <Size>10240</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bthci.dll</Name>
+                <Size>42496</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>BthMtpContextHandler.dll</Name>
+                <Size>27136</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bthpanapi.dll</Name>
+                <Size>23552</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>BthpanContextHandler.dll</Name>
+                <Size>73728</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bthprops.cpl</Name>
+                <Size>692736</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bthserv.dll</Name>
+                <Size>64512</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>bthudtask.exe</Name>
+                <Size>35328</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>btpanui.dll</Name>
+                <Size>66560</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>Bubbles.scr</Name>
+                <Size>878592</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>BWContextHandler.dll</Name>
+                <Size>64000</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>BWUnpairElevated.dll</Name>
+                <Size>10752</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cabinet.dll</Name>
+                <Size>72704</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cabview.dll</Name>
+                <Size>131072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cacls.exe</Name>
+                <Size>25600</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>calc.exe</Name>
+                <Size>776192</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>capiprovider.dll</Name>
+                <Size>48128</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>capisp.dll</Name>
+                <Size>19968</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>catsrv.dll</Name>
+                <Size>449024</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>catsrvps.dll</Name>
+                <Size>24064</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>catsrvut.dll</Name>
+                <Size>487936</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cca.dll</Name>
+                <Size>66560</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cdd.dll</Name>
+                <Size>107008</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cdosys.dll</Name>
+                <Size>805376</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cero.rs</Name>
+                <Size>55296</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>certcli.dll</Name>
+                <Size>335360</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>certCredProvider.dll</Name>
+                <Size>122880</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>certenc.dll</Name>
+                <Size>43008</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>CertEnroll.dll</Name>
+                <Size>1320960</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>CertEnrollCtrl.exe</Name>
+                <Size>67072</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>CertEnrollUI.dll</Name>
+                <Size>271872</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>certmgr.dll</Name>
+                <Size>1555456</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>certmgr.msc</Name>
+                <Size>63070</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>CertPolEng.dll</Name>
+                <Size>65024</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>certprop.dll</Name>
+                <Size>67584</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>certreq.exe</Name>
+                <Size>263168</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>certutil.exe</Name>
+                <Size>889856</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cewmdm.dll</Name>
+                <Size>210432</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cfgbkend.dll</Name>
+                <Size>48640</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cfgmgr32.dll</Name>
+                <Size>145920</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>chajei.ime</Name>
+                <Size>125952</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>change.exe</Name>
+                <Size>15360</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>charmap.exe</Name>
+                <Size>155136</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>chcp.com</Name>
+                <Size>11776</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>chglogon.exe</Name>
+                <Size>21504</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>chgport.exe</Name>
+                <Size>22528</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>chgusr.exe</Name>
+                <Size>20992</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>chkdsk.exe</Name>
+                <Size>16384</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>chkntfs.exe</Name>
+                <Size>16896</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>chkwudrv.dll</Name>
+                <Size>18432</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>choice.exe</Name>
+                <Size>29696</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>chsbrkr.dll</Name>
+                <Size>1672192</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>chtbrkr.dll</Name>
+                <Size>6103040</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>CHxReadingStringIME.dll</Name>
+                <Size>10752</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>ci.dll</Name>
+                <Size>690888</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cic.dll</Name>
+                <Size>172544</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cintlgnt.ime</Name>
+                <Size>125952</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cipher.exe</Name>
+                <Size>37376</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>CIRCoInst.dll</Name>
+                <Size>7680</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>clb.dll</Name>
+                <Size>13824</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>clbcatq.dll</Name>
+                <Size>522240</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cleanmgr.exe</Name>
+                <Size>212480</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>clfs.sys</Name>
+                <Size>249408</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>clfsw32.dll</Name>
+                <Size>58880</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cliconfg.dll</Name>
+                <Size>86016</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cliconfg.exe</Name>
+                <Size>45056</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cliconfg.rll</Name>
+                <Size>40960</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>clip.exe</Name>
+                <Size>26112</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>clusapi.dll</Name>
+                <Size>230912</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cmcfg32.dll</Name>
+                <Size>36864</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cmd.exe</Name>
+                <Size>301568</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cmdial32.dll</Name>
+                <Size>484352</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cmdkey.exe</Name>
+                <Size>13824</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cmdl32.exe</Name>
+                <Size>72704</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cmicryptinstall.dll</Name>
+                <Size>64512</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cmifw.dll</Name>
+                <Size>68608</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cmipnpinstall.dll</Name>
+                <Size>304640</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cmlua.dll</Name>
+                <Size>34304</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cmmon32.exe</Name>
+                <Size>43008</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cmpbk32.dll</Name>
+                <Size>26112</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cmstp.exe</Name>
+                <Size>84992</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cmstplua.dll</Name>
+                <Size>15360</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cmutil.dll</Name>
+                <Size>47104</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cngaudit.dll</Name>
+                <Size>12288</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cngprovider.dll</Name>
+                <Size>51200</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cnvfat.dll</Name>
+                <Size>32768</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cofire.exe</Name>
+                <Size>20480</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>cofiredm.dll</Name>
+                <Size>27136</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>colbact.dll</Name>
+                <Size>63488</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>collab.cpl</Name>
+                <Size>83968</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>COLORCNV.DLL</Name>
+                <Size>153600</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>colorcpl.exe</Name>
+                <Size>86016</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>colorui.dll</Name>
+                <Size>606208</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>comcat.dll</Name>
+                <Size>7168</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>comctl32.dll</Name>
+                <Size>530432</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>comdlg32.dll</Name>
+                <Size>486912</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>comexp.msc</Name>
+                <Size>124118</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>COMM.drv</Name>
+                <Size>10544</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>COMMAND.COM</Name>
+                <Size>50648</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>COMMDLG.DLL</Name>
+                <Size>32816</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>comp.exe</Name>
+                <Size>20480</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>compact.exe</Name>
+                <Size>18432</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>compmgmt.msc</Name>
+                <Size>113256</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>CompMgmtLauncher.exe</Name>
+                <Size>147968</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>compobj.dll</Name>
+                <Size>27792</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>compstui.dll</Name>
+                <Size>276480</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+            </ChildItems>
+            <Name>System32</Name>
+            <Size>66946209</Size>
+            <IsDirectory>true</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems />
+            <Name>Temp</Name>
+            <Size>0</Size>
+            <IsDirectory>true</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems />
+            <Name>explorer.exe</Name>
+            <Size>2803</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems />
+            <Name>HelpPane.exe</Name>
+            <Size>717</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems />
+            <Name>regedit.exe</Name>
+            <Size>417</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems />
+            <Name>win.ini</Name>
+            <Size>1</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems />
+            <Name>write.exe</Name>
+            <Size>10</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+        </ChildItems>
+        <Name>Windows</Name>
+        <Size>66950157</Size>
+        <IsDirectory>true</IsDirectory>
+      </FileSystemItemInfo>
+      <FileSystemItemInfo>
+        <ChildItems>
+          <FileSystemItemInfo>
+            <ChildItems>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>Public Documents</Name>
+                <Size>0</Size>
+                <IsDirectory>true</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>Public Downloads</Name>
+                <Size>0</Size>
+                <IsDirectory>true</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>Public Music</Name>
+                <Size>0</Size>
+                <IsDirectory>true</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>Public Pictures</Name>
+                <Size>0</Size>
+                <IsDirectory>true</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>Public Recorded TV</Name>
+                <Size>0</Size>
+                <IsDirectory>true</IsDirectory>
+              </FileSystemItemInfo>
+              <FileSystemItemInfo>
+                <ChildItems />
+                <Name>Public Videos</Name>
+                <Size>0</Size>
+                <IsDirectory>true</IsDirectory>
+              </FileSystemItemInfo>
+            </ChildItems>
+            <Name>Public</Name>
+            <Size>0</Size>
+            <IsDirectory>true</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems>
+              <FileSystemItemInfo>
+                <ChildItems>
+                </ChildItems>
+                <Name>base.sql</Name>
+                <Size>27917287424</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+            </ChildItems>
+            <Name>Local</Name>
+            <Size>27917287424</Size>
+            <IsDirectory>true</IsDirectory>
+          </FileSystemItemInfo>
+        </ChildItems>
+        <Name>Users</Name>
+        <Size>27917287424</Size>
+        <IsDirectory>true</IsDirectory>
+      </FileSystemItemInfo>
+    </ChildItems>
+    <Name>C:</Name>
+    <Size>27984237581</Size>
+    <IsDirectory>true</IsDirectory>
+  </FileSystemItemInfo>
+  <FileSystemItemInfo>
+    <ChildItems>
+      <FileSystemItemInfo>
+        <ChildItems>
+          <FileSystemItemInfo>
+            <ChildItems>
+            </ChildItems>
+            <Name>SampleDocument.docx</Name>
+            <Size>1024</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems>
+            </ChildItems>
+            <Name>SampleDocument.xlsx</Name>
+            <Size>2048</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems>
+            </ChildItems>
+            <Name>Report.docx</Name>
+            <Size>5767168</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems>
+            </ChildItems>
+            <Name>Manual.pdf</Name>
+            <Size>33554432</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+        </ChildItems>
+        <Name>Documents</Name>
+        <Size>39324672</Size>
+        <IsDirectory>true</IsDirectory>
+      </FileSystemItemInfo>
+      <FileSystemItemInfo>
+        <ChildItems>
+          <FileSystemItemInfo>
+            <ChildItems>
+            </ChildItems>
+            <Name>Chrysanthemum.jpeg</Name>
+            <Size>878592</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems>
+            </ChildItems>
+            <Name>Desert.jpeg</Name>
+            <Size>845824</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems>
+            </ChildItems>
+            <Name>Hydrangeas.jpeg</Name>
+            <Size>594944</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems>
+            </ChildItems>
+            <Name>Jellyfish.jpeg</Name>
+            <Size>878592</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems>
+            </ChildItems>
+            <Name>Koala.jpeg</Name>
+            <Size>768124</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems>
+            </ChildItems>
+            <Name>Lighthouse.jpeg</Name>
+            <Size>842055</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems>
+            </ChildItems>
+            <Name>Penguins.jpeg</Name>
+            <Size>910374</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems>
+            </ChildItems>
+            <Name>Tulips.jpeg</Name>
+            <Size>798326</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+        </ChildItems>
+        <Name>Pictures</Name>
+        <Size>6516831</Size>
+        <IsDirectory>true</IsDirectory>
+      </FileSystemItemInfo>
+      <FileSystemItemInfo>
+        <ChildItems>
+          <FileSystemItemInfo>
+            <ChildItems>
+            </ChildItems>
+            <Name>ReaderInstall.exe</Name>
+            <Size>128008000</Size>
+            <IsDirectory>false</IsDirectory>
+          </FileSystemItemInfo>
+          <FileSystemItemInfo>
+            <ChildItems>
+              <FileSystemItemInfo>
+                <ChildItems>
+                </ChildItems>
+                <Name>SampleBook.txt</Name>
+                <Size>120000</Size>
+                <IsDirectory>false</IsDirectory>
+              </FileSystemItemInfo>
+            </ChildItems>
+            <Name>eBooks</Name>
+            <Size>120000</Size>
+            <IsDirectory>true</IsDirectory>
+          </FileSystemItemInfo>
+        </ChildItems>
+        <Name>Downloads</Name>
+        <Size>128128000</Size>
+        <IsDirectory>true</IsDirectory>
+      </FileSystemItemInfo>
+    </ChildItems>
+    <Name>D:</Name>
+    <Size>173969503</Size>
+    <IsDirectory>true</IsDirectory>
+  </FileSystemItemInfo>
+</FileSystemItems>

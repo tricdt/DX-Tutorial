@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProjectGuid>{7D42FFE3-4108-0D1A-1CCB-FE5DB15C78A4}</ProjectGuid>
+    <EnableDefaultItems>False</EnableDefaultItems>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <Configurations>Debug;Release;DebugTest</Configurations>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    <EmbeddedResourceUseDependentUponConvention>False</EmbeddedResourceUseDependentUponConvention>
+    <RootNamespace>PivotGridDemo</RootNamespace>
+    <AssemblyName>PivotGridDemo</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>WinExe</OutputType>
+    <WarningLevel>4</WarningLevel>
+    <IntermediateOutputPath>obj.NCD</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;WPF;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputPath>.\bin\ClickOnce DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\ClickOnce ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;WPF;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktopTest\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DEBUGTEST;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Images\HeaderIcons\Order.svg" />
+    <Resource Include="Images\HeaderIcons\Person.svg" />
+    <Resource Include="Images\HeaderIcons\Price.svg" />
+    <Resource Include="Images\CustomizationFilter.svg" />
+    <Resource Include="Images\CustomizationHiddenFields.svg" />
+    <Resource Include="Images\WarningIcon.svg" />
+    <Resource Include="Images\Ribbon\Delete.svg" />
+    <Resource Include="Images\Ribbon\Designer.svg" />
+    <Resource Include="Images\Ribbon\ExportToCSV.svg" />
+    <Resource Include="Images\Ribbon\ExportToDOCX.svg" />
+    <Resource Include="Images\Ribbon\ExportToHTML.svg" />
+    <Resource Include="Images\Ribbon\ExportToImage.svg" />
+    <Resource Include="Images\Ribbon\ExportToMHT.svg" />
+    <Resource Include="Images\Ribbon\ExportToPDF.svg" />
+    <Resource Include="Images\Ribbon\ExportToRTF.svg" />
+    <Resource Include="Images\Ribbon\ExportToText.svg" />
+    <Resource Include="Images\Ribbon\ExportToXLS.svg" />
+    <Resource Include="Images\Ribbon\ExportToXLSX.svg" />
+    <Resource Include="Images\Ribbon\NewReportWizard.svg" />
+    <Resource Include="Images\Ribbon\Preview.svg" />
+    <PackageReference Include="DevExpress.Wpf.Demos" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="22.2.3" />
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)' == 'Debug' OR '$(Configuration)' == 'DebugTest' OR '$(Configuration)' == 'Release' OR '$(Configuration)' == 'ClickOnce Debug' OR '$(Configuration)' == 'ClickOnce Release'">
+    <Compile Include="Helpers\ServerMode\DatabaseHelper.cs">
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Controls\ControlStyles\DataSourceDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\DrillDownControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Export\ExportWaitIndicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Export\OpenViewerWaitIndicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PivotGridDemoRibbon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ChartsIntegration.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ConditionalFormatting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ExcelStyleFiltering.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\MVVMPivot.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ServerMode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\ContextMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CustomLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CustomAppearance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FilterPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\OLAPBrowser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\OLAPKPI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\PrintTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\PrintOptions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FieldsCustomization.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\IntervalGrouping.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SortBySummary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\TotalsLocation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SingleTotal.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Serialization.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\OrderReports.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ProductReports.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CustomerReports.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\MultipleTotals.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Groups.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CalculatedFields.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Filter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\FieldItem.cs" />
+    <Compile Include="Data\FormatConditionItem.cs" />
+    <Compile Include="Modules\MVVMPivot.xaml.cs">
+      <DependentUpon>MVVMPivot.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\MVVMPivotViewModel.cs" />
+    <Page Include="Controls\ControlStyles\InplaceProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\CellTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TopValues.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataSourceDialog.cs" />
+    <Compile Include="Controls\Converters.cs" />
+    <Compile Include="Controls\DemoModuleControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\DrillDownControl.xaml.cs">
+      <DependentUpon>DrillDownControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Export\DemoModuleExportHelper.cs" />
+    <Compile Include="Controls\Export\ExportWaitIndicator.xaml.cs">
+      <DependentUpon>ExportWaitIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Export\OpenViewerWaitIndicator.xaml.cs">
+      <DependentUpon>OpenViewerWaitIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PivotGridDemoRibbon.xaml.cs">
+      <DependentUpon>PivotGridDemoRibbon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\VehiclesData.cs" />
+    <Compile Include="DemoTesting\Fixtures.cs" />
+    <Compile Include="Helpers\GroupIntervalToValueFormatConverter.cs" />
+    <Compile Include="Helpers\FieldAreaHelper.cs" />
+    <Compile Include="Helpers\ServerMode\ServerModeViewModelBase.cs">
+    </Compile>
+    <Compile Include="Helpers\ValueSelectorItem.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleResources\DrillDownViewModel.cs" />
+    <Compile Include="Modules\CellTemplates.xaml.cs">
+      <DependentUpon>CellTemplates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ChartsIntegration.xaml.cs">
+      <DependentUpon>ChartsIntegration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ConditionalFormatting.xaml.cs">
+      <DependentUpon>ConditionalFormatting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleResources\FilterViewModel.cs" />
+    <Compile Include="ModuleResources\FieldViewModel.cs" />
+    <Compile Include="ModuleResources\CustomerReportsViewModel.cs" />
+    <Compile Include="ModuleResources\PivotGridDemoService.cs" />
+    <Compile Include="ModuleResources\MoonPhase.cs" />
+    <Compile Include="Modules\ExcelStyleFiltering.xaml.cs">
+      <DependentUpon>ExcelStyleFiltering.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ServerMode.xaml.cs">
+      <DependentUpon>ServerMode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ContextMenu.xaml.cs">
+      <DependentUpon>ContextMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CustomLayout.xaml.cs">
+      <DependentUpon>CustomLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CustomAppearance.xaml.cs">
+      <DependentUpon>CustomAppearance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FilterPopup.xaml.cs">
+      <DependentUpon>FilterPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\OLAPBrowser.xaml.cs">
+      <DependentUpon>OLAPBrowser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\OLAPKPI.xaml.cs">
+      <DependentUpon>OLAPKPI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PrintTemplates.xaml.cs">
+      <DependentUpon>PrintTemplates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PrintOptions.xaml.cs">
+      <DependentUpon>PrintOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FieldsCustomization.xaml.cs">
+      <DependentUpon>FieldsCustomization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\IntervalGrouping.xaml.cs">
+      <DependentUpon>IntervalGrouping.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SortBySummary.xaml.cs">
+      <DependentUpon>SortBySummary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleResources\TopValuesViewModel.cs" />
+    <Compile Include="Modules\TotalsLocation.xaml.cs">
+      <DependentUpon>TotalsLocation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SingleTotal.xaml.cs">
+      <DependentUpon>SingleTotal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Serialization.xaml.cs">
+      <DependentUpon>Serialization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\OrderReports.xaml.cs">
+      <DependentUpon>OrderReports.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ProductReports.xaml.cs">
+      <DependentUpon>ProductReports.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CustomerReports.xaml.cs">
+      <DependentUpon>CustomerReports.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\MultipleTotals.xaml.cs">
+      <DependentUpon>MultipleTotals.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Groups.xaml.cs">
+      <DependentUpon>Groups.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TopValues.xaml.cs">
+      <DependentUpon>TopValues.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CalculatedFields.xaml.cs">
+      <DependentUpon>CalculatedFields.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Filter.xaml.cs">
+      <DependentUpon>Filter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\LayoutSamples\BriefView.xml" />
+    <EmbeddedResource Include="Data\LayoutSamples\FullView.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MoonPhase\FirstQuarterMoon.png" />
+    <Resource Include="Images\MoonPhase\FullMoon.png" />
+    <Resource Include="Images\MoonPhase\LastQuarterMoon.png" />
+    <Resource Include="Images\MoonPhase\NewMoon.png" />
+    <Resource Include="Images\MoonPhase\WaningCrescentMoon.png" />
+    <Resource Include="Images\MoonPhase\WaningGibbousMoon.png" />
+    <Resource Include="Images\MoonPhase\WaxingCrescentMoon.png" />
+    <Resource Include="Images\MoonPhase\WaxingGibbousMoon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\ServerMode\OrderDataContextNetCore.cs">
+    </Compile>
+    <Compile Include="Helpers\ServerMode\ServerModeViewModelNetCore.cs">
+    </Compile>
+  </ItemGroup>
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent"><ItemGroup><Resource Include="@(Page)" /></ItemGroup><ItemGroup><Resource Include="@(Compile)" /></ItemGroup></Target>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
+  </ItemGroup>
+  <ItemGroup></ItemGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

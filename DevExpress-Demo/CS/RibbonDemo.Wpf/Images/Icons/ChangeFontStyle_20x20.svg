@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+<style>
+.Red {fill: #D11C1C;}
+.Yellow {fill: #FFB115;}
+.Green {fill: #039C23;}
+.Blue {fill: #1177D7; }
+.Black {fill: #727272;}
+.White {fill: #FFFFFF;}
+</style>
+<title>ChangeFontStyle_20x20</title>
+<path d="M7,12.43h5.53l.17-.17h0l1.82-1.82L11.25,1H8.5L3,16.71H5.75ZM9.88,3.94,12,10.29H7.79S9.78,4.34,9.88,3.94Z" class="Blue"/>
+<path d="M10.92,15.58l2.3,2.3c-.77,1.53-3.17,1.53-5.15,1.53C10.15,17.88,8.62,16.35,10.92,15.58Z" class="Yellow"/>
+<path d="M12.45,14.05l-.76.76,2.3,2.3.76-.76Z" class="Black"/>
+<path d="M13.22,13.28l2.3,2.3,4.06-4.06a.78.78,0,0,0,0-1.08L18.36,9.22a.78.78,0,0,0-1.08,0L14,12.52Z" style="fill:Red"/>
+</svg>

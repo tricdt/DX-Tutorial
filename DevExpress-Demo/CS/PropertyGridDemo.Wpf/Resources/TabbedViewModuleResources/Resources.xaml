@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+                    xmlns:local="clr-namespace:PropertyGridDemo"
+                    >
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Templates\Effects.xaml"/>
+        <ResourceDictionary Source="Templates\FillNLine.xaml"/>
+        <ResourceDictionary Source="Templates\Misc.xaml"/>
+        <ResourceDictionary Source="Templates\SeriesOptions.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <DataTemplate x:Key="CommonTemplates.BoldHeaderWithoutEditor">
+        <dxprg:PropertyDefinition HeaderShowMode="OnlyHeader" ExpandButtonVisibility="Hidden">
+            <dxprg:PropertyDefinition.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Header}" FontWeight="Bold"/>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.HeaderTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+</ResourceDictionary>

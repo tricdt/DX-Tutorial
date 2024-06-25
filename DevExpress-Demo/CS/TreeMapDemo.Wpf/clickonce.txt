@@ -1,0 +1,11 @@
+DevExpress.Charts.v{DXVersion}.Core
+DevExpress.Map.v{DXVersion}.Core
+DevExpress.Xpf.Charts.v{DXVersion}
+DevExpress.Xpf.Printing.v{DXVersion}
+DevExpress.RichEdit.v{DXVersion}.Core
+DevExpress.Office.v{DXVersion}.Core
+DevExpress.Xpf.DocumentViewer.v{DXVersion}.Core
+DevExpress.Xpf.Map.v{DXVersion}
+DevExpress.Xpf.TreeMap.v{DXVersion}
+DevExpress.TreeMap.v{DXVersion}.Core
+DevExpress.DataVisualization.v{DXVersion}.Core

@@ -1,0 +1,177 @@
+﻿<local:BarsDemoModule x:Class="BarsDemo.BarProperties"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:local="clr-namespace:BarsDemo"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                      xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                      x:Name="root">
+    <local:BarsDemoModule.Resources>
+        <ObjectDataProvider x:Key="glyphSizeSource" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="dxb:GlyphSize" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter" />
+        <ControlTemplate x:Key="CommonPropertiesTemplate" TargetType="Control">
+            <dxlc:LayoutGroup ItemSpace="8" Orientation="Vertical">
+                <dxlc:LayoutItem Label="Visibility" LabelPosition="Top">
+                    <dxe:ComboBoxEdit IsTextEditable="False" SelectedItem="{Binding Visibility}">
+                        <Visibility>Collapsed</Visibility>
+                        <Visibility>Visible</Visibility>
+                    </dxe:ComboBoxEdit>
+                </dxlc:LayoutItem>
+                <dxe:CheckEdit Content="Is Enabled" IsChecked="{Binding IsEnabled}" Visibility="{Binding Visibility}" />
+            </dxlc:LayoutGroup>
+        </ControlTemplate>
+        <ControlTemplate x:Key="CommonToolbarPropertiesTemplate" TargetType="Control">
+            <dxlc:LayoutGroup Orientation="Vertical" ItemSpace="8">
+                <Control Template="{StaticResource CommonPropertiesTemplate}" />
+                <dxlc:LayoutItem Label="Glyph Size:" Visibility="{Binding Visibility}">
+                    <dxe:ComboBoxEdit IsTextEditable="False" SelectedItem="{Binding Path=GlyphSize}">
+                        <dxb:GlyphSize>Default</dxb:GlyphSize>
+                        <dxb:GlyphSize>Small</dxb:GlyphSize>
+                        <dxb:GlyphSize>Large</dxb:GlyphSize>
+                    </dxe:ComboBoxEdit>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+        </ControlTemplate>
+        <ControlTemplate x:Key="ToolbarPropertiesTemplate" TargetType="Control">
+            <dxlc:LayoutGroup Orientation="Vertical" ItemSpace="8">
+                <Control Template="{StaticResource CommonToolbarPropertiesTemplate}" />
+                <dxlc:LayoutGroup Visibility="{Binding Visibility}" Orientation="Vertical" ItemSpace="8">
+                    <dxe:CheckEdit Content="Use Whole Row" IsChecked="{Binding UseWholeRow}" />
+                    <dxe:CheckEdit Content="Allow Quick Customization" IsChecked="{Binding AllowQuickCustomization}" />
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+
+        </ControlTemplate>
+
+        <Style TargetType="{x:Type dxlc:LayoutGroup}">
+            <Setter Property="ItemSpace" Value="10" />
+            <Setter Property="Orientation" Value="Vertical" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+        <Style TargetType="{x:Type dxlc:LayoutItem}">
+            <Setter Property="LabelPosition" Value="Top" />
+        </Style>
+        <Style TargetType="{x:Type GroupBox}">
+            <Setter Property="Margin" Value="0,0,0,10" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+    </local:BarsDemoModule.Resources>
+    <DockPanel LastChildFill="True">
+        <dxb:BarContainerControl DockPanel.Dock="Top">
+            <dxb:MainMenuControl x:Name="mainMenu" Caption="MainMenu">
+                <dxb:BarSubItem Content="File">
+                    <dxb:BarItemLink BarItemName="bNew" />
+                    <dxb:BarItemLink BarItemName="bOpen" />
+                    <dxb:BarItemLink BarItemName="bSave" />
+                    <dxb:BarItemSeparator />
+                    <dxb:BarItemLink BarItemName="bPrint" />
+                </dxb:BarSubItem>
+                <dxb:BarSubItem Content="Edit">
+                    <dxb:BarItemLink BarItemName="bUndo" />
+                    <dxb:BarItemLink BarItemName="bRedo" />
+                    <dxb:BarItemSeparator />
+                    <dxb:BarItemLink BarItemName="bCut" />
+                    <dxb:BarItemLink BarItemName="bCopy" />
+                    <dxb:BarItemLink BarItemName="bPaste" />
+                    <dxb:BarItemSeparator />
+                    <dxb:BarButtonItem Content="Select All" Glyph="{dx:DXImage SvgImages/PDF Viewer/SelectAll.svg}" />
+                    <dxb:BarButtonItem Content="Clear" Glyph="{dx:DXImage SvgImages/Icon Builder/Actions_Clear.svg}" />
+                </dxb:BarSubItem>
+                <dxb:BarSubItem Content="About" Alignment="Far">
+                    <dxb:BarButtonItem Name="bHome" Content="DevExpress on the Web" Command="{Binding ElementName=root, Path=GoDevExpressCommand}" />
+                    <dxb:BarItemLinkSeparator />
+                    <dxb:BarButtonItem Name="bAbout" Content="About" Command="{Binding ElementName=root, Path=ShowAboutCommand}" />
+                </dxb:BarSubItem>
+            </dxb:MainMenuControl>
+            <dxb:ToolBarControl x:Name="fileToolBar" Caption="File">
+                <dxb:BarButtonItem Name="bNew" Content="New" Glyph="{dx:DXImage SvgImages/Outlook Inspired/New.svg}" LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/New.svg}" />
+                <dxb:BarButtonItem Name="bOpen" Content="Open" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Open.svg}" LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Open.svg}" />
+                <dxb:BarButtonItem Name="bSave" Content="Save" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Save.svg}" LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Save.svg}" />
+                <dxb:BarItemLinkSeparator />
+                <dxb:BarButtonItem Name="bPrint"
+                                   Content="Print"
+                                   Glyph="{dx:DXImage SvgImages/Outlook Inspired/Print.svg}"
+                                   LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Print.svg}"
+                                   Alignment="Far" />
+            </dxb:ToolBarControl>
+            <dxb:ToolBarControl x:Name="editToolBar" Caption="Edit">
+                <dxb:BarButtonItem Name="bCut" Content="Cut" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Cut.svg}"  LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Cut.svg}" />
+                <dxb:BarButtonItem Name="bCopy" Content="Copy" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Copy.svg}" LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Copy.svg}" />
+                <dxb:BarButtonItem Name="bPaste" Content="Paste" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Paste.svg}" LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Paste.svg}" />
+                <dxb:BarItemLinkSeparator />
+                <dxb:BarButtonItem Name="bUndo"
+                                   Content="Undo"
+                                   Glyph="{dx:DXImage SvgImages/Outlook Inspired/Undo.svg}"
+                                   LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Undo.svg}"
+                                   Alignment="Far" />
+                <dxb:BarButtonItem Name="bRedo"
+                                   Content="Redo"
+                                   Glyph="{dx:DXImage SvgImages/Outlook Inspired/Redo.svg}"
+                                   LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Redo.svg}"
+                                   Alignment="Far" />
+            </dxb:ToolBarControl>
+        </dxb:BarContainerControl>
+        <dxb:StatusBarControl x:Name="statusBar" DockPanel.Dock="Bottom" Caption="StatusBar">
+            <dxb:BarStaticItem Content="Row:" ShowBorder="False" />
+            <dxb:BarStaticItem Content="1" />
+            <dxb:BarStaticItem Content="Column:" ShowBorder="False" />
+            <dxb:BarStaticItem Content="1" />
+            <dxb:BarStaticItem Content="Info"
+                               Glyph="{dx:DXImage SvgImages/Icon Builder/Actions_Info.svg}"
+                               LargeGlyph="{dx:DXImage SvgImages/Icon Builder/Actions_Info.svg}"
+                               Alignment="Far"
+                               BarItemDisplayMode="ContentAndGlyph"
+                               ShowBorder="False" />
+        </dxb:StatusBarControl>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <ScrollViewer.Resources>
+                <Style TargetType="GroupBox">
+                    <Setter Property="Margin" Value="0,5,0,0" />
+                </Style>
+            </ScrollViewer.Resources>
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Header="Selected Bar">
+                    <dxlc:LayoutGroup>
+                        <RadioButton x:Name="mainMenuBarRadioButton" IsChecked="True" Content="Main Menu" />
+                        <RadioButton x:Name="editBarRadioButton" Content="Edit bar" />
+                        <RadioButton x:Name="fileBarRadioButton" Content="File bar" />
+                        <RadioButton x:Name="statusBarRadioButton" Content="Status bar" />
+                    </dxlc:LayoutGroup>
+                </GroupBox>
+                <GroupBox Header="Main Menu Properties"
+                          Visibility="{Binding ElementName=mainMenuBarRadioButton, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}">
+                    <Control DataContext="{Binding ElementName=mainMenu}" Template="{StaticResource CommonPropertiesTemplate}" />
+                </GroupBox>
+                <GroupBox Header="File Toolbar Properties"
+                          Visibility="{Binding ElementName=fileBarRadioButton, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}">
+                    <Control DataContext="{Binding ElementName=fileToolBar}" Template="{StaticResource ToolbarPropertiesTemplate}" />
+                </GroupBox>
+                <GroupBox Header="Edit Toolbar Properties"
+                          Visibility="{Binding ElementName=editBarRadioButton, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}">
+                    <Control DataContext="{Binding ElementName=editToolBar}" Template="{StaticResource ToolbarPropertiesTemplate}" />
+                </GroupBox>
+                <GroupBox Header="Status Bar Properties"
+                          Visibility="{Binding ElementName=statusBarRadioButton, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}">
+                    <dxlc:LayoutGroup>
+                        <Control DataContext="{Binding ElementName=statusBar}" Template="{StaticResource CommonToolbarPropertiesTemplate}" />
+                        <dxe:CheckEdit Content="Show Size Grip"
+                                       IsChecked="{Binding ElementName=statusBar, Path=ShowSizeGrip}"
+                                       Visibility="{Binding ElementName=statusBar, Path=Visibility}" />
+                    </dxlc:LayoutGroup>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid />
+    </DockPanel>
+</local:BarsDemoModule>

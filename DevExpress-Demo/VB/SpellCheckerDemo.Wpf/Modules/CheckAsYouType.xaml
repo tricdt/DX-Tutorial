@@ -1,0 +1,183 @@
+﻿<local:SpellCheckerDemoModule x:Class="SpellCheckerDemo.CheckAsYouType"
+                              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                              xmlns:local="clr-namespace:SpellCheckerDemo"
+                              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                              xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                              xmlns:dxspch="http://schemas.devexpress.com/winfx/2008/xaml/spellchecker"
+                              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                              mc:Ignorable="d"
+                              d:DesignHeight="400"
+                              d:DesignWidth="800">
+    <local:SpellCheckerDemoModule.Resources>
+        <Style TargetType="dx:DXTabItem">
+            <Setter Property="Padding" Value="12,4,12,4" />
+            <Setter Property="AllowHide" Value="False" />
+        </Style>
+    </local:SpellCheckerDemoModule.Resources>
+    <DockPanel>
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <GroupBox Header="{DXBinding '@e(tabControl).SelectedItem.Content.GetType().Name + ` Spelling Settings`'}"
+                          DataContext="{DXBinding '@e(tabControl).SelectedItem.Content.($dxmvvm:Interaction.BehaviorsInternal)[0]'}"
+                          Margin="12,5,12,12" MinWidth="210" VerticalAlignment="Top">
+                <StackPanel>
+                    <dxe:CheckEdit Content="CheckAsYouType Mode" IsChecked="{Binding CheckAsYouType}" />
+                    <dxe:CheckEdit Content="Show Spell Check Menu" EditValue="{Binding ShowSpellCheckMenu}" />
+                    <GroupBox Header="Underline Style">
+                        <dxe:ComboBoxEdit ItemsSource="{dxe:EnumItemsSource EnumType=dxspch:UnderlineStyle}"
+                                              IsTextEditable="False"
+                                              EditValue="{Binding UnderlineStyle, UpdateSourceTrigger=PropertyChanged}" />
+                    </GroupBox>
+                    <GroupBox Header="Underline Color">
+                        <dxe:PopupColorEdit EditValue="{Binding UnderlineColor, UpdateSourceTrigger=PropertyChanged}"
+                                                ShowMoreColorsButton="False"
+                                                ShowDefaultColorButton="False" />
+                    </GroupBox>
+                    <GroupBox Header="Culture">
+                        <TextBlock Text="{Binding Culture}" />
+                    </GroupBox>
+                    <GroupBox Header="Options Spelling">
+                        <StackPanel>
+                            <dxe:CheckEdit Content="Ignore Words In UPPERCASE" EditValue="{Binding IgnoreUpperCaseWords}" />
+                            <dxe:CheckEdit Content="Ignore Words In MiXEdcAse" EditValue="{Binding IgnoreMixedCaseWords}" />
+                            <dxe:CheckEdit Content="Ignore Words With Numbers" EditValue="{Binding IgnoreWordsWithNumbers}" />
+                            <dxe:CheckEdit Content="Ignore Repeated Words" EditValue="{Binding IgnoreRepeatedWords}" />
+                            <dxe:CheckEdit Content="Ignore E-Mails" EditValue="{Binding IgnoreEmails}" />
+                            <dxe:CheckEdit Content="Ignore Internet and file addresses" EditValue="{Binding IgnoreUri}" />
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </GroupBox>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dx:DXTabControl x:Name="tabControl" Margin="-1,2,-1,-1" Padding="0">
+            <!--#region TextBox-->
+            <dx:DXTabItem Header="TextBox">
+                <TextBox Name="textBox"
+                         BorderThickness="0"
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Visible"
+                         VerticalContentAlignment="Top"
+                         Text="{x:Static local:CheckAsYouType.TextEn}"
+                         TextWrapping="Wrap">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxspch:DXSpellChecker x:Name="textEditSpellChecker"
+                                               CheckAsYouType="True"
+                                               ShowSpellCheckMenu="True"
+                                               IgnoreRepeatedWords="False"
+                                               Culture="en-US"
+                                               UnderlineColor="Orange"
+                                               IgnoreUpperCaseWords="False">
+                            <dxspch:DXSpellChecker.Dictionaries>
+                                <dxspch:SpellCheckerISpellDictionary Culture="en-US"
+                                                           DictionaryUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/american.xlg"
+                                                           GrammarUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/english.aff" />
+                            </dxspch:DXSpellChecker.Dictionaries>
+                        </dxspch:DXSpellChecker>
+                    </dxmvvm:Interaction.Behaviors>
+                </TextBox>
+            </dx:DXTabItem>
+            <!--#endregion-->
+
+            <!--#region DevExpress TextEdit-->
+            <dx:DXTabItem Header="TextEdit">
+                <dxe:TextEdit Name="textEdit"
+                              ShowBorder="False"
+                              AcceptsReturn="True"
+                              VerticalScrollBarVisibility="Visible"
+                              VerticalContentAlignment="Top"
+                              Text="{x:Static local:CheckAsYouType.TextEn}"
+                              TextWrapping="Wrap">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxspch:DXSpellChecker CheckAsYouType="True"
+                                               ShowSpellCheckMenu="True"
+                                               IgnoreRepeatedWords="False"
+                                               Culture="en-US"
+                                               UnderlineStyle="Line"
+                                               IgnoreUpperCaseWords="True"
+                                               IgnoreMixedCaseWords="False">
+                            <dxspch:DXSpellChecker.Dictionaries>
+                                <dxspch:SpellCheckerISpellDictionary Culture="en-US"
+                                                                     DictionaryUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/american.xlg"
+                                                                     GrammarUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/english.aff" />
+                                <dxspch:SpellCheckerCustomDictionary Culture="en-US"
+                                                                     DictionaryUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/CustomEnglish.dic"
+                                                                     AlphabetUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/EnglishAlphabet.txt" />
+                            </dxspch:DXSpellChecker.Dictionaries>
+                        </dxspch:DXSpellChecker>
+                    </dxmvvm:Interaction.Behaviors>
+                    <dxb:BarManager.DXContextMenu>
+                        <dxb:PopupMenu>
+                            <dxb:PopupMenu.Items>
+                                <dxb:BarButtonItem Content="Cut" Command="ApplicationCommands.Cut" Glyph="{dx:DXImage Image=Cut_16x16.png}" />
+                                <dxb:BarButtonItem Content="Copy" Command="ApplicationCommands.Copy" Glyph="{dx:DXImage Image=Copy_16x16.png}" />
+                                <dxb:BarButtonItem Content="Paste" Command="ApplicationCommands.Paste" Glyph="{dx:DXImage Image=Paste_16x16.png}" />
+                            </dxb:PopupMenu.Items>
+                        </dxb:PopupMenu>
+                    </dxb:BarManager.DXContextMenu>
+                </dxe:TextEdit>
+            </dx:DXTabItem>
+            <!--#endregion-->
+
+            <!--#region RichTextBox-->
+            <dx:DXTabItem Header="RichTextBox">
+                <RichTextBox Name="richTextBox" BorderThickness="0" VerticalContentAlignment="Top" VerticalScrollBarVisibility="Visible">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxspch:DXSpellChecker CheckAsYouType="True"
+                                               UnderlineStyle="Point"
+                                               ShowSpellCheckMenu="True"
+                                               IgnoreRepeatedWords="False"
+                                               Culture="en-US"
+                                               UnderlineColor="Green"
+                                               IgnoreUpperCaseWords="True"
+                                               IgnoreMixedCaseWords="True" />
+                    </dxmvvm:Interaction.Behaviors>
+                    <!--#region Text-->
+                    <FlowDocument>
+                        <Paragraph FontWeight="Bold" TextAlignment="Center">
+                            HANS IN LYCK
+                        </Paragraph>
+                        <Paragraph TextIndent="20">
+                            Hans had served his master forseven years, so he said to him, ""Master, my time is up; now I should be glad to to go back home to my mother; give me my wages."" The master answered, ""You have served me faithfully and honesly; as the service was so shall the reward be;"" and he gave Hans a piece of gold as big as his head. Hans pulled his handkerchief out of his pocket, wrapped up the lump init, put it on his shoulder, and set out on the way home.
+                        </Paragraph>
+                        <Paragraph TextIndent="20">
+                            As he went on, always puting one foot before the other, he saw a horseman trotting quickly and merrily by on a lively horse. ""Ah!"" said Hans quite loud, ""what a fine thing it is to ride! There you sit as on a chair; you stumble over no stones, you save your shoes, and get on, you don""t know how.""
+                        </Paragraph>
+                        <Paragraph TextIndent="20">
+                            The rider, who had heard him, stopped and called out, ""Hollo! Hans, why do you go on foot, then?"" ""I must,"" answered he, ""for I have this lump to carry home; it is true that it is gold, but I cannot hold my head straight for it, and it hurts my shoulder.""
+                        </Paragraph>
+                        <Paragraph TextIndent="20">
+                            ""I will tell you what,"" said the rider, ""we will exchange: I will give you my horse, and you can give me your lump.""
+                        </Paragraph>
+                        <Paragraph TextIndent="20">
+                            ""With all my heart,"" said Hans, ""but I can tell you, you will have to crawl along with it.""
+                        </Paragraph>
+                        <Paragraph TextIndent="20">
+                            The rider got down, took the gold, and helped Hans up; then gave him the briddle tight in his hands and said, ""If you want to go at a really good pace, you must click your tongue and call out, ""Jup! Jup!""
+                        </Paragraph>
+                    </FlowDocument>
+                    <!--#endregion-->
+                    <dxb:BarManager.DXContextMenu>
+                        <dxb:PopupMenu>
+                            <dxb:PopupMenu.Items>
+                                <dxb:BarButtonItem Content="Cut" Command="ApplicationCommands.Cut" Glyph="{dx:DXImage Image=Cut_16x16.png}" />
+                                <dxb:BarButtonItem Content="Copy" Command="ApplicationCommands.Copy" Glyph="{dx:DXImage Image=Copy_16x16.png}" />
+                                <dxb:BarButtonItem Content="Paste" Command="ApplicationCommands.Paste" Glyph="{dx:DXImage Image=Paste_16x16.png}" />
+                            </dxb:PopupMenu.Items>
+                        </dxb:PopupMenu>
+                    </dxb:BarManager.DXContextMenu>
+                </RichTextBox>
+            </dx:DXTabItem>
+            <!--#endregion-->
+        </dx:DXTabControl>
+    </DockPanel>
+</local:SpellCheckerDemoModule>

@@ -1,0 +1,32 @@
+﻿<dxwui:NavigationPage x:Class="ControlsDemo.Modules.Views.TileNavDetailsView"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                      xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      mc:Ignorable="d"
+                      d:DesignHeight="300" d:DesignWidth="300">
+    <dxwui:NavigationPage.Resources>
+        <dx:ColorToBrushConverter x:Key="colorToBrushConverter" />
+        <Style x:Key="viewText" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="Margin" Value="16,16,16,24" />
+            <Setter Property="Opacity" Value="0.8" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+    </dxwui:NavigationPage.Resources>
+    <dxwui:PageAdornerControl Header="{Binding DisplayName}" Background="{Binding Color, Converter={StaticResource colorToBrushConverter}}" Foreground="#FFFFFFFF" BackCommand="{Binding BackCommand}">
+        <StackPanel VerticalAlignment="Center">
+            <dx:DXImage Source="{Binding ContentImage}" Stretch="None"
+                        dxb:ImageColorizer.IsEnabled="True"
+                        dxb:ImageColorizer.Color="#FFF8F8F8"/>
+            <TextBlock Style="{StaticResource viewText}" Text="Use the Back button to move to the root page"/>
+        </StackPanel>
+    </dxwui:PageAdornerControl>
+</dxwui:NavigationPage>

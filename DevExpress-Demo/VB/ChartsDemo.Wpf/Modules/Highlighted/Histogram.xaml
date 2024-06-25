@@ -1,0 +1,388 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.HistogramDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:local="clr-namespace:ChartsDemo"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{dxmvvm:ViewModelSource Type=local:HistogramViewModel}">
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!--#region Series Styles-->
+            <Style x:Key="pointSeriesStyle" TargetType="{x:Type dxc:PointSeries2D}">
+                <Setter Property="ArgumentDataMember" Value="Argument"/>
+                <Setter Property="ValueDataMember" Value="Value"/>
+                <Setter Property="CrosshairLabelPattern" Value="{}{A}: {V}"/>
+                <Setter Property="MarkerSize" Value="7"/>
+                <Setter Property="MarkerModel">
+                    <Setter.Value>
+                        <dxc:BorderlessSimpleMarker2DModel/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="rangeBarSeriesStyle" TargetType="{x:Type dxc:RangeBarOverlappedSeries2D}">
+                <Setter Property="ArgumentDataMember" Value="Argument"/>
+                <Setter Property="BarWidth" Value="1"/>
+                <Setter Property="CrosshairLabelPattern" Value="{}{A}: {V2}"/>
+                <Setter Property="dxc:XYDiagram2D.SeriesPane" Value="{Binding ElementName=pane0}"/>
+                <Setter Property="dxc:XYDiagram2D.SeriesAxisX" Value="{Binding ElementName=axisx0}"/>
+                <Setter Property="dxc:XYDiagram2D.SeriesAxisY" Value="{Binding ElementName=axisy0}"/>
+                <Setter Property="MinMarkerModel">
+                    <Setter.Value>
+                        <dxc:CustomMarker2DModel/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="splineAreaSeriesStyle" TargetType="{x:Type dxc:SplineAreaSeries2D}">
+                <Setter Property="ArgumentDataMember" Value="Argument"/>
+                <Setter Property="CrosshairLabelPattern" Value="{}{A}: {V}"/>
+                <Setter Property="dxc:XYDiagram2D.SeriesPane" Value="{Binding ElementName=pane0}"/>
+                <Setter Property="dxc:XYDiagram2D.SeriesAxisX" Value="{Binding ElementName=axisx0}"/>
+                <Setter Property="dxc:XYDiagram2D.SeriesAxisY" Value="{Binding ElementName=axisy0}"/>
+            </Style>
+            <!--#endregion-->
+            <!--#region IntervalNumericScaleOptions-->
+            <dxc:IntervalNumericScaleOptions
+                x:Key="autoIntervalNumericScaleOptions"
+                GridLayoutMode="GridAndLabelShifted"
+                Pattern="{}{A1:#}-{A2:#}"
+                AggregateFunction="Histogram"/>
+            <!--#endregion-->
+            <!--#region WidthIntervalNumericScaleOptions-->
+            <dxc:WidthIntervalNumericScaleOptions
+                x:Key="widthIntervalNumericScaleOptions"
+                GridLayoutMode="GridAndLabelShifted"
+                Pattern="{}{A1:#}-{A2:#}"
+                AggregateFunction="Histogram"
+                Width="{Binding ElementName=tbeIntervalWidth, Path=Value}"/>
+            <!--#endregion-->
+            <!--#region CountIntervalNumericScaleOptions-->
+            <dxc:CountIntervalNumericScaleOptions
+                x:Key="countIntervalNumericScaleOptions"
+                GridLayoutMode="GridAndLabelShifted"
+                Pattern="{}{A1:#}-{A2:#}"
+                AggregateFunction="Histogram"
+                Count="{Binding ElementName=tbeIntervalCount, Path=Value}"/>
+            <!--#endregion-->
+            <local:IntervalDivisionModeToScaleOptionsConverter
+                x:Key="intervalDivisionModeToScaleOptionsConverter"
+                AutoIntervalNumericScaleOptions="{StaticResource autoIntervalNumericScaleOptions}"
+                WidthIntervalNumericScaleOptions="{StaticResource widthIntervalNumericScaleOptions}"
+                CountIntervalNumericScaleOptions="{StaticResource countIntervalNumericScaleOptions}" />
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+    <DockPanel>
+        <!--#region ChartsDemoRibbon-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}"
+            ShowRunChartDesignerButton ="true"/>
+        <!--#endregion-->
+        <!--#region Options-->
+        <ScrollViewer
+            Name="PART_Options"
+            Style="{StaticResource optionsScrollViewerStyle}">
+            <StackPanel Style="{StaticResource optionsRootStackPanelStyle}">
+                <GroupBox
+                    Header="General">
+                    <StackPanel>
+                        <TextBlock
+                            Text="Interval Division Mode:" />
+                        <dxe:ComboBoxEdit
+                            x:Name="cbeIntervalDivisionMode"
+                            Margin="{StaticResource textUnderControlMargin}"
+                            ItemsSource="{dxe:EnumItemsSource EnumType=dxc:IntervalDivisionMode}"
+                            EditValue="{Binding IntervalDivisionMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox
+                    Header="Width"
+                    Margin="0,5,0,0">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                Text="1"
+                                HorizontalAlignment="Left" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Text="5"
+                                HorizontalAlignment="Center" />
+                            <TextBlock
+                                Grid.Column="2"
+                                Text="10"
+                                HorizontalAlignment="Right" />
+                        </Grid>
+                        <dxe:TrackBarEdit
+                            Name="tbeIntervalWidth"
+                            Minimum="1"
+                            Maximum="10"
+                            Value="5"
+                            TickPlacement="None"
+                            IsEnabled="{DXBinding '@e(cbeIntervalDivisionMode).EditValue == $dxc:IntervalDivisionMode.Width'}"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox
+                    Header="Count"
+                    Margin="0,5,0,0">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                Text="10"
+                                HorizontalAlignment="Left" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Text="50"
+                                HorizontalAlignment="Center" />
+                            <TextBlock
+                                Grid.Column="2"
+                                Text="90"
+                                HorizontalAlignment="Right" />
+                        </Grid>
+                        <dxe:TrackBarEdit
+                            Name="tbeIntervalCount"
+                            Minimum="10"
+                            Maximum="90"
+                            Value="80"
+                            TickPlacement="None"
+                            IsEnabled="{DXBinding '@e(cbeIntervalDivisionMode).EditValue == $dxc:IntervalDivisionMode.Count'}"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox
+                    Header="Series Count"
+                    Margin="0,5,0,0">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                Text="1"
+                                HorizontalAlignment="Left" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Text="2"
+                                HorizontalAlignment="Center" />
+                            <TextBlock
+                                Grid.Column="2"
+                                Text="3"
+                                HorizontalAlignment="Right" />
+                        </Grid>
+                        <dxe:TrackBarEdit
+                            Name="tbeSeriesCount"
+                            Minimum="1"
+                            Maximum="3"
+                            Value="3"
+                            TickPlacement="None" />
+                        <dx:SimpleButton
+                            x:Name="btnGeneratePoints"
+                            Content="Generate Points"
+                            Margin="{StaticResource optionsGroupTopMargin}"
+                            Click="BtnGeneratePoints_Click" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox
+                    Header="Histogram Chart Type"
+                    VerticalAlignment="Top">
+                    <dxe:ListBoxEdit
+                        Name="lbSeriesType"
+                        SelectedIndex="0">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings/>
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.Items>
+                            <sys:String>Range Bar</sys:String>
+                            <sys:String>Spline Area</sys:String>
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <Grid>
+            <dxc:ChartControl
+                x:Name="chart"
+                CrosshairEnabled="True"
+                ToolTipEnabled="False"
+                Palette="{Binding Palette, Mode=OneWayToSource}" >
+                <!--#region Titles-->
+                <dxc:ChartControl.Titles>
+                    <dxc:Title
+                        Content="Point Distribution by Arguments"
+                        Dock="Top"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"/>
+                </dxc:ChartControl.Titles>
+                <!--#endregion-->
+                <!--#region CrosshairOptions-->
+                <dxc:ChartControl.CrosshairOptions>
+                    <dxc:CrosshairOptions
+                        ShowValueLine="True"
+                        LinesMode="Free"
+                        ShowGroupHeaders="False"/>
+                </dxc:ChartControl.CrosshairOptions>
+                <!--#endregion-->
+                <dxc:XYDiagram2D
+                    PaneOrientation="Vertical">
+                    <!--#region Axes-->
+                    <dxc:XYDiagram2D.AxisX>
+                        <dxc:AxisX2D
+                            TickmarksMinorVisible="False"
+                            Visible="True">
+                            <dxc:AxisX2D.Title>
+                                <dxc:AxisTitle
+                                    Margin="0"
+                                    Padding="0"
+                                    Content="Arguments"
+                                    Visible="True"/>
+                            </dxc:AxisX2D.Title>
+                        </dxc:AxisX2D>
+                    </dxc:XYDiagram2D.AxisX>
+                    <dxc:XYDiagram2D.AxisY>
+                        <dxc:AxisY2D
+                            GridLinesVisible="False"
+                            TickmarksVisible="True"
+                            TickmarksMinorVisible="False"
+                            Interlaced="False"
+                            Visible="True">
+                            <dxc:AxisY2D.Title>
+                                <dxc:AxisTitle
+                                    Margin="0"
+                                    Padding="0"
+                                    Content="Values"
+                                    Visible="True"/>
+                            </dxc:AxisY2D.Title>
+                        </dxc:AxisY2D>
+                    </dxc:XYDiagram2D.AxisY>
+                    <dxc:XYDiagram2D.SecondaryAxesX>
+                        <dxc:SecondaryAxisX2D
+                            x:Name="axisx0"
+                            TickmarksMinorVisible="False"
+                            Visible="True"
+                            Alignment="Near"
+                            NumericScaleOptions="{Binding IntervalDivisionMode, Converter={StaticResource intervalDivisionModeToScaleOptionsConverter}}">
+                            <dxc:SecondaryAxisX2D.Label>
+                                <dxc:AxisLabel
+                                    TextPattern="{}{A:#}">
+                                    <dxc:Axis2D.ResolveOverlappingOptions>
+                                        <dxc:AxisLabelResolveOverlappingOptions
+                                            AllowRotate="False"
+                                            AllowStagger="False"/>
+                                    </dxc:Axis2D.ResolveOverlappingOptions>
+                                </dxc:AxisLabel>
+                            </dxc:SecondaryAxisX2D.Label>
+                            <dxc:SecondaryAxisX2D.Title>
+                                <dxc:AxisTitle
+                                    Margin="0"
+                                    Padding="0"
+                                    Content="Intervals"
+                                    Visible="True"/>
+                            </dxc:SecondaryAxisX2D.Title>
+                        </dxc:SecondaryAxisX2D>
+                    </dxc:XYDiagram2D.SecondaryAxesX>
+                    <dxc:XYDiagram2D.SecondaryAxesY>
+                        <dxc:SecondaryAxisY2D
+                            x:Name="axisy0"
+                            TickmarksMinorVisible="False"
+                            Visible="True"
+                            Alignment="Near">
+                            <dxc:SecondaryAxisY2D.Title>
+                                <dxc:AxisTitle
+                                    Margin="0"
+                                    Padding="0"
+                                    Content="Number of Points"
+                                    Visible="True"/>
+                            </dxc:SecondaryAxisY2D.Title>
+                        </dxc:SecondaryAxisY2D>
+                    </dxc:XYDiagram2D.SecondaryAxesY>
+                    <!--#endregion-->
+                    <!--#region Panes-->
+                    <dxc:XYDiagram2D.Panes>
+                        <dxc:Pane
+                            x:Name="pane0"
+                            Padding="0,30,0,0"/>
+                    </dxc:XYDiagram2D.Panes>
+                    <!--#endregion-->
+                    <!--#region Series-->
+                    <dxc:PointSeries2D
+                        DisplayName="Series 1"
+                        Style="{StaticResource pointSeriesStyle}"
+                        Visible="{DXBinding '@e(tbeSeriesCount).Value >= 1'}"
+                        Brush="{Binding Cluster1Brush}"/>
+                    <dxc:RangeBarOverlappedSeries2D
+                        BarWidth="1"
+                        DisplayName="Range Bar Histogram 1"
+                        Style="{StaticResource rangeBarSeriesStyle}"
+                        Visible="{DXBinding '@e(lbSeriesType).SelectedItem == `Range Bar` &amp; @e(tbeSeriesCount).Value >= 1'}"
+                        Brush="{Binding Cluster1Brush}"/>
+                    <dxc:SplineAreaSeries2D
+                        DisplayName="Spline Area Histogram 1"
+                        Style="{StaticResource splineAreaSeriesStyle}"
+                        Visible="{DXBinding '@e(lbSeriesType).SelectedItem == `Spline Area` &amp; @e(tbeSeriesCount).Value >= 1'}"
+                        Brush="{Binding Cluster1Brush}"/>
+                    <dxc:PointSeries2D
+                        DisplayName="Series 2"
+                        Style="{StaticResource pointSeriesStyle}"
+                        Visible="{DXBinding '@e(tbeSeriesCount).Value >= 2'}"
+                        Brush="{Binding Cluster2Brush}"/>
+                    <dxc:RangeBarOverlappedSeries2D
+                        BarWidth="1"
+                        DisplayName="Range Bar Histogram 2"
+                        Style="{StaticResource rangeBarSeriesStyle}"
+                        Visible="{DXBinding '@e(lbSeriesType).SelectedItem == `Range Bar` &amp; @e(tbeSeriesCount).Value >= 2'}"
+                        Brush="{Binding Cluster2Brush}"/>
+                    <dxc:SplineAreaSeries2D
+                        DisplayName="Spline Area Histogram 2"
+                        Style="{StaticResource splineAreaSeriesStyle}"
+                        Visible="{DXBinding '@e(lbSeriesType).SelectedItem == `Spline Area` &amp; @e(tbeSeriesCount).Value >= 2'}"
+                        Brush="{Binding Cluster2Brush}"/>
+                    <dxc:PointSeries2D
+                        DisplayName="Series 3"
+                        Style="{StaticResource pointSeriesStyle}"
+                        Visible="{DXBinding '@e(tbeSeriesCount).Value >= 3'}"
+                        Brush="{Binding Cluster3Brush}"/>
+                    <dxc:RangeBarOverlappedSeries2D
+                        BarWidth="1"
+                        DisplayName="Range Bar Histogram 3"
+                        Style="{StaticResource rangeBarSeriesStyle}"
+                        Visible="{DXBinding '@e(lbSeriesType).SelectedItem == `Range Bar` &amp; @e(tbeSeriesCount).Value >= 3'}"
+                        Brush="{Binding Cluster3Brush}"/>
+                    <dxc:SplineAreaSeries2D
+                        DisplayName="Spline Area Histogram 3"
+                        Style="{StaticResource splineAreaSeriesStyle}"
+                        Visible="{DXBinding '@e(lbSeriesType).SelectedItem == `Spline Area` &amp; @e(tbeSeriesCount).Value >= 3'}"
+                        Brush="{Binding Cluster3Brush}"/>
+                    <!--#endregion-->
+                </dxc:XYDiagram2D>
+            </dxc:ChartControl>
+        </Grid>
+    </DockPanel>
+</local:ChartsDemoModule>

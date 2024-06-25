@@ -1,0 +1,230 @@
+﻿<local:GridDemoModule x:Class="GridDemo.StandardTableView"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+                      xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxrudex="http://schemas.devexpress.com/winfx/2008/xaml/reports/userdesignerextensions"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800">
+    <!--#region Resources-->
+    <local:GridDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GridDemo;component/ModuleResources/SharedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="colGroupNameCellTemplate">
+                <dx:DXImage Source="{Binding Path=RowData.Row.GroupName, Converter={local:GroupNameToImageConverter}}" Width="16" Height="16">
+                    <ToolTipService.ToolTip>
+                        <TextBlock Text="{Binding Path=RowData.Row.GroupName}" />
+                    </ToolTipService.ToolTip>
+                </dx:DXImage>
+            </DataTemplate>
+            <Style x:Key="colGroupNamePrintCellStyle"
+                   TargetType="{x:Type dxe:TextEdit}"
+                   BasedOn="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintCellStyle}}">
+                <Setter Property="DisplayTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <dx:DXImage dxp:ExportSettings.TargetType="Image" Source="{Binding Path=Value, Converter={local:GroupNameToImageConverter}}" Width="16" Height="16" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="dxp:ExportSettings.TargetType" Value="Panel" />
+            </Style>
+            <local:TotalSummaryPositionToBooleanConverter x:Key="TotalSummaryPositionToBooleanConverter" />
+        </ResourceDictionary>
+    </local:GridDemoModule.Resources>
+    <!--#endregion-->
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" ReportService="{x:Reference rmsStandardTableView}" />
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Header="Customization Options" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit x:Name="allowSortingCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.AllowSorting, Mode=TwoWay}"
+                                       Content="Allow Sorting"
+                                       ToolTipService.ToolTip="Specifies whether you can sort data." />
+                        <dxe:CheckEdit x:Name="allowGroupingCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.AllowGrouping, Mode=TwoWay}"
+                                       Content="Allow Grouping"
+                                       ToolTipService.ToolTip="Specifies whether you can group data." />
+                        <dxe:CheckEdit x:Name="allowMovingCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.AllowColumnMoving, Mode=TwoWay}"
+                                       Content="Allow Moving"
+                                       ToolTipService.ToolTip="Specifies whether you are allowed to move columns via drag and drop." />
+                        <dxe:CheckEdit x:Name="allowResizingCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.AllowResizing, Mode=TwoWay}"
+                                       Content="Allow Resizing"
+                                       ToolTipService.ToolTip="Specifies whether you can change column widths by dragging the edges of their headers." />
+                        <dxe:CheckEdit x:Name="allowBestFitCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.AllowBestFit, Mode=TwoWay}"
+                                       Content="Allow Best Fit"
+                                       ToolTipService.ToolTip="Specifies whether it's allowed to calculate and aply optimal widths to all columns." />
+                        <dxe:CheckEdit x:Name="showIndicatorCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.ShowIndicator, Mode=TwoWay}"
+                                       Content="Show Indicator"
+                                       ToolTipService.ToolTip="Specifies whether the Row Indicator panel is displayed." />
+                        <dxe:CheckEdit x:Name="showDataNavigator"
+                                       Margin="0"
+                                       IsChecked="{Binding Path=View.ShowDataNavigator, Mode=TwoWay}"
+                                       Content="Show Data Navigator" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Scrolling Options" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.AllowFixedGroups, Mode=TwoWay, Converter={dx:DefaultBooleanToNullableBooleanConverter}}"
+                                       Content="Allow Fixed Groups"
+                                       ToolTipService.ToolTip="Specifies whether the top visible group row is always displayed when scrolling through grouped data." />
+                        <dxe:CheckEdit Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.AllowCascadeUpdate, Mode=TwoWay}"
+                                       Content="Allow Cascade Update"
+                                       ToolTipService.ToolTip="Makes vertical scrolling perfectly fast and smooth." />
+                        <dxe:CheckEdit Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.AllowPerPixelScrolling, Mode=TwoWay}"
+                                       Content="Allow Per Pixel Scrolling"
+                                       ToolTipService.ToolTip="Specifies whether per-pixel scrolling is enabled." />
+                        <dxe:CheckEdit IsEnabled="{Binding View.AllowPerPixelScrolling}"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.ScrollAnimationDuration, Mode=TwoWay, Converter={local:ScrollingAnimationDurationToBooleanConverter}}"
+                                       Content="Allow Scrolling Animation"
+                                       ToolTipService.ToolTip="Turn on this option to provide visual feedback and enhance interactivity when scrolling rows." />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Appearance Options" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit x:Name="useEvenRowBackground"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.UseEvenRowBackground, Mode=TwoWay}"
+                                       Content="Use Even Row Background"
+                                       ToolTipService.ToolTip="Use theme-dependent even row background." />
+                        <dxe:CheckEdit Name="showVerticalLinesCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.ShowVerticalLines, Mode=TwoWay}"
+                                       Content="Show Vertical Lines"
+                                       ToolTipService.ToolTip="Specifies whether to display vertical grid lines." />
+                        <dxe:CheckEdit Name="showHorizontalLinesCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.ShowHorizontalLines, Mode=TwoWay}"
+                                       Content="Show Horizontal Lines"
+                                       ToolTipService.ToolTip="Specifies whether to display horizontal grid lines." />
+                        <dxe:CheckEdit Name="highlightItemOnHover"
+                                       Margin="0,0,0,0"
+                                       IsChecked="{Binding Path=View.HighlightItemOnHover, Mode=TwoWay}"
+                                       Content="Highlight Item on Hover"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Navigation Style" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit Margin="0,0,0,0"
+                                     Background="{x:Null}"
+                                     ShowBorder="False"
+                                     x:Name="NavigationStyleComboBox"
+                                     ItemsSource="{dxe:EnumItemsSource EnumType=dxg:GridViewNavigationStyle}"
+                                     EditValue="{Binding Path=View.NavigationStyle, Mode=TwoWay}"
+                                     ToolTipService.ToolTip="Specifies whether row and/or cell focusing is allowed.">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Summary Options" Margin="0,5,0,12">
+                    <StackPanel>
+                        <RadioButton IsChecked="{Binding Path=View.ShowFixedTotalSummary, Mode=TwoWay}">Show Fixed Summary Panel</RadioButton>
+                        <RadioButton IsChecked="{Binding Path=View.TotalSummaryPosition, Mode=TwoWay, Converter={StaticResource TotalSummaryPositionToBooleanConverter}}">Show Summary Panel</RadioButton>
+                    </StackPanel>
+                </GroupBox>
+                <Button Command="{Binding View.Commands.ShowRibbonPrintPreview}">Show Print Preview</Button>
+                <local:RecentReports ReportService="{x:Reference rmsStandardTableView}" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxg:GridControl Name="grid"
+                         AutoExpandAllGroups="True"
+                         ItemsSource="{x:Static dxdb:EmployeesWithPhotoData.DataSource}"
+                         AllowColumnMRUFilterList="False"
+                         dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                         ShowBorder="False">
+            <dxg:GridControl.GroupSummary>
+                <dxg:GridSummaryItem SummaryType="Count" />
+            </dxg:GridControl.GroupSummary>
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="FullName"
+                                Width="3*"
+                                UnboundDataType="{x:Type sys:String}"
+                                UnboundExpression="[FirstName] + ' ' + [LastName]"
+                                ReadOnly="True"
+                                Image="{local:DemoHeaderImageExtension FullName}" />
+                <dxg:GridColumn FieldName="BirthDate"
+                                Width="2*"
+                                Image="{local:DemoHeaderImageExtension BirthDate}"
+                                CellTemplate="{StaticResource colBirthDateCellTemplate}">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:DateEditSettings DisplayFormat="d" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="JobTitle" Width="3*" Header="Job Title" Image="{local:DemoHeaderImageExtension JobTitle}" />
+                <dxg:GridColumn FieldName="CountryRegionName"
+                                Width="3*"
+                                Header="Country"
+                                Image="{local:DemoHeaderImageExtension Country}"
+                                Style="{StaticResource colCountryNameStyle}" />
+                <dxg:GridColumn FieldName="Age"
+                                Width="2*"
+                                UnboundDataType="{x:Type sys:Int32}"
+                                Visible="False"
+                                ShowInColumnChooser="False"
+                                UnboundExpression="DateDiffYear([BirthDate], Today())"
+                                AllowColumnFiltering="False" />
+                <dxg:GridColumn Name="colInfo" FieldName="Phone" Header="Phone" AllowSorting="False" Image="{local:DemoHeaderImageExtension Phone}" />
+                <dxg:GridColumn Width="*"
+                                GroupIndex="0"
+                                FieldName="GroupName"
+                                SortMode="Value"
+                                AllowEditing="False"
+                                GroupValueTemplate="{StaticResource colGroupNameGroupValueTemplate}"
+                                CellTemplate="{StaticResource colGroupNameCellTemplate}"
+                                PrintCellStyle="{StaticResource colGroupNamePrintCellStyle}" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+                <dxg:GridSummaryItem FieldName="FullName" SummaryType="Count" />
+            </dxg:GridControl.TotalSummary>
+            <dxg:GridControl.View>
+                <dxg:TableView ShowFixedTotalSummary="True"
+                               AllowScrollAnimation="True"
+                               Name="view"
+                               AllowFixedGroups="True"
+                               NavigationStyle="Row"
+                               AllowPrintColumnHeaderImage="True"
+                               HighlightItemOnHover="True">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxrudex:GridReportManagerService Name="rmsStandardTableView" />
+                    </dxmvvm:Interaction.Behaviors>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

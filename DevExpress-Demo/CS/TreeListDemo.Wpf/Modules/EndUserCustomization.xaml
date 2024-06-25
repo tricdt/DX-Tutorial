@@ -1,0 +1,279 @@
+﻿<local:TreeListDemoModule x:Class="TreeListDemo.EndUserCustomization"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                          xmlns:local="clr-namespace:TreeListDemo"
+                          mc:Ignorable="d"
+                          d:DesignHeight="400"
+                          d:DesignWidth="800">
+
+    <local:TreeListDemoModule.Resources>
+        <dxdb:EmployeesWithPhotoData x:Key="employeesData" />
+        <local:ShowTreeListLinesConverter x:Key="ShowTreeLinesConverter" />
+        <local:NavigationStyleToIsEnabledConverter x:Key="navigationStyleToIsEnabledConverter" />
+        <local:HeaderToImageConverter x:Key="HeaderToImageConverter" />
+        <local:CountryToFlagImageConverter x:Key="CountryToFlagImageConverter" />
+        <local:CountriesData x:Key="CountriesData" />
+        <local:EmployeeCategoryImageSelector x:Key="CategoryImageSelector" />
+        <dx:ImageDataConverter x:Key="ImageDataConverter" />
+        <dx:BoolToObjectConverter x:Key="ShowColumnChooserButtonContentConverter" TrueValue="Hide Column Chooser" FalseValue="Show Column Chooser" />
+        <dxg:RowPropertyValueConverter x:Key="RowPropertyValueConverter" />
+        <dxg:RowPropertyValueConverter x:Key="BirthdayMarkVisibilityRowPropertyValueConverter">
+            <dxg:RowPropertyValueConverter.InnerConverter>
+                <dx:BooleanToVisibilityConverter />
+            </dxg:RowPropertyValueConverter.InnerConverter>
+        </dxg:RowPropertyValueConverter>
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="TextTrimming">
+                <Setter.Value>CharacterEllipsis</Setter.Value>
+            </Setter>
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <DataTemplate x:Key="ColumnHeaderTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <dx:DXImage Source="{Binding Converter={StaticResource HeaderToImageConverter}}" Width="16" Height="16" VerticalAlignment="Center" />
+                <TextBlock Style="{StaticResource TextBlockStyle}" Text="{Binding}" Margin="4,0,0,0" Grid.Column="1" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="colBirthDateCellTemplate">
+            <dxe:DateEdit x:Name="PART_Editor">
+                <dxe:DateEdit.DisplayTemplate>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Style="{StaticResource TextBlockStyle}"
+                                       Margin="4,0,0,0"
+                                       Text="{Binding Path=DataContext.RowData.Row.BirthDate, RelativeSource={RelativeSource Mode=TemplatedParent}, StringFormat=MM/dd/yyyy}" />
+                            <dx:DXImage Margin="4,0,4,0"
+                                   Source="/TreeListDemo;component/Images/HeaderIcons/BirthDate.svg"
+                                   Visibility="{Binding Path=DataContext.Data, Converter={StaticResource BirthdayMarkVisibilityRowPropertyValueConverter}, ConverterParameter=BirthdaysMarkVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                   Width="16" Height="16"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center">
+                                <ToolTipService.ToolTip>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Path=DataContext.Data, Converter={StaticResource RowPropertyValueConverter}, ConverterParameter=DaysTillBirthDate, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                        <TextBlock Text="day(s) till the birthday" Margin="5,0,0,0" />
+                                    </StackPanel>
+                                </ToolTipService.ToolTip>
+                            </dx:DXImage>
+                        </Grid>
+                    </ControlTemplate>
+                </dxe:DateEdit.DisplayTemplate>
+            </dxe:DateEdit>
+        </DataTemplate>
+        <Style x:Key="colCountryComboBoxStyle" TargetType="{x:Type dxe:ComboBoxEditSettings}">
+            <Setter Property="ItemsSource" Value="{Binding Path=DataSource, Source={StaticResource CountriesData}}" />
+            <Setter Property="IsTextEditable" Value="False" />
+            <Setter Property="ApplyItemTemplateToSelectedItem" Value="True" />
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <dx:DXImage Source="{Binding Path=Flag, Converter={StaticResource ImageDataConverter}}"
+                                   Stretch="Uniform"
+                                   Height="16"
+                                   VerticalAlignment="Center" />
+                            <TextBlock Style="{StaticResource TextBlockStyle}" Margin="4,0,0,0" Text="{Binding Path=Name}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="colCountryNameStyle" TargetType="{x:Type dxg:ColumnBase}">
+            <Setter Property="EditSettings">
+                <Setter.Value>
+                    <dxe:ComboBoxEditSettings ValueMember="Name" DisplayMember="Name" Style="{StaticResource colCountryComboBoxStyle}" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </local:TreeListDemoModule.Resources>
+    <DockPanel>
+        <local:TreeListDemoRibbon DockPanel.Dock="Top" ExportTreeList="{x:Reference treeList}" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Header="Customization Options" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit x:Name="allowSortingCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.AllowSorting, Mode=TwoWay}"
+                                       Content="Allow Sorting" />
+                        <dxe:CheckEdit x:Name="allowMovingCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.AllowColumnMoving, Mode=TwoWay}"
+                                       Content="Allow Moving" />
+                        <dxe:CheckEdit x:Name="allowResizingCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.AllowResizing, Mode=TwoWay}"
+                                       Content="Allow Resizing" />
+                        <dxe:CheckEdit x:Name="showIndicatorCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.ShowIndicator, Mode=TwoWay}"
+                                       Content="Show Indicator" />
+                        <dxe:CheckEdit x:Name="autoWidthCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.AutoWidth, Mode=TwoWay}"
+                                       Content="Column Auto Width" />
+                        <dxe:CheckEdit x:Name="allowPerPixelScrollingCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.AllowPerPixelScrolling, Mode=TwoWay}"
+                                       Content="Allow Per Pixel Scrolling" />
+                        <dxe:CheckEdit x:Name="allowIndentScrolling"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.AllowTreeIndentScrolling, Mode=TwoWay}"
+                                       Content="Allow Tree Indent Scrolling" />
+                        <dxe:CheckEdit x:Name="useEvenRowBackground"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.UseEvenRowBackground, Mode=TwoWay}"
+                                       Content="Use Even Row Background" />
+                        <dxe:CheckEdit x:Name="showDataNavigator"
+                                       IsChecked="{Binding Path=View.ShowDataNavigator, Mode=TwoWay}"
+                                       Margin="0,0,0,4"
+                                       Content="Show Data Navigator" />
+                        <dxe:CheckEdit Name="highlightItemOnHover"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.HighlightItemOnHover, Mode=TwoWay}"
+                                       Content="Highlight Item on Hover"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Summary Options" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit x:Name="lbSummary"
+                                     Background="{x:Null}"
+                                     Margin="0,0,30,0"
+                                     ShowBorder="False"
+                                     SelectedIndex="0"
+                                     SelectedIndexChanged="lbSummary_SelectedIndexChanged">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <sys:String>Show Summary Panel</sys:String>
+                        <sys:String>Show Fixed Summary Panel</sys:String>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+
+                <GroupBox Header="Appearance Options" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit Name="showVerticalLinesCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.ShowVerticalLines, Mode=TwoWay}"
+                                       Content="Show Vertical Lines" />
+                        <dxe:CheckEdit Name="showHorizontalLinesCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.ShowHorizontalLines, Mode=TwoWay}"
+                                       Content="Show Horizontal Lines" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Navigation Style" Margin="0,5,0,0">
+                    <dxe:ComboBoxEdit Margin="0,0,30,0"
+                                      x:Name="NavigationStyleComboBox"
+                                      IsTextEditable="False"
+                                      DataContext="{x:Null}"
+                                      SelectedItem="{Binding Path=View.NavigationStyle, Mode=TwoWay, ElementName=treeList}">
+                        <dxe:ComboBoxEdit.ItemsSource>
+                            <local:NavigationStyleList>
+                                <dxg:GridViewNavigationStyle>Cell</dxg:GridViewNavigationStyle>
+                                <dxg:GridViewNavigationStyle>Row</dxg:GridViewNavigationStyle>
+                            </local:NavigationStyleList>
+                        </dxe:ComboBoxEdit.ItemsSource>
+                    </dxe:ComboBoxEdit>
+                </GroupBox>
+                <dxe:CheckEdit IsChecked="{Binding Path=View.AllowFixedColumnMenu, Mode=TwoWay}" Content="Enable Fixed Column Menu" Margin="0,8,0,4" />
+                <dxe:CheckEdit Name="chkEnableContextMenu"
+                               Content="Enable Context Menus"
+                               Margin="0,0,0,4"
+                               IsChecked="{Binding Path=View.IsColumnMenuEnabled, Mode=TwoWay}" />
+                <dxe:CheckEdit IsChecked="{Binding Path=View.AllowEditing, Mode=TwoWay}"
+                               Margin="0,0,0,12"
+                               Content="Enable Editing"
+                               IsEnabled="{Binding Path=SelectedItem, ElementName=NavigationStyleComboBox, Converter={StaticResource navigationStyleToIsEnabledConverter}}" />
+                <ToggleButton Name="showHideButton"
+                              Height="22"
+                              IsChecked="{Binding Path=View.IsColumnChooserVisible, Mode=TwoWay}"
+                              Content="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource ShowColumnChooserButtonContentConverter}}" />
+            </StackPanel>
+        </ScrollViewer>
+        <dxg:TreeListControl x:Name="treeList" ItemsSource="{Binding Path=DataSource, Source={StaticResource employeesData}}">
+            <dxg:TreeListControl.Columns>
+                <dxg:TreeListColumn Name="colFullName"
+                                    FieldName="FullName"
+                                    UnboundDataType="{x:Type sys:String}"
+                                    UnboundExpression="[FirstName] + ' ' + [LastName]"
+                                    ReadOnly="True"
+                                    HeaderTemplate="{StaticResource ColumnHeaderTemplate}" />
+                <dxg:TreeListColumn Name="colJobTitle" FieldName="JobTitle" HeaderTemplate="{StaticResource ColumnHeaderTemplate}" />
+                <dxg:TreeListColumn Name="colCountry"
+                                    FieldName="CountryRegionName"
+                                    Header="Country"
+                                    Width="130"
+                                    HeaderTemplate="{StaticResource ColumnHeaderTemplate}"
+                                    Style="{StaticResource colCountryNameStyle}" />
+                <dxg:TreeListColumn Name="colBirthDate"
+                                    FieldName="BirthDate"
+                                    Width="80"
+                                    HeaderTemplate="{StaticResource ColumnHeaderTemplate}"
+                                    CellTemplate="{StaticResource colBirthDateCellTemplate}">
+                    <dxg:TreeListColumn.EditSettings>
+                        <dxe:DateEditSettings DisplayFormat="d" />
+                    </dxg:TreeListColumn.EditSettings>
+                </dxg:TreeListColumn>
+                <dxg:TreeListColumn Name="colInfo" FieldName="Phone" AllowSorting="False" HeaderTemplate="{StaticResource ColumnHeaderTemplate}" />
+                <dxg:TreeListColumn FieldName="BirthDateDiffDays"
+                                    ShowInColumnChooser="False"
+                                    UnboundDataType="{x:Type sys:Int32}"
+                                    Visible="False"
+                                    UnboundExpression="DateDiffDay(Today(), AddYears([BirthDate], DateDiffYear([BirthDate], Today())))" />
+                <dxg:TreeListColumn FieldName="DaysTillBirthDate"
+                                    AllowUnboundExpressionEditor="True"
+                                    UnboundDataType="{x:Type sys:Int32}"
+                                    Visible="False"
+                                    UnboundExpression="Iif([BirthDateDiffDays] &gt; 0, [BirthDateDiffDays], [BirthDateDiffDays] + DateDiffDay(Today(), AddYears(Today(), 1)))" />
+                <dxg:TreeListColumn FieldName="BirthdayMarkVisibility"
+                                    AllowUnboundExpressionEditor="True"
+                                    ShowInColumnChooser="False"
+                                    UnboundDataType="{x:Type sys:Boolean}"
+                                    Visible="False"
+                                    UnboundExpression="Iif([DaysTillBirthDate] &lt; 50, 'True', 'False')" />
+            </dxg:TreeListControl.Columns>
+            <dxg:TreeListControl.TotalSummary>
+                <dxg:TreeListSummaryItem FieldName="FullName" SummaryType="Count" />
+                <dxg:TreeListSummaryItem SummaryType="Count" Alignment="Right" />
+            </dxg:TreeListControl.TotalSummary>
+            <dxg:TreeListControl.View>
+                <dxg:TreeListView x:Name="view"
+                                  KeyFieldName="Id"
+                                  ParentFieldName="ParentId"
+                                  AutoWidth="True"
+                                  AllowPerPixelScrolling="True"
+                                  AutoExpandAllNodes="True"
+                                  AllowCascadeUpdate="{Binding AllowPerPixelScrolling, RelativeSource={RelativeSource Self}}"
+                                  TotalSummaryPosition="Bottom"
+                                  IsTotalSummaryMenuEnabled="{Binding IsColumnMenuEnabled, RelativeSource={RelativeSource Self}}"
+                                  ShowNodeImages="True"
+                                  NodeImageSelector="{StaticResource CategoryImageSelector}"
+                                  AllowScrollAnimation="True"
+                                  PrintNodeImages="True"
+                                  HighlightItemOnHover="True" InitNewNode="OnInitNewNode"/>
+            </dxg:TreeListControl.View>
+        </dxg:TreeListControl>
+    </DockPanel>
+</local:TreeListDemoModule>

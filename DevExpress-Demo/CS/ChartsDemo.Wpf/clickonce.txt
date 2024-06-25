@@ -1,0 +1,13 @@
+DevExpress.Charts.v{DXVersion}.Core
+DevExpress.Xpf.Charts.v{DXVersion}
+DevExpress.Xpf.Gauges.v{DXVersion}
+DevExpress.Xpf.Map.v{DXVersion}
+DevExpress.Map.v{DXVersion}.Core
+DevExpress.Xpf.Printing.v{DXVersion}
+DevExpress.Xpf.DocumentViewer.v{DXVersion}.Core
+DevExpress.RichEdit.v{DXVersion}.Core
+DevExpress.Office.v{DXVersion}.Core
+DevExpress.Charts.Designer.v{DXVersion}
+DevExpress.Xpf.PropertyGrid.v{DXVersion}
+DevExpress.Xpf.TypedStyles.v{DXVersion}
+DevExpress.DataVisualization.v{DXVersion}.Core

@@ -1,0 +1,25 @@
+﻿<local:SpreadsheetDemoModule xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                             xmlns:dxsps="http://schemas.devexpress.com/winfx/2008/xaml/spreadsheet"
+                             xmlns:local="clr-namespace:SpreadsheetDemo"
+                             x:Class="SpreadsheetDemo.PrintTitles">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Button x:Name="btnPageSetup" Click="btnPageSetup_Click" Margin="4,4,4,4" HorizontalAlignment="Left" Width="115">Page Setup</Button>
+            <Button x:Name="btnPrintPreview" Click="btnPrintPreview_Click" Margin="125,4,4,4" HorizontalAlignment="Left" Width="114">Print Preview</Button>
+        </Grid>
+        <dxsps:SpreadsheetControl Grid.Row="1"
+                                  x:Name="spreadsheetControl1"
+                                  DocumentSource="{DXBinding '$local:DemoUtils.GetRelativePath(`PrintTitles_template.xlsx`)'}"
+                                  BorderThickness="0,1,0,0">
+            <dxsps:SpreadsheetControl.Options>
+                <dxsps:SpreadsheetControlOptions Culture="en-US" />
+            </dxsps:SpreadsheetControl.Options>
+        </dxsps:SpreadsheetControl>
+    </Grid>
+</local:SpreadsheetDemoModule>

@@ -1,0 +1,41 @@
+<dx:ThemedWindow x:Class="DevExpress.VideoRent.Wpf.LayoutOptionsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"    
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    Height="300" Width="300" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Icon="../Images/AppIcon.ico"
+    Title="{helpers:ConstString ID=LayoutOptions}" ShowInTaskbar="False">
+
+    <dxlc:LayoutControl Orientation="Vertical">
+        <dxlc:LayoutItem>
+            <dxe:CheckEdit x:Name="EnableLayoutSaving" Content="{helpers:ConstString ID=EnableLayoutSaving}"
+                EditValue="{Binding SaveAllLayouts, Source={x:Static local:SaveLayoutOptionsProvider.Current}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem>
+            <dxe:CheckEdit Content="{helpers:ConstString ID=SaveAndRestoreDetailViewLayouts}"
+                EditValue="{Binding SaveDetailViewLayouts, Source={x:Static local:SaveLayoutOptionsProvider.Current}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                IsEnabled="{Binding ElementName=EnableLayoutSaving,Path=EditValue}"/>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem>
+            <dxe:CheckEdit Content="{helpers:ConstString ID=SaveAndRestoreGridControlLayouts}"
+                EditValue="{Binding SaveGridControlsLayouts, Source={x:Static local:SaveLayoutOptionsProvider.Current}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                IsEnabled="{Binding ElementName=EnableLayoutSaving,Path=EditValue}"/>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem>
+            <dxe:CheckEdit Content="{helpers:ConstString ID=SaveAndRestoreDockWindowLayouts}"
+                EditValue="{Binding SaveDockLayoutManagersLayouts, Source={x:Static local:SaveLayoutOptionsProvider.Current}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                IsEnabled="{Binding ElementName=EnableLayoutSaving,Path=EditValue}"/>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem>
+            <dxe:CheckEdit Content="{helpers:ConstString ID=SaveAndRestoreLayoutControlLayouts}"
+                EditValue="{Binding SaveLayoutControlsLayouts, Source={x:Static local:SaveLayoutOptionsProvider.Current}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                IsEnabled="{Binding ElementName=EnableLayoutSaving,Path=EditValue}"/>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem VerticalAlignment="Bottom">
+            <Button Content="{helpers:ConstString ID=ClearLayouts}" Click="OnClearLayoutsButtonClick" />
+        </dxlc:LayoutItem>
+    </dxlc:LayoutControl>
+</dx:ThemedWindow>

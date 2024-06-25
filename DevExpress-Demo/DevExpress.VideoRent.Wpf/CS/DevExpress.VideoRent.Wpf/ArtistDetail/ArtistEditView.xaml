@@ -1,0 +1,149 @@
+<UserControl x:Class="DevExpress.VideoRent.Wpf.ArtistEditView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxet="http://schemas.devexpress.com/winfx/2008/xaml/editors/themekeys"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:resources="clr-namespace:DevExpress.VideoRent.Resources;assembly=DevExpress.VideoRent.Resources"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/EditsStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dx:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <helpers:DataSource x:Key="DataSource" />
+            <resources:ImagesSourceHelper x:Key="ImagesHelper" />
+            <helpers:ImageCollectionImageSource x:Key="AddButtonImageSource" ImageCollection="{Binding Source={StaticResource ImagesHelper}, Path=BarIcons}" ImageIndex="0" />
+            <helpers:ImageCollectionImageSource x:Key="DeleteButtonImageSource" ImageCollection="{Binding Source={StaticResource ImagesHelper}, Path=BarIcons}" ImageIndex="2" />
+            <helpers:ImageCollectionImageSource x:Key="AllowEditingButtonImageSource" ImageCollection="{Binding Source={StaticResource ImagesHelper}, Path=BarIcons}" ImageIndex="5" />
+            <helpers:ImageCollectionImageSource x:Key="NextItemGlyphSource" ImageCollection="{Binding Source={StaticResource ImagesHelper}, Path=BarIcons}" ImageIndex="7" />
+            <helpers:ImageCollectionImageSource x:Key="PrevItemGlyphSource" ImageCollection="{Binding Source={StaticResource ImagesHelper}, Path=BarIcons}" ImageIndex="6" />
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore"/>
+            <helpers:ValidationRuleIsNotBlank x:Key="ValidationRuleIsNotBlank" Message="{helpers:ConstString ID=RuleIsNotBlankWarning}" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}" DoValidateSignalSlot="{Binding DoValidateSignal}" IsValid="{Binding IsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <helpers:BindingInfo ElementName="resource:ElementLayoutDataStore" Property="{x:Static local:ElementLayoutDataStore.DisposeSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="FirstNameEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="LastNameEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="NickNameEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.NickName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="BirthNameEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.BirthName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="GenderEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="GenderEdit" Property="{x:Static dxe:LookUpEditBase.ItemsSourceProperty}" Value="{Binding PersonGenderEditData.List}" />
+            <helpers:BindingInfo ElementName="BirthDateEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="BirthCountryEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.BirthCountry!, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="BirthCountryEdit" Property="{x:Static dxe:LookUpEditBase.ItemsSourceProperty}" Value="{Binding CountryEditData.List}" />
+            <helpers:BindingInfo ElementName="BirthLocationEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.BirthLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <helpers:BindingInfo ElementName="LinkEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Link, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="LinkEdit" Property="{x:Static helpers:CustomEventCommandHelper.DefaultButtonClickProperty}" Value="{Binding CommandGoToWebSite}" />
+            <helpers:BindingInfo ElementName="BiographyEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Biography, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="MoviesAssociationsGrid" Property="{x:Static helpers:CustomEventCommandHelper.AddItemClickProperty}" Value="{Binding Detail.CommandAddMovie}" />
+            <helpers:BindingInfo ElementName="MoviesAssociationsGrid" Property="{x:Static helpers:AssociationsGrid.AllowDeleteProperty}" Value="{Binding CurrentMovie.AllowDelete}" />
+            <helpers:BindingInfo ElementName="MoviesAssociationsGrid" Property="{x:Static helpers:CustomEventCommandHelper.DeleteItemClickProperty}" Value="{Binding CommandDeleteCurrentMovie}" />
+            <helpers:BindingInfo ElementName="MoviesGrid" Property="{x:Static dxg:GridControl.ItemsSourceProperty}" Value="{Binding EditObject.VideoRentObject.Movies}" />
+            <helpers:BindingInfo ElementName="MoviesGridView" Property="{x:Static dxg:GridViewBase.FocusedRowProperty}" Value="{Binding CurrentMovie, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="MoviesGridView" Property="{x:Static dxg:GridViewBase.FocusedRowProperty}" Value="{Binding CurrentMovie, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="MoviesGridMovieEditSettings" Property="{x:Static dxg:LookUpEditSettings.ItemsSourceProperty}" Value="{Binding MovieEditData.List}" />
+            <helpers:BindingInfo ElementName="MoviesGridLineEditSettings" Property="{x:Static dxg:LookUpEditSettings.ItemsSourceProperty}" Value="{Binding MovieArtistLineEditData.List}" />
+            <helpers:BindingInfo ElementName="PhotoViewer" Property="{x:Static helpers:PhotoViewer.ItemsSourceProperty}" Value="{Binding EditObject.VideoRentObject.Pictures}" />
+            <helpers:BindingInfo ElementName="PhotoViewer" Property="{x:Static helpers:PhotoViewer.CurrentPictureProperty}" Value="{Binding CurrentPicture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="PhotoViewer" Property="{x:Static helpers:AddDeleteBar.AllowDeleteProperty}" Value="{Binding CurrentPicture.AllowDelete}" />
+            <helpers:BindingInfo ElementName="PhotoViewer" Property="{x:Static helpers:CustomEventCommandHelper.AddItemClickProperty}" Value="{Binding CommandAddPicture}" />
+            <helpers:BindingInfo ElementName="PhotoViewer" Property="{x:Static helpers:CustomEventCommandHelper.DeleteItemClickProperty}" Value="{Binding CommandDeleteCurrentPicture}" />
+            <helpers:ValidationInfo EditName0="FirstNameEdit" EditName1="LastNameEdit" Rule="{StaticResource ValidationRuleIsNotBlank}" />
+            <helpers:ElementLayoutInfo ElementName="MainLayoutControl" StoreFolder="LayoutControl:ArtistEdit-MainLayoutControl" Store="{StaticResource ElementLayoutDataStore}" />
+            <helpers:ElementLayoutInfo ElementName="MoviesGrid" StoreFolder="GridControl:ArtistEdit-MoviesGrid" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <dxlc:LayoutControl x:Name="MainLayoutControl" Padding="0">
+        <dxlc:LayoutGroup Orientation="Vertical">
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=FirstNameLabel}">
+                <dxe:TextEdit x:Name="FirstNameEdit" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=LastNameLabel}">
+                <dxe:TextEdit x:Name="LastNameEdit" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=NickNameLabel}">
+                <dxe:TextEdit x:Name="NickNameEdit" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=BirthNameLabel}">
+                <dxe:TextEdit x:Name="BirthNameEdit" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutGroup>
+                <dxlc:LayoutGroup Orientation="Vertical">
+                    <dxlc:LayoutItem Label="{helpers:ConstString ID=GenderLabel}">
+                        <dxe:ComboBoxEdit x:Name="GenderEdit" Style="{StaticResource IconAndValueComboBoxEdit}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="{helpers:ConstString ID=BirthCountryLabel}">
+                        <dxe:ComboBoxEdit x:Name="BirthCountryEdit" Style="{StaticResource SelectComboBoxEdit}" />
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup Orientation="Vertical">
+                    <dxlc:LayoutItem Label="{helpers:ConstString ID=BirthDateLabel}">
+                        <dxe:DateEdit x:Name="BirthDateEdit" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="{helpers:ConstString ID=BirthLocationLabel}">
+                        <dxe:TextEdit x:Name="BirthLocationEdit" />
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=LinkLabel}">
+                <dxe:ButtonEdit x:Name="LinkEdit" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutGroup VerticalAlignment="Stretch" View="Tabs" SelectedTabIndex="1">
+                <dxlc:LayoutGroup.TabsStyle>
+                    <Style TargetType="dx:DXTabControl">
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                </dxlc:LayoutGroup.TabsStyle>
+                <dxlc:LayoutGroup Header="{helpers:ConstString ID=Biography}">
+                    <dxlc:LayoutItem VerticalAlignment="Stretch" Padding="2">
+                        <dxe:TextEdit x:Name="BiographyEdit" Style="{StaticResource MultilineTextEdit}" />
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup Header="{helpers:ConstString ID=Movies}">
+                    <dxlc:LayoutItem VerticalAlignment="Stretch">
+                        <helpers:AssociationsGrid x:Name="MoviesAssociationsGrid" AddItemContent="{helpers:ConstString ID=Add}" DeleteItemContent="{helpers:ConstString ID=Delete}" AllowEditingItemContent="{helpers:ConstString ID=AllowEditing}" AddItemGlyph="{Binding Source={StaticResource AddButtonImageSource}, Path=ImageSource}" DeleteItemGlyph="{Binding Source={StaticResource DeleteButtonImageSource}, Path=ImageSource}" AllowEditingItemGlyph="{Binding Source={StaticResource AllowEditingButtonImageSource}, Path=ImageSource}">
+                            <helpers:AssociationsGrid.MainContent>
+                                <dxg:GridControl x:Name="MoviesGrid" ShowBorder="False">
+                                    <dxg:GridControl.View>
+                                        <dxg:TableView x:Name="MoviesGridView" />
+                                    </dxg:GridControl.View>
+                                    <dxg:GridControl.Columns>
+                                        <dxg:GridColumn x:Name="MovieColumn" Header="{helpers:ConstString ID=Movie}" FieldName="Movie!">
+                                            <dxg:GridColumn.EditSettings>
+                                                <dxg:LookUpEditSettings x:Name="MoviesGridMovieEditSettings" helpers:StyleConverter.Style="{StaticResource MovieLookUpEdit}" />
+                                            </dxg:GridColumn.EditSettings>
+                                        </dxg:GridColumn>
+                                        <dxg:GridColumn x:Name="LineColumn" Header="{helpers:ConstString ID=Line}" FieldName="Line!">
+                                            <dxg:GridColumn.EditSettings>
+                                                <dxe:ComboBoxEditSettings x:Name="MoviesGridLineEditSettings" helpers:StyleConverter.Style="{StaticResource SelectComboBoxEdit}" />
+                                            </dxg:GridColumn.EditSettings>
+                                        </dxg:GridColumn>
+                                        <dxg:GridColumn x:Name="DescriptionColumn" Header="{helpers:ConstString ID=Description}" FieldName="Description">
+                                            <dxg:GridColumn.EditSettings>
+                                                <dxe:MemoEditSettings helpers:StyleConverter.Style="{StaticResource MemoEdit}" />
+                                            </dxg:GridColumn.EditSettings>
+                                        </dxg:GridColumn>
+                                    </dxg:GridControl.Columns>
+                                </dxg:GridControl>
+                            </helpers:AssociationsGrid.MainContent>
+                        </helpers:AssociationsGrid>
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutItem VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="350" dxlc:LayoutControl.AllowHorizontalSizing="True" x:Name="PhotoLayoutItem">
+            <ContentControl Template="{DynamicResource ResourceKey={dxet:TextEditThemeKey ResourceKey=EmptyBorderTemplate}}">
+                <helpers:PhotoViewer x:Name="PhotoViewer" AddItemContent="{helpers:ConstString ID=Add}" DeleteItemContent="{helpers:ConstString ID=Delete}" AddItemGlyph="{Binding Source={StaticResource AddButtonImageSource}, Path=ImageSource}" DeleteItemGlyph="{Binding Source={StaticResource DeleteButtonImageSource}, Path=ImageSource}"
+                    NextItemGlyph="{Binding Source={StaticResource NextItemGlyphSource}, Path=ImageSource}" PrevItemGlyph="{Binding Source={StaticResource PrevItemGlyphSource}, Path=ImageSource}" />
+            </ContentControl>
+        </dxlc:LayoutItem>
+    </dxlc:LayoutControl>
+</UserControl>

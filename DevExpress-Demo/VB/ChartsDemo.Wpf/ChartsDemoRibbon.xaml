@@ -1,0 +1,92 @@
+﻿<UserControl
+    x:Class="ChartsDemo.ChartsDemoRibbon"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxct="http://schemas.devexpress.com/winfx/2008/xaml/charts/themekeys"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:ChartsDemo"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="320"
+    dxb:MergingProperties.ElementMergingBehavior="InternalWithExternal"
+    x:Name="chartsDemoRibbon">
+
+
+
+    <local:MarkedRibbonControl
+        SelectedPageOnMerging="{Binding ElementName=chartsDemoRibbon, Path=SelectedPageOnMerging}"
+        dxc:ChartControlBase.Chart="{Binding Chart}">
+        <dxr:RibbonPage
+            Caption="Demo">
+            <dxr:RibbonPageGroup
+                Caption="Chart"
+                IsVisible="{Binding ShowChartGroup}">
+                <dxb:BarSubItem
+                    x:Name="PaletteItem"
+                    LargeGlyph="{dx:DXImage SvgImages/Dashboards/EditColors.svg}"
+                    Glyph="{dx:DXImage SvgImages/Dashboards/EditColors.svg}"
+                    Style="{DynamicResource {dxct:ChartToolbarThemeKey ResourceKey=PaletteItem}}"
+                    IsVisible="{Binding ShowPaletteButton}">
+                </dxb:BarSubItem>
+                <dxb:BarButtonItem
+                    IsVisible="{Binding ShowRunChartDesignerButton}"
+                    Content="Run Designer"
+                    LargeGlyph="{dx:DXImage SvgImages/Reports/ChartDesigner.svg}"
+                    Glyph="{dx:DXImage SvgImages/Reports/ChartDesigner.svg}"
+                    RibbonStyle="Large"
+                    Command="{Binding RunChartDesignerCommand}">
+                </dxb:BarButtonItem>
+                <dxb:BarSubItem
+                    Content="Export"
+                    LargeGlyph="{dx:DXImage SvgImages/Export/Export.svg}"
+                    Glyph="{dx:DXImage SvgImages/Export/Export.svg}"
+                    RibbonStyle="Large"
+                    IsVisible="{Binding ShowExportButton}">
+                    <dxb:BarSubItem.Items>
+                        <dxb:BarButtonItem
+                            Content="Export to Image"
+                            Glyph="{dx:DXImage SvgImages/Export/ExportToIMG.svg}"
+                            Command="{Binding ExportToImageCommand}"/>
+                        <dxb:BarButtonItem
+                            Content="Export to XLS"
+                            Glyph="{dx:DXImage SvgImages/Export/ExportToXLS.svg}"
+                            Command="{Binding ExportToXlsCommand}"/>
+                        <dxb:BarButtonItem
+                            Content="Export to XLSX"
+                            Glyph="{dx:DXImage SvgImages/Export/ExportToXLSX.svg}"
+                            Command="{Binding ExportToXlsxCommand}"/>
+                        <dxb:BarButtonItem
+                            Content="Export to DOCX"
+                            Glyph="{dx:DXImage SvgImages/Export/ExportToDOCX.svg}"
+                            Command="{Binding ExportToDocxCommand}"/>
+                        <dxb:BarButtonItem
+                            Content="Export to MHT"
+                            Glyph="{dx:DXImage SvgImages/Export/ExportToMHT.svg}"
+                            Command="{Binding ExportToMhtCommand}"/>
+                        <dxb:BarButtonItem
+                            Content="Export to HTML"
+                            Glyph="{dx:DXImage SvgImages/Export/ExportToHTML.svg}"
+                            Command="{Binding ExportToHtmlCommand}"/>
+                        <dxb:BarButtonItem
+                            Content="Export to PDF"
+                            Glyph="{dx:DXImage SvgImages/Export/ExportToPDF.svg}"
+                            Command="{Binding ExportToPdfCommand}"/>
+                        <dxb:BarButtonItem
+                            Content="Export to RTF"
+                            Glyph="{dx:DXImage SvgImages/Export/ExportToRTF.svg}"
+                            Command="{Binding ExportToRtfCommand}"/>
+                        <dxb:BarButtonItem
+                            Content="Export to XPS"
+                            Glyph="{dx:DXImage SvgImages/Export/ExportToXPS.svg}"
+                            Command="{Binding ExportToXpsCommand}"/>
+                    </dxb:BarSubItem.Items>
+                </dxb:BarSubItem>
+            </dxr:RibbonPageGroup>
+        </dxr:RibbonPage>
+    </local:MarkedRibbonControl>
+</UserControl>

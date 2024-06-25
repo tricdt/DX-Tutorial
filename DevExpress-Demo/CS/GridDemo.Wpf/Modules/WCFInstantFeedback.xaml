@@ -1,0 +1,142 @@
+﻿<local:GridDemoModule x:Class="GridDemo.WCFInstantFeedback"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800">
+    <!--#region Resources-->
+    <local:GridDemoModule.Resources>
+        <dxmvvm:ObjectToObjectConverter x:Key="IssueStatusImageConverter">
+            <dxmvvm:MapItem Source="Active" Target="/GridDemo;component/Images/IssueIcons/Active.svg" />
+            <dxmvvm:MapItem Source="Answered" Target="/GridDemo;component/Images/IssueIcons/Answered.svg" />
+            <dxmvvm:MapItem Source="Customer Closed" Target="/GridDemo;component/Images/IssueIcons/CustomerClosed.svg" />
+            <dxmvvm:MapItem Source="Duplicate" Target="/GridDemo;component/Images/IssueIcons/Duplicate.svg" />
+            <dxmvvm:MapItem Source="Insufficient Information" Target="/GridDemo;component/Images/IssueIcons/InsufficientInformation.svg" />
+        </dxmvvm:ObjectToObjectConverter>
+        <DataTemplate x:Key="statusTemplate">
+            <dx:DXImage Height="16"
+                   Width="16"
+                   HorizontalAlignment="Center"
+                   ToolTipService.ToolTip="{Binding Path=Value}"
+                   Source="{Binding Path=Value, Converter={StaticResource IssueStatusImageConverter}}"
+                   RenderOptions.BitmapScalingMode="NearestNeighbor" />
+        </DataTemplate>
+    </local:GridDemoModule.Resources>
+    <!--#endregion-->
+    <DockPanel>
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12" MinWidth="210" MaxWidth="230">
+                <Grid Margin="0,0,0,1" HorizontalAlignment="Stretch" RenderOptions.BitmapScalingMode="NearestNeighbor">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <dx:DXImage Source="/GridDemo;component/Images/WarningIcon.svg" Width="48" Height="48"/>
+                    <TextBlock Margin="4,0,0,0" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center">
+                        In this demo, the GridControl loads its data from the <dxdb:ExternalHyperlink NavigateUri="{x:Static local:WCFInstantFeedback.ServiceUri}">WCF service</dxdb:ExternalHyperlink>,
+                        so this demo requires internet connection.</TextBlock>
+                </Grid>
+
+                <GroupBox Header="Filter Criteria" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit x:Name="filter"
+                                     ValueMember="Content"
+                                     ShowBorder="False"
+                                     DisplayMember="DisplayName"
+                                     SelectedIndex="0"
+                                     ShowNullTextForEmptyValue="False">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <local:ValueSelectorItem DisplayName="All" Content="" />
+                        <local:ValueSelectorItem DisplayName=".NET" Content="[TechnologyName] = '.NET'" />
+                        <local:ValueSelectorItem DisplayName="Urgent" Content="[Urgent] = True" />
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <dxe:CheckEdit Margin="0,8,0,0" IsChecked="{Binding Path=View.AllowPaging, Mode=TwoWay}" Content="Allow Paging" />
+
+                <TextBlock TextWrapping="Wrap" Margin="0,8,0,0">
+                    In this demo, the grid uses an additional WCF Service method to speed up the performance of data management operations (grouping, sorting, filtering, etc).<LineBreak />
+                    Set the <dxdb:ExternalHyperlink NavigateUri="https://documentation.devexpress.com/#WPF/DevExpressXpfCoreServerModeWcfInstantFeedbackDataSource_UseExtendedDataQuerytopic">
+                        UseExtendedDataQuery
+                    </dxdb:ExternalHyperlink>
+                    property to <Bold>true</Bold>
+                    to use this method.</TextBlock>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <Grid>
+            <dx:WcfInstantFeedbackDataSource Name="wcfInstantSource"
+                                             KeyExpression="Oid"
+                                             UseExtendedDataQuery="True"
+                                             DataServiceContext="{x:Static local:WCFInstantFeedback.DataServiceContext}"
+                                             Query="{Binding DataServiceContext.SCIssuesDemo, RelativeSource={RelativeSource Self}}" />
+            <dxg:GridControl Name="grid"
+                             ItemsSource="{Binding ElementName=wcfInstantSource, Path=Data}"
+                             SelectionMode="Row"
+                             FilterString="{DXBinding '@e(filter).EditValue', Mode=TwoWay}"
+                             ShowBorder="False">
+                <!--#region Columns-->
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn x:Name="colId"
+                                    FieldName="ID"
+                                    Width="70"
+                                    FixedWidth="True"
+                                    AllowGrouping="False"
+                                    AllowColumnFiltering="False"
+                                    AllowResizing="False">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:HyperlinkEditSettings NavigationUrlFormat="http://devexpress.com/Support/Center/p/{0}.aspx" AllowAutoNavigate="True" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn x:Name="colSubject" FieldName="Subject" Width="5*" AllowGrouping="False" AllowColumnFiltering="False" />
+                    <dxg:GridColumn x:Name="colTechnologyName" FieldName="TechnologyName" Width="1.5*" Header="Technology" />
+                    <dxg:GridColumn x:Name="colProductName" FieldName="ProductName" Width="3*" Header="Product" />
+                    <dxg:GridColumn x:Name="colStatus"
+                                    FieldName="Status"
+                                    FixedWidth="True"
+                                    Width="60"
+                                    AllowResizing="False"
+                                    CellTemplate="{StaticResource statusTemplate}" />
+                    <dxg:GridColumn x:Name="colCreatedOn"
+                                    FieldName="CreatedOn"
+                                    AllowGrouping="False"
+                                    AllowColumnFiltering="False"
+                                    AllowResizing="False"
+                                    Width="90"
+                                    FixedWidth="True" />
+                    <dxg:GridColumn x:Name="colUrgent" FieldName="Urgent" FixedWidth="True" Width="70" AllowResizing="False" />
+                </dxg:GridControl.Columns>
+                <!--#endregion-->
+                <dxg:GridControl.GroupSummary>
+                    <dxg:GridSummaryItem FieldName="TechnologyName" SummaryType="Count" />
+                </dxg:GridControl.GroupSummary>
+                <dxg:GridControl.TotalSummary>
+                    <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+                </dxg:GridControl.TotalSummary>
+                <dxg:GridControl.View>
+                    <dxg:TableView x:Name="view"
+                                   ShowFixedTotalSummary="True"
+                                   WaitIndicatorType="Panel"
+                                   ShowAutoFilterRow="True"
+                                   NavigationStyle="Row"
+                                   AllowEditing="False"
+                                   SearchPanelFindFilter="Contains"/>
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+        </Grid>
+    </DockPanel>
+</local:GridDemoModule>

@@ -1,0 +1,57 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf">
+
+    <helpers:NullContentToVisibilityConverter x:Key="NullContentToVisibilityConverter" />
+    <helpers:StringFormatConverter x:Key="StringFormatConverter" />
+    <DataTemplate x:Key="TextToolTipTemplate">
+        <TextBlock Text="{Binding}" MaxWidth="250" MaxHeight="400" TextWrapping="Wrap" TextTrimming="WordEllipsis" />
+    </DataTemplate>
+    <local:CustomerPhotoConverter x:Key="CustomerPhotoConverter" />
+    <DataTemplate x:Key="MovieFormatTabItemHeaderTemplate">
+        <StackPanel Orientation="Horizontal">
+            <Image Margin="1,1,6,1" Source="{Binding FormatIcon}" Stretch="None" MinHeight="16" HorizontalAlignment="Left" />
+            <TextBlock HorizontalAlignment="Left" Text="{Binding FormatText}" />
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="CustomerInfoTemplate">
+        <dxlc:LayoutControl Orientation="Vertical" Padding="0" Visibility="{Binding Converter={StaticResource NullContentToVisibilityConverter}}">
+            <dxlc:LayoutItem>
+                <Grid SnapsToDevicePixels="True">
+                    <Border Background="Black" Opacity="0.15" Margin="3,3,0,0" />
+                    <Border Background="White" BorderBrush="#40000000" BorderThickness="1" Margin="0,0,3,3">
+                        <Border Background="#40000000" Margin="12" Padding="1">
+                            <Image Source="{Binding Photo, Converter={StaticResource CustomerPhotoConverter}}" Stretch="Uniform"/>
+                        </Border>
+                    </Border>
+                </Grid>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Margin="10,0">
+                <TextBlock Text="{Binding FullName}" FontSize="21" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=CardNumberLabel}" Margin="10,0">
+                <TextBlock Text="{Binding CustomerId, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:D6\}}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=BirthDateLabel}" Margin="10,0">
+                <TextBlock Text="{Binding BirthDate, Converter={StaticResource StringFormatConverter}, ConverterParameter=\{0:MMMM dd\, yyyy\}}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=EmailLabel}" Margin="10,0">
+                <TextBlock Text="{Binding Email}" TextWrapping="Wrap" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=PhoneLabel}" Margin="10,0">
+                <TextBlock Text="{Binding Phone}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="{helpers:ConstString ID=AddressLabel}" Margin="10,0">
+                <TextBlock Text="{Binding Address}" TextWrapping="Wrap" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Margin="10,0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontWeight="SemiBold" Text="{Binding DiscountLevel, Converter={StaticResource StringFormatConverter}, ConverterParameter={helpers:ConstString ID=RenterDiscount}}" />
+                    <TextBlock Margin="5,0,0,0" Text="{Binding Discount, Converter={StaticResource StringFormatConverter}, ConverterParameter=(Discount\=\{0:P\})}" />
+                </StackPanel>
+            </dxlc:LayoutItem>
+        </dxlc:LayoutControl>
+    </DataTemplate>
+</ResourceDictionary>

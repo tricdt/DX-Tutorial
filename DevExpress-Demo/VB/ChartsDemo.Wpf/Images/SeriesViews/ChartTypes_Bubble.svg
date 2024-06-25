@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.altRed{fill:#D11C1C;}
+	.altYellow{fill:#FFB115;}
+	.altBlue{fill:#1177D7;}
+	.altGreen{fill:#039C23;}
+</style>
+<circle class="altYellow" cx="11" cy="21" r="7"/>
+<circle class="altBlue" cx="23" cy="11" r="5"/>
+<circle class="altGreen" cx="24" cy="22" r="2"/>
+<circle class="altRed" cx="12" cy="6" r="4"/>
+</svg>

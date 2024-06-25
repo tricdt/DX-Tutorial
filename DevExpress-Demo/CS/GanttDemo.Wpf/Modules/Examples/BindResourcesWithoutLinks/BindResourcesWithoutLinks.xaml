@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="GanttDemo.Examples.BindResourcesWithoutLinks"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:GanttDemo.Examples"
+             xmlns:dxgn="http://schemas.devexpress.com/winfx/2008/xaml/gantt">
+    <UserControl.DataContext>
+        <local:BindResourcesWithoutLinksViewModel/>
+    </UserControl.DataContext>
+    <dxgn:GanttControl ItemsSource="{Binding Tasks}">
+        <dxgn:GanttColumn BindTo="Name" Width="Auto"/>
+        <dxgn:GanttColumn BindTo="ResourceLinks" AllowEditing="True"/>
+        <dxgn:GanttControl.View>
+            <dxgn:GanttView ResourcesSource="{Binding Resources}"
+                            ResourceLinksPath="ResourceIds"
+                            Zoom="2:0:0"
+                            AutoExpandAllNodes="True"
+                            TreeListWidth="Auto"
+                            ChildNodesPath="Children"
+                            TreeDerivationMode="ChildNodesSelector"
+                            StartDateMapping="StartDate"
+                            FinishDateMapping="FinishDate"
+                            NameMapping="Name"
+                            NonworkingDayDisplayMode="Cut"
+                            NonworkingTimeDisplayMode="Cut"
+                            AllowEditing="False">
+                <dxgn:GanttView.ResourceMappings>
+                    <dxgn:GanttResourceMappings Name="Name" Key="Id"/>
+                </dxgn:GanttView.ResourceMappings>
+                <dxgn:GanttView.ResourceLinkMappings>
+                    <dxgn:GanttResourceLinkMappings Resource="."/>
+                </dxgn:GanttView.ResourceLinkMappings>
+            </dxgn:GanttView>
+        </dxgn:GanttControl.View>
+    </dxgn:GanttControl>
+</UserControl>

@@ -1,0 +1,51 @@
+﻿<local:PivotGridDemoModule x:Class="PivotGridDemo.SortBySummary"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                           xmlns:local="clr-namespace:PivotGridDemo"
+                           xmlns:dxpg="http://schemas.devexpress.com/winfx/2008/xaml/pivotgrid"
+                           xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                           mc:Ignorable="d"
+                           d:DesignHeight="300"
+                           d:DesignWidth="600">
+    <DockPanel>
+        <local:PivotGridDemoRibbon DockPanel.Dock="Top" ExportPivotGrid="{x:Reference pivotGrid}"/>
+        <dxpg:PivotGridControl x:Name="pivotGrid"
+                           DataProcessingEngine="Optimized"
+                           DataSource="{x:Static dxdb:NWindDataProvider.SalesPersons}"
+                           local:FieldAreaHelper.FixAreas="True"
+                           RowTreeWidth="220"
+                           ShowBorder="False"
+                           Loaded="{DXEvent '@Self.BestFit($dxpg:FieldArea.ColumnArea, true, false)'}">
+            <dxpg:PivotGridControl.Fields>
+                <dxpg:PivotGridField x:Name="fieldQuarter"
+                                 DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateMonth}"
+                                 Area="RowArea"
+                                 AreaIndex="0"
+                                 Width="130"
+                                 ShowGroupIntervalName="True"
+                                 ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}" />
+                <dxpg:PivotGridField x:Name="fieldSalesPerson"
+                                 DataBinding="{dxpg:DataSourceColumnBinding FullName}"
+                                 Area="RowArea"
+                                 AreaIndex="1"
+                                 Width="130"
+                                 Caption="Sales Person"
+                                 SortOrder="Descending"
+                                 HeaderImage="{dx:SvgImageSource Uri='pack://application:,,,/PivotGridDemo;component/Images/HeaderIcons/Person.svg', Size='16,16'}" />
+                <dxpg:PivotGridField x:Name="fieldExtendedPrice" DataBinding="{dxpg:DataSourceColumnBinding ExtendedPrice}" Area="DataArea" AreaIndex="0" Caption="Order Amount" CellFormat="c" />
+                <dxpg:PivotGridField x:Name="fieldCategoryName" Area="ColumnArea" Caption="Category Name" DataBinding="{dxpg:DataSourceColumnBinding CategoryName}" />
+                <dxpg:PivotGridField x:Name="fieldQuantity" DataBinding="{dxpg:DataSourceColumnBinding Quantity}" Area="DataArea" AreaIndex="1" Caption="Quantity" />
+                <dxpg:PivotGridField x:Name="fieldDiscount"
+                                 DataBinding="{dxpg:DataSourceColumnBinding Discount}"
+                                 Area="DataArea"
+                                 AreaIndex="2"
+                                 Caption="Discount (Avg)"
+                                 CellFormat="p"
+                                 SummaryType="Average" />
+            </dxpg:PivotGridControl.Fields>
+        </dxpg:PivotGridControl>
+    </DockPanel>
+</local:PivotGridDemoModule>

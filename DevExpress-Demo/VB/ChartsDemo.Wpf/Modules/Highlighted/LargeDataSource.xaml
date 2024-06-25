@@ -1,0 +1,73 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.LargeDataSourceDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:local="clr-namespace:ChartsDemo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800">
+
+    <!--#region Resources-->
+
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dxc:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+
+    <!--#endregion-->
+
+    <DockPanel>
+        <!--#region ChartsDemoRibbon & Options-->
+        <local:ChartsDemoRibbon Chart="{x:Reference chart}" DockPanel.Dock="Top" />
+        <ScrollViewer Name="PART_Options" Style="{StaticResource optionsScrollViewerStyle}">
+            <StackPanel Style="{StaticResource optionsRootStackPanelStyle}">
+                <dx:SimpleButton
+                    x:Name="btnAdd250KPoints"
+                    Margin="{StaticResource optionsGroupTopMargin}"
+                    Click="btnAdd250KPoints_Click"
+                    Content="Add 250K points" />
+                <dx:SimpleButton
+                    x:Name="btnAdd500KPoints"
+                    Margin="{StaticResource optionsGroupTopMargin}"
+                    Click="btnAdd500KPoints_Click"
+                    Content="Add 500K points" />
+                <dx:SimpleButton
+                    x:Name="btnAdd1MPoints"
+                    Margin="{StaticResource optionsGroupTopMargin}"
+                    Click="btnAdd1MPoints_Click"
+                    Content="Add 1M points" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dx:LoadingDecorator x:Name="loadingDecorator" IsSplashScreenShown="False">
+            <dxc:ChartControl x:Name="chart" CrosshairEnabled="False">
+                <!--#region Titles-->
+                <dxc:ChartControl.Titles>
+                    <dxc:Title HorizontalAlignment="Center" Content="Large Data Source" />
+                    <dxc:Title
+                        x:Name="pointCountTitle"
+                        HorizontalAlignment="Center"
+                        FontSize="14" />
+                </dxc:ChartControl.Titles>
+                <!--#endregion-->
+                <dxc:XYDiagram2D
+                    x:Name="xyDiagram"
+                    EnableAxisXNavigation="True"
+                    EnableAxisYNavigation="True">
+                    <dxc:XYDiagram2D.NavigationOptions>
+                        <dxc:NavigationOptions AxisXMaxZoomPercent="1000000" AxisYMaxZoomPercent="1000000" />
+                    </dxc:XYDiagram2D.NavigationOptions>
+                </dxc:XYDiagram2D>
+            </dxc:ChartControl>
+        </dx:LoadingDecorator>
+    </DockPanel>
+
+</local:ChartsDemoModule>

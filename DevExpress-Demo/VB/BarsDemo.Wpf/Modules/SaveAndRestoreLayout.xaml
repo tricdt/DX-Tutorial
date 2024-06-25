@@ -1,0 +1,202 @@
+﻿<local:BarsDemoModule x:Class="BarsDemo.SaveAndRestoreLayout"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:local="clr-namespace:BarsDemo"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                      x:Name="root">
+
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <StackPanel.Resources>
+                    <Thickness x:Key="ElementMargin">0,4,0,0</Thickness>
+                    <sys:Double x:Key="GroupIndent">10.0</sys:Double>
+                    <sys:Double x:Key="ElementIndent">4.0</sys:Double>
+                </StackPanel.Resources>
+                <GroupBox Header="Layout" Margin="0,5,0,0">
+                    <StackPanel>
+                        <Button x:Name="serializeButton" Content="Save" Click="serializeButton_Click" />
+                        <Button x:Name="deserializeButton" IsEnabled="False" Margin="{StaticResource ElementMargin}" Content="Restore" Click="deserializeButton_Click" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Layout Samples" Margin="0,5,0,0" MinWidth="150">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Select:" VerticalAlignment="Center" Margin="0,0,8,0" />
+                            <dxe:ComboBoxEdit Grid.Column="1" x:Name="layoutSampleName" IsTextEditable="False" SelectedIndex="0">
+                                <dxe:ComboBoxEdit.Items>
+                                    <sys:String>Layout1</sys:String>
+                                    <sys:String>Layout2</sys:String>
+                                    <sys:String>Layout3</sys:String>
+                                </dxe:ComboBoxEdit.Items>
+                            </dxe:ComboBoxEdit>
+                        </Grid>
+                        <Button x:Name="loadSampleLayoutButton" Margin="0,10,0,0" Content="Load" Click="loadSampleLayoutButton_Click" />
+                    </StackPanel>
+                </GroupBox>
+                <dxe:CheckEdit x:Name="useWManagerCheck" Content="Use WorkspaceManager" IsChecked="True" Margin="0,8,0,0" />
+                <GroupBox x:Name="transitionEffectsGroup" Header="Transition Effects" Margin="0,1,0,0">
+
+                    <dxe:ComboBoxEdit x:Name="transitionComboBox"
+                                      IsEnabled="{Binding Path=IsChecked, ElementName=useWManagerCheck}"
+                                      SelectedIndex="0"
+                                      IsTextEditable="False"
+                                      SelectedIndexChanged="transitionComboBox_SelectedIndexChanged">
+                        <dx:TransitionEffect>None</dx:TransitionEffect>
+                        <dx:TransitionEffect>Fade</dx:TransitionEffect>
+                        <dx:TransitionEffect>LineReveal</dx:TransitionEffect>
+                        <dx:TransitionEffect>RadialBlur</dx:TransitionEffect>
+                        <dx:TransitionEffect>Ripple</dx:TransitionEffect>
+                    </dxe:ComboBoxEdit>
+                </GroupBox>
+                <GroupBox x:Name="isolatedStorageSettingsGroup" Header="Isolated Storage Layout" Margin="0,5,0,0">
+                    <StackPanel>
+                        <Button Name="saveLocalStorageButton" Content="Save" Click="saveLocalStorageButton_Click" />
+                        <Button Name="loadLocalStorageButton" Content="Restore" Click="loadLocalStorageButton_Click" Margin="{StaticResource ElementMargin}" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+
+        <dxb:BarManager x:Name="barManager" CreateStandardLayout="False" dx:WorkspaceManager.IsEnabled="True">
+            <dxb:BarManager.Bars>
+                <dxb:Bar Caption="MainMenu" x:Name="MainMenu" IsMainMenu="True">
+                    <dxb:Bar.DockInfo>
+                        <dxb:BarDockInfo ContainerName="TopDockControl" />
+                    </dxb:Bar.DockInfo>
+                    <dxb:BarSubItem Name="bsFile" Content="File">
+                        <dxb:BarButtonItemLink BarItemName="bNew" />
+                        <dxb:BarButtonItemLink BarItemName="bOpen" />
+                        <dxb:BarButtonItemLink BarItemName="bSave" />
+                        <dxb:BarButtonItem Name="bSaveAs" Content="Save As" Glyph="{dx:DXImage SvgImages/Outlook Inspired/SaveAs.svg}" />
+                        <dxb:BarItemLinkSeparator />
+                        <dxb:BarButtonItemLink BarItemName="bPrint" />
+                        <dxb:BarItemLinkSeparator />
+                        <dxb:BarButtonItem Name="bExit" Content="Exit" KeyGesture="Ctrl+X" />
+                    </dxb:BarSubItem>
+                    <dxb:BarSubItem Name="bsEdit" Content="Edit">
+                        <dxb:BarButtonItemLink BarItemName="bUndo" />
+                        <dxb:BarItemLinkSeparator />
+                        <dxb:BarButtonItemLink BarItemName="bCut" />
+                        <dxb:BarButtonItemLink BarItemName="bCopy" />
+                        <dxb:BarButtonItemLink BarItemName="bPaste" />
+                        <dxb:BarItemLinkSeparator />
+                        <dxb:BarButtonItem Name="bClear" Content="Clear" />
+                        <dxb:BarButtonItem Name="bSelectAll" Content="Select All" KeyGesture="Ctrl+A" />
+                        <dxb:BarItemLinkSeparator />
+                        <dxb:BarButtonItem Name="bFind" Content="Find" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Find.svg}" KeyGesture="Ctrl+F" />
+                        <dxb:BarButtonItem Name="bReplace" Content="Replace" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Replace.svg}" KeyGesture="Ctrl+H" />
+                    </dxb:BarSubItem>
+                    <dxb:BarSubItem Name="bsFormat" Content="Format">
+                        <dxb:BarButtonItemLink BarItemName="bFont" />
+                        <dxb:BarItemLinkSeparator />
+                        <dxb:BarCheckItemLink BarItemName="bBullets" />
+                    </dxb:BarSubItem>
+                    <dxb:BarSubItem Name="bsToolBars" Content="Toolbars">
+                        <dxb:ToolbarListItem Name="toolbarListItemCore" Content="Toolbars" />
+                    </dxb:BarSubItem>
+                    <dxb:BarSubItem Name="bsHelp" Content="Help">
+                        <dxb:BarButtonItem Name="bHome" Content="Developer Express on the Web" Command="{Binding ElementName=root, Path=GoDevExpressCommand}" />
+                        <dxb:BarItemLinkSeparator />
+                        <dxb:BarButtonItem Name="bAbout" Content="About" Command="{Binding ElementName=root, Path=ShowAboutCommand}"/>
+                    </dxb:BarSubItem>
+                </dxb:Bar>
+                <dxb:Bar Caption="Standard">
+                    <dxb:Bar.DockInfo>
+                        <dxb:BarDockInfo ContainerName="TopDockControl" Row="1" Column="0" />
+                    </dxb:Bar.DockInfo>
+                    <dxb:BarButtonItem Name="bNew" Content="New" Glyph="{dx:DXImage SvgImages/Outlook Inspired/New.svg}" KeyGesture="Ctrl+N" />
+                    <dxb:BarButtonItem Name="bOpen" Content="Open" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Open.svg}" KeyGesture="Ctrl+O" />
+                    <dxb:BarButtonItem Name="bSave" Content="Save" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Save.svg}" KeyGesture="Ctrl+S" />
+                    <dxb:BarItemLinkSeparator />
+                    <dxb:BarButtonItem Name="bPrint" Content="Print" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Print.svg}" KeyGesture="Ctrl+P" />
+                    <dxb:BarItemLinkSeparator />
+                    <dxb:BarButtonItem Name="bCut" Content="Cut" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Cut.svg}" KeyGesture="Ctrl+X" />
+                    <dxb:BarButtonItem Name="bCopy" Content="Copy" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Copy.svg}" KeyGesture="Ctrl+C" />
+                    <dxb:BarButtonItem Name="bPaste" Content="Paste" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Paste.svg}" KeyGesture="Ctrl+V" />
+                    <dxb:BarItemLinkSeparator />
+                    <dxb:BarButtonItem Name="bUndo" Content="Undo" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Undo.svg}" KeyGesture="Ctrl+Z" />
+                </dxb:Bar>
+                <dxb:Bar Caption="Font">
+                    <dxb:Bar.DockInfo>
+                        <dxb:BarDockInfo ContainerName="TopDockControl" Row="2" Column="1" />
+                    </dxb:Bar.DockInfo>
+                    <dxb:BarEditItem Name="eFontFamily"
+                                     EditWidth="{Binding RelativeSource={RelativeSource Self}, Path=(dx:ThemeManager.TreeWalker), Converter={local:EditWidthConverter EditWidth=150}}"
+                                     Content="Font:">
+                        <dxb:BarEditItem.EditSettings>
+                            <dxe:ComboBoxEditSettings IsTextEditable="False" />
+                        </dxb:BarEditItem.EditSettings>
+                    </dxb:BarEditItem>
+                    <dxb:BarEditItem Name="eFontSize"
+                                     EditWidth="{Binding RelativeSource={RelativeSource Self}, Path=(dx:ThemeManager.TreeWalker), Converter={local:EditWidthConverter EditWidth=60}}"
+                                     Content="Font Size:">
+                        <dxb:BarEditItem.EditSettings>
+                            <dxe:ComboBoxEditSettings PopupMaxHeight="250" IsTextEditable="False" />
+                        </dxb:BarEditItem.EditSettings>
+                    </dxb:BarEditItem>
+                </dxb:Bar>
+                <dxb:Bar Caption="Format">
+                    <dxb:Bar.DockInfo>
+                        <dxb:BarDockInfo ContainerName="TopDockControl" Row="2" Column="0" />
+                    </dxb:Bar.DockInfo>
+                    <dxb:BarCheckItem Name="bBold" Content="Bold" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Bold.svg}" />
+                    <dxb:BarCheckItem Name="bItalic" Content="Italic" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Italic.svg}" />
+                    <dxb:BarCheckItem Name="bUnderline" Content="Underline" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Underline.svg}" />
+                    <dxb:BarItemLinkSeparator />
+                    <dxb:BarCheckItem Name="bLeft" Content="Left" GroupIndex="1" Glyph="{dx:DXImage SvgImages/Outlook Inspired/AlignLeft.svg}" />
+                    <dxb:BarCheckItem Name="bCenter" Content="Center" GroupIndex="1" Glyph="{dx:DXImage SvgImages/Outlook Inspired/AlignCenter.svg}" />
+                    <dxb:BarCheckItem Name="bRight" Content="Right" GroupIndex="1" Glyph="{dx:DXImage SvgImages/Outlook Inspired/AlignRight.svg}" />
+                    <dxb:BarItemLinkSeparator />
+                    <dxb:BarCheckItem Name="bBullets" Content="Bullets" Glyph="{dx:DXImage SvgImages/Outlook Inspired/ListBullets.svg}" />
+                </dxb:Bar>
+                <dxb:Bar Caption="Font">
+                    <dxb:Bar.DockInfo>
+                        <dxb:BarDockInfo ContainerName="RightDockControl" />
+                    </dxb:Bar.DockInfo>
+                    <dxb:BarButtonItem Name="bFont" Content="Font..." Glyph="{dx:DXImage SvgImages/RichEdit/ChangeFontStyle.svg}" />
+                    <dxb:BarItemLinkSeparator />
+                    <dxb:BarSubItemLink BarItemName="bsEdit" />
+                </dxb:Bar>
+                <dxb:Bar Caption="Status Bar" IsStatusBar="True">
+                    <dxb:Bar.DockInfo>
+                        <dxb:BarDockInfo ContainerName="BottomDockControl" />
+                    </dxb:Bar.DockInfo>
+                    <dxb:BarStaticItem Name="bInfo" Content="Info" Glyph="{dx:DXImage SvgImages/Icon Builder/Actions_Info.svg}" ItemWidth="150" />
+                    <dxb:BarStaticItem Name="bEmpty" ItemWidth="100" Content="Static Text" />
+                </dxb:Bar>
+
+            </dxb:BarManager.Bars>
+            <DockPanel>
+
+                <dxb:BarContainerControl Name="TopDockControl">
+
+                    <DockPanel.Dock>Top</DockPanel.Dock>
+                </dxb:BarContainerControl>
+                <dxb:BarContainerControl Name="BottomDockControl">
+
+                    <DockPanel.Dock>Bottom</DockPanel.Dock>
+                </dxb:BarContainerControl>
+                <dxb:BarContainerControl Name="LeftDockControl" Orientation="Vertical">
+                    <DockPanel.Dock>Left</DockPanel.Dock>
+                </dxb:BarContainerControl>
+                <dxb:BarContainerControl Name="RightDockControl" Orientation="Vertical">
+                    <DockPanel.Dock>Right</DockPanel.Dock>
+                </dxb:BarContainerControl>
+                <Grid />
+            </DockPanel>
+        </dxb:BarManager>
+    </DockPanel>
+</local:BarsDemoModule>

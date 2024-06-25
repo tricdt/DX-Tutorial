@@ -1,0 +1,173 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.SpinEditModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:local="clr-namespace:EditorsDemo"
+                         xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                         xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase">
+    <local:EditorsDemoModule.Resources>
+        <dxdb:NWindDataLoader x:Key="NWindDataLoader" />
+        <DataTemplate x:Key="min">
+            <dx:DXImage Width="16" Height="16"
+                        Source="/DevExpress.Images.v22.2;component/SvgImages/Arrows/First.svg"/>
+        </DataTemplate>
+        <DataTemplate x:Key="down">
+            <dx:DXImage Width="16" Height="16"
+                        Source="/DevExpress.Images.v22.2;component/SvgImages/Arrows/Prev.svg"/>
+        </DataTemplate>
+        <DataTemplate x:Key="up">
+            <dx:DXImage Width="16" Height="16"
+                        Source="/DevExpress.Images.v22.2;component/SvgImages/Arrows/Next.svg"/>
+        </DataTemplate>
+        <DataTemplate x:Key="max">
+            <dx:DXImage Width="16" Height="16"
+                        Source="/DevExpress.Images.v22.2;component/SvgImages/Arrows/Last.svg"/>
+        </DataTemplate>
+    </local:EditorsDemoModule.Resources>
+
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12" MinWidth="250">
+                <GroupBox Header="Properties">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Value:" Margin="0,0,6,3" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="MaxValue:" Margin="0,0,6,3" />
+                        <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="MinValue:" Margin="0,0,6,3" />
+                        <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Increment:" Margin="0,0,6,0" />
+
+                        <dxe:TextEdit HorizontalContentAlignment="Right"
+                                      Grid.Row="0"
+                                      Grid.Column="1"
+                                      EditValue="{Binding Path=Value, Mode=TwoWay, ElementName=editor}"
+                                      Margin="0,0,0,6"
+                                      IsReadOnly="True" />
+                        <dxe:SpinEdit Grid.Row="1" Grid.Column="1" EditValue="{Binding Path=MaxValue, Mode=TwoWay, ElementName=editor}" Margin="0,0,0,6" />
+                        <dxe:SpinEdit Grid.Row="2" Grid.Column="1" EditValue="{Binding Path=MinValue, Mode=TwoWay, ElementName=editor}" Margin="0,0,0,6" />
+                        <dxe:SpinEdit Grid.Row="3"
+                                      Grid.Column="1"
+                                      Increment="0.1"
+                                      EditValue="{Binding Path=Increment, Mode=TwoWay, ElementName=editor}"
+                                      Margin="0,0,0,0" />
+                        <dxe:CheckEdit Grid.Row="4"
+                                       Content="Is float value"
+                                       Grid.ColumnSpan="2"
+                                       IsChecked="{Binding Path=IsFloatValue, Mode=TwoWay, ElementName=editor}"
+                                       Margin="0,6,0,0" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Commands" Margin="0,12,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Button ToolTipService.ToolTip="Min"
+                                Height="22"
+                                Grid.Column="0"
+                                Margin="0,0,3,0"
+                                ContentTemplate="{StaticResource min}"
+                                Command="{Binding ElementName=editor, Path=MinimizeCommand}" />
+                        <Button ToolTipService.ToolTip="Down"
+                                Height="22"
+                                Grid.Column="1"
+                                Margin="0,0,3,0"
+                                ContentTemplate="{StaticResource down}"
+                                Command="{Binding ElementName=editor, Path=SpinDownCommand}" />
+                        <Button ToolTipService.ToolTip="Up"
+                                Height="22"
+                                Grid.Column="2"
+                                Margin="0,0,3,0"
+                                ContentTemplate="{StaticResource up}"
+                                Command="{Binding ElementName=editor, Path=SpinUpCommand}" />
+                        <Button ToolTipService.ToolTip="Max"
+                                Height="22"
+                                Grid.Column="3"
+                                Grid.RowSpan="2"
+                                Margin="0"
+                                ContentTemplate="{StaticResource max}"
+                                Command="{Binding ElementName=editor, Path=MaximizeCommand}" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Behavior options" Margin="0,12,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit Content="Is text editable" IsChecked="{Binding Path=IsTextEditable, Mode=TwoWay, ElementName=editor}" Margin="0,0,0,6" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Spin style:" Margin="0,0,6,0" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                            <dxe:ComboBoxEdit x:Name="cboSpinStyle"
+                                              SelectedIndex="0"
+                                              IsTextEditable="False"
+                                              Grid.Column="1"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Center"
+                                              EditValueChanged="cboSpinStyle_EditValueChanged" />
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.25*" />
+                <RowDefinition Height="0.75*" />
+            </Grid.RowDefinitions>
+            <dxe:SpinEdit x:Name="editor" Value="8" MinValue="-10" MaxValue="10" MaxWidth="300" VerticalAlignment="Center" />
+            <dxg:GridControl Grid.Row="1" Margin="32,0,32,32" ItemsSource="{Binding Path=OrderDetails, Source={StaticResource NWindDataLoader}}">
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn Name="colOrderID" FieldName="OrderID" Header="ID" Width="*" MinWidth="30" />
+                    <dxg:GridColumn Name="colProductID" FieldName="ProductID" AllowEditing="False" Header="Product" Width="3*">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:ComboBoxEditSettings AutoComplete="True"
+                                                      ImmediatePopup="True"
+                                                      AllowDefaultButton="False"
+                                                      ValueMember="ProductID"
+                                                      DisplayMember="ProductName"
+                                                      ItemsSource="{Binding Products, Source={StaticResource NWindDataLoader}}" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn Name="colUnitPrice" FieldName="UnitPrice" Width="3*">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:SpinEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" MaskCulture="en-US" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn Name="colQuantity" FieldName="Quantity" Width="3*">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:SpinEditSettings MaskType="Numeric" Mask="d" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn Name="colDiscount" FieldName="Discount" Width="3*">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:SpinEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Increment="0.1" Mask="p0" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.View>
+                    <dxg:TableView Name="view" ShowGroupPanel="False" EditorButtonShowMode="ShowForFocusedRow" />
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+        </Grid>
+    </DockPanel>
+</local:EditorsDemoModule>

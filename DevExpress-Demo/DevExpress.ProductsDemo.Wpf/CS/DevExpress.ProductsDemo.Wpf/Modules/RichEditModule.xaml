@@ -1,0 +1,36 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:utils="clr-namespace:ProductsDemo"
+    xmlns:local="clr-namespace:ProductsDemo.Modules"
+    x:Class="ProductsDemo.Modules.RichEditModule"
+    DataContext="{dxmvvm:ViewModelSource Type=local:GridContactsModuleViewModel}">
+
+    <Grid>
+        <dx:DXDockPanel>
+            <dxg:GridControl x:Name="grid" dx:DXDockPanel.Dock="Left" HorizontalAlignment="Left" Width="203" ItemsSource="{Binding ItemsSource}" >
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn FieldName="Name" Header="Full Name" AllowBestFit="False" AllowGrouping="False"/>
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.View>
+                    <dxg:TableView x:Name="view" AllowEditing="False" AllowColumnMoving="False" AllowGrouping="False" AllowMoveColumnToDropArea="False"
+                                   AllowMasterDetail="False" AllowColumnFiltering="False" AllowBandMoving="False" AutoWidth="True" AllowBestFit="False"
+                                   IsGroupPanelMenuEnabled="False" ShowGroupPanel="False"/>
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+            <dxre:RichEditControl x:Name="richEdit" DocumentSource="{utils:PathProvider MailMerge.docx}" CommandBarStyle="Ribbon"
+                                  dx:DXDockPanel.Dock="Right" ActiveViewType="Draft" ShowBorder="False">
+                <dxre:RichEditControl.MailMergeOptions>
+                    <dxre:DXRichEditMailMergeOptions
+                            DataSource="{Binding ElementName=grid, Path=ItemsSource}"
+                            ViewMergedData="True" ActiveRecord="{Binding ElementName=view, Path=FocusedRowHandle, Mode=TwoWay, Converter={local:FocusedRowHandleToActiveRecordConverter}, ConverterParameter={x:Reference view}}">
+                    </dxre:DXRichEditMailMergeOptions>
+                </dxre:RichEditControl.MailMergeOptions>
+            </dxre:RichEditControl>
+        </dx:DXDockPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.Black{fill:#737374;}
+	.Red{fill:#D02027;}
+	.Blue{fill:#3575BB;}
+	.Yellow{fill:#FCB01B;}
+	.White{fill:#FFFFFF;}
+	.Green{fill:#159C49;}
+	.st0{opacity:0.75;}
+	.st1{opacity:0.5;}
+</style>
+<path class="Red" d="M2,6v12h28V6H2z M8.4,9.3H7.5v5.4h0.9V16H5.8H4.9v-1.3h0.9V9.3H4.9V8h0.9h1.7h0.9V9.3z M19.7,16h-3.3v-1.3h0.8
+	l-0.3-4.2h0l-1.8,4.6h-1.4l-1.7-4.2H12l-0.3,3.8h0.8V16H9.2v-1.3H10l0.4-5.4H9.5V8h3.1l1.8,4.8L16.4,8h3v1.3h-0.9l0.4,5.4h0.7V16z
+	 M27.1,15.2l-0.2,0.1c-0.7,0.4-1.7,0.8-2.9,0.8c-0.4,0-0.8-0.1-1.2-0.2c-2.1-0.5-2.2-2.1-2.2-3v-1.9c0-0.9,0.1-2.5,2.2-3
+	c0.5-0.1,1-0.1,1.4-0.1c0.8,0,1.6,0.1,2.4,0.2v2.1H25V9.3c-0.2,0-0.4,0-0.6,0c-1,0-2.2,0-2.2,1.7v1.9c0,0.5,0.1,1.4,0.9,1.6
+	c0.2,0.1,0.6,0.1,0.8,0.1c0.5,0,1.1-0.1,1.5-0.3V13h-1.6v-1.3h3.2V15.2z"/>
+<path class="Black" d="M4,6V3c0-0.5,0.5-1,1-1h22c0.5,0,1,0.5,1,1v3h-2V4H6v2H4z M26,18v10H6V18H4v11c0,0.5,0.5,1,1,1h22
+	c0.5,0,1-0.5,1-1V18H26z"/>
+</svg>

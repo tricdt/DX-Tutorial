@@ -1,0 +1,104 @@
+﻿<local:MapDemoModule x:Class="MapDemo.ItemsMoving"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                     xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+                     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                     xmlns:local="clr-namespace:MapDemo"
+                     mc:Ignorable="d"
+                     d:DesignHeight="560"
+                     d:DesignWidth="1024"
+                     DataContext="{dxmvvm:ViewModelSource Type=local:PuzzleViewModel}">
+    <local:MapDemoModule.Resources>
+        <local:DemoValuesProvider x:Key="DemoValuesProvider" />
+    </local:MapDemoModule.Resources>
+    <Grid>
+        <dxm:MapControl x:Name="map" MinZoomLevel="2" ZoomLevel="3" SelectionMode="Single" UseSprings="False">
+            <dxmvvm:Interaction.Behaviors>
+                <local:BindFunctionToSourceBehavior Function="{Binding CoordPointToScreenPoint, Mode=TwoWay}"/>
+                <dxmvvm:MethodToCommandBehavior
+                    Target="{Binding}"
+                    Command="ZoomToRegion"
+                    Source="{Binding ElementName=map}"
+                    CommandParameter="{x:Null}"
+                    Method="ZoomToRegion">
+                </dxmvvm:MethodToCommandBehavior>
+            </dxmvvm:Interaction.Behaviors>
+            <dxm:ImageLayer>
+                <dxm:BingMapDataProvider Kind="Road" BingKey="{Binding DevexpressBingKey, Source={StaticResource DemoValuesProvider}}"/>
+            </dxm:ImageLayer>
+            <dxm:VectorLayer x:Name="sourceLayer" Visibility="Hidden">
+                <dxm:ShapefileDataAdapter
+                    FileUri="/MapDemo;component/Data/Shapefiles/Maps/South America.shp"
+                    ShapesLoaded="{DXEvent 'OnItemsLoaded(@args.Shapes)'}"/>
+            </dxm:VectorLayer>
+            <dxm:VectorLayer x:Name="solveLayer"
+                             EnableHighlighting="False"
+                             AllowEditItems="False"
+                             SelectedItem="{Binding ActiveItem, Mode=TwoWay}">
+                <dxm:ListSourceDataAdapter DataSource="{Binding SolvedItems}"/>
+                <dxm:VectorLayer.ShapeFill>
+                    <SolidColorBrush Color="#80008000"/>
+                </dxm:VectorLayer.ShapeFill>
+            </dxm:VectorLayer>
+            <dxm:VectorLayer x:Name="mazeLayer">
+                <dxm:ListSourceDataAdapter DataSource="{Binding Items}"/>
+                <dxm:VectorLayer.ShapeFill>
+                    <SolidColorBrush Color="#40FF0000"/>
+                </dxm:VectorLayer.ShapeFill>
+                <dxm:VectorLayer.ShapeStrokeStyle>
+                    <dxm:StrokeStyle Thickness="2"/>
+                </dxm:VectorLayer.ShapeStrokeStyle>
+                <dxm:VectorLayer.HighlightShapeStrokeStyle>
+                    <dxm:StrokeStyle Thickness="3"/>
+                </dxm:VectorLayer.HighlightShapeStrokeStyle>
+                <dxm:VectorLayer.ShapeTitleOptions>
+                    <dxm:ShapeTitleOptions Pattern=""/>
+                </dxm:VectorLayer.ShapeTitleOptions>
+            </dxm:VectorLayer>
+            <dxm:MapControl.MapEditor>
+                <dxm:MapEditor AllowSaveActions="{Binding AllowSaveActions}"
+                               ActiveItems="{Binding ActiveItems, Mode=TwoWay}"
+                               MapItemEdited="{DXEvent 'OnItemEdited(@args.Items)'}">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxmvvm:DependencyPropertyBehavior
+                            PropertyName="TranslateItemsCommand"
+                            EventName="Changed"
+                            Binding="{Binding TranslateItemsCommand, Mode=OneWayToSource}"/>
+                        <dxmvvm:DependencyPropertyBehavior
+                            PropertyName="ClearSavedActionsCommand"
+                            EventName="Changed"
+                            Binding="{Binding ClearSavedActionsCommand, Mode=OneWayToSource}"/>
+                    </dxmvvm:Interaction.Behaviors>
+                    <dxm:MapEditor.EditorPanelOptions>
+                        <dxm:MapEditorPanelOptions Visible="False"/>
+                    </dxm:MapEditor.EditorPanelOptions>
+                    <dxm:MapEditor.Mode>
+                        <dxm:MapEditorTransformMode Transform="Move"/>
+                    </dxm:MapEditor.Mode>
+                </dxm:MapEditor>
+            </dxm:MapControl.MapEditor>
+            <dxm:MapControl.CoordinateSystem>
+                <dxm:GeoMapCoordinateSystem CircularScrollingMode="TilesAndVectorItems"/>
+            </dxm:MapControl.CoordinateSystem>
+            <dxm:MapControl.CoordinatesPanelOptions>
+                <dxm:CoordinatesPanelOptions Visible="False"/>
+            </dxm:MapControl.CoordinatesPanelOptions>
+            <dxm:MapControl.ScalePanelOptions>
+                <dxm:ScalePanelOptions Visible="False"/>
+            </dxm:MapControl.ScalePanelOptions>
+            <dxm:MapControl.ScrollButtonsOptions>
+                <dxm:ScrollButtonsOptions Visible="False"/>
+            </dxm:MapControl.ScrollButtonsOptions>
+            <dxm:MapControl.ZoomTrackbarOptions>
+                <dxm:ZoomTrackbarOptions Visible="False"/>
+            </dxm:MapControl.ZoomTrackbarOptions>
+        </dxm:MapControl>
+        <local:CopyrightControl ProviderName="Bing"/>
+        <local:PuzzleGameInfoControl
+            SolvedCountriesCount="{Binding SolvedItems.Count}"/>
+        <dx:SimpleButton HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0" Content="Restart Game" Command="{Binding GenerateItemsCommand}"/>
+    </Grid>
+</local:MapDemoModule>

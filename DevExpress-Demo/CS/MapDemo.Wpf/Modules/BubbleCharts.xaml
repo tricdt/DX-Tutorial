@@ -1,0 +1,157 @@
+﻿<local:MapDemoModule x:Class="MapDemo.BubbleCharts"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                     xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+                     xmlns:local="clr-namespace:MapDemo"
+                     xmlns:System="clr-namespace:System;assembly=mscorlib"
+                     mc:Ignorable="d"
+                     d:DesignHeight="557"
+                     d:DesignWidth="2643">
+    <local:MapDemoModule.Resources>
+        <local:DemoValuesProvider x:Key="DemoValuesProvider" />
+    </local:MapDemoModule.Resources>
+
+    <DockPanel>
+
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Header="Years Filter" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit Name="lbYearsFilter"
+                                     Background="{x:Null}"
+                                     ShowBorder="False"
+                                     EditValueChanged="lbYearsFilter_EditValueChanged"
+                                     SelectionMode="Extended">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:CheckedListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.Items>
+                            <dxe:ListBoxEditItem Tag="1996">1996</dxe:ListBoxEditItem>
+                            <dxe:ListBoxEditItem Tag="1997">1997</dxe:ListBoxEditItem>
+                            <dxe:ListBoxEditItem Tag="1998">1998</dxe:ListBoxEditItem>
+                            <dxe:ListBoxEditItem Tag="1999">1999</dxe:ListBoxEditItem>
+                        </dxe:ListBoxEdit.Items>
+
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Magnitude Filter" Margin="0,5,0,0">
+                    <dxe:TrackBarEdit x:Name="tbMagnitudeFilter"
+                                      Minimum="6.5"
+                                      Maximum="9"
+                                      TickFrequency="0.5"
+                                      LargeStep="0.25"
+                                      SmallStep="0.25"
+                                      SelectionStart="6.5"
+                                      SelectionEnd="9"
+                                      EditValueChanged="tbMagnitudeFilter_EditValueChanged">
+                        <dxe:TrackBarEdit.StyleSettings>
+                            <dxe:TrackBarRangeStyleSettings />
+                        </dxe:TrackBarEdit.StyleSettings>
+                    </dxe:TrackBarEdit>
+                </GroupBox>
+                <GroupBox Header="Marker Type" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit Name="lbMarkerType"
+                                     Background="{x:Null}"
+                                     SelectedIndex="0"
+                                     ShowBorder="False"
+                                     ItemsSource="{Binding BubbleMarkerTypes, Source={StaticResource DemoValuesProvider}}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Grid>
+            <dxm:MapControl ZoomLevel="2" CenterPoint="20.0, 10.0" FlowDirection="LeftToRight" IsManipulationEnabled="True">
+                <dxm:MapControl.Legends>
+                    <dxm:ColorListLegend Layer="{Binding ElementName=vectorLayer, Mode=OneWay}" Header="Years" />
+                </dxm:MapControl.Legends>
+
+                <dxm:ImageLayer>
+                    <dxm:BingMapDataProvider Kind="Hybrid" BingKey="{Binding DevexpressBingKey, Source={StaticResource DemoValuesProvider}}" />
+                </dxm:ImageLayer>
+                <dxm:VectorLayer x:Name="vectorLayer"
+                                 ToolTipPattern="Date: {Day}.{Month}.{Year}&#xA;Magnitude: {Magnitude}&#xA;Depth: {Depth}km"
+                                 ToolTipEnabled="True">
+                    <dxm:BubbleChartDataAdapter x:Name="BubbleAdapter" ItemMaxSize="60" ItemMinSize="10" DataSource="{Binding Data}">
+                        <dxm:BubbleChartDataAdapter.Mappings>
+                            <dxm:MapBubbleMappingInfo Latitude="Latitude" Longitude="Longitude" Value="Magnitude" />
+                        </dxm:BubbleChartDataAdapter.Mappings>
+                        <dxm:BubbleChartDataAdapter.AttributeMappings>
+                            <dxm:MapItemAttributeMapping Member="Day" Name="Day" />
+                            <dxm:MapItemAttributeMapping Member="Month" Name="Month" />
+                            <dxm:MapItemAttributeMapping Member="Year" Name="Year" />
+                            <dxm:MapItemAttributeMapping Member="Magnitude" Name="Magnitude" />
+                            <dxm:MapItemAttributeMapping Member="Depth" Name="Depth" />
+                        </dxm:BubbleChartDataAdapter.AttributeMappings>
+                        <dxm:BubbleChartDataAdapter.MeasureRules>
+                            <dxm:MeasureRules ApproximateValues="True" RangeStops="6.5 6.75 7 7.25 7.5 7.75 8 8.25 8.5 8.75 9">
+                                <dxm:MeasureRules.ValueProvider>
+                                    <dxm:ItemAttributeValueProvider AttributeName="Magnitude" />
+                                </dxm:MeasureRules.ValueProvider>
+                                <dxm:MeasureRules.RangeDistribution>
+                                    <dxm:LinearRangeDistribution />
+                                </dxm:MeasureRules.RangeDistribution>
+                            </dxm:MeasureRules>
+                        </dxm:BubbleChartDataAdapter.MeasureRules>
+                        <dxm:BubbleChartDataAdapter.BubbleSettings>
+                            <dxm:MapBubbleSettings MarkerType="{Binding ElementName=lbMarkerType, Path=SelectedItem, Mode=TwoWay}" />
+                        </dxm:BubbleChartDataAdapter.BubbleSettings>
+                    </dxm:BubbleChartDataAdapter>
+                    <dxm:VectorLayer.Colorizer>
+                        <dxm:KeyColorColorizer>
+                            <dxm:KeyColorColorizer.Colors>
+                                <Color>#FFFF5D6A</Color>
+                                <Color>#FF417CD9</Color>
+                                <Color>#FFFFDD74</Color>
+                                <Color>#FF67BF58</Color>
+                            </dxm:KeyColorColorizer.Colors>
+                            <dxm:KeyColorColorizer.Keys>
+                                <dxm:ColorizerKeyItem>
+                                    <dxm:ColorizerKeyItem.Key>
+                                        <System:Int32>1996</System:Int32>
+                                    </dxm:ColorizerKeyItem.Key>
+                                </dxm:ColorizerKeyItem>
+                                <dxm:ColorizerKeyItem>
+                                    <dxm:ColorizerKeyItem.Key>
+                                        <System:Int32>1997</System:Int32>
+                                    </dxm:ColorizerKeyItem.Key>
+                                </dxm:ColorizerKeyItem>
+                                <dxm:ColorizerKeyItem>
+                                    <dxm:ColorizerKeyItem.Key>
+                                        <System:Int32>1998</System:Int32>
+                                    </dxm:ColorizerKeyItem.Key>
+                                </dxm:ColorizerKeyItem>
+                                <dxm:ColorizerKeyItem>
+                                    <dxm:ColorizerKeyItem.Key>
+                                        <System:Int32>1999</System:Int32>
+                                    </dxm:ColorizerKeyItem.Key>
+                                </dxm:ColorizerKeyItem>
+                            </dxm:KeyColorColorizer.Keys>
+                            <dxm:KeyColorColorizer.ItemKeyProvider>
+                                <dxm:AttributeItemKeyProvider AttributeName="Year" />
+                            </dxm:KeyColorColorizer.ItemKeyProvider>
+                        </dxm:KeyColorColorizer>
+                    </dxm:VectorLayer.Colorizer>
+                </dxm:VectorLayer>
+                <dxm:MapControl.CoordinatesPanelOptions>
+                    <dxm:CoordinatesPanelOptions Margin="10,10,10,53" />
+                </dxm:MapControl.CoordinatesPanelOptions>
+                <dxm:MapControl.ScalePanelOptions>
+                    <dxm:ScalePanelOptions Margin="10,10,10,39" />
+                </dxm:MapControl.ScalePanelOptions>
+            </dxm:MapControl>
+            <local:CopyrightControl ProviderName="Bing" />
+        </Grid>
+    </DockPanel>
+</local:MapDemoModule>

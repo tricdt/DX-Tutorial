@@ -1,0 +1,78 @@
+﻿<local:GaugesDemoModule x:Class="GaugesDemo.DigitalModels"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
+                        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                        xmlns:local="clr-namespace:GaugesDemo"
+                        mc:Ignorable="d"
+                        d:DesignHeight="557"
+                        d:DesignWidth="887">
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <GroupBox Header="Model" Margin="12,5,12,12" VerticalAlignment="Top" MinWidth="210">
+                <dxe:ListBoxEdit Name="lbModel"
+                                 Background="{x:Null}"
+                                 ShowBorder="False"
+                                 ItemsSource="{local:GaugeModelsSource PredefinedModels={x:Static dxga:DigitalGaugeControl.PredefinedModels}}"
+                                 SelectedIndex="0">
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+        </ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="70" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <dxga:DigitalGaugeControl Grid.Row="0"
+                                      Name="FourteenSegmentsGauge"
+                                      FlowDirection="LeftToRight"
+                                      VerticalAlignment="Bottom"
+                                      HorizontalAlignment="Center"
+                                      Model="{Binding ElementName=lbModel, Path=SelectedItem.Model}"
+                                      SymbolCount="15"
+                                      Text="{Binding ElementName=lbModel, Path=SelectedItem.Name}"
+                                      EnableAnimation="True"
+                                      Margin="50,0,50,0">
+                <dxga:DigitalGaugeControl.Layers>
+                    <dxga:DigitalGaugeLayer />
+                </dxga:DigitalGaugeControl.Layers>
+                <dxga:FourteenSegmentsView Height="70">
+                    <dxga:FourteenSegmentsView.Animation>
+                        <dxga:CreepingLineAnimation RefreshTime="00:00:00.5" Repeat="True" />
+                    </dxga:FourteenSegmentsView.Animation>
+                </dxga:FourteenSegmentsView>
+            </dxga:DigitalGaugeControl>
+
+            <dxga:DigitalGaugeControl Grid.Row="2"
+                                      Name="Matrix8x14Gauge"
+                                      FlowDirection="LeftToRight"
+                                      VerticalAlignment="Top"
+                                      HorizontalAlignment="Center"
+                                      Model="{Binding ElementName=lbModel, Path=SelectedItem.Model}"
+                                      SymbolCount="15"
+                                      Text="{Binding ElementName=lbModel, Path=SelectedItem.Name}"
+                                      EnableAnimation="True">
+                <dxga:DigitalGaugeControl.Layers>
+                    <dxga:DigitalGaugeLayer />
+                </dxga:DigitalGaugeControl.Layers>
+                <dxga:MatrixView8x14 Height="70">
+                    <dxga:MatrixView8x14.Animation>
+                        <dxga:CreepingLineAnimation RefreshTime="00:00:00.5" Repeat="True" />
+                    </dxga:MatrixView8x14.Animation>
+                </dxga:MatrixView8x14>
+            </dxga:DigitalGaugeControl>
+        </Grid>
+    </DockPanel>
+</local:GaugesDemoModule>

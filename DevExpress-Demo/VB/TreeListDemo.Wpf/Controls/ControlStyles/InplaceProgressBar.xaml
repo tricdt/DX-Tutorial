@@ -1,0 +1,109 @@
+﻿<ResourceDictionary
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      >
+    <ControlTemplate x:Key="inplaceProgressBarTemplate" TargetType="{x:Type ProgressBar}">
+        <Grid Name="TemplateRoot" SnapsToDevicePixels="True">
+            <Rectangle Fill="{TemplateBinding Control.Background}" RadiusX="0" RadiusY="0" />
+            <Border CornerRadius="0" Margin="0">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#50FFFFFF" Offset="0.5385" />
+                        <GradientStop Color="Transparent" Offset="0.5385" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Border BorderBrush="#80FFFFFF" BorderThickness="1,0,1,1" Margin="0">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#80FFFFFF" Offset="0.05" />
+                        <GradientStop Color="Transparent" Offset="0.25" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Rectangle Margin="0" Name="PART_Track" />
+            <Decorator HorizontalAlignment="Left" Margin="0" Name="PART_Indicator">
+                <Grid Name="Foreground">
+                    <Rectangle Fill="{TemplateBinding Control.Foreground}" Name="Indicator" />
+                    <Grid Name="Overlay">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MaxWidth="15" />
+                            <ColumnDefinition Width="0.1*" />
+                            <ColumnDefinition MaxWidth="15" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Rectangle Grid.RowSpan="2" Margin="1,1,0,1" Name="LeftDark" RadiusX="0" RadiusY="0">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                                    <GradientStop Color="#0C000000" Offset="0" />
+                                    <GradientStop Color="#20000000" Offset="0.3" />
+                                    <GradientStop Color="#00000000" Offset="1" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Grid.Column="2" Grid.RowSpan="2" Margin="0,1,1,1" Name="RightDark" RadiusX="1" RadiusY="1">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                                    <GradientStop Color="#00000000" Offset="0" />
+                                    <GradientStop Color="#20000000" Offset="0.7" />
+                                    <GradientStop Color="#0C000000" Offset="1" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Grid.Column="0" Grid.Row="2" Name="LeftLight">
+                            <Rectangle.Fill>
+                                <RadialGradientBrush RadiusX="1" RadiusY="1">
+                                    <RadialGradientBrush.RelativeTransform>
+                                        <MatrixTransform Matrix="1,0,0,1,0.5,0.5" />
+                                    </RadialGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#60FFFFC4" Offset="0" />
+                                    <GradientStop Color="#00FFFFC4" Offset="1" />
+                                </RadialGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Grid.Column="1" Grid.Row="2" Name="CenterLight">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0,0" StartPoint="0,1">
+                                    <GradientStop Color="#60FFFFC4" Offset="0" />
+                                    <GradientStop Color="#00FFFFC4" Offset="1" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Grid.Column="2" Grid.Row="2" Name="RightLight">
+                            <Rectangle.Fill>
+                                <RadialGradientBrush RadiusX="1" RadiusY="1">
+                                    <RadialGradientBrush.RelativeTransform>
+                                        <MatrixTransform Matrix="1,0,0,1,-0.5,0.5" />
+                                    </RadialGradientBrush.RelativeTransform>
+                                    <GradientStop Color="#60FFFFC4" Offset="0" />
+                                    <GradientStop Color="#00FFFFC4" Offset="1" />
+                                </RadialGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Border Grid.ColumnSpan="3" Grid.RowSpan="2" Name="Highlight1">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="#90FFFFFF" Offset="0.5385" />
+                                    <GradientStop Color="Transparent" Offset="0.5385" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                        <Border Grid.ColumnSpan="3" Grid.RowSpan="2" Name="Highlight2">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="#80FFFFFF" Offset="0.05" />
+                                    <GradientStop Color="Transparent" Offset="0.25" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Decorator>
+            <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" CornerRadius="0" />
+        </Grid>
+    </ControlTemplate>
+</ResourceDictionary>

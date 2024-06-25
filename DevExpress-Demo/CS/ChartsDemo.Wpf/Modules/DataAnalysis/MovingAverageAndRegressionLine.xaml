@@ -1,0 +1,246 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.MovingAverageAndRegressionLineDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:ChartsDemo"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800">
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+
+    <DockPanel>
+        <!--#region ChartsDemoRibbon & Options-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}" />
+
+        <ScrollViewer
+            Name="PART_Options"
+            Style="{StaticResource optionsScrollViewerStyle}">
+            <StackPanel
+                Style="{StaticResource optionsRootStackPanelStyle}">
+                <GroupBox
+                    Header="Moving Average">
+                    <StackPanel>
+                        <dxe:ListBoxEdit
+                            x:Name="lbMovingAverage"
+                            SelectedIndex="0">
+                            <dxe:ListBoxEdit.Items>
+                                <dxe:ListBoxEditItem
+                                    Content="Simple Moving Average" />
+                                <dxe:ListBoxEditItem
+                                    Content="Exponential Moving Average" />
+                                <dxe:ListBoxEditItem
+                                    Content="Weighted Moving Average" />
+                                <dxe:ListBoxEditItem
+                                    Content="Triangular Moving Average" />
+                                <dxe:ListBoxEditItem
+                                    Content="Triple Exponential Moving Average (TEMA)" />
+                            </dxe:ListBoxEdit.Items>
+                            <dxe:ListBoxEdit.StyleSettings>
+                                <dxe:RadioListBoxEditStyleSettings />
+                            </dxe:ListBoxEdit.StyleSettings>
+                        </dxe:ListBoxEdit>
+                        <TextBlock
+                            Text="Point Count:"
+                            Margin="{StaticResource optionsGroupTopMargin}" />
+                        <dxe:SpinEdit
+                            x:Name="sePointsCount"
+                            Margin="{StaticResource textUnderControlMargin}"
+                            MinValue="3"
+                            MaxValue="1000"
+                            Value="50"
+                            EditValueType="{x:Type sys:Int32}" />
+                        <TextBlock
+                            Text="Kind:"
+                            Margin="{StaticResource optionsGroupTopMargin}" />
+                        <dxe:ComboBoxEdit
+                            x:Name="cbeMovingAverageKind"
+                            Margin="{StaticResource textUnderControlMargin}"
+                            ItemsSource="{dxe:EnumItemsSource EnumType=dxc:MovingAverageKind}"
+                            SelectedIndex="0" />
+                        <TextBlock
+                            Text="Envelope Percent:"
+                            Margin="{StaticResource optionsGroupTopMargin}" />
+                        <dxe:SpinEdit
+                            x:Name="seEnvelopePercent"
+                            IsEnabled="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=StackPanel}, Path=Children[4].EditValue, Converter={local:MovingAverageKindToEnvelopePercentEnabledConverter}}"
+                            Margin="{StaticResource textUnderControlMargin}"
+                            MinValue="1"
+                            MaxValue="50"
+                            Value="35"
+                            EditValueType="{x:Type sys:Int32}" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox
+                    Header="Regression Line">
+                    <dxe:CheckEdit
+                        x:Name="cheShowRegressionLine"
+                        IsChecked="True"
+                        Content="Show" />
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+
+        <dxc:ChartControl
+            x:Name="chart"
+            AnimationMode="OnLoad"
+            QueryChartCursor="chart_QueryChartCursor">
+            <!--#region CrosshairOptions-->
+            <dxc:ChartControl.CrosshairOptions>
+                <dxc:CrosshairOptions
+                    ShowValueLine="True"
+                    ShowArgumentLabels="True"
+                    ShowValueLabels="True"
+                    LinesMode="Free"
+                    GroupHeaderPattern="X = {A:0.##}" />
+            </dxc:ChartControl.CrosshairOptions>
+            <!--#endregion-->
+            <dxc:XYDiagram2D
+                EnableAxisXNavigation="True"
+                EnableAxisYNavigation="True"
+                Cursor="None">
+                <!--#region Axes-->
+                <dxc:XYDiagram2D.AxisX>
+                    <dxc:AxisX2D
+                        GridLinesMinorVisible="True"
+                        GridLinesVisible="True"
+                        MinorCount="4"
+                        Alignment="Zero">
+                        <dxc:AxisX2D.WholeRange>
+                            <dxc:Range
+                                MinValue="-2000"
+                                MaxValue="1999"
+                                SideMarginsValue="10" />
+                        </dxc:AxisX2D.WholeRange>
+                        <dxc:AxisX2D.VisualRange>
+                            <dxc:Range
+                                MinValue="-1400"
+                                MaxValue="1400" />
+                        </dxc:AxisX2D.VisualRange>
+                        <dxc:AxisX2D.Label>
+                            <dxc:AxisLabel
+                                TextPattern="{}{V:0.##}" />
+                        </dxc:AxisX2D.Label>
+                    </dxc:AxisX2D>
+                </dxc:XYDiagram2D.AxisX>
+                <dxc:XYDiagram2D.AxisY>
+                    <dxc:AxisY2D
+                        GridLinesMinorVisible="True"
+                        GridLinesVisible="True"
+                        MinorCount="4"
+                        Alignment="Zero">
+                        <dxc:AxisY2D.WholeRange>
+                            <dxc:Range
+                                MinValue="-4000"
+                                MaxValue="2500"
+                                SideMarginsValue="0" />
+                        </dxc:AxisY2D.WholeRange>
+                        <dxc:AxisY2D.VisualRange>
+                            <dxc:Range
+                                MinValue="-900"
+                                MaxValue="2000"
+                                SideMarginsValue="0" />
+                        </dxc:AxisY2D.VisualRange>
+                        <dxc:AxisY2D.Label>
+                            <dxc:AxisLabel
+                                TextPattern="{}{V:0.##}" />
+                        </dxc:AxisY2D.Label>
+                    </dxc:AxisY2D>
+                </dxc:XYDiagram2D.AxisY>
+                <!--#endregion-->
+                <dxc:PointSeries2D
+                    DataSource="{DXBinding '$local:PointGenerator.Generate()'}"
+                    ArgumentDataMember="Argument"
+                    ValueDataMember="Value"
+                    MarkerSize="2"
+                    DisplayName="Measurements Data"
+                    AnimationAutoStartMode="SetStartState">
+                    <!--#region Series Point Animation-->
+                    <dxc:PointSeries2D.PointAnimation>
+                        <dxc:Marker2DFadeInAnimation
+                            Duration="0:0:0.01"
+                            PointDelay="0" />
+                    </dxc:PointSeries2D.PointAnimation>
+                    <!--#endregion-->
+                    <dxc:PointSeries2D.Indicators>
+                        <dxc:SimpleMovingAverage
+                            MovingAverageKind="{Binding ElementName=cbeMovingAverageKind, Path=EditValue}"
+                            PointsCount="{Binding ElementName=sePointsCount, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+                            EnvelopePercent="{Binding ElementName=seEnvelopePercent, Path=Value}"
+                            Visible="{DXBinding '@e(lbMovingAverage).EditValue==`Simple Moving Average`'}"
+                            DisplayName="Simple Moving Average"
+                            ShowInLegend="True"
+                            AnimationAutoStartMode="SetStartState"
+                            CrosshairEnabled="True" />
+                        <dxc:ExponentialMovingAverage
+                            MovingAverageKind="{Binding ElementName=cbeMovingAverageKind, Path=EditValue}"
+                            PointsCount="{Binding ElementName=sePointsCount, Path=Value}"
+                            EnvelopePercent="{Binding ElementName=seEnvelopePercent, Path=Value}"
+                            Visible="{DXBinding '@e(lbMovingAverage).EditValue==`Exponential Moving Average`'}"
+                            DisplayName="Exponential Moving Average"
+                            ShowInLegend="True"
+                            CrosshairEnabled="True" />
+                        <dxc:WeightedMovingAverage
+                            MovingAverageKind="{Binding ElementName=cbeMovingAverageKind, Path=EditValue}"
+                            PointsCount="{Binding ElementName=sePointsCount, Path=Value}"
+                            EnvelopePercent="{Binding ElementName=seEnvelopePercent, Path=Value}"
+                            Visible="{DXBinding '@e(lbMovingAverage).EditValue==`Weighted Moving Average`'}"
+                            DisplayName="Weighted Moving Average"
+                            ShowInLegend="True"
+                            CrosshairEnabled="True" />
+                        <dxc:TriangularMovingAverage
+                            MovingAverageKind="{Binding ElementName=cbeMovingAverageKind, Path=EditValue}"
+                            PointsCount="{Binding ElementName=sePointsCount, Path=Value}"
+                            EnvelopePercent="{Binding ElementName=seEnvelopePercent, Path=Value}"
+                            Visible="{DXBinding '@e(lbMovingAverage).EditValue==`Triangular Moving Average`'}"
+                            DisplayName="Triangular Moving Average"
+                            ShowInLegend="True"
+                            CrosshairEnabled="True" />
+                        <dxc:TripleExponentialMovingAverageTema
+                            MovingAverageKind="{Binding ElementName=cbeMovingAverageKind, Path=EditValue}"
+                            PointsCount="{Binding ElementName=sePointsCount, Path=Value}"
+                            EnvelopePercent="{Binding ElementName=seEnvelopePercent, Path=Value}"
+                            Visible="{DXBinding '@e(lbMovingAverage).EditValue==`Triple Exponential Moving Average (TEMA)`'}"
+                            DisplayName="Triple Exponential Moving Average (TEMA)"
+                            ShowInLegend="True"
+                            CrosshairEnabled="True" />
+                        <dxc:RegressionLine
+                            Visible="{Binding ElementName=cheShowRegressionLine, Path=IsChecked}"
+                            DisplayName="Regression Line"
+                            ShowInLegend="True"
+                            AnimationAutoStartMode="SetStartState"
+                            CrosshairEnabled="True">
+                            <dxc:RegressionLine.Animation>
+                                <dxc:IndicatorUnwrapHorizontallyAnimation
+                                    BeginTime="0:0:1" />
+                            </dxc:RegressionLine.Animation>
+                        </dxc:RegressionLine>
+                    </dxc:PointSeries2D.Indicators>
+                </dxc:PointSeries2D>
+            </dxc:XYDiagram2D>
+            <!--#region Legend-->
+            <dxc:ChartControl.Legend>
+                <dxc:Legend
+                    HorizontalPosition="Left"
+                    VerticalPosition="Top" />
+            </dxc:ChartControl.Legend>
+            <!--#endregion-->
+        </dxc:ChartControl>
+    </DockPanel>
+</local:ChartsDemoModule>

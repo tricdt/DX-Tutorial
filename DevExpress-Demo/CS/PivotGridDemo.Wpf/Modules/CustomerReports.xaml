@@ -1,0 +1,254 @@
+﻿<local:PivotGridDemoModule x:Class="PivotGridDemo.CustomerReports"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:local="clr-namespace:PivotGridDemo"
+                           xmlns:dxpg="http://schemas.devexpress.com/winfx/2008/xaml/pivotgrid"
+                           xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                           xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                           xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                           mc:Ignorable="d"
+                           d:DesignHeight="400"
+                           d:DesignWidth="600"
+                           DataContext="{dxmvvm:ViewModelSource Type=local:CustomerReportsViewModel}">
+    <DockPanel>
+        <local:PivotGridDemoRibbon DockPanel.Dock="Top" ExportPivotGrid="{DXBinding Expr='@e(PivotGridHolder).FindName(@e(reportsList).EditValue.ToString()+`PivotGrid`)'}" />
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,5,12,12" MinWidth="210">
+                <GroupBox Header="Customer Reports">
+                    <dxe:ListBoxEdit x:Name="reportsList"
+                                     ShowBorder="False"
+                                     SelectedIndex="0"
+                                     Background="{x:Null}"
+                                     ItemsSource="{dxe:EnumItemsSource EnumType=local:CustomerReportType}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Products Filtering"
+                          Name="gbxFiltering"
+                          Margin="0,5,0,0"
+                          Visibility="{DXBinding '@e(reportsList).EditValue == $local:CustomerReportType.Products', Converter={dx:BooleanToVisibilityConverter}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Year:" VerticalAlignment="Center" Margin="0,0,0,5" />
+                        <dxe:ComboBoxEdit Grid.Column="1"
+                                          Name="cbeYear"
+                                          Width="80"
+                                          IsTextEditable="False"
+                                          Margin="0,0,0,5"
+                                          SelectedIndex="0"
+                                          ItemsSource="{Binding AllYears}"
+                                          SelectedItem="{Binding SelectedYear, Mode=TwoWay}" />
+                        <TextBlock Grid.Row="1" Text="Quarter:" Margin="0,5,0,5" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <dxe:ComboBoxEdit Grid.Row="1"
+                                          Grid.Column="1"
+                                          Name="cbeQuarter"
+                                          Width="80"
+                                          IsTextEditable="False"
+                                          Margin="0,5,0,5"
+                                          SelectedIndex="0"
+                                          ItemsSource="{Binding AllQuarters}"
+                                          SelectedItem="{Binding SelectedQuarter, Mode=TwoWay}" />
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <Grid x:Name="PivotGridHolder">
+            <!--#region Customers-->
+            <dxpg:PivotGridControl x:Name="CustomersPivotGrid"
+                                   DataProcessingEngine="Optimized"
+                                   DataSource="{Binding CustomerReports}"
+                                   Visibility="{DXBinding '@e(reportsList).EditValue == $local:CustomerReportType.Customers', Converter={dx:BooleanToVisibilityConverter}}"
+                                   local:FieldAreaHelper.FixAreas="True"
+                                   DataFieldWidth="90"
+                                   RowTreeWidth="225"
+                                   ShowBorder="False">
+                <dxpg:PivotGridControl.Fields>
+                    <dxpg:PivotGridField x:Name="CustomersFieldYear"
+                                         DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateYear}"
+                                         Area="ColumnArea"
+                                         AreaIndex="0"
+                                         Width="80"
+                                         ShowGroupIntervalName="True"
+                                         ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}"/>
+                    <dxpg:PivotGridField x:Name="CustomersFieldQuarter"
+                                         DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateQuarter}"
+                                         Area="ColumnArea"
+                                         ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}"
+                                         Width="90"
+                                         ShowGroupIntervalName="True" />
+                    <dxpg:PivotGridField x:Name="CustomersFieldCompanyName"
+                                         DataBinding="{dxpg:DataSourceColumnBinding CompanyName}"
+                                         Area="RowArea"
+                                         Width="150"
+                                         Caption="Customer"
+                                         SortOrder="Ascending" />
+                    <dxpg:PivotGridField x:Name="CustomersFieldProductName"
+                                         DataBinding="{dxpg:DataSourceColumnBinding ProductName}"
+                                         Area="RowArea"
+                                         AreaIndex="1"
+                                         Width="120"
+                                         Caption="Product"
+                                         SortOrder="Ascending" />
+                    <dxpg:PivotGridField x:Name="CustomersFieldProductAmount"
+                                         DataBinding="{dxpg:DataSourceColumnBinding ProductAmount}"
+                                         Area="DataArea"
+                                         Width="150"
+                                         Caption="Product Amount"
+                                         CellFormat="c" />
+                </dxpg:PivotGridControl.Fields>
+            </dxpg:PivotGridControl>
+            <!--#endregion-->
+
+            <!--#region Products (filtering)-->
+            <dxpg:PivotGridControl x:Name="ProductsPivotGrid"
+                                   DataProcessingEngine="Optimized"
+                                   DataSource="{Binding CustomerReports}"
+                                   Visibility="{DXBinding '@e(reportsList).EditValue == $local:CustomerReportType.Products', Converter={dx:BooleanToVisibilityConverter}}"
+                                   local:FieldAreaHelper.FixAreas="True"
+                                   DataFieldWidth="90"
+                                   RowTreeWidth="225"
+                                   ShowBorder="False">
+                <dxpg:PivotGridControl.Fields>
+                    <dxpg:PivotGridField x:Name="ProductsFieldYear"
+                                         DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateYear}"
+                                         Area="ColumnArea"
+                                         Width="80"
+                                         ShowGroupIntervalName="True"
+                                         ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}"
+                                         FilterType="Included"
+                                         FieldFilterValues="{Binding YearsFilter}" ShowBlankFilterValues="False" />
+                    <dxpg:PivotGridField x:Name="ProductsFieldQuarter"
+                                         DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateQuarter}"
+                                         Area="ColumnArea"
+                                         ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}"
+                                         Width="90"
+                                         ShowGroupIntervalName="True"
+                                         FilterType="Included"
+                                         FieldFilterValues="{Binding QuartersFilter}" ShowBlankFilterValues="False" />
+                    <dxpg:PivotGridField x:Name="ProductsFieldCompanyName" DataBinding="{dxpg:DataSourceColumnBinding CompanyName}" Area="RowArea" Width="150" Caption="Customer" />
+                    <dxpg:PivotGridField x:Name="ProductsFieldProductName" DataBinding="{dxpg:DataSourceColumnBinding ProductName}" Area="RowArea" Width="120" Caption="Product" />
+                    <dxpg:PivotGridField x:Name="ProductsFieldProductAmount"
+                                         DataBinding="{dxpg:DataSourceColumnBinding ProductAmount}"
+                                         Area="DataArea"
+                                         Width="150"
+                                         Caption="Product Amount"
+                                         CellFormat="c" />
+                </dxpg:PivotGridControl.Fields>
+            </dxpg:PivotGridControl>
+            <!--#endregion-->
+
+            <!--#region Top 2 Products-->
+            <dxpg:PivotGridControl x:Name="Top2ProductsPivotGrid"
+                                   DataProcessingEngine="Optimized"
+                                   DataSource="{Binding CustomerReports}"
+                                   Visibility="{DXBinding '@e(reportsList).EditValue == $local:CustomerReportType.Top2Products', Converter={dx:BooleanToVisibilityConverter}}"
+                                   local:FieldAreaHelper.FixAreas="True"
+                                   DataFieldWidth="90"
+                                   RowTreeWidth="225"
+                                   ShowBorder="False">
+                <dxpg:PivotGridControl.Fields>
+                    <dxpg:PivotGridField x:Name="Top2ProductsFieldYear"
+                                         DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateYear}"
+                                         Area="FilterArea"
+                                         Width="80"
+                                         ShowGroupIntervalName="True"
+                                         ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}" />
+                    <dxpg:PivotGridField x:Name="Top2ProductsFieldQuarter"
+                                         DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateQuarter}"
+                                         Area="FilterArea"
+                                         ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}"
+                                         Width="90"
+                                         AreaIndex="0"
+                                         ShowGroupIntervalName="True" />
+                    <dxpg:PivotGridField x:Name="Top2ProductsFieldCompanyName"
+                                         DataBinding="{dxpg:DataSourceColumnBinding CompanyName}"
+                                         Area="RowArea"
+                                         Width="150"
+                                         Caption="Customer"
+                                         SortOrder="Ascending" />
+                    <dxpg:PivotGridField x:Name="Top2ProductsFieldProductName"
+                                         DataBinding="{dxpg:DataSourceColumnBinding ProductName}"
+                                         Area="RowArea"
+                                         Width="120"
+                                         Caption="Product"
+                                         SortOrder="Descending"
+                                         SortByField="{Binding ElementName=Top2ProductsFieldProductAmount}"
+                                         TopValueCount="2" />
+                    <dxpg:PivotGridField x:Name="Top2ProductsFieldProductAmount"
+                                         DataBinding="{dxpg:DataSourceColumnBinding ProductAmount}"
+                                         Area="DataArea"
+                                         Width="150"
+                                         Caption="Product Amount"
+                                         CellFormat="c" />
+                </dxpg:PivotGridControl.Fields>
+            </dxpg:PivotGridControl>
+            <!--#endregion-->
+
+            <!--#region Top 10 Customers-->
+            <dxpg:PivotGridControl x:Name="Top10CustomersPivotGrid"
+                                   DataProcessingEngine="Optimized"
+                                   DataSource="{Binding CustomerReports}"
+                                   Visibility="{DXBinding '@e(reportsList).EditValue == $local:CustomerReportType.Top10Customers', Converter={dx:BooleanToVisibilityConverter}}"
+                                   local:FieldAreaHelper.FixAreas="True"
+                                   DataFieldWidth="90"
+                                   RowTreeWidth="225"
+                                   ShowBorder="False">
+                <dxpg:PivotGridControl.Fields>
+                    <dxpg:PivotGridField x:Name="Top10CustomersFieldYear"
+                                         DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateYear}"
+                                         Area="FilterArea"
+                                         Width="80"
+                                         ShowGroupIntervalName="True"
+                                         ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}" />
+                    <dxpg:PivotGridField x:Name="Top10CustomersFieldQuarter"
+                                         DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateQuarter}"
+                                         Area="FilterArea"
+                                         ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}"
+                                         Width="90"
+                                         AreaIndex="1"
+                                         ShowGroupIntervalName="True" />
+                    <dxpg:PivotGridField x:Name="Top10CustomersFieldCompanyName"
+                                         DataBinding="{dxpg:DataSourceColumnBinding CompanyName}"
+                                         Area="RowArea"
+                                         Width="150"
+                                         Caption="Customer"
+                                         SortOrder="Descending"
+                                         SortByField="{Binding ElementName=Top10CustomersFieldProductAmount}"
+                                         TopValueCount="10" />
+                    <dxpg:PivotGridField x:Name="Top10CustomersFieldProductName"
+                                         DataBinding="{dxpg:DataSourceColumnBinding ProductName}"
+                                         Area="FilterArea"
+                                         Width="120"
+                                         Caption="Product"
+                                         SortOrder="Ascending"
+                                         AreaIndex="0" />
+                    <dxpg:PivotGridField x:Name="Top10CustomersFieldProductAmount"
+                                         DataBinding="{dxpg:DataSourceColumnBinding ProductAmount}"
+                                         Area="DataArea"
+                                         Width="150"
+                                         Caption="Product Amount"
+                                         CellFormat="c" />
+                </dxpg:PivotGridControl.Fields>
+            </dxpg:PivotGridControl>
+            <!--#endregion-->
+        </Grid>
+    </DockPanel>
+</local:PivotGridDemoModule>

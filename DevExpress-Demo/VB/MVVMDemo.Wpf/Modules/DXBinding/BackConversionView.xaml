@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="MVVMDemo.DXBindingDemo.BackConversionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.DXBindingDemo"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             DataContext="{dxmvvm:ViewModelSource Type=local:BackConversionViewModel}">
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <dxlc:LayoutGroup Header="IsChecked=&quot;{DXBinding '!IsEnabled', BackExpr='!@value'}&quot;" View="GroupBox" Orientation="Vertical">
+            <!--#region !-->
+            <CheckBox IsChecked="{DXBinding '!IsEnabled', BackExpr='!@value'}" VerticalAlignment="Top" HorizontalAlignment="Left">IsReadonly</CheckBox>
+            <!--#endregion-->
+            <TextBox IsEnabled="{Binding IsEnabled}" VerticalAlignment="Top">Some text</TextBox>
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup Orientation="Vertical" View="GroupBox">
+            <!--#region Header, FirstName, LastName-->
+            <dxlc:LayoutGroup.Header>
+                <TextBlock>
+                    Text=&quot;{DXBinding 'FirstName + ` ` + LastName',<LineBreak/>
+                    BackExpr='FirstName=@v.Split(` `[0])[0]; LastName=@v.Split(` `[0])[1]',<LineBreak/>
+                    UpdateSourceTrigger=PropertyChanged}&quot;
+                </TextBlock>
+            </dxlc:LayoutGroup.Header>
+            <dxlc:LayoutItem Label="First Name:">
+                <TextBlock Text="{Binding FirstName}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Last Name:">
+                <TextBlock Text="{Binding LastName}"/>
+            </dxlc:LayoutItem>
+            <!--#endregion-->
+            <dxlc:LayoutItem Label="Full Name:">
+                <!--#region !-->
+                <TextBox Text="{DXBinding 'FirstName + ` ` + LastName', 
+                    BackExpr='FirstName=@v.Split(` `[0])[0]; LastName=@v.Split(` `[0])[1]', 
+                    UpdateSourceTrigger=PropertyChanged}"/>
+                <!--#endregion-->
+            </dxlc:LayoutItem>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</UserControl>

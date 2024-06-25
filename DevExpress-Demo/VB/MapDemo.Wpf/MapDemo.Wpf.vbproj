@@ -1,0 +1,767 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1574D1D4-1E0E-4DF8-ABB1-09F1E66984AF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <BaseIntermediateOutputPath>obj.Wpf</BaseIntermediateOutputPath>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>
+    </RootNamespace>
+    <AssemblyName>MapDemo</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ConvertToNet6Windows />
+  </PropertyGroup>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,WPF,</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE,WPF,</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Debug\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Debug\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,WPF,CLICKONCE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Release\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Release\</OutputPath>
+    <DefineConstants>TRACE,WPF,CLICKONCE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugTest\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,WPF,DEBUGTEST</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>demoicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Data\Ships.xml" />
+    <Resource Include="Images\Ship.png" />
+    <Resource Include="Data\Capitals.xml" />
+    <Resource Include="Data\Earthquakes.xml" />
+    <Resource Include="Data\EuropeEnergyStatictics.xml" />
+    <Resource Include="Images\HotelBack.png" />
+    <Resource Include="Images\Hotels\Bathroom-0.jpg" />
+    <Resource Include="Images\Hotels\Bathroom-2.jpg" />
+    <Resource Include="Images\Hotels\Bathroom-3.jpg" />
+    <Resource Include="Images\Hotels\Bathroom-4.jpg" />
+    <Resource Include="Images\Hotels\Bathroom-6.jpg" />
+    <Resource Include="Images\Hotels\Bedroom-1-0.jpg" />
+    <Resource Include="Images\Hotels\Bedroom-1-2.jpg" />
+    <Resource Include="Images\Hotels\Bedroom-1-3.jpg" />
+    <Resource Include="Images\Hotels\Bedroom-1-5.jpg" />
+    <Resource Include="Images\Hotels\Bedroom-1-7.jpg" />
+    <Resource Include="Images\Hotels\Bedroom-1-8.jpg" />
+    <Resource Include="Images\Hotels\Bedroom-1-9.jpg" />
+    <Resource Include="Images\Hotels\Bedroom-2-0.jpg" />
+    <Resource Include="Images\Hotels\Bedroom-2-1.jpg" />
+    <Resource Include="Images\Hotels\Bedroom-2-10.jpg" />
+    <Resource Include="Images\Hotels\Bedroom-2-11.jpg" />
+    <Resource Include="Images\Hotels\Bedroom-2-2.jpg" />
+    <Resource Include="Images\Hotels\Bedroom-2-3.jpg" />
+    <Resource Include="Images\Hotels\Bedroom-2-4.jpg" />
+    <Resource Include="Images\Hotels\Hotel_1.png" />
+    <Resource Include="Images\Hotels\Hotel_2.png" />
+    <Resource Include="Images\Hotels\Hotel_3.png" />
+    <Resource Include="Images\Hotels\Lobby-23.jpg" />
+    <Resource Include="Images\Hotels\MeetingRoom-0.jpg" />
+    <Resource Include="Images\Hotels\MeetingRoom-1.jpg" />
+    <Resource Include="Images\Hotels\Pool-1.jpg" />
+    <Resource Include="Images\Hotels\Pool-3.jpg" />
+    <Resource Include="Images\Hotels\Pool-6.jpg" />
+    <Resource Include="Images\Hotels\Restaurant-0.jpg" />
+    <Resource Include="Images\Hotels\Restaurant-1.jpg" />
+    <Resource Include="Images\Hotels\Restaurant-2.jpg" />
+    <Resource Include="Images\Hotels\Restaurant-3.jpg" />
+    <Resource Include="Images\Hotels\Restaurant-7.jpg" />
+    <Resource Include="Images\Hotels\Hotel_1_h.png" />
+    <Resource Include="Images\Hotels\Hotel_2_h.png" />
+    <Resource Include="Images\Hotels\Hotel_3_h.png" />
+    <Resource Include="Data\TreesCl_.xml" />
+    <Resource Include="Images\BingLogo.png" />
+    <Resource Include="Images\Flags\Argentina.png" />
+    <Resource Include="Images\Flags\Bolivia.png" />
+    <Resource Include="Images\Flags\Brazil.png" />
+    <Resource Include="Images\Flags\Chile.png" />
+    <Resource Include="Images\Flags\Colombia.png" />
+    <Resource Include="Images\Flags\Ecuador.png" />
+    <Resource Include="Images\Flags\Guyana.png" />
+    <Resource Include="Images\Flags\Suriname.png" />
+    <Resource Include="Images\Flags\Uruguay.png" />
+    <Resource Include="Images\Flags\Venezuela.png" />
+    <Resource Include="Images\Flags\Paraguay.png" />
+    <Resource Include="Images\Flags\Peru.png" />
+    <Resource Include="Images\ShapeImage\CentralPark.png" />
+    <Reference Include="DevExpress.Printing.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.Desktop.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.DemoData.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Map.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Charts.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Dialogs.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Gauges.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Map.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.DemoBase.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="PresentationUI">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xaml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UIAutomationProvider">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UIAutomationTypes">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RouteIsochrones.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TrafficAndIncidents.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\HeatImage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ItemsMoving.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\MapEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\BingMapsProvider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Colorizer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Clustering.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\MapProjections.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\BubbleCharts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ShapeImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\GpxDataAdapter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\VectorItemBinding.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\PieCharts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CoordinateSystems.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\MapElements.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\MultipleLayers.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DirectionsNavigation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\WebMapService.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\OpenStreetMapProvider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\PhotoGallery.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SalesDashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ImportExport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ShapeSimplifier.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\MapArrows.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls\PhotoGallery\CityInformationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls\PhotoGallery\LabelControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls\PhotoGallery\PhotoGalleryButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls\PhotoGallery\PhotoGalleryControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls\PhotoGallery\PhotoGalleryItemControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls\PhotoGallery\PlaceInfoControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.vb">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CopyrightControl.vb" />
+    <Compile Include="Controls\FileTypeSelectorControl.vb" />
+    <Compile Include="Controls\HotelLabel.vb" />
+    <Compile Include="Controls\MapShapeTooltip.vb" />
+    <Compile Include="Controls\PhotoGallery\CityInformationControl.vb" />
+    <Compile Include="Controls\PhotoGallery\LabelControl.vb" />
+    <Compile Include="Controls\PhotoGallery\PhotoGalleryButton.vb" />
+    <Compile Include="Controls\PhotoGallery\PhotoGalleryControl.vb" />
+    <Compile Include="Controls\PhotoGallery\PhotoGalleryItemControl.vb" />
+    <Compile Include="Controls\PhotoGallery\PlaceInfoControl.vb" />
+    <Compile Include="Controls\PhotoGallery\VisibleControl.vb" />
+    <Compile Include="Controls\PlaneInfoPanel.vb" />
+    <Compile Include="Controls\PuzzleGameInfoControl.vb" />
+    <Compile Include="Controls\StatisticPanel.vb" />
+    <Compile Include="DemoTesting\Fixtures.vb" />
+    <Compile Include="Helpers\BingKeyProvider.vb" />
+    <Compile Include="Helpers\ChartControlService.vb" />
+    <Compile Include="Helpers\DayAndNightLineCalculator.vb" />
+    <Compile Include="Helpers\PuzzleGame.vb" />
+    <Compile Include="InfromationLayer\DriveModel.vb" />
+    <Compile Include="InfromationLayer\TrafficAndIncidentsModel.vb" />
+    <Compile Include="InfromationLayer\RouteModel.vb" />
+    <Compile Include="MainWindow.xaml.vb">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MapDemoModuleControl.vb" />
+    <Compile Include="Modules\RouteIsochrones.xaml.vb">
+      <DependentUpon>RouteIsochrones.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TrafficAndIncidents.xaml.vb">
+      <DependentUpon>TrafficAndIncidents.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\HeatImage.xaml.vb">
+      <DependentUpon>HeatImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ItemsMoving.xaml.vb">
+      <DependentUpon>ItemsMoving.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\MapEditor.xaml.vb">
+      <DependentUpon>MapEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\BingMapsProvider.xaml.vb">
+      <DependentUpon>BingMapsProvider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Colorizer.xaml.vb">
+      <DependentUpon>Colorizer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Clustering.xaml.vb">
+      <DependentUpon>Clustering.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\MapProjections.xaml.vb">
+      <DependentUpon>MapProjections.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\BubbleCharts.xaml.vb">
+      <DependentUpon>BubbleCharts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ShapeImage.xaml.vb">
+      <DependentUpon>ShapeImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\GpxDataAdapter.xaml.vb">
+      <DependentUpon>GpxDataAdapter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\VectorItemBinding.xaml.vb">
+      <DependentUpon>VectorItemBinding.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PieCharts.xaml.vb">
+      <DependentUpon>PieCharts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CoordinateSystems.xaml.vb">
+      <DependentUpon>CoordinateSystems.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\MapElements.xaml.vb">
+      <DependentUpon>MapElements.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\MultipleLayers.xaml.vb">
+      <DependentUpon>MultipleLayers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DirectionsNavigation.xaml.vb">
+      <DependentUpon>DirectionsNavigation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\WebMapService.xaml.vb">
+      <DependentUpon>WebMapService.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\OpenStreetMapProvider.xaml.vb">
+      <DependentUpon>OpenStreetMapProvider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PhotoGallery.xaml.vb">
+      <DependentUpon>PhotoGallery.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SalesDashboard.xaml.vb">
+      <DependentUpon>SalesDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ImportExport.xaml.vb">
+      <DependentUpon>ImportExport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ShapeSimplifier.xaml.vb">
+      <DependentUpon>ShapeSimplifier.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\MapArrows.xaml.vb">
+      <DependentUpon>MapArrows.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Utils.vb" />
+    <Compile Include="ViewModels\EarthquakeViewModel.vb" />
+    <Compile Include="ViewModels\HeatImageViewModel.vb" />
+    <Compile Include="ViewModels\MapEditorViewModel.vb" />
+    <Compile Include="ViewModels\ProductGroupViewModel.vb" />
+    <Compile Include="ViewModels\PuzzleViewModel.vb" />
+    <Compile Include="ViewModels\SalesDashboardViewModel.vb" />
+    <Compile Include="ViewModels\GpxDataAdapterViewModel.vb" />
+    <Compile Include="ViewModels\ShapeSimplifierViewModel.vb" />
+    <Compile Include="ViewModels\ShopInfoViewModel.vb" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>MapDemo.Properties</CustomToolNamespace>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <netcore3ignore />
+    </None>
+    <EmbeddedResource Include="clickonce.txt">
+      <netcore3ignore />
+    </EmbeddedResource>
+    <Resource Include="Data\Shapefiles\Hotels\HotelA\FirstFloor.dbf" />
+    <Resource Include="Data\Shapefiles\Hotels\HotelA\FirstFloor.shp" />
+    <Resource Include="Data\Shapefiles\Hotels\HotelA\SecondFloor.dbf" />
+    <Resource Include="Data\Shapefiles\Hotels\HotelA\SecondFloor.shp" />
+    <Resource Include="Data\Shapefiles\Hotels\HotelB\FirstFloor.dbf" />
+    <Resource Include="Data\Shapefiles\Hotels\HotelB\FirstFloor.shp" />
+    <Resource Include="Data\Shapefiles\Hotels\HotelB\SecondFloor.dbf" />
+    <Resource Include="Data\Shapefiles\Hotels\HotelB\SecondFloor.shp" />
+    <Resource Include="Data\Shapefiles\Hotels\HotelC\FirstFloor.dbf" />
+    <Resource Include="Data\Shapefiles\Hotels\HotelC\FirstFloor.shp" />
+    <Resource Include="Data\Shapefiles\Hotels\HotelC\SecondFloor.dbf" />
+    <Resource Include="Data\Shapefiles\Hotels\HotelC\SecondFloor.shp" />
+    <Resource Include="Data\Shapefiles\Hotels\Room1.dbf" />
+    <Resource Include="Data\Shapefiles\Hotels\Room1.shp" />
+    <Resource Include="Data\Shapefiles\Hotels\Room2.dbf" />
+    <Resource Include="Data\Shapefiles\Hotels\Room2.shp" />
+    <Resource Include="Data\Shapefiles\Maps\Countries.dbf" />
+    <Resource Include="Data\Shapefiles\Maps\Countries.shp" />
+    <Resource Include="Data\Shapefiles\Maps\Africa.dbf" />
+    <Resource Include="Data\Shapefiles\Maps\Africa.shp" />
+    <Resource Include="Data\Shapefiles\Maps\Australia.dbf" />
+    <Resource Include="Data\Shapefiles\Maps\Australia.shp" />
+    <Resource Include="Data\Shapefiles\Maps\Eurasia.dbf" />
+    <Resource Include="Data\Shapefiles\Maps\Eurasia.shp" />
+    <Resource Include="Data\Shapefiles\Maps\NorthAmerica.dbf" />
+    <Resource Include="Data\Shapefiles\Maps\NorthAmerica.shp" />
+    <Resource Include="Data\Shapefiles\Maps\SouthAmerica.dbf" />
+    <Resource Include="Data\Shapefiles\Maps\SouthAmerica.shp" />
+    <Resource Include="Data\Shapefiles\Maps\EUR.dbf" />
+    <Resource Include="Data\Shapefiles\Maps\EUR.shp" />
+    <Resource Include="Data\Shapefiles\Hotels\Hotel1.DBF" />
+    <Resource Include="Data\Shapefiles\Hotels\Hotel1.shp" />
+    <Resource Include="Data\Shapefiles\Hotels\Hotel2.DBF" />
+    <Resource Include="Data\Shapefiles\Hotels\Hotel2.shp" />
+    <Resource Include="Data\Shapefiles\Hotels\Hotel3.DBF" />
+    <Resource Include="Data\Shapefiles\Hotels\Hotel3.shp" />
+    <Resource Include="Data\hotelmap.kml" />
+    <Resource Include="Data\Shapefiles\Maps\South America.dbf" />
+    <Resource Include="Data\Shapefiles\Maps\South America.shp" />
+    <Resource Include="Data\Shapefiles\Iceland.shp" />
+    <Resource Include="Data\Gpx\parkrun_Alstervorland.gpx" />
+    <Resource Include="Data\Gpx\parkrun_Westpark.gpx" />
+    <Resource Include="Data\Gpx\track3.gpx" />
+    <Resource Include="Data\Gpx\3145917691.gpx" />
+    <Resource Include="Data\windData.csv" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\Sales.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\FlightMap.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Planes\AirbusA318.png" />
+    <Resource Include="Images\Planes\AirbusA340.png" />
+    <Resource Include="Images\Planes\AirbusA380.png" />
+    <Resource Include="Images\Planes\Boeing737.png" />
+    <Resource Include="Images\Planes\Boeing747.png" />
+    <Resource Include="Images\Planes\Boeing777.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\Hotels.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Shops\ShopA.png" />
+    <Resource Include="Images\Shops\ShopB.png" />
+    <Resource Include="Images\Shops\ShopC.png" />
+    <Resource Include="Images\Shops\ShopD.png" />
+    <Resource Include="Images\Shops\ShopE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\CitiesData.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Title.png" />
+    <Resource Include="Images\TitleOverview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PhotoGallery\Athens\Academy-of-Athens.jpg" />
+    <Resource Include="Images\PhotoGallery\Athens\Acropolis-of-Athens.jpg" />
+    <Resource Include="Images\PhotoGallery\Athens\National-Library-of-Greece.jpg" />
+    <Resource Include="Images\PhotoGallery\Athens\Temple-of-Hephaestus.jpg" />
+    <Resource Include="Images\PhotoGallery\Athens\Temple-of-Olympian-Zeus.jpg" />
+    <Resource Include="Images\PhotoGallery\Athens\Zappeion.jpg" />
+    <Resource Include="Images\PhotoGallery\BackButton.png" />
+    <Resource Include="Images\PhotoGallery\Barcelona\Arc-de-Triomf.jpg" />
+    <Resource Include="Images\PhotoGallery\Barcelona\Camp-Nou.jpg" />
+    <Resource Include="Images\PhotoGallery\Barcelona\Cathedral-of-Santa-Eulalia.jpg" />
+    <Resource Include="Images\PhotoGallery\Barcelona\Columbus-Monument.jpg" />
+    <Resource Include="Images\PhotoGallery\Barcelona\Palau-de-la-Musica-Catalana.jpg" />
+    <Resource Include="Images\PhotoGallery\Barcelona\Sagrada-Familia.jpg" />
+    <Resource Include="Images\PhotoGallery\Berlin\Bellevue-Palace.jpg" />
+    <Resource Include="Images\PhotoGallery\Berlin\Brandenburg-Gate.jpg" />
+    <Resource Include="Images\PhotoGallery\Berlin\Fernsehturm-Berlin.jpg" />
+    <Resource Include="Images\PhotoGallery\Berlin\Gendarmenmarkt.jpg" />
+    <Resource Include="Images\PhotoGallery\Berlin\Red-City-Hall.jpg" />
+    <Resource Include="Images\PhotoGallery\Berlin\Reichstag.jpg" />
+    <Resource Include="Images\PhotoGallery\Cairo\Al-Azhar-Mosque.jpg" />
+    <Resource Include="Images\PhotoGallery\Cairo\Cairo-Citadel.jpg" />
+    <Resource Include="Images\PhotoGallery\Cairo\Cairo-Tower.jpg" />
+    <Resource Include="Images\PhotoGallery\Cairo\Egyptian-Museum.jpg" />
+    <Resource Include="Images\PhotoGallery\Cairo\Mosque-of-Ibn-Tulun.jpg" />
+    <Resource Include="Images\PhotoGallery\CityInformationControl.png" />
+    <Resource Include="Images\PhotoGallery\CitySmallIcon.png" />
+    <Resource Include="Images\PhotoGallery\Label.png" />
+    <Resource Include="Images\PhotoGallery\London\Buckingham-Palace.jpg" />
+    <Resource Include="Images\PhotoGallery\London\St-Pauls-Cathedral.jpg" />
+    <Resource Include="Images\PhotoGallery\London\Tower-Bridge.jpg" />
+    <Resource Include="Images\PhotoGallery\London\Tower-of-London.jpg" />
+    <Resource Include="Images\PhotoGallery\London\Trafalgar-Square.jpg" />
+    <Resource Include="Images\PhotoGallery\London\Westminster-Abbey.jpg" />
+    <Resource Include="Images\PhotoGallery\Los-Angeles\%28Los-Angeles%29-Downtown.jpg" />
+    <Resource Include="Images\PhotoGallery\Los-Angeles\%28Los-Angeles%29-Griffith-Observatory.jpg" />
+    <Resource Include="Images\PhotoGallery\Los-Angeles\%28Los-Angeles%29-International-Airport.jpg" />
+    <Resource Include="Images\PhotoGallery\Los-Angeles\%28Los-Angeles%29-Music-Center.jpg" />
+    <Resource Include="Images\PhotoGallery\Los-Angeles\DevExpress-Office.jpg" />
+    <Resource Include="Images\PhotoGallery\Los-Angeles\Hollywood-Walk-of-Fame.jpg" />
+    <Resource Include="Images\PhotoGallery\Moscow\Bolshoi-Theatre.jpg" />
+    <Resource Include="Images\PhotoGallery\Moscow\Cathedral-of-Christ-the-Saviour.jpg" />
+    <Resource Include="Images\PhotoGallery\Moscow\Novodevichy-Convent.jpg" />
+    <Resource Include="Images\PhotoGallery\Moscow\Ostankino-Tower.jpg" />
+    <Resource Include="Images\PhotoGallery\Moscow\Saint-Basils-Cathedral.jpg" />
+    <Resource Include="Images\PhotoGallery\Moscow\Spasskaya-Tower.jpg" />
+    <Resource Include="Images\PhotoGallery\NewYork\Broadway.jpg" />
+    <Resource Include="Images\PhotoGallery\NewYork\Brooklyn-Bridge.jpg" />
+    <Resource Include="Images\PhotoGallery\NewYork\Empire-State-Building.jpg" />
+    <Resource Include="Images\PhotoGallery\NewYork\Rockefeller-Center.jpg" />
+    <Resource Include="Images\PhotoGallery\NewYork\Statue-of-Liberty.jpg" />
+    <Resource Include="Images\PhotoGallery\NewYork\Times-Square.jpg" />
+    <Resource Include="Images\PhotoGallery\Paris\Arc-de-Triomphe.jpg" />
+    <Resource Include="Images\PhotoGallery\Paris\Eiffel-Tower.jpg" />
+    <Resource Include="Images\PhotoGallery\Paris\Louvre.jpg" />
+    <Resource Include="Images\PhotoGallery\Paris\Montmartre.jpg" />
+    <Resource Include="Images\PhotoGallery\Paris\Notre-Dame-de-Paris.jpg" />
+    <Resource Include="Images\PhotoGallery\Paris\Sainte-Chapelle.jpg" />
+    <Resource Include="Images\PhotoGallery\Prague\Charles-Bridge.jpg" />
+    <Resource Include="Images\PhotoGallery\Prague\Lennon-Wall.jpg" />
+    <Resource Include="Images\PhotoGallery\Prague\Prague-Orloj.jpg" />
+    <Resource Include="Images\PhotoGallery\Prague\Prague-Zoo.jpg" />
+    <Resource Include="Images\PhotoGallery\Prague\St.-Vitus-Cathedral.jpg" />
+    <Resource Include="Images\PhotoGallery\Rio-de-Janeiro\Christ-the-Redeemer.jpg" />
+    <Resource Include="Images\PhotoGallery\Rio-de-Janeiro\Copacabana-Beach.jpg" />
+    <Resource Include="Images\PhotoGallery\Rio-de-Janeiro\Maracana.jpg" />
+    <Resource Include="Images\PhotoGallery\Rio-de-Janeiro\Rio-Niteroi-Bridge.jpg" />
+    <Resource Include="Images\PhotoGallery\Rio-de-Janeiro\Sugarloaf-Mountain.jpg" />
+    <Resource Include="Images\PhotoGallery\Sydney\Queen-Victoria-Building.jpg" />
+    <Resource Include="Images\PhotoGallery\Sydney\Royal-Botanic-Gardens.jpg" />
+    <Resource Include="Images\PhotoGallery\Sydney\Sydney-Central-Business-District.jpg" />
+    <Resource Include="Images\PhotoGallery\Sydney\Sydney-Harbour-Bridge.jpg" />
+    <Resource Include="Images\PhotoGallery\Sydney\Sydney-Opera-House.jpg" />
+    <Resource Include="Images\PhotoGallery\Sydney\Sydney-Town-Hall.jpg" />
+    <Resource Include="Images\PhotoGallery\Tokyo\Rainbow-Bridge.jpg" />
+    <Resource Include="Images\PhotoGallery\Tokyo\Tokyo-Imperial-Palace.jpg" />
+    <Resource Include="Images\PhotoGallery\Tokyo\Tokyo-National-Museum.jpg" />
+    <Resource Include="Images\PhotoGallery\Tokyo\Tokyo-Tower.jpg" />
+    <Resource Include="Images\PhotoGallery\Tokyo\University-of-Tokyo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\Gpx\Activities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SportStatistic\clock.svg" />
+    <Resource Include="Images\SportStatistic\heart.svg" />
+    <Resource Include="Images\SportStatistic\ruler.svg" />
+    <Resource Include="Images\SportStatistic\speed.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Moon.svg" />
+    <Resource Include="Images\Sun.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ShopImage.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PhotoGallery\NextPlace.svg" />
+    <Resource Include="Images\PhotoGallery\PrevPlace.svg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent">
+    <ItemGroup>
+      <Resource Include="@(Page)" />
+    </ItemGroup>
+    <ItemGroup>
+      <Resource Include="@(Compile)" />
+    </ItemGroup>
+  </Target>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+	<GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+	<ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3
+    <Import Project="Demo.targets" />
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3 
+    <Import Project="Themes.WPF.NetCore.targets" />
+  ONLY NETCORE3-->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+  </PropertyGroup>
+</Project>

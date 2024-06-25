@@ -1,0 +1,292 @@
+﻿<local:TabItemModule
+    x:Class="ChartsDemo.DataPoint3DBindingTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ChartsDemo"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{dxmvvm:ViewModelSource Type=local:DataPoint3DBindingViewModel}">
+    <!--#region Resources-->
+    <local:TabItemModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:TabItemModule.Resources>
+    <!--#endregion-->
+
+    <!--#region Options-->
+    <local:TabItemModule.Options>
+        <StackPanel
+            Style="{StaticResource optionsRootStackPanelStyle}">
+            <GroupBox
+                Header="Functions">
+                <StackPanel>
+                    <dxe:ListBoxEdit
+                        x:Name="cbeFunction"
+                        SelectedItem="{Binding Function}"
+                        ItemsSource="{Binding FunctionItemsData}"
+                        HorizontalAlignment="Stretch"
+                        Background="White"
+                        ShowBorder="True">
+                        <dxe:ListBoxEdit.ItemTemplate>
+                            <DataTemplate>
+                                <Image
+                                    Source="{Binding Image}"
+                                    HorizontalAlignment="Left"
+                                    Stretch="None"
+                                    Margin="2,0,2,0" />
+                            </DataTemplate>
+                        </dxe:ListBoxEdit.ItemTemplate>
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox>
+                <GroupBox.Header>
+                    <dxe:CheckEdit
+                        x:Name="cbCrosshairEnabled"
+                        Content="Crosshair"
+                        IsChecked="True"
+                        HorizontalAlignment="Center" />
+                </GroupBox.Header>
+                <Grid
+                    IsEnabled="{Binding RelativeSource={RelativeSource AncestorType=GroupBox}, Path=Header.IsChecked}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <dxe:CheckEdit
+                        Grid.Column="0"
+                        x:Name="cbCrosshairAxisLabelsVisibility"
+                        Content="Axis Labels Visibility"
+                        IsChecked="True" />
+                    <dxe:CheckEdit
+                        Grid.Column="1"
+                        x:Name="cbCrosshairSeriesLabelVisibility"
+                        Content="Series Labels Visibility"
+                        IsChecked="True" />
+                    <dxe:CheckEdit
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        x:Name="cbCrosshairMarkerVisibility"
+                        Content="Marker Visibility"
+                        IsChecked="True" />
+                    <dxe:CheckEdit
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        x:Name="cbCrosshairAxisLinesVisibility"
+                        Content="Axis Lines Visibility"
+                        IsChecked="True" />
+                </Grid>
+            </GroupBox>
+            <GroupBox>
+                <GroupBox.Header>
+                    <dxe:CheckEdit
+                        Name="cbUseAspectRatio"
+                        Content="Aspect Ratio"
+                        IsChecked="False" />
+                </GroupBox.Header>
+                <StackPanel
+                    IsEnabled="{Binding RelativeSource={RelativeSource AncestorType=GroupBox}, Path=Header.IsChecked}">
+                    <Label
+                        Content="Argument X"
+                        HorizontalAlignment="Center" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Content="0.1"
+                            HorizontalAlignment="Left" />
+                        <Label
+                            Grid.Column="1"
+                            Content="2.0"
+                            HorizontalAlignment="Right" />
+                    </Grid>
+                    <dxe:TrackBarEdit
+                        Name="slRatioX"
+                        Value="1"
+                        Minimum="0.1"
+                        Maximum="2"
+                        SmallStep="0.05"
+                        LargeStep="0.1"
+                        TickFrequency="0.475"
+                        TickPlacement="TopLeft" />
+
+                    <Label
+                        Content="Argument Y"
+                        HorizontalAlignment="Center" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Content="0.1"
+                            HorizontalAlignment="Left" />
+                        <Label
+                            Grid.Column="1"
+                            Content="2.0"
+                            HorizontalAlignment="Right" />
+                    </Grid>
+                    <dxe:TrackBarEdit
+                        Name="slRatioY"
+                        Value="1"
+                        Minimum="0.1"
+                        Maximum="2"
+                        SmallStep="0.05"
+                        LargeStep="0.1"
+                        TickFrequency="0.475"
+                        TickPlacement="TopLeft" />
+
+                    <Label
+                        Content="Value Ratio"
+                        HorizontalAlignment="Center" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Content="0.1"
+                            HorizontalAlignment="Left" />
+                        <Label
+                            Grid.Column="1"
+                            Content="2.0"
+                            HorizontalAlignment="Right" />
+                    </Grid>
+                    <dxe:TrackBarEdit
+                        Name="slRatioZ"
+                        Value="1"
+                        Minimum="0.1"
+                        Maximum="2"
+                        SmallStep="0.05"
+                        LargeStep="0.1"
+                        TickFrequency="0.475"
+                        TickPlacement="TopLeft" />
+                </StackPanel>
+            </GroupBox>
+
+        </StackPanel>
+    </local:TabItemModule.Options>
+    <!--#endregion-->
+
+    <DockPanel>
+
+        <!--#region ChartsRibbon-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}" />
+        <!--#endregion-->
+
+        <dxc:Chart3DControl
+            x:Name="chart"
+            CrosshairEnabled="{Binding ElementName=cbCrosshairEnabled, Path=IsChecked}"
+            AspectRatio="{DXBinding Expr='@e(cbUseAspectRatio).IsChecked ? $local:Chart3DUtils.CreateSize3D(@e(slRatioX).Value, @e(slRatioY).Value, @e(slRatioZ).Value) : $local:Chart3DUtils.CreateSize3D(0, 0, 0)'}">
+            <dxc:Chart3DControl.Palette>
+                <dxc:NatureColorsPalette />
+            </dxc:Chart3DControl.Palette>
+            <dxc:Series3DStorage>
+                <dxc:Series3D
+                    DisplayName="Function"
+                    CrosshairLabelVisibility="{Binding ElementName=cbCrosshairSeriesLabelVisibility, Path=IsChecked}">
+                    <dxc:SeriesPoint3DDataSourceAdapter
+                        DataSource="{Binding Function.Points}"
+                        XArgumentDataMember="X"
+                        YArgumentDataMember="Y"
+                        ValueDataMember="Z" />
+                    <!--#region Series3D.View-->
+                    <dxc:Series3D.View>
+                        <dxc:SurfaceSeriesView
+                            VisualizationMode="Grid">
+                            <dxc:SurfaceSeriesView.FillStyle>
+                                <dxc:GradientFillStyle
+                                    LegendTextPattern="{}{V:F2}">
+                                    <dxc:GradientFillStyle.ColorStops>
+                                        <dxc:ColorStop
+                                            Offset="0%" />
+                                        <dxc:ColorStop
+                                            Offset="25%" />
+                                        <dxc:ColorStop
+                                            Offset="50%" />
+                                        <dxc:ColorStop
+                                            Offset="75%" />
+                                        <dxc:ColorStop
+                                            Offset="100%" />
+                                    </dxc:GradientFillStyle.ColorStops>
+                                </dxc:GradientFillStyle>
+                            </dxc:SurfaceSeriesView.FillStyle>
+                        </dxc:SurfaceSeriesView>
+                    </dxc:Series3D.View>
+                    <!--#endregion-->
+                </dxc:Series3D>
+            </dxc:Series3DStorage>
+            <!--#region Legends-->
+            <dxc:Chart3DControl.Legends>
+                <dxc:Legend
+                    BorderThickness="0"
+                    HorizontalPosition="Right"
+                    VerticalPosition="Top" />
+            </dxc:Chart3DControl.Legends>
+            <!--#endregion-->
+            <!--#region CroshairOptions-->
+            <dxc:Chart3DControl.CrosshairOptions>
+                <dxc:Crosshair3DOptions
+                    ShowMarker="{Binding ElementName=cbCrosshairMarkerVisibility, Path=IsChecked}"
+                    ShowValueLine="{Binding ElementName=cbCrosshairAxisLinesVisibility, Path=IsChecked}"
+                    ShowXArgumentLine="{Binding ElementName=cbCrosshairAxisLinesVisibility, Path=IsChecked}"
+                    ShowYArgumentLine="{Binding ElementName=cbCrosshairAxisLinesVisibility, Path=IsChecked}" />
+            </dxc:Chart3DControl.CrosshairOptions>
+            <!--#endregion-->
+            <!--#region Axes-->
+            <dxc:Chart3DControl.XAxis>
+                <dxc:XAxis3D>
+                    <dxc:XAxis3D.CrosshairAxisLabelOptions>
+                        <dxc:CrosshairAxisLabelOptions
+                            Visibility="{Binding ElementName=cbCrosshairAxisLabelsVisibility, Path=IsChecked}"
+                            Pattern="{}{V:F3}" />
+                    </dxc:XAxis3D.CrosshairAxisLabelOptions>
+                </dxc:XAxis3D>
+            </dxc:Chart3DControl.XAxis>
+            <dxc:Chart3DControl.YAxis>
+                <dxc:YAxis3D>
+                    <dxc:YAxis3D.CrosshairAxisLabelOptions>
+                        <dxc:CrosshairAxisLabelOptions
+                            Visibility="{Binding ElementName=cbCrosshairAxisLabelsVisibility, Path=IsChecked}"
+                            Pattern="{}{V:F3}" />
+                    </dxc:YAxis3D.CrosshairAxisLabelOptions>
+                </dxc:YAxis3D>
+            </dxc:Chart3DControl.YAxis>
+            <dxc:Chart3DControl.ZAxis>
+                <dxc:ZAxis3D>
+                    <dxc:ZAxis3D.CrosshairAxisLabelOptions>
+                        <dxc:CrosshairAxisLabelOptions
+                            Visibility="{Binding ElementName=cbCrosshairAxisLabelsVisibility, Path=IsChecked}"
+                            Pattern="{}{V:F3}" />
+                    </dxc:ZAxis3D.CrosshairAxisLabelOptions>
+                </dxc:ZAxis3D>
+            </dxc:Chart3DControl.ZAxis>
+            <!--#endregion-->
+        </dxc:Chart3DControl>
+
+    </DockPanel>
+</local:TabItemModule>

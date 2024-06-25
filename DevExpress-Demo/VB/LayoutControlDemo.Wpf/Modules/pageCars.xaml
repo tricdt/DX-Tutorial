@@ -1,0 +1,63 @@
+﻿<local:LayoutControlDemoModule x:Class="LayoutControlDemo.pageCars"
+                               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                               xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                               xmlns:local="clr-namespace:LayoutControlDemo"
+                               xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                               xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                               xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                               DataContext="{dxmvvm:ViewModelSource Type=local:CarsViewModel}">
+    <dxlc:FlowLayoutControl x:Name="layoutCars"
+                            Background="White"
+                            ItemSpace="7"
+                            LayerSpace="12"
+                            ItemsSource="{Binding Items}"
+                            Orientation="Horizontal">
+        <!--#region Resources-->
+        <dxlc:FlowLayoutControl.Resources>
+            <dx:BoolToObjectConverter x:Key="boolToObjectConverter" TrueValue="0,0,0,40" FalseValue="0" />
+            <DataTemplate x:Key="BrandDataTemplate">
+                <StackPanel dxlc:FlowLayoutControl.IsFlowBreak="True" Margin="0,0,0,5">
+                    <Image Source="{Binding Image}" HorizontalAlignment="Left" />
+                </StackPanel>
+            </DataTemplate>
+            <DataTemplate x:Key="CarDataTemplate">
+                <dxlc:LayoutControl dxlc:FlowLayoutControl.IsFlowBreak="{Binding IsFirstInBrand}"
+                                    Padding="0"
+                                    Margin="{Binding IsLastInBrand, Converter={StaticResource boolToObjectConverter}}">
+                    <dxlc:LayoutGroup View="GroupBox" Width="200" VerticalAlignment="Stretch" Header="{Binding}" Orientation="Vertical">
+                        <dxlc:LayoutGroup.HeaderTemplate>
+                            <DataTemplate>
+                                <dxe:TextEdit Text="{Binding Name}"
+                                              EditMode="InplaceInactive"
+                                              FontWeight="Bold"
+                                              HorizontalAlignment="Center"
+                                              ShowTooltipForTrimmedText="True"
+                                              TextTrimming="CharacterEllipsis" />
+                            </DataTemplate>
+                        </dxlc:LayoutGroup.HeaderTemplate>
+                        <dxlc:LayoutGroup.GroupBoxStyle>
+                            <Style TargetType="dxlc:GroupBox">
+                                <Setter Property="Padding" Value="0" />
+                            </Style>
+                        </dxlc:LayoutGroup.GroupBoxStyle>
+                        <dx:BackgroundPanel>
+                            <StackPanel>
+                                <dxlc:LayoutItem>
+                                    <Image Source="{Binding Image}" Stretch="Uniform" StretchDirection="DownOnly" Width="130" Height="80" Margin="0,8,0,0" />
+                                </dxlc:LayoutItem>
+                                <dxlc:LayoutItem>
+                                    <TextBlock Text="{Binding Price, StringFormat='{}{0:c}'}" HorizontalAlignment="Center" Margin="0,8" />
+                                </dxlc:LayoutItem>
+                            </StackPanel>
+                        </dx:BackgroundPanel>
+                    </dxlc:LayoutGroup>
+                </dxlc:LayoutControl>
+            </DataTemplate>
+        </dxlc:FlowLayoutControl.Resources>
+        <!--#endregion-->
+        <dxlc:FlowLayoutControl.ItemTemplateSelector>
+            <local:CarDataTemplateSelector />
+        </dxlc:FlowLayoutControl.ItemTemplateSelector>
+    </dxlc:FlowLayoutControl>
+</local:LayoutControlDemoModule>

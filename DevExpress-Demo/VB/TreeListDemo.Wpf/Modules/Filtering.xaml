@@ -1,0 +1,152 @@
+﻿<local:TreeListDemoModule x:Class="TreeListDemo.Filtering"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                          xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                          xmlns:local="clr-namespace:TreeListDemo"
+                          mc:Ignorable="d"
+                          d:DesignHeight="400"
+                          d:DesignWidth="800">
+
+    <local:TreeListDemoModule.Resources>
+        <dxdb:EmployeesData x:Key="employeesData" />
+        <dxg:RowPropertyValueConverter x:Key="RowPropertyValueConverter" />
+        <dxg:RowPropertyValueConverter x:Key="BirthdayMarkVisibilityRowPropertyValueConverter">
+            <dxg:RowPropertyValueConverter.InnerConverter>
+                <local:BooleanToVisibilityConverter />
+            </dxg:RowPropertyValueConverter.InnerConverter>
+        </dxg:RowPropertyValueConverter>
+        <DataTemplate x:Key="AgeCellTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="Auto"
+                           Text="{Binding Path=Data, Converter={StaticResource RowPropertyValueConverter}, ConverterParameter=Age}"
+                           TextAlignment="Left"
+                           HorizontalAlignment="Left"
+                           Margin="5,0,0,0"
+                           VerticalAlignment="Center"
+                           Height="Auto" />
+                <dx:DXImage Width="16" Height="16"
+                       Source="/TreeListDemo;component/Images/HeaderIcons/BirthDate.svg"
+                       Visibility="{Binding Path=Data, Converter={StaticResource BirthdayMarkVisibilityRowPropertyValueConverter}, ConverterParameter=BirthdaysMarkVisibility}"
+                       Margin="0,0,5,0">
+                    <RenderOptions.BitmapScalingMode>NearestNeighbor</RenderOptions.BitmapScalingMode>
+                    <ToolTipService.ToolTip>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Data, Converter={StaticResource RowPropertyValueConverter}, ConverterParameter=DaysTillBirthDate}" />
+                            <TextBlock Text="day(s) till the birthday" Margin="5,0,0,0" />
+                        </StackPanel>
+                    </ToolTipService.ToolTip>
+                </dx:DXImage>
+            </StackPanel>
+        </DataTemplate>
+        <local:FiltrationModuleViewModel x:Key="viewModel" />
+    </local:TreeListDemoModule.Resources>
+    <DockPanel>
+        <local:TreeListDemoRibbon DockPanel.Dock="Top" ExportTreeList="{x:Reference treeList}" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,5,12,12" MinWidth="210">
+                <GroupBox Header="Filter Criteria Options">
+                    <StackPanel DataContext="{StaticResource ResourceKey=viewModel}">
+                        <dxe:ListBoxEdit x:Name="filters"
+                                         ItemsSource="{Binding Filters}"
+                                         DisplayMember="Name"
+                                         ValueMember="FilterString"
+                                         EditValue="{Binding FilterString, ElementName=treeList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         SelectedIndex="0"
+                                         ShowBorder="False">
+                            <dxe:ListBoxEdit.StyleSettings>
+                                <dxe:RadioListBoxEditStyleSettings />
+                            </dxe:ListBoxEdit.StyleSettings>
+                        </dxe:ListBoxEdit>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Search Panel Mode" Margin="0,5,0,0">
+                    <StackPanel DataContext="{StaticResource ResourceKey=viewModel}">
+                        <dxe:ListBoxEdit x:Name="searchPanelModes" ItemsSource="{Binding SearchPanelModes}" ShowBorder="False" SelectedIndex="0">
+                            <dxe:ListBoxEdit.StyleSettings>
+                                <dxe:RadioListBoxEditStyleSettings />
+                            </dxe:ListBoxEdit.StyleSettings>
+                        </dxe:ListBoxEdit>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Filtering Mode" Margin="0,5,0,0">
+                    <StackPanel DataContext="{StaticResource ResourceKey=viewModel}">
+                        <dxe:ListBoxEdit x:Name="filterModes" ItemsSource="{Binding FilterModes}" ShowBorder="False" SelectedIndex="0">
+                            <dxe:ListBoxEdit.StyleSettings>
+                                <dxe:RadioListBoxEditStyleSettings />
+                            </dxe:ListBoxEdit.StyleSettings>
+                        </dxe:ListBoxEdit>
+                    </StackPanel>
+                </GroupBox>
+
+                <StackPanel DataContext="{StaticResource ResourceKey=viewModel}">
+                    <CheckBox Margin="0,8,0,0" Content="Expand Nodes On Filtering" IsChecked="{Binding ExpandNodesOnFiltering, Mode=TwoWay}" />
+                    <CheckBox Margin="0,4,0,0" Content="Show Auto Filter Row" IsChecked="{Binding ShowAutoFilterRow, Mode=TwoWay}" />
+                    <CheckBox Margin="0,4,0,0" Content="Show Criteria in Auto Filter Row" IsChecked="{Binding ShowCriteriaInAutoFilterRow, Mode=TwoWay}" />
+                    <Button Name="btnFilterEditor" Margin="0,12,0,0" Content="Show Filter Editor" Command="{Binding Commands.ShowFilterEditor, ElementName=view}" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        <dxg:TreeListControl x:Name="treeList"
+                             DataContext="{StaticResource ResourceKey=viewModel}"
+                             ItemsSource="{Binding Path=DataSource, Source={StaticResource employeesData}}">
+            <dxg:TreeListControl.Columns>
+                <dxg:TreeListColumn FieldName="JobTitle" Width="2*" />
+                <dxg:TreeListColumn FieldName="FullName" UnboundDataType="{x:Type sys:String}" UnboundExpression="[FirstName] + ' ' + [LastName]" Width="2*" ReadOnly="True" />
+                <dxg:TreeListColumn FieldName="City" Width="2*" />
+                <dxg:TreeListColumn FieldName="AddressLine1" Header="Address" Width="2*" />
+                <dxg:TreeListColumn FieldName="Phone" Width="2*" />
+                <dxg:TreeListColumn FieldName="Gender" Width="2*" />
+                <dxg:TreeListColumn FieldName="Age"
+                                    Width="0.8*"
+                                    UnboundDataType="{x:Type sys:Int32}"
+                                    UnboundExpression="DateDiffYear([BirthDate], Today())"
+                                    CellTemplate="{StaticResource AgeCellTemplate}" />
+                <dxg:TreeListColumn FieldName="BirthDateDiffDays"
+                                    ShowInColumnChooser="False"
+                                    UnboundDataType="{x:Type sys:Int32}"
+                                    Visible="False"
+                                    Width="2*"
+                                    UnboundExpression="DateDiffDay(Today(), AddYears([BirthDate], DateDiffYear([BirthDate], Today())))" />
+                <dxg:TreeListColumn FieldName="DaysTillBirthDate"
+                                    UnboundDataType="{x:Type sys:Int32}"
+                                    Visible="False"
+                                    Width="2*"
+                                    UnboundExpression="Iif([BirthDateDiffDays] &gt; 0, [BirthDateDiffDays], [BirthDateDiffDays] + DateDiffDay(Today(), AddYears(Today(), 1)))" />
+                <dxg:TreeListColumn FieldName="BirthdayMarkVisibility"
+                                    ShowInColumnChooser="False"
+                                    UnboundDataType="{x:Type sys:Boolean}"
+                                    Visible="False"
+                                    Width="2*"
+                                    UnboundExpression="Iif([DaysTillBirthDate] &lt; 30, 'True', 'False')" />
+            </dxg:TreeListControl.Columns>
+            <dxg:TreeListControl.View>
+                <dxg:TreeListView x:Name="view"
+                                  AllowHorizontalScrollingVirtualization="False"
+                                  ParentFieldName="ParentId"
+                                  ShowSearchPanelMode="{Binding SelectedItem, ElementName=searchPanelModes}"
+                                  FilteringMode="{Binding SelectedItem, ElementName=filterModes}"
+                                  KeyFieldName="Id"
+                                  ShowAutoFilterRow="{Binding ShowAutoFilterRow}"
+                                  ExpandNodesOnFiltering="{Binding ExpandNodesOnFiltering}"
+                                  ShowCriteriaInAutoFilterRow="{Binding ShowCriteriaInAutoFilterRow}"
+                                  ShowEmptyText="True">
+                    <dxmvvm:Interaction.Triggers>
+                        <dxmvvm:EventToCommand EventName="Loaded" Command="{Binding Commands.ExpandToLevel, ElementName=view}" CommandParameter="1" />
+                    </dxmvvm:Interaction.Triggers>
+                </dxg:TreeListView>
+            </dxg:TreeListControl.View>
+        </dxg:TreeListControl>
+    </DockPanel>
+</local:TreeListDemoModule>

@@ -1,0 +1,157 @@
+﻿<local:GridDemoModule x:Class="GridDemo.CardWinExplorer"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      xmlns:dxco="http://schemas.devexpress.com/winfx/2008/xaml/controls"
+                      mc:Ignorable="d"
+                      d:DesignHeight="300"
+                      d:DesignWidth="300"
+                      DataContext="{dxmvvm:ViewModelSource local:CardViewExplorerViewModel}">
+    <local:GridDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../ModuleResources/CardViewFileExplorer/CardViewExplorerTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:GridDemoModule.Resources>
+
+    <DockPanel>
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Header="Navigation Style" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit Margin="0,0,0,0"
+                                     Background="{x:Null}"
+                                     ShowBorder="False"
+                                     x:Name="NavigationStyleComboBox"
+                                     ItemsSource="{dxe:EnumItemsSource EnumType=local:SizeIcon}"
+                                     EditValue="{Binding Path=DataContext.SizeType, Mode=TwoWay}"
+                                     ToolTipService.ToolTip="Specifies whether row and/or cell focusing is allowed.">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Group By" Margin="0,5,0,0">
+                    <StackPanel>
+                        <RadioButton Content="Name" IsChecked="{DXBinding Expr='@e(columnNameFirst).GroupIndex != -1', BackExpr='@value ? 0 : -1'}" />
+                        <RadioButton Content="Type" IsChecked="{DXBinding Expr='@e(columnType).GroupIndex != -1', BackExpr='@value ? 0 : -1'}" />
+                        <RadioButton Content="None" IsChecked="True" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <Grid Cursor="{Binding IsLoading, Converter={dxmvvm:BooleanToObjectConverter TrueValue={x:Static Cursors.Wait}}}">
+            <!--#region Navigation panel-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <dxb:ToolBarControl Caption="_=Navigation"
+                                GlyphSize="Small"
+                                UseWholeRow="True"
+                                AllowQuickCustomization="False"
+                                AllowHide="False"
+                                AllowDrop="False"
+                                AllowCollapse="False"
+                                ShowDragWidget="False"
+                                AllowCustomizationMenu="False"
+                                Margin="2,5,5,5"
+                                ShowBackground="False">
+                <dxb:BarButtonItem Name="bBack"
+                                   Content="_Back"
+                                   Glyph="{dx:DXImage SvgImages/Navigation/Backward.svg}"
+                                   Command="{Binding BackCommand}" />
+                <dxb:BarButtonItem Name="bForward"
+                                   Content="_Forward"
+                                   Glyph="{dx:DXImage SvgImages/Navigation/Forward.svg}"
+                                   Command="{Binding ForwardCommand}" />
+                <dxb:BarButtonItem Name="bUp"
+                                   Content="_Up"
+                                   Glyph="{dx:DXImage SvgImages/Actions/Up.svg}"
+                                   Command="{Binding UpCommand}" />
+            </dxb:ToolBarControl>
+            <dxco:BreadcrumbControl
+                               ChildSelector="{Binding}"
+                               EmptyItemText="{Binding Root}"
+                               Grid.Column="1"
+                               Margin="5,5,5,0"
+                               MinHeight="24"
+                               PathEditPopupMaxHeight="500"
+                               PopupMaxHeight="500"
+                               SelectedItemPath="{Binding Path=Path, Mode=TwoWay}">
+                <dxmvvm:Interaction.Behaviors>
+                    <dxmvvm:EventToCommand Command="{Binding Path=CustomDisplayTextCommand}" EventName="CustomDisplayText" PassEventArgsToCommand="True" />
+                    <dxmvvm:EventToCommand Command="{Binding Path=CustomImageCommand}" EventName="CustomImage" PassEventArgsToCommand="True" />
+                    <dxmvvm:EventToCommand Command="{Binding Path=QueryPathCommand}" EventName="QueryPath" PassEventArgsToCommand="True" />
+                </dxmvvm:Interaction.Behaviors>
+            </dxco:BreadcrumbControl>
+            <dxe:SearchControl Margin="0,5,5,5"
+                               Grid.Column="2"
+                               x:Name="tbSearch"
+                               NullText="Search..."
+                               HorizontalAlignment="Stretch"
+                               SearchText="{Binding Path=SearchString, ElementName=View, Mode=TwoWay}" />
+            <!--#endregion-->
+
+            <!--#region GridControl-->
+            <dxg:GridControl Grid.Row="1"
+                             Grid.ColumnSpan="3"
+                             Name="Grid"
+                             ItemsSource="{Binding Path=Source}"
+                             CurrentItem="{Binding Path=CurrentItem, Mode=TwoWay}"
+                             AutoExpandAllGroups="True"
+                             SelectionMode="Row"
+                             ShowBorder="False">
+                <dxg:GridControl.InputBindings>
+                    <KeyBinding Key="Back" Command="{Binding BackCommand}" />
+                    <KeyBinding Key="BrowserBack" Command="{Binding BackCommand}" />
+                    <KeyBinding Key="Enter" Command="{Binding OpenCommand}" />
+                </dxg:GridControl.InputBindings>
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn FieldName="Icon" />
+                    <dxg:GridColumn x:Name="columnName" FieldName="FileName" GroupInterval="Alphabetical" />
+                    <dxg:GridColumn x:Name="columnType" FieldName="Type" Visible="False" />
+                    <dxg:GridColumn x:Name="columnNameFirst" FieldName="FileNameFirst" Header="File Name" Visible="False" GroupInterval="Alphabetical" />
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.View>
+                    <dxg:CardView Name="View"
+                                  IsColumnChooserVisible="False"
+                                  SeparatorThickness="0"
+                                  CardLayout="Rows"
+                                  ShowCardExpandButton="False"
+                                  ShowColumnHeaders="False"
+                                  ShowFilterPanelMode="Never"
+                                  ShowGroupedColumns="False"
+                                  ShowGroupPanel="False"
+                                  SearchPanelHighlightResults="False"
+                                  SearchPanelAllowFilter="True"
+                                  ShowSearchPanelMode="Never"
+                                  SearchColumns="FileName"
+                                  CardTemplate="{StaticResource cardTemplate}"
+                                  PrintCardViewItemTemplate="{StaticResource printCardTemplate}"
+                                  NavigationStyle="Row" />
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+            <!--#endregion-->
+        </Grid>
+    </DockPanel>
+</local:GridDemoModule>

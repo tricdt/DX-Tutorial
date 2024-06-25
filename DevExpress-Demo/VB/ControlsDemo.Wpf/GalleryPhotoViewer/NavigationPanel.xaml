@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="ControlsDemo.GalleryDemo.NavigationPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ControlsDemo;component/Themes/GalleryPhotoViewer/NavigationPanel.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Border BorderThickness="1" Margin="0,-12,0,0" Opacity="0.15" Height="200" VerticalAlignment="Top">
+            <Border.Background>
+                <RadialGradientBrush Center="0.499,0.026" GradientOrigin="0.499,0.026" RadiusY="0.957" RadiusX="0.496">
+                    <GradientStop Color="#BFFFFFFF" Offset="0" />
+                    <GradientStop Color="Transparent" Offset="1" />
+                </RadialGradientBrush>
+            </Border.Background>
+        </Border>
+        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+            <StackPanel Orientation="Vertical">
+                <RadioButton Style="{StaticResource MenuButtonGallery}">
+                    <TextBlock Foreground="#FFBEC3E6" TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Test VStates" />
+                </RadioButton>
+                <RadioButton Style="{StaticResource MenuButtonGallery}">
+                    <TextBlock Foreground="#FFBEC3E6" TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Test VStates" />
+                </RadioButton>
+                <RadioButton Style="{StaticResource MenuButtonGallery}">
+                    <TextBlock Foreground="#FFBEC3E6" TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Test VStates" />
+                </RadioButton>
+                <RadioButton Style="{StaticResource MenuButtonGallery}">
+                    <TextBlock Foreground="#FFBEC3E6" TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Test VStates" />
+                </RadioButton>
+                <RadioButton Style="{StaticResource MenuButtonGallery}">
+                    <TextBlock Foreground="#FFBEC3E6" TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Test VStates" />
+                </RadioButton>
+                <RadioButton Style="{StaticResource MenuButtonGallery}">
+                    <TextBlock Foreground="#FFBEC3E6" TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Test VStates" />
+                </RadioButton>
+                <RadioButton Style="{StaticResource MenuButtonGallery}">
+                    <TextBlock Foreground="#FFBEC3E6" TextWrapping="Wrap" FontSize="13.333" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Test VStates" />
+                </RadioButton>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

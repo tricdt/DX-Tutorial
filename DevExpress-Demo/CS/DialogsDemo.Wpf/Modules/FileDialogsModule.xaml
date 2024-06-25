@@ -1,0 +1,116 @@
+﻿<local:DialogsDemoModule x:Class="DialogsDemo.FileDialogsModule"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                          xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+                          xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                          xmlns:local="clr-namespace:DialogsDemo"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          mc:Ignorable="d"
+                          d:DesignWidth="800"
+                          d:DesignHeight="600"
+                          DataContext="{dxmvvm:ViewModelSource Type={x:Type local:FileDialogsViewModel}}">
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <StackPanel.Resources>
+                    <Style TargetType="GroupBox">
+                        <Setter Property="Margin" Value="0,5,0,0" />
+                    </Style>
+                </StackPanel.Resources>
+                <GroupBox Header="Open file dialog filters">
+                    <ItemsControl x:Name="PART_FiltersBox" ItemsSource="{Binding Filters}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsEnable}" Content="{Binding Description}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </GroupBox>
+                <GroupBox Header="Save file fialog default extension">
+                    <dxe:ListBoxEdit x:Name="PART_ExtensionBox"
+                                     Grid.Row="3"
+                                     Grid.Column="0"
+                                     ShowBorder="False"
+                                     SelectedItem="{Binding DefaultExt}"
+                                     ItemsSource="{Binding Extensions}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid x:Name="PART_RootGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <dxr:RibbonControl x:Name="PART_Ribbon">
+                <dxr:RibbonPage Caption="Dialogs">
+                    <dxr:RibbonPageGroup Caption="Actions">
+                        <dxb:BarButtonItem Content="Upload"
+                                           ToolTip="Add photos to gallery"
+                                           GlyphSize="Large"
+                                           LargeGlyph="/DialogsDemo;component/Images/Upload.svg"
+                                           MediumGlyph="/DialogsDemo;component/Images/Upload.svg"
+                                           Command="{Binding Path=UploadPhotosCommand}" />
+                        <dxb:BarButtonItem Content="Download"
+                                           ToolTip="Download selected photos from gallery"
+                                           LargeGlyph="/DialogsDemo;component/Images/Download.svg"
+                                           MediumGlyph="/DialogsDemo;component/Images/Download.svg"
+                                           Command="{Binding Path=DownloadPhotoCommand}" />
+                        <dxb:BarButtonItem Content="Choose directory"
+                                           ToolTip="Choose gallery directory"
+                                           LargeGlyph="/DevExpress.Images.v22.2;component/SvgImages/Actions/Open.svg"
+                                           MediumGlyph="/DevExpress.Images.v22.2;component/SvgImages/Actions/Open.svg"
+                                           Command="{Binding Path=ChangeGalleryDirectoryCommand}" />
+                    </dxr:RibbonPageGroup>
+                </dxr:RibbonPage>
+            </dxr:RibbonControl>
+            <dxe:ListBoxEdit x:Name="PART_ListBox"
+                             Grid.Row="1"
+                             ShowBorder="False"
+                             SelectedItem="{Binding CurrentPhoto}"
+                             ItemsSource="{Binding Photos}"
+                             SelectionMode="Single"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <dxe:ListBoxEdit.ItemContainerStyle>
+                    <Style TargetType="dxe:ListBoxEditItem">
+                        <Setter Property="ToolTip" Value="{Binding Path=PhotoName, Mode=OneWay}" />
+                    </Style>
+                </dxe:ListBoxEdit.ItemContainerStyle>
+                <dxe:ListBoxEdit.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="Transparent">
+                            <Image Source="{Binding Path=Photo}" Stretch="Uniform" />
+                        </Border>
+                    </DataTemplate>
+                </dxe:ListBoxEdit.ItemTemplate>
+                <dxe:ListBoxEdit.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" ItemHeight="150" ItemWidth="150" />
+                    </ItemsPanelTemplate>
+                </dxe:ListBoxEdit.ItemsPanel>
+            </dxe:ListBoxEdit>
+            <dxb:StatusBarControl x:Name="PART_StatusBar" Grid.Row="2" BarItemDisplayMode="ContentAndGlyph" GlyphSize="Large">
+                <dxb:BarStaticItem AutoSizeMode="Fill" ContentAlignment="Stretch" ShowBorder="False">
+                    <dxb:BarStaticItem.ContentTemplate>
+                        <DataTemplate>
+                            <dxe:TextEdit EditMode="InplaceInactive" Text="{Binding Path=DataContext.GalleryDirectory, ElementName=PART_Ribbon, Mode=OneWay}" />
+                        </DataTemplate>
+                    </dxb:BarStaticItem.ContentTemplate>
+                </dxb:BarStaticItem>
+            </dxb:StatusBarControl>
+        </Grid>
+    </DockPanel>
+</local:DialogsDemoModule>

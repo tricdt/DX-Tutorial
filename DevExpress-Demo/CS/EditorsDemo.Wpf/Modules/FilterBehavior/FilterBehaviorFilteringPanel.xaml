@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="EditorsDemo.FilterBehavior.FilterBehaviorFilteringPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:local="clr-namespace:EditorsDemo.FilterBehavior">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <!--#region !-->
+        <dxfui:FilteringPanelControl Grid.Row="1" Margin="0,8,0,0">
+            <dxmvvm:Interaction.Behaviors>
+                <dxfui:FilterBehavior x:Name="filterBehavior" FilterString="[Year] >= 2014 And Sales > 1"
+                                      ItemsSource="{Binding ElementName=chart, Path=DataSource}">
+                    <dxfui:FilterField FieldName="Company"/>
+                    <dxfui:FilterField FieldName="Year"/>
+                    <dxfui:FilterField FieldName="Sales" Caption="Sales, millions of USD"/>
+                    <dxfui:FilterField FieldName="Charges" Caption="Charges, millions of USD"/>
+                </dxfui:FilterBehavior>
+            </dxmvvm:Interaction.Behaviors>
+        </dxfui:FilteringPanelControl>
+        <!--#endregion-->
+
+        <dxc:ChartControl Name="chart" DataSource="{Binding Sales}">
+            <dxc:XYDiagram2D SeriesDataMember="Company" EqualBarWidth="True">
+                <!--#region Axes-->
+                <dxc:XYDiagram2D.AxisX>
+                    <dxc:AxisX2D>
+                        <dxc:AxisX2D.NumericScaleOptions>
+                            <dxc:ManualNumericScaleOptions AutoGrid="False" />
+                        </dxc:AxisX2D.NumericScaleOptions>
+                        <dxc:AxisX2D.Title>
+                            <dxc:AxisTitle Content="Year" />
+                        </dxc:AxisX2D.Title>
+                    </dxc:AxisX2D>
+                </dxc:XYDiagram2D.AxisX>
+                <dxc:XYDiagram2D.AxisY>
+                    <dxc:AxisY2D>
+                        <dxc:AxisY2D.Title>
+                            <dxc:AxisTitle Content="Sales, millions of USD" />
+                        </dxc:AxisY2D.Title>
+                    </dxc:AxisY2D>
+                </dxc:XYDiagram2D.AxisY>
+                <!--#endregion-->
+                <dxc:XYDiagram2D.SeriesTemplate>
+                    <dxc:BarFullStackedSeries2D Name="seriesTemplate" ArgumentDataMember="Year" ValueDataMember="Sales" ToolTipHintDataMember="Charges"
+                                                FilterCriteria="{Binding ElementName=filterBehavior, Path=ActualFilterCriteria}"
+                                                CrosshairLabelPattern="{}{S}:&#xA;Sales: {V:$0.00}M&#xA;Charges: {HINT:$0.00}M">
+                    </dxc:BarFullStackedSeries2D>
+                </dxc:XYDiagram2D.SeriesTemplate>
+            </dxc:XYDiagram2D>
+            <!--#region Legend and Title-->
+            <dxc:ChartControl.Legend>
+                <dxc:Legend Orientation="Horizontal" HorizontalPosition="Center" VerticalPosition="BottomOutside" />
+            </dxc:ChartControl.Legend>
+            <dxc:ChartControl.Titles>
+                <dxc:Title Content="Market Share Over Time" HorizontalAlignment="Center" />
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+        </dxc:ChartControl>
+    </Grid>
+</UserControl>

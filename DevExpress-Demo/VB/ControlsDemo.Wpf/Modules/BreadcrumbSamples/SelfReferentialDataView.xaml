@@ -1,0 +1,36 @@
+﻿<UserControl
+    x:Class="ControlsDemo.BreadcrumbSamples.SelfReferentialDataView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxco="http://schemas.devexpress.com/winfx/2008/xaml/controls"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:local="clr-namespace:ControlsDemo.BreadcrumbSamples"
+    DataContext="{dxmvvm:ViewModelSource Type=local:SelfReferentialDataViewModel}">
+
+    <dxlc:LayoutControl Padding="10,0,0,0">
+        <dxlc:LayoutGroup Orientation="Vertical">
+            <dxlc:LayoutItem>
+                <!--#region !-->
+                <dxco:BreadcrumbControl
+                    x:Name="breadcrumb"
+                    DisplayMember="Name"
+                    EmptyItemText="Select item"
+                    ItemsSource="{Binding Items}"
+                    KeyMember="Id"
+                    ParentMember="ParentId"
+                    ShowItemImages="False"
+                    ShowSelectedItemImage="False" />
+                <!--#endregion-->
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem AddColonToLabel="True" Label="SelectedItem">
+                <dxe:TextEdit EditValue="{Binding ElementName=breadcrumb, Path=SelectedItem}" IsReadOnly="True" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem AddColonToLabel="True" Label="SelectedItemPath">
+                <dxe:TextEdit EditValue="{Binding ElementName=breadcrumb, Path=SelectedItemPath}" IsReadOnly="True" />
+            </dxlc:LayoutItem>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+
+</UserControl>

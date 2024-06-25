@@ -1,0 +1,96 @@
+﻿<local:GridDemoModule x:Class="GridDemo.CellMerging"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dd="clr-namespace:DevExpress.DemoData"
+                      xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+                      mc:Ignorable="d"
+                      d:DesignHeight="300"
+                      d:DesignWidth="300">
+    <local:GridDemoModule.DataContext>
+        <dd:IssueDataLoader />
+    </local:GridDemoModule.DataContext>
+    <!--#region Resources-->
+    <local:GridDemoModule.Resources>
+        <dx:Format x:Key="newFormat" Background="#FFFAF9B8" Foreground="Black" />
+        <dx:Format x:Key="fixedFormat" Background="#FFD4FFAF" Foreground="Black" />
+        <DataTemplate x:Key="priorityCellTemplate">
+            <Border Background="Transparent">
+                <dx:DXImage Source="{Binding Path=Image}" Width="16" Height="16" HorizontalAlignment="Center" />
+            </Border>
+        </DataTemplate>
+        <Style x:Key="priorityCellPrintStyle"
+               TargetType="dxe:ComboBoxEdit"
+               BasedOn="{StaticResource ResourceKey={dxgt:TableViewThemeKey ResourceKey=DefaultPrintCellStyle}}">
+            <Setter Property="dxp:ExportSettings.TargetType" Value="Image" />
+            <Setter Property="dxp:ImageExportSettings.ForceCenterImageMode" Value="True" />
+            <Setter Property="dxp:ImageExportSettings.ImageRenderMode" Value="UseImageSource" />
+            <Setter Property="dxp:ImageExportSettings.ImageSource" Value="{Binding Path=SelectedItem, RelativeSource={RelativeSource Self}, Converter={local:PriorityToImageConverter}}" />
+        </Style>
+    </local:GridDemoModule.Resources>
+    <!--#endregion-->
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" />
+        <!--#region Options-->
+        <StackPanel Name="PART_Options" Margin="12,8,12,12" DockPanel.Dock="Right" MinWidth="210">
+            <dxe:CheckEdit IsChecked="{Binding Path=AllowCellMerge, ElementName=view, Mode=TwoWay}" Content="Allow Cell Merging" Margin="0,0,0,8" />
+            <Button Content="Print Preview" Command="{Binding Path=Commands.ShowRibbonPrintPreview, ElementName=view}" />
+        </StackPanel>
+        <!--#endregion-->
+        <dxg:GridControl x:Name="grid" ItemsSource="{Binding Path=Items}" ShowBorder="False" UseLayoutRounding="False">
+            <!--#region Columns-->
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="ProjectID" Header="Project Name" Width="2*" SortIndex="0">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{Binding Path=Projects}" ValueMember="ID" DisplayMember="Name" IsTextEditable="False" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Type" Width="*" SortIndex="1">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{dxe:EnumItemsSource EnumType=dd:IssueType}" IsTextEditable="False" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Priority" Width="*" SortIndex="2" PrintCellStyle="{StaticResource priorityCellPrintStyle}">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{dxe:EnumItemsSource EnumType=dd:IssuePriority, AllowImages=False}"
+                                                  ApplyItemTemplateToSelectedItem="True"
+                                                  IsTextEditable="False"
+                                                  HorizontalContentAlignment="Stretch"
+                                                  ItemTemplate="{StaticResource priorityCellTemplate}" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Status" Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{dxe:EnumItemsSource EnumType=dd:Status}" IsTextEditable="False" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Name" Width="2*" />
+                <dxg:GridColumn FieldName="CreatedDate" Width="*" />
+                <dxg:GridColumn FieldName="OwnerID" Header="Owner" Width="1.5*" AllowCellMerge="False">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{Binding Path=Users}" ValueMember="ID" DisplayMember="FullName" IsTextEditable="False" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <!--#endregion-->
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="view" AllowCellMerge="True">
+                    <!--#region Format conditions-->
+                    <dxg:TableView.FormatConditions>
+                        <dxg:FormatCondition FieldName="Status" Expression="[Status]='New'" Format="{StaticResource newFormat}" />
+                        <dxg:FormatCondition FieldName="Name" Expression="[Status]='New'" Format="{StaticResource newFormat}" />
+                        <dxg:FormatCondition FieldName="Status" Expression="[Status]='Fixed'" Format="{StaticResource fixedFormat}" />
+                        <dxg:FormatCondition FieldName="Name" Expression="[Status]='Fixed'" Format="{StaticResource fixedFormat}" />
+                    </dxg:TableView.FormatConditions>
+                    <!--#endregion-->
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

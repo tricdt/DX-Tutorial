@@ -1,0 +1,230 @@
+﻿<local:GaugesDemoModule x:Class="GaugesDemo.LinearScales"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                        xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
+                        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                        xmlns:local="clr-namespace:GaugesDemo"
+                        mc:Ignorable="d"
+                        d:DesignHeight="820"
+                        d:DesignWidth="970"
+                        DataContext="{dxmvvm:ViewModelSource Type={x:Type local:EqualizerViewModel}}"
+                        Loaded="{DXEvent Handler='Start()'}"
+                        Unloaded="{DXEvent Handler='Stop()'}">
+    <dxdb:DemoModule.Resources>
+        <Style TargetType="{x:Type dxga:LinearScale}">
+            <Setter Property="MajorIntervalCount" Value="2"/>
+            <Setter Property="MinorIntervalCount" Value="5"/>
+            <Setter Property="ShowMajorTickmarks" Value="{Binding ElementName=ceShowMajor, Path=IsChecked, Converter={local:BoolToDefaultBooleanConverter}}"/>
+            <Setter Property="ShowMinorTickmarks" Value="{Binding ElementName=ceShowMinor, Path=IsChecked, Converter={local:BoolToDefaultBooleanConverter}}"/>
+            <Setter Property="ShowLabels" Value="{Binding ElementName=ceShowLabels, Path=IsChecked, Converter={local:BoolToDefaultBooleanConverter}}"/>
+            <Setter Property="MajorTickmarkOptions">
+                <Setter.Value>
+                    <dxga:MajorTickmarkOptions Offset="5" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="MinorTickmarkOptions">
+                <Setter.Value>
+                    <dxga:MinorTickmarkOptions Offset="5" ShowTicksForMajor="True" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="LabelOptions">
+                <Setter.Value>
+                    <dxga:LinearScaleLabelOptions Offset="-23" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </dxdb:DemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,5,12,12" MinWidth="210">
+                <GroupBox Header="Labels">
+                    <StackPanel>
+                        <dxe:CheckEdit x:Name="ceShowLabels" Content="Show" Margin="0,0,0,2" IsChecked="False" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Tickmarks" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit x:Name="ceShowMajor" Content="Show Major" Margin="0,0,0,2" IsChecked="True" />
+                        <dxe:CheckEdit x:Name="ceShowMinor" Content="Show Minor" Margin="0,0,0,2" IsChecked="True" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*" MinHeight="30" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="4*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0"
+                       Grid.Column="1"
+                       Text="Equalizer"
+                       Margin="0,5,0,0"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="22"
+                       Foreground="#06697E" />
+            <dxga:LinearGaugeControl Grid.Row="1" Grid.Column="1" Width="600" Height="400" EnableAnimation="True">
+                <dxga:LinearGaugeControl.ScalePanelTemplate>
+                    <ItemsPanelTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </dxga:LinearGaugeControl.ScalePanelTemplate>
+                <dxga:LinearGaugeControl.Model>
+                    <dxga:LinearMagicLightModel />
+                </dxga:LinearGaugeControl.Model>
+                <dxga:LinearGaugeControl.Layers>
+                    <dxga:LinearGaugeLayer />
+                </dxga:LinearGaugeControl.Layers>
+                <dxga:LinearScale Grid.Column="0">
+                    <dxga:LinearScale.CustomLabels>
+                        <dxga:ScaleCustomLabel Content="32Hz" Offset="-12" Value="-1" Foreground="#FF62D7E7" />
+                    </dxga:LinearScale.CustomLabels>
+                    <dxga:LinearScale.RangeBars>
+                        <dxga:LinearScaleRangeBar Value="{Binding Frequency32}">
+                            <dxga:LinearScaleRangeBar.Options>
+                                <dxga:LinearScaleRangeBarOptions Offset="0" Thickness="30" ZIndex="150" />
+                            </dxga:LinearScaleRangeBar.Options>
+                        </dxga:LinearScaleRangeBar>
+                    </dxga:LinearScale.RangeBars>
+                </dxga:LinearScale>
+                <dxga:LinearScale Grid.Column="1">
+                    <dxga:LinearScale.CustomLabels>
+                        <dxga:ScaleCustomLabel Content="64Hz" Offset="-12" Value="-1" Foreground="#FF62D7E7" />
+                    </dxga:LinearScale.CustomLabels>
+                    <dxga:LinearScale.RangeBars>
+                        <dxga:LinearScaleRangeBar Value="{Binding Frequency64}">
+                            <dxga:LinearScaleRangeBar.Options>
+                                <dxga:LinearScaleRangeBarOptions Offset="0" Thickness="30" ZIndex="150" />
+                            </dxga:LinearScaleRangeBar.Options>
+                        </dxga:LinearScaleRangeBar>
+                    </dxga:LinearScale.RangeBars>
+                </dxga:LinearScale>
+                <dxga:LinearScale Grid.Column="2">
+                    <dxga:LinearScale.CustomLabels>
+                        <dxga:ScaleCustomLabel Content="125Hz" Offset="-14" Value="-1" Foreground="#FF62D7E7" />
+                    </dxga:LinearScale.CustomLabels>
+                    <dxga:LinearScale.RangeBars>
+                        <dxga:LinearScaleRangeBar Value="{Binding Frequency125}">
+                            <dxga:LinearScaleRangeBar.Options>
+                                <dxga:LinearScaleRangeBarOptions Offset="0" Thickness="30" ZIndex="150" />
+                            </dxga:LinearScaleRangeBar.Options>
+                        </dxga:LinearScaleRangeBar>
+                    </dxga:LinearScale.RangeBars>
+                </dxga:LinearScale>
+                <dxga:LinearScale Grid.Column="3">
+                    <dxga:LinearScale.CustomLabels>
+                        <dxga:ScaleCustomLabel Content="250Hz" Offset="-14" Value="-1" Foreground="#FF62D7E7" />
+                    </dxga:LinearScale.CustomLabels>
+                    <dxga:LinearScale.RangeBars>
+                        <dxga:LinearScaleRangeBar Value="{Binding Frequency250}">
+                            <dxga:LinearScaleRangeBar.Options>
+                                <dxga:LinearScaleRangeBarOptions Offset="0" Thickness="30" ZIndex="150" />
+                            </dxga:LinearScaleRangeBar.Options>
+                        </dxga:LinearScaleRangeBar>
+                    </dxga:LinearScale.RangeBars>
+                </dxga:LinearScale>
+                <dxga:LinearScale Grid.Column="4">
+                    <dxga:LinearScale.CustomLabels>
+                        <dxga:ScaleCustomLabel Content="500Hz" Offset="-14" Value="-1" Foreground="#FF62D7E7" />
+                    </dxga:LinearScale.CustomLabels>
+                    <dxga:LinearScale.RangeBars>
+                        <dxga:LinearScaleRangeBar Value="{Binding Frequency500}">
+                            <dxga:LinearScaleRangeBar.Options>
+                                <dxga:LinearScaleRangeBarOptions Offset="0" Thickness="30" ZIndex="150" />
+                            </dxga:LinearScaleRangeBar.Options>
+                        </dxga:LinearScaleRangeBar>
+                    </dxga:LinearScale.RangeBars>
+                </dxga:LinearScale>
+                <dxga:LinearScale Grid.Column="5">
+                    <dxga:LinearScale.CustomLabels>
+                        <dxga:ScaleCustomLabel Content="1kHz" Offset="-12" Value="-1" Foreground="#FF62D7E7" />
+                    </dxga:LinearScale.CustomLabels>
+                    <dxga:LinearScale.RangeBars>
+                        <dxga:LinearScaleRangeBar Value="{Binding Frequency1K}">
+                            <dxga:LinearScaleRangeBar.Options>
+                                <dxga:LinearScaleRangeBarOptions Offset="0" Thickness="30" ZIndex="150" />
+                            </dxga:LinearScaleRangeBar.Options>
+                        </dxga:LinearScaleRangeBar>
+                    </dxga:LinearScale.RangeBars>
+                </dxga:LinearScale>
+                <dxga:LinearScale Grid.Column="6">
+                    <dxga:LinearScale.CustomLabels>
+                        <dxga:ScaleCustomLabel Content="2kHz" Offset="-12" Value="-1" Foreground="#FF62D7E7" />
+                    </dxga:LinearScale.CustomLabels>
+                    <dxga:LinearScale.RangeBars>
+                        <dxga:LinearScaleRangeBar Value="{Binding Frequency2K}">
+                            <dxga:LinearScaleRangeBar.Options>
+                                <dxga:LinearScaleRangeBarOptions Offset="0" Thickness="30" ZIndex="150" />
+                            </dxga:LinearScaleRangeBar.Options>
+                        </dxga:LinearScaleRangeBar>
+                    </dxga:LinearScale.RangeBars>
+                </dxga:LinearScale>
+                <dxga:LinearScale Grid.Column="7">
+                    <dxga:LinearScale.CustomLabels>
+                        <dxga:ScaleCustomLabel Content="4kHz" Offset="-12" Value="-1" Foreground="#FF62D7E7" />
+                    </dxga:LinearScale.CustomLabels>
+                    <dxga:LinearScale.RangeBars>
+                        <dxga:LinearScaleRangeBar Value="{Binding Frequency4K}">
+                            <dxga:LinearScaleRangeBar.Options>
+                                <dxga:LinearScaleRangeBarOptions Offset="0" Thickness="30" ZIndex="150" />
+                            </dxga:LinearScaleRangeBar.Options>
+                        </dxga:LinearScaleRangeBar>
+                    </dxga:LinearScale.RangeBars>
+                </dxga:LinearScale>
+                <dxga:LinearScale Grid.Column="8">
+                    <dxga:LinearScale.CustomLabels>
+                        <dxga:ScaleCustomLabel Content="8kHz" Offset="-12" Value="-1" Foreground="#FF62D7E7" />
+                    </dxga:LinearScale.CustomLabels>
+                    <dxga:LinearScale.RangeBars>
+                        <dxga:LinearScaleRangeBar Value="{Binding Frequency8K}">
+                            <dxga:LinearScaleRangeBar.Options>
+                                <dxga:LinearScaleRangeBarOptions Offset="0" Thickness="30" ZIndex="150" />
+                            </dxga:LinearScaleRangeBar.Options>
+                        </dxga:LinearScaleRangeBar>
+                    </dxga:LinearScale.RangeBars>
+                </dxga:LinearScale>
+                <dxga:LinearScale Grid.Column="9">
+                    <dxga:LinearScale.CustomLabels>
+                        <dxga:ScaleCustomLabel Content="16kHz" Offset="-14" Value="-1" Foreground="#FF62D7E7" />
+                    </dxga:LinearScale.CustomLabels>
+                    <dxga:LinearScale.RangeBars>
+                        <dxga:LinearScaleRangeBar Value="{Binding Frequency16K}">
+                            <dxga:LinearScaleRangeBar.Options>
+                                <dxga:LinearScaleRangeBarOptions Offset="0" Thickness="30" ZIndex="150" />
+                            </dxga:LinearScaleRangeBar.Options>
+                        </dxga:LinearScaleRangeBar>
+                    </dxga:LinearScale.RangeBars>
+                </dxga:LinearScale>
+            </dxga:LinearGaugeControl>
+        </Grid>
+    </DockPanel>
+</local:GaugesDemoModule>

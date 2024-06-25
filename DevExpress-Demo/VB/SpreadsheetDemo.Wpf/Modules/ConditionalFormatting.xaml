@@ -1,0 +1,51 @@
+﻿<local:SpreadsheetDemoModule xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                             xmlns:dxsps="http://schemas.devexpress.com/winfx/2008/xaml/spreadsheet"
+                             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                             xmlns:local="clr-namespace:SpreadsheetDemo"
+                             x:Class="SpreadsheetDemo.ConditionalFormatting">
+
+    <DockPanel>
+        <!--#region OptionsContent-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <GroupBox Header="Conditional Formatting:" Margin="12,5,12,12" MinWidth="210" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical">
+                    <CheckBox x:Name="chkImports" Content="Imports" Checked="OnCheckedChanged" Unchecked="OnCheckedChanged" IsChecked="True" Margin="0,5,0,0" />
+                    <CheckBox x:Name="chkExports" Content="Exports" Checked="OnCheckedChanged" Unchecked="OnCheckedChanged" IsChecked="True" Margin="0,5,0,0" />
+                    <CheckBox x:Name="chkBalance" Content="Balance" Checked="OnCheckedChanged" Unchecked="OnCheckedChanged" IsChecked="True" Margin="0,5,0,0" />
+                    <CheckBox x:Name="chkAsiaRegion"
+                                  Content="Asia Region"
+                                  Checked="OnCheckedChanged"
+                                  Unchecked="OnCheckedChanged"
+                                  IsChecked="True"
+                                  Margin="0,5,0,0" />
+                </StackPanel>
+            </GroupBox>
+        </ScrollViewer>
+        <!--#endregion OptionsContent-->
+        <dxsps:SpreadsheetControl x:Name="spreadsheetControl1"
+                                  CommandBarStyle="Ribbon"
+                                  ShowFormulaBar="True"
+                                  ShowStatusBar="True"
+                                  DocumentSource="{DXBinding '$local:DemoUtils.GetRelativePath(`TopTradingPartners.xlsx`)'}"
+                                  DocumentLoaded="spreadsheetControl1_DocumentLoaded"
+                                  BorderThickness="0,1,0,0">
+            <dxsps:SpreadsheetControl.Options>
+                <dxsps:SpreadsheetControlOptions Culture="en-US" >
+                    <dxsps:SpreadsheetControlOptions.Print>
+                        <dxsps:SpreadsheetPrintOptions PrintContent="ActiveSheets"/>
+                    </dxsps:SpreadsheetControlOptions.Print>
+                </dxsps:SpreadsheetControlOptions>
+            </dxsps:SpreadsheetControl.Options>
+            <dxsps:SpreadsheetControl.RibbonActions>
+                <dxb:UpdateAction ElementName="{x:Static dxsps:DefaultBarItemNames.RibbonPage_Home}" PropertyName="IsSelected" Value="True" />
+            </dxsps:SpreadsheetControl.RibbonActions>
+        </dxsps:SpreadsheetControl>
+    </DockPanel>
+</local:SpreadsheetDemoModule>

@@ -1,0 +1,312 @@
+﻿<local:GridDemoModule x:Class="GridDemo.UsingPrintingTemplates"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+                      xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800">
+    <local:GridDemoModule.DataContext>
+        <local:PrintTemplatesViewModel />
+    </local:GridDemoModule.DataContext>
+    <local:GridDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GridDemo;component/ModuleResources/PrintDemoModuleResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!--#region detailPrintRowTemplate-->
+            <DataTemplate x:Key="detailPrintRowTemplate">
+                <DataTemplate.Resources>
+                    <Style x:Key="fieldStyle"
+                           TargetType="{x:Type dxe:TextEdit}"
+                           BasedOn="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintStyleBase}}">
+                        <Setter Property="Background" Value="#FF6D8C59" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Setter Property="Foreground" Value="#FFFFFFFF" />
+                        <Setter Property="Margin" Value="0,2,2,2" />
+                        <Setter Property="Width" Value="120" />
+                    </Style>
+                    <Style x:Key="dataStyle"
+                           TargetType="{x:Type dxe:TextEdit}"
+                           BasedOn="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintStyleBase}}">
+                        <Setter Property="Background" Value="#FFF0EDDA" />
+                        <Setter Property="Margin" Value="0,2,2,2" />
+                        <Setter Property="TextWrapping" Value="Wrap" />
+                    </Style>
+                </DataTemplate.Resources>
+                <ContentControl Foreground="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}">
+                    <Grid DataContext="{Binding DataContext.Content, RelativeSource={RelativeSource TemplatedParent}}"
+                          Width="{Binding Path=(dxg:GridPrintingHelper.PrintRowInfo).TotalHeaderWidth}"
+                          Margin="0,12,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <dxe:ImageEdit IsPrintingMode="True"
+                                       Grid.Column="0"
+                                       VerticalAlignment="Center"
+                                       BorderThickness="8"
+                                       BorderBrush="#FFF0EDDA"
+                                       Source="{Binding Path=Row.Photo}" />
+                        <Grid Grid.Column="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="12" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <dxe:TextEdit Grid.Column="0" Grid.Row="0" EditValue="First Name:" Style="{StaticResource fieldStyle}" />
+                            <dxe:TextEdit Grid.Column="0" Grid.Row="1" EditValue="Last Name:" Style="{StaticResource fieldStyle}" />
+                            <dxe:TextEdit Grid.Column="0" Grid.Row="2" EditValue="Birth Date:" Style="{StaticResource fieldStyle}" />
+                            <dxe:TextEdit Grid.Column="0" Grid.Row="3" EditValue="Position:" Style="{StaticResource fieldStyle}" />
+                            <dxe:TextEdit Grid.Column="0" Grid.Row="4" EditValue="Hire Date:" Style="{StaticResource fieldStyle}" />
+                            <dxe:TextEdit Grid.Column="0" Grid.Row="5" EditValue="About:" Style="{StaticResource fieldStyle}" />
+                            <dxe:TextEdit Grid.Column="0" Grid.Row="6" EditValue="Address:" Style="{StaticResource fieldStyle}" />
+
+                            <dxe:TextEdit Grid.Column="2" Grid.Row="0" EditValue="{Binding Row.FirstName}" Style="{StaticResource dataStyle}" />
+                            <dxe:TextEdit Grid.Column="2" Grid.Row="1" EditValue="{Binding Row.LastName}" Style="{StaticResource dataStyle}" />
+                            <dxe:TextEdit Grid.Column="2"
+                                          Grid.Row="2"
+                                          EditValue="{Binding Row.BirthDate}"
+                                          MaskUseAsDisplayFormat="True"
+                                          MaskType="DateTime"
+                                          Mask="D"
+                                          Style="{StaticResource dataStyle}" />
+                            <dxe:TextEdit Grid.Column="2" Grid.Row="3" EditValue="{Binding Row.Title}" Style="{StaticResource dataStyle}" />
+                            <dxe:TextEdit Grid.Column="2"
+                                          Grid.Row="4"
+                                          EditValue="{Binding Row.HireDate}"
+                                          MaskUseAsDisplayFormat="True"
+                                          MaskType="DateTime"
+                                          Mask="D"
+                                          Style="{StaticResource dataStyle}" />
+                            <dxe:TextEdit Grid.Column="2"
+                                          Grid.Row="5"
+                                          EditValue="{Binding Row.Notes}"
+                                          Style="{StaticResource dataStyle}"
+                                          dxp:TextExportSettings.TextTrimming="None" />
+                            <dxe:TextEdit Grid.Column="2" Grid.Row="6" EditValue="{Binding Row.Address}" Style="{StaticResource dataStyle}" />
+                        </Grid>
+                    </Grid>
+                </ContentControl>
+            </DataTemplate>
+            <!--#endregion-->
+
+            <!--#region detailPrintHeaderTemplate-->
+            <DataTemplate x:Key="detailPrintHeaderTemplate">
+                <dxe:TextEdit IsPrintingMode="True"
+                              Background="#FF6D8C59"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Padding="12"
+                              Margin="0,0,0,8"
+                              Width="{Binding Path=Content.(dxg:GridPrintingHelper.PrintRowInfo).TotalHeaderWidth}"
+                              Foreground="#FFFFFFFF"
+                              FontWeight="Bold"
+                              FontSize="20"
+                              HorizontalContentAlignment="Center"
+                              EditValue="Employee List" />
+            </DataTemplate>
+            <!--#endregion-->
+
+            <!--#region mailMergePrintHeaderStyle-->
+            <Style x:Key="mailMergePrintHeaderStyle" TargetType="{x:Type dxe:TextEdit}">
+                <Setter Property="BorderThickness" Value="0" />
+            </Style>
+            <!--#endregion-->
+
+            <!--#region mailMergePrintRowTemplate-->
+            <DataTemplate x:Key="mailMergePrintRowTemplate">
+                <ContentControl Foreground="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}">
+                    <Grid DataContext="{Binding DataContext.Content, RelativeSource={RelativeSource TemplatedParent}}"
+                          Width="{Binding Path=(dxg:GridPrintingHelper.PrintRowInfo).TotalHeaderWidth}"
+                          Margin="0,15,0,0"
+                          dxp:ExportSettings.TargetType="Panel">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <dxe:ImageEdit IsPrintingMode="True"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       MaxWidth="150"
+                                       BorderThickness="1"
+                                       BorderBrush="Black"
+                                       Source="{Binding Path=Row.Photo}" />
+                        <dxe:TextEdit Grid.Row="1"
+                                      HorizontalContentAlignment="Center"
+                                      FontSize="24"
+                                      FontWeight="Bold"
+                                      Foreground="#FFBE4410"
+                                      Style="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintStyleBase}}"
+                                      dxp:TextExportSettings.TextWrapping="NoWrap"
+                                      Padding="5,2,5,2"
+                                      EditValue="{Binding Path=DataContext.FullName, Mode=OneWay}" />
+                        <dxe:TextEdit Grid.Row="2"
+                                      EditValue="Details"
+                                      FontSize="20"
+                                      HorizontalContentAlignment="Center"
+                                      Margin="2,4,2,4"
+                                      Foreground="#FF797979"
+                                      Style="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintStyleBase}}" />
+                        <WrapPanel Grid.Row="3" dxp:ExportSettings.TargetType="Panel">
+                            <dxe:TextEdit EditValue="Birth date:"
+                                          FontWeight="Bold"
+                                          dxp:TextExportSettings.TextTrimming="None"
+                                          Style="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintStyleBase}}" />
+                            <dxe:TextEdit Text="{Binding Row.BirthDate, StringFormat=D}"
+                                          Style="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintStyleBase}}" />
+                        </WrapPanel>
+                        <WrapPanel Grid.Row="4" dxp:ExportSettings.TargetType="Panel">
+                            <dxe:TextEdit EditValue="Position:"
+                                          FontWeight="Bold"
+                                          dxp:TextExportSettings.TextTrimming="None"
+                                          Style="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintStyleBase}}" />
+                            <dxe:TextEdit EditValue="{Binding Row.Title}" Style="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintStyleBase}}" />
+                        </WrapPanel>
+                        <WrapPanel Grid.Row="5" dxp:ExportSettings.TargetType="Panel">
+                            <dxe:TextEdit EditValue="Deparment:"
+                                          FontWeight="Bold"
+                                          dxp:TextExportSettings.TextTrimming="None"
+                                          Style="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintStyleBase}}" />
+                            <dxe:TextEdit EditValue="{Binding Row.Region}" Style="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintStyleBase}}" />
+                        </WrapPanel>
+                        <Grid Grid.Row="6" dxp:ExportSettings.TargetType="Panel">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <dxe:TextEdit Grid.Column="0"
+                                          EditValue="Notes:"
+                                          FontWeight="Bold"
+                                          VerticalAlignment="Top"
+                                          Style="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintStyleBase}}"
+                                          dxp:TextExportSettings.TextTrimming="None" />
+                            <dxe:TextEdit Grid.Column="1"
+                                          EditValue="{Binding Row.Notes}"
+                                          TextWrapping="Wrap"
+                                          Style="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintStyleBase}}"
+                                          dxp:TextExportSettings.TextTrimming="None" />
+                        </Grid>
+                        <WrapPanel Grid.Row="7" Margin="0,5,0,0" dxp:ExportSettings.TargetType="Panel">
+                            <dxe:TextEdit EditValue="Contact phone:"
+                                          FontWeight="Bold"
+                                          Style="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintStyleBase}}"
+                                          dxp:TextExportSettings.TextTrimming="None" />
+                            <dxe:TextEdit EditValue="{Binding Row.HomePhone}"
+                                          Foreground="#FFBE4410"
+                                          FontWeight="Bold"
+                                          Style="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintStyleBase}}"
+                                          dxp:TextExportSettings.TextTrimming="None" />
+                        </WrapPanel>
+                    </Grid>
+                </ContentControl>
+            </DataTemplate>
+            <!--#endregion-->
+        </ResourceDictionary>
+    </local:GridDemoModule.Resources>
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" />
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Header="Templates" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit x:Name="templateNamesListBox"
+                                     ShowBorder="False"
+                                     ItemsSource="{dxe:EnumItemsSource EnumType=local:PrintTemplatesMode}"
+                                     EditValue="{Binding Mode, Mode=TwoWay}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <Button Command="{Binding ShowPreviewInNewTabCommand}" Margin="0,12,0,0" Content="Preview" />
+                <Button Command="{Binding Commands.ShowRibbonPrintPreviewDialog, ElementName=view}" Margin="0,12,0,0" Content="Preview in New Window" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dx:DXTabControl Style="{StaticResource tabControlPrintPreviewStyle}">
+            <dx:DXTabItem Style="{StaticResource gridControlTabItemStyle}" Header="Grid Control">
+                <dxg:GridControl Name="grid" Grid.Column="0" ItemsSource="{x:Static dxdb:NWindDataProvider.Employees}" ShowBorder="False">
+                    <!--#region Columns-->
+                    <dxg:GridControl.Columns>
+                        <dxg:GridColumn FieldName="FirstName" MinWidth="50" Width="*" />
+                        <dxg:GridColumn FieldName="LastName" MinWidth="50" Width="*" />
+                        <dxg:GridColumn FieldName="BirthDate" MinWidth="50" Width="*">
+                            <dxg:GridColumn.EditSettings>
+                                <dxe:DateEditSettings DisplayFormat="d" />
+                            </dxg:GridColumn.EditSettings>
+                        </dxg:GridColumn>
+                        <dxg:GridColumn FieldName="Title" MinWidth="50" Width="*" Header="Position" />
+                        <dxg:GridColumn FieldName="FullName"
+                                        Visible="False"
+                                        Width="2*"
+                                        ShowInColumnChooser="False"
+                                        UnboundDataType="{x:Type sys:String}"
+                                        UnboundExpression="[FirstName] + ' ' + [LastName]" />
+                        <dxg:GridColumn FieldName="Photo" MinWidth="60" Width="0.5*" ReadOnly="True">
+                            <dxg:GridColumn.EditSettings>
+                                <dxe:ImageEditSettings ShowMenu="False" ShowLoadDialogOnClickMode="Never" />
+                            </dxg:GridColumn.EditSettings>
+                        </dxg:GridColumn>
+                    </dxg:GridControl.Columns>
+                    <!--#endregion-->
+                    <dxg:GridControl.View>
+                        <dxg:TableView Name="view" ShowGroupedColumns="True" AllowGrouping="False">
+                            <dxg:TableView.Style>
+                                <Style TargetType="dxg:TableView">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Mode}" Value="Detail">
+                                            <Setter Property="PrintColumnHeaderStyle" Value="{StaticResource mailMergePrintHeaderStyle}" />
+                                            <Setter Property="PrintHeaderTemplate" Value="{StaticResource detailPrintHeaderTemplate}" />
+                                            <Setter Property="PrintRowTemplate" Value="{StaticResource detailPrintRowTemplate}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Mode}" Value="MailMerge">
+                                            <Setter Property="PrintColumnHeaderStyle" Value="{StaticResource mailMergePrintHeaderStyle}" />
+                                            <Setter Property="PrintHeaderTemplate" Value="{x:Null}" />
+                                            <Setter Property="PrintRowTemplate" Value="{StaticResource mailMergePrintRowTemplate}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </dxg:TableView.Style>
+                            <dxmvvm:Interaction.Behaviors>
+                                <local:PrintableTabBehavior PrintableControl="{Binding PrintableControl, Mode=OneWayToSource}" ShowPreviewTab="{Binding ReOpenPreviewTabsCommand}" />
+                            </dxmvvm:Interaction.Behaviors>
+                        </dxg:TableView>
+                    </dxg:GridControl.View>
+                </dxg:GridControl>
+            </dx:DXTabItem>
+        </dx:DXTabControl>
+    </DockPanel>
+</local:GridDemoModule>

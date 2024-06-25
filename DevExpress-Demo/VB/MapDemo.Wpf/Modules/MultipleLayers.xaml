@@ -1,0 +1,24 @@
+﻿<local:MapDemoModule x:Class="MapDemo.MultipleLayers"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+                     xmlns:local="clr-namespace:MapDemo"
+                     mc:Ignorable="d"
+                     d:DesignHeight="557"
+                     d:DesignWidth="2643">
+    <local:MapDemoModule.Resources>
+        <local:DemoValuesProvider x:Key="DemoValuesProvider" />
+    </local:MapDemoModule.Resources>
+    <dxm:MapControl ZoomLevel="12" FlowDirection="LeftToRight" CenterPoint="29.084,-110.97" IsManipulationEnabled="True">
+        <dxm:ImageLayer>
+            <dxm:BingMapDataProvider Kind="Area" BingKey="{Binding DevexpressBingKey, Source={StaticResource DemoValuesProvider}}" />
+        </dxm:ImageLayer>
+        <dxm:ImageLayer MaxZoomLevel="18"
+                        MinZoomLevel="11"
+                        Bounds="29.127,-111.059 29.177,-110.999 29.149,-110.946 29.093,-110.912 29.037,-110.914 29.021,-110.901 28.994,-110.915 28.989,-110.938 28.997,-110.949 29.073,-111.041">
+            <dxm:OpenStreetMapDataProvider WebRequest="OnWebRequest" />
+        </dxm:ImageLayer>
+    </dxm:MapControl>
+</local:MapDemoModule>

@@ -1,0 +1,75 @@
+<mb:DemoModule x:Class="DevExpress.VideoRent.Wpf.ArtistDetailView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:mb="clr-namespace:DevExpress.VideoRent.Wpf.ModulesBase"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    ShowMethodType="{DynamicResource ShowType}">
+
+    <mb:DemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/CommonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <helpers:DataSource x:Key="DataSource" />
+            <mb:ClassicShowType x:Key="ShowType" Category="{x:Static local:WpfViewsManager.CategoryArtists}" Subcategory="{helpers:ConstString ID=Details}" Select="False" />
+        </ResourceDictionary>
+    </mb:DemoModule.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}">
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static mb:ShowType.CloseSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static mb:ClassicShowType.SelectSignalSlotProperty}" Value="{Binding FocusSignal}" />
+            <helpers:BindingInfo ElementName="BbiHome" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding View.SelectCategoryCommand}" />
+            <helpers:BindingInfo ElementName="BbiAddPhoto" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding ArtistEdit.CommandAddPicture}" />
+            <helpers:BindingInfo ElementName="BbiDeletePhoto" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding ArtistEdit.CommandDeleteCurrentPicture}" />
+            <helpers:BindingInfo ElementName="BbiDeletePhoto" Property="{x:Static dxb:BarButtonItem.IsEnabledProperty}" Value="{Binding ArtistEdit.CurrentPicture.AllowDelete, TargetNullValue=False, FallbackValue=False}" />
+            <helpers:BindingInfo ElementName="BbiSave" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding CommandSave}" />
+            <helpers:BindingInfo ElementName="BbiSaveAndClose" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding CommandSaveAndDispose}" />
+            <helpers:BindingInfo ElementName="BbiClose" Property="{x:Static helpers:CustomEventCommandHelper.ItemClickProperty}" Value="{Binding CommandClose}" />
+            <helpers:BindingInfo ElementName="ArtistEditViewPresenter" Property="{x:Static ContentControl.ContentProperty}" Value="{Binding ArtistEdit.View}" />
+            <helpers:BindingInfo ElementName="ArtistDetailPage" Property="{x:Static dxr:RibbonPage.CaptionProperty}" Value="{Binding Title}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <dxb:BarManager>
+            <dxb:BarManager.Items>
+                <dxb:BarButtonItem x:Name="BbiHome" local:ImagesHelper.VideoRentImage="Home" Content="{helpers:ConstString ID=ArtistList}" helpers:RibbonManager.Action="Home" />
+                <dxb:BarButtonItem x:Name="BbiAddPhoto" local:ImagesHelper.VideoRentImage="New" Content="{helpers:ConstString ID=Add}" />
+                <dxb:BarButtonItem x:Name="BbiDeletePhoto" local:ImagesHelper.VideoRentImage="Delete" Content="{helpers:ConstString ID=Delete}" />
+                <dxb:BarButtonItem x:Name="BbiSave" local:ImagesHelper.VideoRentImage="Save" Content="{helpers:ConstString ID=Save}" />
+                <dxb:BarButtonItem x:Name="BbiSaveAndClose" local:ImagesHelper.VideoRentImage="SaveAndClose" Content="{helpers:ConstString ID=SaveAndClose}" />
+                <dxb:BarButtonItem x:Name="BbiClose" local:ImagesHelper.VideoRentImage="Close" Content="{helpers:ConstString ID=Close}" />
+            </dxb:BarManager.Items>
+            <dxr:RibbonControl>
+                <dxr:RibbonControl.PageHeaderItemLinks>
+                    <dxb:BarButtonItemLink BarItemName="BbiClose" />
+                </dxr:RibbonControl.PageHeaderItemLinks>
+                <dxr:RibbonDefaultPageCategory>
+                    <dxr:RibbonPage x:Name="ArtistDetailPage">
+                        <dxr:RibbonPageGroup Caption="{helpers:ConstString ID=Home}">
+                            <dxb:BarButtonItemLink BarItemName="BbiHome" RibbonStyle="Large" />
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{helpers:ConstString ID=Photo}">
+                            <dxb:BarButtonItemLink BarItemName="BbiAddPhoto" RibbonStyle="Large" />
+                            <dxb:BarButtonItemLink BarItemName="BbiDeletePhoto" RibbonStyle="Large" />
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{helpers:ConstString ID=Main}">
+                            <dxb:BarButtonItemLink BarItemName="BbiSave" RibbonStyle="Large" />
+                            <dxb:BarButtonItemLink BarItemName="BbiSaveAndClose" RibbonStyle="Large" />
+                            <dxb:BarItemLinkSeparator />
+                            <dxb:BarButtonItemLink BarItemName="BbiClose" RibbonStyle="Large" />
+                        </dxr:RibbonPageGroup>
+                    </dxr:RibbonPage>
+                </dxr:RibbonDefaultPageCategory>
+            </dxr:RibbonControl>
+        </dxb:BarManager>
+        <ContentControl Grid.Row="1" x:Name="ArtistEditViewPresenter" Style="{StaticResource ModulePresenter}" />
+    </Grid>
+</mb:DemoModule>

@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="MVVMDemo.TypedStylesDemo.BaseStylesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+    <UserControl.Resources>
+        <!--#region !-->
+        <ControlStyle x:Key="BaseStyle" Background="LightGreen" />
+        <TextBoxStyle x:Key="TextBoxStyle" BasedOn="{StaticResource BaseStyle}"
+                      TextWrapping="Wrap" IsUndoEnabled="False" AcceptsReturn="True"/>
+        <!--#endregion-->
+    </UserControl.Resources>
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <TextBox Style="{StaticResource TextBoxStyle}">TextBox</TextBox>
+    </dxlc:LayoutControl>
+</UserControl>

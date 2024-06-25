@@ -1,0 +1,62 @@
+﻿<UserControl
+    x:Class="LayoutControlDemo.controlProperties"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:local="clr-namespace:LayoutControlDemo">
+    <UserControl.Resources>
+        <local:ObjectToTypeNameConverter x:Key="ObjectToTypeNameConverter" />
+        <local:ItemToHeaderConverter x:Key="ItemToHeaderConverter" />
+        <dx:ObjectToBooleanConverter x:Key="InvertedObjectToBooleanConverter" Invert="True" />
+    </UserControl.Resources>
+
+    <dxlc:LayoutControl x:Name="layoutProperties" Orientation="Vertical" Padding="0" ItemSpace="10" Background="Transparent" ScrollBars="None"
+                      DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
+        <dxlc:LayoutControl.GroupBoxStyle>
+            <Style TargetType="dxlc:GroupBox">
+                <Setter Property="Padding" Value="10,8" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="dxlc:GroupBox">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <dx:DXContentPresenter Grid.Row="0" Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" FontSize="16" />
+                                <dx:DXContentPresenter Grid.Row="1" Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </dxlc:LayoutControl.GroupBoxStyle>
+        <dxlc:LayoutControl.Resources>
+            <Style TargetType="dxlc:GroupBox">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="dxlc:GroupBox">
+                            <GroupBox Header="{TemplateBinding Header}"
+                                             Content="{TemplateBinding Content}" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </dxlc:LayoutControl.Resources>
+
+        <dxlc:LayoutGroup View="GroupBox" IsCollapsible="True" VerticalAlignment="Top"
+                        Header="{Binding LayoutControl, Converter={StaticResource ObjectToTypeNameConverter}, StringFormat=\{0\} Properties}">
+            <dx:DXContentPresenter Content="{Binding LayoutControlProperties, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                     DataContext="{Binding LayoutControl}" />
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup View="GroupBox" IsCollapsible="True" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                        Header="{Binding SelectedItem, Converter={StaticResource ItemToHeaderConverter}, StringFormat=\{0\} Properties, TargetNullValue=Select an Item}"
+                        HeaderTemplate="{Binding ItemPropertiesHeaderTemplate}"
+                        IsCollapsed="{Binding SelectedItem, Converter={StaticResource InvertedObjectToBooleanConverter}}">
+            <dx:DXContentPresenter Content="{Binding ItemProperties, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                     DataContext="{Binding SelectedItem}" />
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</UserControl>

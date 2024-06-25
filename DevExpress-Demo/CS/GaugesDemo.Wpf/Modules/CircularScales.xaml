@@ -1,0 +1,262 @@
+﻿<local:GaugesDemoModule x:Class="GaugesDemo.CircularScales"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                        xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
+                        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                        xmlns:local="clr-namespace:GaugesDemo"
+                        mc:Ignorable="d"
+                        d:DesignHeight="557"
+                        d:DesignWidth="2643"
+                        DataContext="{dxmvvm:ViewModelSource Type={x:Type local:WorldTimeViewModel}}"
+                        Loaded="{DXEvent Handler='Start()'}"
+                        Unloaded="{DXEvent Handler='Stop()'}">
+    <dxdb:DemoModule.Resources>
+        <Style TargetType="{x:Type dxga:ArcScale}">
+            <Setter Property="CustomLabelsSource" Value="{Binding RomanLabels}"/>
+            <Setter Property="StartAngle" Value="-90"/>
+            <Setter Property="EndAngle" Value="270"/>
+            <Setter Property="StartValue" Value="0"/>
+            <Setter Property="EndValue" Value="12"/>
+            <Setter Property="MajorIntervalCount" Value="12"/>
+            <Setter Property="MinorIntervalCount" Value="5"/>
+            <Setter Property="ShowMajorTickmarks" Value="{Binding ElementName=showMajorCheckEdit, Path=IsChecked, Converter={local:BoolToDefaultBooleanConverter}}"/>
+            <Setter Property="ShowMinorTickmarks" Value="{Binding ElementName=showMinorCheckEdit, Path=IsChecked, Converter={local:BoolToDefaultBooleanConverter}}"/>
+            <Setter Property="ShowLabels" Value="{Binding Path=ShowRegularLabels, Converter={local:BoolToDefaultBooleanConverter}}"/>
+            <Setter Property="CustomLabelTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <dxga:ScaleCustomLabel RenderTransformOrigin="0.5,0.5"
+                                               Offset="-46"
+                                               Value="{Binding Hour}"
+                                               Content="{Binding RomanHour}"
+                                               Visible="{Binding Visible}"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="LabelOptions">
+                <Setter.Value>
+                    <dxga:ArcScaleLabelOptions Orientation="LeftToRight" ShowFirst="False" Offset="-46" ZIndex="1" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="MinorTickmarkOptions">
+                <Setter.Value>
+                    <dxga:MinorTickmarkOptions ShowTicksForMajor="True" Offset="-24" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </dxdb:DemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,5,12,12" MinWidth="210">
+                <GroupBox Header="Labels">
+                    <StackPanel>
+                        <dxe:CheckEdit x:Name="showLabelsCheckEdit"
+                                       Content="Show"
+                                       Margin="0,0,0,2"
+                                       IsChecked="{Binding Path=ShowLabels, Mode=TwoWay}"/>
+                        <dxe:CheckEdit IsEnabled="{Binding ElementName=showLabelsCheckEdit, Path=IsChecked}"
+                                       Content="Custom Labels"
+                                       Margin="0,0,0,2"
+                                       IsChecked="{Binding Path=ShowCustomLabels, Mode=TwoWay}"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Tickmarks" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit x:Name="showMajorCheckEdit" Content="Show Major" Margin="0,0,0,2" IsChecked="True" />
+                        <dxe:CheckEdit x:Name="showMinorCheckEdit" Content="Show Minor" Margin="0,0,0,2" IsChecked="True" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*" />
+                <RowDefinition Height="75*" />
+                <RowDefinition Height="10*" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="World Time" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Opacity="0.85"/>
+            <Grid Grid.Row="1" MaxWidth="1100">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.9*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="0.9*" />
+                </Grid.ColumnDefinitions>
+                <dxga:CircularGaugeControl VerticalAlignment="Center"
+                                           HorizontalAlignment="Right"
+                                           Grid.Column="1"
+                                           Grid.Row="1"
+                                           Padding="0,5,0,40"
+                                           FlowDirection="LeftToRight">
+                    <dxga:CircularGaugeControl.Model>
+                        <dxga:CircularRedClockModel />
+                    </dxga:CircularGaugeControl.Model>
+                    <dxga:ArcScale>
+                        <dxga:ArcScale.Layers>
+                            <dxga:ArcScaleLayer>
+                                <dxga:ArcScaleLayer.Presentation>
+                                    <dxga:CustomArcScaleLayerPresentation>
+                                        <dxga:CustomArcScaleLayerPresentation.ScaleLayerTemplate>
+                                            <ControlTemplate>
+                                                <Image Grid.Row="1"
+                                                       RenderTransformOrigin="0.5,0.5"
+                                                       Source="../Images/CircularScales/Shadow.png"
+                                                       Margin="-10,42,-10,-30"
+                                                       Height="71"
+                                                       VerticalAlignment="Bottom"
+                                                       Stretch="Fill" />
+                                            </ControlTemplate>
+                                        </dxga:CustomArcScaleLayerPresentation.ScaleLayerTemplate>
+                                    </dxga:CustomArcScaleLayerPresentation>
+                                </dxga:ArcScaleLayer.Presentation>
+                            </dxga:ArcScaleLayer>
+                            <dxga:ArcScaleLayer />
+                        </dxga:ArcScale.Layers>
+                        <dxga:ArcScale.Needles>
+                            <dxga:ArcScaleNeedle Value="{Binding NewYorkTime, Converter={local:DateTimeToHourConverter}}" />
+                            <dxga:ArcScaleNeedle Value="{Binding NewYorkTime, Converter={local:DateTimeToMinuteConverter}}" />
+                            <dxga:ArcScaleNeedle Value="{Binding NewYorkTime, Converter={local:DateTimeToSecondConverter}}" />
+                        </dxga:ArcScale.Needles>
+                        <dxga:ArcScale.CustomElements>
+                            <dxga:ScaleCustomElement VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <Grid Margin="42">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Image Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Source="../Images/CircularScales/IconNewYork.png" Stretch="None" />
+                                    <Label Content="New York" Grid.Row="1" Margin="0,0,0,-85"   FontSize="16"
+                                               HorizontalAlignment="Center" Opacity="0.9"
+                                               VerticalAlignment="Bottom"/>
+                                </Grid>
+                            </dxga:ScaleCustomElement>
+                        </dxga:ArcScale.CustomElements>
+                    </dxga:ArcScale>
+                </dxga:CircularGaugeControl>
+                <dxga:CircularGaugeControl VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Grid.Row="1"
+                                           Grid.Column="3"
+                                           Padding="0,5,0,40"
+                                           FlowDirection="LeftToRight">
+                    <dxga:CircularGaugeControl.Model>
+                        <dxga:CircularRedClockModel />
+                    </dxga:CircularGaugeControl.Model>
+                    <dxga:ArcScale Grid.RowSpan="2">
+                        <dxga:ArcScale.Layers>
+                            <dxga:ArcScaleLayer>
+                                <dxga:ArcScaleLayer.Presentation>
+                                    <dxga:CustomArcScaleLayerPresentation>
+                                        <dxga:CustomArcScaleLayerPresentation.ScaleLayerTemplate>
+                                            <ControlTemplate>
+                                                <Image Grid.Row="1"
+                                                           RenderTransformOrigin="0.5,0.5"
+                                                           Source="../Images/CircularScales/Shadow.png"
+                                                           Margin="-10,42,-10,-30"
+                                                           Height="71"
+                                                           VerticalAlignment="Bottom"
+                                                           Stretch="Fill" />
+                                            </ControlTemplate>
+                                        </dxga:CustomArcScaleLayerPresentation.ScaleLayerTemplate>
+                                    </dxga:CustomArcScaleLayerPresentation>
+                                </dxga:ArcScaleLayer.Presentation>
+                            </dxga:ArcScaleLayer>
+                            <dxga:ArcScaleLayer />
+                        </dxga:ArcScale.Layers>
+                        <dxga:ArcScale.Needles>
+                            <dxga:ArcScaleNeedle Value="{Binding LondonTime, Converter={local:DateTimeToHourConverter}}" />
+                            <dxga:ArcScaleNeedle Value="{Binding LondonTime, Converter={local:DateTimeToMinuteConverter}}" />
+                            <dxga:ArcScaleNeedle Value="{Binding LondonTime, Converter={local:DateTimeToSecondConverter}}" />
+                        </dxga:ArcScale.Needles>
+                        <dxga:ArcScale.CustomElements>
+                            <dxga:ScaleCustomElement HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Grid RenderTransformOrigin="0.5, 0.5" Margin="42">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Image Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Source="../Images/CircularScales/IconLondon.png" Stretch="None" />
+                                    <Label Grid.Row="1"
+                                               Margin="0,0,0,-85"
+                                               FontSize="16"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Bottom"
+                                               Content="London"
+                                               Opacity="0.9"/>
+                                </Grid>
+                            </dxga:ScaleCustomElement>
+                        </dxga:ArcScale.CustomElements>
+                    </dxga:ArcScale>
+                </dxga:CircularGaugeControl>
+                <dxga:CircularGaugeControl VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Grid.Row="1"
+                                           Grid.Column="5"
+                                           Padding="0,5,0,40"
+                                           FlowDirection="LeftToRight">
+                    <dxga:CircularGaugeControl.Model>
+                        <dxga:CircularRedClockModel />
+                    </dxga:CircularGaugeControl.Model>
+                    <dxga:ArcScale x:Name="watchMoscowScale">
+                        <dxga:ArcScale.Layers>
+                            <dxga:ArcScaleLayer>
+                                <dxga:ArcScaleLayer.Presentation>
+                                    <dxga:CustomArcScaleLayerPresentation>
+                                        <dxga:CustomArcScaleLayerPresentation.ScaleLayerTemplate>
+                                            <ControlTemplate>
+                                                <Image Grid.Row="1"
+                                                       RenderTransformOrigin="0.5,0.5"
+                                                       Source="../Images/CircularScales/Shadow.png"
+                                                       Margin="-10,42,-10,-30"
+                                                       Height="71"
+                                                       VerticalAlignment="Bottom"
+                                                       Stretch="Fill" />
+                                            </ControlTemplate>
+                                        </dxga:CustomArcScaleLayerPresentation.ScaleLayerTemplate>
+                                    </dxga:CustomArcScaleLayerPresentation>
+                                </dxga:ArcScaleLayer.Presentation>
+                            </dxga:ArcScaleLayer>
+                            <dxga:ArcScaleLayer />
+                        </dxga:ArcScale.Layers>
+                        <dxga:ArcScale.Needles>
+                            <dxga:ArcScaleNeedle Value="{Binding MoscowTime, Converter={local:DateTimeToHourConverter}}" />
+                            <dxga:ArcScaleNeedle Value="{Binding MoscowTime, Converter={local:DateTimeToMinuteConverter}}" />
+                            <dxga:ArcScaleNeedle Value="{Binding MoscowTime, Converter={local:DateTimeToSecondConverter}}" />
+                        </dxga:ArcScale.Needles>
+                        <dxga:ArcScale.CustomElements>
+                            <dxga:ScaleCustomElement HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Grid RenderTransformOrigin="0.5, 0.5" Margin="42">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Image Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Source="../Images/CircularScales/IconMoscow.png" Stretch="None" />
+                                    <Label Grid.Row="1"
+                                               Margin="0,0,0,-85"
+                                               FontSize="16"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Bottom"
+                                               Content="Moscow"
+                                               Opacity="0.9"/>
+                                </Grid>
+                            </dxga:ScaleCustomElement>
+                        </dxga:ArcScale.CustomElements>
+                    </dxga:ArcScale>
+                </dxga:CircularGaugeControl>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</local:GaugesDemoModule>

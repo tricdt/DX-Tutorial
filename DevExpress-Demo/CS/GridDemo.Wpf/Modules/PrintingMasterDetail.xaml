@@ -1,0 +1,120 @@
+﻿<local:GridDemoModule x:Class="GridDemo.PrintingMasterDetail"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      xmlns:dxrudex="http://schemas.devexpress.com/winfx/2008/xaml/reports/userdesignerextensions"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800">
+    <local:GridDemoModule.DataContext>
+        <local:PrintMasterDetailViewModel />
+    </local:GridDemoModule.DataContext>
+    <local:GridDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GridDemo;component/ModuleResources/PrintDemoModuleResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:GridDemoModule.Resources>
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" ReportService="{x:Reference rmsPrintingMasterDetail}" />
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Header="Details Print Mode" Margin="0,5,0,0">
+                    <StackPanel Orientation="Vertical">
+                        <RadioButton Content="All Details"
+                                     IsChecked="{Binding PrintAllDetails, ElementName=view, Converter={dx:DefaultBooleanToNullableBooleanConverter}}" />
+                        <RadioButton Content="Expanded Only" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Orders Detail Print Options" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit IsChecked="{DXBinding '@e(detailView).PrintColumnHeaders'}" Margin="0,0,0,5">Print Column Headers</dxe:CheckEdit>
+                        <dxe:CheckEdit IsChecked="{DXBinding '@e(detailView).ShowFixedTotalSummary'}" Margin="0,0,0,5">Print Total Summary</dxe:CheckEdit>
+                    </StackPanel>
+                </GroupBox>
+                <Button Command="{Binding ShowPreviewInNewTabCommand}" Margin="0,12,0,0" Content="Preview" />
+                <Button Command="{Binding Commands.ShowRibbonPrintPreviewDialog, ElementName=view}" Margin="0,12,0,0" Content="Preview in New Window" />
+                <local:RecentReports ReportService="{x:Reference rmsPrintingMasterDetail}" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dx:DXTabControl Style="{StaticResource tabControlPrintPreviewStyle}">
+            <dx:DXTabItem Style="{StaticResource gridControlTabItemStyle}" Header="MasterDetail">
+                <dxg:GridControl x:Name="grid"
+                                 ShowBorder="False"
+                                 ItemsSource="{x:Static dxdb:NWindDataProvider.Customers}"
+                                 Loaded="{DXEvent '@Self.ExpandMasterRow(0)'}">
+                    <!--#region Order details-->
+                    <dxg:GridControl.DetailDescriptor>
+                        <dxg:DataControlDetailDescriptor x:Name="OrdersDescriptor" ItemsSourceBinding="{Binding Orders}" ShowHeader="false">
+                            <dxg:GridControl SelectionMode="Row">
+                                <!--#region Columns-->
+                                <dxg:GridControl.Columns>
+                                    <dxg:GridColumn FieldName="OrderDate" Width="*" />
+                                    <dxg:GridColumn FieldName="Freight" Width="*" />
+                                    <dxg:GridColumn FieldName="ShipName" Width="*" />
+                                    <dxg:GridColumn FieldName="ShipCountry" Width="*" />
+                                    <dxg:GridColumn FieldName="ShipCity" Width="*" />
+                                    <dxg:GridColumn FieldName="ShipAddress" Width="*" />
+                                </dxg:GridControl.Columns>
+                                <!--#endregion-->
+                                <dxg:GridControl.View>
+                                    <dxg:TableView x:Name="detailView"
+                                                   VerticalScrollbarVisibility="Auto"
+                                                   NavigationStyle="Row"
+                                                   DetailHeaderContent="Orders"
+                                                   ShowFixedTotalSummary="True"
+                                                   PrintFixedTotalSummary="True" />
+                                </dxg:GridControl.View>
+                                <dxg:GridControl.TotalSummary>
+                                    <dxg:GridSummaryItem FieldName="Freight" SummaryType="Sum" Alignment="Right" />
+                                </dxg:GridControl.TotalSummary>
+                            </dxg:GridControl>
+                        </dxg:DataControlDetailDescriptor>
+                    </dxg:GridControl.DetailDescriptor>
+                    <!--#endregion-->
+                    <dxg:GridControl.View>
+                        <dxg:TableView x:Name="view"
+                                       NavigationStyle="Row"
+                                       DetailHeaderContent="Customers"
+                                       AllowPrintEmptyDetails="false"
+                                       ShowFixedTotalSummary="True"
+                                       PrintFixedTotalSummary="True"
+                                       PrintAllDetails="True">
+                            <dxmvvm:Interaction.Behaviors>
+                                <dxrudex:GridReportManagerService Name="rmsPrintingMasterDetail" />
+                                <local:PrintableTabBehavior PrintableControl="{Binding PrintableControl, Mode=OneWayToSource}" ShowPreviewTab="{Binding ReOpenPreviewTabsCommand}" />
+                            </dxmvvm:Interaction.Behaviors>
+                        </dxg:TableView>
+                    </dxg:GridControl.View>
+                    <!--#region Columns-->
+                    <dxg:GridControl.Columns>
+                        <dxg:GridColumn FieldName="ContactName" Width="*" />
+                        <dxg:GridColumn FieldName="Country" Width="*" />
+                        <dxg:GridColumn FieldName="City" Width="*" />
+                        <dxg:GridColumn FieldName="Address" Width="*" />
+                        <dxg:GridColumn FieldName="Phone" Width="*" />
+                    </dxg:GridControl.Columns>
+                    <!--#endregion-->
+                    <dxg:GridControl.TotalSummary>
+                        <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+                    </dxg:GridControl.TotalSummary>
+                </dxg:GridControl>
+            </dx:DXTabItem>
+        </dx:DXTabControl>
+    </DockPanel>
+</local:GridDemoModule>

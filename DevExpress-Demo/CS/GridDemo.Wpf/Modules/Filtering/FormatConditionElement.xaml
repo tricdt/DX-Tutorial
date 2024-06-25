@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="GridDemo.Filtering.FormatConditionElement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+             xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+        <!--#region !-->
+        <StackPanel Grid.Column="1" Margin="8,0,0,0" dxfui:FilterElement.Context="{Binding ElementName=grid, Path=FilteringContext}">
+            <dxfui:FormatConditionFilterElement FieldName="UnitPrice"/>
+            <dxfui:FormatConditionFilterElement FieldName="Quantity"/>
+            <dxfui:FormatConditionFilterElement FieldName="Discount"/>
+        </StackPanel>
+        <!--#endregion-->
+        <dxg:GridControl Name="grid" FilterString="[@TopPercent]([UnitPrice], 10)"
+                         ItemsSource="{x:Static dxdb:NWindDataProvider.Invoices}">
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="view" ShowFixedTotalSummary="True" NavigationStyle="None">
+                    <!--#region !-->
+                    <dxg:TableView.FormatConditions>
+                        <dxg:TopBottomRuleFormatCondition FieldName="UnitPrice" Rule="TopPercent" Threshold="10" PredefinedFormatName="LightRedFillWithDarkRedText" />
+                        <dxg:FormatCondition FieldName="Discount" ValueRule="Greater" Value1="0" PredefinedFormatName="GreenFillWithDarkGreenText" />
+                        <dxg:FormatCondition FieldName="Quantity" ValueRule="LessOrEqual" Value1="5" PredefinedFormatName="RedText" />
+                    </dxg:TableView.FormatConditions>
+                    <!--#endregion-->
+                </dxg:TableView>
+            </dxg:GridControl.View>
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="Country" Width="*" />
+                <dxg:GridColumn FieldName="UnitPrice" Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="$0.00" MaskType="Numeric" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Quantity" Width="*" />
+                <dxg:GridColumn FieldName="Discount" Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="0%" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+            </dxg:GridControl.TotalSummary>
+        </dxg:GridControl>
+    </Grid>
+</UserControl>

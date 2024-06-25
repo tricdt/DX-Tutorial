@@ -1,0 +1,51 @@
+﻿<local:DiagramDemoModule x:Class="DiagramDemo.EventsExamplesModule"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:local="clr-namespace:DiagramDemo"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                         xmlns:dxdbi="http://schemas.devexpress.com/winfx/2008/xaml/demobase/internal"
+                         mc:Ignorable="d"
+                         d:DesignWidth="800"
+                         d:DesignHeight="600">
+
+    <local:DiagramDemoModule.Resources>
+        <CollectionViewSource x:Key="showcasesView">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Group" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </local:DiagramDemoModule.Resources>
+    <dxlc:LayoutControl Orientation="Vertical">
+        <dxlc:LayoutGroup Orientation="Horizontal" dxlc:LayoutControl.AllowVerticalSizing="True">
+            <ListBox x:Name="showcasesList"
+                     ItemsSource="{Binding Source={StaticResource showcasesView}}"
+                     dxlc:LayoutControl.AllowHorizontalSizing="True"
+                     DisplayMemberPath="Name"
+                     SelectedIndex="0">
+                <ListBox.GroupStyle>
+                    <GroupStyle />
+                </ListBox.GroupStyle>
+            </ListBox>
+            <ContentPresenter x:Name="viewPresenter" Content="{DXBinding '@e(showcasesList).SelectedItem.Run()'}" />
+        </dxlc:LayoutGroup>
+        <dx:DXTabControl x:Name="tabControl" Padding="0">
+            <dx:DXTabItem Header="C#" Content="{DXBinding '@e(showcasesList).SelectedItem.CSCodeText'}">
+                <dx:DXTabItem.ContentTemplate>
+                    <DataTemplate>
+                        <dxdbi:CodeViewPresenter BorderThickness="0" CodeText="{Binding}" />
+                    </DataTemplate>
+                </dx:DXTabItem.ContentTemplate>
+            </dx:DXTabItem>
+            <dx:DXTabItem Header="VB" Content="{DXBinding '@e(showcasesList).SelectedItem.VBCodeText'}">
+                <dx:DXTabItem.ContentTemplate>
+                    <DataTemplate>
+                        <dxdbi:CodeViewPresenter BorderThickness="0" CodeText="{Binding}" />
+                    </DataTemplate>
+                </dx:DXTabItem.ContentTemplate>
+            </dx:DXTabItem>
+        </dx:DXTabControl>
+    </dxlc:LayoutControl>
+</local:DiagramDemoModule>

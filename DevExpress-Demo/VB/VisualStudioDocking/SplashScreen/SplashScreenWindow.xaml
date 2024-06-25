@@ -1,0 +1,49 @@
+﻿<dx:SplashScreenWindow
+    x:Class="VisualStudioDocking.DockingSplashScreenWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Width="600"
+    Height="400"
+    AllowTheming="False"
+    d:DataContext="{x:Static dxmvvm:DXSplashScreenViewModel.DesignTimeData}"
+    FadeOutDuration="0:0:1">
+
+    <Grid>
+        <dx:DXImage
+            Width="600"
+            Height="400"
+            Source="/VisualStudioDocking;component/Images/Docking/SplashScreenBackground.png" />
+        <StackPanel VerticalAlignment="Top" Orientation="Vertical">
+            <dx:DXImage
+                x:Name="PART_Logo"
+                Margin="30,30,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Source="{Binding Logo}"
+                Stretch="None" />
+            <TextBlock
+                x:Name="PART_Title"
+                Margin="30,11,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="27"
+                FontWeight="Thin"
+                Foreground="#FFDB9DFF"
+                Text="{Binding Title}" />
+            <TextBlock
+                x:Name="PART_SubTitle"
+                Margin="30,0"
+                HorizontalAlignment="Left"
+                FontSize="18"
+                FontWeight="Regular"
+                Foreground="#FFFFFFFF"
+                Text="{Binding Subtitle}" />
+        </StackPanel>
+    </Grid>
+
+</dx:SplashScreenWindow>

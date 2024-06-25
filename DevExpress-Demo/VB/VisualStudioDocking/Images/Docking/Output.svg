@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+    <style type="text/css">
+        .Black {
+            fill: #727272;
+        }
+        .White {
+            fill: #ffffff;
+        }
+        .Blue {
+            fill: #1177D7;
+        }
+        .Yellow {
+            fill: #FFB115;
+        }
+        .Green {
+            fill: #039C23;
+        }
+        .Red {
+            fill: #D11C1C;
+        }
+    </style>
+    <title>Split</title>
+    <path class="White" d="M12,16a6,6,0,0,1,6-6h2V0H0V32H20V22H18A6,6,0,0,1,12,16Z" />
+    <path class="Black" d="M10,16a8,8,0,0,1,8-8V2H2V30H18V24A8,8,0,0,1,10,16Z"/>
+    <path class="White" d="M31,6.2A10.2,10.2,0,0,0,29,6a10,10,0,0,0,0,20,10.2,10.2,0,0,0,2-.2Z" />
+    <path class="Black" d="M29,8a8,8,0,0,0,0,16Z"/>
+</svg>

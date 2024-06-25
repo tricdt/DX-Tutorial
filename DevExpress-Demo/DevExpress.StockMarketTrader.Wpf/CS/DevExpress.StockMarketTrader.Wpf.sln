@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevExpress.StockMarketTrader.Wpf", "DevExpress.StockMarketTrader.Wpf\DevExpress.StockMarketTrader.Wpf.csproj", "{458042E7-408B-470A-A042-71A3A21235FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		ClickOnce Debug|Any CPU = ClickOnce Debug|Any CPU
+		ClickOnce Release|Any CPU = ClickOnce Release|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		DebugTest|Any CPU = DebugTest|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{458042E7-408B-470A-A042-71A3A21235FA}.ClickOnce Debug|Any CPU.ActiveCfg = ClickOnce Debug|Any CPU
+		{458042E7-408B-470A-A042-71A3A21235FA}.ClickOnce Debug|Any CPU.Build.0 = ClickOnce Debug|Any CPU
+		{458042E7-408B-470A-A042-71A3A21235FA}.ClickOnce Release|Any CPU.ActiveCfg = ClickOnce Release|Any CPU
+		{458042E7-408B-470A-A042-71A3A21235FA}.ClickOnce Release|Any CPU.Build.0 = ClickOnce Release|Any CPU
+		{458042E7-408B-470A-A042-71A3A21235FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{458042E7-408B-470A-A042-71A3A21235FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{458042E7-408B-470A-A042-71A3A21235FA}.DebugTest|Any CPU.ActiveCfg = DebugTest|Any CPU
+		{458042E7-408B-470A-A042-71A3A21235FA}.DebugTest|Any CPU.Build.0 = DebugTest|Any CPU
+		{458042E7-408B-470A-A042-71A3A21235FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{458042E7-408B-470A-A042-71A3A21235FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {26CE4B3B-81F7-4B51-8161-BEDAB85C27B2}
+	EndGlobalSection
+EndGlobal

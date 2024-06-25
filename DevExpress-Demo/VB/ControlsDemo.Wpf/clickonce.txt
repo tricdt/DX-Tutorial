@@ -1,0 +1,10 @@
+DevExpress.DevAV.v{DXVersion}.Data
+DevExpress.Dialogs.v{DXVersion}.Core
+DevExpress.Office.v{DXVersion}.Core
+DevExpress.RichEdit.v{DXVersion}.Core
+DevExpress.Xpf.Dialogs.v{DXVersion}
+DevExpress.Xpf.DocumentViewer.v{DXVersion}.Core
+DevExpress.Xpf.Printing.v{DXVersion}
+DevExpress.Xpf.PropertyGrid.v{DXVersion}
+DevExpress.Xpf.RichEdit.v{DXVersion}
+DevExpress.Xpf.Office.v{DXVersion}

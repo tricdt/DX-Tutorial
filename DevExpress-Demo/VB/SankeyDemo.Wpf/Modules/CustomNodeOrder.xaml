@@ -1,0 +1,101 @@
+﻿<local:SankeyDemoModule
+    x:Class="SankeyDemo.CustomNodeOrder"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+    xmlns:dxsa="http://schemas.devexpress.com/winfx/2008/xaml/sankey"
+    xmlns:dxsat="http://schemas.devexpress.com/winfx/2008/xaml/sankey/themekeys"
+    xmlns:local="clr-namespace:SankeyDemo"
+    Width="800"
+    Height="600">
+
+    <local:SankeyDemoModule.Resources>
+        <local:NodeComparerConverter x:Key="nodeComparerConverter" />
+        <local:CustomNodeOrderDemoToolTipContentConverter x:Key="toolTipContentConverter" />
+        <local:CustomNodeOrderDemoToolTipHeaderConverter x:Key="toolTipHeaderConverter" />
+        <DataTemplate x:Key="toolTipContentTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontWeight="Bold"
+                    Foreground="{dxi:ThemeResource {dxsat:SankeyBrushesThemeKey ResourceKey=ToolTipForeground}}"
+                    Text="{Binding SourceObject, Converter={StaticResource toolTipHeaderConverter}}" />
+                <TextBlock
+                    Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    Foreground="{dxi:ThemeResource {dxsat:SankeyBrushesThemeKey ResourceKey=ToolTipForeground}}"
+                    Text="{Binding SourceObject, Converter={StaticResource toolTipContentConverter}}" />
+            </Grid>
+        </DataTemplate>
+    </local:SankeyDemoModule.Resources>
+
+    <DockPanel>
+        <ScrollViewer
+            MinWidth="210"
+            DockPanel.Dock="Right"
+            dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+            Focusable="False"
+            HorizontalScrollBarVisibility="Disabled"
+            Name="PART_Options"
+            VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <GroupBox Margin="12,12,12,12" Header="Sort by">
+                    <dxe:ListBoxEdit
+                        x:Name="comparerCBE"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        SelectedIndex="0"
+                        ShowBorder="False"
+                        StyleSettings="{dxe:RadioListBoxEditStyleSettings}">
+                        <dxe:ListBoxEditItem Content="Total Weight" />
+                        <dxe:ListBoxEditItem Content="Output Link Count" />
+                        <dxe:ListBoxEditItem Content="Node Name" />
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Margin="12,0,12,12" Header="Order">
+                    <dxe:ListBoxEdit
+                        x:Name="orderCBE"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        SelectedIndex="0"
+                        ShowBorder="False"
+                        StyleSettings="{dxe:RadioListBoxEditStyleSettings}">
+                        <dxe:ListBoxEditItem Content="Ascending" />
+                        <dxe:ListBoxEditItem Content="Descending" />
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <dxsa:SankeyDiagramControl
+            x:Name="sankey"
+            BorderThickness="0"
+            DataSource="{DXBinding '$local:ProductTransfers.GetData()'}"
+            LinkToolTipContentTemplate="{StaticResource toolTipContentTemplate}"
+            NodeToolTipContentTemplate="{StaticResource toolTipContentTemplate}"
+            SourceDataMember="From"
+            TargetDataMember="To"
+            WeightDataMember="TotalPrice">
+            <dxsa:SankeyDiagramControl.NodeComparer>
+                <MultiBinding Converter="{StaticResource nodeComparerConverter}">
+                    <Binding ElementName="comparerCBE" Path="SelectedItem.Content" />
+                    <Binding ElementName="orderCBE" Path="SelectedItem.Content" />
+                </MultiBinding>
+            </dxsa:SankeyDiagramControl.NodeComparer>
+            <dxsa:SankeyDiagramControl.Titles>
+                <dxsa:SankeyTitle
+                    HorizontalAlignment="Center"
+                    Content="Top 10 Companies by Revenue"
+                    Dock="Top"
+                    FontFamily="Tahoma"
+                    FontSize="24" />
+            </dxsa:SankeyDiagramControl.Titles>
+        </dxsa:SankeyDiagramControl>
+    </DockPanel>
+
+</local:SankeyDemoModule>

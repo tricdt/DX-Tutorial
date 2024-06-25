@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="BarsDemo.FontSettingsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+        xmlns:local="clr-namespace:BarsDemo"
+        dxb:BarNameScope.IsScopeOwner="True"
+        >
+    <Grid DataContext="{dxmvvm:ViewModelSource Type={x:Type local:FontSettingsModel}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <dxb:MainMenuControl Visibility="Collapsed" Caption="MainMenu" AllowCustomizationMenu="False">
+            <dxb:BarSubItem dxb:MergingProperties.Name="settings" Content="Settings" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Bold.svg}" MergeType="MergeItems">
+                <dxb:BarItemMenuHeader Content="Font Properties">
+                    <dxb:BarCheckItem x:Name="fBold" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Bold.svg}" IsChecked="{Binding IsBold, Mode=TwoWay}" Content="Bold"/>
+                    <dxb:BarCheckItem x:Name="fItalic" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Italic.svg}" IsChecked="{Binding IsItalic, Mode=TwoWay}"  Content="Italic"/>
+                    <dxb:BarCheckItem x:Name="fUnderline" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Underline.svg}"  IsChecked="{Binding IsUnderline, Mode=TwoWay}" Content="Underline"/>
+                </dxb:BarItemMenuHeader>
+            </dxb:BarSubItem>
+        </dxb:MainMenuControl>
+        <dxb:ToolBarControl Grid.Row="1" Caption="ToolBar" AllowCustomizationMenu="False" AllowQuickCustomization="False">
+            <dxb:BarItemLink BarItemName="fBold"/>
+            <dxb:BarItemLink BarItemName="fItalic"/>
+            <dxb:BarItemLink BarItemName="fUnderline"/>
+        </dxb:ToolBarControl>
+        <TextBox Text="Select Alignment to change main menu items" Grid.Row="2" TextDecorations="{Binding Decorations}" FontWeight="{Binding Weight}" FontStyle="{Binding Style}" />
+        <dxb:StatusBarControl Grid.Row="3" Caption="StatusBar" AllowCustomizationMenu="False">
+            <dxb:BarStaticItem IsEnabled="{Binding ElementName=fBold, Path=IsChecked}" Content="Bold" ShowBorder="False"/>
+            <dxb:BarItemSeparator/>
+            <dxb:BarStaticItem IsEnabled="{Binding ElementName=fItalic, Path=IsChecked}" Content="Italic" ShowBorder="False"/>
+            <dxb:BarItemSeparator/>
+            <dxb:BarStaticItem IsEnabled="{Binding ElementName=fUnderline, Path=IsChecked}" Content="Underline" ShowBorder="False"/>
+        </dxb:StatusBarControl>
+    </Grid>
+</UserControl>

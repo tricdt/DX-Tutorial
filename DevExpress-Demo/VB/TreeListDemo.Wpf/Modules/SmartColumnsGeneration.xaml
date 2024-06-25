@@ -1,0 +1,60 @@
+﻿<local:TreeListDemoModule x:Class="TreeListDemo.SmartColumnsGeneration"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                          xmlns:local="clr-namespace:TreeListDemo"
+                          xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                          xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+                          mc:Ignorable="d"
+                          d:DesignHeight="400"
+                          d:DesignWidth="800"
+                          DataContext="{dxmvvm:ViewModelSource Type=local:SmartColumnsGenerationViewModel}">
+    <local:TreeListDemoModule.Resources>
+        <local:IEnumerableToFirstItemConverter x:Key="IEnumerableToFirstItemConverter" />
+    </local:TreeListDemoModule.Resources>
+    <DockPanel>
+        <local:TreeListDemoRibbon DockPanel.Dock="Top" ExportTreeList="{x:Reference treeList}" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <dxg:TreeListControl Name="treeList"
+                                 ItemsSource="{Binding CurrentItemsSource}"
+                                 AutoGenerateColumns="RemoveOld"
+                                 EnableSmartColumnsGeneration="True"
+                                 ShowBorder="False">
+                <dxg:TreeListControl.View>
+                    <dxg:TreeListView AutoExpandAllNodes="True"
+                                      ParentFieldName="ParentID"
+                                      KeyFieldName="ID"
+                                      AutoWidth="{Binding IsSmallObject}"
+                                      PrintAutoWidth="False" />
+                </dxg:TreeListControl.View>
+            </dxg:TreeListControl>
+            <dxlc:LayoutItem Grid.Row="1" Label="Current item:" Margin="12,14,12,0">
+                <dxe:ComboBoxEdit x:Name="comboBoxItems"
+                                  ItemsSource="{Binding Items}"
+                                  SelectedItem="{Binding CurrentItemsSource, Mode=TwoWay}"
+                                  SelectedIndex="0"
+                                  IsTextEditable="False"
+                                  DisplayTextConverter="{StaticResource IEnumerableToFirstItemConverter}">
+                    <dxe:ComboBoxEdit.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource IEnumerableToFirstItemConverter}}" />
+                        </DataTemplate>
+                    </dxe:ComboBoxEdit.ItemTemplate>
+                </dxe:ComboBoxEdit>
+            </dxlc:LayoutItem>
+            <local:CodeViewer Grid.Row="2"
+                              Margin="12,4,12,12"
+                              CurrentItemsCollection="{Binding CurrentItemsSource}"
+                              BorderBrush="{DynamicResource {dxt:BrushesThemeKey ResourceKey=PanelBorder}}" />
+        </Grid>
+    </DockPanel>
+</local:TreeListDemoModule>

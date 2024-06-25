@@ -1,0 +1,189 @@
+﻿<local:DockingDemoModule x:Class="DockingDemo.DockLayoutManagerEvents"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:local="clr-namespace:DockingDemo"
+                         xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
+                         xmlns:dxa="http://schemas.devexpress.com/winfx/2008/xaml/accordion"
+                         xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                         xmlns:viewModels="clr-namespace:DockingDemo.ViewModels"
+                         xmlns:dxdove="http://schemas.devexpress.com/winfx/2008/xaml/docking/visualelements">
+    <local:DockingDemoModule.DataContext>
+        <viewModels:DockLayoutManagerEventsViewModel />
+    </local:DockingDemoModule.DataContext>
+    <local:DockingDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DockingDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="dxa:AccordionItem">
+                <Setter Property="GlyphSize" Value="16,16"/>
+                <Style.Triggers>
+                    <Trigger Property="ItemLevel" Value="1">
+                        <Setter Property="ExpandButtonPosition" Value="None"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="{x:Type dxdo:LayoutPanel}">
+                <Setter Property="CaptionImageStyle">
+                    <Setter.Value>
+                        <Style TargetType="dxdove:CaptionImage">
+                            <Setter Property="Width" Value="16"/>
+                            <Setter Property="Height" Value="16"/>
+                            <Setter Property="Stretch" Value="Fill"/>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </local:DockingDemoModule.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="350" />
+        </Grid.ColumnDefinitions>
+        <dxdo:DockLayoutManager x:Name="DemoDockContainer" FloatingMode="Desktop">
+            <dxmvvm:Interaction.Behaviors>
+                <local:DockLayoutManagerEventsService x:Name="eventService" />
+            </dxmvvm:Interaction.Behaviors>
+            <dxdo:DockLayoutManager.AutoHideGroups>
+                <dxdo:AutoHideGroup>
+                    <dxdo:LayoutPanel Caption="Toolbox" CaptionImage="{dx:SvgImageSource Uri='pack://application:,,,/DevExpress.Images.v22.2;component/SvgImages/Dashboards/InsertTabContainer.svg'}" ItemWidth="160">
+                        <dxa:AccordionControl Margin="3" RootItemDisplayMode="Item">
+                            <dxa:AccordionItem Header="Common" IsExpanded="True">
+                                <dxa:AccordionItem Header="Control" Glyph="/DockingDemo;component/Images/Toolbox/Control.svg"/>
+                                <dxa:AccordionItem Header="CheckBox" Glyph="/DockingDemo;component/Images/Toolbox/CheckBox.svg"/>
+                                <dxa:AccordionItem Header="Label" Glyph="/DockingDemo;component/Images/Toolbox/Label.svg"/>
+                                <dxa:AccordionItem Header="Panel" Glyph="/DockingDemo;component/Images/Toolbox/Panel.svg"/>
+                                <dxa:AccordionItem Header="Image" Glyph="/DockingDemo;component/Images/Toolbox/PictureBox.svg"/>
+                            </dxa:AccordionItem>
+                            <dxa:AccordionItem Header="Controls">
+                                <dxa:AccordionItem Header="Canvas" Glyph="/DockingDemo;component/Images/Toolbox/Canvas.svg"/>
+                                <dxa:AccordionItem Header="Chart" Glyph="/DockingDemo;component/Images/Toolbox/Chart.svg"/>
+                                <dxa:AccordionItem Header="RichText" Glyph="/DockingDemo;component/Images/Toolbox/RichText.svg"/>
+                                <dxa:AccordionItem Header="Grid" Glyph="/DockingDemo;component/Images/Toolbox/Table.svg"/>
+                            </dxa:AccordionItem>
+                            <dxa:AccordionItem Header="General" IsExpanded="True">
+                                <dxa:AccordionItem Header="Line" Glyph="/DockingDemo;component/Images/Toolbox/Line.svg"/>
+                                <dxa:AccordionItem Header="Shape" Glyph="/DockingDemo;component/Images/Toolbox/Shape.svg"/>
+                            </dxa:AccordionItem>
+                        </dxa:AccordionControl>
+                    </dxdo:LayoutPanel>
+                </dxdo:AutoHideGroup>
+            </dxdo:DockLayoutManager.AutoHideGroups>
+            <dxdo:LayoutGroup>
+                <dxdo:LayoutGroup Orientation="Vertical" ItemWidth="3*">
+                    <dxdo:LayoutGroup ItemWidth="3*" DestroyOnClosingChildren="False">
+                        <dxdo:DocumentGroup ClosePageButtonShowMode="InAllTabPageHeaders" DestroyOnClosingChildren="False">
+                            <dxdo:DocumentPanel Caption="About DXDocking"
+                                                ToolTip="C:\Documents\AboutDXDocking.doc"
+                                                FooterDescription="C:\Documents\AboutDXDocking.doc"
+                                                Description="Text file">
+                                <FlowDocumentScrollViewer VerticalScrollBarVisibility="Hidden" Zoom="1">
+                                    <FlowDocument FontFamily="Segoue" PagePadding="24" FontStyle="Italic">
+                                        <Paragraph FontSize="24">
+                                            DevExpress WPF Docking
+                                        </Paragraph>
+                                        <Paragraph>
+                                            DXDocking is the docking library for the Windows Presentation Framework. Developed from the ground up, it brings you complete docking features, strengthened by the WPF technology. Whenever your end-users want to perform any dock operation, they can do this with ease, using helpful hints and intuitive UI.
+                                        </Paragraph>
+                                    </FlowDocument>
+                                </FlowDocumentScrollViewer>
+                            </dxdo:DocumentPanel>
+                            <dxdo:DocumentPanel Caption="Document1" ToolTip="C:\Documents\doc1.doc" FooterDescription="C:\Documents\doc1.doc" Description="Text file">
+                                <FlowDocumentScrollViewer VerticalScrollBarVisibility="Hidden" Zoom="1">
+                                    <FlowDocument FontFamily="Segoue" PagePadding="24" FontStyle="Italic">
+                                        <Paragraph>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sagittis urna et lorem. Nunc diam justo, tempus sit amet, euismod a, lacinia nec, eros.
+                                        </Paragraph>
+                                    </FlowDocument>
+                                </FlowDocumentScrollViewer>
+                            </dxdo:DocumentPanel>
+                            <dxdo:DocumentPanel Caption="Document2" ToolTip="C:\Documents\doc2.doc" FooterDescription="C:\Documents\doc2.doc" Description="Text file">
+                                <FlowDocumentScrollViewer VerticalScrollBarVisibility="Hidden" Zoom="1">
+                                    <FlowDocument FontFamily="Segoue" PagePadding="24" FontStyle="Italic">
+                                        <Paragraph>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sagittis urna et lorem. Nunc diam justo, tempus sit amet, euismod a, lacinia nec, eros.
+                                        </Paragraph>
+                                    </FlowDocument>
+                                </FlowDocumentScrollViewer>
+                            </dxdo:DocumentPanel>
+                        </dxdo:DocumentGroup>
+                    </dxdo:LayoutGroup>
+                    <dxdo:TabbedGroup ItemHeight="150">
+                        <dxdo:LayoutPanel Caption="Error List" CaptionImage="{dx:SvgImageSource Uri='pack://application:,,,/DevExpress.Images.v22.2;component/SvgImages/Icon Builder/Actions_Comment.svg'}" HeaderBarContainerControlName="ErrorsBar">
+                            <Border Background="White" Margin="3">
+                                <ListBox>
+                                    <ListBoxItem Content="0 errors" />
+                                </ListBox>
+                            </Border>
+                        </dxdo:LayoutPanel>
+                        <dxdo:LayoutPanel Caption="Output" CaptionImage="{dx:SvgImageSource Uri='pack://application:,,,/DevExpress.Images.v22.2;component/SvgImages/Icon Builder/Actions_Comment.svg'}">
+                            <TextBox Style="{StaticResource BottomTextStyle}" Text="Build: 1 succeeded or up-to-date, 0 failed, 0 skipped" />
+                        </dxdo:LayoutPanel>
+                        <dxdo:LayoutPanel Caption="Find Results" CaptionImage="{dx:SvgImageSource Uri='pack://application:,,,/DevExpress.Images.v22.2;component/SvgImages/Icon Builder/Actions_Find.svg'}">
+                            <TextBox Style="{StaticResource BottomTextStyle}" Text="Matching lines: 0    Matching files: 0    Total files searched: 61" />
+                        </dxdo:LayoutPanel>
+                    </dxdo:TabbedGroup>
+                </dxdo:LayoutGroup>
+                <dxdo:TabbedGroup SelectedTabIndex="1" ItemWidth="240">
+                    <dxdo:LayoutPanel Caption="Solution Explorer"
+                                      CaptionImage="{dx:SvgImageSource Uri='pack://application:,,,/DevExpress.Images.v22.2;component/SvgImages/Icon Builder/Business_Diagram.svg'}"
+                                      HeaderBarContainerControlName="SolutionBar">
+                        <Border Background="White" Margin="3">
+                            <ListBox>
+                                <ListBoxItem>
+                                    <StackPanel Orientation="Horizontal">
+                                        <dx:DXImage Width="16" Height="16" Source="pack://application:,,,/DockingDemo;component/Images/AddGroup.svg" />
+                                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center">WPFApplication</TextBlock>
+                                    </StackPanel>
+                                </ListBoxItem>
+                                <ListBoxItem>
+                                    <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
+                                        <dx:DXImage Width="16" Height="16" Source="{dx:DXImage SvgImages/Outlook Inspired/Open.svg}" />
+                                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center">Properties</TextBlock>
+                                    </StackPanel>
+                                </ListBoxItem>
+                                <ListBoxItem>
+                                    <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
+                                        <dx:DXImage Width="16" Height="16" Source="{dx:DXImage SvgImages/Outlook Inspired/Open.svg}" />
+                                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center">References</TextBlock>
+                                    </StackPanel>
+                                </ListBoxItem>
+                                <ListBoxItem>
+                                    <StackPanel Orientation="Horizontal" Margin="25,0,0,0">
+                                        <dx:DXImage Width="16" Height="16" Source="{dx:DXImage SvgImages/Icon Builder/Actions_New.svg}" />
+                                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Center">Program.cs</TextBlock>
+                                    </StackPanel>
+                                </ListBoxItem>
+                            </ListBox>
+                        </Border>
+                    </dxdo:LayoutPanel>
+                    <dxdo:LayoutPanel Caption="Properties" CaptionImage="{dx:SvgImageSource Uri='pack://application:,,,/DevExpress.Images.v22.2;component/SvgImages/Outlook Inspired/Task.svg'}">
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap">No properties are available</TextBlock>
+                    </dxdo:LayoutPanel>
+                </dxdo:TabbedGroup>
+            </dxdo:LayoutGroup>
+        </dxdo:DockLayoutManager>
+        <GridSplitter />
+        <GroupBox Header="Event Log" Grid.Column="1" Margin="12,12,20,20">
+            <DockPanel>
+                <Button x:Name="clearButton"
+                        MinHeight="22"
+                        MinWidth="80"
+                        HorizontalAlignment="Center"
+                        DockPanel.Dock="Bottom"
+                        Content="Clear log"
+                        Command="{Binding ClearLogCommand}"
+                        Margin="0,7,0,0" />
+                <local:AutoScrollableTextEdit Text="{Binding ElementName=eventService, Path=Log}"
+                                              x:Name="textBox"
+                                              Focusable="False"
+                                              IsReadOnly="True"
+                                              HorizontalScrollBarVisibility="Auto"
+                                              VerticalScrollBarVisibility="Auto"
+                                              VerticalContentAlignment="Top" />
+            </DockPanel>
+        </GroupBox>
+    </Grid>
+</local:DockingDemoModule>

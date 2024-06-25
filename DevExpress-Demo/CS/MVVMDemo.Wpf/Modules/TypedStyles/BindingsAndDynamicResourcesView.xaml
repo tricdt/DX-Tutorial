@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="MVVMDemo.TypedStylesDemo.BindingsAndDynamicResourcesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:demo="clr-namespace:MVVMDemo"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+    <!--#region !-->
+    <UserControl.DataContext>
+        <demo:PersonInfo FirstName="Gregory" LastName="Price"/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="brush" Color="LightGreen" />
+        <TextBoxStyle x:Key="TextBoxStyle" Text_Source="{Binding FirstName}" Background_Source="{DynamicResource brush}"/>
+    </UserControl.Resources>
+    <!--#endregion-->
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <TextBox Style="{StaticResource TextBoxStyle}"/>
+    </dxlc:LayoutControl>
+</UserControl>

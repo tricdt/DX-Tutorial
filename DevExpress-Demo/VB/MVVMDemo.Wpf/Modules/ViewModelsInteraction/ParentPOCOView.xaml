@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="MVVMDemo.ViewModelsInteraction.ParentPOCOView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.ViewModelsInteraction"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             DataContext="{dxmvvm:ViewModelSource local:ParentPOCOViewModel}">
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+        <dx:DialogService>
+            <!--#region DialogStyle-->
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="Window">
+                    <Setter Property="Width" Value="200" />
+                    <Setter Property="Height" Value="150" />
+                    <Setter Property="WindowStyle" Value="ToolWindow" />
+                </Style>
+            </dx:DialogService.DialogStyle>
+            <!--#endregion-->
+            <dx:DialogService.ViewTemplate>
+                <DataTemplate>
+                    <Border DataContext="{dxmvvm:ViewModelSource local:ChildPOCOViewModel}">
+                        <Button Command="{Binding ShowMessageCommand}" VerticalAlignment="Center" HorizontalAlignment="Center">Show Message</Button>
+                    </Border>
+                </DataTemplate>
+            </dx:DialogService.ViewTemplate>
+        </dx:DialogService>
+    </dxmvvm:Interaction.Behaviors>
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <Button Command="{Binding ShowDetailCommand}">Show Child View</Button>
+    </dxlc:LayoutControl>
+</UserControl>

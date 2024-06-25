@@ -1,0 +1,73 @@
+﻿<local:PropertyGridDemoModule x:Class="PropertyGridDemo.SelectedItemEditingModule"
+                              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                              xmlns:local="clr-namespace:PropertyGridDemo"
+                              xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                              xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+                              xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid">
+    <local:PropertyGridDemoModule.Resources>
+        <dxdb:NWindDataLoader x:Key="NWindDataLoader" />
+    </local:PropertyGridDemoModule.Resources>
+    <Grid Margin="12" KeyboardNavigation.ControlTabNavigation="Cycle">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="12" />
+            <ColumnDefinition Width="420" />
+        </Grid.ColumnDefinitions>
+
+        <dxg:GridControl Name="grid" ItemsSource="{Binding Path=Employees, Source={StaticResource NWindDataLoader}}" SelectionMode="Row">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="FirstName" MinWidth="100" />
+                <dxg:GridColumn FieldName="LastName" MinWidth="100" />
+                <dxg:GridColumn FieldName="BirthDate" MinWidth="100">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:DateEditSettings DisplayFormat="d" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Title" MinWidth="100" Header="Position" />
+                <dxg:GridColumn FieldName="Notes" MinWidth="100">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:MemoEditSettings ShowIcon="True" PopupWidth="250" MemoTextWrapping="Wrap" MemoVerticalScrollBarVisibility="Auto" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView ShowGroupedColumns="True" Name="view" AutoWidth="True">
+                    <dxmvvm:Interaction.Behaviors>
+                        <local:CommitEditingOnCellValueChanged />
+                    </dxmvvm:Interaction.Behaviors>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+        <dxprg:PropertyGridControl x:Name="pGrid"
+                                   Grid.Column="2"
+                                   SelectedObjects="{Binding Path=SelectedItems, ElementName=grid}"
+                                   ShowProperties="WithPropertyDefinitions"
+                                   ShowCategories="False"
+                                   SortMode="Definitions"
+                                   ExpandCategoriesWhenSelectedObjectChanged="True">
+            <dxprg:PropertyGridControl.PropertyDefinitions>
+                <dxprg:PropertyDefinition Path="Photo" AllowExpanding="Never">
+                    <dxprg:PropertyDefinition.EditSettings>
+                        <dxe:ImageEditSettings ShowMenuMode="Always" />
+                    </dxprg:PropertyDefinition.EditSettings>
+                </dxprg:PropertyDefinition>
+                <dxprg:PropertyDefinition Path="FirstName" Header="First name" />
+                <dxprg:PropertyDefinition Path="LastName" Header="Last name" />
+                <dxprg:PropertyDefinition Path="BirthDate" />
+                <dxprg:PropertyDefinition Path="Country" />
+                <dxprg:PropertyDefinition Path="City" />
+                <dxprg:PropertyDefinition Path="Address" />
+                <dxprg:PropertyDefinition Path="HomePhone" Header="Home phone" />
+                <dxprg:PropertyDefinition Path="Address" />
+                <dxprg:PropertyDefinition Path="Notes">
+                    <dxprg:PropertyDefinition.EditSettings>
+                        <dxe:TextEditSettings AcceptsReturn="True" TextWrapping="Wrap" />
+                    </dxprg:PropertyDefinition.EditSettings>
+                </dxprg:PropertyDefinition>
+            </dxprg:PropertyGridControl.PropertyDefinitions>
+        </dxprg:PropertyGridControl>
+    </Grid>
+</local:PropertyGridDemoModule>

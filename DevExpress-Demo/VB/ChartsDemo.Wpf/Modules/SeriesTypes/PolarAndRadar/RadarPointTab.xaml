@@ -1,0 +1,165 @@
+﻿<local:TabItemModule
+    x:Class="ChartsDemo.RadarPointTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ChartsDemo"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800">
+    <!--#region Resources-->
+    <local:TabItemModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <system:String
+                x:Key="tooltipPointPattern"
+                xml:space="preserve">Date: {A:MMMM}
+Temperature: {V}</system:String>
+        </ResourceDictionary>
+    </local:TabItemModule.Resources>
+    <!--#endregion-->
+
+    <!--#region Options-->
+    <local:TabItemModule.Options>
+        <StackPanel
+            Style="{StaticResource optionsRootStackPanelStyle}">
+            <GroupBox
+                Header="Shape Style"
+                Margin="0,5,0,0">
+                <dxe:ListBoxEdit
+                    Name="lbeShapeStyle"
+                    ItemsSource="{dxe:EnumItemsSource EnumType=dxc:CircularDiagramShapeStyle}"
+                    EditValue="{x:Static dxc:CircularDiagramShapeStyle.Polygon}">
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+            <GroupBox
+                Header="Rotation Direction"
+                Margin="0,5,0,0">
+                <dxe:ListBoxEdit
+                    Name="lbeRotationDirection"
+                    ItemsSource="{dxe:EnumItemsSource EnumType=dxc:CircularDiagramRotationDirection}"
+                    EditValue="{x:Static dxc:CircularDiagramRotationDirection.Clockwise}">
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+            <GroupBox
+                Header="Start Angle"
+                Margin="0,5,0,0">
+                <StackPanel
+                    MinWidth="150">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Text="0"
+                            HorizontalAlignment="Left" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="180"
+                            HorizontalAlignment="Center" />
+                        <TextBlock
+                            Grid.Column="2"
+                            Text="360"
+                            HorizontalAlignment="Right" />
+                    </Grid>
+                    <dxe:TrackBarEdit
+                        Name="tbeStartAngle"
+                        Value="0"
+                        Minimum="0"
+                        Maximum="360"
+                        TickPlacement="None" />
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </local:TabItemModule.Options>
+    <!--#endregion-->
+
+    <DockPanel
+        Loaded="{DXEvent '@e(chart).Animate()'}">
+
+        <!--#region ChartsRibbon-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}" />
+        <!--#endregion-->
+
+        <dxc:ChartControl
+            Name="chart"
+            AnimationMode="OnLoad">
+            <dxc:RadarDiagram2D
+                SeriesItemsSource="{DXBinding '$local:TemperatureData.Load()'}"
+                StartAngle="{Binding ElementName=tbeStartAngle, Path=Value}"
+                ShapeStyle="{Binding ElementName=lbeShapeStyle, Path=EditValue}"
+                RotationDirection="{Binding ElementName=lbeRotationDirection, Path=EditValue}">
+                <dxc:RadarDiagram2D.AxisX>
+                    <dxc:RadarAxisX2D>
+                        <dxc:RadarAxisX2D.DateTimeScaleOptions>
+                            <dxc:ManualDateTimeScaleOptions
+                                MeasureUnit="Month"
+                                GridAlignment="Month"
+                                AutoGrid="False" />
+                        </dxc:RadarAxisX2D.DateTimeScaleOptions>
+                        <dxc:RadarAxisX2D.Label>
+                            <dxc:AxisLabel
+                                TextPattern="{}{A:MMMM}" />
+                        </dxc:RadarAxisX2D.Label>
+                    </dxc:RadarAxisX2D>
+                </dxc:RadarDiagram2D.AxisX>
+                <dxc:RadarDiagram2D.AxisY>
+                    <dxc:RadarAxisY2D
+                        TickmarksMinorVisible="False"
+                        TickmarksVisible="False"
+                        Thickness="0" />
+                </dxc:RadarDiagram2D.AxisY>
+                <dxc:RadarDiagram2D.SeriesItemTemplate>
+                    <DataTemplate
+                        DataType="{x:Type local:TemperaturesInfo}">
+                        <dxc:RadarPointSeries2D
+                            DisplayName="{Binding Description}"
+                            DataSource="{Binding Items}"
+                            ArgumentDataMember="Date"
+                            ValueDataMember="Temperature"
+                            ToolTipPointPattern="{StaticResource tooltipPointPattern}"
+                            ArgumentScaleType="DateTime"
+                            AnimationAutoStartMode="SetStartState" />
+                    </DataTemplate>
+                </dxc:RadarDiagram2D.SeriesItemTemplate>
+            </dxc:RadarDiagram2D>
+            <!--#region Legend-->
+            <dxc:ChartControl.Legend>
+                <dxc:Legend />
+            </dxc:ChartControl.Legend>
+            <!--#endregion-->
+            <!--#region Titles-->
+            <dxc:ChartControl.Titles>
+                <dxc:Title
+                    HorizontalAlignment="Center">Average temperature in London</dxc:Title>
+                <dxc:Title
+                    Dock="Bottom"
+                    HorizontalAlignment="Right"
+                    FontSize="10"
+                    Foreground="Silver"
+                    Margin="0,10,0,0"
+                    Content="From www.weather.com" />
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+        </dxc:ChartControl>
+
+    </DockPanel>
+</local:TabItemModule>

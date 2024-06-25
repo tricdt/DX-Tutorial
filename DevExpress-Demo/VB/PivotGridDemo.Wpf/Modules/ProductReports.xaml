@@ -1,0 +1,147 @@
+﻿<local:PivotGridDemoModule x:Class="PivotGridDemo.ProductReports"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                           xmlns:local="clr-namespace:PivotGridDemo"
+                           xmlns:dxpg="http://schemas.devexpress.com/winfx/2008/xaml/pivotgrid"
+                           xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                           xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                           xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                           xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                           DataContext="{dxmvvm:ViewModelSource Type=local:DrillDownViewModel}">
+
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DialogService Name="DrillDownTemplate">
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="dx:ThemedWindow">
+                    <Setter Property="ShowIcon" Value="False" />
+                    <Setter Property="ShowInTaskbar" Value="False" />
+                </Style>
+            </dx:DialogService.DialogStyle>
+            <dx:DialogService.ViewTemplate>
+                <DataTemplate>
+                    <local:DrillDownControl />
+                </DataTemplate>
+            </dx:DialogService.ViewTemplate>
+        </dx:DialogService>
+    </dxmvvm:Interaction.Behaviors>
+    <DockPanel>
+        <local:PivotGridDemoRibbon DockPanel.Dock="Top" ExportPivotGrid="{x:Reference pivotGrid}"/>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,5,12,12" MinWidth="210">
+                <GroupBox Header="Product Reports">
+                    <dxe:ListBoxEdit x:Name="reportsList"
+                                     ShowBorder="False"
+                                     SelectedIndex="0"
+                                     Background="{x:Null}"
+                                     SelectedIndexChanged="ReportsList_SelectionChanged">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.Items>
+                            <sys:String>Category Sales</sys:String>
+                            <sys:String>Product Sales</sys:String>
+                            <sys:String>Interval Grouping</sys:String>
+                            <sys:String>Multiple Subtotals</sys:String>
+                            <sys:String>Average Sales</sys:String>
+                            <sys:String>Top 3 Products</sys:String>
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Report Options" Margin="0,5,0,0" Name="gbxOptions">
+                    <StackPanel>
+                        <dxe:CheckEdit IsChecked="{Binding CanPerformDrillDown}" Content="Show Drill Down Form on Cell Double Click" Name="showDrillDown" />
+                        <dxe:CheckEdit Content="Show Categories"
+                                       Name="cbxShowCategories"
+                                       Checked="cbxShowCategories_Checked"
+                                       Unchecked="cbxShowCategories_Checked"
+                                       Visibility="Collapsed"
+                                       Margin="0,4,0,0" />
+                        <Grid Name="spGroupingLayout" Visibility="Collapsed" Margin="0,4,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Grouping Layout" x:Name="tbGroupingLayout" VerticalAlignment="Center" />
+                            <dxe:ComboBoxEdit Grid.Column="1"
+                                              IsTextEditable="False"
+                                              SelectedIndex="1"
+                                              SelectedIndexChanged="ComboBoxEdit_SelectedIndexChanged"
+                                              Name="cbeGroupingLayout">
+                                <dxe:ComboBoxEdit.Items>
+                                    <sys:String>by Years</sys:String>
+                                    <sys:String>by Quarters</sys:String>
+                                    <sys:String>by Month</sys:String>
+                                    <sys:String>by Years, Quarters, Month</sys:String>
+                                </dxe:ComboBoxEdit.Items>
+                            </dxe:ComboBoxEdit>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+
+        <dxpg:PivotGridControl x:Name="pivotGrid"
+                               DataProcessingEngine="Optimized"
+                               DataSource="{x:Static dxdb:NWindDataProvider.ProductReports}"
+                               local:FieldAreaHelper.FixAreas="True"
+                               RowTreeWidth="230"
+                               ShowBorder="False">
+            <dxpg:PivotGridControl.Fields>
+                <dxpg:PivotGridField x:Name="fieldCategory" DataBinding="{dxpg:DataSourceColumnBinding CategoryName}" Area="RowArea" Width="130" Caption="Category Name" />
+                <dxpg:PivotGridField x:Name="fieldProduct" DataBinding="{dxpg:DataSourceColumnBinding ProductName}" Area="FilterArea" Width="200" Caption="Product Name" />
+                <dxpg:PivotGridField x:Name="fieldSales" CellFormat="c" DataBinding="{dxpg:DataSourceColumnBinding ProductSales}" Area="DataArea" Width="135" Caption="Product Sales" />
+                <dxpg:PivotGridField x:Name="fieldAverageSale"
+                                     CellFormat="c"
+                                     DataBinding="{dxpg:DataSourceColumnBinding ProductSales}"
+                                     Area="DataArea"
+                                     Width="90"
+                                     Caption="Average Sale"
+                                     SummaryType="Average"
+                                     Visible="False" />
+                <dxpg:PivotGridField x:Name="fieldMinimumSale"
+                                     CellFormat="c"
+                                     DataBinding="{dxpg:DataSourceColumnBinding ProductSales}"
+                                     Area="DataArea"
+                                     Width="90"
+                                     Caption="Minimum Sale"
+                                     SummaryType="Min"
+                                     Visible="False" />
+                <dxpg:PivotGridField x:Name="fieldYear"
+                                     DataBinding="{dxpg:DataSourceColumnBinding ShippedDate, GroupInterval=DateYear}"
+                                     Area="FilterArea"
+                                     ShowGroupIntervalName="True"
+                                     ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}"
+                                     Width="150" />
+                <dxpg:PivotGridField x:Name="fieldQuarter"
+                                     DataBinding="{dxpg:DataSourceColumnBinding ShippedDate, GroupInterval=DateQuarter}"
+                                     Area="FilterArea"
+                                     ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}"
+                                     ShowGroupIntervalName="True"
+                                     Width="150" />
+                <dxpg:PivotGridField x:Name="fieldMonth"
+                                     DataBinding="{dxpg:DataSourceColumnBinding ShippedDate, GroupInterval=DateMonth}"
+                                     Area="FilterArea"
+                                     Visible="False"
+                                     ShowGroupIntervalName="True"
+                                     ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}"
+                                     Width="70" />
+            </dxpg:PivotGridControl.Fields>
+            <dxmvvm:Interaction.Triggers>
+                <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                       Command="{Binding ShowDrillDownCommand}"
+                                       EventName="MouseDoubleClick"
+                                       SourceName="pivotGrid">
+                    <dxmvvm:EventToCommand.EventArgsConverter>
+                        <dxpg:EventArgsToCellInfoConverter />
+                    </dxmvvm:EventToCommand.EventArgsConverter>
+                </dxmvvm:EventToCommand>
+            </dxmvvm:Interaction.Triggers>
+        </dxpg:PivotGridControl>
+    </DockPanel>
+</local:PivotGridDemoModule>

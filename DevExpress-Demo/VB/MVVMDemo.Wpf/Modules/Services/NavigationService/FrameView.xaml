@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="MVVMDemo.Services.Navigation.FrameView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:demo="clr-namespace:MVVMDemo"
+             xmlns:local="clr-namespace:MVVMDemo.Services.Navigation"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+             xmlns:dxwuin="http://schemas.devexpress.com/winfx/2008/xaml/windowsui/navigation"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+    <dxwui:NavigationFrame AnimationType="SlideHorizontal">
+        <dxwui:NavigationFrame.Source>
+            <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top" DataContext="{dxmvvm:ViewModelSource local:CollectionViewModel}">
+                <!--#region !-->
+                <dxmvvm:Interaction.Behaviors>
+                    <dxwuin:FrameDocumentUIService/>
+                </dxmvvm:Interaction.Behaviors>
+                <!--#endregion-->
+                <TextBlock VerticalAlignment="Top">Double click item to navigate to detail view</TextBlock>
+                <!--#region grid-->
+                <dxg:GridControl ItemsSource="{x:Static demo:PersonInfo.Persons}" AutoGenerateColumns="AddNew">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxmvvm:EventToCommand EventName="MouseDoubleClick" Command="{Binding ShowDetailCommand}">
+                            <dxmvvm:EventToCommand.EventArgsConverter>
+                                <dx:EventArgsToDataRowConverter/>
+                            </dxmvvm:EventToCommand.EventArgsConverter>
+                        </dxmvvm:EventToCommand>
+                    </dxmvvm:Interaction.Behaviors>
+                    <dxg:GridControl.View>
+                        <dxg:TableView NavigationStyle="Row" ShowGroupPanel="False"/>
+                    </dxg:GridControl.View>
+                </dxg:GridControl>
+                <!--#endregion-->
+            </dxlc:LayoutControl>
+        </dxwui:NavigationFrame.Source>
+    </dxwui:NavigationFrame>
+</UserControl>

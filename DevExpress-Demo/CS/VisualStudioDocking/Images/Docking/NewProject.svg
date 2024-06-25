@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.Yellow{fill:#FFB115;}
+	.Blue{fill:#1177D7;}
+	.Black{fill:#727272;}
+	.st0{fill:none;}
+</style>
+<rect x="24" y="12" class="st0" width="2" height="2"/>
+<rect x="26" y="18" class="Blue" width="6" height="6"/>
+<rect x="18" y="18" class="Blue" width="6" height="6"/>
+<rect x="26" y="26" class="Blue" width="6" height="6"/>
+<rect x="18" y="26" class="Blue" width="6" height="6"/>
+<path class="Yellow" d="M14,8V6H9.8C9.7,5.8,9.7,5.6,9.6,5.4L12,3l-1-1L8.6,4.4C8.4,4.3,8.2,4.3,8,4.2V0H6v4.2
+	C5.8,4.3,5.6,4.3,5.4,4.4L3,2L2,3l2.4,2.4C4.3,5.6,4.3,5.8,4.2,6H0v2h4.2c0.1,0.2,0.2,0.4,0.3,0.6L2,11l1,1l2.4-2.4
+	C5.6,9.7,5.8,9.7,6,9.8V14h2V9.8c0.2-0.1,0.4-0.2,0.6-0.3L11,12l1-1L9.6,8.6C9.7,8.4,9.7,8.2,9.8,8H14z M6,7c0-0.6,0.4-1,1-1
+	s1,0.4,1,1c0,0.6-0.4,1-1,1S6,7.6,6,7z"/>
+<polygon class="Black" points="8,16 6,16 6,26 16,26 16,24 8,24 "/>
+<path class="Black" d="M16,10h-2v2l-2,2h-2v2h16h2v-6H16z M26,14h-2v-2h2V14z"/>
+</svg>

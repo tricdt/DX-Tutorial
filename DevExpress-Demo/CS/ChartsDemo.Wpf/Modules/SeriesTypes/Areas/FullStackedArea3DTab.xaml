@@ -1,0 +1,134 @@
+﻿<local:TabItemModule
+    x:Class="ChartsDemo.FullStackedArea3DTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ChartsDemo"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800">
+    <!--#region Resources-->
+    <local:TabItemModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Storyboard
+                x:Key="InitialAnimation" Completed="Storyboard_Completed"
+                TargetProperty="Opacity"
+                TargetName="chart">
+                <DoubleAnimation
+                    From="0"
+                    To="1"
+                    Duration="0:0:2" />
+            </Storyboard>
+        </ResourceDictionary>
+    </local:TabItemModule.Resources>
+    <!--#endregion-->
+
+    <!--#region Options-->
+    <local:TabItemModule.Options>
+        <StackPanel
+            Style="{StaticResource optionsRootStackPanelStyle}">
+            <dxe:CheckEdit
+                Name="cheShowLabels"
+                Content="Show Labels"
+                IsChecked="False" />
+            <dxe:CheckEdit
+                Name="cheValuesAsPercent"
+                Content="Values as Percent"
+                Margin="0,4,0,0"
+                IsChecked="True"
+                IsEnabled="{Binding RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}, Path=Children[0].IsChecked}" />
+        </StackPanel>
+    </local:TabItemModule.Options>
+    <!--#endregion-->
+
+    <DockPanel>
+        <!--#region Animation trigger-->
+        <DockPanel.Triggers>
+            <EventTrigger
+                RoutedEvent="Loaded">
+                <EventTrigger.Actions>
+                    <BeginStoryboard
+                        Storyboard="{StaticResource InitialAnimation}" />
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </DockPanel.Triggers>
+        <!--#endregion-->
+
+        <!--#region ChartsRibbon-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}" />
+        <!--#endregion-->
+
+        <dxc:ChartControl
+            Name="chart"
+            Opacity="0"
+            IsManipulationEnabled="True"
+            ToolTipEnabled="False"
+            DataSource="{DXBinding 'new $local:DevAVBranchesSales().GetList()'}">
+            <dxc:ChartControl.Diagram>
+                <dxc:XYDiagram3D
+                    ZoomPercent="125"
+                    SeriesDataMember="Company">
+                    <!--#region Axes-->
+                    <dxc:XYDiagram3D.AxisY>
+                        <dxc:AxisY3D>
+                            <dxc:AxisY3D.WholeRange>
+                                <dxc:Range
+                                    SideMarginsValue="0" />
+                            </dxc:AxisY3D.WholeRange>
+                            <dxc:AxisY3D.Label>
+                                <dxc:AxisLabel
+                                    TextPattern="{}{VP:P0}" />
+                            </dxc:AxisY3D.Label>
+                        </dxc:AxisY3D>
+                    </dxc:XYDiagram3D.AxisY>
+                    <dxc:XYDiagram3D.AxisX>
+                        <dxc:AxisX3D>
+                            <dxc:AxisX3D.WholeRange>
+                                <dxc:Range
+                                    SideMarginsValue="0" />
+                            </dxc:AxisX3D.WholeRange>
+                        </dxc:AxisX3D>
+                    </dxc:XYDiagram3D.AxisX>
+                    <!--#endregion-->
+                    <dxc:XYDiagram3D.SeriesTemplate>
+                        <dxc:AreaFullStackedSeries3D
+                            LabelsVisibility="{Binding ElementName=cheShowLabels, Path=IsChecked}"
+                            ArgumentDataMember="Year"
+                            ValueDataMember="Sales"
+                            AreaWidth="0.6">
+                            <dxc:AreaFullStackedSeries3D.Label>
+                                <dxc:SeriesLabel
+                                    RenderMode="CustomShape"
+                                    TextPattern="{DXBinding '@e(cheValuesAsPercent).IsChecked ? `{VP:P2}` : `${V}M`' }" />
+                            </dxc:AreaFullStackedSeries3D.Label>
+                        </dxc:AreaFullStackedSeries3D>
+                    </dxc:XYDiagram3D.SeriesTemplate>
+                </dxc:XYDiagram3D>
+            </dxc:ChartControl.Diagram>
+            <!--#region Legend-->
+            <dxc:ChartControl.Legend>
+                <dxc:Legend
+                    HorizontalPosition="Right"
+                    ReverseItems="True" />
+            </dxc:ChartControl.Legend>
+            <!--#endregion-->
+            <!--#region Titles-->
+            <dxc:ChartControl.Titles>
+                <dxc:Title
+                    Dock="Top"
+                    HorizontalAlignment="Center">Market Share Over Time</dxc:Title>
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+        </dxc:ChartControl>
+
+    </DockPanel>
+</local:TabItemModule>

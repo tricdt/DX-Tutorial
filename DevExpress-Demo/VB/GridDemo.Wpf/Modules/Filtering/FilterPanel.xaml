@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="GridDemo.Filtering.FilterPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Margin="8">
+                <Label Margin="0,0,4,0">Show Filter Panel Mode:</Label>
+                <dxe:ComboBoxEdit Name="showFilterPanelModeComboBox" SelectedIndex="0" IsTextEditable="False"
+                                  ItemsSource="{dxe:EnumItemsSource EnumType={x:Type dxg:ShowFilterPanelMode}}"/>
+            </StackPanel>
+            <CheckBox Name="allowFilterEditorCheckBox" Margin="8" IsChecked="True" Content="Allow Filter Editor" />
+        </StackPanel>
+        <dxg:GridControl Name="grid" Grid.Row="1" ItemsSource="{x:Static dxdb:NWindDataProvider.Invoices}"
+                         FilterString="[ShipCountry] = 'USA'">
+            <dxg:GridControl.View>
+                <!--#region !-->
+                <dxg:TableView x:Name="view" ScrollBarAnnotationMode="SearchResult" AllowEditing="False" NavigationStyle="Row"
+                               AllowFilterEditor="{Binding ElementName=allowFilterEditorCheckBox, Path=IsChecked, Converter={dxmvvm:DefaultBooleanToBooleanConverter}}"
+                               ShowFilterPanelMode="{Binding ElementName=showFilterPanelModeComboBox, Path=EditValue}"/>
+                <!--#endregion-->
+            </dxg:GridControl.View>
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="ProductName" Width="*" />
+                <dxg:GridColumn FieldName="UnitPrice" Width="*" />
+                <dxg:GridColumn FieldName="Quantity" Width="*" />
+                <dxg:GridColumn FieldName="OrderDate" Width="*" />
+                <dxg:GridColumn FieldName="ShipCountry" Width="*" />
+                <dxg:GridColumn FieldName="ShipCity" Width="*" />
+            </dxg:GridControl.Columns>
+        </dxg:GridControl>
+    </Grid>
+</UserControl>

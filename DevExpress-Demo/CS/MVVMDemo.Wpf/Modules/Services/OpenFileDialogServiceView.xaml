@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="MVVMDemo.Services.OpenFileDialogServiceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.Services"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxdlg="http://schemas.devexpress.com/winfx/2008/xaml/dialogs"
+             DataContext="{dxmvvm:ViewModelSource local:OpenFileDialogServiceViewModel}">
+    <!--#region !-->
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:OpenFileDialogService x:Name="OpenFileDialogService" Multiselect="{Binding ElementName=multiselectCheckBox, Path=IsChecked}"/>
+        <dxdlg:DXOpenFileDialogService x:Name="DXOpenFileDialogService" Multiselect="{Binding ElementName=multiselectCheckBox, Path=IsChecked}"/>
+    </dxmvvm:Interaction.Behaviors>
+    <!--#endregion-->
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <CheckBox x:Name="multiselectCheckBox">Multiselect</CheckBox>
+        <Button Command="{Binding ShowDialogCommand}" CommandParameter="OpenFileDialogService">Show System Dialog</Button>
+        <Button Command="{Binding ShowDialogCommand}" CommandParameter="DXOpenFileDialogService">Show DevExpress Dialog</Button>
+        <dxlc:LayoutItem Label="Opened file(s):" VerticalAlignment="Top" LabelPosition="Top">
+            <TextBlock Text="{Binding OpenedFiles}" TextWrapping="Wrap"/>
+        </dxlc:LayoutItem>
+    </dxlc:LayoutControl>
+</UserControl>

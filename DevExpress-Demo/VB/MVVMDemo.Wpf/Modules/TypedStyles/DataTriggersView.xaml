@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="MVVMDemo.TypedStylesDemo.DataTriggersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:demo="clr-namespace:MVVMDemo">
+    <UserControl.DataContext>
+        <demo:PersonInfo FirstName="Gregory" LastName="Price" />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <!--#region !-->
+        <ButtonStyle x:Key="ButtonStyle">
+            <ButtonStyle.Triggers>
+                <TypedDataTrigger Binding="{Binding FirstName}" Value="Gregory">
+                    <ButtonStyle Foreground="Red"/>
+                </TypedDataTrigger>
+            </ButtonStyle.Triggers>
+        </ButtonStyle>
+        <!--#endregion-->
+    </UserControl.Resources>
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <Button Style="{StaticResource ButtonStyle}" Content="{Binding FullName}"/>
+    </dxlc:LayoutControl>
+</UserControl>

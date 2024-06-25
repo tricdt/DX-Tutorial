@@ -1,0 +1,144 @@
+﻿<local:MapDemoModule x:Class="MapDemo.MapEditor"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+                     xmlns:dxmt="http://schemas.devexpress.com/winfx/2008/xaml/map/themekeys"
+                     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                     xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+                     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                     xmlns:local="clr-namespace:MapDemo"
+                     mc:Ignorable="d"
+                     d:DesignHeight="560"
+                     d:DesignWidth="1024"
+                     DataContext="{dxmvvm:ViewModelSource Type=local:MapEditorViewModel}">
+    <local:MapDemoModule.Resources>
+        <local:DemoValuesProvider x:Key="DemoValuesProvider" />
+
+        <DataTemplate x:Key="shapeToolTipTemplate">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock TextWrapping="Wrap" FontSize="16" Foreground= "{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=ToolTipForeground}}"
+                           Text="{Binding ToolTipText}" Margin="0,0,0,6"/>
+                <StackPanel Orientation="Horizontal" Margin="6,0,0,0">
+                    <Rectangle Width="{Binding  ElementName=Perimeter, Path=ActualHeight, Converter={local:FontHeightToRectangleSizeConverter}}"
+                               Height="{Binding  ElementName=Perimeter, Path=ActualHeight, Converter={local:FontHeightToRectangleSizeConverter}}" VerticalAlignment="Center"
+                               Stroke="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=ToolTipForeground}}" />
+                    <TextBlock Name="Perimeter" TextWrapping="Wrap" Foreground="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=ToolTipForeground}}" Padding="4,0,0,0"
+                               Text="{Binding Item, Converter={local:SelectedItemToPerimeterConverter}}" />
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="6,0,0,0">
+                    <Rectangle Width="{Binding  ElementName=Area, Path=ActualHeight, Converter={local:FontHeightToRectangleSizeConverter}}"
+                               Height="{Binding  ElementName=Area, Path=ActualHeight, Converter={local:FontHeightToRectangleSizeConverter}}" VerticalAlignment="Center"
+                               Stroke="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=ToolTipForeground}}"
+                               Fill="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=ToolTipForeground}}"/>
+                    <TextBlock Name="Area" TextWrapping="Wrap" Foreground="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=ToolTipForeground}}" Padding="4,0,0,0"
+                               Text="{Binding Item, Converter={local:SelectedItemToAreaConverter}}" />
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="dotToolTipTemplate">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock TextWrapping="Wrap" FontSize="16" Foreground= "{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=ToolTipForeground}}"
+                           Text="{Binding ToolTipText}" Margin="0,0,0,6"/>
+                <StackPanel Orientation="Horizontal" Margin="6,0,0,0">
+                    <Ellipse Width="{Binding  ElementName=Diameter, Path=ActualHeight, Converter={local:FontHeightToRectangleSizeConverter}}"
+                               Height="{Binding  ElementName=Diameter, Path=ActualHeight, Converter={local:FontHeightToRectangleSizeConverter}}" VerticalAlignment="Center"
+                               Stroke="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=ToolTipForeground}}" />
+                    <TextBlock Name="Diameter" TextWrapping="Wrap" Foreground="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=ToolTipForeground}}"
+                               Padding="4,0,0,0" Text="{Binding Item, Converter={local:SelectedItemToDiameterConverter}}" />
+
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="pinToolTipTemplate">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock TextWrapping="Wrap" FontSize="16" Foreground= "{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=ToolTipForeground}}"
+                           Text="{Binding ToolTipText}" Margin="0,0,0,6"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <local:ItemToolTipTemplateConverter x:Key="itemToolTipTemplateConverter"
+                                               PinTemplate="{StaticResource ResourceKey=pinToolTipTemplate}"
+                                               ShapeTemplate="{StaticResource ResourceKey=shapeToolTipTemplate}"
+                                               DotTemplate="{StaticResource ResourceKey=dotToolTipTemplate}"/>
+
+        <DataTemplate x:Key="itemToolTipTemplate">
+            <ContentPresenter ContentTemplate="{Binding Item, Converter={StaticResource itemToolTipTemplateConverter}}"/>
+        </DataTemplate>
+
+    </local:MapDemoModule.Resources>
+    <Grid>
+        <dxm:MapControl ZoomLevel="18" MinZoomLevel="16" CenterPoint="26.804559994944, 33.947806856342" IsManipulationEnabled="True">
+            <dxm:MapControl.MapEditor>
+                <dxm:MapEditor x:Name="Editor" ActiveLayer="{Binding ElementName=DataLayer}"
+                               ActiveItems="{Binding ActiveItems, Mode=TwoWay}"
+                               MapItemCreating="{DXEvent 'OnMapItemCreating(@args.Item)'}">
+                    <dxm:MapEditor.Mode>
+                        <dxm:MapEditorEditMode/>
+                    </dxm:MapEditor.Mode>
+                </dxm:MapEditor>
+            </dxm:MapControl.MapEditor>
+            <dxm:MapControl.Measurements>
+                <dxm:Measurements DistanceUnits="{x:Static dxm:MeasureUnit.Meter}" AreaUnits="{x:Static dxm:AreaMeasurementUnit.SquareMeter}">
+                    <dxm:Measurements.ToolbarOptions>
+                        <dxm:MeasurementToolbarOptions Visible="True" Margin="-398,50,0,0"/>
+                    </dxm:Measurements.ToolbarOptions>
+                </dxm:Measurements>
+            </dxm:MapControl.Measurements>
+            <dxm:ImageLayer>
+                <dxm:BingMapDataProvider Kind="Area"
+                                         BingKey="{Binding DevexpressBingKey, Source={StaticResource DemoValuesProvider}}" />
+            </dxm:ImageLayer>
+
+            <dxm:VectorLayer x:Name="DataLayer" ToolTipPattern= "{} {name}"
+                             ToolTipContentTemplate="{StaticResource itemToolTipTemplate}"
+                             ToolTipEnabled="{Binding ElementName=Editor, Path=Mode, Converter={local:EditorModeToToolTipEnabledConverter}}">
+                <dxm:KmlFileDataAdapter FileUri="/MapDemo;component/Data/hotelmap.kml" ShapesLoaded="{DXEvent 'OnShapesLoaded(@args.Shapes)'}"/>
+            </dxm:VectorLayer>
+
+            <dxm:MapControl.Legends>
+                <dxm:ColorListLegend Header="Resort Map">
+                    <dxm:ColorListLegend.CustomItems>
+                        <dxm:ColorLegendItem Text="Roads/Parking" Color="Gray" />
+                        <dxm:ColorLegendItem Text="Services" Color="#C00000"/>
+                        <dxm:ColorLegendItem Text="Botanic Gardens" Color="#00B050"/>
+                        <dxm:ColorLegendItem Text="Pools and Fountains" Color="#00B0F0"/>
+                        <dxm:ColorLegendItem Text="Recreation/Play Areas" Color="#FFCB2F"/>
+                        <dxm:ColorLegendItem Text="Residential Buildings" Color="#C45C07"/>
+                        <dxm:ColorLegendItem Text="Reception/Restaurant" Color="#AA00FF"/>
+                    </dxm:ColorListLegend.CustomItems>
+                </dxm:ColorListLegend>
+
+            </dxm:MapControl.Legends>
+
+            <dxm:MapControl.CoordinatesPanelOptions>
+                <dxm:CoordinatesPanelOptions Margin="100,0,0,4" />
+            </dxm:MapControl.CoordinatesPanelOptions>
+            <dxm:MapControl.ScrollButtonsOptions>
+                <dxm:ScrollButtonsOptions Visible="False"/>
+            </dxm:MapControl.ScrollButtonsOptions>
+            <dxm:MapControl.ZoomTrackbarOptions>
+                <dxm:ZoomTrackbarOptions Visible="False"/>
+            </dxm:MapControl.ZoomTrackbarOptions>
+            <dxm:MapControl.ScalePanelOptions>
+                <dxm:ScalePanelOptions Visible="False"/>
+            </dxm:MapControl.ScalePanelOptions>
+        </dxm:MapControl>
+        <local:CopyrightControl ProviderName="Bing" />
+        <StackPanel Height="24"
+                    Background="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=OverlayBackground}}"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="408,16,0,0"
+                    Orientation="Horizontal">
+            <TextBlock Text="Fill:"  Foreground="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=OverlayElementForeground}}" VerticalAlignment="Center" Margin="8,0,0,0"/>
+            <dxe:PopupColorEdit Name="fillColorEdit" Color="{Binding FillColor, Mode=TwoWay}" ShowDefaultColorButton="False" ShowNoColorButton="False" Margin="8,0,0,0"/>
+            <TextBlock Text="Stroke:" Foreground="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=OverlayElementForeground}}" VerticalAlignment="Center" Margin="8,0,0,0"/>
+            <dxe:PopupColorEdit Name="strokeColorEdit" Color="{Binding StrokeColor, Mode=TwoWay}" ShowDefaultColorButton="False" ShowNoColorButton="False" Margin="8,0,0,0"/>
+            <dx:SimpleButton Content = "Save to KML" Margin="16,0,0,0" Command="{DXCommand Execute='Export(@e(Editor).ActiveLayer);'}"/>
+        </StackPanel>
+    </Grid>
+</local:MapDemoModule>

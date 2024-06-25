@@ -1,0 +1,121 @@
+﻿<UserControl x:Class="EditorsDemo.SearchLookUpEditOptions"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:EditorsDemo"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    mc:Ignorable="d"
+    Name="options"
+    d:DesignHeight="300" d:DesignWidth="400" MinWidth="280">
+
+    <StackPanel x:Name="LayoutRoot">
+        <GroupBox Header="Editor Properties" Margin="0,12,0,0">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        Text="Edit Value:"
+                        VerticalAlignment="Center"
+                        Margin="0,0,6,3"/>
+                    <dxe:TextEdit
+                        IsReadOnly="True"
+                        Grid.Column="1"
+                        Margin="0,0,0,6"
+                        Text="{Binding Path=FocusedEditor.EditValue, Mode=TwoWay, ElementName=options, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock
+                        Text="Display Member:"
+                        Grid.Row="2"
+                        VerticalAlignment="Center"
+                        Margin="0,0,6,3"/>
+                    <dxe:TextEdit
+                        x:Name="txtDisplayMember"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="0,0,0,6"
+                        IsReadOnly="True"
+                        Text="{Binding Path=FocusedEditor.DisplayMember, Mode=TwoWay, ElementName=options, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock
+                        Text="Value Member:"
+                        Grid.Row="3"
+                        VerticalAlignment="Center"
+                        Margin="0,0,6,3"/>
+                    <dxe:TextEdit
+                        x:Name="txtValueMember"
+                        IsReadOnly="true"
+                        Text="{Binding Path=FocusedEditor.ValueMember, Mode=TwoWay, ElementName=options, UpdateSourceTrigger=PropertyChanged}"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="0,0,0,6"/>
+                </Grid>
+                <dxe:CheckEdit
+                    VerticalAlignment="Center"
+                    Margin="0,0,0,6"
+                    x:Name="showSizeGrip"
+                    Content="Show Size Grip"
+                    EditValue="{Binding Path=FocusedEditor.ShowSizeGrip, Mode=TwoWay, ElementName=options}" />
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Search Properties" Margin="0,12,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Margin="0,0,6,3"
+                    VerticalAlignment="Center"
+                    Grid.Row="0"
+                    Text="Filter Condition:" />
+                <dxe:ComboBoxEdit
+                    Margin="0,0,0,6"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    x:Name="filterConditionComboBox"
+                    IsTextEditable="False"
+                    EditValue="{Binding Path=FocusedEditor.FilterCondition, Mode=TwoWay, ElementName=options, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock
+                    Margin="0,0,6,3"
+                    VerticalAlignment="Center"
+                    Grid.Row="1"
+                    Text="Find Mode:" />
+                <dxe:ComboBoxEdit
+                    Margin="0,0,0,6"
+                    Grid.Row="1"
+                    x:Name="findModeComboBox"
+                    Grid.Column="1"
+                    IsTextEditable="False"
+                    EditValue="{Binding Path=FocusedEditor.FindMode, Mode=TwoWay, ElementName=options, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock
+                    Margin="0,0,6,3"
+                    VerticalAlignment="Center"
+                    Grid.Row="3"
+                    Text="Add New Button Placement:" />
+                <dxe:ComboBoxEdit
+                    Margin="0,0,0,6"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    x:Name="addNewComboBox"
+                    IsTextEditable="False"
+                    EditValue="{Binding Path=FocusedEditor.AddNewButtonPlacement, Mode=TwoWay, ElementName=options, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+        </GroupBox>
+    </StackPanel>
+</UserControl>

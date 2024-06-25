@@ -1,0 +1,231 @@
+﻿<local:LayoutControlDemoModule x:Class="LayoutControlDemo.pageTileLayoutControl"
+                               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                               xmlns:system="clr-namespace:System;assembly=mscorlib"
+                               xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                               xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                               xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                               xmlns:local="clr-namespace:LayoutControlDemo"
+                               mc:Ignorable="d"
+                               d:DesignHeight="550"
+                               d:DesignWidth="1000">
+    <local:LayoutControlDemoModule.Resources>
+        <local:ScalablePaddingConverter x:Key="ScalablePaddingConverter" MinPadding="80" />
+    </local:LayoutControlDemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <local:controlProperties Margin="10,6,2,4" LayoutControl="{Binding ElementName=layoutItems}" MinWidth="355">
+                <local:controlProperties.Resources>
+                    <dx:EnumToBoolConverter x:Key="EnumToBoolConverter" />
+                </local:controlProperties.Resources>
+                <local:controlProperties.LayoutControlProperties>
+                    <dxlc:LayoutControl Orientation="Vertical" Padding="0" Background="Transparent">
+                        <dxlc:LayoutGroup View="GroupBox" Header="Layout" Orientation="Vertical">
+                            <dxlc:LayoutItem Label="Orientation" LabelPosition="Top">
+                                <StackPanel Orientation="Horizontal">
+                                    <RadioButton Content="Horizontal"
+                                                 GroupName="1a"
+                                                 IsChecked="{Binding Orientation, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Horizontal, Mode=TwoWay}" />
+                                    <RadioButton Content="Vertical"
+                                                 GroupName="1b"
+                                                 Margin="12,0,0,0"
+                                                 IsChecked="{Binding Orientation, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Vertical, Mode=TwoWay}" />
+                                </StackPanel>
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="MaximizedElementPosition:">
+                                <dxe:ComboBoxEdit EditValue="{Binding MaximizedElementPosition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  ItemsSource="{dxe:EnumItemsSource EnumType=dxlc:MaximizedElementPosition}" />
+                            </dxlc:LayoutItem>
+                            <dxe:CheckEdit Content="BreakFlowToFit" IsChecked="{Binding BreakFlowToFit, Mode=TwoWay}" />
+                        </dxlc:LayoutGroup>
+
+                        <dxlc:LayoutGroup View="GroupBox" Header="Customization" Orientation="Vertical">
+                            <dxe:CheckEdit Content="AllowGroupHeaderEditing" IsChecked="{Binding AllowGroupHeaderEditing, Mode=TwoWay}" />
+                            <dxe:CheckEdit Content="AllowItemMoving" IsChecked="{Binding AllowItemMoving, Mode=TwoWay}" />
+                            <dxe:CheckEdit Content="AllowAddFlowBreaksDuringItemMoving"
+                                           IsChecked="{Binding AllowAddFlowBreaksDuringItemMoving, Mode=TwoWay}"
+                                           Margin="16,0,0,0" />
+                            <dxe:CheckEdit Content="AllowMaximizedElementMoving" IsChecked="{Binding AllowMaximizedElementMoving, Mode=TwoWay}" />
+                        </dxlc:LayoutGroup>
+
+                        <dxlc:LayoutGroup View="GroupBox" Header="Behavior" Orientation="Vertical">
+                            <dxe:CheckEdit Content="AnimateItemMaximization" IsChecked="{Binding AnimateItemMaximization, Mode=TwoWay}" />
+                            <dxe:CheckEdit Content="AnimateItemMoving" IsChecked="{Binding AnimateItemMoving, Mode=TwoWay}" />
+                            <dxe:CheckEdit Content="AnimateScrolling" IsChecked="{Binding AnimateScrolling, Mode=TwoWay}" />
+                            <dxe:CheckEdit Content="DragScrolling" IsChecked="{Binding DragScrolling, Mode=TwoWay}" />
+                        </dxlc:LayoutGroup>
+                    </dxlc:LayoutControl>
+                </local:controlProperties.LayoutControlProperties>
+                <local:controlProperties.ItemProperties>
+                    <dxlc:LayoutControl Orientation="Vertical" Padding="0" ScrollBars="None">
+                        <dxlc:LayoutControl.Resources>
+                            <local:TimeSpanToSecondsConverter x:Key="TimeSpanToSecondsConverter" />
+                        </dxlc:LayoutControl.Resources>
+
+                        <dxlc:LayoutItem Label="GroupHeader (set on the first tile in a group)" LabelPosition="Top">
+                            <dxe:TextEdit EditValue="{Binding Path=(dxlc:TileLayoutControl.GroupHeader), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </dxlc:LayoutItem>
+
+                        <dxlc:LayoutGroup View="GroupBox" Header="Layout" Orientation="Vertical">
+                            <dxlc:LayoutItem Label="Size" LabelPosition="Top" Margin="0,0,0,8">
+                                <StackPanel Orientation="Horizontal">
+                                    <RadioButton Content="ExtraSmall"
+                                                 GroupName="5a"
+                                                 IsChecked="{Binding Size, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=ExtraSmall, Mode=TwoWay}" />
+                                    <RadioButton Content="Small"
+                                                 GroupName="5b"
+                                                 Margin="12,0,0,0"
+                                                 IsChecked="{Binding Size, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Small, Mode=TwoWay}" />
+                                    <RadioButton Content="Large"
+                                                 GroupName="5c"
+                                                 Margin="12,0,0,0"
+                                                 IsChecked="{Binding Size, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Large, Mode=TwoWay}" />
+                                    <RadioButton Content="ExtraLarge"
+                                                 GroupName="5d"
+                                                 Margin="12,0,0,0"
+                                                 IsChecked="{Binding Size, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=ExtraLarge, Mode=TwoWay}" />
+                                </StackPanel>
+                            </dxlc:LayoutItem>
+                            <dxe:CheckEdit Content="IsFlowBreak" IsChecked="{Binding Path=(dxlc:FlowLayoutControl.IsFlowBreak), Mode=TwoWay}" />
+                            <dxe:CheckEdit Content="IsMaximized" IsChecked="{Binding IsMaximized, Mode=TwoWay}" />
+                        </dxlc:LayoutGroup>
+
+                        <dxlc:LayoutGroup View="GroupBox" Header="Header" Orientation="Vertical">
+                            <dxe:TextEdit Text="{Binding Header, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <dxlc:LayoutItem Label="Horizontal Alignment:">
+                                <dxe:ComboBoxEdit EditValue="{Binding HorizontalHeaderAlignment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  ItemsSource="{dxe:EnumItemsSource EnumType=HorizontalAlignment}" />
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="Vertical Alignment:">
+                                <dxe:ComboBoxEdit EditValue="{Binding VerticalHeaderAlignment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  ItemsSource="{dxe:EnumItemsSource EnumType=VerticalAlignment}" />
+                            </dxlc:LayoutItem>
+                        </dxlc:LayoutGroup>
+
+                        <dxlc:LayoutGroup View="GroupBox" Header="Content" Orientation="Vertical">
+                            <dxe:TextEdit Text="{Binding Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBlock Text="Tile.Content can be any object, and in this local it's a string"
+                                       FontSize="10"
+                                       TextWrapping="Wrap"
+                                       Width="235"
+                                       HorizontalAlignment="Left" />
+                            <dxlc:LayoutItem Label="Horizontal Alignment:">
+                                <dxe:ComboBoxEdit EditValue="{Binding HorizontalContentAlignment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  ItemsSource="{dxe:EnumItemsSource EnumType=HorizontalAlignment}" />
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="Vertical Alignment:">
+                                <dxe:ComboBoxEdit EditValue="{Binding VerticalContentAlignment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  ItemsSource="{dxe:EnumItemsSource EnumType=VerticalAlignment}" />
+                            </dxlc:LayoutItem>
+                        </dxlc:LayoutGroup>
+
+                        <dxlc:LayoutGroup View="GroupBox" Header="Content Change" Orientation="Vertical" ItemLabelsAlignment="Local">
+                            <dxe:CheckEdit Content="Animate" IsChecked="{Binding AnimateContentChange, Mode=TwoWay}" />
+                            <dxlc:LayoutItem Label="Interval:">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Text="{Binding ContentChangeInterval, Converter={StaticResource TimeSpanToSecondsConverter}, StringFormat=\{0\} sec}"
+                                               Width="45"
+                                               VerticalAlignment="Center" />
+                                    <dxe:TrackBarEdit Grid.Column="1"
+                                                      Minimum="1"
+                                                      Maximum="10"
+                                                      SmallStep="0.1"
+                                                      LargeStep="1"
+                                                      Value="{Binding ContentChangeInterval, Converter={StaticResource TimeSpanToSecondsConverter}, Mode=TwoWay}" />
+                                </Grid>
+                            </dxlc:LayoutItem>
+                        </dxlc:LayoutGroup>
+
+                        <dxlc:LayoutGroup View="GroupBox" Header="Padding">
+                            <local:ThicknessEdit Value="{Binding Padding, Mode=TwoWay}" />
+                        </dxlc:LayoutGroup>
+                    </dxlc:LayoutControl>
+                </local:controlProperties.ItemProperties>
+            </local:controlProperties>
+        </ScrollViewer>
+        <dxlc:TileLayoutControl x:Name="layoutItems"
+                                Background="#FF0E6D38"
+                                Padding="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource ScalablePaddingConverter}}">
+            <dxlc:TileLayoutControl.Resources>
+                <Style TargetType="dxlc:Tile">
+                    <Setter Property="ContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" FontFamily="Segoe UI Light" FontSize="48" />
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="MaximizedContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" Margin="16">
+                                    <TextBlock Text="{Binding}" FontFamily="Segoe UI Light" FontSize="48" />
+                                    <TextBlock FontSize="14" TextWrapping="Wrap">
+                                        You can define an alternative content template when Tile is maximized using the MaximizedContentTemplate property.
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                </Style>
+                <SolidColorBrush x:Key="color2" Color="#FFDA8515" />
+                <SolidColorBrush x:Key="color3" Color="#FF54AF0E" />
+            </dxlc:TileLayoutControl.Resources>
+
+            <dxlc:Tile Content="1" Header="Tile 1" dxlc:TileLayoutControl.GroupHeader="First group" />
+            <dxlc:Tile Content="2" Header="Tile 2" Size="Small" />
+            <dxlc:Tile Content="3" Header="Tile 3" Size="Small" />
+            <dxlc:Tile Content="4" Header="Tile 4" Size="ExtraLarge" ContentChangeInterval="0:0:2.5">
+                <dxlc:Tile.ContentSource>
+                    <local:StringCollection>
+                        <system:String>WinForms</system:String>
+                        <system:String>ASP.NET</system:String>
+                        <system:String>WPF</system:String>
+                        <system:String>Silverlight</system:String>
+                    </local:StringCollection>
+                </dxlc:Tile.ContentSource>
+            </dxlc:Tile>
+            <dxlc:Tile Content="5" Header="Tile 5" Size="ExtraSmall" />
+
+            <dxlc:Tile Content="6"
+                       Header="Tile 6"
+                       Size="ExtraLarge"
+                       dxlc:FlowLayoutControl.IsFlowBreak="True"
+                       Background="{StaticResource color2}"
+                       dxlc:TileLayoutControl.GroupHeader="Second group" />
+            <dxlc:Tile Content="7"
+                       Header="Tile 7"
+                       Size="ExtraSmall"
+                       Background="{StaticResource color2}"
+                       ContentChangeInterval="0:0:1"
+                       ContentSource="{Binding Numbers, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+            <dxlc:Tile Content="8" Header="Tile 8" Size="ExtraSmall" Background="{StaticResource color2}" />
+            <dxlc:Tile Content="9" Header="Tile 9" Size="ExtraSmall" Background="{StaticResource color2}" />
+            <dxlc:Tile Content="10" Header="Tile 10" Size="Small" Background="{StaticResource color2}" />
+
+            <dxlc:Tile Content="11"
+                       Header="Tile 11"
+                       dxlc:TileLayoutControl.IsFlowBreak="True"
+                       Background="{StaticResource color3}"
+                       dxlc:TileLayoutControl.GroupHeader="Third group" />
+            <dxlc:Tile Content="12" Header="Tile 12" Background="{StaticResource color3}" />
+            <dxlc:Tile Content="13" Header="Tile 13" Background="{StaticResource color3}" />
+            <dxlc:Tile Content="14" Header="Tile 14" Background="{StaticResource color3}" />
+            <dxlc:Tile Content="15" Header="Tile 15" Background="{StaticResource color3}" />
+        </dxlc:TileLayoutControl>
+    </DockPanel>
+</local:LayoutControlDemoModule>

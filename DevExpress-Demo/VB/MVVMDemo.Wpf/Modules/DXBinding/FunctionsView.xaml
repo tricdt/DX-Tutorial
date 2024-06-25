@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="MVVMDemo.DXBindingDemo.FunctionsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.DXBindingDemo"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             DataContext="{dxmvvm:ViewModelSource Type=local:FunctionsViewModel}">
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <dxlc:LayoutGroup Header="Text=&quot;{DXBinding 'Person.LoadAddress().Country'}&quot;" Orientation="Vertical" View="GroupBox">
+            <dxlc:LayoutItem Label="Full Name:">
+                <TextBlock Text="{Binding 'Person.FullName'}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Country:">
+                <!--#region !-->
+                <TextBlock Text="{DXBinding 'Person.LoadAddress().Country'}"/>
+                <!--#endregion-->
+            </dxlc:LayoutItem>
+            <Button Command="{Binding NextCommand}" VerticalAlignment="Top">Next</Button>
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup Header="IsEnabled=&quot;{DXBinding '$local:RegistrationHelper.CanRegister(UserName, AcceptTerms)'}&quot;" Orientation="Vertical" View="GroupBox">
+            <!--#region UserName and AcceptTerms-->
+            <dxlc:LayoutGroup VerticalAlignment="Top" Orientation="Vertical">
+                <dxlc:LayoutItem Label="User Name:" >
+                    <dxe:TextEdit Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"/>
+                </dxlc:LayoutItem>
+                <CheckBox IsChecked="{Binding AcceptTerms}">Accept terms and conditions</CheckBox>
+            </dxlc:LayoutGroup>
+            <!--#endregion-->
+            <!--#region !-->
+            <Button Command="{Binding RegisterCommand}" IsEnabled="{DXBinding '$local:RegistrationHelper.CanRegister(UserName, AcceptTerms)'}" VerticalAlignment="Top">Register</Button>
+            <!--#endregion-->
+        </dxlc:LayoutGroup>
+
+    </dxlc:LayoutControl>
+</UserControl>

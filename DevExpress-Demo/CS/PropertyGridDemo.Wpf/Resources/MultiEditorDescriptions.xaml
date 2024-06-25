@@ -1,0 +1,214 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase/grid">
+    <ControlTemplate x:Key="NumericTextEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Text Editor</Span> – a single line text editor with a numeric mask. Masks provide restricted data input and formatted data output.  Numeric masks are the best option when you need to restrict input to numeric values. To increase or decrease values, use CTRL + UP and CTRL + DOWN key combinations or the mouse wheel.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="TextEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Text Editor</Span> – a single line text editor with comprehensive text editing options including, selection and built-in context menu (cut/copy/paste).
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="ComboBoxEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Combo Box</Span> – a simple drop down editor that allows end users to specify values from a pre-defined list.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="LookUpEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">LookUpEdit</Span> - a multi-column combo box that provides the lookup functionality using an embedded DXGrid control.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="SearchLookUpEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">SearchLookUpEdit</Span> - a multi-column combo box that provides the lookup functionality using an embedded DXGrid control with the Find feature. It allows you to quickly locate records by the text they contain.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="AutoCompleteComboBoxEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Combo Box</Span> – With an integrated Auto Complete option, you can provide the ability for end-users to select items from a drop down list by entering characters within the grid cell. When text is entered into the editor, the control automatically searches for the item within the list and if found, highlights it and enters the value within the data cell.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="SpinEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Spin Edit</Span> – Ships with a built-in numeric mask that allows only the entry of numbers within it. The longer spin buttons are pressed, the faster the value will change.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="TrackBarEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Track Bar</Span> – Built to display numeric information in an elegant manner. Users can specify values by sliding the thumb across the control’s continuous line. Features include the ability to limit the range of values, horizontal and vertical orientation, customizable position of ticks.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="ProgressBarEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Progress Bar Edit</Span> – Used to indicate the progress of lengthy operations. Features include built-in content display mode, ability to limit the range of values, display numbers as percentages, indeterminate (marquee) progress style.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="ZoomTrackBarEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Zoom Track Bar</Span> – Much like the track bar introduced in MS Office 2007, this editor gives you extensive data editing options.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="RangeTrackBarEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Range Track Bar</Span> – Allows your end-users to specify a range of values in a straightforward visual manner.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="CheckEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Check Box Edit</Span> – a check box editor. In addition to the standard True/False states, CheckEdit supports the Indeterminate state.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="RegExTextEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">RegEx Mask Edit</Span> – A single line text editor with extended mask capabilities. Masks provide restricted data input as well as formatted data output. The RegEx mask allows you to construct masks using fully functional regular expressions - providing ultimate flexibility when it comes to data input control.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="MemoEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Memo Edit</Span> – Deliver Memo field display and editing with the Memo Edit control.  Features include optional ENTER and TAB key processing, customizable visibility for vertical and horizontal scrollbars, optional text word-wrapping.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="DateEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Date Edit</Span> – Easily display and edit Date/Time values via a drop down calendar. Features include built in date/time mask, Windows® Vista style calendar views for easy date navigation and selection.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="DatePickerDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Date Picker</Span> – A Windows 8 inspired DateTime editor.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="ListBoxEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">List Box Edit</Span> – Allows you to display a list of items from which users can select a given value. Features include built in list styles (Native, Checked, Radio), optional item highlighting, and multiple item selection.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="ButtonEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Button Edit</Span> – A single line editor allowing you to display an unlimited number of buttons within the edit box. Features include multiple button support, customizable button arrangement, and full mask input support.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="PopupCalcEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Calculator Edit</Span> – Allows you to activate a calculator dropdown window for data editing/modification. Features include a Windows® 7 display style, basic math functions, memory operations, keyboard and mouse wheel support, configurable precision and display format.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="PasswordBoxEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Password Edit</Span> – Designed to enter and handle password data fields. Features include configurable password characters, maximum length, and input validation.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="PopupColorEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Color Edit</Span> – End users can select values using the color edit drop down from the RGBA color space. Features include multiple present palettes, configurable palette layout, unlimited custom color palettes, customizable default color, and a localizable UI.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="PopupBrushEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Brush Edit</Span> – Provides numerous options to pick a color and includes the gradient support.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="SparklineEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">Sparkline Edit</Span> – A line chart that is used to display data in a graphical representation and provides numerous display options.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="PopupImageEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">PopupImageEdit</Span> – displays an image within a dropdown window. Key features include: Supported Image Formats – JPEG and PNG; Configurable Image Size; Built-in Toolbar; Auto-Sizing Image Popup; Easy Image Loading – clicking within an image editor shows the Open File dialog allowing you to select an image; Custom menu appearance via Menu Templates; Localizable UI.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="FontEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">FontEdit</Span> –  Displays available fonts and allows an end-user to select a specific font.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="BarCodeEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                Allows you to display barcodes. <Span FontWeight="Bold">BarCodeEdit</Span> supports multiple barcode types and provides various rendering options.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="RatingEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">RatingEdit</Span> - brings an intuitive rating experience. Features include customizable appearance and behavior.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="ToggleSwitchEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">ToggleSwitchEdit</Span> - The ToggleSwitch control that allows users to turn things on and off. Features offered by the ToggleSwitch include multiple content positions and optional toggle flip animation. The ToggleSwitchEdit can be used standalone or as an inplace editor.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="HyperlinkEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">HyperlinkEdit</Span> - An editor that presents its contents as a hyperlink.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+    <ControlTemplate x:Key="AutoSuggestEditDescription">
+        <dxdb:ParagraphContainer>
+            <Paragraph>
+                <Span FontWeight="Bold">AutoSuggestEdit</Span> - An editor that displays a drop-down list of suggestions as a user types in the text box.
+            </Paragraph>
+        </dxdb:ParagraphContainer>
+    </ControlTemplate>
+</ResourceDictionary>

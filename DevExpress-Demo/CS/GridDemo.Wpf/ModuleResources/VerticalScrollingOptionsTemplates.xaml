@@ -1,0 +1,14 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid">
+
+    <dxe:BytesToImageSourceConverter x:Key="imageConverter" />
+    <DataTemplate x:Key="ColumnTemplate">
+        <ContentControl>
+            <dxg:GridColumn FieldName="{Binding FieldName}" EditSettings="{Binding EditSettings}" Width="{Binding Width}" FixedWidth="{Binding FixedWidth}" Header="{Binding Header}" ReadOnly="{Binding ReadOnly}"/>
+        </ContentControl>
+    </DataTemplate>
+
+</ResourceDictionary>

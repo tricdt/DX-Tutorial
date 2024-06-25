@@ -1,0 +1,192 @@
+﻿<UserControl x:Class="EditorsDemo.PaintControl" x:Name="paintControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:local="clr-namespace:EditorsDemo"
+             mc:Ignorable="d"
+             dx:ThemeManager.ThemeName="Office2019Colorful"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <dx:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+        <local:PaletteCollectionConverter x:Key="PaletteCollectionConverter" />
+        <Style x:Key="paletteColorsStyle" TargetType="ListBox">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="{x:Null}" />
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Margin" Value="1,0,1,0" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Fill="{Binding Converter={StaticResource ColorToBrushConverter}}" Width="12" Height="12" Stroke="Gray" StrokeThickness="1" />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <dx:DXImage x:Key="textButtonContent"
+                    Source="/DevExpress.Images.v22.2;component/SvgImages/DiagramIcons/Symbols/symbols5.svg"
+                    Width="16" Height="16"/>
+        <ControlTemplate TargetType="RadioButton" x:Key="radioToggle">
+            <ToggleButton Content="{TemplateBinding Content}" IsChecked="{Binding IsChecked, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+        </ControlTemplate>
+        <DataTemplate x:Key="itemTemplate">
+            <StackPanel Orientation="Horizontal" Margin="0,1,0,1">
+                <ListBox ItemsSource="{Binding Converter={StaticResource PaletteCollectionConverter}}" Margin="6,0,0,0" Style="{StaticResource paletteColorsStyle}"/>
+                <TextBlock Text="{Binding Name}" Margin="6,0,6,0"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="smallItemTemplate">
+            <StackPanel Orientation="Horizontal" Margin="0,1,0,1">
+                <TextBlock Text="{Binding Name}" Margin="6,0,6,0"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Resources>
+
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Background="White" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Canvas dx:FrameworkElementHelper.IsClipped="True"  x:Name="canvas" MouseLeftButtonDown="canvas_MouseDown" MouseMove="canvas_MouseMove" MouseLeftButtonUp="canvas_MouseUp" KeyDown="canvas_KeyDown" MouseEnter="canvas_MouseEnter" MouseLeave="canvas_MouseLeave" Background="White" Cursor="None" FlowDirection="LeftToRight">
+                <Image Name="logoImage" Source="../Images/Icons/ColorEditDemoImage.png" Width="341" Height="341" />
+            </Canvas>
+
+            <ScrollViewer Grid.Column="1" Margin="6,0" ScrollViewer.VerticalScrollBarVisibility="Auto" Foreground="Black">
+                <StackPanel Orientation="Vertical" Margin="12">
+                    <GroupBox Header="Brush Properties">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="100" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Size: " VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <dxe:TrackBarEdit x:Name="brushSizeEdit" Width="70" Margin="0,0,6,0" Minimum="1" Maximum="24" Value="8" IsSnapToTickEnabled="False">
+                                </dxe:TrackBarEdit>
+                                <Grid>
+                                    <Ellipse Fill="LightGray" Width="24" Height="24" />
+                                    <Ellipse Fill="Black" Width="{Binding Path=Value, ElementName=brushSizeEdit}" Height="{Binding Path=Value, ElementName=brushSizeEdit}" />
+                                </Grid>
+                            </StackPanel>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Color: " VerticalAlignment="Center" Margin="0,6,0,0" />
+                            <!--#region !-->
+                            <dxe:PopupColorEdit Grid.Row="1" Grid.Column="1" x:Name="brushColorEdit" Color="Gray" Margin="0,6,0,0" Palettes="{Binding ElementName=palettes, Path=EditValue, Mode=TwoWay}"
+                                            ShowDefaultColorButton="{Binding Path=ShowAutomaticButton, ElementName=paintControl}"
+                                            ShowNoColorButton="{Binding Path=ShowNoColorButton, ElementName=paintControl}"
+                                            ShowMoreColorsButton="{Binding Path=ShowMoreColorsButton, ElementName=paintControl}"
+                                            ChipSize="{Binding Path=ChipSize, ElementName=paintControl}"
+                                            ColorChanged="brushColorEdit_ColorChanged"
+                                            />
+                            <!--#endregion-->
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Font Properties" Margin="0,12,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="100" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Size: " VerticalAlignment="Center" />
+                            <dxe:ComboBoxEdit x:Name="fontSizeEdit" Grid.Column="1" IsTextEditable="False" SelectedIndex="4"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Family: " VerticalAlignment="Center" Margin="0,6,0,0" />
+                            <dxe:ComboBoxEdit Grid.Row="1" Grid.Column="1" x:Name="fontFamilyEdit" Margin="0,6,0,0" IsTextEditable="False" SelectedIndex="0" />
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Color: " VerticalAlignment="Center" Margin="0,6,0,0" />
+                            <!--#region !-->
+                            <dxe:PopupColorEdit Grid.Row="2" Grid.Column="1" x:Name="fontColorEdit" Margin="0,6,0,0" Color="Black" Palettes="{Binding ElementName=palettes, Path=EditValue, Mode=TwoWay}"
+                                            ShowDefaultColorButton="{Binding Path=ShowAutomaticButton, ElementName=paintControl}"
+                                            ShowNoColorButton="{Binding Path=ShowNoColorButton, ElementName=paintControl}"
+                                            ShowMoreColorsButton="{Binding Path=ShowMoreColorsButton, ElementName=paintControl}"
+                                            ChipSize="{Binding Path=ChipSize, ElementName=paintControl}"
+                                            ColorChanged="fontColorEdit_ColorChanged" />
+                            <!--#endregion-->
+                        </Grid>
+                    </GroupBox>
+                    <!--#region !-->
+                        <dxe:ColorEdit x:Name="swatchesEdit"
+                            Margin="0,12,0,0"
+                            Color="#ff396ba7"
+                            Palettes="{Binding Path=EditValue, Mode=TwoWay, ElementName=palettesCombo}"
+                            ShowDefaultColorButton="{Binding Path=ShowAutomaticButton, ElementName=paintControl}"
+                            ShowNoColorButton="{Binding Path=ShowNoColorButton, ElementName=paintControl}"
+                            ShowMoreColorsButton="{Binding Path=ShowMoreColorsButton, ElementName=paintControl}"
+                            ChipSize="{Binding Path=ChipSize, ElementName=paintControl}" />
+                        <!--#endregion-->
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <StackPanel Grid.Row="1" Background="#FFE6E6E6">
+            <Border BorderBrush="Gray" BorderThickness="0,1,0,0"/>
+            <Grid Margin="8" VerticalAlignment="Center" x:Name="grid" SizeChanged="panel_SizeChanged">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel x:Name="leftPanel" Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Left">
+                    <Border Name="currentColor" BorderBrush="DarkGray"  BorderThickness="1" Width="40" Background="{Binding Path=Tool.Color, Converter={StaticResource ColorToBrushConverter}, ElementName=paintControl}"/>
+                    <RadioButton Template="{StaticResource radioToggle}"
+                                 GroupName="tool" x:Name="textToolButton"
+                                 Margin="16,0,0,0" IsThreeState="False"
+                                 Checked="OnToolChanged"
+                                 ToolTipService.ToolTip="Text" >
+                        <dx:DXImage Source="/DevExpress.Images.v22.2;component/SvgImages/DiagramIcons/Symbols/symbols5.svg"
+                                    Width="16" Height="16"/>
+                    </RadioButton>
+                    <RadioButton Template="{StaticResource radioToggle}"
+                                 GroupName="tool" x:Name="penToolButton"
+                                 Margin="6,0,0,0" IsThreeState="False"
+                                 IsChecked="True"
+                                 Checked="OnToolChanged"
+                                 ToolTipService.ToolTip="Pen">
+                       <dx:DXImage Source="/DevExpress.Images.v22.2;component/SvgImages/RichEdit/PenColor.svg"
+                                   Width="16" Height="16"/>
+                    </RadioButton>
+                    <Border BorderBrush="Gray" BorderThickness="1,0,0,0" Margin="6,0,0,0" Height="16"/>
+                    <dx:SimpleButton x:Name="resetButton"
+                                     Margin="6,0,0,0"
+                                     ToolTipService.ToolTip="Clear"
+                                     Click="resetButton_Click"
+                                     Glyph="/DevExpress.Images.v22.2;component/SvgImages/Icon Builder/Actions_Delete.svg"/>
+                    <dx:SimpleButton x:Name="saveButton" Margin="6,0,0,0"
+                                     ToolTipService.ToolTip="Save"
+                                     Click="saveButton_Click"
+                                     Glyph="/DevExpress.Images.v22.2;component/SvgImages/Save/Save.svg"/>
+                </StackPanel>
+                <StackPanel x:Name="rightPanel" Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                    <TextBlock x:Name="palettesTxt" Text="Palettes:  " VerticalAlignment="Center"/>
+                    <dxe:ComboBoxEdit x:Name="palettesCombo" ApplyItemTemplateToSelectedItem="True" IsTextEditable="False" SelectedIndex="11" Padding="2,0,0,0" ItemTemplate="{StaticResource itemTemplate}"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

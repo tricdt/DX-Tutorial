@@ -1,0 +1,150 @@
+﻿<local:GridDemoModule x:Class="GridDemo.FilteringUI"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      xmlns:dxa="http://schemas.devexpress.com/winfx/2008/xaml/accordion"
+                      xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:local="clr-namespace:GridDemo"
+                      mc:Ignorable="d"
+                      d:DesignHeight="550"
+                      d:DesignWidth="670"
+                      DataContext="{dxmvvm:ViewModelSource local:FilteringUIViewModel}">
+    <local:GridDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GridDemo;component/ModuleResources/FilteringUIResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dxa:AccordionItemStyle x:Key="accordionItemStyle">
+                <dxa:AccordionItemStyle.ItemContainerStyle>
+                    <dxa:AccordionItemStyle ItemDisplayMode="Header" Margin="8"/>
+                </dxa:AccordionItemStyle.ItemContainerStyle>
+            </dxa:AccordionItemStyle>
+        </ResourceDictionary>
+    </local:GridDemoModule.Resources>
+    <DockPanel dx:ScrollBarExtensions.ScrollBarMode="Standard">
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <dxa:AccordionControl SelectionMode="None" dxfui:FilterElement.Context="{Binding Path=FilteringContext, ElementName=grid}">
+                <dxa:AccordionItem Header="Main Parameters" IsExpanded="True" ExpandButtonPosition="None">
+                    <dxa:AccordionItem Header="Price ($)" IsExpanded="True" Style="{StaticResource accordionItemStyle}">
+                        <dxfui:RangeFilterElement FieldName="Price"/>
+                    </dxa:AccordionItem>
+                    <dxa:AccordionItem Header="Trademark" IsExpanded="True" Style="{StaticResource accordionItemStyle}">
+                        <dxfui:CheckedListFilterElement FieldName="TrademarkID" MaxHeight="200"/>
+                    </dxa:AccordionItem>
+                    <dxa:AccordionItem Header="Transmission Type" IsExpanded="True" Style="{StaticResource accordionItemStyle}">
+                        <dxfui:RadioListFilterElement FieldName="TransmissionTypeID" MaxHeight="200">
+                            <dxfui:RadioListFilterElement.Resources>
+                                <dxe:ListBoxEditStyle x:Key="{x:Type dxe:ListBoxEdit}" ShowBorder="False" />
+                            </dxfui:RadioListFilterElement.Resources>
+                        </dxfui:RadioListFilterElement>
+                    </dxa:AccordionItem>
+                </dxa:AccordionItem>
+
+                <dxa:AccordionItem Header="Body" IsExpanded="True" ExpandButtonPosition="None">
+                    <dxa:AccordionItem Header="Body Style" IsExpanded="True" Style="{StaticResource accordionItemStyle}">
+                        <dxfui:CheckedListFilterElement FieldName="BodyStyleID" MaxHeight="200"/>
+                    </dxa:AccordionItem>
+                    <dxa:AccordionItem Header="Doors" IsExpanded="True" Style="{StaticResource accordionItemStyle}">
+                        <dxfui:RadioListFilterElement FieldName="Doors" MaxHeight="200">
+                            <dxfui:RadioListFilterElement.Resources>
+                                <dxe:ListBoxEditStyle x:Key="{x:Type dxe:ListBoxEdit}" ShowBorder="False" />
+                            </dxfui:RadioListFilterElement.Resources>
+                        </dxfui:RadioListFilterElement>
+                    </dxa:AccordionItem>
+                </dxa:AccordionItem>
+
+                <dxa:AccordionItem Header="Engine" IsExpanded="True" ExpandButtonPosition="None">
+                    <dxa:AccordionItem Header="Miles Per Gallon (City)" IsExpanded="True" Style="{StaticResource accordionItemStyle}">
+                        <dxfui:PredefinedFiltersElement FieldName="MPGCity">
+                            <dxfui:PredefinedFiltersElement.Resources>
+                                <dxe:ListBoxEditStyle x:Key="{x:Type dxe:ListBoxEdit}" ShowBorder="False" />
+                            </dxfui:PredefinedFiltersElement.Resources>
+                        </dxfui:PredefinedFiltersElement>
+                    </dxa:AccordionItem>
+                    <dxa:AccordionItem Header="Miles Per Gallon (Highway)" IsExpanded="True" Style="{StaticResource accordionItemStyle}">
+                        <dxfui:PredefinedFiltersElement FieldName="MPGHighway">
+                            <dxfui:PredefinedFiltersElement.Resources>
+                                <dxe:ListBoxEditStyle x:Key="{x:Type dxe:ListBoxEdit}" ShowBorder="False" />
+                            </dxfui:PredefinedFiltersElement.Resources>
+                        </dxfui:PredefinedFiltersElement>
+                    </dxa:AccordionItem>
+                </dxa:AccordionItem>
+            </dxa:AccordionControl>
+            <dxg:GridControl Name="grid"
+                             Grid.Column="1"
+                             ItemsSource="{Binding Vehicles}"
+                             ShowBorder="False">
+                <dxg:GridColumn FieldName="TrademarkID">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{Binding Path=Trademarks}" ValueMember="ID" DisplayMember="Name"/>
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="TransmissionTypeID">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{Binding Path=TransmissionTypes}" ValueMember="ID" DisplayMember="Name"/>
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="BodyStyleID">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{Binding Path=BodyStyles}" ValueMember="ID" DisplayMember="Name"/>
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Doors">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{Binding Path=DoorTypes}"/>
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="MPGCity">
+                    <dxg:GridColumn.PredefinedFilters>
+                        <dxfui:PredefinedFilterCollection>
+                            <dxfui:PredefinedFilter Filter="?p >= 25" Name="More than 25" />
+                            <dxfui:PredefinedFilter Filter="?p >= 15 AND ?p &lt; 25" Name="From 15 to 25" />
+                            <dxfui:PredefinedFilter Filter="?p &lt; 15" Name="Less than 15" />
+                        </dxfui:PredefinedFilterCollection>
+                    </dxg:GridColumn.PredefinedFilters>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="MPGHighway">
+                    <dxg:GridColumn.PredefinedFilters>
+                        <dxfui:PredefinedFilterCollection>
+                            <dxfui:PredefinedFilter Filter="?p >= 30" Name="More than 30" />
+                            <dxfui:PredefinedFilter Filter="?p >= 20 AND ?p &lt; 30" Name="From 20 to 30" />
+                            <dxfui:PredefinedFilter Filter="?p &lt; 20" Name="Less than 20" />
+                        </dxfui:PredefinedFilterCollection>
+                    </dxg:GridColumn.PredefinedFilters>
+
+                </dxg:GridColumn>
+                <dxg:GridControl.View>
+                    <dxg:CardView ShowCardExpandButton="False"
+                                  ShowGroupPanel="False"
+                                  AllowGrouping="False"
+                                  ShowColumnHeaders="False"
+                                  SeparatorThickness="0"
+                                  CardAlignment="Center"
+                                  CardLayout="Rows"
+                                  NavigationStyle="Row"
+                                  AllowColumnFiltering="False"
+                                  CardTemplate="{StaticResource cardTemplate}"
+                                  ShowSearchPanelMode="Never"
+                                  CardHeaderTemplate="{StaticResource cardHeaderTemplate}"
+                                  CardHeaderBinding="{DXBinding 'TrademarkName + ` ` + Name'}"
+                                  PrintMaximumCardColumns="2"
+                                  PrintAutoCardWidth="True"
+                                  PrintCardViewItemTemplate="{StaticResource printCardViewItemTemplate}"
+                                  PrintCardHeaderTemplate="{StaticResource printCardHeaderTemplate}"
+                                  ShowFilterPanelMode="Default"
+                                  ShowEmptyText="True"/>
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+        </Grid>
+    </DockPanel>
+</local:GridDemoModule>

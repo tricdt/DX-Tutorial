@@ -1,0 +1,193 @@
+﻿<local:GridDemoModule x:Class="GridDemo.VerticalScrollingOptions"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                      xmlns:dxdd="clr-namespace:DevExpress.DemoData"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      xmlns:dxrudex="http://schemas.devexpress.com/winfx/2008/xaml/reports/userdesignerextensions"
+                      mc:Ignorable="d"
+                      d:DesignHeight="300"
+                      d:DesignWidth="300">
+    <local:GridDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GridDemo;component/ModuleResources/VerticalScrollingOptionsTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dx:DefaultBooleanToNullableBooleanConverter x:Key="DefaultBooleanToNullableBooleanConverter" />
+            <dxdb:NWindDataLoader x:Key="NWindDataLoader" />
+            <dxdd:VehiclesData x:Key="VehiclesData" />
+            <dxmvvm:ObjectToObjectConverter x:Key="ScrollBarModeToBoolConverter" DefaultSource="Standard" DefaultTarget="False">
+                <dxmvvm:MapItem Source="TouchOverlap" Target="True" />
+            </dxmvvm:ObjectToObjectConverter>
+
+            <local:VerticalScrollingOptionsViewModel x:Key="ViewModel">
+                <local:VerticalScrollingOptionsViewModel.ControlDefinitions>
+                    <local:GridControlDefinitionCollection>
+                        <local:GridControlDefinition Name="Customers" DataSource="{Binding Path=Customers, Source={StaticResource NWindDataLoader}}">
+                            <local:GridControlDefinition.Columns>
+                                <local:GridColumnDefinition FieldName="CustomerID" Width="70" FixedWidth="True" />
+                                <local:GridColumnDefinition FieldName="CompanyName" Width="*" />
+                                <local:GridColumnDefinition FieldName="Country" Width="*" />
+                                <local:GridColumnDefinition FieldName="Region" Width="*" />
+                                <local:GridColumnDefinition FieldName="City" Width="*" />
+                                <local:GridColumnDefinition FieldName="Phone" Width="100" FixedWidth="True" />
+                                <local:GridColumnDefinition FieldName="ContactName" Width="*" />
+                            </local:GridControlDefinition.Columns>
+                        </local:GridControlDefinition>
+                        <local:GridControlDefinition Name="Cars" DataSource="{Binding Path=Models, Source={StaticResource VehiclesData}}">
+                            <local:GridControlDefinition.Columns>
+                                <local:GridColumnDefinition FieldName="ID" Width="*" />
+                                <local:GridColumnDefinition FieldName="TrademarkName" Header="Trademark" Width="*" />
+                                <local:GridColumnDefinition FieldName="Name" Header="Model" Width="*" />
+                                <local:GridColumnDefinition FieldName="CategoryName" Header="Category" Width="*" />
+                                <local:GridColumnDefinition FieldName="Price" Width="*">
+                                    <local:GridColumnDefinition.EditSettings>
+                                        <dxe:TextEditSettings DisplayFormat="$0" MaskType="Numeric" />
+                                    </local:GridColumnDefinition.EditSettings>
+                                </local:GridColumnDefinition>
+                                <local:GridColumnDefinition FieldName="Photo" Header="Image" Width="200" FixedWidth="True" ReadOnly="True">
+                                    <local:GridColumnDefinition.EditSettings>
+                                        <dxe:ImageEditSettings />
+                                    </local:GridColumnDefinition.EditSettings>
+                                </local:GridColumnDefinition>
+                            </local:GridControlDefinition.Columns>
+                        </local:GridControlDefinition>
+                        <local:GridControlDefinition Name="Orders" DataSource="{Binding Path=OrderDetails, Source={StaticResource NWindDataLoader}}">
+                            <local:GridControlDefinition.Columns>
+                                <local:GridColumnDefinition FieldName="OrderID" Header="ID" Width="0.4*" />
+                                <local:GridColumnDefinition FieldName="ProductID" Header="Product" Width="*">
+                                    <local:GridColumnDefinition.EditSettings>
+                                        <dxe:ComboBoxEditSettings ValueMember="ProductID"
+                                                                  DisplayMember="ProductName"
+                                                                  ItemsSource="{Binding Products, Source={StaticResource NWindDataLoader}}" />
+                                    </local:GridColumnDefinition.EditSettings>
+                                </local:GridColumnDefinition>
+                                <local:GridColumnDefinition FieldName="UnitPrice" Width="*">
+                                    <local:GridColumnDefinition.EditSettings>
+                                        <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" MaskCulture="en-US" />
+                                    </local:GridColumnDefinition.EditSettings>
+                                </local:GridColumnDefinition>
+                                <local:GridColumnDefinition FieldName="Quantity" Width="*" />
+                                <local:GridColumnDefinition FieldName="Discount" Width="*">
+                                    <local:GridColumnDefinition.EditSettings>
+                                        <dxe:SpinEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="p0" />
+                                    </local:GridColumnDefinition.EditSettings>
+                                </local:GridColumnDefinition>
+                            </local:GridControlDefinition.Columns>
+                        </local:GridControlDefinition>
+                    </local:GridControlDefinitionCollection>
+                </local:VerticalScrollingOptionsViewModel.ControlDefinitions>
+            </local:VerticalScrollingOptionsViewModel>
+        </ResourceDictionary>
+    </local:GridDemoModule.Resources>
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" ReportService="{x:Reference rmsVerticalScrollingOptions}" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,8,12,12" MinWidth="210">
+                <dxe:CheckEdit Margin="0,0,0,4"
+                               IsChecked="{Binding Path=View.AllowCascadeUpdate, Mode=TwoWay}"
+                               Content="Allow Cascade Update"
+                               ToolTipService.ToolTip="Makes vertical scrolling perfectly fast and smooth." />
+                <dxe:CheckEdit Margin="0,0,0,4"
+                               IsChecked="{Binding Path=View.AllowFixedGroups, Mode=TwoWay, Converter={StaticResource DefaultBooleanToNullableBooleanConverter}}"
+                               Content="Allow Fixed Groups"
+                               ToolTipService.ToolTip="Specifies whether the top visible group row is always displayed when scrolling through grouped data." />
+                <dxe:CheckEdit x:Name="scrollBarMode"
+                               Margin="0,0,0,12"
+                               IsChecked="{Binding Path=(dx:ScrollBarExtensions.ScrollBarMode), Mode=TwoWay, Converter={StaticResource ScrollBarModeToBoolConverter}}"
+                               Content="Enable Touch ScrollBars" />
+
+                <dxe:CheckEdit Margin="0,0,0,4"
+                               IsChecked="{Binding Path=View.AllowPerPixelScrolling, Mode=TwoWay}"
+                               Content="Allow Per Pixel Scrolling"
+                               ToolTipService.ToolTip="Specifies whether per-pixel scrolling is enabled." />
+                <dxe:CheckEdit IsEnabled="{Binding View.AllowPerPixelScrolling}"
+                               Margin="0,0,0,4"
+                               IsChecked="{Binding Path=View.ScrollAnimationDuration, Mode=TwoWay, Converter={local:ScrollingAnimationDurationToBooleanConverter}}"
+                               Content="Allow Scrolling Animation"
+                               ToolTipService.ToolTip="Turn on this option to provide visual feedback and enhance interactivity when scrolling rows." />
+                <ContentControl IsEnabled="{Binding View.AllowPerPixelScrolling}" HorizontalContentAlignment="Stretch">
+                    <dxdb:SliderControl x:Name="durationSlider"
+                                        Margin="4,0,0,4"
+                                        Header="Scroll Animation Duration"
+                                        UOM="(ms)"
+                                        Minimum="0"
+                                        Maximum="2000"
+                                        EditValue="{Binding Path=View.ScrollAnimationDuration, Mode=TwoWay}"
+                                        SmallStep="1"
+                                        LargeStep="1"
+                                        ValueMinWidth="15" />
+                </ContentControl>
+                <GroupBox Header="Scroll Animation Mode" Margin="0,5,0,0" IsEnabled="{Binding View.AllowPerPixelScrolling}">
+                    <dxe:ListBoxEdit Background="{x:Null}"
+                                     ShowBorder="False"
+                                     x:Name="animationEffectListBoxEdit"
+                                     Margin="0,0,30,0"
+                                     EditValue="{Binding Path=View.ScrollAnimationMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.Items>
+                            <dxg:CustomComboBoxItem DisplayValue="Easy Out">
+                                <dxg:CustomComboBoxItem.EditValue>
+                                    <dxg:ScrollAnimationMode>EaseOut</dxg:ScrollAnimationMode>
+                                </dxg:CustomComboBoxItem.EditValue>
+                            </dxg:CustomComboBoxItem>
+                            <dxg:CustomComboBoxItem DisplayValue="Linear">
+                                <dxg:CustomComboBoxItem.EditValue>
+                                    <dxg:ScrollAnimationMode>Linear</dxg:ScrollAnimationMode>
+                                </dxg:CustomComboBoxItem.EditValue>
+                            </dxg:CustomComboBoxItem>
+                            <dxg:CustomComboBoxItem DisplayValue="Easy In/Out">
+                                <dxg:CustomComboBoxItem.EditValue>
+                                    <dxg:ScrollAnimationMode>EaseInOut</dxg:ScrollAnimationMode>
+                                </dxg:CustomComboBoxItem.EditValue>
+                            </dxg:CustomComboBoxItem>
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Data Source" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit x:Name="gridDataSourceListBoxEdit"
+                                     ItemsSource="{Binding ControlDefinitions, Source={StaticResource ViewModel}}"
+                                     SelectedItem="{Binding SelectedDefinition, Source={StaticResource ViewModel}, Mode=TwoWay}"
+                                     ShowBorder="False"
+                                     Background="{x:Null}"
+                                     DisplayMember="Name">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <local:RecentReports ReportService="{x:Reference rmsVerticalScrollingOptions}" />
+            </StackPanel>
+        </ScrollViewer>
+        <dxg:GridControl Name="grid"
+                         AutoGenerateColumns="KeepOld"
+                         ItemsSource="{Binding SelectedDefinition.DataSource, Source={StaticResource ViewModel}}"
+                         ColumnsSource="{Binding SelectedDefinition.Columns, Source={StaticResource ViewModel}}"
+                         ColumnGeneratorTemplate="{StaticResource ColumnTemplate}"
+                         ShowBorder="False">
+            <dxmvvm:Interaction.Triggers>
+                <dxmvvm:EventToCommand Command="{Binding Path=View.Commands.ClearFilter, ElementName=grid}" EventName="ItemsSourceChanged" />
+            </dxmvvm:Interaction.Triggers>
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="gridView" AllowFixedGroups="True" AllowCascadeUpdate="True" AllowScrollAnimation="True" AllowEditing="False">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxrudex:GridReportManagerService Name="rmsVerticalScrollingOptions" />
+                    </dxmvvm:Interaction.Behaviors>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

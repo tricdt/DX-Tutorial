@@ -1,0 +1,66 @@
+<UserControl x:Class="DevExpress.VideoRent.Wpf.MovieCategoryPriceEditView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/EditsStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <helpers:IntToDecimalConverter x:Key="IntToDecimalConverter" />
+            <helpers:DataSource x:Key="DataSource" />
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}">
+            <helpers:BindingInfo ElementName="resource:ElementLayoutDataStore" Property="{x:Static local:ElementLayoutDataStore.DisposeSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="Days1PriceEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.CategoryPrice.Days1RentPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="Days2PriceEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.CategoryPrice.Days2RentPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="Days3PriceEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.CategoryPrice.Days3RentPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="Days4PriceEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.CategoryPrice.Days4RentPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <helpers:BindingInfo ElementName="Days5PriceEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.CategoryPrice.Days5RentPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="Days6PriceEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.CategoryPrice.Days6RentPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="LatePriceEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.CategoryPrice.LateRentPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="DefaultRentDaysEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.CategoryPrice.DefaultRentDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntToDecimalConverter}}" />
+            <helpers:ElementLayoutInfo ElementName="MainLayoutControl" StoreFolder="LayoutControl:MovieCategoryPriceEdit-MainLayoutControl" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <dxlc:LayoutControl x:Name="MainLayoutControl" Orientation="Vertical" Padding="0">
+        <dxlc:LayoutItem x:Name="LatePrice" Label="{helpers:ConstString ID=DefaultLatePricePerDayLabel}">
+            <dxe:SpinEdit x:Name="LatePriceEdit" Style="{StaticResource PriceSpinEdit}"/>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem x:Name="DefaultRentDays" Label="{helpers:ConstString ID=DefaultRentalDaysLabel}">
+            <dxe:SpinEdit x:Name="DefaultRentDaysEdit" Style="{StaticResource CountSpinEdit}" />
+        </dxlc:LayoutItem>
+        <dxlc:LayoutGroup View="GroupBox" Header="{helpers:ConstString ID=SpecialPricePerDayFor}" Orientation="Horizontal" ItemSpace="12">
+            <dxlc:LayoutGroup Orientation="Vertical">
+                <dxlc:LayoutItem x:Name="Days1Price" Label="{helpers:ConstString ID=OneDayRentalLabel}">
+                    <dxe:SpinEdit x:Name="Days1PriceEdit" Style="{StaticResource PriceSpinEdit}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem x:Name="Days2Price" Label="{helpers:ConstString ID=TwoDayRentalLabel}">
+                    <dxe:SpinEdit x:Name="Days2PriceEdit" Style="{StaticResource PriceSpinEdit}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem x:Name="Days3Price" Label="{helpers:ConstString ID=ThreeDayRentalLabel}">
+                    <dxe:SpinEdit x:Name="Days3PriceEdit" Style="{StaticResource PriceSpinEdit}"/>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup Orientation="Vertical">
+                <dxlc:LayoutItem x:Name="Days4Price" Label="{helpers:ConstString ID=FourDayRentalLabel}">
+                    <dxe:SpinEdit x:Name="Days4PriceEdit" Style="{StaticResource PriceSpinEdit}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem x:Name="Days5Price" Label="{helpers:ConstString ID=FiveDayRentalLabel}">
+                    <dxe:SpinEdit x:Name="Days5PriceEdit" Style="{StaticResource PriceSpinEdit}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem x:Name="Days6Price" Label="{helpers:ConstString ID=SixDayRentalLabel}">
+                    <dxe:SpinEdit x:Name="Days6PriceEdit" Style="{StaticResource PriceSpinEdit}"/>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</UserControl>

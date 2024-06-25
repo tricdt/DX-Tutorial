@@ -1,0 +1,81 @@
+﻿<local:GridDemoModule x:Class="GridDemo.NewItemRow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxrudex="http://schemas.devexpress.com/winfx/2008/xaml/reports/userdesignerextensions"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800">
+    <local:GridDemoModule.Resources>
+        <dxdb:NWindDataLoader x:Key="NWindDataLoader" />
+    </local:GridDemoModule.Resources>
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" ReportService="{x:Reference rmsNewItemRow}" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,5,12,12" MinWidth="210">
+                <GroupBox Header="New Item Row Position">
+                    <dxe:ListBoxEdit ShowBorder="False"
+                                     SelectedItem="{Binding ElementName=view, Path=NewItemRowPosition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     SelectedIndexChanged="newItemRowPositionChanged">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxg:NewItemRowPosition>Top</dxg:NewItemRowPosition>
+                        <dxg:NewItemRowPosition>Bottom</dxg:NewItemRowPosition>
+                        <dxg:NewItemRowPosition>None</dxg:NewItemRowPosition>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <local:RecentReports ReportService="{x:Reference rmsNewItemRow}" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <dxg:GridControl Name="grid" ShowBorder="False">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn Name="colOrderID" FieldName="OrderID" Header="ID" Width="*" MinWidth="30" />
+                <dxg:GridColumn Name="colProductID" FieldName="ProductID" Header="Product" Width="3*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings AutoComplete="True"
+                                                  ImmediatePopup="True"
+                                                  ValueMember="ProductID"
+                                                  DisplayMember="ProductName"
+                                                  ItemsSource="{Binding Products, Source={StaticResource NWindDataLoader}}" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn Name="colUnitPrice" FieldName="UnitPrice" Width="3*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:SpinEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="c" MaskCulture="en-US" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn Name="colQuantity" FieldName="Quantity" Width="3*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:SpinEditSettings MaskType="Numeric" Mask="d" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn Name="colDiscount" FieldName="Discount" Width="3*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings MaskType="Numeric" MaskUseAsDisplayFormat="True" Mask="p0" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView Name="view" NewItemRowPosition="Bottom" ShowGroupedColumns="True" InitNewRow="view_InitNewRow">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxrudex:GridReportManagerService Name="rmsNewItemRow" />
+                    </dxmvvm:Interaction.Behaviors>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

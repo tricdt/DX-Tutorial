@@ -1,0 +1,340 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.SelectionDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:local="clr-namespace:ChartsDemo"
+    DataContext="{dxmvvm:ViewModelSource Type=local:SelectionViewModel}">
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:ChartPaletteToMapColorsConverter
+                x:Key="chartPaletteToMapColorsConverter" />
+            <DoubleCollection
+                x:Key="colorizerRange">0,10</DoubleCollection>
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+
+    <DockPanel>
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference pieChart}" />
+        <Grid>
+            <!--#region Grid difinitions-->
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <!--#endregion-->
+
+            <dxc:ChartControl
+                x:Name="pieChart"
+                Grid.Row="0"
+                Grid.Column="0"
+                AnimationMode="OnLoad"
+                SelectionMode="Single"
+                ToolTipEnabled="True"
+                SelectedItem="{Binding Path=SelectedCountry, Mode=TwoWay}"
+                IsManipulationEnabled="True">
+                <!--#region Titles-->
+                <dxc:ChartControl.Titles>
+                    <dxc:Title
+                        Content="Top 10 Largest Countries by Area"
+                        HorizontalAlignment="Center" />
+                </dxc:ChartControl.Titles>
+                <!--#endregion-->
+                <!--#region Legend-->
+                <dxc:ChartControl.Legend>
+                    <dxc:Legend
+                        VerticalPosition="Center"
+                        BorderThickness="0"
+                        Background="{Binding ElementName=pieChart, Path=Background, Mode=OneWay}" />
+                </dxc:ChartControl.Legend>
+                <!--#endregion-->
+                <dxc:SimpleDiagram2D>
+                    <dxc:PieSeries2D
+                        DataSource="{Binding Path=CountriesData, Mode=OneTime}"
+                        ArgumentDataMember="Name"
+                        ValueDataMember="AreaMSqrKilometers"
+                        ToolTipPointPattern="{}{A}: {V:0.0}M km²"
+                        LegendTextPattern="{}{A}"
+                        AnimationAutoStartMode="SetStartState">
+                        <dxc:PieSeries2D.PointAnimation>
+                            <dxc:Pie2DWidenAnimation
+                                Duration="0:0:1.5"
+                                PointDelay="0" />
+                        </dxc:PieSeries2D.PointAnimation>
+                        <dxc:PieSeries2D.Model>
+                            <dxc:BorderlessFlatPie2DModel />
+                        </dxc:PieSeries2D.Model>
+                    </dxc:PieSeries2D>
+                </dxc:SimpleDiagram2D>
+            </dxc:ChartControl>
+
+            <!--#region MapControl-->
+            <dxm:MapControl
+                x:Name="map"
+                Grid.Row="1"
+                Grid.Column="0"
+                Background="{Binding ElementName=pieChart, Path=Background, Mode=OneWay}"
+                InitialMapSize="420,420"
+                Padding="10"
+                CenterPoint="45,0"
+                EnableZooming="False"
+                EnableScrolling="False"
+                SelectionMode="Single"
+                IsManipulationEnabled="True">
+                <dxm:MapControl.ZoomTrackbarOptions>
+                    <dxm:ZoomTrackbarOptions
+                        Visible="False" />
+                </dxm:MapControl.ZoomTrackbarOptions>
+                <dxm:MapControl.ScalePanelOptions>
+                    <dxm:ScalePanelOptions
+                        Visible="False" />
+                </dxm:MapControl.ScalePanelOptions>
+                <dxm:MapControl.ScrollButtonsOptions>
+                    <dxm:ScrollButtonsOptions
+                        Visible="False" />
+                </dxm:MapControl.ScrollButtonsOptions>
+                <dxm:MapControl.CoordinatesPanelOptions>
+                    <dxm:CoordinatesPanelOptions
+                        Visible="False" />
+                </dxm:MapControl.CoordinatesPanelOptions>
+                <dxm:VectorLayer
+                    x:Name="vectorLayer"
+                    AllowResetSelection="False">
+                    <dxmvvm:Interaction.Behaviors>
+                        <local:SelectedItemNameBindingBehavior
+                            SelectedItemName="{Binding Path=SelectedCountryName, Mode=TwoWay}" />
+                    </dxmvvm:Interaction.Behaviors>
+                    <dxm:VectorLayer.ShapeTitleOptions>
+                        <dxm:ShapeTitleOptions
+                            VisibilityMode="Hidden" />
+                    </dxm:VectorLayer.ShapeTitleOptions>
+                    <dxm:VectorLayer.SelectedShapeFill>
+                        <LinearGradientBrush
+                            SpreadMethod="Repeat"
+                            EndPoint="7,7"
+                            MappingMode="Absolute">
+                            <GradientStop
+                                Color="#FFFFA500" />
+                            <GradientStop
+                                Color="#FFFFA500"
+                                Offset="0.45" />
+                            <GradientStop
+                                Color="#70FFA500"
+                                Offset="0.55" />
+                            <GradientStop
+                                Color="#70FFA500"
+                                Offset=".95" />
+                        </LinearGradientBrush>
+                    </dxm:VectorLayer.SelectedShapeFill>
+                    <dxm:VectorLayer.Data>
+                        <dxm:ShapefileDataAdapter
+                            FileUri="/ChartsDemo;component/Data/ShapeFiles/Top10LargestCountries.shp" />
+                    </dxm:VectorLayer.Data>
+                    <dxm:VectorLayer.Colorizer>
+                        <dxm:ChoroplethColorizer
+                            RangeStops="{StaticResource colorizerRange}"
+                            ApproximateColors="True"
+                            Colors="{Binding Path=Palette, Source={x:Reference Name=pieChart}, Converter={StaticResource chartPaletteToMapColorsConverter}, ConverterParameter={StaticResource colorizerRange}, Mode=OneWay}">
+                            <dxm:ChoroplethColorizer.ValueProvider>
+                                <dxm:ShapeAttributeValueProvider
+                                    AttributeName="MAP_COLOR" />
+                            </dxm:ChoroplethColorizer.ValueProvider>
+                        </dxm:ChoroplethColorizer>
+                    </dxm:VectorLayer.Colorizer>
+                </dxm:VectorLayer>
+            </dxm:MapControl>
+            <!--#endregion-->
+
+            <dxc:ChartControl
+                x:Name="chart1"
+                Grid.Row="0"
+                Grid.Column="1"
+                AnimationMode="OnDataChanged">
+                <!--#region Titles-->
+                <dxc:ChartControl.Titles>
+                    <dxc:Title
+                        Content="{Binding Path=SelectedCountry.Name, Mode=OneWay}"
+                        HorizontalAlignment="Center">
+                        <dxc:Title.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel
+                                    Orientation="Horizontal">
+                                    <TextBlock
+                                        Text="Population Dynamics (" />
+                                    <TextBlock
+                                        Text="{Binding}" />
+                                    <TextBlock
+                                        Text=")" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </dxc:Title.ContentTemplate>
+                    </dxc:Title>
+                </dxc:ChartControl.Titles>
+                <!--#endregion-->
+                <dxc:ChartControl.Diagram>
+                    <dxc:XYDiagram2D>
+                        <dxc:XYDiagram2D.DefaultPane>
+                            <dxc:Pane
+                                DomainBorderBrush="Transparent" />
+                        </dxc:XYDiagram2D.DefaultPane>
+                        <!--#region Axes-->
+                        <dxc:XYDiagram2D.AxisX>
+                            <dxc:AxisX2D
+                                TickmarksMinorVisible="False" />
+                        </dxc:XYDiagram2D.AxisX>
+                        <dxc:XYDiagram2D.AxisY>
+                            <dxc:AxisY2D
+                                Alignment="Far"
+                                Interlaced="False"
+                                TickmarksMinorVisible="False">
+                                <dxc:AxisY2D.Label>
+                                    <dxc:AxisLabel
+                                        EndText="M" />
+                                </dxc:AxisY2D.Label>
+                                <dxc:AxisY2D.WholeRange>
+                                    <dxc:Range
+                                        SideMarginsValue="0" />
+                                </dxc:AxisY2D.WholeRange>
+                            </dxc:AxisY2D>
+                        </dxc:XYDiagram2D.AxisY>
+                        <!--#endregion-->
+                        <dxc:AreaSeries2D
+                            DataSource="{Binding Path=SelectedCountry.PopulationDynamic, Mode=OneWay}"
+                            ArgumentDataMember="Year"
+                            ValueDataMember="PopulationMillionsOfPeople"
+                            Transparency="0.3"
+                            CrosshairLabelPattern="{}{A}: {V:F1}M">
+                            <dxc:AreaSeries2D.Brush>
+                                <MultiBinding
+                                    Converter="{local:SelectedIndexToBrushConverter}">
+                                    <Binding
+                                        Path="SelectedIndex" />
+                                    <Binding
+                                        ElementName="pieChart"
+                                        Path="Palette" />
+                                </MultiBinding>
+                            </dxc:AreaSeries2D.Brush>
+                            <dxc:AreaSeries2D.SeriesAnimation>
+                                <dxc:Area2DUnwindAnimation
+                                    Duration="0:0:1.5" />
+                            </dxc:AreaSeries2D.SeriesAnimation>
+                        </dxc:AreaSeries2D>
+                    </dxc:XYDiagram2D>
+                </dxc:ChartControl.Diagram>
+            </dxc:ChartControl>
+
+            <dxc:ChartControl
+                x:Name="chart2"
+                Grid.Row="1"
+                Grid.Column="1"
+                AnimationMode="OnDataChanged">
+                <!--#region Titles-->
+                <dxc:ChartControl.Titles>
+                    <dxc:Title
+                        Content="Urban/Rural Population Change"
+                        HorizontalAlignment="Center" />
+                </dxc:ChartControl.Titles>
+                <!--#endregion-->
+                <dxc:ChartControl.Diagram>
+                    <dxc:XYDiagram2D>
+                        <dxc:XYDiagram2D.DefaultPane>
+                            <dxc:Pane
+                                DomainBorderBrush="Transparent" />
+                        </dxc:XYDiagram2D.DefaultPane>
+                        <!--#region Axes-->
+                        <dxc:XYDiagram2D.AxisX>
+                            <dxc:AxisX2D
+                                TickmarksMinorVisible="False" />
+                        </dxc:XYDiagram2D.AxisX>
+                        <dxc:XYDiagram2D.AxisY>
+                            <dxc:AxisY2D
+                                Alignment="Far"
+                                Interlaced="False"
+                                TickmarksMinorVisible="False">
+                                <dxc:AxisY2D.WholeRange>
+                                    <dxc:Range
+                                        SideMarginsValue="0" />
+                                </dxc:AxisY2D.WholeRange>
+                                <dxc:AxisY2D.NumericOptions>
+                                    <dxc:NumericOptions
+                                        Format="Percent"
+                                        Precision="0" />
+                                </dxc:AxisY2D.NumericOptions>
+                            </dxc:AxisY2D>
+                        </dxc:XYDiagram2D.AxisY>
+                        <!--#endregion-->
+                        <dxc:BarFullStackedSeries2D
+                            DataSource="{Binding Path=SelectedCountry.PopulationDynamic, Mode=OneWay}"
+                            ArgumentDataMember="Year"
+                            ValueDataMember="UrbanPercent"
+                            ArgumentScaleType="Numerical"
+                            BarWidth="5"
+                            DisplayName="Urban"
+                            CrosshairLabelPattern="{}{S}: {V:F1}%">
+                            <!--#region Model-->
+                            <dxc:BarFullStackedSeries2D.Model>
+                                <dxc:BorderlessSimpleBar2DModel />
+                            </dxc:BarFullStackedSeries2D.Model>
+                            <!--#endregion-->
+                            <!--#region Animation-->
+                            <dxc:BarFullStackedSeries2D.PointAnimation>
+                                <dxc:Bar2DGrowUpAnimation
+                                    Duration="0:0:1.5"
+                                    PointDelay="0" />
+                            </dxc:BarFullStackedSeries2D.PointAnimation>
+                            <!--#endregion-->
+                            <!--#region Brush-->
+                            <dxc:BarFullStackedSeries2D.Brush>
+                                <MultiBinding
+                                    Converter="{local:SelectedIndexToBrushConverter}">
+                                    <Binding
+                                        Path="SelectedIndex" />
+                                    <Binding
+                                        ElementName="pieChart"
+                                        Path="Palette" />
+                                </MultiBinding>
+                            </dxc:BarFullStackedSeries2D.Brush>
+                            <!--#endregion-->
+                        </dxc:BarFullStackedSeries2D>
+                        <dxc:BarFullStackedSeries2D
+                            DataSource="{Binding Path=SelectedCountry.PopulationDynamic, Mode=OneWay}"
+                            ArgumentDataMember="Year"
+                            ValueDataMember="RuralPercent"
+                            ArgumentScaleType="Numerical"
+                            BarWidth="5"
+                            DisplayName="Rural"
+                            CrosshairLabelPattern="{}{S}: {V:F1}%"
+                            Brush="SaddleBrown">
+                            <!--#region Animation-->
+                            <dxc:BarFullStackedSeries2D.PointAnimation>
+                                <dxc:Bar2DGrowUpAnimation
+                                    Duration="0:0:1.5" />
+                            </dxc:BarFullStackedSeries2D.PointAnimation>
+                            <!--#endregion-->
+                            <!--#region Model-->
+                            <dxc:BarFullStackedSeries2D.Model>
+                                <dxc:BorderlessSimpleBar2DModel />
+                            </dxc:BarFullStackedSeries2D.Model>
+                            <!--#endregion-->
+                        </dxc:BarFullStackedSeries2D>
+                    </dxc:XYDiagram2D>
+                </dxc:ChartControl.Diagram>
+            </dxc:ChartControl>
+
+        </Grid>
+    </DockPanel>
+</local:ChartsDemoModule>

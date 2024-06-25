@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTemplate x:Key="rangeEditorPanel" TargetType="{x:Type ContentControl}">
+        <ContentPresenter x:Name="presenter" />
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=Orientation, ElementName=editor}" Value="Horizontal">
+                <Setter Property="MaxWidth" Value="400" TargetName="presenter" />
+                <Setter Property="MaxHeight" Value="50" TargetName="presenter" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=Orientation, ElementName=editor}" Value="Vertical">
+                <Setter Property="MaxWidth" Value="50" TargetName="presenter" />
+                <Setter Property="MaxHeight" Value="400" TargetName="presenter" />
+            </DataTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+</ResourceDictionary>

@@ -1,0 +1,62 @@
+﻿using System.ComponentModel;
+using System;
+using System.Drawing;
+
+namespace DevExpress.CrmDemo.Win.Data {
+    public class TeamMember : INotifyPropertyChanged {
+        #region Public members
+
+        public int Id {
+            get { return _id; }
+            set {
+                _id = value;
+                InvokePropertyChanged("Id");
+            }
+        }
+
+        public string FullName {
+            get { return _fullName; }
+            set {
+                _fullName = value;
+                InvokePropertyChanged("FullName");
+            }
+        }
+
+        public Bitmap Photo {
+            get { return _photo; }
+            set {
+                _photo = value;
+                InvokePropertyChanged("Photo");
+            }
+        }
+
+        public Bitmap PhotoSmall {
+            get { return _photoSmall; }
+            set {
+                _photoSmall = value;
+                InvokePropertyChanged("PhotoSmall");
+            }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged implementation
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void InvokePropertyChanged(string name) {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if(handler != null) handler(this, new PropertyChangedEventArgs(name));
+        }
+        #endregion
+
+        #region Private data
+
+        private int _id;
+        private string _fullName;
+        private Bitmap _photo;
+        private Bitmap _photoSmall;
+
+        #endregion
+
+    }
+}

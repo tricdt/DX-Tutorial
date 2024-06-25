@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="GridDemo.Filtering.DateRangeElementRangeControlTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+             xmlns:dxcr="http://schemas.devexpress.com/winfx/2008/xaml/charts/rangecontrolclient">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <!--#region !-->
+        <dxfui:DateRangeFilterElement Grid.Row="1" Margin="0,8,0,0" VerticalAlignment="Top" FieldName="OrderDate"
+                                      Context="{Binding ElementName=grid, Path=FilteringContext}">
+            <dxfui:DateRangeFilterElement.FilterModelTemplate>
+                <DataTemplate>
+                    <dxe:RangeControl Name="rangeControl" AllowZoom="False" BorderThickness="0,1,0,0"
+                                      RangeEnd="{Binding Max}"
+                                      RangeStart="{Binding Min}"
+                                      SelectionRangeEnd="{Binding To, Mode=TwoWay}"
+                                      SelectionRangeStart="{Binding From, Mode=TwoWay}">
+                        <dxe:RangeControl.Client>
+                            <dxcr:DateTimeChartRangeControlClient ItemsSource="{Binding FilterValues}"
+                                                                  ArgumentDataMember="Value" ValueDataMember="Count"
+                                                                  GridAlignment="Auto">
+                                <dxcr:DateTimeChartRangeControlClient.View>
+                                    <dxcr:RangeControlClientBarView />
+                                </dxcr:DateTimeChartRangeControlClient.View>
+                            </dxcr:DateTimeChartRangeControlClient>
+                        </dxe:RangeControl.Client>
+                    </dxe:RangeControl>
+                </DataTemplate>
+            </dxfui:DateRangeFilterElement.FilterModelTemplate>
+        </dxfui:DateRangeFilterElement>
+        <!--#endregion-->
+        <dxg:GridControl Name="grid">
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="view" ShowFixedTotalSummary="True" NavigationStyle="Row" />
+            </dxg:GridControl.View>
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="Country" Width="*" />
+                <dxg:GridColumn FieldName="OrderDate" Width="*" />
+                <dxg:GridColumn FieldName="Quantity" Width="*" />
+                <dxg:GridColumn FieldName="UnitPrice" Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="$0.00" MaskType="Numeric" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+            </dxg:GridControl.TotalSummary>
+        </dxg:GridControl>
+    </Grid>
+</UserControl>

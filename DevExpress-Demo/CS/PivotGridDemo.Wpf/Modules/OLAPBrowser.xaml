@@ -1,0 +1,86 @@
+﻿<local:PivotGridDemoModule x:Class="PivotGridDemo.OLAPBrowser"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:local="clr-namespace:PivotGridDemo"
+                           xmlns:dxpg="http://schemas.devexpress.com/winfx/2008/xaml/pivotgrid"
+                           xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                           xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                           xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                           DataContext="{dxmvvm:ViewModelSource Type=local:DrillDownViewModel}"
+                           Height="515"
+                           Width="937"
+                           ModuleLoaded="PivotGridDemoModule_Loaded">
+    <local:PivotGridDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/PivotGridDemo;component/Controls/ControlStyles/DataSourceDialog.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dxmvvm:BooleanToVisibilityConverter Inverse="True" x:Key="inverseBoolToVisible" />
+        </ResourceDictionary>
+    </local:PivotGridDemoModule.Resources>
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DialogService Name="DrillDownTemplate">
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="dx:ThemedWindow">
+                    <Setter Property="ShowIcon" Value="False" />
+                    <Setter Property="ShowInTaskbar" Value="False" />
+                </Style>
+            </dx:DialogService.DialogStyle>
+            <dx:DialogService.ViewTemplate>
+                <DataTemplate>
+                    <local:DrillDownControl />
+                </DataTemplate>
+            </dx:DialogService.ViewTemplate>
+        </dx:DialogService>
+    </dxmvvm:Interaction.Behaviors>
+    <DockPanel>
+        <local:PivotGridDemoRibbon DockPanel.Dock="Top" ExportPivotGrid="{x:Reference pivotGrid}"/>
+        <dxlc:DockLayoutControl>
+            <Border dxlc:DockLayoutControl.Dock="Right"
+                dxlc:DockLayoutControl.AllowHorizontalSizing="True"
+                Padding="6,8,12,12"
+                Width="300"
+                Background="{Binding Background, ElementName=pivotGrid}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Button x:Name="showConnectionButton"
+                        Content="New Connection"
+                        Click="OnShowConnectionClick"
+                        Margin="0,0,0,7"
+                        IsEnabled="{Binding IsMainWaitIndicatorVisible, ElementName=pivotGrid, Converter={StaticResource inverseBoolToVisible}}" />
+                    <dxpg:PivotExcelFieldListControl Grid.Row="1" x:Name="fieldList" Owner="{Binding ElementName=pivotGrid}" HorizontalAlignment="Stretch" />
+                </Grid>
+            </Border>
+            <dx:ThemedBorder dxlc:DockLayoutControl.AllowHorizontalSizing="True"
+                               dxlc:DockLayoutControl.Dock="Client"
+                               BorderThickness="0,0,1,0"
+                               Margin="0,0,6,0">
+                <dxpg:PivotGridControl ShowFilterHeaders="False"
+                                   ShowDataHeaders="False"
+                                   ShowColumnHeaders="False"
+                                   ShowRowHeaders="False"
+                                   RowTreeWidth="202"
+                                   UseAsyncMode="True"
+                                   FieldListSplitterY="300"
+                                   x:Name="pivotGrid"
+                                   VerticalAlignment="Stretch"
+                                   ShowBorder="False">
+                    <dxmvvm:Interaction.Triggers>
+                        <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                           Command="{Binding ShowDrillDownCommand}"
+                                           EventName="MouseDoubleClick"
+                                           SourceName="pivotGrid">
+                            <dxmvvm:EventToCommand.EventArgsConverter>
+                                <dxpg:EventArgsToCellInfoConverter />
+                            </dxmvvm:EventToCommand.EventArgsConverter>
+                        </dxmvvm:EventToCommand>
+                    </dxmvvm:Interaction.Triggers>
+                </dxpg:PivotGridControl>
+            </dx:ThemedBorder>
+        </dxlc:DockLayoutControl>
+    </DockPanel>
+</local:PivotGridDemoModule>

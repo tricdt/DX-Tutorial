@@ -1,0 +1,530 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProjectGuid>{D8F42E64-7560-0ADA-1C55-E5448F1B1DDF}</ProjectGuid>
+    <EnableDefaultItems>False</EnableDefaultItems>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <Configurations>Debug;Release;DebugTest</Configurations>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    <EmbeddedResourceUseDependentUponConvention>False</EmbeddedResourceUseDependentUponConvention>
+    <RootNamespace>DevExpress.DevAV</RootNamespace>
+    <AssemblyName>DevExpress.HybridApp.Wpf</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>WinExe</OutputType>
+    <ApplicationIcon>Resources\AppIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktopTest\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;DEBUGTEST;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\ClickOnce DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\ClickOnce ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Wpf.Demos" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf" Version="22.2.3" />
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\CollectionViewModel.cs" />
+    <Compile Include="Common\CommonResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommonResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\EntitiesViewModel.cs" />
+    <Compile Include="Common\InstantFeedbackCollectionViewModel.cs" />
+    <Compile Include="Common\ReadOnlyCollectionViewModel.cs" />
+    <Compile Include="Common\SingleObjectViewModel.cs" />
+    <Compile Include="Common\Utils\DeviceDetector.cs" />
+    <Compile Include="Common\Utils\MapUtils.cs" />
+    <Compile Include="Common\Utils\Utils.cs" />
+    <Compile Include="Common\ViewModel\Services\IReportService.cs" />
+    <Compile Include="Common\View\Behaviors\FilterItemClickBehavior.cs" />
+    <Compile Include="Common\View\Behaviors\FilterUnselectionBehavior.cs" />
+    <Compile Include="Common\View\CollectionViewBehavior.cs" />
+    <Compile Include="Common\View\Converters\TextSingleLineConverter.cs" />
+    <Compile Include="Common\View\CustomFilterBehavior.cs" />
+    <Compile Include="Common\View\DeleteMarginFromParentBorderBehavior.cs" />
+    <Compile Include="Common\View\ExceptionHelper.cs" />
+    <Compile Include="Common\View\RangeSelectionBehavior.cs" />
+    <Compile Include="Common\View\RichEditControlZoomBehavior.cs" />
+    <Compile Include="Common\View\Services\PrintableControlPreviewService.cs" />
+    <Compile Include="Common\View\Services\ReportService.cs" />
+    <Compile Include="Common\View\TileBarFocusBehavior.cs" />
+    <Compile Include="Common\View\ZoomToFitMapBehavior.cs" />
+    <Compile Include="Converters\AbsoluteToLocalConverter.cs" />
+    <Compile Include="Converters\AddressToGeoPointConverter.cs" />
+    <Compile Include="Converters\HalfValueConverter.cs" />
+    <Compile Include="Converters\ImageConverter.cs" />
+    <Compile Include="Converters\PictureConverter.cs" />
+    <Compile Include="DevAVDbDataModel\DesignTimeDevAVDbUnitOfWork.cs" />
+    <Compile Include="DevAVDbDataModel\DevAVDbUnitOfWork.cs" />
+    <Compile Include="DevAVDbDataModel\IDevAVDbUnitOfWork.cs" />
+    <Compile Include="DevAVDbDataModel\UnitOfWorkSource.cs" />
+    <Compile Include="Filtering\ViewModel\FilterInfo.cs" />
+    <Compile Include="Filtering\ViewModel\FilterItem.cs" />
+    <Compile Include="Filtering\ViewModel\FilterTreeModelPageSpecificSettings.cs" />
+    <Compile Include="Filtering\ViewModel\IFilterTreeModelPageSpecificSettings.cs" />
+    <Compile Include="Filtering\ViewModel\ISupportFiltering.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="ViewModels\Customer\CustomerCollectionViewModel.cs" />
+    <Compile Include="ViewModels\Customer\CustomerCollectionViewModel.partial.cs" />
+    <Compile Include="ViewModels\Customer\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\Customer\CustomerViewModel.partial.cs" />
+    <Compile Include="Filtering\ViewModel\CustomFilterViewModel.cs" />
+    <Compile Include="ViewModels\DevAVDbViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeReportType.cs" />
+    <Compile Include="ViewModels\EmployeeTask\EmployeeTaskCollectionViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeTask\EmployeeTaskCollectionViewModel.partial.cs" />
+    <Compile Include="ViewModels\EmployeeTask\EmployeeTaskViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeTask\EmployeeTaskViewModel.partial.cs" />
+    <Compile Include="ViewModels\Employee\EmployeeCollectionViewModel.cs" />
+    <Compile Include="ViewModels\Employee\EmployeeCollectionViewModel.partial.cs" />
+    <Compile Include="ViewModels\Employee\EmployeeContactsViewModel.cs" />
+    <Compile Include="ViewModels\Employee\EmployeeViewModel.cs" />
+    <Compile Include="ViewModels\Employee\EmployeeViewModel.partial.cs" />
+    <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\Evaluation\EvaluationCollectionViewModel.cs" />
+    <Compile Include="ViewModels\Evaluation\EvaluationCollectionViewModel.partial.cs" />
+    <Compile Include="ViewModels\Evaluation\EvaluationViewModel.cs" />
+    <Compile Include="ViewModels\Evaluation\EvaluationViewModel.partial.cs" />
+    <Compile Include="Filtering\ViewModel\FiltersSettings.cs" />
+    <Compile Include="Filtering\ViewModel\FilterTreeViewModel.cs" />
+    <Compile Include="ViewModels\LinksViewModel.cs" />
+    <Compile Include="ViewModels\MailMergeTemplatesHelper.cs" />
+    <Compile Include="ViewModels\MailMergeViewModel.cs" />
+    <Compile Include="ViewModels\Order\OrderCollectionViewModel.cs" />
+    <Compile Include="ViewModels\Order\OrderCollectionViewModel.partial.cs" />
+    <Compile Include="ViewModels\Order\OrderViewModel.cs" />
+    <Compile Include="ViewModels\Order\OrderViewModel.partial.cs" />
+    <Compile Include="ViewModels\PrintableControlPreviewViewModel.cs" />
+    <Compile Include="ViewModels\Product\ProductCollectionViewModel.cs" />
+    <Compile Include="ViewModels\Product\ProductCollectionViewModel.partial.cs" />
+    <Compile Include="ViewModels\Product\ProductViewModel.cs" />
+    <Compile Include="ViewModels\Product\ProductViewModel.partial.cs" />
+    <Compile Include="ViewModels\Quote\QuoteCollectionViewModel.cs" />
+    <Compile Include="ViewModels\Quote\QuoteCollectionViewModel.partial.cs" />
+    <Compile Include="ViewModels\Quote\QuoteViewModel.cs" />
+    <Compile Include="ViewModels\Quote\QuoteViewModel.partial.cs" />
+    <Compile Include="ViewModels\ReportInfoFactory.cs" />
+    <Compile Include="ViewModels\ReportPreviewViewModel.cs" />
+    <Compile Include="Views\Customer\CustomerCollectionView.xaml.cs">
+      <DependentUpon>CustomerCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\CustomerView.xaml.cs">
+      <DependentUpon>CustomerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Filtering\View\CustomFilterView.xaml.cs">
+      <DependentUpon>CustomFilterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DevAVDbView.xaml.cs">
+      <DependentUpon>DevAVDbView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\EmployeeCollectionView.xaml.cs">
+      <DependentUpon>EmployeeCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\EmployeeMailMergeView.xaml.cs">
+      <DependentUpon>EmployeeMailMergeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\EmployeeTaskCollectionView.xaml.cs">
+      <DependentUpon>EmployeeTaskCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\EmployeeView.xaml.cs">
+      <DependentUpon>EmployeeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\EvaluationCollectionView.xaml.cs">
+      <DependentUpon>EvaluationCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\EvaluationView.xaml.cs">
+      <DependentUpon>EvaluationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\EmployeeTaskView.xaml.cs">
+      <DependentUpon>EmployeeTaskView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DashboardView.xaml.cs">
+      <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\OrderCollectionView.xaml.cs">
+      <DependentUpon>OrderCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PrintableControlPrintPreview.xaml.cs">
+      <DependentUpon>PrintableControlPrintPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\OrderView.xaml.cs">
+      <DependentUpon>OrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportPreview.xaml.cs">
+      <DependentUpon>ReportPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Product\ProductCollectionView.xaml.cs">
+      <DependentUpon>ProductCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Product\ProductView.xaml.cs">
+      <DependentUpon>ProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Quote\QuoteCollectionView.xaml.cs">
+      <DependentUpon>QuoteCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Filtering\View\StaticFiltersPanel.xaml.cs">
+      <DependentUpon>StaticFiltersPanel.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Resources\Analysis\CustomerAnalysis.xlsx" />
+    <EmbeddedResource Include="Resources\Analysis\ProductAnalysis.xlsx" />
+    <EmbeddedResource Include="Resources\MailMerge\Employee of the Month.rtf" />
+    <EmbeddedResource Include="Resources\MailMerge\Employee of the Month.snx" />
+    <EmbeddedResource Include="Resources\MailMerge\Employee Probation Notice.rtf" />
+    <EmbeddedResource Include="Resources\MailMerge\Employee Probation Notice.snx" />
+    <EmbeddedResource Include="Resources\MailMerge\Employee Service Excellence.rtf" />
+    <EmbeddedResource Include="Resources\MailMerge\Employee Service Excellence.snx" />
+    <EmbeddedResource Include="Resources\MailMerge\Employee Thank You Note.rtf" />
+    <EmbeddedResource Include="Resources\MailMerge\Employee Thank You Note.snx" />
+    <EmbeddedResource Include="Resources\MailMerge\Order.snx" />
+    <EmbeddedResource Include="Resources\MailMerge\Sales Analysys Report.snx" />
+    <EmbeddedResource Include="Resources\MailMerge\Sales Invoice.snx" />
+    <EmbeddedResource Include="Resources\MailMerge\Sales Order Summary Report.snx" />
+    <EmbeddedResource Include="Resources\MailMerge\Sales Thank You.rtf" />
+    <EmbeddedResource Include="Resources\MailMerge\Sales Thank You.snx" />
+    <EmbeddedResource Include="Resources\MailMerge\Welcome to DevAV.rtf" />
+    <EmbeddedResource Include="Resources\MailMerge\Welcome to DevAV.snx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Shared.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Customer\CustomerCollectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Customer\CustomerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Filtering\View\CustomFilterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DevAVDbView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Employee\EmployeeCollectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Employee\EmployeeMailMergeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Employee\EmployeeTaskCollectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Employee\EmployeeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Employee\EvaluationCollectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Employee\EvaluationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Employee\EmployeeTaskView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DashboardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Order\OrderCollectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PrintableControlPrintPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Order\OrderView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ReportPreview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Product\ProductCollectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Product\ProductView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Quote\QuoteCollectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Filtering\View\StaticFiltersPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\NorthAmerica.dbf" />
+    <Resource Include="Resources\NorthAmerica.shp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AppIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Common\CommonResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommonResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DevExpress.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Universal.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\WPF.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Toolbar\New.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Toolbar\Cancel.svg" />
+    <Resource Include="Resources\Toolbar\CustomFilter.svg" />
+    <Resource Include="Resources\Toolbar\Delete.svg" />
+    <Resource Include="Resources\Toolbar\Edit.svg" />
+    <Resource Include="Resources\Toolbar\MailMerge.svg" />
+    <Resource Include="Resources\Toolbar\MapView.svg" />
+    <Resource Include="Resources\Toolbar\Meeting.svg" />
+    <Resource Include="Resources\Toolbar\Note.svg" />
+    <Resource Include="Resources\Toolbar\OrderList.svg" />
+    <Resource Include="Resources\Toolbar\PivotTable.svg" />
+    <Resource Include="Resources\Toolbar\Reports.svg" />
+    <Resource Include="Resources\Toolbar\SalesMap.svg" />
+    <Resource Include="Resources\Toolbar\Save.svg" />
+    <Resource Include="Resources\Toolbar\Settings.svg" />
+    <Resource Include="Resources\Toolbar\SortAZ.svg" />
+    <Resource Include="Resources\Toolbar\SortZA.svg" />
+    <Resource Include="Resources\Toolbar\Task.svg" />
+    <Resource Include="Resources\Toolbar\ZoomIn.svg" />
+    <Resource Include="Resources\Toolbar\ZoomOut.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Toolbar\Print.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Contacts\Email.svg" />
+    <Resource Include="Resources\Contacts\HomePhone.svg" />
+    <Resource Include="Resources\Contacts\MobilePhone.svg" />
+    <Resource Include="Resources\Contacts\Skype.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Status\Completed.svg" />
+    <Resource Include="Resources\Status\Deferred.svg" />
+    <Resource Include="Resources\Status\InProgress.svg" />
+    <Resource Include="Resources\Status\NeedAssistance.svg" />
+    <Resource Include="Resources\Status\NotStarted.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Priority\HighPriority.svg" />
+    <Resource Include="Resources\Priority\LowPriority.svg" />
+    <Resource Include="Resources\Priority\MediumPriority.svg" />
+    <Resource Include="Resources\Priority\NormalPriority.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ArrowLeft.svg" />
+    <Resource Include="Resources\ArrowRight.svg" />
+    <Resource Include="Resources\Menu\Customers.svg" />
+    <Resource Include="Resources\Menu\Dashboard.svg" />
+    <Resource Include="Resources\Menu\Employees.svg" />
+    <Resource Include="Resources\Menu\Opportunities.svg" />
+    <Resource Include="Resources\Menu\Products.svg" />
+    <Resource Include="Resources\Menu\Sales.svg" />
+    <Resource Include="Resources\Menu\Tasks.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Tasks\AllTasks.svg" />
+    <Resource Include="Resources\Tasks\Completed.svg" />
+    <Resource Include="Resources\Tasks\Deferred.svg" />
+    <Resource Include="Resources\Tasks\HighPriority.svg" />
+    <Resource Include="Resources\Tasks\InProgress.svg" />
+    <Resource Include="Resources\Tasks\NotStarted.svg" />
+    <Resource Include="Resources\Tasks\Urgent.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Employees\All.svg" />
+    <Resource Include="Resources\Employees\Commission.svg" />
+    <Resource Include="Resources\Employees\OnLeave.svg" />
+    <Resource Include="Resources\Employees\Probation.svg" />
+    <Resource Include="Resources\Employees\Salaried.svg" />
+    <Resource Include="Resources\Employees\Terminated.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Products\All.svg" />
+    <Resource Include="Resources\Products\Automation.svg" />
+    <Resource Include="Resources\Products\Monitors.svg" />
+    <Resource Include="Resources\Products\Projectors.svg" />
+    <Resource Include="Resources\Products\TVs.svg" />
+    <Resource Include="Resources\Products\VideoPlayers.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AppIcon.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Help.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\Utils\FilesHelper.cs" />
+    
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
+  </ItemGroup>
+  <ItemGroup>
+    
+  </ItemGroup>
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

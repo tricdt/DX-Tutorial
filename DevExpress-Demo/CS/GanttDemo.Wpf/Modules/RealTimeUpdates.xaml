@@ -1,0 +1,75 @@
+﻿<local:GanttDemoModule x:Class="GanttDemo.RealTimeUpdates"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:dxgn="http://schemas.devexpress.com/winfx/2008/xaml/gantt"
+      xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+      xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+      xmlns:local="clr-namespace:GanttDemo"
+      mc:Ignorable="d"
+      d:DesignHeight="600"
+      d:DesignWidth="1200"
+      DataContext="{dxmvvm:ViewModelSource Type=local:PageLoadingViewModel}">
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:EventToCommand EventName="ModuleLoaded" Command="{Binding OnModuleLoadedCommand}"/>
+        <dxmvvm:EventToCommand EventName="ModuleUnloaded" Command="{Binding OnModuleUnloadedCommand}"/>
+    </dxmvvm:Interaction.Behaviors>
+    <DockPanel>
+        <dxr:RibbonControl DockPanel.Dock="Top">
+            <dxr:RibbonPage Caption="Demo">
+                <dxr:RibbonPageGroup Caption="Actions">
+                    <dxb:BarButtonItem Content="Reload Page" RibbonStyle="Large"
+                                       LargeGlyph="pack://application:,,,/GanttDemo;component/Images/Ribbon/Refresh.svg"
+                                       MediumGlyph="pack://application:,,,/GanttDemo;component/Images/Ribbon/Refresh.svg">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EventToCommand EventName="ItemClick" Command="{Binding ReloadPageCommand}"/>
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxb:BarButtonItem>
+                </dxr:RibbonPageGroup>
+            </dxr:RibbonPage>
+        </dxr:RibbonControl>
+        <dxgn:GanttControl ItemsSource="{Binding DataItems}" CurrentItem="{Binding LastItem, Mode=OneWay}" ShowBorder="False">
+            <dxgn:GanttControl.Columns>
+                <dxgn:GanttColumn FieldName="Name" Width="150"/>
+                <dxgn:GanttColumn FieldName="Status" Width="45"/>
+                <dxgn:GanttColumn FieldName="Type" Width="70"/>
+                <dxgn:GanttColumn FieldName="Size" Width="70">
+                    <dxgn:GanttColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayTextConverter="{local:ByteSizeToStringConverter}"/>
+                    </dxgn:GanttColumn.EditSettings>
+                </dxgn:GanttColumn>
+                <dxgn:GanttColumn FieldName="Duration" Header="Time" Width="70">
+                    <dxgn:GanttColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayTextConverter="{local:DurationToStringConverter}"/>
+                    </dxgn:GanttColumn.EditSettings>
+                </dxgn:GanttColumn>
+            </dxgn:GanttControl.Columns>
+            <dxgn:GanttControl.View>
+                <dxgn:GanttView TreeListWidth="Auto"
+                                AllowEditing="False"
+                                TimescaleRulerCount="3"
+                                ScrollMargin="10"
+                                FirstVisibleDate="{Binding StartTime, Mode=OneTime}"
+                                ZoomRange="0:0:0.008-0:0:0.004"
+                                Zoom="0:0:0.008"
+                                StartDateMapping="StartTime"
+                                DurationMapping="Duration"
+                                RequestTimescaleRulers="RequestGanttTimescaleRulers">
+                    <dxgn:GanttView.WorkingTimeRules>
+                        <dxgn:WorkingTimeRule WorkingTime="0:0:0-24:0:0">
+                            <dxgn:Daily/>
+                        </dxgn:WorkingTimeRule>
+                    </dxgn:GanttView.WorkingTimeRules>
+                    <dxgn:GanttView.WorkdayRules>
+                        <dxgn:WorkdayRule IsWorkday="True">
+                            <dxgn:Daily/>
+                        </dxgn:WorkdayRule>
+                    </dxgn:GanttView.WorkdayRules>
+                </dxgn:GanttView>
+            </dxgn:GanttControl.View>
+        </dxgn:GanttControl>
+    </DockPanel>
+</local:GanttDemoModule>

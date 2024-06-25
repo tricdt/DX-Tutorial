@@ -1,0 +1,69 @@
+﻿<local:PivotGridDemoModule x:Class="PivotGridDemo.MultipleTotals"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:local="clr-namespace:PivotGridDemo"
+                           xmlns:dxpg="http://schemas.devexpress.com/winfx/2008/xaml/pivotgrid"
+                           xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase">
+    <DockPanel>
+        <local:PivotGridDemoRibbon DockPanel.Dock="Top" ExportPivotGrid="{x:Reference pivotGrid}"/>
+        <dxpg:PivotGridControl x:Name="pivotGrid"
+                           DataProcessingEngine="Optimized"
+                           DataSource="{x:Static dxdb:NWindDataProvider.SalesPersons}"
+                           local:FieldAreaHelper.FixAreas="True"
+                           RowTreeWidth="200"
+                           ShowBorder="False">
+            <dxpg:PivotGridControl.Fields>
+                <dxpg:PivotGridField x:Name="fieldCategory"
+                                  DataBinding="{dxpg:DataSourceColumnBinding CategoryName}"
+                                 Area="RowArea"
+                                 Width="100"
+                                 Caption="Category"
+                                 TotalsVisibility="CustomTotals">
+                    <dxpg:PivotGridField.CustomTotals>
+                        <dxpg:PivotGridCustomTotal SummaryType="Average" />
+                        <dxpg:PivotGridCustomTotal SummaryType="Sum" />
+                        <dxpg:PivotGridCustomTotal SummaryType="Max" />
+                        <dxpg:PivotGridCustomTotal SummaryType="Min" />
+                        <dxpg:PivotGridCustomTotal SummaryType="Count" />
+                    </dxpg:PivotGridField.CustomTotals>
+                </dxpg:PivotGridField>
+                <dxpg:PivotGridField x:Name="fieldProduct" DataBinding="{dxpg:DataSourceColumnBinding ProductName}" Area="RowArea" Width="200" Caption="Product" />
+                <dxpg:PivotGridField x:Name="fieldYear"
+                                 DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateYear}"
+                                 Area="ColumnArea"
+                                 ShowGroupIntervalName="True"
+                                 Width="80"
+                                 Group="{Binding ElementName=PivotGridGroup1}"
+                                 ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}" />
+                <dxpg:PivotGridField x:Name="fieldQuarter"
+                                 DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateQuarter}"
+                                 Area="ColumnArea"
+                                 ShowGroupIntervalName="True"
+                                 ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}"
+                                 Width="80"
+                                 Group="{Binding ElementName=PivotGridGroup1}" />
+                <dxpg:PivotGridField x:Name="fieldQuantity"
+                                 DataBinding="{dxpg:DataSourceColumnBinding Quantity}"
+                                 Area="DataArea"
+                                 Width="100"
+                                 Caption="Quantity"
+                                 CellFormat="f2"
+                                 Group="{Binding ElementName=PivotGridGroup2}" />
+                <dxpg:PivotGridField x:Name="fieldExtendedPrice"
+                                 DataBinding="{dxpg:DataSourceColumnBinding ExtendedPrice}"
+                                 Area="DataArea"
+                                 Width="100"
+                                 Caption="Extended Price"
+                                 Group="{Binding ElementName=PivotGridGroup2}" />
+            </dxpg:PivotGridControl.Fields>
+            <dxpg:PivotGridControl.Groups>
+                <dxpg:PivotGridGroup x:Name="PivotGridGroup1" FilterType="Included">
+                    <dxpg:PivotGridGroup.GroupFilterValues>
+                        <dxpg:GroupFilterValue Value="{local:Int32 2014}" />
+                    </dxpg:PivotGridGroup.GroupFilterValues>
+                </dxpg:PivotGridGroup>
+                <dxpg:PivotGridGroup x:Name="PivotGridGroup2" />
+            </dxpg:PivotGridControl.Groups>
+        </dxpg:PivotGridControl>
+    </DockPanel>
+</local:PivotGridDemoModule>

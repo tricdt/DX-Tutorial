@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="GanttDemo.GanttDemoRibbon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:GanttDemo"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+             xmlns:printing="clr-namespace:DevExpress.XtraPrinting;assembly=DevExpress.Printing.v22.2.Core"
+             xmlns:export="clr-namespace:GridDemo"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300">
+    <dxr:RibbonControl>
+        <dxr:RibbonPage Caption="Demo">
+            <dxr:RibbonPageGroup Caption="Print and Export" IsVisible="{DXBinding '@a($local:GanttDemoRibbon).ExportGantt != null'}">
+                <dxb:BarButtonItem Content="Print Preview"
+                                   Glyph="pack://application:,,,/GanttDemo;component/Images/Ribbon/Preview.svg"
+                                   Command="{DXBinding '@a($local:GanttDemoRibbon).ExportGantt.View.Commands.ShowRibbonPrintPreview'}" />
+                <dxb:BarSplitButtonItem Content="Data Aware Export"
+                                        Hint="An advanced data export engine that supports a lot of MS Excel data analysis capabilites.">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxdb:BarSplitButtonItemBehavior />
+                    </dxmvvm:Interaction.Behaviors>
+                    <dxb:PopupMenu>
+                        <dxb:BarButtonItem Content="Export to XLSX"
+                                           Glyph="pack://application:,,,/GanttDemo;component/Images/Ribbon/ExportToXLSX.svg"
+                                           ItemClick="{DXEvent Handler='$export:DemoModuleExportHelper.ExportToXlsx(@a($local:GanttDemoRibbon).ExportGantt.View)'}" />
+                        <dxb:BarButtonItem Content="Export to XLS"
+                                           Glyph="pack://application:,,,/GanttDemo;component/Images/Ribbon/ExportToXLS.svg"
+                                           ItemClick="{DXEvent Handler='$export:DemoModuleExportHelper.ExportToXls(@a($local:GanttDemoRibbon).ExportGantt.View)'}" />
+                        <dxb:BarButtonItem Content="Export to CSV"
+                                           Glyph="pack://application:,,,/GanttDemo;component/Images/Ribbon/ExportToCSV.svg"
+                                           ItemClick="{DXEvent Handler='$export:DemoModuleExportHelper.ExportToCsv(@a($local:GanttDemoRibbon).ExportGantt.View)'}" />
+                    </dxb:PopupMenu>
+                </dxb:BarSplitButtonItem>
+                <dxb:BarSplitButtonItem Content="WYSIWYG Export"
+                                        Hint="Allows you to export data in various formats and provides numerous customization options.">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxdb:BarSplitButtonItemBehavior />
+                    </dxmvvm:Interaction.Behaviors>
+                    <dxb:PopupMenu>
+                        <dxb:BarButtonItem Content="Export to PDF"
+                                           Glyph="pack://application:,,,/GanttDemo;component/Images/Ribbon/ExportToPDF.svg"
+                                           ItemClick="{DXEvent Handler='$export:DemoModuleWYSIWYGExportHelper.DoExport(@a($local:GanttDemoRibbon).ExportGantt.View, $printing:ExportFormat.Pdf)'}" />
+                        <dxb:BarButtonItem Content="Export to Image"
+                                           Glyph="pack://application:,,,/GanttDemo;component/Images/Ribbon/ExportToImage.svg"
+                                           ItemClick="{DXEvent Handler='$export:DemoModuleWYSIWYGExportHelper.DoExport(@a($local:GanttDemoRibbon).ExportGantt.View, $printing:ExportFormat.Image)'}" />
+                    </dxb:PopupMenu>
+                </dxb:BarSplitButtonItem>
+            </dxr:RibbonPageGroup>
+        </dxr:RibbonPage>
+    </dxr:RibbonControl>
+</UserControl>

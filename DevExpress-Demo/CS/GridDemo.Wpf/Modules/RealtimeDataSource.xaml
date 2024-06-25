@@ -1,0 +1,110 @@
+﻿<local:GridDemoModule x:Class="GridDemo.RealtimeDataSource"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800"
+                      DataContext="{dxmvvm:ViewModelSource local:RealtimeDataSourceViewModel}"
+                      ModuleUnloaded="{DXEvent 'Dispose()'}">
+    <!--#region Resources-->
+    <local:GridDemoModule.Resources>
+        <Style x:Key="NumericGridColumnStyle" TargetType="dxg:GridColumn">
+            <Setter Property="EditSettings">
+                <Setter.Value>
+                    <dxe:TextEditSettings MaskType="Numeric" Mask="f" MaskUseAsDisplayFormat="True" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Width" Value="2*" />
+        </Style>
+    </local:GridDemoModule.Resources>
+    <!--#endregion-->
+
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,8,12,12" MinWidth="300">
+                <CheckBox FontSize="12" Content="Use RealTimeSource" IsChecked="{Binding DataContext.UseRealTimeSource}" />
+                <GroupBox Margin="0,10,0,0" Header="Speed of change" Height="70" FontSize="12">
+                    <Slider Height="30"
+                            HorizontalAlignment="Stretch"
+                            Name="slider"
+                            VerticalAlignment="Center"
+                            Maximum="{Binding DataContext.MaxLoad}"
+                            Value="{Binding DataContext.Load}"
+                            TickPlacement="BottomRight" />
+                </GroupBox>
+                <!--#region Update per second chart-->
+                <dxc:ChartControl CrosshairEnabled="False" Margin="0,30,0,0" DataSource="{Binding DataContext.UpdateInfo}">
+                    <dxc:ChartControl.Diagram>
+                        <dxc:XYDiagram2D>
+                            <dxc:XYDiagram2D.Series>
+                                <dxc:LineScatterSeries2D x:Name="UPSDiagram" ArgumentScaleType="Numerical" MarkerSize="2" ArgumentDataMember="Time" ValueDataMember="Count">
+                                    <dxc:LineScatterSeries2D.Label>
+                                        <dxc:SeriesLabel Visible="True" ResolveOverlappingMode="HideOverlapped" />
+                                    </dxc:LineScatterSeries2D.Label>
+                                    <dxc:LineScatterSeries2D.PointOptions>
+                                        <dxc:PointOptions>
+                                            <dxc:PointOptions.ValueNumericOptions>
+                                                <dxc:NumericOptions Format="Number" />
+                                            </dxc:PointOptions.ValueNumericOptions>
+                                        </dxc:PointOptions>
+                                    </dxc:LineScatterSeries2D.PointOptions>
+                                </dxc:LineScatterSeries2D>
+                            </dxc:XYDiagram2D.Series>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D GridLinesVisible="False" TickmarksVisible="False" TickmarksMinorVisible="False" Visible="False" />
+                            </dxc:XYDiagram2D.AxisX>
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D TickmarksMinorVisible="True" TickmarksVisible="True" Logarithmic="True" Visible="False" >
+                                    <dxc:AxisY2D.WholeRange>
+                                        <dxc:Range dxc:AxisY2D.AlwaysShowZeroLevel="False" />
+                                    </dxc:AxisY2D.WholeRange>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl.Diagram>
+                    <dxc:ChartControl.Titles>
+                        <dxc:Title Dock="Top" HorizontalAlignment="Center" Content="Update per second" FontSize="16" />
+                    </dxc:ChartControl.Titles>
+                </dxc:ChartControl>
+                <!--#endregion-->
+            </StackPanel>
+        </ScrollViewer>
+        <dxg:GridControl Name="grid" Margin="0,0,0,0" ShowBorder="False" ItemsSource="{Binding Source}">
+            <dxg:GridControl.View>
+                <dxg:TableView AllowEditing="False"/>
+            </dxg:GridControl.View>
+            <!--#region Columns-->
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="Ticker" Width="3*" />
+                <dxg:GridColumn FieldName="Last" Style="{StaticResource NumericGridColumnStyle}" />
+                <dxg:GridColumn FieldName="ChgPercent" Header="Chg%" Width="3*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings MaskType="Numeric" Mask="p" MaskUseAsDisplayFormat="True" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Open" Style="{StaticResource NumericGridColumnStyle}" />
+                <dxg:GridColumn FieldName="High" Style="{StaticResource NumericGridColumnStyle}" />
+                <dxg:GridColumn FieldName="Low" Style="{StaticResource NumericGridColumnStyle}" />
+                <dxg:GridColumn FieldName="DayVal" Width="2*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ProgressBarEditSettings Minimum="300" Maximum="1000" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <!--#endregion-->
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

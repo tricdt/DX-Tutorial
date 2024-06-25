@@ -1,0 +1,39 @@
+﻿<UserControl
+    x:Class="GanttDemo.Examples.CustomizeWorkingTime"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxgn="http://schemas.devexpress.com/winfx/2008/xaml/gantt"
+    xmlns:local="clr-namespace:GanttDemo.Examples">
+
+    <UserControl.DataContext>
+        <local:ProjectTaskViewModel />
+    </UserControl.DataContext>
+
+    <dxgn:GanttControl ItemsSource="{Binding Tasks}">
+        <dxgn:GanttControl.View>
+            <!--#region !-->
+            <dxgn:GanttView
+                AutoExpandAllNodes="True"
+                NonworkingDayDisplayMode="Show"
+                NonworkingTimeDisplayMode="Show"
+                TreeListWidth="0">
+                <dxgn:GanttView.WorkingTimeRules>
+                    <dxgn:WorkingTimeRule Recurrence="{dxgn:Daily}" WorkingTime="9:0:0-13:0:0, 14:0:0-18:0:0" />
+                    <dxgn:WorkingTimeRule Recurrence="{dxgn:Weekly DayOfWeek=Thursday}" WorkingTime="9:0:0-13:0:0, 14:0:0-17:0:0" />
+                </dxgn:GanttView.WorkingTimeRules>
+                <dxgn:GanttView.WorkdayRules>
+                    <dxgn:WorkdayRule IsWorkday="True" Recurrence="{dxgn:Weekly DayOfWeek=Sunday}" />
+                    <dxgn:WorkdayRule IsWorkday="False" Recurrence="{dxgn:Weekly DayOfWeek=Friday}" />
+                    <dxgn:WorkdayRule IsWorkday="False" Recurrence="{dxgn:Weekly DayOfWeek=Saturday}" />
+                    <dxgn:WorkdayRule IsWorkday="False" Recurrence="{dxgn:YearlyByDayOfWeek Month=11, DayOfWeek=Thursday, Week=4}" />
+                    <dxgn:WorkdayRule IsWorkday="False">
+                        <dxgn:SpecificDays Days="{x:Static local:CustomizeWorkingTime.Holidays}" />
+                    </dxgn:WorkdayRule>
+                    <dxgn:WorkdayRule IsWorkday="False" Recurrence="{dxgn:Weekly DayOfWeek=Friday, Start=1/1/2019, Until=7/1/2019}" />
+                    <dxgn:WorkdayRule IsWorkday="False" Recurrence="{dxgn:Weekly DayOfWeek=Saturday, Interval=2}" />
+                </dxgn:GanttView.WorkdayRules>
+            </dxgn:GanttView>
+            <!--#endregion-->
+        </dxgn:GanttControl.View>
+    </dxgn:GanttControl>
+</UserControl>

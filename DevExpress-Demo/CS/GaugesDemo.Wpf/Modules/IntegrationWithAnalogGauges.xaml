@@ -1,0 +1,167 @@
+﻿<local:GaugesDemoModule x:Class="GaugesDemo.IntegrationWithAnalogGauges"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
+                        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                        xmlns:local="clr-namespace:GaugesDemo"
+                        mc:Ignorable="d"
+                        d:DesignHeight="676"
+                        d:DesignWidth="1375">
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <GroupBox Header="Values" Margin="12,5,12,12" MinWidth="210">
+                <StackPanel>
+                    <TextBlock Text="Pressure" />
+                    <dxe:TrackBarEdit Minimum="0"
+                                      Maximum="200"
+                                      TickFrequency="0"
+                                      Value="{Binding ElementName=pressureNeedle, Path=Value, Mode=TwoWay}"/>
+                    <TextBlock Text="Temperature" />
+                    <dxe:TrackBarEdit Minimum="0"
+                                      Maximum="300"
+                                      TickFrequency="0"
+                                      Value="{Binding ElementName=temperatureMarker, Path=Value, Mode=TwoWay}"/>
+                </StackPanel>
+            </GroupBox>
+        </ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="10*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="592" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="320" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                           Text="Pressure"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           FontSize="18"
+                           Width="320"
+                           TextAlignment="Center"
+                           Margin="0,0,0,30" />
+                <TextBlock Grid.Row="0"
+                           Text="Temperature"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Bottom"
+                           FontSize="18"
+                           Width="150"
+                           TextAlignment="Center"
+                           Margin="0,0,0,30" />
+                <dxga:LinearGaugeControl Grid.Row="1" HorizontalAlignment="Right" Width="150" VerticalAlignment="Stretch">
+                    <dxga:LinearGaugeControl.Layers>
+                        <dxga:LinearGaugeLayer />
+                    </dxga:LinearGaugeControl.Layers>
+                    <dxga:LinearGaugeControl.Model>
+                        <dxga:LinearEcoModel />
+                    </dxga:LinearGaugeControl.Model>
+                    <dxga:LinearScale StartValue="0" EndValue="300" Margin="23,0,0,15">
+                        <dxga:LinearScale.Markers>
+                            <dxga:LinearScaleMarker x:Name="temperatureMarker" IsInteractive="True" Value="0" />
+                        </dxga:LinearScale.Markers>
+                        <dxga:LinearScale.Ranges>
+                            <dxga:LinearScaleRange StartValue="0" EndValue="200" />
+                            <dxga:LinearScaleRange StartValue="200" EndValue="250" />
+                            <dxga:LinearScaleRange StartValue="250" EndValue="300" />
+                        </dxga:LinearScale.Ranges>
+                        <dxga:LinearScale.CustomElements>
+                            <dxga:ScaleCustomElement HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-10,0,0" FontSize="14">
+                                <TextBlock Text="°C" />
+                            </dxga:ScaleCustomElement>
+                        </dxga:LinearScale.CustomElements>
+                    </dxga:LinearScale>
+                </dxga:LinearGaugeControl>
+                <dxga:StateIndicatorControl dxga:AnalogGaugeControl.ValueIndicator="{Binding ElementName=temperatureMarker}"
+                                            Grid.Row="1"
+                                            Width="30"
+                                            Height="30"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Bottom"
+                                            Margin="0,0,59,20">
+                    <dxga:StateIndicatorControl.AdditionalStates>
+                        <dxga:State>
+                            <dxga:State.Presentation>
+                                <dxga:LampGreenStatePresentation />
+                            </dxga:State.Presentation>
+                        </dxga:State>
+                        <dxga:State>
+                            <dxga:State.Presentation>
+                                <dxga:LampYellowStatePresentation />
+                            </dxga:State.Presentation>
+                        </dxga:State>
+                        <dxga:State>
+                            <dxga:State.Presentation>
+                                <dxga:LampRedStatePresentation />
+                            </dxga:State.Presentation>
+                        </dxga:State>
+                    </dxga:StateIndicatorControl.AdditionalStates>
+                </dxga:StateIndicatorControl>
+                <dxga:CircularGaugeControl Grid.Row="1" HorizontalAlignment="Left" Width="320">
+                    <dxga:CircularGaugeControl.Model>
+                        <dxga:CircularEcoModel />
+                    </dxga:CircularGaugeControl.Model>
+                    <dxga:ArcScale StartValue="0" EndValue="200">
+                        <dxga:ArcScale.Layers>
+                            <dxga:ArcScaleLayer />
+                        </dxga:ArcScale.Layers>
+                        <dxga:ArcScale.Needles>
+                            <dxga:ArcScaleNeedle IsInteractive="True" x:Name="pressureNeedle" />
+                        </dxga:ArcScale.Needles>
+                        <dxga:ArcScale.Ranges>
+                            <dxga:ArcScaleRange StartValue="0" EndValue="100" />
+                            <dxga:ArcScaleRange StartValue="100" EndValue="150" />
+                            <dxga:ArcScaleRange StartValue="150" EndValue="200" />
+                        </dxga:ArcScale.Ranges>
+                        <dxga:ArcScale.CustomElements>
+                            <dxga:ScaleCustomElement HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,95,0,0" FontSize="14">
+                                <TextBlock Text="bar" />
+                            </dxga:ScaleCustomElement>
+                        </dxga:ArcScale.CustomElements>
+                    </dxga:ArcScale>
+                </dxga:CircularGaugeControl>
+                <dxga:StateIndicatorControl dxga:AnalogGaugeControl.ValueIndicator="{Binding ElementName=pressureNeedle}"
+                                            Grid.Row="1"
+                                            Width="40"
+                                            Height="40"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Margin="142,160,0,0">
+                    <dxga:StateIndicatorControl.AdditionalStates>
+                        <dxga:State>
+                            <dxga:State.Presentation>
+                                <dxga:LampGreenStatePresentation />
+                            </dxga:State.Presentation>
+                        </dxga:State>
+                        <dxga:State>
+                            <dxga:State.Presentation>
+                                <dxga:LampYellowStatePresentation />
+                            </dxga:State.Presentation>
+                        </dxga:State>
+                        <dxga:State>
+                            <dxga:State.Presentation>
+                                <dxga:LampRedStatePresentation />
+                            </dxga:State.Presentation>
+                        </dxga:State>
+                    </dxga:StateIndicatorControl.AdditionalStates>
+                </dxga:StateIndicatorControl>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</local:GaugesDemoModule>

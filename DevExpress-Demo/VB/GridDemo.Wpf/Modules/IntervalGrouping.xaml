@@ -1,0 +1,72 @@
+﻿<local:GridDemoModule x:Class="GridDemo.IntervalGrouping"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dxdata="clr-namespace:DevExpress.XtraGrid;assembly=DevExpress.Data.v22.2"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxrudex="http://schemas.devexpress.com/winfx/2008/xaml/reports/userdesignerextensions"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800"
+                      x:Name="root">
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" ReportService="{x:Reference rmsIntervalGrouping}" />
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Header="Group Mode" Margin="0,5,0,8">
+                    <StackPanel>
+                        <RadioButton Checked="{DXEvent '@e(root).SetInterval(`Country`, $dxdata:ColumnGroupInterval.Alphabetical)'}" IsChecked="True">Alphabetical</RadioButton>
+                        <RadioButton Checked="{DXEvent '@e(root).SetInterval(`OrderDate`, $dxdata:ColumnGroupInterval.DateMonth)'}">Date: Month</RadioButton>
+                        <RadioButton Checked="{DXEvent '@e(root).SetInterval(`OrderDate`, $dxdata:ColumnGroupInterval.DateYear)'}">Date: Year</RadioButton>
+                        <RadioButton Checked="{DXEvent '@e(root).SetInterval(`OrderDate`, $dxdata:ColumnGroupInterval.DateRange)'}">Date: Range</RadioButton>
+                        <RadioButton Checked="{DXEvent '@e(root).SetSortMode(`UnitPrice`)'}">Custom Interval</RadioButton>
+                    </StackPanel>
+                </GroupBox>
+                <dxe:CheckEdit IsChecked="{Binding Path=View.AllowDateTimeGroupIntervalMenu, Mode=TwoWay}" Content="Allow DateTime Group Interval Menu" />
+                <local:RecentReports ReportService="{x:Reference rmsIntervalGrouping}" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxg:GridControl Name="grid"
+                         ItemsSource="{x:Static local:GroupIntervalData.Invoices}"
+                         CustomColumnGroup="grid_CustomColumnGroup"
+                         CustomGroupDisplayText="view_CustomGroupDisplayText"
+                         ShowBorder="False">
+            <!--#region Columns-->
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn x:Name="colCountry" FieldName="Country" MinWidth="30" Width="*" />
+                <dxg:GridColumn FieldName="City" MinWidth="30" Width="*" />
+                <dxg:GridColumn x:Name="colOrderDate" FieldName="OrderDate" MinWidth="30" Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:DateEditSettings DisplayFormat="d" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn x:Name="colUnitPrice" FieldName="UnitPrice" MinWidth="30" Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="$0.00" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Region" MinWidth="30" Width="*" />
+            </dxg:GridControl.Columns>
+            <!--#endregion-->
+            <dxg:GridControl.View>
+                <dxg:TableView ShowGroupedColumns="True" NavigationStyle="Row" Name="view" AllowGrouping="False">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxrudex:GridReportManagerService Name="rmsIntervalGrouping" />
+                    </dxmvvm:Interaction.Behaviors>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

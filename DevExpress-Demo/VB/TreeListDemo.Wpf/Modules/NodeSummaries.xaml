@@ -1,0 +1,96 @@
+﻿<local:TreeListDemoModule x:Class="TreeListDemo.NodeSummaries"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:local="clr-namespace:TreeListDemo"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          mc:Ignorable="d"
+                          d:DesignHeight="400"
+                          d:DesignWidth="800">
+    <local:TreeListDemoModule.Resources>
+        <local:SpaceObjectsViewModel x:Key="spaceObjectsViewModel" />
+    </local:TreeListDemoModule.Resources>
+    <DockPanel>
+        <local:TreeListDemoRibbon DockPanel.Dock="Top" ExportTreeList="{x:Reference treeList}" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <dxe:CheckEdit Content="Show Node Footers"
+                                   Margin="0,8,0,4"
+                                   x:Name="chkShowNodeFooters"
+                                   IsChecked="{Binding Path=View.ShowNodeFooters, Mode=TwoWay}" />
+                <dxe:CheckEdit Content="Hide Footers For Single Nodes"
+                                   x:Name="chkHideSingleNodeFooters"
+                                   Margin="0,0,0,4"
+                                   IsEnabled="{Binding IsChecked, ElementName=chkShowNodeFooters}"
+                                   IsChecked="True">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxmvvm:MethodToCommandBehavior Source="{Binding ElementName=treeList}" Method="RefreshData" />
+                    </dxmvvm:Interaction.Behaviors>
+                </dxe:CheckEdit>
+                <dxe:CheckEdit Content="Allow Recursive Node Summary Calculation"
+                                   IsChecked="{Binding Path=View.AllowRecursiveNodeSummaryCalculation, Mode=TwoWay}" />
+            </StackPanel>
+        </ScrollViewer>
+        <dxg:TreeListControl x:Name="treeList" DataContext="{StaticResource spaceObjectsViewModel}" ItemsSource="{Binding Path=SpaceObjects}">
+            <dxg:TreeListControl.TotalSummary>
+                <dxg:TreeListSummaryItem FieldName="Name" SummaryType="Count" />
+                <dxg:TreeListSummaryItem FieldName="Mass10pow21kg" SummaryType="Max" />
+                <dxg:TreeListSummaryItem FieldName="Mass10pow21kg" SummaryType="Min" />
+            </dxg:TreeListControl.TotalSummary>
+            <dxg:TreeListControl.Columns>
+                <dxg:TreeListColumn FieldName="Name" Header="Name" Width="*" />
+                <dxg:TreeListColumn FieldName="MeanRadiusInKM" Header="Mean radius (km)" Width="*">
+                    <dxg:TreeListColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="f" />
+                    </dxg:TreeListColumn.EditSettings>
+                </dxg:TreeListColumn>
+                <dxg:TreeListColumn FieldName="Volume10pow9KM3" Header="Volume (10⁹ km³)" Width="*">
+                    <dxg:TreeListColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="f" />
+                    </dxg:TreeListColumn.EditSettings>
+                </dxg:TreeListColumn>
+                <dxg:TreeListColumn FieldName="Mass10pow21kg" Header="Mass (10²¹kg)" Width="*">
+                    <dxg:TreeListColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="f" />
+                    </dxg:TreeListColumn.EditSettings>
+                </dxg:TreeListColumn>
+                <dxg:TreeListColumn FieldName="DensitygBycm3" Header="Density (g/cm³)" Width="*">
+                    <dxg:TreeListColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="f" />
+                    </dxg:TreeListColumn.EditSettings>
+                </dxg:TreeListColumn>
+                <dxg:TreeListColumn FieldName="SurfaceGravitymBys2" Header="Surface gravity (m/s²)" Width="*">
+                    <dxg:TreeListColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="f" />
+                    </dxg:TreeListColumn.EditSettings>
+                </dxg:TreeListColumn>
+            </dxg:TreeListControl.Columns>
+            <dxg:TreeListControl.View>
+                <dxg:TreeListView x:Name="view"
+                                  KeyFieldName="ObjectId"
+                                  ParentFieldName="ParentId"
+                                  NavigationStyle="Row"
+                                  ShowNodeFooters="True"
+                                  TotalSummaryPosition="Bottom"
+                                  ShowingNodeFooter="OnShowingNodeFooter"
+                                  ExpandStateBinding="{Binding IsExpanded}">
+                    <dxg:TreeListView.NodeSummary>
+                        <dxg:TreeListSummaryItem FieldName="MeanRadiusInKM" SummaryType="Max" />
+                        <dxg:TreeListSummaryItem FieldName="MeanRadiusInKM" SummaryType="Min" />
+                        <dxg:TreeListSummaryItem FieldName="Mass10pow21kg" SummaryType="Max" />
+                        <dxg:TreeListSummaryItem FieldName="Mass10pow21kg" SummaryType="Min" />
+                    </dxg:TreeListView.NodeSummary>
+                </dxg:TreeListView>
+            </dxg:TreeListControl.View>
+        </dxg:TreeListControl>
+    </DockPanel>
+</local:TreeListDemoModule>

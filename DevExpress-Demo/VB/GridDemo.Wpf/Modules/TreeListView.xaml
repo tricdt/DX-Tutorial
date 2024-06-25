@@ -1,0 +1,178 @@
+﻿<local:GridDemoModule x:Class="GridDemo.TreeListView"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800">
+    <local:GridDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/GridDemo;component/ModuleResources/SharedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:TotalSummaryPositionToBooleanConverter x:Key="TotalSummaryPositionToBooleanConverter" />
+        </ResourceDictionary>
+    </local:GridDemoModule.Resources>
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference treeList}" />
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Header="Customization Options" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit Margin="0,0,0,4" IsChecked="{Binding Path=View.AllowSorting, Mode=TwoWay}" Content="Allow Sorting" />
+                        <dxe:CheckEdit Margin="0,0,0,4" IsChecked="{Binding Path=View.AllowColumnMoving, Mode=TwoWay}" Content="Allow Moving" />
+                        <dxe:CheckEdit Margin="0,0,0,4" IsChecked="{Binding Path=View.AllowResizing, Mode=TwoWay}" Content="Allow Resizing" />
+                        <dxe:CheckEdit Margin="0,0,0,4" IsChecked="{Binding Path=View.ShowIndicator, Mode=TwoWay}" Content="Show Indicator" />
+                        <dxe:CheckEdit Margin="0,0,0,4" IsChecked="{Binding Path=View.AutoWidth, Mode=TwoWay}" Content="Column Auto Width" />
+                        <dxe:CheckEdit IsChecked="{Binding Path=View.ShowDataNavigator, Mode=TwoWay}" Content="Show Data Navigator" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Scrolling Options" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.AllowCascadeUpdate, Mode=TwoWay}"
+                                       Content="Allow Cascade Update"
+                                       ToolTipService.ToolTip="Makes vertical scrolling perfectly fast and smooth." />
+                        <dxe:CheckEdit Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.AllowPerPixelScrolling, Mode=TwoWay}"
+                                       Content="Allow Per Pixel Scrolling"
+                                       ToolTipService.ToolTip="Specifies whether per-pixel scrolling is enabled." />
+                        <dxe:CheckEdit IsEnabled="{Binding View.AllowPerPixelScrolling}"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.ScrollAnimationDuration, Mode=TwoWay, Converter={local:ScrollingAnimationDurationToBooleanConverter}}"
+                                       Content="Allow Scrolling Animation"
+                                       ToolTipService.ToolTip="Turn on this option to provide visual feedback and enhance interactivity when scrolling rows." />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Appearance Options" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit Margin="0,0,0,4" IsChecked="{Binding Path=View.UseEvenRowBackground, Mode=TwoWay}" Content="Use Even Row Background" />
+                        <dxe:CheckEdit Name="showVerticalLinesCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.ShowVerticalLines, Mode=TwoWay}"
+                                       Content="Show Vertical Lines" />
+                        <dxe:CheckEdit Name="showHorizontalLinesCheckEdit"
+                                       Margin="0,0,0,4"
+                                       IsChecked="{Binding Path=View.ShowHorizontalLines, Mode=TwoWay}"
+                                       Content="Show Horizontal Lines" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Navigation Style" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit Margin="0,0,0,0"
+                                     Background="{x:Null}"
+                                     ShowBorder="False"
+                                     x:Name="NavigationStyleComboBox"
+                                     ItemsSource="{dxe:EnumItemsSource EnumType=dxg:GridViewNavigationStyle}"
+                                     EditValue="{Binding Path=View.NavigationStyle, Mode=TwoWay}"
+                                     ToolTipService.ToolTip="Specifies whether row and/or cell focusing is allowed.">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Summary Options" Margin="0,5,0,0">
+                    <StackPanel>
+                        <RadioButton IsChecked="{Binding Path=View.ShowFixedTotalSummary, Mode=TwoWay}">Show Fixed Summary Panel</RadioButton>
+                        <RadioButton IsChecked="{Binding Path=View.TotalSummaryPosition, Mode=TwoWay, Converter={StaticResource TotalSummaryPositionToBooleanConverter}}">Show Summary Panel</RadioButton>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Filtering Options" Margin="0,5,0,12">
+                    <StackPanel>
+                        <dxe:ListBoxEdit Margin="0,0,0,0"
+                                         Background="{x:Null}"
+                                         ShowBorder="False"
+                                         ItemsSource="{dxe:EnumItemsSource EnumType=dxg:ColumnFilterPopupMode }"
+                                         EditValue="{Binding Path=View.ColumnFilterPopupMode, Mode=TwoWay}">
+                            <dxe:ListBoxEdit.StyleSettings>
+                                <dxe:RadioListBoxEditStyleSettings />
+                            </dxe:ListBoxEdit.StyleSettings>
+                        </dxe:ListBoxEdit>
+                    </StackPanel>
+                </GroupBox>
+                <Button Command="{Binding View.Commands.ShowRibbonPrintPreview}">Show Print Preview</Button>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxg:GridControl x:Name="treeList" ItemsSource="{x:Static dxdb:EmployeesWithPhotoData.DataSource}" ShowBorder="False">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn Name="colFullName"
+                                FieldName="FullName"
+                                UnboundDataType="{x:Type sys:String}"
+                                UnboundExpression="[FirstName] + ' ' + [LastName]"
+                                ReadOnly="True"
+                                Image="{local:DemoHeaderImage FullName}" />
+                <dxg:GridColumn Name="colJobTitle" FieldName="JobTitle" Image="{local:DemoHeaderImage JobTitle}" />
+                <dxg:GridColumn Name="colCountry"
+                                FieldName="CountryRegionName"
+                                Header="Country"
+                                Width="130"
+                                Image="{local:DemoHeaderImage Country}"
+                                Style="{StaticResource colCountryNameStyle}" />
+                <dxg:GridColumn Name="colBirthDate"
+                                FieldName="BirthDate"
+                                Width="80"
+                                Image="{local:DemoHeaderImage BirthDate}"
+                                CellTemplate="{StaticResource colBirthDateCellTemplate}">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:DateEditSettings DisplayFormat="d" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn Name="colInfo" FieldName="Phone" AllowSorting="False" Image="{local:DemoHeaderImage Phone}" />
+                <dxg:GridColumn FieldName="BirthDateDiffDays"
+                                ShowInColumnChooser="False"
+                                UnboundDataType="{x:Type sys:Int32}"
+                                Visible="False"
+                                UnboundExpression="DateDiffDay(Today(), AddYears([BirthDate], DateDiffYear([BirthDate], Today())))" />
+                <dxg:GridColumn FieldName="DaysTillBirthDate"
+                                AllowUnboundExpressionEditor="True"
+                                UnboundDataType="{x:Type sys:Int32}"
+                                Visible="False"
+                                UnboundExpression="Iif([BirthDateDiffDays] &gt; 0, [BirthDateDiffDays], [BirthDateDiffDays] + DateDiffDay(Today(), AddYears(Today(), 1)))" />
+                <dxg:GridColumn FieldName="BalloonVisibility"
+                                AllowUnboundExpressionEditor="True"
+                                ShowInColumnChooser="False"
+                                UnboundDataType="{x:Type sys:Boolean}"
+                                Visible="False"
+                                UnboundExpression="Iif([DaysTillBirthDate] &lt; 50, 'True', 'False')" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem FieldName="FullName" SummaryType="Count" />
+                <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+            </dxg:GridControl.TotalSummary>
+            <dxg:GridControl.View>
+                <dxg:TreeListView x:Name="view"
+                                  KeyFieldName="Id"
+                                  ParentFieldName="ParentId"
+                                  AutoWidth="True"
+                                  AllowPerPixelScrolling="True"
+                                  AutoExpandAllNodes="True"
+                                  ShowFixedTotalSummary="True"
+                                  ShowNodeImages="True"
+                                  AllowScrollAnimation="True"
+                                  PrintNodeImages="True"
+                                  AllowPrintColumnHeaderImage="True" InitNewNode="OnInitNewNode">
+                    <dxmvvm:Interaction.Triggers>
+                        <dxmvvm:EventToCommand EventName="Loaded" Command="{Binding Commands.ExpandAllNodes, ElementName=view}" />
+                    </dxmvvm:Interaction.Triggers>
+                    <dxg:TreeListView.NodeImageSelector>
+                        <local:EmployeeCategoryImageSelector />
+                    </dxg:TreeListView.NodeImageSelector>
+                </dxg:TreeListView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

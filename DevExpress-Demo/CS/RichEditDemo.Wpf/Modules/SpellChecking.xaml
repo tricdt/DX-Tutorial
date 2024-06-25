@@ -1,0 +1,41 @@
+﻿<local:RichEditDemoModule xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                          xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit"
+                          xmlns:dxspch="http://schemas.devexpress.com/winfx/2008/xaml/spellchecker"
+                          xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                          xmlns:local="clr-namespace:RichEditDemo"
+                          x:Class="RichEditDemo.SpellChecking"
+                          Height="400"
+                          Width="800">
+    <dxre:RichEditControl x:Name="richEdit"
+                          CommandBarStyle="Ribbon"
+                          VerticalAlignment="Stretch"
+                          ShowBorder="False"
+                          DocumentSource="{DXBinding '$local:DemoUtils.GetRelativePath(`SpellChecker.rtf`)'}">
+        <dxmvvm:Interaction.Behaviors>
+            <dxspch:RichEditSpellChecker x:Name="spellChecker" Culture="en-US" CheckAsYouType="True" />
+        </dxmvvm:Interaction.Behaviors>
+        <dxre:RichEditControl.RibbonActions>
+            <dxb:UpdateAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_Review}" PropertyName="IsSelected" Value="True" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonCategory_HeaderFooterTools}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonCategory_TableTools}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonCategory_PictureTools}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_Insert}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_PageLayout}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_References}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_MailMerge}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonGroup_Review_Protect}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonGroup_Review_Comment}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonGroup_Review_Tracking}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonGroup_Review_Changes}" />
+            <dxb:RemoveAction ElementName="{x:Static dxre:DefaultBarItemNames.RibbonPage_View}" />
+            <dxb:InsertAction ContainerName="{x:Static dxre:DefaultBarItemNames.RibbonGroup_Review_Proofing}">
+                <dxb:BarCheckItem Content="Check As You Type"
+                                  IsChecked="{DXBinding '@e(spellChecker).CheckAsYouType'}"
+                                  Glyph="/RichEditDemo;component/Images/SpellCheckAsYouType_16x16.png"
+                                  LargeGlyph="/RichEditDemo;component/Images/SpellCheckAsYouType_32x32.png" />
+            </dxb:InsertAction>
+        </dxre:RichEditControl.RibbonActions>
+    </dxre:RichEditControl>
+</local:RichEditDemoModule>

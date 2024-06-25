@@ -1,0 +1,99 @@
+﻿<XtraSerializer version="1.0" application="GridControl">
+  <property name="#LayoutVersion" isnull="true" />
+  <property name="$GridControl" iskey="true" value="grid">
+    <property name="AutoExpandAllGroups">true</property>
+    <property name="TotalSummary" iskey="true" value="1">
+      <property name="Item1" isnull="true" iskey="true">
+        <property name="SummaryType">Count</property>
+        <property name="FieldName">CompanyName</property>
+        <property name="Alignment">Right</property>
+      </property>
+    </property>
+    <property name="GroupSummary" iskey="true" value="1">
+      <property name="Item1" isnull="true" iskey="true">
+        <property name="SummaryType">Count</property>
+        <property name="Alignment">Default</property>
+      </property>
+    </property>
+    <property name="GroupCount">1</property>
+    <property name="Columns" iskey="true" value="11">
+      <property name="Item1" isnull="true" iskey="true">
+        <property name="VisibleIndex">0</property>
+        <property name="Fixed">Left</property>
+        <property name="FieldName">CompanyName</property>
+        <property name="Name">colCompanyName</property>
+        <property name="ActualWidth">173</property>
+      </property>
+      <property name="Item2" isnull="true" iskey="true">
+        <property name="VisibleIndex">1</property>
+        <property name="FieldName">Phone</property>
+        <property name="Name">colPhone</property>
+      </property>
+      <property name="Item3" isnull="true" iskey="true">
+        <property name="VisibleIndex">2</property>
+        <property name="FieldName">ContactName</property>
+        <property name="Name">colContactName</property>
+        <property name="ActualWidth">126</property>
+      </property>
+      <property name="Item4" isnull="true" iskey="true">
+        <property name="VisibleIndex">3</property>
+        <property name="FieldName">ContactTitle</property>
+        <property name="Name">colContactTitle</property>
+        <property name="ActualWidth">144</property>
+      </property>
+      <property name="Item5" isnull="true" iskey="true">
+        <property name="Visible">false</property>
+        <property name="VisibleIndex">4</property>
+        <property name="FieldName">Region</property>
+        <property name="Name">colRegion</property>
+      </property>
+      <property name="Item6" isnull="true" iskey="true">
+        <property name="FieldName">Country</property>
+        <property name="Name">colCountry</property>
+      </property>
+      <property name="Item7" isnull="true" iskey="true">
+        <property name="VisibleIndex">4</property>
+        <property name="FieldName">City</property>
+        <property name="Name">colCity</property>
+      </property>
+      <property name="Item8" isnull="true" iskey="true">
+        <property name="VisibleIndex">5</property>
+        <property name="FieldName">Address</property>
+        <property name="Name">colAddress</property>
+        <property name="ActualWidth">159</property>
+      </property>
+      <property name="Item9" isnull="true" iskey="true">
+        <property name="Visible">false</property>
+        <property name="VisibleIndex">6</property>
+        <property name="FieldName">PostalCode</property>
+        <property name="Name">colPostalCode</property>
+      </property>
+      <property name="Item10" isnull="true" iskey="true">
+        <property name="VisibleIndex">6</property>
+        <property name="FieldName">Fax</property>
+        <property name="Name">colFax</property>
+      </property>
+      <property name="Item11" isnull="true" iskey="true">
+        <property name="Visible">false</property>
+        <property name="VisibleIndex">7</property>
+        <property name="FieldName">CustomerID</property>
+        <property name="Name">colCustomerID</property>
+      </property>
+    </property>
+    <property name="View" isnull="true" iskey="true">
+      <property name="ShowFixedTotalSummary">true</property>
+      <property name="ShowAutoFilterRow">true</property>
+      <property name="ColumnChooserState" isnull="true" iskey="true">
+        <property name="Size">220,250</property>
+        <property name="Location">411,259</property>
+      </property>
+    </property>
+    <property name="SortInfo" iskey="true" value="1">
+      <property name="Item1" isnull="true" iskey="true">
+        <property name="SortOrder">Ascending</property>
+        <property name="FieldName">Country</property>
+      </property>
+    </property>
+    <property name="GroupSummarySortInfo" iskey="true" value="0" />
+  </property>
+</XtraSerializer>

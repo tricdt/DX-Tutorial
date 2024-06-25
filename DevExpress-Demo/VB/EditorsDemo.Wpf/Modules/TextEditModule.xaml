@@ -1,0 +1,166 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.TextEditModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:local="clr-namespace:EditorsDemo"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12" MinWidth="250">
+                <GroupBox Header="Simple Sample Properties">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Edit value:" VerticalAlignment="Center" Margin="0,0,6,3" />
+                        <dxe:TextEdit IsReadOnly="True" Grid.Column="1" Grid.Row="0" Text="{Binding ElementName=editor, Path=EditValue, Mode=OneWay}" Margin="0,0,0,6" />
+                        <dxe:CheckEdit x:Name="readOnly" Content="Is read-only" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,6" />
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Maximum length:" VerticalAlignment="Center" Margin="0,0,6,3" />
+                        <dxe:SpinEdit x:Name="maxLength" MinValue="0" IsFloatValue="False" EditValue="0" Grid.Column="1" Grid.Row="2" Margin="0,0,0,6"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Character casing:" VerticalAlignment="Center" Margin="0,0,6,0" />
+                        <dxe:ComboBoxEdit x:Name="casing" Grid.Column="1" Grid.Row="3" SelectedIndex="0" IsTextEditable="False">
+                            <CharacterCasing>Normal</CharacterCasing>
+                            <CharacterCasing>Lower</CharacterCasing>
+                            <CharacterCasing>Upper</CharacterCasing>
+                        </dxe:ComboBoxEdit>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Null Text Properties" Margin="0,12,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Edit value:" VerticalAlignment="Center" Margin="0,0,6,3" />
+                        <dxe:ButtonEdit x:Name="txtEditValue" Grid.Column="1" Grid.Row="0" Margin="0,0,0,6" Text="Hello world!" AllowDefaultButton="False">
+                            <dxe:ButtonEdit.Buttons>
+                                <dxe:ButtonInfo ToolTipService.ToolTip="Clear value" GlyphKind="Cancel" Click="ButtonInfo_Click" />
+                            </dxe:ButtonEdit.Buttons>
+                        </dxe:ButtonEdit>
+                        <dxe:CheckEdit x:Name="chShowNullText" Grid.Column="0" Grid.Row="1" Content="Show null text" Margin="0,0,0,6" IsChecked="True" />
+                        <dxe:CheckEdit x:Name="chShowNullTextIfFocused" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Content="Show null text if focused" Margin="0,0,0,6" />
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Null text:" VerticalAlignment="Center" Margin="0,0,6,3" />
+                        <dxe:TextEdit x:Name="txtNullText" Grid.Column="1" Grid.Row="3" Margin="0,0,0,6" Text="Enter your text..." />
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Null value:" VerticalAlignment="Center" Margin="0,0,6,3" />
+                        <dxe:TextEdit x:Name="txtNullValue" Grid.Column="1" Grid.Row="4" Margin="0,0,0,6" Text="Hello world!" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Numeric Formatting" Margin="0,12,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Format type:" VerticalAlignment="Center" Margin="0,0,6,3" />
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Edit value:" VerticalAlignment="Center" Margin="0,0,6,0" />
+                        <dxe:ComboBoxEdit x:Name="numericFormat"
+                                          SelectedIndex="0"
+                                          Grid.Column="1"
+                                          Grid.Row="0"
+                                          IsTextEditable="False"
+                                          DisplayMember="FormatName"
+                                          ShowNullTextForEmptyValue="False"
+                                          ValueMember="FormatString"
+                                          Margin="0,0,0,6"/>
+                        <dxe:ComboBoxEdit x:Name="numericValue" Grid.Column="1" Grid.Row="1" SelectedIndex="1" IsTextEditable="False" />
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Date and Time Formatting" Margin="0,12,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Format type:" VerticalAlignment="Center" Margin="0,0,6,3" />
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Edit value:" VerticalAlignment="Center" Margin="0,0,6,0" />
+                        <dxe:ComboBoxEdit x:Name="dateTimeFormat"
+                                          SelectedIndex="0"
+                                          Grid.Column="1"
+                                          Grid.Row="0"
+                                          IsTextEditable="False"
+                                          DisplayMember="FormatName"
+                                          ShowNullTextForEmptyValue="False"
+                                          ValueMember="FormatString"
+                                          Margin="0,0,0,6"/>
+                        <dxe:DateEdit x:Name="dDate" Grid.Column="1" Grid.Row="1" IsTextEditable="False" />
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid Width="400"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Top"
+              Margin="0,60,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,24">
+                <Label Content="Simple Sample" />
+                <dxe:TextEdit x:Name="editor"
+                              Text="I'm a Text Edit"
+                              VerticalAlignment="Center"
+                              MaxLength="{Binding ElementName=maxLength, Path=Value, Mode=TwoWay}"
+                              IsReadOnly="{Binding ElementName=readOnly, Path=IsChecked, Mode=TwoWay}">
+                    <dxe:TextEdit.CharacterCasing>
+                        <Binding ElementName="casing" Path="SelectedItem" Mode="TwoWay" />
+                    </dxe:TextEdit.CharacterCasing>
+                </dxe:TextEdit>
+            </StackPanel>
+            <StackPanel Margin="0,24" Grid.Row="1">
+                <Label Content="Null Text" />
+                <dxe:TextEdit x:Name="nullTextEditor"
+                              EditValue="{Binding Path=EditValue, ElementName=txtEditValue, Mode=TwoWay}"
+                              NullText="{Binding Path=EditValue, ElementName=txtNullText}"
+                              NullValue="{Binding Path=EditValue, ElementName=txtNullValue}"
+                              ShowNullText="{Binding Path=EditValue, ElementName=chShowNullText}"
+                              ShowNullTextIfFocused="{Binding Path=EditValue, ElementName=chShowNullTextIfFocused}"/>
+            </StackPanel>
+            <StackPanel Margin="0,24" Grid.Row="2">
+                <Label Content="Numeric" />
+                <dxe:TextEdit x:Name="numericEditor"
+                              MaskType="Numeric"
+                              VerticalAlignment="Center"
+                              EditValue="{Binding Path=EditValue, ElementName=numericValue, Mode=TwoWay}"
+                              DisplayFormatString="{Binding Path=EditValue, ElementName=numericFormat, Mode=TwoWay}" />
+            </StackPanel>
+            <StackPanel Margin="0,24" Grid.Row="3">
+                <Label Content="Date and Time" />
+                <dxe:TextEdit x:Name="dateTimeEditor"
+                              MaskType="DateTime"
+                              VerticalAlignment="Center"
+                              EditValue="{Binding Path=EditValue, ElementName=dDate, Mode=TwoWay}"
+                              DisplayFormatString="{Binding Path=EditValue, ElementName=dateTimeFormat, Mode=TwoWay}" />
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</local:EditorsDemoModule>

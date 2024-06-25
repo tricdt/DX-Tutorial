@@ -1,0 +1,132 @@
+<dx:ThemedWindow x:Class="DevExpress.VideoRent.Wpf.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"    
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+    xmlns:dxat="http://schemas.devexpress.com/winfx/2008/xaml/accordion/themekeys"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:viewmodel="clr-namespace:DevExpress.VideoRent.ViewModel;assembly=DevExpress.VideoRent.ViewModel"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    xmlns:mb="clr-namespace:DevExpress.VideoRent.Wpf.ModulesBase"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxdbi="http://schemas.devexpress.com/winfx/2008/xaml/demobase/internal"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300"
+    TitleAlignment="Center"
+    MinWidth="640" MinHeight="480"
+    Width="1090" Height="830" WindowStartupLocation="CenterScreen" Icon="../Images/AppIcon.ico"
+    Title="{helpers:ConstString ID=DemoName}" dx:DXSplashScreen.SplashScreenType="{x:Type local:StartUpSplashScreenWindow}">
+
+    <dx:ThemedWindow.Resources>
+        <ResourceDictionary>
+            <helpers:StringFormatConverter x:Key="StringFormatConverter" />
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore" />
+            <sys:Double x:Key="{dxat:AccordionThemeKeys ResourceKey=PopupDefaultWidth, IsThemeIndependent=True}">1</sys:Double>
+        </ResourceDictionary>
+    </dx:ThemedWindow.Resources>
+    <dxmvvm:Interaction.Behaviors>
+        <dxdbi:DpiAwareSizeBehavior/>
+    </dxmvvm:Interaction.Behaviors>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection>
+            <helpers:BindingInfo ElementName="CurrentEmployee" Property="{x:Static dxb:BarItem.ContentProperty}" Value="{Binding CurrentEmployee.Login, Source={x:Static viewmodel:CurrentEmployeeProvider.Current}}" />
+            <helpers:ElementLayoutInfo ElementName="top:Window" StoreFolder="Window:MainWindow-Window" Store="{StaticResource ElementLayoutDataStore}" />
+            <helpers:ElementLayoutInfo ElementName="Modules" StoreFolder="RibbonControl:MainWindow-RibbonControl" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <mb:DemoModulesControl x:Name="Modules">
+        <mb:DemoModulesControl.BarManager>
+            <dxb:BarManager x:Name="BarManager">
+                <dxb:BarManager.Items>
+                    <dxb:BarButtonItem x:Name="BbiLayoutOptions" local:ImagesHelper.VideoRentImage="LayoutOptions" Content="{helpers:ConstString ID=LayoutOptions}" Description="{helpers:ConstString ID=LayoutOptionDescription}" ItemClick="OnBbiLayoutOptionsItemClick" />
+                    <dxb:BarButtonItem x:Name="BbiAbout" local:ImagesHelper.VideoRentImage="Info" Content="{helpers:ConstString ID=About}" Description="{helpers:ConstString ID=AboutDescription}" ItemClick="OnBbiAboutItemClick" />
+                    <dxb:BarButtonItem x:Name="BbiHome" Content="{helpers:ConstString ID=Home}" Description="{helpers:ConstString ID=HomeDescription}" ItemClick="OnBbiHomeItemClick" />
+                </dxb:BarManager.Items>
+                <dxr:RibbonControl x:Name="Ribbon" PageCategoryAlignment="Right" RibbonStyle="Office2010">
+                    <dxr:RibbonControl.PageHeaderItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="BbiAbout" />
+                    </dxr:RibbonControl.PageHeaderItemLinks>
+                    <dxr:RibbonControl.ApplicationMenu>
+                        <dxr:ApplicationMenu>
+                            <dxr:ApplicationMenu.ItemLinks>
+                                <dxb:BarButtonItemLink BarItemName="BbiLayoutOptions" />
+                                <dxb:BarItemLinkSeparator />
+                                <dxb:BarButtonItemLink BarItemName="BbiHome" />
+                                <dxb:BarButtonItemLink BarItemName="BbiAbout" />
+                            </dxr:ApplicationMenu.ItemLinks>
+                            <dxr:ApplicationMenu.BottomPane>
+                                <dx:UniformStackPanel Orientation="Horizontal">
+                                    <Button Margin="5,0,5,0" Click="OnLogOffButtonClick" IsEnabled="False">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image local:ImagesHelper.VideoRentImage="LayoutOptions" />
+                                            <TextBlock Margin="5,0,0,0" Text="{helpers:ConstString ID=LogOff}" />
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Margin="5,0,5,0" Click="OnExitButtonClick">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image local:ImagesHelper.VideoRentImage="Close" />
+                                            <TextBlock Margin="5,0,0,0" Text="{helpers:ConstString ID=Exit}" />
+                                        </StackPanel>
+                                    </Button>
+                                </dx:UniformStackPanel>
+                            </dxr:ApplicationMenu.BottomPane>
+                        </dxr:ApplicationMenu>
+                    </dxr:RibbonControl.ApplicationMenu>
+                    <dxr:RibbonDefaultPageCategory>
+                        <dxr:RibbonPage Caption="{helpers:ConstString ID=View}">
+                            <dxr:RibbonPageGroup x:Name="ThemesPageGroup" Caption="{helpers:ConstString ID=Appearance}" >
+                                <dxr:RibbonPageGroup.Items>
+                                    <dxr:RibbonGalleryBarItem>
+                                        <dxr:RibbonGalleryBarItem.DropDownGallery>
+                                            <dxb:Gallery RowCount="6"/>
+                                        </dxr:RibbonGalleryBarItem.DropDownGallery>
+                                        <dxmvvm:Interaction.Behaviors>
+                                            <dxr:RibbonGalleryItemThemeSelectorBehavior />
+                                        </dxmvvm:Interaction.Behaviors>
+                                    </dxr:RibbonGalleryBarItem>
+                                </dxr:RibbonPageGroup.Items>
+                            </dxr:RibbonPageGroup>
+                            <dxr:RibbonPageGroup Caption="{helpers:ConstString ID=Options}">
+                                <dxb:BarButtonItemLink BarItemName="BbiLayoutOptions" RibbonStyle="Large" />
+                            </dxr:RibbonPageGroup>
+                        </dxr:RibbonPage>
+                    </dxr:RibbonDefaultPageCategory>
+                </dxr:RibbonControl>
+            </dxb:BarManager>
+        </mb:DemoModulesControl.BarManager>
+        <mb:DemoModulesControl.StatusBarManager>
+            <dxb:BarManager x:Name="StatusBarManager" AllowCustomization="False">
+                <dxb:BarManager.Items>
+                    <dxb:BarButtonItem x:Name="ChangeCurrentCustomer" local:ImagesHelper.VideoRentImage="UserKey" ItemClick="OnChangeCurrentCustomerClick" GlyphSize="Small" Content="{helpers:ConstString ID=ChangeCurrentCustomer}" />
+                    <dxb:BarStaticItem x:Name="CurrentEmployee" AutoSizeMode="Fill">
+                        <dxb:BarStaticItem.ContentTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" MinWidth="150" VerticalAlignment="Center" />
+                            </DataTemplate>
+                        </dxb:BarStaticItem.ContentTemplate>
+                    </dxb:BarStaticItem>
+                </dxb:BarManager.Items>
+                <dxb:BarManager.Bars>
+                    <dxb:Bar IsStatusBar="True">
+                        <dxb:Bar.ItemLinks>
+                            <dxb:BarStaticItemLink BarItemName="CurrentEmployee" />
+                            <dxb:BarButtonItemLink BarItemName="ChangeCurrentCustomer" />
+                        </dxb:Bar.ItemLinks>
+                    </dxb:Bar>
+                </dxb:BarManager.Bars>
+            </dxb:BarManager>
+        </mb:DemoModulesControl.StatusBarManager>
+        <mb:DemoModulesControl.DefaultToolbarItems>
+            <dxb:BarButtonItem local:ImagesHelper.VideoRentImage="Refresh" Content="{helpers:ConstString ID=Refresh}" />
+            <dxb:BarButtonItem local:ImagesHelper.VideoRentImage="CloseDetails" Content="{helpers:ConstString ID=CloseDetailViews}" />
+            <dxb:BarButtonItem local:ImagesHelper.VideoRentImage="Edit" Content="{helpers:ConstString ID=Edit}" />
+            <dxb:BarButtonItem local:ImagesHelper.VideoRentImage="Home" helpers:RibbonManager.Action="Home" />
+            <dxb:BarButtonItem local:ImagesHelper.VideoRentImage="Save" Content="{helpers:ConstString ID=Save}" />
+            <dxb:BarButtonItem local:ImagesHelper.VideoRentImage="SaveAndClose" Content="{helpers:ConstString ID=SaveAndClose}" />
+            <dxb:BarButtonItem local:ImagesHelper.VideoRentImage="Close" Content="{helpers:ConstString ID=Close}" />
+        </mb:DemoModulesControl.DefaultToolbarItems>
+    </mb:DemoModulesControl>
+</dx:ThemedWindow>

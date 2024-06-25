@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+    <style type="text/css">
+        .Black {
+            fill: #727272;
+        }
+        .White {
+            fill: #ffffff;
+        }
+        .Blue {
+            fill: #1177D7;
+        }
+        .Yellow {
+            fill: #FFB115;
+        }
+        .Green {
+            fill: #039C23;
+        }
+        .Red {
+            fill: #D11C1C;
+        }
+    </style>
+    <title>Reload</title>
+    <rect class="White" width="32" height="28"/>
+    <circle class="White" cx="7" cy="25" r="7"/>
+    <path class="Black" d="M11,16H8l4,4H7A5,5,0,0,0,7,30V28a3,3,0,0,1,0-6h5L8,26h3l5-5Z" />
+    <polygon class="Black" points="2 2 2 21 4 19 4 8 28 8 28 24 15 24 13 26 30 26 30 2 2 2"/>
+</svg>

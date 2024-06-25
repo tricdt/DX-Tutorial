@@ -1,0 +1,98 @@
+<UserControl x:Class="DevExpress.VideoRent.Wpf.ArtistsEditView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:videorent="clr-namespace:DevExpress.VideoRent;assembly=DevExpress.VideoRent"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="900">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/EditsStyles.xaml" />
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/CommonTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:DrawingImageToImageSourceConverter x:Key="DrawingImageToImageSourceConverter" />
+            <helpers:NullContentToVisibilityConverter x:Key="NullContentToVisibilityConverter" />
+            <helpers:NullContentToBoolConverter x:Key="NullContentToBoolConverter" />
+            <helpers:ContentToControlConverter x:Key="ContentToControlConverter" />
+            <helpers:DataSource x:Key="DataSource" />
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore" />
+            <local:EnumItemToItemIconConverter x:Key="GenderToGenderIconConverter" EnumType="{x:Type videorent:PersonGender}" ImagesPropertyName="PersonIcons" />
+            <local:GenderToGenderItemConverter x:Key="GenderToGenderItemConverter" />
+            <helpers:BoolToAnyConverter x:Key="GridViewNavigationStyleConverter">
+                <helpers:BoolToAnyConverter.FalseValue>
+                    <dxg:GridViewNavigationStyle>Row</dxg:GridViewNavigationStyle>
+                </helpers:BoolToAnyConverter.FalseValue>
+                <helpers:BoolToAnyConverter.TrueValue>
+                    <dxg:GridViewNavigationStyle>Cell</dxg:GridViewNavigationStyle>
+                </helpers:BoolToAnyConverter.TrueValue>
+            </helpers:BoolToAnyConverter>
+            <dxg:TableView x:Key="TableView" ShowGroupedColumns="True" AutoWidth="True" BestFitMode="Smart" BestFitArea="All" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}">
+            <helpers:BindingInfo ElementName="resource:ElementLayoutDataStore" Property="{x:Static local:ElementLayoutDataStore.DisposeSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="ArtistsGrid" Property="{x:Static helpers:FocusedRowRestoringHelper.ItemsSourceInterfaceProperty}" Value="{Binding EditObject.VideoRentObjects}" />
+            <helpers:BindingInfo ElementName="BirthCountryEditSettings" Property="{x:Static dxe:LookUpEditSettingsBase.ItemsSourceProperty}" Value="{Binding CountryEditData.List}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static dxg:GridViewBase.FocusedRowProperty}" Value="{Binding CurrentRecord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static helpers:CustomEventCommandHelper.MouseDoubleClickProperty}" Value="{Binding Detail.CommandEdit}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static helpers:CustomEventCommandHelper.EnterKeyDownProperty}" Value="{Binding Detail.CommandEdit}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static dxg:TableView.AllowPerPixelScrollingProperty}" Value="{Binding GridUIOptions.AllowPerPixelScrolling}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static dxg:TableView.AllowCascadeUpdateProperty}" Value="{Binding GridUIOptions.AllowCascadeUpdate}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static dxg:DataViewBase.AllowEditingProperty}" Value="{Binding GridUIOptions.AllowEditing}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static helpers:FocusedRowRestoringHelper.NavigationStyleInterfaceProperty}" Value="{Binding GridUIOptions.AllowEditing, Converter={StaticResource GridViewNavigationStyleConverter}}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static dxg:TableView.ShowAutoFilterRowProperty}" Value="{Binding GridUIOptions.ShowTheAutoFilterRow}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static dxg:TableView.ShowVerticalLinesProperty}" Value="{Binding GridUIOptions.ShowVerticalLines}" />
+            <helpers:BindingInfo ElementName="GenderColumn" Property="{x:Static helpers:EditHelper.ItemsSourceProperty}" Value="{Binding PersonGenderEditData.List}" />
+            <helpers:ElementLayoutInfo ElementName="ArtistsGrid" StoreFolder="GridControl:ArtistsEdit-ArtistsGrid" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <dxg:GridControl x:Name="ArtistsGrid" View="{StaticResource TableView}" helpers:GridControlHelper.Grid="{Binding RelativeSource={RelativeSource Self}}">
+        <dxg:GridControl.Columns>
+            <dxg:GridColumn x:Name="GenderColumn" FieldName="Gender" Header="{helpers:ConstString ID=Gender}" Width="62">
+                <dxg:GridColumn.EditTemplate>
+                    <ControlTemplate>
+                        <dxe:ComboBoxEdit x:Name="PART_Editor" Style="{StaticResource OnlyIconComboBoxEdit}"
+                                            ItemsSource="{Binding Path=DataContext.Column.(helpers:EditHelper.ItemsSource), RelativeSource={RelativeSource TemplatedParent}}"
+                                            EditValue="{Binding Path=EditValue, RelativeSource={RelativeSource TemplatedParent}}"
+                                            SelectedItem="{Binding Path=EditValue, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource GenderToGenderItemConverter}}" />
+                    </ControlTemplate>
+                </dxg:GridColumn.EditTemplate>
+                <dxg:GridColumn.DisplayTemplate>
+                    <ControlTemplate>
+                        <Image Stretch="None"
+                                            Source="{Binding Path=DisplayText, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource GenderToGenderIconConverter}}" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+                    </ControlTemplate>
+                </dxg:GridColumn.DisplayTemplate>
+            </dxg:GridColumn>
+            <dxg:GridColumn x:Name="FirstNameColumn" FieldName="FirstName" Header="{helpers:ConstString ID=FirstName}" Width="85" />
+            <dxg:GridColumn x:Name="LastNameColumn" FieldName="LastName" Header="{helpers:ConstString ID=LastName}" Width="85" />
+            <dxg:GridColumn x:Name="BirthDateColumn" FieldName="BirthDate" Header="{helpers:ConstString ID=BirthDate}" Width="77" local:ColumnByYearFilterHelper.IsEnabled="True" ColumnFilterMode="DisplayText" AutoFilterCondition="Contains" />
+            <dxg:GridColumn x:Name="BirthNameColumn" FieldName="BirthName" Header="{helpers:ConstString ID=BirthName}" Width="154" ColumnFilterMode="DisplayText" AutoFilterCondition="Contains" />
+            <dxg:GridColumn x:Name="BirthCountryColumn" FieldName="BirthCountry!" Header="{helpers:ConstString ID=BirthCountry}" Width="94" ColumnFilterMode="DisplayText">
+                <dxg:GridColumn.EditSettings>
+                    <dxe:ComboBoxEditSettings x:Name="BirthCountryEditSettings" />
+                </dxg:GridColumn.EditSettings>
+            </dxg:GridColumn>
+            <dxg:GridColumn x:Name="BirthLocationColumn" FieldName="BirthLocation" Header="{helpers:ConstString ID=BirthLocation}" Width="146" AutoFilterCondition="Contains" />
+            <dxg:GridColumn x:Name="NickNameColumn" FieldName="NickName" Header="{helpers:ConstString ID=NickName}" Width="81" />
+            <dxg:GridColumn x:Name="BiographyColumn" FieldName="Biography" Header="{helpers:ConstString ID=Biography}" Width="76" AllowColumnFiltering="False" AllowGrouping="False" AutoFilterCondition="Contains">
+                <dxg:GridColumn.CellStyle>
+                    <Style TargetType="dxg:LightweightCellEditor" BasedOn="{StaticResource {dxgt:GridRowThemeKey ResourceKey=LightweightCellStyle}}">
+                        <Setter Property="ToolTip" Value="{Binding RowData.Row.Biography, Converter={StaticResource ContentToControlConverter}, ConverterParameter={StaticResource TextToolTipTemplate}}" />
+                    </Style>
+                </dxg:GridColumn.CellStyle>
+                <dxg:GridColumn.EditSettings>
+                    <dxe:MemoEditSettings helpers:StyleConverter.Style="{StaticResource MemoEdit}" />
+                </dxg:GridColumn.EditSettings>
+            </dxg:GridColumn>
+        </dxg:GridControl.Columns>
+    </dxg:GridControl>
+</UserControl>

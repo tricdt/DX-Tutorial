@@ -1,0 +1,52 @@
+﻿<local:GridDemoModule x:Class="GridDemo.BindingToDynamicObject"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800">
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" />
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210" x:Name="optionsPanel">
+                <GroupBox Header="New column type:" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit x:Name="TypeBox" SelectedIndex="0" ShowBorder="False" DisplayMember="DisplayName" ValueMember="Content">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.Items>
+                            <local:ValueSelectorItem DisplayName="Integer" Content="{x:Type sys:Int32}" />
+                            <local:ValueSelectorItem DisplayName="String" Content="{x:Type sys:String}" />
+                            <local:ValueSelectorItem DisplayName="DateTime" Content="{x:Type sys:DateTime}" />
+                            <local:ValueSelectorItem DisplayName="Boolean" Content="{x:Type sys:Boolean}" />
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <Button x:Name="CreateNewColBtn" Margin="0,12,0,0" Content="Create new column" Click="OnCreateNewColumnButtonClick" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxg:GridControl x:Name="grid" ShowBorder="False">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn Header="Id" Binding="{Binding Id, Mode=TwoWay}" />
+                <dxg:GridColumn Header="First Name" Binding="{Binding FirstName, Mode=TwoWay}" />
+                <dxg:GridColumn Header="Last Name" Binding="{Binding LastName, Mode=TwoWay}" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView Name="View" ShowAutoFilterRow="True" NewItemRowPosition="Top"/>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

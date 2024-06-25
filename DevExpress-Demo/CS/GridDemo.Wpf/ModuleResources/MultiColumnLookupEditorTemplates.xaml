@@ -1,0 +1,147 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:demo="clr-namespace:GridDemo">
+
+    <ControlTemplate x:Key="PersonGridTemplate">
+        <dxg:GridControl x:Name="PART_GridControl">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="FullName" />
+                <dxg:GridColumn FieldName="Company" />
+                <dxg:GridColumn FieldName="JobTitle" />
+                <dxg:GridColumn FieldName="City" />
+                <dxg:GridColumn FieldName="Address" />
+                <dxg:GridColumn FieldName="Phone" />
+                <dxg:GridColumn FieldName="Email" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView Name="view" AutoWidth="False" TotalSummaryPosition="Bottom" />
+            </dxg:GridControl.View>
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem FieldName="FullName" SummaryType="Count" />
+            </dxg:GridControl.TotalSummary>
+        </dxg:GridControl>
+    </ControlTemplate>
+    <DataTemplate x:Key="ProductIconTemplate">
+        <dx:DXImage Width="16" Height="16" Source="{Binding Path=Value.CategoryName, Converter={x:Static demo:ProductItemToImageConverter.Instance}}"/>
+    </DataTemplate>
+    <DataTemplate x:Key="GroupIconTemplate">
+        <dx:DXImage Width="16" Height="16" Source="{Binding Path=Value, Converter={demo:GroupNameToImageConverter}}"/>
+    </DataTemplate>
+    <ControlTemplate x:Key="ProductsPopupContentTemplate">
+        <dxg:GridControl x:Name="PART_GridControl">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn Width="36"
+                                AllowResizing="False"
+                                CellDisplayTemplate="{StaticResource ProductIconTemplate}"
+                                FieldName="Category"
+                                Header=""
+                                Image="{dx:SvgImageSource Uri='/DevExpress.Images.v22.2;component/SvgImages/Actions/New.svg', Size='16,16'}"
+                                ImageAlignment="Center"
+                                AllowAutoFilter="False"
+                                HeaderToolTip="Category" />
+                <dxg:GridColumn Width="200"
+                                FieldName="ProductName"
+                                Header="Product" />
+                <dxg:GridColumn FieldName="QuantityPerUnit"
+                                Header="Quantity"
+                                Width="150"/>
+                <dxg:GridColumn AutoFilterCondition="Equals"
+                                FieldName="UnitPrice"
+                                Header="Unit Price">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="c" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Discontinued" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView AutoWidth="True"
+                               ShowAutoFilterRow="True"
+                               ShowIndicator="False"
+                               ShowGroupedColumns="True" >
+                    <dxg:TableView.FormatConditions>
+                        <dxg:FormatCondition FieldName="CategoryID" ValueRule="Equal" Value1="Beverages">
+                            <dx:Format Foreground="#FF4169E1"/>
+                        </dxg:FormatCondition>
+                        <dxg:FormatCondition FieldName="Discontinued" ValueRule="Equal" Value1="True">
+                            <dx:Format Foreground="#FF808080" TextDecorations="Strikethrough"/>
+                        </dxg:FormatCondition>
+                    </dxg:TableView.FormatConditions>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </ControlTemplate>
+    <ControlTemplate x:Key="EmployeesPopupContentTemplate">
+        <dxg:GridControl x:Name="PART_GridControl" AutoExpandAllGroups="True">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="GroupName"
+                                Header=""
+                                Width="36"
+                                AllowResizing="False"
+                                AllowAutoFilter="False"
+                                Image="{dx:SvgImageSource Uri='/DevExpress.Images.v22.2;component/SvgImages/Actions/New.svg', Size='16,16'}"
+                                ImageAlignment="Center"
+                                CellDisplayTemplate="{StaticResource GroupIconTemplate}"/>
+                <dxg:GridColumn FieldName="JobTitle" Width="190"/>
+                <dxg:GridColumn FieldName="FirstName" Width="90"/>
+                <dxg:GridColumn FieldName="LastName" Width="90"/>
+                <dxg:GridColumn FieldName="BirthDate" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView AllowPerPixelScrolling="True"
+                               AutoWidth="True"
+                               ScrollAnimationDuration="0"
+                               ShowIndicator="False"/>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </ControlTemplate>
+    <ControlTemplate x:Key="OrdersPopupContentTemplate">
+        <dxg:GridControl x:Name="PART_GridControl">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="OrderID"
+                                Header="Order"
+                                Width="70"
+                                Image="{dx:SvgImageSource Uri='/DevExpress.Images.v22.2;component/SvgImages/Icon Builder/Business_Report.svg', Size='16,16'}">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings HorizontalContentAlignment="Center"/>
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="ProductName"
+                                Header="Product"
+                                Width="180"
+                                Image="{dx:SvgImageSource Uri='/DevExpress.Images.v22.2;component/SvgImages/Icon Builder/Travel_Restaurant.svg', Size='16,16'}"/>
+                <dxg:GridColumn FieldName="Quantity"
+                                Width="100"
+                                HorizontalHeaderContentAlignment="Right"
+                                Image="{dx:SvgImageSource Uri='/DevExpress.Images.v22.2;component/SvgImages/Icon Builder/Shopping_ShoppingBasket.svg', Size='16,16'}"/>
+                <dxg:GridColumn FieldName="UnitPrice"
+                                Width="100"
+                                Header="Unit Price"
+                                HorizontalHeaderContentAlignment="Right"
+                                Image="{dx:SvgImageSource Uri='/DevExpress.Images.v22.2;component/SvgImages/Icon Builder/Travel_CurrencyExchange.svg', Size='16,16'}">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="c" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Discount"
+                                HorizontalHeaderContentAlignment="Right"
+                                Image="{dx:SvgImageSource Uri='/DevExpress.Images.v22.2;component/SvgImages/Icon Builder/Shopping_Percent.svg', Size='16,16'}">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings MaskType="Numeric" Mask="p" MaskUseAsDisplayFormat="True" MaskCulture="en-US" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView AllowPerPixelScrolling="True"
+                               AutoWidth="True"
+                               NavigationStyle="Row"
+                               ShowGroupPanel="False"
+                               ShowIndicator="False"/>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </ControlTemplate>
+</ResourceDictionary>

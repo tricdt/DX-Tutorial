@@ -1,0 +1,69 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:local="clr-namespace:DockingDemo"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             mc:Ignorable="d"
+             x:Class="DockingDemo.TextUserControl" VerticalAlignment="Stretch"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <local:PointToStringConverter x:Key="pointToStringConverter" FormatString="Column: {0} Row: {0}"/>
+        <Style x:Key="backstageGlyphStyle" TargetType="Image">
+            <Setter Property="Height" Value="16"/>
+            <Setter Property="Width" Value="16"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <dxr:RibbonControl x:Name="ribbonControl" AllowCustomization="False" RibbonHeaderVisibility="Collapsed">
+            <dxr:RibbonControl.ApplicationMenu>
+                <dxr:BackstageViewControl>
+                    <dxr:BackstageButtonItem x:Name="backstageUndoBtn"
+                                   Glyph="{dx:DXImage SvgImages/Outlook Inspired/Undo.svg}"
+                                   GlyphStyle="{StaticResource backstageGlyphStyle}"
+                                   Content="Undo"
+                                   Command="{Binding ElementName=textBox, Path=UndoCommand}"/>
+                    <dxr:BackstageButtonItem x:Name="backstageRedoBtn"
+                                   Glyph="{dx:DXImage SvgImages/Outlook Inspired/Redo.svg}"
+                                   GlyphStyle="{StaticResource backstageGlyphStyle}"
+                                   Content="Redo"
+                                   Command="{Binding ElementName=textBox, Path=RedoCommand}"/>
+                    <dxr:BackstageButtonItem x:Name="backstageCutButton" Content="Cut" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Cut.svg}" GlyphStyle="{StaticResource backstageGlyphStyle}" Command="{Binding CutCommand, ElementName=textBox}"/>
+                    <dxr:BackstageButtonItem x:Name="backstageCopyButton" Content="Copy" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Copy.svg}" GlyphStyle="{StaticResource backstageGlyphStyle}" Command="{Binding CopyCommand, ElementName=textBox}"/>
+                    <dxr:BackstageButtonItem x:Name="backstagePasteButton" Content="Paste" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Paste.svg}" GlyphStyle="{StaticResource backstageGlyphStyle}" Command="{Binding PasteCommand, ElementName=textBox}"/>
+                    <dxr:BackstageButtonItem x:Name="backstageSelectAllButton" Content="Select All" Glyph="{dx:DXImage SvgImages/PDF Viewer/SelectAll.svg}" GlyphStyle="{StaticResource backstageGlyphStyle}" Command="{Binding SelectAllCommand, ElementName=textBox}"/>
+                </dxr:BackstageViewControl>
+            </dxr:RibbonControl.ApplicationMenu>
+            <dxr:RibbonControl.ToolbarItemLinks>
+                <dxb:BarButtonItemLink BarItemName="undoBtn"/>
+                <dxb:BarButtonItemLink BarItemName="redoBtn"/>
+            </dxr:RibbonControl.ToolbarItemLinks>
+            <dxr:RibbonPage Caption="Home">
+                <dxr:RibbonPageGroup Caption="File">
+                    <dxb:BarButtonItem x:Name="openFile" Content="Open" Command="{Binding OpenFromFileCommand, ElementName=textBox}" Glyph="{dx:DXImage SvgImages/Actions/Open.svg}"/>
+                    <dxb:BarButtonItem x:Name="saveFile" Content="Save" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Save.svg}" Command="{Binding SaveToFileCommand, ElementName=textBox}"/>
+                    <dxb:BarButtonItem x:Name="closeFile" Content="Close" Glyph="{dx:DXImage SvgImages/RichEdit/CloseHeaderAndFooter.svg}" Command="{Binding CloseCommand}"/>
+                </dxr:RibbonPageGroup>
+                <dxr:RibbonPageGroup Caption="Clipboard">
+                    <dxb:BarButtonItem x:Name="cutButton" Content="Cut" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Cut.svg}" LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Cut.svg}" Command="{Binding CutCommand, ElementName=textBox}"/>
+                    <dxb:BarButtonItem x:Name="copyButton" Content="Copy" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Copy.svg}" LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Copy.svg}" Command="{Binding CopyCommand, ElementName=textBox}"/>
+                    <dxb:BarButtonItem x:Name="pasteButton" Content="Paste" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Paste.svg}" LargeGlyph="{dx:DXImage SvgImages/Outlook Inspired/Paste.svg}" Command="{Binding PasteCommand, ElementName=textBox}"/>
+                    <dxb:BarButtonItem x:Name="selectAllButton" Content="Select All" Glyph="{dx:DXImage SvgImages/PDF Viewer/SelectAll.svg}" LargeGlyph="{dx:DXImage SvgImages/PDF Viewer/SelectAll.svg}" Command="{Binding SelectAllCommand, ElementName=textBox}"/>
+                </dxr:RibbonPageGroup>
+            </dxr:RibbonPage>
+        </dxr:RibbonControl>
+        <TextBox x:Name="textBox" Grid.Row="1" Margin="0,0,0,1" AcceptsReturn="True" TextWrapping="Wrap"/>
+        <dxr:RibbonStatusBarControl x:Name="statusBar" Grid.Row="2" IsSizeGripVisible="False">
+            <dxr:RibbonStatusBarControl.LeftItems>
+                <dxb:BarStaticItem Content="{Binding ElementName=textBox, Path=CaretPos, Converter={StaticResource pointToStringConverter}}" ShowBorder="False"/>
+            </dxr:RibbonStatusBarControl.LeftItems>
+        </dxr:RibbonStatusBarControl>
+    </Grid>
+</UserControl>

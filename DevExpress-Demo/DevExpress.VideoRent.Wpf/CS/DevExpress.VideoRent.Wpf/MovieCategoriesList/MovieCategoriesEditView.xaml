@@ -1,0 +1,99 @@
+<UserControl x:Class="DevExpress.VideoRent.Wpf.MovieCategoriesEditView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <helpers:DataSource x:Key="DataSource" />
+            <helpers:EmptyConverter x:Key="EmptyConverter"/>
+            <local:PaletteNameToPaletteConverter x:Key="PaletteNameToPaletteConverter" />
+            <local:Marker2DKindNameToMarker2DModelConverter x:Key="Marker2DKindNameToMarker2DModelConverter" />
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore" />
+            <local:CategoryPricesChartSeriesGenerator x:Key="CategoryPricesChartSeriesGenerator">
+                <local:CategoryPricesChartSeriesGenerator.ItemStyle>
+                    <Style TargetType="dxc:LineSeries2D">
+                        <Setter Property="MarkerSize" Value="{Binding Path=(helpers:ChartHelper.MarkerSize), RelativeSource={RelativeSource AncestorType=dxc:ChartControl}}" />
+                        <Setter Property="dxc:MarkerSeries2D.Angle" Value="{Binding Path=(helpers:ChartHelper.MarkerAngle), RelativeSource={RelativeSource AncestorType=dxc:ChartControl}, Converter={StaticResource EmptyConverter}}" />
+                        <Setter Property="MarkerVisible" Value="True" />
+                        <Setter Property="MarkerModel" Value="{Binding Path=(helpers:ChartHelper.Marker2DModel), RelativeSource={RelativeSource AncestorType=dxc:ChartControl}}" />
+                        <Setter Property="SeriesAnimation">
+                            <Setter.Value>
+                                <dxc:Line2DBlowUpAnimation />
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="PointAnimation">
+                            <Setter.Value>
+                                <dxc:Marker2DFadeInAnimation />
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </local:CategoryPricesChartSeriesGenerator.ItemStyle>
+            </local:CategoryPricesChartSeriesGenerator>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}">
+            <helpers:BindingInfo ElementName="resource:ElementLayoutDataStore" Property="{x:Static local:ElementLayoutDataStore.DisposeSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="resource:CategoryPricesChartSeriesGenerator" Property="{x:Static local:CategoryPricesChartSeriesGenerator.MovieCategoryProperty}" Value="{Binding Source={StaticResource DataSource}, Path=DataObject.CurrentRecord}" />
+            <helpers:BindingInfo ElementName="CurrentMovieCategoryEditPresenter" Property="{x:Static ContentControl.ContentProperty}" Value="{Binding Detail.MovieCategoryEdit.View}" />
+            <helpers:BindingInfo ElementName="CategoriesListView" Property="{x:Static dxg:TableView.FocusedRowProperty}" Value="{Binding CurrentRecord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="CategoriesGrid" Property="{x:Static helpers:FocusedRowRestoringHelper.ItemsSourceInterfaceProperty}" Value="{Binding EditObject.VideoRentObjects}" />
+            <helpers:BindingInfo ElementName="MainLayoutControl" Property="{x:Static helpers:LayoutControlSignalHelper.FlipLayoutSignalSlotProperty}" Value="{Binding FlipLayoutSignal}" />
+            <helpers:BindingInfo ElementName="PricesChart" Property="{x:Static dxc:ChartControl.PaletteProperty}" Value="{Binding ChartPaletteName, Converter={StaticResource PaletteNameToPaletteConverter}}" />
+            <helpers:BindingInfo ElementName="PricesChart" Property="{x:Static helpers:ChartHelper.MarkerAngleProperty}" Value="{Binding ChartMarkerAngle}" />
+            <helpers:BindingInfo ElementName="PricesChart" Property="{x:Static helpers:ChartHelper.MarkerSizeProperty}" Value="{Binding ChartMarkerSize}" />
+            <helpers:BindingInfo ElementName="PricesChart" Property="{x:Static helpers:ChartHelper.Marker2DModelProperty}" Value="{Binding ChartMarkerKindName, Converter={StaticResource Marker2DKindNameToMarker2DModelConverter}}" />
+            <helpers:ElementLayoutInfo ElementName="MainLayoutControl" StoreFolder="LayoutControl:MovieCategoriesEdit-MainLayoutControl" Store="{StaticResource ElementLayoutDataStore}" />
+            <helpers:ElementLayoutInfo ElementName="CategoriesGrid" StoreFolder="GridControl:MovieCategoriesEdit-CategoriesGrid" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <dxlc:LayoutControl x:Name="MainLayoutControl" Orientation="Horizontal" VerticalAlignment="Stretch" AllowItemSizing="True" Padding="0">
+        <dxlc:LayoutItem VerticalAlignment="Stretch" HorizontalAlignment="Left" Width="250" dxlc:LayoutControl.AllowHorizontalSizing="True" x:Name="ListLayoutItem">
+            <dxg:GridControl x:Name="CategoriesGrid">
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn x:Name="NameColumn" FieldName="Name" Header="{helpers:ConstString ID=Name}" />
+                    <dxg:GridColumn x:Name="IsDefaultColumn" FieldName="IsDefault" Header="{helpers:ConstString ID=Default}" />
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.View>
+                    <dxg:TableView x:Name="CategoriesListView" AllowGrouping="False" ShowGroupPanel="False" AllowEditing="False" AutoWidth="True" NavigationStyle="Row" />
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutGroup Orientation="Vertical" HorizontalAlignment="Stretch">
+            <dxlc:LayoutItem VerticalAlignment="Top" MinWidth="475">
+                <ContentControl x:Name="CurrentMovieCategoryEditPresenter" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem VerticalAlignment="Stretch">
+                <dxc:ChartControl x:Name="PricesChart" EnableAnimation="True" local:GeneratorToChartAttacher.ChartSeriesGenerator="{StaticResource CategoryPricesChartSeriesGenerator}" Padding="0,10,16,10">
+                    <dxc:ChartControl.Diagram>
+                        <dxc:XYDiagram2D>
+                            <dxc:XYDiagram2D.AxisY>
+                                <dxc:AxisY2D>
+                                    <dxc:AxisY2D.Title>
+                                        <dxc:AxisTitle Content="Payment $"/>
+                                    </dxc:AxisY2D.Title>
+                                </dxc:AxisY2D>
+                            </dxc:XYDiagram2D.AxisY>
+                            <dxc:XYDiagram2D.AxisX>
+                                <dxc:AxisX2D>
+                                    <dxc:AxisX2D.Title>
+                                        <dxc:AxisTitle Content="Days"/>
+                                    </dxc:AxisX2D.Title>
+                                </dxc:AxisX2D>
+                            </dxc:XYDiagram2D.AxisX>
+                        </dxc:XYDiagram2D>
+                    </dxc:ChartControl.Diagram>
+                    <dxc:ChartControl.Legend>
+                        <dxc:Legend Orientation="Horizontal" HorizontalPosition="Right" VerticalPosition="BottomOutside"  ReverseItems="True" IndentFromDiagram="0,-25,0,0"/>
+                    </dxc:ChartControl.Legend>
+                </dxc:ChartControl>
+            </dxlc:LayoutItem>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</UserControl>

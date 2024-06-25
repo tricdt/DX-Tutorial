@@ -1,0 +1,221 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.DataGridChartingDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:local="clr-namespace:ChartsDemo">
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <local:AggregateTypeToAggregateFunctionConverter
+            x:Key="AggregateTypeConverter" />
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+
+    <Grid>
+        <!--#region Grid definitions-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="*" />
+            <ColumnDefinition
+                Width="1.5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="1.2*" />
+            <RowDefinition
+                Height="5" />
+            <RowDefinition
+                Height="*" />
+        </Grid.RowDefinitions>
+        <!--#endregion-->
+        <dxc:Title
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center">Product Sales YTD</dxc:Title>
+        <!--#region GridControl x:Name=grid-->
+        <dxg:GridControl
+            x:Name="grid"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Stretch"
+            Margin="16,8,16,8"
+            VerticalAlignment="Stretch"
+            ItemsSource="{DXBinding 'new $local:SalesProductData().GetSalesData()'}"
+            AutoGenerateColumns="AddNew"
+            EnableSmartColumnsGeneration="True"
+            SelectionMode="Row"
+            Loaded="{DXEvent '@Self.SelectItem(-1);@Self.SelectItem(-11);@Self.SelectItem(-26);'}"
+            ShowBorder="True">
+
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn
+                    FieldName="State"
+                    GroupIndex="0" />
+                <dxg:GridColumn
+                    FieldName="Category"
+                    GroupIndex="1" />
+            </dxg:GridControl.Columns>
+
+            <dxg:GridControl.View>
+                <dxg:TableView
+                    x:Name="gridView"
+                    AllowEditing="False"
+                    AllowColumnMoving="False"
+                    ShowGroupPanel="False"
+                    AutoWidth="True"
+                    ShowCheckBoxSelectorInGroupRow="True"
+                    ShowCheckBoxSelectorColumn="True">
+                    <dxg:TableView.FormatConditions>
+                        <dxg:FormatCondition
+                            ValueRule="Less"
+                            Value1="0"
+                            FieldName="SalesDynamic"
+                            PredefinedFormatName="RedText" />
+                        <dxg:FormatCondition
+                            ValueRule="GreaterOrEqual"
+                            Value1="0"
+                            FieldName="SalesDynamic"
+                            PredefinedFormatName="GreenText" />
+                    </dxg:TableView.FormatConditions>
+                    <dxg:TableView.CheckBoxSelectorColumnHeaderTemplate>
+                        <DataTemplate />
+                    </dxg:TableView.CheckBoxSelectorColumnHeaderTemplate>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+        <!--#endregion-->
+
+        <GridSplitter
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Height="5"
+            HorizontalAlignment="Stretch" />
+
+        <dxc:ChartControl
+            x:Name="unitsChart"
+            Grid.Row="3"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Margin="16,8,8,16"
+            DataSource="{Binding ElementName=grid, Path=SelectedItems}">
+            <!--#region Titles-->
+            <dxc:ChartControl.Titles>
+                <dxc:Title>
+                    <dxc:Title.Template>
+                        <ControlTemplate>
+                            <StackPanel>
+                                <TextBlock
+                                    Text="Units Sold"
+                                    HorizontalAlignment="Center" />
+                                <dxe:ListBoxEdit
+                                    HorizontalAlignment="Center"
+                                    ItemsSource="{dxe:EnumItemsSource EnumType=local:AggregateType}"
+                                    SelectedIndex="0"
+                                    SelectedItem="{Binding ElementName=unitsChart, Path=Tag}">
+                                    <dxe:ListBoxEdit.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel
+                                                Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </dxe:ListBoxEdit.ItemsPanel>
+                                    <dxe:ListBoxEdit.ItemContainerStyle>
+                                        <Style
+                                            TargetType="dxe:ListBoxEditItem">
+                                            <Setter
+                                                Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate>
+                                                        <ToggleButton
+                                                            Content="{Binding Mode=OneWay}"
+                                                            IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}}"
+                                                            FontSize="10" />
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </dxe:ListBoxEdit.ItemContainerStyle>
+                                </dxe:ListBoxEdit>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </dxc:Title.Template>
+                </dxc:Title>
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+            <dxc:ChartControl.Diagram>
+                <dxc:XYDiagram2D
+                    SeriesDataMember="State">
+                    <dxc:XYDiagram2D.SeriesTemplate>
+                        <dxc:BarSideBySideSeries2D
+                            ArgumentDataMember="Category"
+                            ValueDataMember="UnitsSold"
+                            CrosshairLabelPattern="{}{S} {V:F0}" />
+                    </dxc:XYDiagram2D.SeriesTemplate>
+                    <!--#region AxisX-->
+                    <dxc:XYDiagram2D.AxisX>
+                        <dxc:AxisX2D>
+                            <dxc:AxisX2D.QualitativeScaleOptions>
+                                <dxc:QualitativeScaleOptions
+                                    AggregateFunction="{Binding ElementName=unitsChart, Path=Tag, Converter={StaticResource AggregateTypeConverter}}" />
+                            </dxc:AxisX2D.QualitativeScaleOptions>
+                        </dxc:AxisX2D>
+                    </dxc:XYDiagram2D.AxisX>
+                    <!--#endregion-->
+                </dxc:XYDiagram2D>
+            </dxc:ChartControl.Diagram>
+        </dxc:ChartControl>
+
+        <dxc:ChartControl
+            Grid.Row="3"
+            Grid.Column="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Margin="8,8,16,16"
+            DataSource="{Binding ElementName=grid, Path=SelectedItems}"
+            AutoLayout="False">
+            <!--#region Titles-->
+            <dxc:ChartControl.Titles>
+                <dxc:Title
+                    HorizontalAlignment="Center">Monthly Revenue</dxc:Title>
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+            <dxc:XYDiagram2D
+                SeriesDataMember="Category">
+                <dxc:XYDiagram2D.SeriesTemplate>
+                    <dxc:LineSeries2D
+                        ArgumentDataMember="ReportDate"
+                        ValueDataMember="Revenue" />
+                </dxc:XYDiagram2D.SeriesTemplate>
+                <!--#region Axes-->
+                <dxc:XYDiagram2D.AxisX>
+                    <dxc:AxisX2D>
+                        <dxc:AxisX2D.DateTimeScaleOptions>
+                            <dxc:AutomaticDateTimeScaleOptions
+                                AggregateFunction="Sum" />
+                        </dxc:AxisX2D.DateTimeScaleOptions>
+                    </dxc:AxisX2D>
+                </dxc:XYDiagram2D.AxisX>
+                <dxc:XYDiagram2D.AxisY>
+                    <dxc:AxisY2D>
+                        <dxc:AxisY2D.Label>
+                            <dxc:AxisLabel
+                                TextPattern="${V:#,##0,,}M" />
+                        </dxc:AxisY2D.Label>
+                    </dxc:AxisY2D>
+                </dxc:XYDiagram2D.AxisY>
+                <!--#endregion-->
+            </dxc:XYDiagram2D>
+            <!--#region Legends-->
+            <dxc:ChartControl.Legends>
+                <dxc:Legend
+                    HorizontalPosition="Center"
+                    VerticalPosition="BottomOutside"
+                    Orientation="Horizontal" />
+            </dxc:ChartControl.Legends>
+            <!--#endregion-->
+        </dxc:ChartControl>
+    </Grid>
+</local:ChartsDemoModule>

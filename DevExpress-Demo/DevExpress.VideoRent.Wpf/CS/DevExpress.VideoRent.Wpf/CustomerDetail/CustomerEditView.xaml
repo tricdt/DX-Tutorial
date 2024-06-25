@@ -1,0 +1,98 @@
+<UserControl x:Class="DevExpress.VideoRent.Wpf.CustomerEditView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/EditsStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:DrawingImageToImageSourceConverter x:Key="DrawingImageToImageSourceConverter" />
+            <helpers:DataSource x:Key="DataSource" />
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore"/>
+            <helpers:ValidationRuleIsNotBlank x:Key="ValidationRuleIsNotBlank" Message="{helpers:ConstString ID=RuleIsNotBlankWarning}" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}" DoValidateSignalSlot="{Binding DoValidateSignal}" IsValid="{Binding IsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <helpers:BindingInfo ElementName="resource:ElementLayoutDataStore" Property="{x:Static local:ElementLayoutDataStore.DisposeSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="PhotoEdit" Property="{x:Static dxe:ImageEdit.SourceProperty}" Value="{Binding EditObject.VideoRentObject.Photo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DrawingImageToImageSourceConverter}}" />
+            <helpers:BindingInfo ElementName="FirstNameEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="MiddleNameEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.MiddleName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="LastNameEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="GenderEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="GenderEdit" Property="{x:Static dxe:LookUpEditBase.ItemsSourceProperty}" Value="{Binding PersonGenderEditData.List}" />
+            <helpers:BindingInfo ElementName="BirthDateEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="PhoneEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="AddressEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="EmailEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="EmailEdit" Property="{x:Static helpers:CommandHelper.Command0Property}" Value="{Binding CommandSendEmail}"/>
+            <helpers:BindingInfo ElementName="DiscountLevelEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.DiscountLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="DiscountLevelEdit" Property="{x:Static dxe:LookUpEditBase.ItemsSourceProperty}" Value="{Binding DiscountLevelEditData.List}" />
+            <helpers:BindingInfo ElementName="DiscountEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Discount, Mode=OneWay}" />
+            <helpers:BindingInfo ElementName="CommentsEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Comments, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:ValidationInfo EditName0="FirstNameEdit" Rule="{StaticResource ValidationRuleIsNotBlank}" />
+            <helpers:ValidationInfo EditName0="LastNameEdit" Rule="{StaticResource ValidationRuleIsNotBlank}" />
+            <helpers:ElementLayoutInfo ElementName="MainLayoutControl" StoreFolder="LayoutControl:CustomerEdit-MainLayoutControl" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <dxlc:LayoutControl x:Name="MainLayoutControl" Orientation="Vertical" helpers:ImageEditHelper.ImageEdit="{Binding ElementName=PhotoEdit}" Padding="0">
+        <dxlc:LayoutGroup Orientation="Horizontal">
+            <dxlc:LayoutItem dxlc:LayoutControl.AllowHorizontalSizing="True" Width="370" HorizontalAlignment="Left" VerticalAlignment="Stretch" MinWidth="220" MaxWidth="360" x:Name="PhotoLayoutItem">
+                <helpers:CustomImageEdit x:Name="PhotoEdit" Style="{StaticResource CustomerPhotoImageEdit}" />
+            </dxlc:LayoutItem>
+            <dxlc:LayoutGroup Orientation="Vertical">
+                <dxlc:LayoutItem Label="{helpers:ConstString ID=FirstNameLabel}">
+                    <dxe:TextEdit x:Name="FirstNameEdit" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="{helpers:ConstString ID=MiddleNameLabel}">
+                    <dxe:TextEdit x:Name="MiddleNameEdit" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="{helpers:ConstString ID=LastNameLabel}">
+                    <dxe:TextEdit x:Name="LastNameEdit" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutGroup Orientation="Horizontal">
+                    <dxlc:LayoutItem Label="{helpers:ConstString ID=GenderLabel}">
+                        <dxe:ComboBoxEdit x:Name="GenderEdit" Style="{StaticResource IconAndValueComboBoxEdit}" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="{helpers:ConstString ID=BirthDateLabel}">
+                        <dxe:DateEdit x:Name="BirthDateEdit" />
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup View="Tabs">
+                    <dxlc:LayoutGroup Header="{helpers:ConstString ID=Address}" Orientation="Vertical">
+                        <dxlc:LayoutItem VerticalAlignment="Top" Label="{helpers:ConstString ID=PhoneLabel}" LabelHorizontalAlignment="Right">
+                            <dxe:TextEdit x:Name="PhoneEdit" Style="{StaticResource PhoneTextEdit}" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="{helpers:ConstString ID=AddressLabel}" VerticalAlignment="Stretch" LabelHorizontalAlignment="Right">
+                            <dxe:TextEdit x:Name="AddressEdit" Style="{StaticResource MultilineShortTextEdit}" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem VerticalAlignment="Bottom" Label="{helpers:ConstString ID=EmailLabel}" LabelHorizontalAlignment="Right">
+                            <dxe:ButtonEdit x:Name="EmailEdit" Style="{StaticResource EmailButtonEdit}" />
+                        </dxlc:LayoutItem>
+                    </dxlc:LayoutGroup>
+                    <dxlc:LayoutGroup Header="{helpers:ConstString ID=Discount}" Orientation="Vertical">
+                        <dxlc:LayoutItem Label="{helpers:ConstString ID=DiscountLevelLabel}" VerticalAlignment="Top">
+                            <dxe:ComboBoxEdit x:Name="DiscountLevelEdit" Style="{StaticResource CustomerDiscountLevelComboBoxEdit}" IsReadOnly="True" IsEnabled="False" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="{helpers:ConstString ID=DiscountLabel}" VerticalAlignment="Top">
+                            <dxe:TextEdit x:Name="DiscountEdit" Style="{StaticResource PercentTextEdit}" IsReadOnly="True" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem VerticalAlignment="Bottom">
+                            <helpers:NoteControl Text="{helpers:ConstString ID=DiscountNote}" />
+                        </dxlc:LayoutItem>
+                    </dxlc:LayoutGroup>
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutItem Label="{helpers:ConstString ID=Comments}" LabelPosition="Top" Height="150">
+            <dxe:TextEdit x:Name="CommentsEdit" Style="{StaticResource MultilineShortTextEdit}" />
+        </dxlc:LayoutItem>
+    </dxlc:LayoutControl>
+</UserControl>

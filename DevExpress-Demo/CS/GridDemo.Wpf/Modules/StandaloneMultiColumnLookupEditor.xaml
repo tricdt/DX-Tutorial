@@ -1,0 +1,197 @@
+﻿<common:CommonDemoModule x:Class="CommonDemo.StandaloneMultiColumnLookupEditor"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:common="clr-namespace:CommonDemo"
+                         xmlns:dxdata="clr-namespace:DevExpress.Data.Filtering;assembly=DevExpress.Data.v22.2">
+    <common:CommonDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../ModuleResources/MultiColumnLookupEditorTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <common:LookUpEditOptionsTemplateSelector x:Key="optionsTemplateSelector">
+                <common:LookUpEditOptionsTemplateSelector.PlaceHolderTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="Select an Editor to see its options."
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                        Margin="0,120,0,0"/>
+                        </Grid>
+                    </DataTemplate>
+                </common:LookUpEditOptionsTemplateSelector.PlaceHolderTemplate>
+                <common:LookUpEditOptionsTemplateSelector.LookUpTemplate>
+                    <DataTemplate DataType="{x:Type dxg:LookUpEdit}">
+                        <StackPanel>
+                            <Grid Margin="0,0,0,12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="6*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center"
+                                           Text="Edit Value:" />
+                                <dxe:TextEdit Grid.Column="1"
+                                              EditValue="{Binding Path=EditValue, Mode=OneWay}"
+                                              IsReadOnly="True" />
+                            </Grid>
+                            <dxe:CheckEdit Content="Text Editable"
+                                           Margin="0,6,0,0"
+                                           IsChecked="{Binding Path=IsTextEditable, Mode=TwoWay}"
+                                           IsThreeState="True"/>
+                            <dxe:CheckEdit Content="Immediate Popup"
+                                           Margin="0,6,0,0"
+                                           IsChecked="{Binding Path=ImmediatePopup, Mode=TwoWay}"
+                                           IsThreeState="True"/>
+                            <dxe:CheckEdit Content="Allow Auto Complete"
+                                           Margin="0,6,0,0"
+                                           IsChecked="{Binding Path=AutoComplete, Mode=TwoWay}" />
+                            <dxe:CheckEdit Content="Allow Incremental Filtering"
+                                           Margin="0,6,0,0"
+                                           IsChecked="{Binding Path=IncrementalFiltering, Mode=TwoWay}"
+                                           IsThreeState="True"/>
+                            <dxe:CheckEdit Content="Show Size Grip"
+                                           Margin="0,6,0,0"
+                                           IsChecked="{Binding Path=ShowSizeGrip, Mode=TwoWay}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </common:LookUpEditOptionsTemplateSelector.LookUpTemplate>
+                <common:LookUpEditOptionsTemplateSelector.SearchLookUpTemplate>
+                    <DataTemplate DataType="{x:Type dxg:LookUpEdit}">
+                        <StackPanel>
+                            <Grid Margin="0,0,0,12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="6*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center"
+                                           Text="Edit Value:" />
+                                <dxe:TextEdit Grid.Column="1"
+                                              EditValue="{Binding Path=EditValue, Mode=OneWay}"
+                                              IsReadOnly="True" />
+                            </Grid>
+                            <Grid Margin="0,6,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="6*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center"
+                                           Text="Filter Condition:" />
+                                <dxe:ComboBoxEdit Grid.Column="1"
+                                                  ItemsSource="{dxe:EnumItemsSource EnumType={x:Type dxdata:FilterCondition}}"
+                                                  EditValue="{Binding Path=FilterCondition, Mode=TwoWay}"
+                                                  IsTextEditable="False"/>
+                            </Grid>
+                            <Grid Margin="0,6,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="6*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center"
+                                           Text="Find Mode:" />
+                                <dxe:ComboBoxEdit Grid.Column="1"
+                                                  ItemsSource="{dxe:EnumItemsSource EnumType={x:Type dxe:FindMode}}"
+                                                  EditValue="{Binding Path=FindMode, Mode=TwoWay}"
+                                                  IsTextEditable="False" />
+                            </Grid>
+                        </StackPanel>
+                    </DataTemplate>
+                </common:LookUpEditOptionsTemplateSelector.SearchLookUpTemplate>
+                <common:LookUpEditOptionsTemplateSelector.MultiSelectLookUpTemplate>
+                    <DataTemplate DataType="{x:Type dxg:LookUpEdit}">
+                        <StackPanel Margin="0,0,0,12">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="6*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Top"
+                                           Text="Edit Value:" />
+                                <dxe:ListBoxEdit Grid.Column="1"
+                                                 MaxHeight="300"
+                                                 ItemsSource="{Binding Path=EditValue, Mode=OneWay}"
+                                                 IsReadOnly="True" />
+                            </Grid>
+                        </StackPanel>
+                    </DataTemplate>
+                </common:LookUpEditOptionsTemplateSelector.MultiSelectLookUpTemplate>
+            </common:LookUpEditOptionsTemplateSelector>
+        </ResourceDictionary>
+    </common:CommonDemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer
+            Name="PART_Options"
+            dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+            DockPanel.Dock="Right"
+            Focusable="False"
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility="Auto">
+            <StackPanel Width="250" Margin="12">
+                <ContentPresenter Content="{Binding FocusedEditor}"
+                                  ContentTemplateSelector="{StaticResource optionsTemplateSelector}"/>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid Width="400"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Top"
+              Margin="0,120,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,0,0,24">
+                <Label Content="Multi-Column Lookup Editor" />
+                <dxg:LookUpEdit Name="defaultLookUpEdit"
+                                AutoPopulateColumns="False"
+                                DisplayMember="ProductName"
+                                ValueMember="ProductName"
+                                ItemsSource="{Binding Products}"
+                                PopupContentTemplate="{StaticResource ProductsPopupContentTemplate}"
+                                PopupWidth="600"
+                                PopupMaxWidth="800"
+                                SelectedIndex="1"
+                                ShowSizeGrip="{Binding Path=IsChecked, ElementName=ceSizeGrip}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Margin="0,24">
+                <Label Content="Search Lookup Editor" />
+                <dxg:LookUpEdit Name="searchLookUpEdit"
+                                SelectedIndex="2"
+                                AutoPopulateColumns="False"
+                                DisplayMember="LastName"
+                                ValueMember="LastName"
+                                FilterCondition="StartsWith"
+                                FindButtonPlacement="Popup"
+                                FindMode="Always"
+                                PopupWidth="500"
+                                PopupMaxWidth="800"
+                                IsTextEditable="False"
+                                ItemsSource="{Binding Employees}"
+                                PopupContentTemplate="{StaticResource EmployeesPopupContentTemplate}">
+                    <dxg:LookUpEdit.StyleSettings>
+                        <dxg:SearchLookUpEditStyleSettings />
+                    </dxg:LookUpEdit.StyleSettings>
+                </dxg:LookUpEdit>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Margin="0,24">
+                <Label Content="MultiSelect" />
+                <dxg:LookUpEdit Name="multiSelectLookUpEdit"
+                                AutoPopulateColumns="False"
+                                DisplayMember="ProductName"
+                                ValueMember="ProductName"
+                                EditValue="{Binding SelectedOrders}"
+                                IsPopupAutoWidth="False"
+                                IsTextEditable="False"
+                                ItemsSource="{Binding OrdersSource}"
+                                PopupWidth="500"
+                                PopupMaxWidth="800"
+                                PopupContentTemplate="{StaticResource OrdersPopupContentTemplate}">
+                    <dxg:LookUpEdit.StyleSettings>
+                        <dxg:MultiSelectLookUpEditStyleSettings/>
+                    </dxg:LookUpEdit.StyleSettings>
+                </dxg:LookUpEdit>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</common:CommonDemoModule>

@@ -1,0 +1,326 @@
+<?xml version="1.0"?>
+<ArrayOfTypeInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeInfo>
+    <Namespace>Commands</Namespace>
+    <TypesCount>99</TypesCount>
+    <NestedNamespaces>
+      <TypeInfo>
+        <Namespace>Internal</Namespace>
+        <TypesCount>18</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>Ribbon</Namespace>
+        <TypesCount>12</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>Design</Namespace>
+        <TypesCount>11</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+    </NestedNamespaces>
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>CodedUISupport</Namespace>
+    <TypesCount>24</TypesCount>
+    <NestedNamespaces />
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>WinRTLiveTiles</Namespace>
+    <TypesCount>24</TypesCount>
+    <NestedNamespaces />
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>ToastNotifications</Namespace>
+    <TypesCount>20</TypesCount>
+    <NestedNamespaces />
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>Styles</Namespace>
+    <TypesCount>20</TypesCount>
+    <NestedNamespaces />
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>InternalItems</Namespace>
+    <TypesCount>30</TypesCount>
+    <NestedNamespaces />
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>Docking</Namespace>
+    <TypesCount>255</TypesCount>
+    <NestedNamespaces>
+      <TypeInfo>
+        <Namespace>Controller</Namespace>
+        <TypesCount>12</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>Paint</Namespace>
+        <TypesCount>47</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>BehaviorSource</Namespace>
+        <TypesCount>2</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>Helpers</Namespace>
+        <TypesCount>76</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+    </NestedNamespaces>
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>Ribbon</Namespace>
+    <TypesCount>787</TypesCount>
+    <NestedNamespaces>
+      <TypeInfo>
+        <Namespace>Customization</Namespace>
+        <TypesCount>22</TypesCount>
+        <NestedNamespaces>
+          <TypeInfo>
+            <Namespace>UI</Namespace>
+            <TypesCount>3</TypesCount>
+            <NestedNamespaces />
+          </TypeInfo>
+        </NestedNamespaces>
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>Helpers</Namespace>
+        <TypesCount>27</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>Internal</Namespace>
+        <TypesCount>21</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>Gallery</Namespace>
+        <TypesCount>30</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>Accessible</Namespace>
+        <TypesCount>30</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>Handler</Namespace>
+        <TypesCount>49</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>ViewInfo</Namespace>
+        <TypesCount>154</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>Drawing</Namespace>
+        <TypesCount>61</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>BackstageView</Namespace>
+        <TypesCount>5</TypesCount>
+        <NestedNamespaces>
+          <TypeInfo>
+            <Namespace>Accessible</Namespace>
+            <TypesCount>5</TypesCount>
+            <NestedNamespaces />
+          </TypeInfo>
+        </NestedNamespaces>
+      </TypeInfo>
+    </NestedNamespaces>
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>MVVM</Namespace>
+    <TypesCount>19</TypesCount>
+    <NestedNamespaces>
+      <TypeInfo>
+        <Namespace>Services</Namespace>
+        <TypesCount>19</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+    </NestedNamespaces>
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>Docking2010</Namespace>
+    <TypesCount>1524</TypesCount>
+    <NestedNamespaces>
+      <TypeInfo>
+        <Namespace>Resources</Namespace>
+        <TypesCount>4</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>DragEngine</Namespace>
+        <TypesCount>78</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>BehaviorSource</Namespace>
+        <TypesCount>2</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>Dragging</Namespace>
+        <TypesCount>137</TypesCount>
+        <NestedNamespaces>
+          <TypeInfo>
+            <Namespace>Widget</Namespace>
+            <TypesCount>6</TypesCount>
+            <NestedNamespaces />
+          </TypeInfo>
+          <TypeInfo>
+            <Namespace>Tabbed</Namespace>
+            <TypesCount>12</TypesCount>
+            <NestedNamespaces />
+          </TypeInfo>
+          <TypeInfo>
+            <Namespace>WindowsUI</Namespace>
+            <TypesCount>49</TypesCount>
+            <NestedNamespaces />
+          </TypeInfo>
+          <TypeInfo>
+            <Namespace>WidgetUI</Namespace>
+            <TypesCount>2</TypesCount>
+            <NestedNamespaces />
+          </TypeInfo>
+        </NestedNamespaces>
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>FreeLayoutEngine</Namespace>
+        <TypesCount>44</TypesCount>
+        <NestedNamespaces>
+          <TypeInfo>
+            <Namespace>Elements</Namespace>
+            <TypesCount>23</TypesCount>
+            <NestedNamespaces />
+          </TypeInfo>
+        </NestedNamespaces>
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>Customization</Namespace>
+        <TypesCount>217</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>Views</Namespace>
+        <TypesCount>857</TypesCount>
+        <NestedNamespaces>
+          <TypeInfo>
+            <Namespace>NoDocuments</Namespace>
+            <TypesCount>8</TypesCount>
+            <NestedNamespaces />
+          </TypeInfo>
+          <TypeInfo>
+            <Namespace>NativeMdi</Namespace>
+            <TypesCount>27</TypesCount>
+            <NestedNamespaces />
+          </TypeInfo>
+          <TypeInfo>
+            <Namespace>WindowsUI</Namespace>
+            <TypesCount>452</TypesCount>
+            <NestedNamespaces />
+          </TypeInfo>
+          <TypeInfo>
+            <Namespace>Widget</Namespace>
+            <TypesCount>103</TypesCount>
+            <NestedNamespaces />
+          </TypeInfo>
+          <TypeInfo>
+            <Namespace>Tabbed</Namespace>
+            <TypesCount>87</TypesCount>
+            <NestedNamespaces />
+          </TypeInfo>
+        </NestedNamespaces>
+      </TypeInfo>
+      <TypeInfo>
+        <Namespace>Base</Namespace>
+        <TypesCount>32</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+    </NestedNamespaces>
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>Forms</Namespace>
+    <TypesCount>16</TypesCount>
+    <NestedNamespaces />
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>FluentDesignSystem</Namespace>
+    <TypesCount>36</TypesCount>
+    <NestedNamespaces>
+      <TypeInfo>
+        <Namespace>FluentFormLinks</Namespace>
+        <TypesCount>10</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+    </NestedNamespaces>
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>Helpers</Namespace>
+    <TypesCount>22</TypesCount>
+    <NestedNamespaces>
+      <TypeInfo>
+        <Namespace>Docking</Namespace>
+        <TypesCount>7</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+    </NestedNamespaces>
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>ViewInfo</Namespace>
+    <TypesCount>116</TypesCount>
+    <NestedNamespaces />
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>Objects</Namespace>
+    <TypesCount>17</TypesCount>
+    <NestedNamespaces />
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>Painters</Namespace>
+    <TypesCount>100</TypesCount>
+    <NestedNamespaces />
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>Utils</Namespace>
+    <TypesCount>31</TypesCount>
+    <NestedNamespaces />
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>Controls</Namespace>
+    <TypesCount>37</TypesCount>
+    <NestedNamespaces />
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>Alerter</Namespace>
+    <TypesCount>51</TypesCount>
+    <NestedNamespaces />
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>Customization</Namespace>
+    <TypesCount>21</TypesCount>
+    <NestedNamespaces>
+      <TypeInfo>
+        <Namespace>Helpers</Namespace>
+        <TypesCount>9</TypesCount>
+        <NestedNamespaces />
+      </TypeInfo>
+    </NestedNamespaces>
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>Navigation</Namespace>
+    <TypesCount>448</TypesCount>
+    <NestedNamespaces />
+  </TypeInfo>
+  <TypeInfo>
+    <Namespace>Accessible</Namespace>
+    <TypesCount>11</TypesCount>
+    <NestedNamespaces />
+  </TypeInfo>
+</ArrayOfTypeInfo>

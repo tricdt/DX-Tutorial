@@ -1,0 +1,28 @@
+﻿<dx:ThemedWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="ProductsDemo.Controls.CustomFlagWindow"
+        Icon="/DevExpress.ProductsDemo.Wpf;component/demoicon.ico"
+        Title="Custom" Height="150" Width="300" ResizeMode="NoResize">
+    <dx:ThemedWindow.WindowStartupLocation>
+        <WindowStartupLocation>CenterScreen</WindowStartupLocation>
+    </dx:ThemedWindow.WindowStartupLocation>
+    <dxlc:LayoutControl>
+        <dxlc:LayoutGroup Orientation="Vertical">
+            <dxlc:LayoutGroup Orientation="Vertical">
+                <dxlc:LayoutItem Label="Start Date">
+                    <dxe:DateEdit EditValue="{Binding StartDate}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="End Date">
+                    <dxe:DateEdit EditValue="{Binding DueDate}"/>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup Header="LayoutGroup" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <Button x:Name="btn_Ok" Content="OK" Width="80" Click="btn_Ok_Click"/>
+                <Button x:Name="btn_Cancel" Content="Cancel" Width="80" Click="btn_Cancel_Click"/>
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</dx:ThemedWindow>

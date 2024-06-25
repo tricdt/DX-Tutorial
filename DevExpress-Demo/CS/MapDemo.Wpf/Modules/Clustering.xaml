@@ -1,0 +1,210 @@
+﻿<local:MapDemoModule xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+                     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                     xmlns:dxmt="http://schemas.devexpress.com/winfx/2008/xaml/map/themekeys"
+                     xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+                     xmlns:local="clr-namespace:MapDemo"
+                     mc:Ignorable="d"
+                     x:Class="MapDemo.Clustering"
+                     ModuleLoaded="MapDemoModule_ModuleLoaded">
+
+    <local:MapDemoModule.Resources>
+        <local:DemoValuesProvider x:Key="demoValuesProvider" />
+        <local:CountToMatrixTransformConverter x:Key="countToMatrixTransformConverter" />
+        <local:CountToTextConverter x:Key="countToTextConverter" />
+        <dxm:ChoroplethColorizer x:Key="ClusterColorizer" RangeStops="1, 10, 20, 50, 100, 250, 500, 1000, 3000, 5000">
+            <dxm:ChoroplethColorizer.Colors>
+                <Color>#2f3d13</Color>
+                <Color>#3d4f19</Color>
+                <Color>#4c641e</Color>
+                <Color>#688a2a</Color>
+                <Color>#779e30</Color>
+                <Color>#8bb838</Color>
+                <Color>#9bcd3e</Color>
+                <Color>#a7dd43</Color>
+                <Color>#b7f249</Color>
+                <Color>#caff68</Color>
+            </dxm:ChoroplethColorizer.Colors>
+            <dxm:ChoroplethColorizer.ValueProvider>
+                <dxm:MapClusterValueProvider />
+            </dxm:ChoroplethColorizer.ValueProvider>
+        </dxm:ChoroplethColorizer>
+        <dxm:KeyColorColorizer x:Key="AttributeColorizer">
+            <dxm:KeyColorColorizer.Colors>
+                <Color>#FFFF5D6A</Color>
+                <Color>#FF417CD9</Color>
+                <Color>#FFFFDD74</Color>
+                <Color>#FF67BF58</Color>
+                <Color>#FF8C68C3</Color>
+            </dxm:KeyColorColorizer.Colors>
+            <dxm:KeyColorColorizer.ItemKeyProvider>
+                <dxm:AttributeItemKeyProvider AttributeName="location" />
+            </dxm:KeyColorColorizer.ItemKeyProvider>
+        </dxm:KeyColorColorizer>
+        <Style x:Key="colorizerStyle" TargetType="dxm:VectorLayer">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=ceClusteringByAttr, Path=IsChecked}" Value="False">
+                    <Setter Property="Colorizer" Value="{StaticResource ClusterColorizer}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=ceClusteringByAttr, Path=IsChecked}" Value="True">
+                    <Setter Property="Colorizer" Value="{StaticResource AttributeColorizer}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="pathStyle">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Path.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="(StrokeThickness)" From="10.0" To="20.0" Duration="0:0:0.2" />
+                                <ColorAnimation Duration="0:0:0.2" From="Black" To="Brown" Storyboard.TargetProperty="(Stroke).(SolidColorBrush.Color)" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Path.MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="(StrokeThickness)" From="20.0" To="10.0" Duration="0:0:0.2" />
+                                <ColorAnimation Duration="0:0:0.2" From="Brown" To="Black" Storyboard.TargetProperty="(Stroke).(SolidColorBrush.Color)" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        <DataTemplate x:Key="clusterTemplate">
+            <Path Data="F1 M 0,0 C -1.28,-12.02 -4.65,-23.23 -9.77,-33.49 -22.59,-83.97 -69.84,-112.01 -118.06,-104.64           -132.32,-122.91 -151.54,-137.33 -175.73,-145.82 -214.01,-159.12 -254.86,-145.5 -279.85,-116.66 -350.5,-174.35 -459.26,-145.82 -489.22,-53.04           -490.82,-48.39 -493.23,-44.23 -494.51,-39.58 -494.67,-39.42 -494.67,-39.26 -494.67,-39.1 -525.26,-31.25 -555.7,-6.09 -558.1,25           -558.26,26.92 -558.42,28.85 -558.26,30.77 -574.28,71.95 -572.2,112.33 -547.37,151.11 -521.58,191.82 -484.25,211.69 -437.96,212.17           -393.59,272.1 -352.9,334.76 -316.06,399.65 -317.66,409.91 -321.18,420.81 -325.99,434.27 -336.72,464.55 -326.63,479.78 -294.43,480.74           -289.62,480.9 -284.82,481.06 -279.85,480.58 -261.27,478.98 -251.5,465.04 -256.63,447.09 -259.99,435.07 -266.08,423.53 -267.68,411.19           -267.84,410.71 -267.68,407.83 -267.36,403.18 -249.26,368.73 -208.73,348.54 -185.82,317.29 -171.08,296.94 -160.35,274.34 -154.26,250.47           -139.85,249.5 -125.27,245.18 -110.69,235.88 -88.59,221.78 -75.77,198.39 -72.57,173.39 -69.68,167.3 -66,164.57 -58.31,163.29           -14.42,156.56 12.65,128.36 18.26,84.45 22.26,54.65 13.61,28.04 0.16,2.25 0.16,1.44 0.16,0.8 0,0 z           M -396.79,224.67 C -384.78,235.88 -373.08,247.26 -362.99,259.92 -357.22,267.29 -352.42,281.87 -347.93,296.62           -363.63,272.26 -379.97,248.22 -396.79,224.67 z           M -291.07,324.82 C -300.2,326.26 -321.34,279.95 -328.71,264.89 -305.8,263.45 -282.58,262 -258.07,260.4           -258.71,262 -259.03,263.93 -259.83,265.53 -267.68,278.99 -272.48,321.94 -291.07,324.82 z           M -219.62,316.81 C -232.76,330.91 -247.81,342.93 -261.43,355.91 -255.66,321.13 -244.93,276.75 -225.87,242.29           -223.63,238.29 -221.06,236.2 -218.02,235.24 -205.68,241.17 -193.35,245.82 -180.86,248.54 -188.06,273.54 -201.04,296.78 -219.62,316.81 z"
+                  Fill="{Binding MapItem.Brush}"
+                  Stroke="Black"
+                  StrokeThickness="10"
+                  Style="{StaticResource pathStyle}">
+                <Path.RenderTransform>
+                    <MatrixTransform Matrix="{Binding MapItem.ClusteredItems, Converter= {StaticResource countToMatrixTransformConverter}}" />
+                </Path.RenderTransform>
+                <Path.ToolTip>
+                    <ToolTip Placement="Top">
+                        <ToolTip.Triggers>
+                            <EventTrigger RoutedEvent="ToolTip.Opened">
+                                <BeginStoryboard>
+                                    <Storyboard TargetProperty="Opacity">
+                                        <DoubleAnimation From="0.0" To="1.0" Duration="0:0:0.6" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ToolTip.Triggers>
+                        <ToolTip.Template>
+                            <ControlTemplate x:Name="ToolTipTemplate">
+                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True">
+                                    <Border Background="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=ToolTipBackground}}" />
+                                    <ContentPresenter Content="{Binding}">
+                                        <ContentPresenter.ContentTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Margin="8"
+                                                           Text="{Binding MapItem.ClusteredItems, Converter= {StaticResource countToTextConverter}}"
+                                                           FontSize="14"
+                                                           TextWrapping="Wrap"
+                                                           Foreground="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=ToolTipForeground}}" />
+                                            </DataTemplate>
+                                        </ContentPresenter.ContentTemplate>
+                                    </ContentPresenter>
+                                </Grid>
+                            </ControlTemplate>
+                        </ToolTip.Template>
+                    </ToolTip>
+                </Path.ToolTip>
+            </Path>
+        </DataTemplate>
+    </local:MapDemoModule.Resources>
+
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,5,12,12" MinWidth="210">
+                <GroupBox Header="Clustering method">
+                    <dxe:ListBoxEdit Name="lbClusterizeMethod"
+                                     SelectedItem="{Binding ClustererInfo}"
+                                     ItemsSource="{Binding Clusterers}"
+                                     ShowBorder="False"
+                                     DisplayMember="Name" />
+                </GroupBox>
+
+                <dxe:CheckEdit Name="ceClusteringByAttr"
+                               Content="Clustering by attribute"
+                               Margin="12,8,0,0"
+                               VerticalAlignment="Center"
+                               IsChecked="{Binding AttributeClusteringEnabled}" />
+
+                <dxe:CheckEdit Name="ceCustomTemplate"
+                               Content="Use custom template"
+                               Margin="12,4,0,0"
+                               VerticalAlignment="Center"
+                               IsChecked="{Binding UsingCustomTemplate}" />
+
+                <dxe:TrackBarEdit x:Name="StepInPixelEdit"
+                                  SmallStep="10"
+                                  LargeStep="10"
+                                  EditValue="{Binding StepInPixels}"
+                                  Minimum="10"
+                                  Maximum="200"
+                                  Margin="12" />
+
+                <TextBlock HorizontalAlignment="Center" Text="{Binding ElementName=StepInPixelEdit, Path=EditValue, StringFormat='Step: {0} pixels'}" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <Grid>
+            <dx:LoadingDecorator Name="loadingDecorator" IsSplashScreenShown="{DXBinding 'IsClustering and IsLoaded'}" OwnerLock="None">
+                <dxm:MapControl x:Name="Map" CenterPoint="-37.551,143.83" ScrollArea="143.65,-37.47,143.94,-37.62" MinZoomLevel="10" MaxZoomLevel="18" ZoomLevel="14" MouseUp="Map_MouseUp">
+
+                    <dxm:MapControl.Legends>
+                        <dxm:ColorListLegend Layer="{Binding ElementName=ItemLayer}" Alignment="TopRight" Header="{Binding LegendHeaderText}" />
+                    </dxm:MapControl.Legends>
+
+                    <dxm:ImageLayer>
+                        <dxm:BingMapDataProvider Kind="Road" BingKey="{Binding DevexpressBingKey, Source={StaticResource demoValuesProvider}}" />
+                    </dxm:ImageLayer>
+
+                    <dxm:VectorLayer x:Name="ItemLayer" Style="{StaticResource colorizerStyle}">
+
+                        <dxm:ListSourceDataAdapter DataMember="Row" Clusterer="{Binding ClustererInfo.Clusterer}">
+                            <dxm:ListSourceDataAdapter.DataSource>
+                                <XmlDataProvider Source="/MapDemo;component/Data/TreesCL_.xml" />
+                            </dxm:ListSourceDataAdapter.DataSource>
+
+                            <dxm:ListSourceDataAdapter.ItemSettings>
+                                <dxm:MapDotSettings Size="8" />
+                            </dxm:ListSourceDataAdapter.ItemSettings>
+
+                            <dxm:ListSourceDataAdapter.AttributeMappings>
+                                <dxm:MapItemAttributeMapping Member="location" Name="location" />
+                            </dxm:ListSourceDataAdapter.AttributeMappings>
+
+                            <dxm:ListSourceDataAdapter.Mappings>
+                                <dxm:MapItemMappingInfo XCoordinate="lon" YCoordinate="lat" />
+                            </dxm:ListSourceDataAdapter.Mappings>
+                        </dxm:ListSourceDataAdapter>
+
+                    </dxm:VectorLayer>
+                    <dxm:MapControl.CoordinatesPanelOptions>
+                        <dxm:CoordinatesPanelOptions Margin="10,10,10,53" />
+                    </dxm:MapControl.CoordinatesPanelOptions>
+                    <dxm:MapControl.ScalePanelOptions>
+                        <dxm:ScalePanelOptions Margin="10,10,10,39" />
+                    </dxm:MapControl.ScalePanelOptions>
+                </dxm:MapControl>
+            </dx:LoadingDecorator>
+            <local:CopyrightControl ProviderName="Bing" />
+        </Grid>
+    </DockPanel>
+</local:MapDemoModule>

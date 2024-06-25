@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="PropertyGridDemo.TabbedViewModuleCharts "
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PropertyGridDemo"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+             xmlns:dxct="http://schemas.devexpress.com/winfx/2008/xaml/charts/themekeys"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.Resources>
+            <ControlTemplate x:Key="{dxct:ChartControlThemeKey ResourceKey=ChartWrapperTemplate, IsThemeIndependent=True}" TargetType="ContentControl">
+                <Grid>
+                    <Rectangle x:Name="PART_Rectangle"
+                           StrokeDashArray="{Binding Path=Border.Data.DashStyle.Dashes}"
+                           Stroke="{Binding Path=Border.Data.Color, Converter={local:ColorToBrushConverter}}"
+                           StrokeThickness="{Binding Path=Border.Data.Thickness}"
+                           Opacity="{Binding Path=Border.Data.Opacity}"
+                           />
+                    <Border x:Name="InsideBorder" Background="{Binding Fill.Result}" Padding="{TemplateBinding Padding}" Margin="{Binding ElementName=PART_Rectangle, Path=StrokeThickness}">
+                        <dxc:ChartContentPresenter Content="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Grid.Resources>
+        <dxc:ChartControl Grid.Column="0" Background="{Binding Fill.Result}" CrosshairEnabled="{Binding ShowLabel, Converter={dxmvvm:BooleanNegationConverter}}">
+            <dxc:ChartControl.Diagram>
+                <dxc:XYDiagram2D >
+                    <dxc:XYDiagram2D.DefaultPane>
+                        <dxc:Pane DomainBrush="Transparent" MirrorHeight="{Binding Mirror.ActualLength}"/>
+                    </dxc:XYDiagram2D.DefaultPane>
+                    <dxc:XYDiagram2D.Series>
+                        <dxc:BarSideBySideSeries2D Model="{Binding Options.Model, Converter={local:Bar2DKindToModelConverter}}">
+                            <dxc:BarSideBySideSeries2D.Label>
+                                <dxc:SeriesLabel Indent="20" ResolveOverlappingMode="Default"
+                                    ConnectorThickness="1"
+                                    Visible="{Binding ShowLabel}"
+                                    dxc:BarSideBySideSeries2D.LabelPosition="{Binding Label.Position}"/>
+                            </dxc:BarSideBySideSeries2D.Label>
+                            <dxc:BarSideBySideSeries2D.Points>
+                                <dxc:SeriesPoint Argument="Category1" Value="10" />
+                                <dxc:SeriesPoint Argument="Category2" Value="20" />
+                                <dxc:SeriesPoint Argument="Category3" Value="30" />
+                            </dxc:BarSideBySideSeries2D.Points>
+                        </dxc:BarSideBySideSeries2D>
+                        <dxc:BarSideBySideSeries2D Model="{Binding Options.Model, Converter={local:Bar2DKindToModelConverter}}">
+                            <dxc:BarSideBySideSeries2D.Label>
+                                <dxc:SeriesLabel Indent="20" ResolveOverlappingMode="Default"
+                                    ConnectorThickness="1"
+                                    Visible="{Binding ShowLabel}"
+                                    dxc:BarSideBySideSeries2D.LabelPosition="{Binding Label.Position}"/>
+                            </dxc:BarSideBySideSeries2D.Label>
+                            <dxc:BarSideBySideSeries2D.Points>
+                                <dxc:SeriesPoint Argument="Category1" Value="20" />
+                                <dxc:SeriesPoint Argument="Category2" Value="10" />
+                                <dxc:SeriesPoint Argument="Category3" Value="30" />
+                            </dxc:BarSideBySideSeries2D.Points>
+                        </dxc:BarSideBySideSeries2D>
+                        <dxc:BarSideBySideSeries2D Model="{Binding Options.Model, Converter={local:Bar2DKindToModelConverter}}">
+                            <dxc:BarSideBySideSeries2D.Label>
+                                <dxc:SeriesLabel Indent="20" ResolveOverlappingMode="None"
+                                    ConnectorThickness="1"
+                                    Visible="{Binding ShowLabel}"
+                                    dxc:BarSideBySideSeries2D.LabelPosition="{Binding Label.Position}"/>
+                            </dxc:BarSideBySideSeries2D.Label>
+                            <dxc:BarSideBySideSeries2D.Points>
+                                <dxc:SeriesPoint Argument="Category1" Value="30" />
+                                <dxc:SeriesPoint Argument="Category2" Value="20" />
+                                <dxc:SeriesPoint Argument="Category3" Value="10" />
+                            </dxc:BarSideBySideSeries2D.Points>
+                        </dxc:BarSideBySideSeries2D>
+                    </dxc:XYDiagram2D.Series>
+                </dxc:XYDiagram2D>
+            </dxc:ChartControl.Diagram>
+        </dxc:ChartControl>
+    </Grid>
+</UserControl>

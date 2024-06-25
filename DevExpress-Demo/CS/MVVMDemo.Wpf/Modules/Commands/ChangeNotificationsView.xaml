@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="MVVMDemo.Commands.ChangeNotificationsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.Commands"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+    <UserControl.DataContext>
+        <local:ChangeNotificationsViewModel/>
+    </UserControl.DataContext>
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <CheckBox IsChecked="{Binding CanExecuteSaveCommand}" Content="Can Save"/>
+        <Button Command="{Binding SaveCommand}">Save</Button>
+    </dxlc:LayoutControl>
+</UserControl>

@@ -1,0 +1,308 @@
+﻿<local:TreeListDemoModule x:Class="TreeListDemo.DataEditorTypes"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:local="clr-namespace:TreeListDemo"
+                          xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                          xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                          xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                          mc:Ignorable="d"
+                          d:DesignHeight="400"
+                          d:DesignWidth="800">
+    <local:TreeListDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TreeListDemo;component/Descriptions/DataEditorTypesDescriptions.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dxdb:NWindDataLoader x:Key="NWindDataLoader" />
+        </ResourceDictionary>
+    </local:TreeListDemoModule.Resources>
+
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <GroupBox Margin="12,5,12,12" Header="Highlighted Editor" x:Name="groupFrame" MinWidth="210" MaxWidth="230">
+                <RichTextBox x:Name="descriptionRichTextBox"
+                             Background="Transparent"
+                             Foreground="{Binding Path=Foreground, ElementName=groupFrame}"
+                             BorderThickness="0"
+                             IsReadOnly="True" />
+            </GroupBox>
+        </ScrollViewer>
+        <dxg:TreeListControl x:Name="treeList" CurrentItemChanged="CurrentItemChanged">
+            <dxg:TreeListControl.Resources>
+                <local:CountriesData x:Key="CountriesData" />
+                <dxe:BytesToImageSourceConverter x:Key="imageConverter" />
+                <ControlTemplate x:Key="displayTemplate">
+                    <dx:DXImage x:Name="PART_Editor"
+                           Margin="1"
+                           Source="{Binding Path=SelectedItem.Picture, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource imageConverter}}" />
+                </ControlTemplate>
+                <DataTemplate x:Key="FilterHeaderContentTemplate">
+                    <ContentPresenter Content="{Binding}" />
+                </DataTemplate>
+                <ControlTemplate x:Key="comboBoxItemTemplate">
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                        <dx:DXImage Height="16"
+                               Width="16"
+                               Source="{Binding Path=(dxe:BaseEdit.OwnerEdit).SelectedItem.CategoryName, RelativeSource={RelativeSource TemplatedParent}, Converter={local:ProductCategoryToImageConverter}}" />
+                        <TextBlock Margin="2"
+                                   Text="{Binding Path=(dxe:BaseEdit.OwnerEdit).SelectedItem.CategoryName, RelativeSource={RelativeSource TemplatedParent}}"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                </ControlTemplate>
+                <ControlTemplate x:Key="gridBeveragesTemplate">
+                    <dxg:GridControl x:Name="PART_GridControl">
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn FieldName="CategoryID"
+                                            Header="Category"
+                                            HeaderToolTip="Category"
+                                            MinWidth="36"
+                                            Width="36"
+                                            AllowResizing="False"
+                                            Fixed="None"
+                                            DisplayTemplate="{StaticResource displayTemplate}"
+                                            AutoFilterRowDisplayTemplate="{StaticResource displayTemplate}"
+                                            AutoFilterRowEditTemplate="{StaticResource displayTemplate}"
+                                            FilterEditorHeaderTemplate="{StaticResource FilterHeaderContentTemplate}">
+                                <dxg:GridColumn.HeaderTemplate>
+                                    <DataTemplate />
+                                </dxg:GridColumn.HeaderTemplate>
+                                <dxg:GridColumn.EditSettings>
+                                    <dxe:ComboBoxEditSettings IsTextEditable="False"
+                                                              ValueMember="CategoryID"
+                                                              DisplayMember="CategoryName"
+                                                              ItemsSource="{Binding Path=Categories, Source={StaticResource NWindDataLoader}}">
+                                        <dxe:ComboBoxEditSettings.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <dx:DXImage Width="30" Source="{Binding Path=Picture, Converter={StaticResource imageConverter}}" />
+                                                    <TextBlock Margin="2,0,0,0" Text="{Binding Path=CategoryName}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </dxe:ComboBoxEditSettings.ItemTemplate>
+                                        <dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+                                            <ControlTemplate>
+                                                <dx:DXImage x:Name="PART_Editor"
+                                                       Width="30"
+                                                       HorizontalAlignment="Left"
+                                                       Margin="1"
+                                                       Source="{Binding Path=(dxe:BaseEdit.OwnerEdit).SelectedItem.Picture, Converter={StaticResource imageConverter}}" />
+                                            </ControlTemplate>
+                                        </dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+                                    </dxe:ComboBoxEditSettings>
+                                </dxg:GridColumn.EditSettings>
+                            </dxg:GridColumn>
+                            <dxg:GridColumn FieldName="CategoryName" Width="*" />
+                            <dxg:GridColumn FieldName="Description" Width="*" />
+                        </dxg:GridControl.Columns>
+                        <dxg:GridControl.View>
+                            <dxg:TableView Name="view" ShowAutoFilterRow="True" ShowGroupedColumns="True" />
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+                </ControlTemplate>
+                <DataTemplate x:Key="LookUpEdit">
+                    <dxg:LookUpEdit Name="PART_Editor"
+                                    ItemsSource="{Binding Categories, Source={StaticResource NWindDataLoader}}"
+                                    ValueMember="CategoryID"
+                                    DisplayMember="CategoryName"
+                                    PopupContentTemplate="{DynamicResource gridBeveragesTemplate}"
+                                    AutoComplete="True"
+                                    IncrementalFiltering="True"
+                                    ImmediatePopup="True"
+                                    AutoPopulateColumns="False"
+                                    PopupWidth="500"
+                                    IsPopupAutoWidth="False" />
+                </DataTemplate>
+                <DataTemplate x:Key="SearchLookUpEdit">
+                    <dxg:LookUpEdit Name="PART_Editor"
+                                    ItemsSource="{Binding Categories, Source={StaticResource NWindDataLoader}}"
+                                    ValueMember="CategoryID"
+                                    PopupHeight="400"
+                                    PopupWidth="500"
+                                    DisplayTemplate="{DynamicResource comboBoxItemTemplate}"
+                                    EditNonEditableTemplate="{DynamicResource comboBoxItemTemplate}"
+                                    PopupContentTemplate="{DynamicResource gridBeveragesTemplate}"
+                                    AutoPopulateColumns="False"
+                                    FilterCondition="Contains">
+                        <dxg:LookUpEdit.StyleSettings>
+                            <dxg:SearchLookUpEditStyleSettings />
+                        </dxg:LookUpEdit.StyleSettings>
+                    </dxg:LookUpEdit>
+                </DataTemplate>
+
+                <DataTemplate x:Key="NumericTextEdit">
+                    <dxe:TextEdit Name="PART_Editor" HorizontalContentAlignment="Right" MaskType="Numeric" Mask="d" MaskUseAsDisplayFormat="True" />
+                </DataTemplate>
+                <DataTemplate x:Key="TextEdit">
+                    <dxe:TextEdit Name="PART_Editor" />
+                </DataTemplate>
+                <DataTemplate x:Key="AutoCompleteComboBoxEdit">
+                    <dxe:ComboBoxEdit Name="PART_Editor"
+                                      ItemsSource="{Binding Countries, Source={StaticResource NWindDataLoader}}"
+                                      AutoComplete="True"
+                                      IsTextEditable="True"
+                                      ImmediatePopup="True" />
+                </DataTemplate>
+                <DataTemplate x:Key="TokenComboBoxEdit">
+                    <dxe:ComboBoxEdit Name="PART_Editor"
+                                      ItemsSource="{Binding Categories, Source={StaticResource NWindDataLoader}}"
+                                      ValueMember="CategoryID"
+                                      DisplayMember="CategoryName"
+                                      AutoComplete="True"
+                                      ImmediatePopup="True">
+                        <dxe:ComboBoxEdit.StyleSettings>
+                            <dxe:TokenComboBoxStyleSettings />
+                        </dxe:ComboBoxEdit.StyleSettings>
+                    </dxe:ComboBoxEdit>
+                </DataTemplate>
+                <DataTemplate x:Key="ComboBoxEdit">
+                    <dxe:ComboBoxEdit Name="PART_Editor"
+                                      ItemsSource="{Binding Categories, Source={StaticResource NWindDataLoader}}"
+                                      ValueMember="CategoryID"
+                                      IsTextEditable="False"
+                                      DisplayTemplate="{DynamicResource comboBoxItemTemplate}"
+                                      EditNonEditableTemplate="{DynamicResource comboBoxItemTemplate}">
+                        <dxe:ComboBoxEdit.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Background="Transparent">
+                                    <dx:DXImage Height="16" Width="16" Source="{Binding Path=CategoryName, Converter={local:ProductCategoryToImageConverter}}" />
+                                    <TextBlock Text="{Binding Path=CategoryName}" Margin="2" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </dxe:ComboBoxEdit.ItemTemplate>
+                    </dxe:ComboBoxEdit>
+                </DataTemplate>
+                <DataTemplate x:Key="SpinEdit">
+                    <dxe:SpinEdit Name="PART_Editor" Mask="p" MaskUseAsDisplayFormat="True" Increment="0.01" MinValue="0" IsFloatValue="True" />
+                </DataTemplate>
+                <DataTemplate x:Key="BarCodeEdit">
+                    <dxe:BarCodeEdit Name="PART_Editor" ShowText="False">
+                        <dxe:BarCodeEdit.StyleSettings>
+                            <dxe:Code128StyleSettings CharacterSet="CharsetA" />
+                        </dxe:BarCodeEdit.StyleSettings>
+                    </dxe:BarCodeEdit>
+                </DataTemplate>
+                <DataTemplate x:Key="CheckEdit">
+                    <dxe:CheckEdit Name="PART_Editor" />
+                </DataTemplate>
+                <DataTemplate x:Key="RegExTextEdit">
+                    <dxe:TextEdit Name="PART_Editor" MaskType="RegEx" Mask="\d{5}-\d{3}-\d{4}" MaskUseAsDisplayFormat="True" />
+                </DataTemplate>
+                <DataTemplate x:Key="TrackBarEdit">
+                    <dxe:TrackBarEdit Name="PART_Editor" TickPlacement="None" />
+                </DataTemplate>
+                <DataTemplate x:Key="ProgressBarEdit">
+                    <dxe:ProgressBarEdit Name="PART_Editor" ContentDisplayMode="Value" />
+                </DataTemplate>
+                <DataTemplate x:Key="ZoomTrackBarEdit">
+                    <dxe:TrackBarEdit Name="PART_Editor" TickPlacement="None">
+                        <dxe:TrackBarEdit.StyleSettings>
+                            <dxe:TrackBarZoomStyleSettings />
+                        </dxe:TrackBarEdit.StyleSettings>
+                    </dxe:TrackBarEdit>
+                </DataTemplate>
+                <DataTemplate x:Key="RangeTrackBarEdit">
+                    <dxe:TrackBarEdit Name="PART_Editor" TickPlacement="None" UseLayoutRounding="True">
+                        <dxe:TrackBarEdit.StyleSettings>
+                            <dxe:TrackBarRangeStyleSettings />
+                        </dxe:TrackBarEdit.StyleSettings>
+                    </dxe:TrackBarEdit>
+                </DataTemplate>
+                <DataTemplate x:Key="MemoEdit">
+                    <dxe:MemoEdit Name="PART_Editor" />
+                </DataTemplate>
+                <DataTemplate x:Key="DateEdit">
+                    <dxe:DateEdit Name="PART_Editor">
+                        <dxe:DateEdit.NullValue>
+                            <x:Static Member="sys:DBNull.Value" />
+                        </dxe:DateEdit.NullValue>
+                    </dxe:DateEdit>
+                </DataTemplate>
+                <DataTemplate x:Key="ListBoxEdit">
+                    <dxe:ListBoxEdit Name="PART_Editor">
+                        <dxe:ListBoxEdit.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Height="60" Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </dxe:ListBoxEdit.ItemsPanel>
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.Items>
+                            <sys:String>4x4</sys:String>
+                            <sys:String>10x10</sys:String>
+                            <sys:String>16x16</sys:String>
+                            <sys:String>20x20</sys:String>
+                            <sys:String>25x25</sys:String>
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>
+                </DataTemplate>
+                <DataTemplate x:Key="ButtonEdit">
+                    <dxe:ButtonEdit Name="PART_Editor" AllowDefaultButton="False">
+                        <dxe:ButtonInfo ClickMode="Release" Click="PART_Editor_DefaultButtonClick" GlyphKind="Regular" />
+                    </dxe:ButtonEdit>
+                </DataTemplate>
+                <DataTemplate x:Key="PopupColorEdit">
+                    <dxe:PopupColorEdit Name="PART_Editor" Color="White" />
+                </DataTemplate>
+                <DataTemplate x:Key="PopupBrushEdit">
+                    <dxprg:PopupBrushEdit Name="PART_Editor" />
+                </DataTemplate>
+                <DataTemplate x:Key="SparklineEdit">
+                    <dxe:SparklineEdit Name="PART_Editor">
+                        <dxe:SparklineEdit.StyleSettings>
+                            <dxe:AreaSparklineStyleSettings />
+                        </dxe:SparklineEdit.StyleSettings>
+                    </dxe:SparklineEdit>
+                </DataTemplate>
+                <DataTemplate x:Key="PasswordBoxEdit">
+                    <dxe:PasswordBoxEdit Name="PART_Editor" />
+                </DataTemplate>
+                <DataTemplate x:Key="PopupCalcEdit">
+                    <dxe:PopupCalcEdit Name="PART_Editor" Mask="c" MaskCulture="en-US" Precision="4" MaskUseAsDisplayFormat="True" />
+                </DataTemplate>
+                <DataTemplate x:Key="PopupImageEdit">
+                    <dxe:PopupImageEdit Name="PART_Editor" ShowMenuMode="Always" />
+                </DataTemplate>
+                <DataTemplate x:Key="FontEdit">
+                    <dxe:FontEdit Name="PART_Editor" />
+                </DataTemplate>
+                <DataTemplate x:Key="RatingEdit">
+                    <dxe:RatingEdit Name="PART_Editor" />
+                </DataTemplate>
+                <DataTemplate x:Key="ToggleSwitchEdit">
+                    <dxe:ToggleSwitchEdit Name="PART_Editor" CheckedStateContent="On" UncheckedStateContent="Off" Margin="5,0" />
+                </DataTemplate>
+                <DataTemplate x:Key="HyperlinkEdit">
+                    <dxe:HyperlinkEdit Name="PART_Editor"
+                                       NavigationUrlFormat="https://www.google.com/search?newwindow=1&amp;q={0}"
+                                       AllowAutoNavigate="True" />
+                </DataTemplate>
+                <DataTemplate x:Key="AutoSuggestEdit">
+                    <dxe:AutoSuggestEdit Name="PART_Editor" TextMember="ProductName" DisplayMember="ProductName" ImmediatePopup="True">
+                        <dxmvvm:Interaction.Behaviors>
+                            <local:AutoSuggestEditInplaceEditingBehavior />
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:AutoSuggestEdit>
+                </DataTemplate>
+            </dxg:TreeListControl.Resources>
+            <dxg:TreeListControl.View>
+                <dxg:TreeListView x:Name="treeListView"
+                                  KeyFieldName="Id"
+                                  ParentFieldName="ParentId"
+                                  AllowColumnFiltering="False"
+                                  ShowingEditor="TableView_ShowingEditor" />
+            </dxg:TreeListControl.View>
+        </dxg:TreeListControl>
+    </DockPanel>
+</local:TreeListDemoModule>

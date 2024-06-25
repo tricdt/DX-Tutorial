@@ -1,0 +1,60 @@
+﻿<local:GridDemoModule x:Class="GridDemo.DataUpdateAnimation"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      xmlns:dxrudex="http://schemas.devexpress.com/winfx/2008/xaml/reports/userdesignerextensions"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      mc:Ignorable="d"
+                      d:DesignHeight="300"
+                      d:DesignWidth="300"
+                      DataContext="{dxmvvm:ViewModelSource local:DataUpdateAnimationViewModel}"
+                      Loaded="{DXEvent 'StartUpdate()'}"
+                      Unloaded="{DXEvent 'StopUpdate()'}">
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" ReportService="{x:Reference rmsDataUpdateAnimation}" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <local:RecentReports Margin="12,0,12,12" VerticalAlignment="Top" ReportService="{x:Reference rmsDataUpdateAnimation}" />
+        </ScrollViewer>
+        <dxg:GridControl Name="grid" ItemsSource="{Binding Path=Data}" ShowBorder="False">
+            <!--#region Columns-->
+            <dxg:GridColumn FieldName="CompanyName" Header="Symbol" Width="*" />
+            <dxg:GridColumn FieldName="Price" Width="*" EditSettings="{dxe:TextSettings DisplayFormat=c}" />
+            <dxg:GridColumn FieldName="DeltaPrice" Header="Change ($)" Width="*" EditSettings="{dxe:TextSettings DisplayFormat=n2}" />
+            <dxg:GridColumn FieldName="DeltaPricePercent" Header="Change (%)" Width="*" EditSettings="{dxe:TextSettings DisplayFormat=p}" />
+            <dxg:GridColumn FieldName="LowPrice" Header="Low ($)" Width="*" EditSettings="{dxe:TextSettings DisplayFormat=c}" />
+            <dxg:GridColumn FieldName="HighPrice" Header="High ($)" Width="*" EditSettings="{dxe:TextSettings DisplayFormat=c}" />
+            <!--#endregion-->
+            <dxg:GridControl.View>
+                <dxg:TableView AllowEditing="False"
+                               AllowGrouping="False"
+                               ShowGroupPanel="False"
+                               NavigationStyle="Row"
+                               AnimateConditionalFormattingTransition="True"
+                               AllowConditionalFormattingMenu="True"
+                               AllowDataUpdateFormatConditionMenu="True">
+                    <dxg:TableView.FormatConditions>
+                        <dxg:DataBarFormatCondition FieldName="DeltaPricePercent" PredefinedFormatName="GreenSolidDataBar" MaxValue="0.1" MinValue="-0.1" />
+                        <dxg:IconSetFormatCondition FieldName="Price" Expression="[DeltaPrice]" PredefinedFormatName="PositiveNegativeTrianglesIconSet" />
+                        <dxg:DataUpdateFormatCondition FieldName="DeltaPrice" PredefinedFormatName="GreenFillWithDarkGreenText" Rule="Increase" />
+                        <dxg:DataUpdateFormatCondition FieldName="DeltaPrice" PredefinedFormatName="LightRedFillWithDarkRedText" Rule="Decrease" />
+                        <dxg:DataUpdateFormatCondition FieldName="LowPrice" PredefinedFormatName="YellowFillWithDarkYellowText" Rule="Always" />
+                        <dxg:DataUpdateFormatCondition FieldName="HighPrice" PredefinedFormatName="YellowFillWithDarkYellowText" Rule="Always" />
+                    </dxg:TableView.FormatConditions>
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxrudex:GridReportManagerService Name="rmsDataUpdateAnimation" />
+                    </dxmvvm:Interaction.Behaviors>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

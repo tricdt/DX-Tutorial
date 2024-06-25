@@ -1,0 +1,253 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.EmptyPointsDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:local="clr-namespace:ChartsDemo">
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:EmptyPointBrushConverter x:Key="emptyPointBrushConverter" />
+            <Style x:Key="seriesStyle" TargetType="{x:Type dxc:XYSeries2D}">
+                <Setter Property="ArgumentDataMember" Value="Date" />
+                <Setter Property="LabelsVisibility" Value="True" />
+                <Setter Property="AnimationAutoStartMode" Value="SetStartState" />
+            </Style>
+            <Style
+                x:Key="windSeriesStyle"
+                BasedOn="{StaticResource seriesStyle}"
+                TargetType="{x:Type dxc:XYSeries2D}">
+                <Setter Property="DisplayName" Value="Wind" />
+                <Setter Property="ValueDataMember" Value="Wind" />
+                <Setter Property="CrosshairLabelPattern" Value="{}{S}: {V} m/s" />
+            </Style>
+            <Style
+                x:Key="pressureSeriesStyle"
+                BasedOn="{StaticResource seriesStyle}"
+                TargetType="{x:Type dxc:XYSeries2D}">
+                <Setter Property="DisplayName" Value="Pressure" />
+                <Setter Property="ValueDataMember" Value="Pressure" />
+                <Setter Property="Pane" Value="{Binding ElementName=pressurePane}" />
+                <Setter Property="AxisY" Value="{Binding ElementName=pressureAxisY}" />
+                <Setter Property="CrosshairLabelPattern" Value="{}{S}: {V} mmHG" />
+            </Style>
+            <Style
+                x:Key="temperatureSeriesStyle"
+                BasedOn="{StaticResource seriesStyle}"
+                TargetType="{x:Type dxc:XYSeries2D}">
+                <Setter Property="DisplayName" Value="Temperature" />
+                <Setter Property="ValueDataMember" Value="DayTemperature" />
+                <Setter Property="Pane" Value="{Binding ElementName=temperaturePane}" />
+                <Setter Property="AxisY" Value="{Binding ElementName=temperatureAxisY}" />
+            </Style>
+            <Style x:Key="axisYStyle" TargetType="dxc:AxisY2D">
+                <Setter Property="Alignment" Value="Near" />
+                <Setter Property="WholeRange">
+                    <Setter.Value>
+                        <dxc:Range dxc:AxisY2D.AlwaysShowZeroLevel="False" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <dxc:LineStyle x:Key="emptyPointLineStyle" Thickness="2">
+                <dxc:LineStyle.DashStyle>
+                    <DashStyle Dashes="5" />
+                </dxc:LineStyle.DashStyle>
+            </dxc:LineStyle>
+            <dxc:ProcessEmptyPointsMode x:Key="currentProcessPoints">Interpolate</dxc:ProcessEmptyPointsMode>
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+
+    <DockPanel>
+        <!--#region ChartsDemoRibbon & Options-->
+        <local:ChartsDemoRibbon Chart="{x:Reference chart}" DockPanel.Dock="Top" />
+
+        <ScrollViewer Name="PART_Options" Style="{StaticResource optionsScrollViewerStyle}">
+            <StackPanel Style="{StaticResource optionsRootStackPanelStyle}">
+                <GroupBox Margin="0,5,0,0" Header="Series Types">
+                    <dxe:ListBoxEdit
+                        EditValueChanged="lbSeriesGroup_EditValueChanged"
+                        Name="lbSeriesGroup"
+                        SelectedIndex="0">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.Items>
+                            <dxe:ListBoxEditItem Content="Point, Step Line and Area" Tag="Group1" />
+                            <dxe:ListBoxEditItem Content="Line, Bar and Range Bar" Tag="Group2" />
+                            <dxe:ListBoxEditItem Content="Spline, Step Area and Range Area" Tag="Group3" />
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <dxe:CheckEdit
+                    x:Name="cheCustomStyle"
+                    Content="Display Empty Points"
+                    IsChecked="True" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+
+        <Grid>
+            <dxc:ChartControl
+                x:Name="chart"
+                AnimationMode="OnLoad"
+                DataSource="{DXBinding '$local:WeatherInWashington.Data'}">
+                <!--#region Crosshair-->
+                <dxc:ChartControl.CrosshairOptions>
+                    <dxc:CrosshairOptions ShowOnlyInFocusedPane="False" />
+                </dxc:ChartControl.CrosshairOptions>
+                <!--#endregion-->
+                <!--#region Palette-->
+                <dxc:ChartControl.Palette>
+                    <dxc:BlueGreenPalette x:Name="palette" />
+                </dxc:ChartControl.Palette>
+                <!--#endregion-->
+                <!--#region Legend-->
+                <dxc:ChartControl.Legend>
+                    <dxc:Legend
+                        HorizontalPosition="Center"
+                        Orientation="Horizontal"
+                        VerticalPosition="BottomOutside"
+                        Visible="True" />
+                </dxc:ChartControl.Legend>
+                <!--#endregion-->
+                <!--#region Titles-->
+                <dxc:ChartControl.Titles>
+                    <dxc:Title
+                        HorizontalAlignment="Center"
+                        Content="Weather in Washington for July"
+                        Dock="Top"
+                        FontSize="24"
+                        Visible="True" />
+                </dxc:ChartControl.Titles>
+                <!--#endregion-->
+                <dxc:XYDiagram2D>
+                    <!--#region Panes-->
+                    <dxc:XYDiagram2D.DefaultPane>
+                        <dxc:Pane x:Name="windPane" DomainMargin="5" />
+                    </dxc:XYDiagram2D.DefaultPane>
+                    <dxc:XYDiagram2D.Panes>
+                        <dxc:Pane x:Name="pressurePane" DomainMargin="5" />
+                        <dxc:Pane x:Name="temperaturePane" DomainMargin="5" />
+                    </dxc:XYDiagram2D.Panes>
+                    <!--#endregion-->
+                    <!--#region Axes-->
+                    <dxc:XYDiagram2D.AxisX>
+                        <dxc:AxisX2D>
+                            <dxc:AxisX2D.VisibilityInPanes>
+                                <dxc:VisibilityInPane Pane="{Binding ElementName=windPane}" Visible="False" />
+                                <dxc:VisibilityInPane Pane="{Binding ElementName=pressurePane}" Visible="False" />
+                            </dxc:AxisX2D.VisibilityInPanes>
+                        </dxc:AxisX2D>
+                    </dxc:XYDiagram2D.AxisX>
+                    <dxc:XYDiagram2D.AxisY>
+                        <dxc:AxisY2D Style="{StaticResource axisYStyle}">
+                            <dxc:AxisY2D.Title>
+                                <dxc:AxisTitle Content="Wind, m/s" Visible="True" />
+                            </dxc:AxisY2D.Title>
+                        </dxc:AxisY2D>
+                    </dxc:XYDiagram2D.AxisY>
+                    <dxc:XYDiagram2D.SecondaryAxesY>
+                        <dxc:SecondaryAxisY2D x:Name="pressureAxisY" Style="{StaticResource axisYStyle}">
+                            <dxc:AxisY2D.Title>
+                                <dxc:AxisTitle Content="Pressure, mmHg" />
+                            </dxc:AxisY2D.Title>
+                        </dxc:SecondaryAxisY2D>
+                        <dxc:SecondaryAxisY2D x:Name="temperatureAxisY" Style="{StaticResource axisYStyle}">
+                            <dxc:AxisY2D.Title>
+                                <dxc:AxisTitle Content="Temperature, °C" />
+                            </dxc:AxisY2D.Title>
+                        </dxc:SecondaryAxisY2D>
+                    </dxc:XYDiagram2D.SecondaryAxesY>
+                    <!--#endregion-->
+                    <!--#region Series-->
+                    <dxc:PointSeries2D Style="{StaticResource windSeriesStyle}" Visible="{DXBinding '@e(lbSeriesGroup).SelectedItem.Tag == `Group1`'}">
+                        <dxc:PointSeries2D.EmptyPointOptions>
+                            <dxc:EmptyPointOptions Brush="{DXBinding '@e(cheCustomStyle).IsChecked ? @e(palette)[0] : null', Converter={StaticResource emptyPointBrushConverter}}" ProcessPoints="{StaticResource currentProcessPoints}" />
+                        </dxc:PointSeries2D.EmptyPointOptions>
+                    </dxc:PointSeries2D>
+                    <dxc:LineStepSeries2D Style="{StaticResource pressureSeriesStyle}" Visible="{DXBinding '@e(lbSeriesGroup).SelectedItem.Tag == `Group1`'}">
+                        <dxc:LineStepSeries2D.EmptyPointOptions>
+                            <dxc:LineEmptyPointOptions
+                                Brush="{DXBinding '@e(cheCustomStyle).IsChecked ? @e(palette)[1] : null', Converter={StaticResource emptyPointBrushConverter}}"
+                                LineStyle="{StaticResource emptyPointLineStyle}"
+                                ProcessPoints="{StaticResource currentProcessPoints}" />
+                        </dxc:LineStepSeries2D.EmptyPointOptions>
+                    </dxc:LineStepSeries2D>
+                    <dxc:AreaSeries2D
+                        CrosshairLabelPattern="{}{S}: {V}°C"
+                        Style="{StaticResource temperatureSeriesStyle}"
+                        Visible="{DXBinding '@e(lbSeriesGroup).SelectedItem.Tag == `Group1`'}">
+                        <dxc:AreaSeries2D.EmptyPointOptions>
+                            <dxc:AreaEmptyPointOptions Brush="{DXBinding '@e(cheCustomStyle).IsChecked ? @e(palette)[2] : null', Converter={StaticResource emptyPointBrushConverter}}" ProcessPoints="{StaticResource currentProcessPoints}">
+                                <dxc:AreaEmptyPointOptions.Border>
+                                    <dxc:SeriesBorder Brush="{DXBinding '@e(palette)[2]'}" />
+                                </dxc:AreaEmptyPointOptions.Border>
+                            </dxc:AreaEmptyPointOptions>
+                        </dxc:AreaSeries2D.EmptyPointOptions>
+                    </dxc:AreaSeries2D>
+
+                    <dxc:LineSeries2D Style="{StaticResource windSeriesStyle}" Visible="{DXBinding '@e(lbSeriesGroup).SelectedItem.Tag == `Group2`'}">
+                        <dxc:LineSeries2D.EmptyPointOptions>
+                            <dxc:LineEmptyPointOptions
+                                Brush="{DXBinding '@e(cheCustomStyle).IsChecked ? @e(palette)[0] : null', Converter={StaticResource emptyPointBrushConverter}}"
+                                LineStyle="{StaticResource emptyPointLineStyle}"
+                                ProcessPoints="{StaticResource currentProcessPoints}" />
+                        </dxc:LineSeries2D.EmptyPointOptions>
+                        <dxc:LineSeries2D.SeriesAnimation>
+                            <dxc:Line2DBlowUpAnimation/>
+                        </dxc:LineSeries2D.SeriesAnimation>
+                    </dxc:LineSeries2D>
+                    <dxc:BarSideBySideSeries2D Style="{StaticResource pressureSeriesStyle}" Visible="{DXBinding '@e(lbSeriesGroup).SelectedItem.Tag == `Group2`'}">
+                        <dxc:BarSideBySideSeries2D.EmptyPointOptions>
+                            <dxc:EmptyPointOptions Brush="{DXBinding '@e(cheCustomStyle).IsChecked ? @e(palette)[1] : null', Converter={StaticResource emptyPointBrushConverter}}" ProcessPoints="{StaticResource currentProcessPoints}" />
+                        </dxc:BarSideBySideSeries2D.EmptyPointOptions>
+                    </dxc:BarSideBySideSeries2D>
+                    <dxc:RangeBarSideBySideSeries2D
+                        CrosshairLabelPattern="{}{S}: Day {V1}°C, Night {V2}°C"
+                        Style="{StaticResource temperatureSeriesStyle}"
+                        Value2DataMember="NightTemperature"
+                        Visible="{DXBinding '@e(lbSeriesGroup).SelectedItem.Tag == `Group2`'}">
+                        <dxc:RangeBarSideBySideSeries2D.EmptyPointOptions>
+                            <dxc:EmptyPointOptions Brush="{DXBinding '@e(cheCustomStyle).IsChecked ? @e(palette)[2] : null', Converter={StaticResource emptyPointBrushConverter}}" ProcessPoints="{StaticResource currentProcessPoints}" />
+                        </dxc:RangeBarSideBySideSeries2D.EmptyPointOptions>
+                    </dxc:RangeBarSideBySideSeries2D>
+
+                    <dxc:SplineSeries2D Style="{StaticResource windSeriesStyle}" Visible="{DXBinding '@e(lbSeriesGroup).SelectedItem.Tag == `Group3`'}">
+                        <dxc:SplineSeries2D.EmptyPointOptions>
+                            <dxc:LineEmptyPointOptions
+                                Brush="{DXBinding '@e(cheCustomStyle).IsChecked ? @e(palette)[0] : null', Converter={StaticResource emptyPointBrushConverter}}"
+                                LineStyle="{StaticResource emptyPointLineStyle}"
+                                ProcessPoints="{StaticResource currentProcessPoints}" />
+                        </dxc:SplineSeries2D.EmptyPointOptions>
+                    </dxc:SplineSeries2D>
+                    <dxc:AreaStepSeries2D Style="{StaticResource pressureSeriesStyle}" Visible="{DXBinding '@e(lbSeriesGroup).SelectedItem.Tag == `Group3`'}">
+                        <dxc:AreaStepSeries2D.EmptyPointOptions>
+                            <dxc:AreaEmptyPointOptions Brush="{DXBinding '@e(cheCustomStyle).IsChecked ? @e(palette)[1] : null', Converter={StaticResource emptyPointBrushConverter}}" ProcessPoints="{StaticResource currentProcessPoints}">
+                                <dxc:AreaEmptyPointOptions.Border>
+                                    <dxc:SeriesBorder Brush="{DXBinding '@e(palette)[1]'}" />
+                                </dxc:AreaEmptyPointOptions.Border>
+                            </dxc:AreaEmptyPointOptions>
+                        </dxc:AreaStepSeries2D.EmptyPointOptions>
+                    </dxc:AreaStepSeries2D>
+                    <dxc:RangeAreaSeries2D
+                        CrosshairLabelPattern="{}{S}: Day {V1}°C, Night {V2}°C"
+                        Style="{StaticResource temperatureSeriesStyle}"
+                        Value2DataMember="NightTemperature"
+                        Visible="{DXBinding '@e(lbSeriesGroup).SelectedItem.Tag == `Group3`'}">
+                        <dxc:RangeAreaSeries2D.EmptyPointOptions>
+                            <dxc:AreaEmptyPointOptions Brush="{DXBinding '@e(cheCustomStyle).IsChecked ? @e(palette)[2] : null', Converter={StaticResource emptyPointBrushConverter}}" ProcessPoints="{StaticResource currentProcessPoints}">
+                                <dxc:AreaEmptyPointOptions.Border>
+                                    <dxc:SeriesBorder Brush="{DXBinding '@e(palette)[2]'}" />
+                                </dxc:AreaEmptyPointOptions.Border>
+                            </dxc:AreaEmptyPointOptions>
+                        </dxc:RangeAreaSeries2D.EmptyPointOptions>
+                    </dxc:RangeAreaSeries2D>
+                    <!--#endregion-->
+                </dxc:XYDiagram2D>
+            </dxc:ChartControl>
+        </Grid>
+    </DockPanel>
+</local:ChartsDemoModule>

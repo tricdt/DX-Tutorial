@@ -1,0 +1,145 @@
+﻿<local:TreeMapDemoModule
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxtm="http://schemas.devexpress.com/winfx/2008/xaml/treemap"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:TreeMapDemo"
+    x:Class="TreeMapDemo.Colorizer">
+
+
+    <local:TreeMapDemoModule.Resources>
+        <ResourceDictionary>
+            <!--#region Other Resources-->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/TreeMapDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:BoolToObjectConverter
+                x:Key="boolToObjectConverter" />
+            <dxtm:GroupDefinitionCollection
+                x:Key="treeMapGroups">
+                <dxtm:TreeMapGroupDefinition
+                    GroupDataMember="FieldOfActivity" />
+            </dxtm:GroupDefinitionCollection>
+            <!--#endregion-->
+
+            <local:ColorizersCollection
+                x:Key="colorizers">
+
+                <local:ColorizerInfo
+                    ColorizerName="Group Gradient Colorizer" LegendTitle="Field Of Activity"
+                    Groups="{StaticResource treeMapGroups}">
+                    <local:ColorizerInfo.Colorizer>
+                        <dxtm:TreeMapGroupGradientColorizer>
+                            <dxtm:TreeMapGroupGradientColorizer.Palette>
+                                <dxtm:InAFogPalette />
+                            </dxtm:TreeMapGroupGradientColorizer.Palette>
+                        </dxtm:TreeMapGroupGradientColorizer>
+                    </local:ColorizerInfo.Colorizer>
+                </local:ColorizerInfo>
+
+                <local:ColorizerInfo
+                    ColorizerName="Palette Colorizer"
+                    Groups="{StaticResource treeMapGroups}">
+                    <local:ColorizerInfo.Colorizer>
+                        <dxtm:TreeMapPaletteColorizer>
+                            <dxtm:TreeMapPaletteColorizer.Palette>
+                                <dxtm:GreenYellowPalette />
+                            </dxtm:TreeMapPaletteColorizer.Palette>
+                        </dxtm:TreeMapPaletteColorizer>
+                    </local:ColorizerInfo.Colorizer>
+                </local:ColorizerInfo>
+
+                <local:ColorizerInfo
+                    ColorizerName="Range Colorizer" LegendTitle="Assets in billions of dollars">
+                    <local:ColorizerInfo.Colorizer>
+                        <dxtm:TreeMapRangeColorizer
+                            RangeStops="0, 59, 95, 300, 1300, 2500">
+                            <dxtm:TreeMapRangeColorizer.Palette>
+                                <dxtm:CustomPalette>
+                                    <Color>#D8610D</Color>
+                                    <Color>#EF802B</Color>
+                                    <Color>#FF9C11</Color>
+                                    <Color>#FFBB32</Color>
+                                    <Color>#FFCD7C</Color>
+                                </dxtm:CustomPalette>
+                            </dxtm:TreeMapRangeColorizer.Palette>
+                        </dxtm:TreeMapRangeColorizer>
+                    </local:ColorizerInfo.Colorizer>
+                </local:ColorizerInfo>
+
+                <local:ColorizerInfo
+                    ColorizerName="Gradient Colorizer">
+                    <local:ColorizerInfo.Colorizer>
+                        <dxtm:TreeMapGradientColorizer
+                            StartColor="#333333"
+                            EndColor="#EEEEEE" />
+                    </local:ColorizerInfo.Colorizer>
+                </local:ColorizerInfo>
+
+            </local:ColorizersCollection>
+
+        </ResourceDictionary>
+    </local:TreeMapDemoModule.Resources>
+
+
+    <DockPanel>
+        <!--#region Options-->
+        <ScrollViewer
+            Style="{StaticResource optionsScrollViewerStyle}"
+            x:Name="PART_Options">
+            <StackPanel
+                Style="{StaticResource optionsRootStackPanelStyle}">
+                <GroupBox
+                    Header="Colorizer">
+                    <dxe:ListBoxEdit
+                        x:Name="lbColorizer"
+                        ShowBorder="False"
+                        SelectedIndex="0"
+                        ItemsSource="{StaticResource colorizers}" />
+                </GroupBox>
+                <dxe:CheckEdit
+                    x:Name="enableGrouping"
+                    Content="Enable Grouping"
+                    IsChecked="True" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+
+        <Grid>
+            <!--#region RowDefinitions-->
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition
+                    Height="Auto" />
+            </Grid.RowDefinitions>
+            <!--#endregion-->
+
+            <dxtm:TreeMapControl
+                Colorizer="{Binding ElementName=lbColorizer, Path=SelectedItem.Colorizer}"
+                EnableHighlighting="False"
+                SelectionMode="None"
+                ToolTipEnabled="True"
+                ToolTipPattern="{}{L}: ${V}B"
+                ToolTipGroupPattern="{}{L}: ${V}B">
+                <dxtm:TreeMapControl.Titles>
+                    <dxtm:Title Content="US Largest Companies, 2011" FontSize="20"/>
+                </dxtm:TreeMapControl.Titles>
+                <dxtm:TreeMapControl.Legend>
+                    <dxtm:Legend Direction="LeftToRight" VerticalPosition="BottomOutside" Margin="10">
+                        <dxtm:Legend.Title>
+                            <dxtm:LegendTitle HorizontalAlignment="Center" Content="{Binding ElementName=lbColorizer, Path=SelectedItem.LegendTitle}" FontWeight="SemiBold"/>
+                        </dxtm:Legend.Title>
+                    </dxtm:Legend>
+                </dxtm:TreeMapControl.Legend>
+                <dxtm:TreeMapControl.DataAdapter>
+                    <dxtm:TreeMapFlatDataAdapter
+                        ValueDataMember="Assets"
+                        DataSource="{Binding}"
+                        LabelDataMember="CompanyName"
+                        Groups="{Binding ElementName=enableGrouping, Path=IsChecked, Converter={StaticResource boolToObjectConverter}, ConverterParameter={StaticResource treeMapGroups} }" />
+                </dxtm:TreeMapControl.DataAdapter>
+            </dxtm:TreeMapControl>
+        </Grid>
+    </DockPanel>
+</local:TreeMapDemoModule>

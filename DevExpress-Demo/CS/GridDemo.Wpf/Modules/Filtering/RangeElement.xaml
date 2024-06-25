@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="GridDemo.Filtering.RangeElement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+             xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <!--#region !-->
+        <dxfui:RangeFilterElement Grid.Column="1" Margin="8,0,0,0" FieldName="UnitPrice"
+                                  Context="{Binding ElementName=grid, Path=FilteringContext}"/>
+        <!--#endregion-->
+        <dxg:GridControl Name="grid" ItemsSource="{x:Static dxdb:NWindDataProvider.Invoices}"
+                         FilterString="[UnitPrice] Between(20, 100)">
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="view" ShowFixedTotalSummary="True" NavigationStyle="Row" />
+            </dxg:GridControl.View>
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="ProductName" Width="*" />
+                <dxg:GridColumn FieldName="UnitPrice" Width="*" />
+                <dxg:GridColumn FieldName="Quantity" Width="*" />
+                <dxg:GridColumn FieldName="ShipCity" Width="*" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+            </dxg:GridControl.TotalSummary>
+        </dxg:GridControl>
+    </Grid>
+</UserControl>

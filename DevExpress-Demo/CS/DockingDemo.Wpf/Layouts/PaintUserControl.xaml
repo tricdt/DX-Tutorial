@@ -1,0 +1,133 @@
+﻿<UserControl x:Class="DockingDemo.PaintUserControl" x:Name="painterUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:local="clr-namespace:DockingDemo"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="600"
+             Focusable="True">
+    <UserControl.Resources>
+        <local:PointToStringConverter x:Key="pointToStringConverter" FormatString="X: {0} Y: {1}"/>
+        <sys:Double x:Key="editWidth">100</sys:Double>
+        <Style x:Key="backstageGlyphStyle" TargetType="Image">
+            <Setter Property="Height" Value="16"/>
+            <Setter Property="Width" Value="16"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <dxb:BarManager>
+            <dxb:BarManager.Items>
+                <dxb:BarButtonItem x:Name="undoBtn"
+                                   Glyph="{dx:DXImage SvgImages/Outlook Inspired/Undo.svg}"
+                                   Content="Undo"
+                                   Command="{Binding ElementName=painter, Path=UndoCommand}"/>
+                <dxb:BarButtonItem x:Name="redoBtn"
+                                   Glyph="{dx:DXImage SvgImages/Outlook Inspired/Redo.svg}"
+                                   Content="Redo"
+                                   Command="{Binding ElementName=painter, Path=RedoCommand}"/>
+            </dxb:BarManager.Items>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <dxr:RibbonControl x:Name="paintRibbon" AllowCustomization="False" PageCategoryAlignment="Right" RibbonHeaderVisibility="Collapsed">
+                    <dxr:RibbonControl.ApplicationMenu>
+                        <dxr:BackstageViewControl>
+                            <dxr:BackstageButtonItem x:Name="backstageUndoBtn"
+                                   Glyph="{dx:DXImage SvgImages/Outlook Inspired/Undo.svg}"
+                                   GlyphStyle="{StaticResource backstageGlyphStyle}"
+                                   Content="Undo"
+                                   Command="{Binding ElementName=painter, Path=UndoCommand}"/>
+                            <dxr:BackstageButtonItem x:Name="backstageRedoBtn"
+                                   Glyph="{dx:DXImage SvgImages/Outlook Inspired/Redo.svg}"
+                                   GlyphStyle="{StaticResource backstageGlyphStyle}"
+                                   Content="Redo"
+                                   Command="{Binding ElementName=painter, Path=RedoCommand}"/>
+                            <dxr:BackstageButtonItem Content="Open" Glyph="{dx:DXImage SvgImages/Actions/Open.svg}" GlyphStyle="{StaticResource backstageGlyphStyle}" Command="{Binding ElementName=painter, Path=OpenCommand}"/>
+                            <dxr:BackstageButtonItem Content="Save" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Save.svg}" GlyphStyle="{StaticResource backstageGlyphStyle}" Command="{Binding ElementName=painter, Path=SaveCommand}"/>
+                            <dxr:BackstageButtonItem Content="Close" Glyph="{dx:DXImage SvgImages/RichEdit/CloseHeaderAndFooter.svg}" GlyphStyle="{StaticResource backstageGlyphStyle}" Command="{Binding CloseCommand}"/>
+                        </dxr:BackstageViewControl>
+                    </dxr:RibbonControl.ApplicationMenu>
+                    <dxr:RibbonControl.ToolbarItemLinks>
+                        <dxb:BarButtonItemLink BarItemName="undoBtn"/>
+                        <dxb:BarButtonItemLink BarItemName="redoBtn"/>
+                    </dxr:RibbonControl.ToolbarItemLinks>
+                    <dxr:RibbonPage Caption="Home">
+                        <dxr:RibbonPageGroup Caption="File">
+                            <dxb:BarButtonItem Content="Open" Glyph="{dx:DXImage SvgImages/Actions/Open.svg}" Command="{Binding ElementName=painter, Path=OpenCommand}"/>
+                            <dxb:BarButtonItem Content="Save" Glyph="{dx:DXImage SvgImages/Outlook Inspired/Save.svg}" Command="{Binding ElementName=painter, Path=SaveCommand}"/>
+                            <dxb:BarButtonItem Content="Close" Glyph="{dx:DXImage SvgImages/RichEdit/CloseHeaderAndFooter.svg}" Command="{Binding CloseCommand}"/>
+                        </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="Tools" >
+                            <dxb:BarEditItem Content="Brush Color" EditValue="{Binding ElementName=painter, Path=BrushColor, Mode=TwoWay}" EditWidth="{Binding RelativeSource={RelativeSource Self}, Path=(dx:ThemeManager.TreeWalker), Converter={local:EditWidthConverter EditWidth=100}}">
+                                <dxb:BarEditItem.EditSettings>
+                                    <dxe:PopupColorEditSettings />
+                                </dxb:BarEditItem.EditSettings>
+                            </dxb:BarEditItem>
+                            <dxb:BarEditItem Content="Brush Size" EditValue="{Binding ElementName=painter, Path=BrushSize, Mode=TwoWay}" EditWidth="{Binding RelativeSource={RelativeSource Self}, Path=(dx:ThemeManager.TreeWalker), Converter={local:EditWidthConverter EditWidth=100}}">
+                                <dxb:BarEditItem.EditSettings>
+                                    <dxe:TrackBarEditSettings Minimum="{Binding ElementName=painter, Path=MinBrushSize}"
+                                            Maximum="{Binding ElementName=painter, Path=MaxBrushSize}"/>
+                                </dxb:BarEditItem.EditSettings>
+                            </dxb:BarEditItem>
+                            <dxb:BarEditItem x:Name="brushOpacity" Content="Brush Opacity" EditValue="{Binding ElementName= painter, Path=BrushOpacity, Mode=TwoWay}" EditWidth="{Binding RelativeSource={RelativeSource Self}, Path=(dx:ThemeManager.TreeWalker), Converter={local:EditWidthConverter EditWidth=100}}">
+                                <dxb:BarEditItem.EditSettings>
+                                    <dxe:TrackBarEditSettings Minimum="0" Maximum="1" SmallStep="0.01"/>
+                                </dxb:BarEditItem.EditSettings>
+                            </dxb:BarEditItem>
+                            <dxb:BarItemLinkSeparator/>
+                            <dxb:BarCheckItem Content="Brush Tool" Glyph="/DockingDemo;component/Images/Icons/Change.svg" IsChecked="{Binding ElementName=painter, Path=IsBrushToolSelected, Mode=TwoWay}"/>
+                            <dxb:BarCheckItem Content="Type Tool" Glyph="/DockingDemo;component/Images/Icons/Font.svg" IsChecked="{Binding ElementName=painter, Path=IsTextToolSelected, Mode=TwoWay}"/>
+                        </dxr:RibbonPageGroup>
+                    </dxr:RibbonPage>
+                    <dxr:RibbonPageCategory Color="Orange" Caption="Text Tools" IsVisible="{Binding ElementName=painter, Path=IsTextEditing}">
+                        <dxr:RibbonPage Caption="Text">
+                            <dxr:RibbonPageGroup Caption="Font">
+                                <dxb:BarEditItem Content="Font Family:"
+                                                 EditWidth="{Binding RelativeSource={RelativeSource Self}, Path=(dx:ThemeManager.TreeWalker), Converter={local:EditWidthConverter EditWidth=150}}" ClosePopupOnChangingEditValue="True"
+                                                 Description="Changes the font family of the text."
+                                                 EditValue="{Binding ElementName=painter, Path=TextFontFamily, Mode=TwoWay}"
+                                                 >
+                                    <dxb:BarEditItem.EditSettings>
+                                        <dxe:FontEditSettings AutoComplete="True" ValidateOnTextInput="False" IsTextEditable="False"/>
+                                    </dxb:BarEditItem.EditSettings>
+                                </dxb:BarEditItem>
+                                <dxb:BarEditItem Content="Font Size:"
+                                                 EditWidth="{Binding RelativeSource={RelativeSource Self}, Path=(dx:ThemeManager.TreeWalker), Converter={local:EditWidthConverter EditWidth=60}}"
+                                                 Description="Changes the font size of the text."
+                                                 EditValue="{Binding ElementName=painter, Path=TextFontSize, Mode=TwoWay}">
+                                    <dxb:BarEditItem.EditSettings>
+                                        <dxe:ComboBoxEditSettings x:Name="fontSizeSettings" PopupMaxHeight="250" IsTextEditable="False" ItemsSource="{Binding FontSizes}"/>
+                                    </dxb:BarEditItem.EditSettings>
+                                </dxb:BarEditItem>
+                                <dxb:BarEditItem Content="Font Color:"
+                                                 EditValue="{Binding ElementName=painter, Path=TextFontColor, Mode=TwoWay}"
+                                                 Description="Changes the font color of the text."
+                                                 EditWidth="{Binding RelativeSource={RelativeSource Self}, Path=(dx:ThemeManager.TreeWalker), Converter={local:EditWidthConverter EditWidth=100}}"
+                                                 >
+                                    <dxb:BarEditItem.EditSettings>
+                                        <dxe:PopupColorEditSettings />
+                                    </dxb:BarEditItem.EditSettings>
+                                </dxb:BarEditItem>
+                            </dxr:RibbonPageGroup>
+                        </dxr:RibbonPage>
+                    </dxr:RibbonPageCategory>
+                </dxr:RibbonControl>
+                <local:PaintControl Grid.Row="1" x:Name="painter"></local:PaintControl>
+                <dxr:RibbonStatusBarControl x:Name="statusBar" Grid.Row="2" IsSizeGripVisible="False">
+                    <dxr:RibbonStatusBarControl.LeftItems>
+                        <dxb:BarStaticItem Content="{Binding ElementName=painter, Path=MousePosition, Converter={StaticResource pointToStringConverter}}" ShowBorder="False" />
+                    </dxr:RibbonStatusBarControl.LeftItems>
+                </dxr:RibbonStatusBarControl>
+            </Grid>
+        </dxb:BarManager>
+    </Grid>
+</UserControl>

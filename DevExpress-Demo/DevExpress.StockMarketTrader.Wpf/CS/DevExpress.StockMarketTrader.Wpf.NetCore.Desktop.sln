@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevExpress.StockMarketTrader.Wpf.NetCore.Desktop", "DevExpress.StockMarketTrader.Wpf\DevExpress.StockMarketTrader.Wpf.NetCore.Desktop.csproj", "{6AC078E7-9C7C-0511-1B14-C728BB065DC2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		DebugTest|Any CPU = DebugTest|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AC078E7-9C7C-0511-1B14-C728BB065DC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AC078E7-9C7C-0511-1B14-C728BB065DC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AC078E7-9C7C-0511-1B14-C728BB065DC2}.DebugTest|Any CPU.ActiveCfg = DebugTest|Any CPU
+		{6AC078E7-9C7C-0511-1B14-C728BB065DC2}.DebugTest|Any CPU.Build.0 = DebugTest|Any CPU
+		{6AC078E7-9C7C-0511-1B14-C728BB065DC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AC078E7-9C7C-0511-1B14-C728BB065DC2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5EEAA857-3B11-45C4-816A-AE0F5848F537}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="GridDemo.Filtering.ColumnOperators"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+             xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+             mc:Ignorable="d">
+    <dxg:GridControl ItemsSource="{x:Static dxdb:NWindDataProvider.Invoices}" FilterString="LastYears([OrderDate], 4)">
+        <dxg:GridControl.Columns>
+            <dxg:GridColumn FieldName="ProductName" Width="*" />
+            <dxg:GridColumn FieldName="UnitPrice" Width="*" />
+            <dxg:GridColumn FieldName="Quantity" Width="*" />
+            <!--#region !-->
+            <dxg:GridColumn FieldName="OrderDate" Width="*">
+                <dxg:GridColumn.CustomColumnFilterPopupTemplate>
+                    <DataTemplate>
+                        <dxfui:ExcelStyleFilterElement x:Name="PART_FilterElement" QueryOperators="OnExcelStyleFilterQueryOperators"/>
+                    </DataTemplate>
+                </dxg:GridColumn.CustomColumnFilterPopupTemplate>
+            </dxg:GridColumn>
+            <!--#endregion-->
+            <dxg:GridColumn FieldName="ShipCountry" Width="*" />
+            <dxg:GridColumn FieldName="ShipCity" Width="*" />
+        </dxg:GridControl.Columns>
+        <dxg:GridControl.View>
+            <dxg:TableView ShowGroupPanel="False" NavigationStyle="Row"/>
+        </dxg:GridControl.View>
+    </dxg:GridControl>
+</UserControl>

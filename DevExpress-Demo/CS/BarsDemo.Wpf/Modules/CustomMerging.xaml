@@ -1,0 +1,24 @@
+﻿<local:BarsDemoModule x:Class="BarsDemo.CustomMerging"
+                      xmlns:local="clr-namespace:BarsDemo"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                      mc:Ignorable="d">
+    <local:RootView>
+        <TabControl BorderThickness="0,1,0,0">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="dxb:MergingProperties.ElementMergingBehavior" Value="{Binding Path=IsSelected, RelativeSource={RelativeSource Self}}" />
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="Font Settings">
+                <local:FontSettingsView />
+            </TabItem>
+            <TabItem Header="Alignment">
+                <local:AlignmentView />
+            </TabItem>
+        </TabControl>
+    </local:RootView>
+</local:BarsDemoModule>

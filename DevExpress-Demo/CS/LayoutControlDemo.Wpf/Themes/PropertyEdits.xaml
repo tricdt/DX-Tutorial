@@ -1,0 +1,82 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:local="clr-namespace:LayoutControlDemo">
+    <Style TargetType="dxe:ComboBoxEdit">
+        <Setter Property="IsTabStop" Value="False"/>
+    </Style>
+
+    <Style TargetType="local:ThicknessMemberEdit">
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ThicknessMemberEdit">
+                    <dxe:ComboBoxEdit x:Name="EditorElement" ApplyItemTemplateToSelectedItem="True" IsTextEditable="False"
+                                          Padding="5,1" PopupMaxHeight="600">
+                        <dxe:ComboBoxEdit.Items>
+                            <system:Double>0</system:Double>
+                            <system:Double>1</system:Double>
+                            <system:Double>2</system:Double>
+                            <system:Double>3</system:Double>
+                            <system:Double>4</system:Double>
+                            <system:Double>5</system:Double>
+                            <system:Double>6</system:Double>
+                            <system:Double>7</system:Double>
+                            <system:Double>8</system:Double>
+                            <system:Double>9</system:Double>
+                            <system:Double>10</system:Double>
+                            <system:Double>11</system:Double>
+                            <system:Double>12</system:Double>
+                            <system:Double>13</system:Double>
+                            <system:Double>14</system:Double>
+                            <system:Double>15</system:Double>
+                            <system:Double>16</system:Double>
+                            <system:Double>17</system:Double>
+                            <system:Double>18</system:Double>
+                            <system:Double>19</system:Double>
+                            <system:Double>20</system:Double>
+                        </dxe:ComboBoxEdit.Items>
+                        <dxe:ComboBoxEdit.ItemTemplate>
+                            <DataTemplate>
+                                <Grid VerticalAlignment="Center">
+                                    <TextBlock Text="00" Opacity="0" />
+                                    <TextBlock Text="{Binding}" />
+                                </Grid>
+                            </DataTemplate>
+                        </dxe:ComboBoxEdit.ItemTemplate>
+                    </dxe:ComboBoxEdit>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="local:ThicknessEdit">
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ThicknessEdit">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Left:" VerticalAlignment="Center" Margin="0,0,3,0" />
+                        <local:ThicknessMemberEdit Thickness="{Binding Value, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Side="Left"
+                                                   VerticalAlignment="Center" />
+                        <StackPanel Orientation="Vertical" Margin="7,0">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <TextBlock Text="Top:" VerticalAlignment="Center" Margin="0,0,3,0" />
+                                <local:ThicknessMemberEdit Thickness="{Binding Value, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Side="Top" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                <TextBlock Text="Bottom:" VerticalAlignment="Center" Margin="0,0,3,0" />
+                                <local:ThicknessMemberEdit Thickness="{Binding Value, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Side="Bottom" />
+                            </StackPanel>
+                        </StackPanel>
+                        <TextBlock Text="Right:" VerticalAlignment="Center" Margin="0,0,3,0" />
+                        <local:ThicknessMemberEdit Thickness="{Binding Value, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Side="Right"
+                                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

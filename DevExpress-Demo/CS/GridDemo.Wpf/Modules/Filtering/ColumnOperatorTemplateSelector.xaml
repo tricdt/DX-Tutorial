@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="GridDemo.Filtering.ColumnOperatorTemplateSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+             xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:local="clr-namespace:GridDemo"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <!--#region !-->
+        <DataTemplate x:Key="ternaryTemplate">
+            <dxe:TrackBarEdit Minimum="0" Maximum="300" MinWidth="120" TickPlacement="None">
+                <dxe:TrackBarEdit.EditValue>
+                    <MultiBinding Converter="{local:TrackBarEditRangeConverter}">
+                        <Binding Path="LeftValueItem.Value"/>
+                        <Binding Path="RightValueItem.Value"/>
+                    </MultiBinding>
+                </dxe:TrackBarEdit.EditValue>
+                <dxe:TrackBarEdit.StyleSettings>
+                    <dxe:TrackBarRangeStyleSettings />
+                </dxe:TrackBarEdit.StyleSettings>
+            </dxe:TrackBarEdit>
+        </DataTemplate>
+        <!--#endregion-->
+    </UserControl.Resources>
+    <dxg:GridControl ItemsSource="{x:Static dxdb:NWindDataProvider.Invoices}" FilterString="[Quantity] Between(10, 50)">
+        <dxg:GridControl.Columns>
+            <dxg:GridColumn FieldName="ProductName" Width="*" />
+            <dxg:GridColumn FieldName="UnitPrice" Width="*" />
+            <!--#region !-->
+            <dxg:GridColumn FieldName="Quantity" Width="*" >
+                <dxg:GridColumn.CustomColumnFilterPopupTemplate>
+                    <DataTemplate>
+                        <dxfui:ExcelStyleFilterElement x:Name="PART_FilterElement" QueryOperators="OnExcelStyleFilterQueryOperators"/>
+                    </DataTemplate>
+                </dxg:GridColumn.CustomColumnFilterPopupTemplate>
+            </dxg:GridColumn>
+            <!--#endregion-->
+            <dxg:GridColumn FieldName="OrderDate" Width="*"/>
+            <dxg:GridColumn FieldName="ShipCountry" Width="*" />
+            <dxg:GridColumn FieldName="ShipCity" Width="*" />
+        </dxg:GridControl.Columns>
+        <dxg:GridControl.View>
+            <dxg:TableView ShowGroupPanel="False" NavigationStyle="Row"/>
+        </dxg:GridControl.View>
+    </dxg:GridControl>
+</UserControl>

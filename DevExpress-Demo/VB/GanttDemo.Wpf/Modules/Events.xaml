@@ -1,0 +1,132 @@
+﻿<local:GanttDemoModule x:Class="GanttDemo.Events"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+      xmlns:dxgn="http://schemas.devexpress.com/winfx/2008/xaml/gantt"
+      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+      xmlns:local="clr-namespace:GanttDemo"
+      mc:Ignorable="d"
+      d:DesignHeight="600"
+      d:DesignWidth="1200"
+      DataContext="{dxmvvm:ViewModelSource Type={x:Type local:EventsViewModel}}">
+    <local:GanttDemoModule.Resources>
+        <Style TargetType="TextBlock" x:Key="hyperlinkTextBlock">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand" />
+                    <Setter Property="Foreground" Value="#FF0E70C0" />
+                    <Setter Property="TextDecorations" Value="Underline" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </local:GanttDemoModule.Resources>
+
+    <DockPanel Loaded="{DXEvent Handler='InitializeEventsInfo(@e(gantt))'}">
+        <local:GanttDemoRibbon DockPanel.Dock="Top" ExportGantt="{x:Reference gantt}" />
+        <dx:DXTabControl Margin="12"
+                         Width="320"
+                         Padding="0"
+                         dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                         Name="PART_Options"
+                         DockPanel.Dock="Right"
+                         MinWidth="210">
+            <dx:DXTabItem Header="Event Log">
+                <DockPanel Margin="12">
+                    <Button x:Name="clearButton"
+                            Height="22"
+                            Width="80"
+                            HorizontalAlignment="Center"
+                            DockPanel.Dock="Bottom"
+                            Content="Clear log"
+                            Command="{Binding ClearLogCommand}" />
+                    <Grid Margin="0,0,0,12">
+                        <dxe:TextEdit HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsReadOnly="True" Focusable="False" IsTabStop="False" />
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" IsTabStop="False" Focusable="False">
+                            <dxmvvm:Interaction.Behaviors>
+                                <local:ScrollToEndService />
+                            </dxmvvm:Interaction.Behaviors>
+                            <ItemsControl ItemsSource="{Binding Log}" Margin="5,2,5,5" Focusable="False" IsTabStop="False">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding EventName}" FontWeight="Bold" MouseLeftButtonDown="{DXEvent Handler='ShowHelp()'}" Style="{StaticResource hyperlinkTextBlock}"/>
+                                            <TextBlock Text="{Binding EventArgs}"
+                                                       Margin="20,0,0,0"
+                                                       Visibility="{DXBinding '$string.IsNullOrEmpty(EventArgs) ? $Visibility.Collapsed : $Visibility.Visible'}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+                </DockPanel>
+            </dx:DXTabItem>
+            <dx:DXTabItem Header="Track Events">
+                <dxg:GridControl ItemsSource="{Binding EventsInfo}" SelectionMode="None" ShowBorder="False">
+                    <dxg:GridControl.View>
+                        <dxg:TreeListView ChildNodesPath="Children"
+                                          TreeDerivationMode="ChildNodesSelector"
+                                          ShowCheckboxes="True"
+                                          CheckBoxFieldName="IsChecked"
+                                          ParentFieldName="Parent"
+                                          AllowEditing="False"
+                                          AllowRecursiveNodeChecking="True"
+                                          AutoWidth="True"
+                                          ShowVerticalLines="False"
+                                          ShowHorizontalLines="False"
+                                          ShowColumnHeaders="False"
+                                          ShowIndicator="False"
+                                          AutoExpandAllNodes="True"
+                                          ShowSearchPanelMode="Always"
+                                          SearchPanelHorizontalAlignment="Stretch">
+                            <dxg:TreeListView.CellTemplateSelector>
+                                <local:EventNodeTemplateSelector>
+                                    <local:EventNodeTemplateSelector.EventTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Data.Title}" MouseLeftButtonDown="{DXEvent Handler='RowData.Row.ShowHelp()'}" VerticalAlignment="Bottom"
+                                                       Style="{StaticResource hyperlinkTextBlock}"/>
+                                        </DataTemplate>
+                                    </local:EventNodeTemplateSelector.EventTemplate>
+                                    <local:EventNodeTemplateSelector.OtherTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Data.Title}" VerticalAlignment="Bottom" />
+                                        </DataTemplate>
+                                    </local:EventNodeTemplateSelector.OtherTemplate>
+                                </local:EventNodeTemplateSelector>
+                            </dxg:TreeListView.CellTemplateSelector>
+                            <dxg:TreeListView.FormatConditions>
+                                <dxg:FormatCondition ApplyToRow="True" Expression="[Kind] = 'Group'">
+                                    <dx:Format FontWeight="SemiBold" />
+                                </dxg:FormatCondition>
+                            </dxg:TreeListView.FormatConditions>
+                        </dxg:TreeListView>
+                    </dxg:GridControl.View>
+                    <dxg:GridColumn FieldName="Title" />
+                    <dxg:GridColumn FieldName="Parent" Visible="False" />
+                    <dxg:GridColumn FieldName="IsParameter" Visible="False" />
+                </dxg:GridControl>
+            </dx:DXTabItem>
+        </dx:DXTabControl>
+        <dxgn:GanttControl x:Name="gantt"
+                           ShowBorder="False"
+                           ItemsSource="{Binding Items}">
+            <dxgn:GanttColumn BindTo="Name"/>
+            <dxgn:GanttColumn BindTo="StartDate"/>
+            <dxgn:GanttColumn BindTo="FinishDate"/>
+            <dxgn:GanttColumn BindTo="Progress"/>
+            <dxgn:GanttColumn BindTo="ResourceLinks"/>
+            <dxgn:GanttControl.View>
+                <dxgn:GanttView x:Name="ganttView"
+                                AllowDragDrop="True"
+                                AutoExpandAllNodes="True"
+                                NewItemRowPosition="Bottom"
+                                ShowBaseline="False"
+                                ResourcesSource="{Binding Resources}"/>
+            </dxgn:GanttControl.View>
+        </dxgn:GanttControl>
+    </DockPanel>
+</local:GanttDemoModule>

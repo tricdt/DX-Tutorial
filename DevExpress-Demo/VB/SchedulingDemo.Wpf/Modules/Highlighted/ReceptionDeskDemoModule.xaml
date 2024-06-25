@@ -1,0 +1,202 @@
+﻿<local:SchedulingDemoModule
+    x:Class="SchedulingDemo.ReceptionDeskDemoModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduling"
+    xmlns:dxschv="http://schemas.devexpress.com/winfx/2008/xaml/scheduling/visual"
+    xmlns:local="clr-namespace:SchedulingDemo"
+    xmlns:vm="clr-namespace:SchedulingDemo.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="700"
+    d:DesignWidth="900"
+    DataContext="{dxmvvm:ViewModelSource vm:ReceptionDeskDemoViewModel}">
+
+    <!--#region Resources-->
+    <local:SchedulingDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/SchedulingDemo;component/Themes/ReceptionDesk.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="ResourceHeader.ContentTemplate">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Image Source="{Binding Resource.CustomFields.Photo}" DockPanel.Dock="Top" Stretch="Uniform"
+                           RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Center" MaxHeight="100" />
+                    <StackPanel Grid.Row="1">
+                        <TextBlock Text="{Binding Resource.Caption}" FontWeight="Bold" HorizontalAlignment="Center" />
+                        <TextBlock Text="{Binding Resource.CustomFields.DepartmentName}" FontWeight="Bold" HorizontalAlignment="Center" Opacity="0.6" />
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="ResourceHeader.Timeline.ContentTemplate">
+                <StackPanel>
+                    <TextBlock Text="{Binding Resource.Caption}" FontWeight="Bold" HorizontalAlignment="Left" />
+                    <TextBlock Text="{Binding Resource.CustomFields.DepartmentName}" FontWeight="Bold" HorizontalAlignment="Left" Opacity="0.6" />
+                </StackPanel>
+            </DataTemplate>
+            <Style x:Key="ResourceHeader.Style" TargetType="dxschv:ResourceHeaderControl">
+                <Setter Property="ContentTemplate" Value="{StaticResource ResourceHeader.ContentTemplate}" />
+            </Style>
+            <Style x:Key="ResourceHeader.Timeline.Style" TargetType="dxschv:ResourceHeaderControl">
+                <Setter Property="ContentTemplate" Value="{StaticResource ResourceHeader.Timeline.ContentTemplate}" />
+            </Style>
+        </ResourceDictionary>
+    </local:SchedulingDemoModule.Resources>
+    <!--#endregion-->
+
+    <DockPanel>
+        <dxlc:LayoutControl Name="PART_Options" Orientation="Vertical" Padding="0" DockPanel.Dock="Right">
+            <dxe:DateNavigator
+                ShowTodayButton="False" ShowWeekNumbers="False" IsMultiSelect="True"
+                VerticalAlignment="Top" dxlc:LayoutControl.AllowVerticalSizing="True">
+                <dxe:DateNavigator.StyleSettings>
+                    <dxsch:SchedulerDateNavigatorStyleSettings Scheduler="{Binding ElementName=scheduler}" />
+                </dxe:DateNavigator.StyleSettings>
+            </dxe:DateNavigator>
+            <dx:DXTabControl dxlc:LayoutControl.AllowVerticalSizing="True" Padding="0" Margin="-1,0,-1,-1">
+                <dx:DXTabItem Header="Doctors">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="Switch visible doctors" Opacity="0.6" Margin="6,3,6,3" />
+                        <dxe:ListBoxEdit
+                            Style="{StaticResource DoctorsList.Style}"
+                            Margin="-1,0,-1,-1"
+                            EditValue="{Binding SelectedDoctors}"
+                            ItemsSource="{Binding Doctors}">
+                            <dxe:ListBoxEdit.ItemContainerStyle>
+                                <Style TargetType="dxe:ListBoxEditItem">
+                                    <Setter Property="IsSelected" Value="{Binding IsVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Style>
+                            </dxe:ListBoxEdit.ItemContainerStyle>
+                        </dxe:ListBoxEdit>
+                    </DockPanel>
+                </dx:DXTabItem>
+                <dx:DXTabItem Header="Patients">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="Drag and drop a patient onto Scheduler" Opacity="0.6" Margin="6,3,6,3" />
+                        <dxg:GridControl
+                            Style="{StaticResource PatientsGridControl.Style}"
+                            Margin="-1,0,-1,-1"
+                            ItemsSource="{Binding Patients}">
+                            <dxg:GridControl.Columns>
+                                <dxg:GridColumn FieldName="Name" />
+                                <dxg:GridColumn FieldName="BirthDate" />
+                            </dxg:GridControl.Columns>
+                            <dxg:GridControl.View>
+                                <dxg:TableView
+                                    Name="view"
+                                    Style="{StaticResource PatientsTableView.Style}"
+                                    StartRecordDrag="OnStartRecordDrag"
+                                    CompleteRecordDragDrop="OnCompleteRecordDragDrop"
+                                    DragRecordOver="OnDragRecordOver"
+                                    DropRecord="OnDropRecord" />
+                            </dxg:GridControl.View>
+                        </dxg:GridControl>
+                    </DockPanel>
+                </dx:DXTabItem>
+            </dx:DXTabControl>
+        </dxlc:LayoutControl>
+
+        <dxsch:SchedulerControl
+            x:Name="scheduler"
+            ShowBorder="False"
+            CommandBarStyle="Ribbon"
+            GroupType="Resource"
+            AllowAppointmentConflicts="False"
+            AppointmentWindowShowing="OnAppointmentWindowShowing"
+            StartAppointmentDragFromOutside="OnStartAppointmentDragFromOutside"
+            DropAppointment="OnDropAppointment"
+            dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap">
+            <dxsch:SchedulerControl.RibbonActions>
+                <dxb:RemoveAction ElementName="{x:Static dxsch:DefaultBarItemNames.Items_Appointment_Options_LabelAs}"/>
+                <dxb:UpdateAction ElementName="{x:Static dxsch:DefaultBarItemNames.Items_Appointment_Options_ShowTimeAs}" Property="{x:Static dxb:BarSubItem.ContentProperty}" Value="Payment"/>
+            </dxsch:SchedulerControl.RibbonActions>
+            <dxsch:SchedulerControl.OptionsContextMenu>
+                <dxsch:OptionsContextMenu>
+                    <dxsch:OptionsContextMenu.AppointmentContextMenuActions>
+                        <dxb:RemoveAction ElementName="{x:Static dxsch:DefaultBarItemNames.ContextMenu_Items_Appointment_Options_LabelAs}"/>
+                        <dxb:UpdateAction ElementName="{x:Static dxsch:DefaultBarItemNames.ContextMenu_Items_Appointment_Options_ShowTimeAs}" Property="{x:Static dxb:BarSubItem.ContentProperty}" Value="Payment"/>
+                    </dxsch:OptionsContextMenu.AppointmentContextMenuActions>
+                </dxsch:OptionsContextMenu>
+            </dxsch:SchedulerControl.OptionsContextMenu>
+
+            <dxsch:DayView
+                x:Name="dayView"
+                CellMinHeight="26"
+                ShowWorkTimeOnly="True"
+                ShowAllDayArea="False"
+                SnapToCellsMode="Never"
+                NavigationButtonsVisibility="Never"
+                ShowAppointmentInterval="True"
+                ShowAllDayAppointmentLocation="False"
+                TimeScale="00:10:00"
+                ShowResourceNavigator="True"
+                ResourcesPerPage="6"
+                ResourceHeaderStyle="{StaticResource ResourceHeader.Style}"
+                GroupSeparatorSize="0"/>
+            <dxsch:TimelineView
+                x:Name="timelineView"
+                ViewMode="Standard"
+                SnapToCellsMode="Never"
+                ShowAppointmentInterval="False"
+                ResourceHeaderStyle="{StaticResource ResourceHeader.Timeline.Style}"
+                AppointmentMinHeight="36"
+                AppointmentMinWidth="40"
+                ResourceMinHeight="44"
+                ResourceMaxHeight="116"
+                NavigationButtonsVisibility="Never"/>
+            <dxsch:AgendaView x:Name="agendaView"/>
+            <dxsch:ListView x:Name="listView"/>
+
+            <dxsch:SchedulerControl.OptionsWindows>
+                <dxsch:OptionsWindows AppointmentWindowType="{x:Type local:MedicalAppointmentWindow}" />
+            </dxsch:SchedulerControl.OptionsWindows>
+            <dxsch:SchedulerControl.DataSource>
+                <dxsch:DataSource
+                    AppointmentsSource="{Binding MedicalAppointments}"
+                    AppointmentStatusesSource="{Binding PaymentStates}"
+                    ResourcesSource="{Binding Doctors}">
+                    <dxsch:DataSource.AppointmentMappings>
+                        <dxsch:AppointmentMappings
+                            Type="Type"
+                            AllDay="AllDay"
+                            Id="Id"
+                            Description="Note"
+                            End="EndTime"
+                            Location="Purpose"
+                            RecurrenceInfo="RecurrenceInfo"
+                            Reminder="ReminderInfo"
+                            ResourceId="DoctorId"
+                            Start="StartTime"
+                            StatusId="PaymentStateId"
+                            Subject="Subject"
+                            TimeZoneId="TimeZoneId">
+                            <dxsch:CustomFieldMapping Mapping="PatientId" />
+                            <dxsch:CustomFieldMapping Mapping="LocationId" />
+                        </dxsch:AppointmentMappings>
+                    </dxsch:DataSource.AppointmentMappings>
+                    <dxsch:DataSource.ResourceMappings>
+                        <dxsch:ResourceMappings Caption="Name" Id="Id" Visible="IsVisible" Group="Department.Name">
+                            <dxsch:CustomFieldMapping Name="DepartmentName"  Mapping="Department.Name" />
+                            <dxsch:CustomFieldMapping Mapping="Photo" />
+                            <dxsch:CustomFieldMapping Mapping="Phone" />
+                        </dxsch:ResourceMappings>
+                    </dxsch:DataSource.ResourceMappings>
+                    <dxsch:DataSource.AppointmentStatusMappings>
+                        <dxsch:AppointmentStatusMappings Caption="Caption" Id="Id" BrushName="BrushName" />
+                    </dxsch:DataSource.AppointmentStatusMappings>
+                </dxsch:DataSource>
+            </dxsch:SchedulerControl.DataSource>
+        </dxsch:SchedulerControl>
+    </DockPanel>
+</local:SchedulingDemoModule>

@@ -1,0 +1,245 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:demo="clr-namespace:ProductsDemo">
+
+    <demo:ResourceImageConverter x:Key="ResourceImageConverter"/>
+
+    <LinearGradientBrush x:Key="navigationTileNormalBackground">
+        <GradientStop Color="#FF469EA5"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="navigationTileMouseOverBackground">
+        <GradientStop Color="#FF4668A5"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="navigationTileSelectedBackground">
+        <GradientStop Color="#FF4668A5"/>
+    </LinearGradientBrush>
+    <DataTemplate
+        x:Key="navigationTileTemplate">
+        <Grid
+            Margin="10,4,4,4">
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="*" />
+                <RowDefinition
+                    Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel
+                Orientation="Vertical">
+                <TextBlock
+                    Text="{Binding Caption}"
+                    FontSize="22"
+                    Foreground="White" />
+                <TextBlock
+                    Text="{Binding Description}"
+                    FontSize="12"
+                    Foreground="White" />
+            </StackPanel>
+            <Image
+                Grid.Row="1"
+                HorizontalAlignment="Right"
+                Source="{Binding Glyph}"
+                Stretch="None" />
+        </Grid>
+    </DataTemplate>
+
+    <SolidColorBrush
+        x:Key="loginButtonNormalBorderBrush"
+        Color="#a6a6a6" />
+    <SolidColorBrush
+        x:Key="loginButtonMouseOverBorderBrush"
+        Color="#7eb4ea" />
+    <SolidColorBrush
+        x:Key="loginButtonPressedBorderBrush"
+        Color="#7eb4ea" />
+    <SolidColorBrush
+        x:Key="loginButtonForeground"
+        Color="Black" />
+    <SolidColorBrush
+        x:Key="powderBlue"
+        Color="#469ea5" />
+    <SolidColorBrush
+        x:Key="redViolet"
+        Color="#a54671" />
+    <SolidColorBrush
+        x:Key="blue"
+        Color="#4668a5" />
+    <SolidColorBrush
+        x:Key="headerBrush"
+        Color="#141414" />
+    <SolidColorBrush
+        x:Key="textBrush"
+        Color="#6F7170" />
+    <SolidColorBrush
+        x:Key="separatorBrush"
+        Color="#E3E3E3" />
+    <SolidColorBrush
+        x:Key="yellow"
+        Color="#fcc653" />
+    <SolidColorBrush
+        x:Key="backgroundBrush"
+        Color="White" />
+
+    <dxc:CustomPalette
+        x:Key="palette">
+        <dxc:CustomPalette.Colors>
+            <Color>#4668a5</Color>
+            <Color>#a54671</Color>
+            <Color>#49a4be</Color>
+            <Color>#469ea5</Color>
+            <Color>#5848a5</Color>
+            <Color>#9462ae</Color>
+            <Color>#fcc653</Color>
+        </dxc:CustomPalette.Colors>
+    </dxc:CustomPalette>
+
+    <sys:Double
+        x:Key="chartLabelFontSize">
+        10.0
+    </sys:Double>
+    <sys:Double
+        x:Key="salesVolumesCaptionFontSize">
+        13.0
+    </sys:Double>
+    <sys:Double
+        x:Key="salesVoluemesFontSize">
+        24.0
+    </sys:Double>
+    <FontWeight
+        x:Key="salesVolumesFontWeight">
+        Light
+    </FontWeight>
+
+    <DataTemplate
+        x:Key="doughnutSeriesLabelTemplate">
+        <Border
+            Background="{x:Null}">
+            <TextBlock
+                Text="{Binding Path=Text}"
+                FontSize="{StaticResource ResourceKey=chartLabelFontSize}">
+                <TextBlock.Foreground>
+                    <SolidColorBrush
+                        Color="{Binding Path=Color}" />
+                </TextBlock.Foreground>
+            </TextBlock>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate
+        x:Key="barSeriesLabelTemplate">
+        <Border>
+            <Border.Background>
+                <SolidColorBrush
+                    Color="{Binding Path=Color}" />
+            </Border.Background>
+            <TextBlock
+                Text="{Binding Path=Text}"
+                FontSize="{StaticResource ResourceKey=chartLabelFontSize}"
+                Foreground="White">
+            </TextBlock>
+        </Border>
+    </DataTemplate>
+
+    <demo:BillionStringToShortStringConverter x:Key="billionStringToShortStringConverter" />
+
+    <DataTemplate
+        x:Key="axisYLabelTemplate">
+        <TextBlock
+            Text="{Binding Path=Content, Converter={StaticResource ResourceKey=billionStringToShortStringConverter}}"
+            FontSize="{StaticResource ResourceKey=chartLabelFontSize}"
+            Foreground="{StaticResource ResourceKey=textBrush}" />
+    </DataTemplate>
+
+    <Style
+        TargetType="TextBlock"
+        x:Key="topTextBlockStyle">
+        <Setter
+            Property="FontSize"
+            Value="{StaticResource ResourceKey=salesVolumesCaptionFontSize}" />
+        <Setter
+            Property="Foreground"
+            Value="{StaticResource ResourceKey=textBrush}" />
+    </Style>
+
+    <Style
+        TargetType="TextBlock"
+        x:Key="bottomTextBlockStyle">
+        <Setter
+            Property="FontSize"
+            Value="{StaticResource ResourceKey=salesVoluemesFontSize}" />
+        <Setter
+            Property="FontWeight"
+            Value="{StaticResource ResourceKey=salesVolumesFontWeight}" />
+        <Setter
+            Property="Margin"
+            Value="0,-5,0,0" />
+    </Style>
+
+    <demo:DecimalToRangeValueConverter x:Key="decimalToRangeValueConverter" />
+
+    <ControlTemplate
+        x:Key="gaugeLabelTemplate">
+        <TextBlock
+            RenderTransformOrigin="0.5, 0.5"
+            Text="{Binding Text}"
+            FontSize="{StaticResource ResourceKey=chartLabelFontSize}"
+            Foreground="{StaticResource ResourceKey=textBrush}" />
+    </ControlTemplate>
+
+    <Style
+        TargetType="dxga:CircularGaugeControl"
+        x:Key="circularGaugeStyle">
+        <Setter
+            Property="Model">
+            <Setter.Value>
+                <dxga:CircularFlatLightModel />
+            </Setter.Value>
+        </Setter>
+        <Setter
+            Property="EnableAnimation"
+            Value="True" />
+    </Style>
+
+    <Style
+        TargetType="dxga:ArcScale"
+        x:Key="arcScaleStyle">
+        <Setter
+            Property="LayoutMode"
+            Value="Circle" />
+        <Setter
+            Property="ShowLabels"
+            Value="True" />
+        <Setter
+            Property="ShowLine"
+            Value="False" />
+        <Setter
+            Property="ShowMajorTickmarks"
+            Value="True" />
+        <Setter
+            Property="ShowMinorTickmarks"
+            Value="False" />
+        <Setter
+            Property="StartAngle"
+            Value="-210" />
+        <Setter
+            Property="EndAngle"
+            Value="30" />
+        <Setter
+            Property="StartValue"
+            Value="0" />
+        <Setter
+            Property="MajorIntervalCount"
+            Value="3" />
+        <Setter
+            Property="LabelOptions">
+            <Setter.Value>
+                <dxga:ArcScaleLabelOptions
+                    FormatString="{}{0:$0,,M}"
+                    Offset="-6" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

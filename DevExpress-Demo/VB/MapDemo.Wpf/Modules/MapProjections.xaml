@@ -1,0 +1,109 @@
+﻿<local:MapDemoModule x:Class="MapDemo.MapProjections"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                     xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+                     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                     xmlns:local="clr-namespace:MapDemo"
+                     mc:Ignorable="d"
+                     d:DesignHeight="768"
+                     d:DesignWidth="1024">
+    <local:MapDemoModule.Resources>
+        <local:DemoValuesProvider x:Key="DemoValuesProvider" />
+        <Style x:Key="markersStyle" TargetType="dx:DXImage">
+            <Setter Property="Width" Value="48"/>
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="dxb:ImageColorizer.IsEnabled" Value="True"/>
+            <Setter Property="dxb:ImageColorizer.Color" Value="#FFFFFFFF"/>
+        </Style>
+        <DataTemplate x:Key="SunMarker">
+            <dx:DXImage Source="../Images/Sun.svg" Style="{StaticResource markersStyle}">
+                <Image.RenderTransform>
+                    <TranslateTransform X="-25" Y="-25" />
+                </Image.RenderTransform>
+            </dx:DXImage>
+        </DataTemplate>
+        <DataTemplate x:Key="MoonMarker">
+            <dx:DXImage Source="../Images/Moon.svg" Style="{StaticResource markersStyle}">
+                <dx:DXImage.RenderTransform>
+                    <TranslateTransform X="-25" Y="-25" />
+                </dx:DXImage.RenderTransform>
+            </dx:DXImage>
+        </DataTemplate>
+    </local:MapDemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="220">
+                <GroupBox Header="Projection" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxg:TreeListControl Name="lbProjection"
+                                     Background="{x:Null}"
+                                     MaxHeight="600"
+                                     SelectedItem="{Binding DefaultProjection, Source={StaticResource DemoValuesProvider}, Mode=OneTime}"
+                                     AutoGenerateColumns="None"
+                                     ShowBorder="False"
+                                     ItemsSource="{Binding Projections, Source={StaticResource DemoValuesProvider}}"
+                                     SelectedItemChanged="OnProjectionChanged" SelectionMode="Row">
+                            <dxg:TreeListControl.View>
+                                <dxg:TreeListView Background="{x:Null}" KeyFieldName="Name" ParentFieldName="ParentPrjName" AllowEditing="False"
+                                                  ShowColumnHeaders="False" ShowHorizontalLines="False" ShowIndicator="False" AutoExpandAllNodes="True"
+                                                  ShowVerticalLines="False" TreeLineStyle="None" ShowFilterPanelMode="Never" AutoWidth="True"/>
+                            </dxg:TreeListControl.View>
+                            <dxg:TreeListColumn FieldName="Name" IsSmart="False" AllowFocus="False"/>
+                        </dxg:TreeListControl>
+                        <dxe:CheckEdit x:Name="chShowGrid" Content="Show Grid" IsChecked="True" Margin="0,8,0,0"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Date and Time Set" Margin="0,5,0,0">
+                    <StackPanel x:Name="TimePanel">
+                        <dxe:DateEdit Mask="G" DisplayFormatString="G" DateTime="{Binding Path=ActualDateTime}" Margin="0,0,0,6" VerticalAlignment="Center" />
+                        <Button Content="Set Current Time" Click="Button_Click" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Interactivity" Margin="0,5,0,0">
+                    <StackPanel x:Name="InteractivityPanel">
+                        <dxe:CheckEdit Content="Run Steadily" Margin="0,0,0,6" VerticalAlignment="Center" IsChecked="{Binding IsSteady}" />
+                        <Button Content="Step Forward" Margin="0,0,0,6" VerticalAlignment="Center" Click="ButtonForwardClick" />
+                        <Button Content="Step Backward" Click="ButtonBackwardClick" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Grid>
+            <dxm:MapControl x:Name="Map" FlowDirection="LeftToRight" Background="#FF2FADD5" MinZoomLevel="0.1">
+                <dxm:MapControl.CoordinateSystem>
+                    <dxm:GeoMapCoordinateSystem Projection="{Binding ElementName=lbProjection, Path=SelectedItem.PrjInstance, Mode=TwoWay}" />
+                </dxm:MapControl.CoordinateSystem>
+                <dxm:MapControl.ZoomTrackbarOptions>
+                    <dxm:ZoomTrackbarOptions Visible="False" />
+                </dxm:MapControl.ZoomTrackbarOptions>
+                <dxm:VectorLayer EnableHighlighting="False" EnableSelection="False" ShapeFill="#FF7DD3EC" ShapeStroke="#FF7DD3EC">
+                    <dxm:VectorLayer.ShapeTitleOptions>
+                        <dxm:ShapeTitleOptions VisibilityMode="Hidden" />
+                    </dxm:VectorLayer.ShapeTitleOptions>
+                    <dxm:ShapefileDataAdapter FileUri="/MapDemo;component/Data/Shapefiles/Maps/Countries.shp" />
+                </dxm:VectorLayer>
+                <dxm:VectorLayer EnableHighlighting="False" EnableSelection="False" IsHitTestVisible="False">
+                    <dxm:MapItemStorage>
+                        <dxm:MapPolygon Points="{Binding Path=DayAndNightLineVertices, Mode=TwoWay}" Fill="#40000000" Stroke="Transparent" />
+                        <dxm:MapPushpin Location="{Binding Path=SunPosition}" Text="Sun" MarkerTemplate="{DynamicResource SunMarker}" />
+                        <dxm:MapPushpin Location="{Binding Path=MoonPosition}" Text="Moon" MarkerTemplate="{DynamicResource MoonMarker}" />
+                    </dxm:MapItemStorage>
+                </dxm:VectorLayer>
+                <dxm:VectorLayer Data="{Binding GridData}" Visibility="{Binding ElementName=chShowGrid, Path=IsChecked, Converter={dxmvvm:BooleanToVisibilityConverter}}"
+                                 IsHitTestVisible="False" EnableSelection="False" EnableHighlighting="False"/>
+            </dxm:MapControl>
+        </Grid>
+    </DockPanel>
+</local:MapDemoModule>

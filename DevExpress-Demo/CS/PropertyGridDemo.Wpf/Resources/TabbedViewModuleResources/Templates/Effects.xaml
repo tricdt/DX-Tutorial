@@ -1,0 +1,44 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                    xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+                    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+                    xmlns:local="clr-namespace:PropertyGridDemo"
+                    >
+    <DataTemplate x:Key="MirrorOptions.MirrorLength">
+        <dxprg:PropertyDefinition HeaderShowMode="OnlyExpander" EditorHorizontalAlignment="Stretch" PostOnEditValueChanged="True">
+            <dxprg:PropertyDefinition.CellTemplate>
+                <DataTemplate>
+                    <dxe:SpinEdit x:Name="PART_Editor" MinValue="10" MaxValue="100" Increment="5"/>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.CellTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="MirrorOptions.Show">
+        <dxprg:PropertyDefinition HeaderShowMode="OnlyExpander" EditorHorizontalAlignment="Left" PostOnEditValueChanged="True">
+            <dxprg:PropertyDefinition.CellTemplate>
+                <DataTemplate>
+                    <dxe:CheckEdit Content="IsEnabled" x:Name="PART_Editor"/>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.CellTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="LabelOptions.ShowLabel">
+        <dxprg:PropertyDefinition HeaderShowMode="OnlyExpander" EditorHorizontalAlignment="Left" PostOnEditValueChanged="True">
+            <dxprg:PropertyDefinition.CellTemplate>
+                <DataTemplate>
+                    <dxprg:CellEditorPresenter Path="ShowLabel" PathMode="Absolute"/>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.CellTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+    <DataTemplate x:Key="VisibleLabelOptions.Position">
+        <dxprg:PropertyDefinition PostOnEditValueChanged="True" HeaderShowMode="OnlyExpander" UseTypeConverterToStringConversion="False">
+            <dxprg:PropertyDefinition.CellTemplate>
+                <DataTemplate>
+                    <dxe:ListBoxEdit StyleSettings="{dxe:RadioListBoxEditStyleSettings}" ItemsSource="{dxe:EnumItemsSource EnumType={x:Type dxc:Bar2DLabelPosition}}" x:Name="PART_Editor" ShowBorder="False"/>
+                </DataTemplate>
+            </dxprg:PropertyDefinition.CellTemplate>
+        </dxprg:PropertyDefinition>
+    </DataTemplate>
+</ResourceDictionary>

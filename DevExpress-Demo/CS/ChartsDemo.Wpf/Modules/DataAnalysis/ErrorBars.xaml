@@ -1,0 +1,237 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.ErrorBarsDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:local="clr-namespace:ChartsDemo">
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dxe:RadioListBoxEditStyleSettings
+                x:Key="radioStyle" />
+            <Style
+                x:Key="seriesStyle"
+                TargetType="{x:Type dxc:XYSeries2D}">
+                <Setter
+                    Property="AnimationAutoStartMode"
+                    Value="SetStartState" />
+                <Setter
+                    Property="ArgumentDataMember"
+                    Value="Argument" />
+                <Setter
+                    Property="ValueDataMember"
+                    Value="Value" />
+            </Style>
+            <dxc:IndicatorSlideFromBottomAnimation
+                x:Key="indicatorAnimation"
+                Duration="0:0:2"
+                BeginTime="0:0:1.250">
+                <dxc:IndicatorSlideFromBottomAnimation.EasingFunction>
+                    <ElasticEase
+                        Oscillations="1"
+                        EasingMode="EaseInOut" />
+                </dxc:IndicatorSlideFromBottomAnimation.EasingFunction>
+            </dxc:IndicatorSlideFromBottomAnimation>
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+    <DockPanel>
+        <!--#region ChartsDemoRibbon & Options-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}" />
+
+        <ScrollViewer
+            Name="PART_Options"
+            Style="{StaticResource optionsScrollViewerStyle}">
+            <StackPanel
+                Style="{StaticResource optionsRootStackPanelStyle}">
+                <GroupBox
+                    Header="Indicator">
+                    <dxe:ListBoxEdit
+                        x:Name="lbeIndicator"
+                        SelectedIndex="0"
+                        StyleSettings="{StaticResource radioStyle}">
+                        <dxe:ListBoxEdit.Items>
+                            <dxe:ListBoxEditItem
+                                x:Name="lbFixedValue"
+                                Content="Fixed Values" />
+                            <dxe:ListBoxEditItem
+                                x:Name="lbPercentage"
+                                Content="Percentage" />
+                            <dxe:ListBoxEditItem
+                                x:Name="lbDeviation"
+                                Content="Standard Deviation(s)" />
+                            <dxe:ListBoxEditItem
+                                x:Name="lbError"
+                                Content="Standard Error" />
+                            <dxe:ListBoxEditItem
+                                x:Name="lbDataSource"
+                                Content="Data Source" />
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox
+                    Header="Series"
+                    Margin="0,5,0,0">
+                    <dxe:ListBoxEdit
+                        x:Name="lbeSeries"
+                        SelectedIndex="0"
+                        SelectedIndexChanged="{DXEvent @e(animationService).Animate()}"
+                        StyleSettings="{StaticResource radioStyle}">
+                        <dxe:ListBoxEdit.Items>
+                            <dxe:ListBoxEditItem
+                                x:Name="lbBar"
+                                Content="Bar" />
+                            <dxe:ListBoxEditItem
+                                x:Name="lbPoint"
+                                Content="Point" />
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox
+                    Header="Direction"
+                    Margin="0,5,0,0">
+                    <dxe:ListBoxEdit
+                        x:Name="lbeDirection"
+                        ItemsSource="{dxe:EnumItemsSource EnumType=dxc:ErrorBarDirection}"
+                        SelectedIndex="0"
+                        StyleSettings="{StaticResource radioStyle}" />
+                </GroupBox>
+                <GroupBox
+                    Header="End Style"
+                    Margin="0,5,0,0">
+                    <dxe:ListBoxEdit
+                        x:Name="lbeEndStyle"
+                        ItemsSource="{dxe:EnumItemsSource EnumType=dxc:ErrorBarEndStyle}"
+                        SelectedIndex="0"
+                        StyleSettings="{StaticResource radioStyle}" />
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+
+        <dxc:ChartControl
+            Name="chart"
+            DataSource="{DXBinding 'new $local:ErrorBarsData().Data'}"
+            CrosshairEnabled="True"
+            ToolTipEnabled="False"
+            AnimationMode="OnLoad">
+            <!--#region ChartAnimationService-->
+            <dxmvvm:Interaction.Behaviors>
+                <local:ChartAnimationService
+                    x:Name="animationService" />
+            </dxmvvm:Interaction.Behaviors>
+            <!--#endregion-->
+            <!--#region Indicators Styles-->
+            <dxc:ChartControl.Resources>
+                <Style
+                    x:Key="indicatorStyle"
+                    TargetType="{x:Type dxc:ErrorBars}">
+                    <Setter
+                        Property="Animation"
+                        Value="{StaticResource indicatorAnimation}" />
+                    <Setter
+                        Property="Brush"
+                        Value="Black" />
+                    <Setter
+                        Property="Direction"
+                        Value="{Binding ElementName=lbeDirection, Path=EditValue}" />
+                    <Setter
+                        Property="EndStyle"
+                        Value="{Binding ElementName=lbeEndStyle, Path=EditValue}" />
+                </Style>
+                <Style
+                    TargetType="dxc:FixedValueErrorBars"
+                    BasedOn="{StaticResource indicatorStyle}">
+                    <Setter
+                        Property="NegativeError"
+                        Value="1" />
+                    <Setter
+                        Property="PositiveError"
+                        Value="3" />
+                    <Setter
+                        Property="Visible"
+                        Value="{Binding ElementName=lbFixedValue, Path=IsSelected}" />
+                </Style>
+                <Style
+                    TargetType="dxc:PercentageErrorBars"
+                    BasedOn="{StaticResource indicatorStyle}">
+                    <Setter
+                        Property="Percent"
+                        Value="10" />
+                    <Setter
+                        Property="Visible"
+                        Value="{Binding ElementName=lbPercentage, Path=IsSelected}" />
+                </Style>
+                <Style
+                    TargetType="dxc:StandardDeviationErrorBars"
+                    BasedOn="{StaticResource indicatorStyle}">
+                    <Setter
+                        Property="Multiplier"
+                        Value="1" />
+                    <Setter
+                        Property="Visible"
+                        Value="{Binding ElementName=lbDeviation, Path=IsSelected}" />
+                </Style>
+                <Style
+                    TargetType="dxc:StandardErrorBars"
+                    BasedOn="{StaticResource indicatorStyle}">
+                    <Setter
+                        Property="Visible"
+                        Value="{Binding ElementName=lbError, Path=IsSelected}" />
+                </Style>
+                <Style
+                    TargetType="dxc:DataSourceBasedErrorBars"
+                    BasedOn="{StaticResource indicatorStyle}">
+                    <Setter
+                        Property="NegativeErrorDataMember"
+                        Value="Negative" />
+                    <Setter
+                        Property="PositiveErrorDataMember"
+                        Value="Positive" />
+                    <Setter
+                        Property="Visible"
+                        Value="{Binding ElementName=lbDataSource, Path=IsSelected}" />
+                </Style>
+            </dxc:ChartControl.Resources>
+            <!--#endregion-->
+            <dxc:ChartControl.Diagram>
+                <dxc:XYDiagram2D
+                    x:Name="diagram">
+                    <dxc:XYDiagram2D.Series>
+                        <dxc:BarSideBySideSeries2D
+                            Visible="{Binding ElementName=lbBar, Path=IsSelected}"
+                            Style="{StaticResource seriesStyle}">
+                            <dxc:BarSideBySideSeries2D.Indicators>
+                                <dxc:FixedValueErrorBars />
+                                <dxc:PercentageErrorBars />
+                                <dxc:StandardDeviationErrorBars />
+                                <dxc:StandardErrorBars />
+                                <dxc:DataSourceBasedErrorBars />
+                            </dxc:BarSideBySideSeries2D.Indicators>
+                        </dxc:BarSideBySideSeries2D>
+                        <dxc:PointSeries2D
+                            Visible="{Binding ElementName=lbPoint, Path=IsSelected}"
+                            Style="{StaticResource seriesStyle}">
+                            <dxc:PointSeries2D.Indicators>
+                                <dxc:FixedValueErrorBars />
+                                <dxc:PercentageErrorBars />
+                                <dxc:StandardDeviationErrorBars />
+                                <dxc:StandardErrorBars />
+                                <dxc:DataSourceBasedErrorBars />
+                            </dxc:PointSeries2D.Indicators>
+                        </dxc:PointSeries2D>
+                    </dxc:XYDiagram2D.Series>
+                </dxc:XYDiagram2D>
+            </dxc:ChartControl.Diagram>
+        </dxc:ChartControl>
+
+    </DockPanel>
+</local:ChartsDemoModule>

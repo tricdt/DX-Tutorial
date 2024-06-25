@@ -1,0 +1,571 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DE3AA91B-D8FC-4C1B-A8FD-E84C63C2C89F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DevExpress.VideoRent.Wpf</RootNamespace>
+    <AssemblyName>DevExpress.VideoRent.Wpf</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;VIDEORENT;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;VIDEORENT;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;VIDEORENT;DebugTest;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>DevExpress.VideoRent.Wpf.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\AppIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Charts.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Data.Desktop.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Data.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Mvvm.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Printing.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Utils.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Carousel.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.DemoBase.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Charts.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Core.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Docking.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Accordion.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Printing.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Ribbon.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpo.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.XtraReports.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="System"><Private>False</Private></Reference>
+    <Reference Include="System.Data"><Private>False</Private></Reference>
+    <Reference Include="System.Drawing"><Private>False</Private></Reference>
+    <Reference Include="System.Xml"><Private>False</Private></Reference>
+    <Reference Include="Microsoft.CSharp"><Private>False</Private></Reference>
+    <Reference Include="System.Core"><Private>False</Private></Reference>
+    <Reference Include="System.Xml.Linq"><Private>False</Private></Reference>
+    <Reference Include="System.Data.DataSetExtensions"><Private>False</Private></Reference>
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    <Private>False</Private></Reference>
+    <Reference Include="WindowsBase"><Private>False</Private></Reference>
+    <Reference Include="PresentationCore"><Private>False</Private></Reference>
+    <Reference Include="PresentationFramework"><Private>False</Private></Reference>
+    <Reference Include="nunit.framework">
+      <HintPath></HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    <Private>False</Private></Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Announcer\AnnouncerView.xaml.cs">
+      <DependentUpon>AnnouncerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArtistsList\ArtistsViewOptionsEditView.xaml.cs">
+      <DependentUpon>ArtistsViewOptionsEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArtistsList\ArtistPicturesEditView.xaml.cs">
+      <DependentUpon>ArtistPicturesEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChartDataHelpers.cs" />
+    <Compile Include="CompaniesList\CompaniesEditView.xaml.cs">
+      <DependentUpon>CompaniesEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CompaniesList\CompaniesListView.xaml.cs">
+      <DependentUpon>CompaniesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CompaniesList\CompaniesViewOptionsEditView.xaml.cs">
+      <DependentUpon>CompaniesViewOptionsEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CompaniesList\CompanyMoviesEditView.xaml.cs">
+      <DependentUpon>CompanyMoviesEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyDetail\CompanyAddMovieEditView.xaml.cs">
+      <DependentUpon>CompanyAddMovieEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyDetail\CompanyDetailView.xaml.cs">
+      <DependentUpon>CompanyDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyDetail\CompanyEditView.xaml.cs">
+      <DependentUpon>CompanyEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CurrentCustomerRents\CurrentCustomerRentsDetailView.xaml.cs">
+      <DependentUpon>CurrentCustomerRentsDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CurrentCustomerRents\CurrentCustomerRentsEditView.xaml.cs">
+      <DependentUpon>CurrentCustomerRentsEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CurrentCustomerRents\RentsPeriodEditView.xaml.cs">
+      <DependentUpon>RentsPeriodEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CurrentCustomerRents\RentsViewOptionsEditView.xaml.cs">
+      <DependentUpon>RentsViewOptionsEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerDetail\CustomerDetailView.xaml.cs">
+      <DependentUpon>CustomerDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerDetail\CustomerEditView.xaml.cs">
+      <DependentUpon>CustomerEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersList\CustomersEditView.xaml.cs">
+      <DependentUpon>CustomersEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersList\CustomersListView.xaml.cs">
+      <DependentUpon>CustomersListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersList\CustomersViewOptionsEditView.xaml.cs">
+      <DependentUpon>CustomersViewOptionsEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ExceptionHelper.cs" />
+    <Compile Include="Helpers\ThreadHelper.cs" />
+    <Compile Include="Windows\ApplyingThemeSplashScreenWindow.xaml.cs">
+      <DependentUpon>ApplyingThemeSplashScreenWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StartUpSplashScreenWindow.xaml.cs">
+      <DependentUpon>StartUpSplashScreenWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FindCustomer\FindCustomerDetailView.xaml.cs">
+      <DependentUpon>FindCustomerDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FindCustomer\FindCustomerEditView.xaml.cs">
+      <DependentUpon>FindCustomerEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\AssociationsGrid.cs" />
+    <Compile Include="Helpers\ConstString.cs" />
+    <Compile Include="Helpers\NoteControl.cs" />
+    <Compile Include="Helpers\PhotoViewer.cs" />
+    <Compile Include="Helpers\RibbonManager.cs" />
+    <Compile Include="Helpers\BindingHelpers.cs" />
+    <Compile Include="Helpers\DataBindingHelpers.cs" />
+    <Compile Include="Helpers\ElementLayoutStoreHelpers.cs" />
+    <Compile Include="Helpers\PopupWindow.cs" />
+    <Compile Include="Helpers\BindingListAttacher.cs" />
+    <Compile Include="Helpers\CustomComboBoxEdit.cs" />
+    <Compile Include="Helpers\CustomImageEdit.cs" />
+    <Compile Include="Helpers\EventCommandHelper.cs" />
+    <Compile Include="Helpers\CustomListBoxEdit.cs" />
+    <Compile Include="Helpers\StyleConverter.cs" />
+    <Compile Include="Helpers\UnboundColumnHelper.cs" />
+    <Compile Include="Helpers\ValidationRules.cs" />
+    <Compile Include="ModulesBase\ShowType.cs" />
+    <Compile Include="MovieCategoriesList\MovieCategoriesEditView.xaml.cs">
+      <DependentUpon>MovieCategoriesEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MovieCategoriesList\MovieCategoriesListView.xaml.cs">
+      <DependentUpon>MovieCategoriesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDetail\MovieAddArtistEditView.xaml.cs">
+      <DependentUpon>MovieAddArtistEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDetail\MovieAddCompanyEditView.xaml.cs">
+      <DependentUpon>MovieAddCompanyEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDetail\MovieAddItemsEditView.xaml.cs">
+      <DependentUpon>MovieAddItemsEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDetail\MovieItemsEditView.xaml.cs">
+      <DependentUpon>MovieItemsEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MoviesList\MoviePicturesEditView.xaml.cs">
+      <DependentUpon>MoviePicturesEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MoviesList\MoviesViewOptionsEditView.xaml.cs">
+      <DependentUpon>MoviesViewOptionsEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewViewModel\LayoutData.cs" />
+    <Compile Include="ViewViewModel\ViewModel.cs" />
+    <Compile Include="Helpers\VisualBackgroundWorker.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="Helpers\Converters.cs" />
+    <Compile Include="ArtistDetail\ArtistDetailView.xaml.cs">
+      <DependentUpon>ArtistDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArtistDetail\ArtistEditView.xaml.cs">
+      <DependentUpon>ArtistEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArtistDetail\ArtistAddMovieEditView.xaml.cs">
+      <DependentUpon>ArtistAddMovieEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArtistsList\ArtistsEditView.xaml.cs">
+      <DependentUpon>ArtistsEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArtistsList\ArtistsListView.xaml.cs">
+      <DependentUpon>ArtistsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MovieCategoryDetail\MovieCategoryDetailView.xaml.cs">
+      <DependentUpon>MovieCategoryDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MovieCategoryDetail\MovieCategoryEditView.xaml.cs">
+      <DependentUpon>MovieCategoryEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MovieCategoryDetail\MovieCategoryPriceEditView.xaml.cs">
+      <DependentUpon>MovieCategoryPriceEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDetail\MovieEditView.xaml.cs">
+      <DependentUpon>MovieEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDetail\MovieDetailView.xaml.cs">
+      <DependentUpon>MovieDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MoviesList\MoviesEditView.xaml.cs">
+      <DependentUpon>MoviesEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MoviesList\MoviesListView.xaml.cs">
+      <DependentUpon>MoviesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\PicturesGallery.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Tests\HelpersTests.cs" />
+    <Compile Include="ViewViewModel\Registration.cs" />
+    <Compile Include="Windows\AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\CreateDatabaseWindow.xaml.cs">
+      <DependentUpon>CreateDatabaseWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LayoutOptionsWindow.xaml.cs">
+      <DependentUpon>LayoutOptionsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Announcer\AnnouncerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ArtistsList\ArtistsViewOptionsEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ArtistsList\ArtistPicturesEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CompaniesList\CompaniesEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CompaniesList\CompaniesListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CompaniesList\CompaniesViewOptionsEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CompaniesList\CompanyMoviesEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CompanyDetail\CompanyAddMovieEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CompanyDetail\CompanyDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CompanyDetail\CompanyEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CurrentCustomerRents\CurrentCustomerRentsDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CurrentCustomerRents\CurrentCustomerRentsEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CurrentCustomerRents\RentsPeriodEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CurrentCustomerRents\RentsViewOptionsEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomerDetail\CustomerDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomerDetail\CustomerEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomersList\CustomersEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomersList\CustomersListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomersList\CustomersViewOptionsEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ApplyingThemeSplashScreenWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\StartUpSplashScreenWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FindCustomer\FindCustomerDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FindCustomer\FindCustomerEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ArtistDetail\ArtistDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ArtistDetail\ArtistEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ArtistDetail\ArtistAddMovieEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ArtistsList\ArtistsEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ArtistsList\ArtistsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MovieCategoriesList\MovieCategoriesEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MovieCategoriesList\MovieCategoriesListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MovieCategoryDetail\MovieCategoryDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MovieCategoryDetail\MovieCategoryEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MovieCategoryDetail\MovieCategoryPriceEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MovieDetail\MovieAddArtistEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MovieDetail\MovieAddCompanyEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MovieDetail\MovieAddItemsEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MovieDetail\MovieEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MovieDetail\MovieDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MovieDetail\MovieItemsEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MoviesList\MoviePicturesEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MoviesList\MoviesEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MoviesList\MoviesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MoviesList\MoviesViewOptionsEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\CommonStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\CommonTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\EditsStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Helpers\AddDeleteBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Helpers\PhotoViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Helpers\NoteControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Helpers\AssociationsGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Helpers\PicturesGallery.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ModulesBase\DemoModules.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="ModulesBase\DemoModules.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
+    <Page Include="Windows\AboutWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\CreateDatabaseWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\LayoutOptionsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Exclamation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AppIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DevExpress.VideoRent.Resources\DevExpress.VideoRent.Resources.csproj">
+      <Project>{30E7937A-0651-4865-B8AE-97C2A8D405F8}</Project>
+      <Name>DevExpress.VideoRent.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DevExpress.VideoRent.ViewModel\DevExpress.VideoRent.ViewModel.csproj">
+      <Project>{E2ACD1A2-B73F-466A-8282-101F846ED8FA}</Project>
+      <Name>DevExpress.VideoRent.ViewModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DevExpress.VideoRent\DevExpress.VideoRent.csproj">
+      <Project>{64358044-1010-4E3D-A18D-ACB7755C40FA}</Project>
+      <Name>DevExpress.VideoRent</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AboutIcons\Charts.png" />
+    <Resource Include="Images\AboutIcons\Editors.png" />
+    <Resource Include="Images\AboutIcons\Grid.png" />
+    <Resource Include="Images\AboutIcons\LayoutControl.png" />
+    <Resource Include="Images\AboutIcons\Reports.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\StartUpSplashScreenImage.png" />
+    <Resource Include="Images\StartUpSplashScreenLogo.png" />
+    <Resource Include="Images\StartUpSplashScreenShadow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AboutIcons\Bars.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

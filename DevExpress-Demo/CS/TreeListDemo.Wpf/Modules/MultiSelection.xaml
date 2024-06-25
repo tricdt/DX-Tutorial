@@ -1,0 +1,117 @@
+﻿<local:TreeListDemoModule x:Class="TreeListDemo.MultiSelection"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                          xmlns:local="clr-namespace:TreeListDemo"
+                          mc:Ignorable="d"
+                          d:DesignHeight="400"
+                          d:DesignWidth="800">
+
+    <local:TreeListDemoModule.Resources>
+        <local:EmployeeCategoryImageSelector x:Key="CategoryImageSelector" />
+        <dxdb:EmployeesData x:Key="employeesData" />
+    </local:TreeListDemoModule.Resources>
+    <DockPanel>
+        <local:TreeListDemoRibbon DockPanel.Dock="Top" ExportTreeList="{x:Reference treeList}" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,5,12,12" MinWidth="210">
+                <GroupBox Header="Selection Mode">
+                    <dxe:ListBoxEdit ShowBorder="False" Background="{x:Null}" SelectedIndex="0" EditValue="{Binding SelectionMode, ElementName=treeList}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.Items>
+                            <dxe:CustomItem>
+                                <dxe:CustomItem.DisplayText>Single</dxe:CustomItem.DisplayText>
+                                <dxe:CustomItem.EditValue>
+                                    <dxg:MultiSelectMode>None</dxg:MultiSelectMode>
+                                </dxe:CustomItem.EditValue>
+                            </dxe:CustomItem>
+                            <dxe:CustomItem>
+                                <dxe:CustomItem.DisplayText>Extended</dxe:CustomItem.DisplayText>
+                                <dxe:CustomItem.EditValue>
+                                    <dxg:MultiSelectMode>Row</dxg:MultiSelectMode>
+                                </dxe:CustomItem.EditValue>
+                            </dxe:CustomItem>
+                            <dxe:CustomItem>
+                                <dxe:CustomItem.DisplayText>Multiple</dxe:CustomItem.DisplayText>
+                                <dxe:CustomItem.EditValue>
+                                    <dxg:MultiSelectMode>MultipleRow</dxg:MultiSelectMode>
+                                </dxe:CustomItem.EditValue>
+                            </dxe:CustomItem>
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Selected Names" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit Height="300" Background="{x:Null}" Width="200" ItemsSource="{Binding Path=SelectedItems}">
+                        <dxe:ListBoxEdit.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Path=FirstName}" />
+                                    <TextBlock Text=" " />
+                                    <TextBlock Text="{Binding Path=LastName}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </dxe:ListBoxEdit.ItemTemplate>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <dxe:CheckEdit x:Name="checkShowSelectionRectangle" IsChecked="False" Content="Show Selection Rectangle" Margin="0,8,0,0">
+                    <dxe:CheckEdit.Style>
+                        <Style TargetType="{x:Type dxe:CheckEdit}">
+                            <Setter Property="IsEnabled" Value="False" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectionMode, ElementName=treeList}" Value="Row">
+                                    <Setter Property="IsEnabled" Value="True" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </dxe:CheckEdit.Style>
+                </dxe:CheckEdit>
+            </StackPanel>
+        </ScrollViewer>
+        <dxg:TreeListControl x:Name="treeList"
+                             ItemsSource="{Binding Path=DataSource, Source={StaticResource employeesData}}"
+                             DataContext="{StaticResource employeesData}"
+                             SelectionMode="Row">
+            <dxg:TreeListControl.Columns>
+                <dxg:TreeListColumn FieldName="JobTitle" Width="*" />
+                <dxg:TreeListColumn FieldName="FullName"
+                                    UnboundDataType="{x:Type sys:String}"
+                                    UnboundExpression="[FirstName] + ' ' + [LastName]"
+                                    VisibleIndex="1"
+                                    ReadOnly="True"
+                                    Width="*" />
+                <dxg:TreeListColumn FieldName="City" Width="*" />
+                <dxg:TreeListColumn FieldName="AddressLine1" Header="Address" Width="*" />
+                <dxg:TreeListColumn FieldName="Phone" Width="*" />
+            </dxg:TreeListControl.Columns>
+            <dxg:TreeListControl.TotalSummary>
+                <dxg:TreeListSummaryItem FieldName="FullName" SummaryType="Count" DisplayFormat="Total Count={0}" Alignment="Right" />
+                <dxg:TreeListSummaryItem FieldName="FullName" SummaryType="Count" CalculationMode="SelectedRows" DisplayFormat="Selected Count={0}" Alignment="Left" />
+            </dxg:TreeListControl.TotalSummary>
+            <dxg:TreeListControl.View>
+                <dxg:TreeListView x:Name="view"
+                                  ParentFieldName="ParentId"
+                                  KeyFieldName="Id"
+                                  ShowFixedTotalSummary="True"
+                                  AutoExpandAllNodes="True"
+                                  ShowNodeImages="True"
+                                  NodeImageSelector="{StaticResource CategoryImageSelector}"
+                                  PrintNodeImages="True"
+                                  PrintSelectedRowsOnly="True"
+                                  ShowSelectionRectangle="{Binding IsChecked, ElementName=checkShowSelectionRectangle}" />
+            </dxg:TreeListControl.View>
+        </dxg:TreeListControl>
+    </DockPanel>
+</local:TreeListDemoModule>

@@ -1,0 +1,83 @@
+﻿<local:SpreadsheetDemoModule xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                             xmlns:dxsps="http://schemas.devexpress.com/winfx/2008/xaml/spreadsheet"
+                             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+                             xmlns:local="clr-namespace:SpreadsheetDemo"
+                             x:Class="SpreadsheetDemo.RibbonCustomization">
+
+    <DockPanel>
+        <!--#region OptionsContent-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <GroupBox Header="Customization Actions:" Margin="12,5,12,12" MinWidth="210" VerticalAlignment="Top">
+                <StackPanel>
+                    <dxe:CheckEdit x:Name="ceShowRibbonPage" Content="Show Home Tab" IsChecked="True" />
+                    <dxe:CheckEdit x:Name="ceShowRibbonGroup"
+                                       Content="Show Clipboard Group"
+                                       IsChecked="True"
+                                       IsEnabled="{Binding ElementName=ceShowRibbonPage, Path=IsChecked}" />
+                    <dxe:CheckEdit x:Name="ceShowRibbonItem"
+                                       Content="Show Paste Button"
+                                       IsChecked="True"
+                                       IsEnabled="{DXBinding '@e(ceShowRibbonPage).IsChecked and @e(ceShowRibbonGroup).IsChecked'}" />
+                    <dxe:CheckEdit x:Name="ceUseSVGIcons" Content="Use SVG icons" IsChecked="True" />
+                </StackPanel>
+            </GroupBox>
+        </ScrollViewer>
+        <!--#endregion OptionsContent-->
+        <dxsps:SpreadsheetControl x:Name="spreadsheetControl1"
+                                  CommandBarStyle="Ribbon"
+                                  ShowFormulaBar="True"
+                                  DocumentSource="{DXBinding '$local:DemoUtils.GetRelativePath(`InvestmentPortfolio.xltx`)'}"
+                                  BorderThickness="0,1,0,0"
+                                  UseDefaultSvgImages="{Binding ElementName=ceUseSVGIcons, Path=IsChecked}">
+            <dxsps:SpreadsheetControl.Options>
+                <dxsps:SpreadsheetControlOptions Culture="en-US" />
+            </dxsps:SpreadsheetControl.Options>
+            <dxsps:SpreadsheetControl.RibbonActions>
+                <dxb:UpdateAction ElementName="{x:Static dxsps:DefaultBarItemNames.RibbonPage_Home}" PropertyName="IsSelected" Value="True" />
+                <dxb:UpdateAction ElementName="{x:Static dxsps:DefaultBarItemNames.RibbonPage_PageLayout}" PropertyName="IsVisible" Value="False" />
+                <dxb:UpdateAction ElementName="{x:Static dxsps:DefaultBarItemNames.RibbonPage_Formulas}" PropertyName="IsVisible" Value="False" />
+                <dxb:UpdateAction ElementName="{x:Static dxsps:DefaultBarItemNames.RibbonPage_Data}" PropertyName="IsVisible" Value="False" />
+                <dxb:UpdateAction ElementName="{x:Static dxsps:DefaultBarItemNames.RibbonGroup_View_Show}" PropertyName="IsVisible" Value="False" />
+                <dxb:UpdateAction ElementName="{x:Static dxsps:DefaultBarItemNames.RibbonItem_Insert_Tables_PivotTable}"
+                                  PropertyName="IsVisible"
+                                  Value="False" />
+                <dxb:RemoveAction ElementName="{x:Static dxsps:DefaultBarItemNames.RibbonPage_Review}" />
+                <dxb:RemoveAction ElementName="{x:Static dxsps:DefaultBarItemNames.RibbonGroup_View_Window}" />
+                <dxb:RemoveAction ElementName="{x:Static dxsps:DefaultBarItemNames.RibbonItem_File_Common_QuickPrint}" />
+                <dxb:InsertAction Index="2" ContainerName="{x:Static dxsps:DefaultBarItemNames.RibbonPage_File}">
+                    <dxr:RibbonPageGroup Caption="Demo">
+                        <dxb:BarButtonItem Content="About" LargeGlyph="{dx:DXImage SvgImages/Icon Builder/Actions_Info.svg}" Glyph="{dx:DXImage SvgImages/Icon Builder/Actions_Info.svg}" ItemClick="About_ItemClick" />
+                    </dxr:RibbonPageGroup>
+                </dxb:InsertAction>
+                <dxb:InsertAction Index="5" ContainerName="{x:Static dxsps:DefaultBarItemNames.RibbonPage_Insert}">
+                    <dxr:RibbonPageGroup Caption="Comments">
+                        <dxb:BarButtonItem Content="Comment"
+                                           LargeGlyph="{dxsps:SpreadsheetSvgImage Name=InsertComment.svg, UseOfficeImage=True}"
+                                           Command="{Binding RelativeSource={RelativeSource Self}, Path=(dxsps:SpreadsheetControl.Spreadsheet).CommandProvider.InsertComment}" />
+                    </dxr:RibbonPageGroup>
+                </dxb:InsertAction>
+                <dxb:UpdateAction ElementName="{x:Static dxsps:DefaultBarItemNames.RibbonPage_Home}"
+                                  Property="{x:Static dxr:RibbonPage.IsVisibleProperty}"
+                                  ValueBinding="{Binding ElementName=ceShowRibbonPage, Path=IsChecked}" />
+                <dxb:UpdateAction ElementName="{x:Static dxsps:DefaultBarItemNames.RibbonPage_Home}"
+                                  Property="{x:Static dxr:RibbonPage.IsSelectedProperty}"
+                                  ValueBinding="{Binding ElementName=ceShowRibbonPage, Path=IsChecked}" />
+                <dxb:UpdateAction ElementName="{x:Static dxsps:DefaultBarItemNames.RibbonGroup_Home_Clipboard}"
+                                  Property="{x:Static dxr:RibbonPageGroup.IsVisibleProperty}"
+                                  ValueBinding="{Binding ElementName=ceShowRibbonGroup, Path=IsChecked}" />
+                <dxb:UpdateAction ElementName="{x:Static dxsps:DefaultBarItemNames.RibbonItem_Home_Clipboard_Paste}"
+                                  Property="{x:Static dxb:BarItem.IsVisibleProperty}"
+                                  ValueBinding="{Binding ElementName=ceShowRibbonItem, Path=IsChecked}" />
+            </dxsps:SpreadsheetControl.RibbonActions>
+        </dxsps:SpreadsheetControl>
+    </DockPanel>
+</local:SpreadsheetDemoModule>

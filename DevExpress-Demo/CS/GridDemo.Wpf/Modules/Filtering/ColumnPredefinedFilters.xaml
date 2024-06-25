@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="GridDemo.Filtering.ColumnPredefinedFilters"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+             xmlns:dxfui="http://schemas.devexpress.com/winfx/2008/xaml/core/filteringui"
+             mc:Ignorable="d">
+    <dxg:GridControl ItemsSource="{x:Static dxdb:NWindDataProvider.Invoices}">
+        <dxg:GridControl.Columns>
+            <dxg:GridColumn FieldName="ProductName" Width="*" />
+            <!--#region !-->
+            <dxg:GridColumn FieldName="UnitPrice" Width="*">
+                <dxg:GridColumn.PredefinedFilters>
+                    <dxfui:PredefinedFilterCollection>
+                        <dxfui:PredefinedFilter Name="Less than 10" Filter="?p &lt; 10" />
+                        <dxfui:PredefinedFilter Name="From 10 to 50" Filter="?p >= 10 and ?p &lt; 50" />
+                        <dxfui:PredefinedFilter Name="From 50 to 100" Filter="?p >= 50 and ?p &lt; 100" />
+                        <dxfui:PredefinedFilter Name="More than 100" Filter="?p >= 100" />
+                    </dxfui:PredefinedFilterCollection>
+                </dxg:GridColumn.PredefinedFilters>
+            </dxg:GridColumn>
+            <!--#endregion-->
+            <dxg:GridColumn FieldName="Quantity" Width="*" />
+            <dxg:GridColumn FieldName="OrderDate" Width="*" />
+            <dxg:GridColumn FieldName="ShipCountry" Width="*" />
+            <dxg:GridColumn FieldName="ShipCity" Width="*" />
+        </dxg:GridControl.Columns>
+        <dxg:GridControl.View>
+            <dxg:TableView ShowGroupPanel="False" NavigationStyle="Row"/>
+        </dxg:GridControl.View>
+    </dxg:GridControl>
+</UserControl>

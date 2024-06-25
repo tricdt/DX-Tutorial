@@ -1,0 +1,53 @@
+﻿using System;
+using System.ComponentModel;
+using System.Linq;
+
+namespace DevExpress.CrmDemo.Win.Data {
+    public class CategoryStat : INotifyPropertyChanged {
+        #region Public members
+
+        public string Tech {
+            get { return _tech; }
+            set {
+                _tech = value;
+                InvokePropertyChanged("Tech");
+            }
+        }
+
+        public long Count {
+            get { return _count; }
+            set {
+                _count = value;
+                InvokePropertyChanged("Count");
+            }
+        }
+
+        public long Amount {
+            get { return _amount; }
+            set {
+                _amount = value;
+                InvokePropertyChanged("Amount");
+            }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged implementation
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void InvokePropertyChanged(string name) {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if(handler != null) handler(this, new PropertyChangedEventArgs(name));
+        }
+        #endregion
+
+        #region Private data
+        private long _count;
+        private long _amount;
+        private string _tech;
+        #endregion
+
+    }
+
+    public class CategoryStatList : BindingList<CategoryStat> { }
+}

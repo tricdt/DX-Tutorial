@@ -1,0 +1,94 @@
+﻿<local:DialogsDemoModule x:Class="DialogsDemo.ThemedWindowModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                         xmlns:local="clr-namespace:DialogsDemo"
+                         xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                         mc:Ignorable="d"
+                         DataContext="{dxmvvm:ViewModelSource Type={x:Type local:ThemedWindowViewModel}}"
+                         d:DataContext="{d:DesignInstance Type=local:ThemedWindowViewModel, IsDesignTimeCreatable=False}"
+                         d:DesignHeight="300"
+                         d:DesignWidth="300">
+    <local:DialogsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/DialogsDemo;component/Resources/ThemedWindowModuleResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:DialogsDemoModule.Resources>
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:WindowService Title="{Binding Title, StringFormat='Themed Window \{0\}'}">
+            <dxmvvm:WindowService.ViewTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding Content}"/>
+                </DataTemplate>
+            </dxmvvm:WindowService.ViewTemplate>
+            <dxmvvm:WindowService.WindowStyle>
+                <Style TargetType="{x:Type dx:ThemedWindow}">
+                    <Style.Resources>
+                        <ResourceDictionary>
+                            <ResourceDictionary.MergedDictionaries>
+                                <ResourceDictionary Source="pack://application:,,,/DialogsDemo;component/Resources/ThemedWindowModuleResources.xaml" />
+                            </ResourceDictionary.MergedDictionaries>
+                        </ResourceDictionary>
+                    </Style.Resources>
+                    <Setter Property="HeaderItemContainerStyleSelector">
+                        <Setter.Value>
+                            <local:ThemedWindowHeaderItemContainerStyleSelector />
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="HeaderItemsSource" Value="{Binding HeaderItems}" />
+                    <Setter Property="Icon" Value="{Binding Icon}" />
+                    <Setter Property="ShowTitle" Value="{Binding ShowTitle}" />
+                    <Setter Property="ActiveGlowColor" Value="{Binding ActiveGlowColor}"/>
+                    <Setter Property="InactiveGlowColor" Value="{Binding ActiveGlowColor}"/>
+                    <Setter Property="UseGlowColors" Value="{Binding UseGlowColors}" />
+                    <Setter Property="TitleAlignment" Value="{Binding TitleAlignment}" />
+                    <Setter Property="UseLayoutRounding" Value="True" />
+                    <Setter Property="WindowKind" Value="{Binding WindowKind}" />
+                    <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <ItemsControl>
+                                    <dx:DXMessageBoxService />
+                                    <dxdb:PinnedDemoWindowBehavior BoundObject="{x:Reference RootGrid}" Pinned="{Binding PinWindow, Mode=TwoWay}" Padding="10" />
+                                </ItemsControl>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </dxmvvm:WindowService.WindowStyle>
+        </dxmvvm:WindowService>
+    </dxmvvm:Interaction.Behaviors>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <Control DataContext="{Binding ElementName=RootGrid, Path=DataContext}"
+                     Template="{StaticResource optionsTemplate}"
+                     Margin="12,5,12,12"
+                     MinWidth="210" />
+        </ScrollViewer>
+        <Grid x:Name="RootGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Button Content="Show Themed Window"
+                    Command="{Binding ShowWindowCommand}"
+                    Grid.Row="1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Height="50"
+                    Width="300"
+                    SnapsToDevicePixels="True" />
+        </Grid>
+    </DockPanel>
+</local:DialogsDemoModule>

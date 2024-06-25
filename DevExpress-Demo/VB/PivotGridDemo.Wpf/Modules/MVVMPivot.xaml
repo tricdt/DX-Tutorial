@@ -1,0 +1,70 @@
+﻿<local:PivotGridDemoModule x:Class="PivotGridDemo.MVVMPivot"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:local="clr-namespace:PivotGridDemo"
+                           xmlns:dxpg="http://schemas.devexpress.com/winfx/2008/xaml/pivotgrid"
+                           xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+                           xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                           xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                           mc:Ignorable="d"
+                           d:DesignHeight="300"
+                           d:DesignWidth="500"
+                           DataContext="{dxmvvm:ViewModelSource Type=local:MVVMPivotViewModel}">
+    <local:PivotGridDemoModule.Resources>
+        <!--#region Templates-->
+        <local:FormatConditionGeneratorTemplateSelector x:Key="formatConditionGeneratorTemplateSelector">
+            <local:FormatConditionGeneratorTemplateSelector.DataBarTemplate>
+                <DataTemplate>
+                    <ContentControl>
+                        <dxpg:DataBarFormatCondition
+                            ColumnName="{Binding Path=(dxi:DependencyObjectExtensions.DataContext).ColumnName, RelativeSource={RelativeSource Self}}"
+                            RowName="{Binding Path=(dxi:DependencyObjectExtensions.DataContext).RowName, RelativeSource={RelativeSource Self}}"
+                            MeasureName="{Binding Path=(dxi:DependencyObjectExtensions.DataContext).MeasureName, RelativeSource={RelativeSource Self}}"
+                            PredefinedFormatName="{Binding Path=(dxi:DependencyObjectExtensions.DataContext).PredefinedFormatName, RelativeSource={RelativeSource Self}}"
+                            ApplyToSpecificLevel="True" />
+                    </ContentControl>
+                </DataTemplate>
+            </local:FormatConditionGeneratorTemplateSelector.DataBarTemplate>
+        </local:FormatConditionGeneratorTemplateSelector>
+        <DataTemplate x:Key="fieldGeneratorTemplate">
+            <ContentControl>
+                <dxpg:PivotGridField
+                    dx:XamlHelper.Name="{Binding Name}"
+                    DataBinding="{Binding DataBinding}"
+                    Area="{Binding Area}"
+                    Width="{Binding Width}"
+                    Caption="{Binding Caption}"
+                    SummaryType="{Binding SummaryType}"
+                    CellFormat="{Binding CellFormat}"
+                    GroupName="{Binding GroupName}"
+                    ExpandedInFieldsGroup="{Binding ExpandedInFieldsGroup}"/>
+            </ContentControl>
+        </DataTemplate>
+        <DataTemplate x:Key="groupGeneratorTemplate">
+            <ContentControl>
+                <dxpg:PivotGridGroup dx:XamlHelper.Name="{Binding .}"/>
+            </ContentControl>
+        </DataTemplate>
+        <!--#endregion-->
+    </local:PivotGridDemoModule.Resources>
+    <DockPanel>
+        <local:PivotGridDemoRibbon DockPanel.Dock="Top" ExportPivotGrid="{x:Reference pivot}"/>
+        <dxpg:PivotGridControl
+            DataProcessingEngine="Optimized"
+            x:Name="pivot"
+            ShowDateTimeGroupIntervalItems="None"
+            RowTreeWidth="200"
+            RowTotalsLocation="Far"
+            ShowBorder="False"
+            DataSource="{Binding DataSource}"
+            FormatConditionsSource="{Binding FormatConditionsSource}"
+            FormatConditionGeneratorTemplateSelector="{StaticResource formatConditionGeneratorTemplateSelector}"
+            GroupsSource="{Binding GroupsSource}"
+            FieldsSource="{Binding FieldsSource}"
+            FieldGeneratorTemplate="{StaticResource fieldGeneratorTemplate}"
+            GroupGeneratorTemplate="{StaticResource groupGeneratorTemplate}"
+            Loaded="{DXEvent Handler='@sender.CollapseAllColumns()'}"/>
+    </DockPanel>
+</local:PivotGridDemoModule>

@@ -1,0 +1,184 @@
+﻿<local:AccordionDemoModule x:Class="NavigationDemo.FileSearchDemoModule"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                           xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                           xmlns:dxa="http://schemas.devexpress.com/winfx/2008/xaml/accordion"
+                           xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                           xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                           xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+                           xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                           xmlns:local="clr-namespace:NavigationDemo"
+                           mc:Ignorable="d"
+                           DataContext="{dxmvvm:ViewModelSource local:FileSearchViewModel}"
+                           Initialized="{DXEvent Handler='OnInitialized()'}"
+                           ModuleUnloaded="{DXEvent Handler='OnUnloaded()'}"
+                           d:DesignWidth="1200"
+                           d:DesignHeight="600">
+
+    <!--#region Resources-->
+    <local:AccordionDemoModule.Resources>
+        <dxmvvm:ObjectToObjectConverter x:Key="boldConverter" DefaultTarget="{x:Static FontWeights.Normal}">
+            <dxmvvm:MapItem Source="True" Target="{x:Static FontWeights.Bold}" />
+        </dxmvvm:ObjectToObjectConverter>
+        <Style TargetType="dxe:CheckEdit">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="ShowBorder" Value="False" />
+        </Style>
+        <Style TargetType="RadioButton">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <Thickness x:Key="verticalSpacing">0,4,0,0</Thickness>
+        <Style x:Key="contentStyle" TargetType="StackPanel">
+            <Setter Property="Margin" Value="0,2,0,5" />
+            <Setter Property="TextBlock.FontSize" Value="12" />
+            <Setter Property="TextBlock.FontWeight" Value="Normal" />
+        </Style>
+    </local:AccordionDemoModule.Resources>
+    <!--#endregion-->
+
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:FolderBrowserDialogService />
+    </dxmvvm:Interaction.Behaviors>
+    <Grid HorizontalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="11*" MaxWidth="250" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="20*" />
+        </Grid.ColumnDefinitions>
+        <dxa:AccordionControl SelectionMode="None" Margin="1" SubItemExpandButtonPosition="None">
+            <dxa:AccordionControl.ItemContainerStyle>
+                <Style TargetType="dxa:AccordionItem">
+                    <Setter Property="HighlightOnHover" Value="False" />
+                    <Setter Property="HighlightOnPress" Value="False" />
+                    <Setter Property="GlyphSize" Value="16,16" />
+                </Style>
+            </dxa:AccordionControl.ItemContainerStyle>
+            <dxa:AccordionItem Header="Search" Glyph="{dx:DXImage SvgImages/Find/Find.svg}" IsExpanded="True">
+                <StackPanel Style="{StaticResource contentStyle}">
+                    <TextBlock Text="File Name Contains:" />
+                    <dxe:ButtonEdit Margin="{StaticResource verticalSpacing}"
+                                    EditValue="{Binding SearchPattern, UpdateSourceTrigger=PropertyChanged}"
+                                    TextTrimming="CharacterEllipsis"
+                                    NullValueButtonPlacement="EditBox"
+                                    NullText="Search"
+                                    AllowDefaultButton="False" />
+                    <TextBlock Text="Location:" Margin="0,8,0,0" />
+                    <dxe:ComboBoxEdit ItemsSource="{Binding SelectedPaths}"
+                                      IsTextEditable="False"
+                                      SelectedItem="{Binding SelectedPath, UpdateSourceTrigger=PropertyChanged}"
+                                      TextTrimming="CharacterEllipsis"
+                                      IsEnabled="{Binding SelectedPaths.Count, Converter={dxmvvm:NumericToBooleanConverter}}"
+                                      Margin="{StaticResource verticalSpacing}">
+                        <dxe:ComboBoxEdit.Buttons>
+                            <dxe:ButtonInfo GlyphKind="Regular" Content="..." Command="{Binding SelectPathCommand}" />
+                        </dxe:ComboBoxEdit.Buttons>
+                    </dxe:ComboBoxEdit>
+                    <Grid Margin="0,8,0,1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="4" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Button Content="Search" Command="{Binding StartSearchCommand}" />
+                        <Button Grid.Column="2" Content="Stop" Command="{Binding CancelCommand}" />
+                    </Grid>
+                </StackPanel>
+            </dxa:AccordionItem>
+            <dxa:AccordionItem Header="Date Modified" Glyph="{dx:DXImage  SvgImages/Scheduling/ListViewAppointment.svg}" IsExpanded="True">
+                <StackPanel Style="{StaticResource contentStyle}">
+                    <RadioButton Content="Any Date" Command="{Binding SelectDateTimeKindCommand}" CommandParameter="Undefined" IsChecked="True" />
+                    <RadioButton Content="Within the last week" Command="{Binding SelectDateTimeKindCommand}" CommandParameter="LastWeek" />
+                    <RadioButton Content="Past month" Command="{Binding SelectDateTimeKindCommand}" CommandParameter="PastMonth" />
+                    <RadioButton Content="Within the past year" Command="{Binding SelectDateTimeKindCommand}" CommandParameter="PastYear" />
+                    <RadioButton x:Name="SpecifyDate" Content="Date Range" Command="{Binding SelectDateTimeKindCommand}" CommandParameter="SpecifiedDates" />
+                    <dxe:ComboBoxEdit Margin="{StaticResource verticalSpacing}"
+                                      EditValue="{Binding DateKind, Mode=TwoWay}"
+                                      SelectedIndex="0"
+                                      IsTextEditable="False"
+                                      IsEnabled="{Binding IsChecked, ElementName=SpecifyDate}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type local:SpecifiedDateKind}" />
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:ComboBoxEdit>
+                    <Grid Margin="0,4,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="From" VerticalAlignment="Center" />
+                        <dxe:DateEdit Grid.Column="2"
+                                      AllowNullInput="False"
+                                      IsTextEditable="False"
+                                      EditValue="{Binding FromDate, Mode=TwoWay}"
+                                      IsEnabled="{Binding IsChecked, ElementName=SpecifyDate}" />
+                        <TextBlock Grid.Row="1" Text="To" VerticalAlignment="Center" />
+                        <dxe:DateEdit Grid.Row="1"
+                                      Grid.Column="2"
+                                      Margin="{StaticResource verticalSpacing}"
+                                      AllowNullInput="False"
+                                      IsTextEditable="False"
+                                      EditValue="{Binding ToDate, Mode=TwoWay}"
+                                      IsEnabled="{Binding IsChecked, ElementName=SpecifyDate}" />
+                    </Grid>
+                </StackPanel>
+            </dxa:AccordionItem>
+            <dxa:AccordionItem Header="Advanced options" Glyph="{dx:DXImage SvgImages/Setup/Properties.svg}" IsExpanded="True">
+                <StackPanel Style="{StaticResource contentStyle}">
+                    <dxe:CheckEdit Content="Search subfolders"
+                                   IsChecked="{Binding IsSearchSubfolders, Mode=TwoWay}"
+                                   FontWeight="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource boldConverter}}" />
+                    <dxe:CheckEdit Content="Search hidden files and folders"
+                                   IsChecked="{Binding IsSearchHiddenFilesAndFolders, Mode=TwoWay}"
+                                   FontWeight="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource boldConverter}}" />
+                    <dxe:CheckEdit Content="Search system folders"
+                                   IsChecked="{Binding IsSearchSystemFolders, Mode=TwoWay}"
+                                   FontWeight="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource boldConverter}}" />
+                    <dxe:CheckEdit Content="Search read-only files"
+                                   IsChecked="{Binding IsReadOnlyFiles, Mode=TwoWay}"
+                                   FontWeight="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource boldConverter}}" />
+                </StackPanel>
+            </dxa:AccordionItem>
+        </dxa:AccordionControl>
+        <Rectangle Grid.Column="1" Fill="{dxi:ThemeResource {dxgt:GridRowThemeKey ResourceKey=GridDataRowDelimiterBrush}}" Width="1" />
+        <dxg:GridControl Grid.Column="2"
+                         ItemsSource="{Binding SearchResult}"
+                         AutoExpandAllGroups="True"
+                         ShowBorder="False"
+                         dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap">
+            <dxg:GridControl.View>
+                <dxg:TableView ShowGroupPanel="False"
+                               ShowColumnHeaders="False"
+                               ShowFixedTotalSummary="True"
+                               ShowIndicator="False"
+                               AutoWidth="True"
+                               NavigationStyle="Row" />
+            </dxg:GridControl.View>
+            <dxg:GridControl.GroupSummary>
+                <dxg:GridSummaryItem SummaryType="Count" />
+            </dxg:GridControl.GroupSummary>
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+            </dxg:GridControl.TotalSummary>
+            <dxg:GridColumn FieldName="DirectoryName" GroupIndex="0" Header="Directory" />
+            <dxg:GridColumn FieldName="Name" />
+        </dxg:GridControl>
+        <dx:WaitIndicator x:Name="waitIndicator" Grid.Column="2" DeferedVisibility="{Binding Searching}" Content="Searching...">
+            <dx:WaitIndicator.ContentTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Please Wait" FontSize="20" />
+                        <TextBlock Text="{Binding}" />
+                    </StackPanel>
+                </DataTemplate>
+            </dx:WaitIndicator.ContentTemplate>
+        </dx:WaitIndicator>
+    </Grid>
+</local:AccordionDemoModule>

@@ -1,0 +1,320 @@
+<UserControl x:Class="DevExpress.VideoRent.Wpf.CurrentCustomerRentsEditView"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:videorent="clr-namespace:DevExpress.VideoRent;assembly=DevExpress.VideoRent"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:resources="clr-namespace:DevExpress.VideoRent.Resources;assembly=DevExpress.VideoRent.Resources"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
+    d:DesignWidth="1000">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/CommonTemplates.xaml" />
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/EditsStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <helpers:StringSplitConverter x:Key="StringSplitConverter" />
+            <helpers:BrushToColorConverter x:Key="BrushToColorConverter" />
+            <helpers:DataSource x:Key="DataSource" />
+            <resources:ImagesSourceHelper x:Key="ImagesHelper" />
+            <helpers:ImageCollectionImageSource x:Key="RentTypeSource" ImageCollection="{Binding Source={StaticResource ImagesHelper}, Path=ColumnHeaderIconsSmooth}" ImageIndex="0" />
+            <helpers:ImageCollectionImageSource x:Key="SelectActiveRentalSource" ImageCollection="{Binding Source={StaticResource ImagesHelper}, Path=ColumnHeaderIconsSmooth}" ImageIndex="1" />
+            <helpers:SelectConverter x:Key="ActiveRentalsGroupHeaderTemplateConverter" Value0="{x:Null}">
+                <helpers:SelectConverter.Key0>
+                    <sys:Int32>0</sys:Int32>
+                </helpers:SelectConverter.Key0>
+                <helpers:SelectConverter.DefaultValue>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontWeight="Bold" />
+                    </DataTemplate>
+                </helpers:SelectConverter.DefaultValue>
+            </helpers:SelectConverter>
+            <helpers:StringFormatConverter x:Key="GridCaptionConverter" InnerConverter="{StaticResource StringSplitConverter}" InnerConverterParameter="|1" />
+            <helpers:BoolToAnyConverter x:Key="ReceiptsGroupHeaderTemplateConverter">
+                <helpers:BoolToAnyConverter.TrueValue>
+                    <DataTemplate>
+                        <StackPanel Background="Transparent" Orientation="Horizontal">
+                            <TextBlock Background="Transparent" Text="{Binding Converter={StaticResource StringSplitConverter}, ConverterParameter=|0}" />
+                            <TextBlock Background="Transparent" FontWeight="Bold" Margin="4,0,0,0" Text="{Binding Converter={StaticResource GridCaptionConverter}, ConverterParameter=(\{0\})}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </helpers:BoolToAnyConverter.TrueValue>
+                <helpers:BoolToAnyConverter.FalseValue>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Background="Transparent" Text="{Binding Converter={StaticResource StringSplitConverter}, ConverterParameter=|0}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </helpers:BoolToAnyConverter.FalseValue>
+            </helpers:BoolToAnyConverter>
+            <local:EnumItemToItemIconConverter x:Key="ReceiptTypeToTypeIconConverter" EnumType="{x:Type videorent:ReceiptType}" ImagesPropertyName="ReceiptTypes"/>
+            <local:EnumItemToItemIconConverter x:Key="FormatToFormatIconConverter" EnumType="{x:Type videorent:MovieItemFormat}" ImagesPropertyName="DiskIcons"/>
+            <local:EnumItemToItemIconConverter x:Key="ActiveRentTypeToIconConverter" EnumType="{x:Type videorent:ActiveRentType}" ImagesPropertyName="RentTypes"/>
+            <local:RentOverdueFormatter x:Key="RentOverdueFormatter" />
+            <helpers:AnyToBoolConverter x:Key="RentalsGridVisibilityConverter" InnerConverter="{StaticResource BoolToVisibilityConverter}">
+                <helpers:AnyToBoolConverter.TrueValue>
+                    <videorent:ReceiptType>Rentals</videorent:ReceiptType>
+                </helpers:AnyToBoolConverter.TrueValue>
+            </helpers:AnyToBoolConverter>
+            <helpers:AnyToBoolConverter x:Key="PurchasesGridVisibilityConverter" InnerConverter="{StaticResource BoolToVisibilityConverter}">
+                <helpers:AnyToBoolConverter.TrueValue>
+                    <videorent:ReceiptType>Purchases</videorent:ReceiptType>
+                </helpers:AnyToBoolConverter.TrueValue>
+            </helpers:AnyToBoolConverter>
+            <helpers:AnyToBoolConverter x:Key="LateFeesGridVisibilityConverter" InnerConverter="{StaticResource BoolToVisibilityConverter}">
+                <helpers:AnyToBoolConverter.TrueValue>
+                    <videorent:ReceiptType>LateFees</videorent:ReceiptType>
+                </helpers:AnyToBoolConverter.TrueValue>
+            </helpers:AnyToBoolConverter>
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}">
+            <helpers:BindingInfo ElementName="resource:ElementLayoutDataStore" Property="{x:Static local:ElementLayoutDataStore.DisposeSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="ReceiptsGroup" Property="{x:Static dxlc:LayoutGroup.HeaderProperty}" Value="{Binding GridCaption}" />
+            <helpers:BindingInfo ElementName="ReceiptsGroup" Property="{x:Static dxlc:LayoutGroup.HeaderTemplateProperty}" Value="{Binding ShowViewCaption, Converter={StaticResource ReceiptsGroupHeaderTemplateConverter}}" />
+            <helpers:BindingInfo ElementName="ReceiptsGrid" Property="{x:Static dxg:GridControl.ItemsSourceProperty}" Value="{Binding CurrentCustomer.Receipts}" />
+            <helpers:BindingInfo ElementName="ReceiptsGridView" Property="{x:Static dxg:GridViewBase.FocusedRowProperty}" Value="{Binding CurrentRecord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="ReceiptsGridView" Property="{x:Static dxg:TableView.ShowIndicatorProperty}" Value="{Binding GridUIOptions.ShowIndicator}" />
+            <helpers:BindingInfo ElementName="ReceiptsGridView" Property="{x:Static dxg:TableView.ShowVerticalLinesProperty}" Value="{Binding GridUIOptions.ShowVerticalLines}" />
+            <helpers:BindingInfo ElementName="ReceiptsGridView" Property="{x:Static dxg:TableView.ShowAutoFilterRowProperty}" Value="{Binding GridUIOptions.ShowTheAutoFilterRow}" />
+            <helpers:BindingInfo ElementName="RentalsGrid" Property="{x:Static dxg:GridControl.ItemsSourceProperty}" Value="{Binding CurrentRecord.Rents}" />
+            <helpers:BindingInfo ElementName="RentalsGrid" Property="{x:Static UIElement.VisibilityProperty}" Value="{Binding CurrentRecord.Type, Converter={StaticResource RentalsGridVisibilityConverter}, TargetNullValue=Collapsed, FallbackValue=Collapsed}" />
+            <helpers:BindingInfo ElementName="PurchasesGrid" Property="{x:Static dxg:GridControl.ItemsSourceProperty}" Value="{Binding CurrentRecord.Rents}" />
+            <helpers:BindingInfo ElementName="PurchasesGrid" Property="{x:Static UIElement.VisibilityProperty}" Value="{Binding CurrentRecord.Type, Converter={StaticResource PurchasesGridVisibilityConverter}, TargetNullValue=Collapsed, FallbackValue=Collapsed}" />
+            <helpers:BindingInfo ElementName="LateFeesGrid" Property="{x:Static dxg:GridControl.ItemsSourceProperty}" Value="{Binding CurrentRecord.OverdueRents}" />
+            <helpers:BindingInfo ElementName="LateFeesGrid" Property="{x:Static UIElement.VisibilityProperty}" Value="{Binding CurrentRecord.Type, Converter={StaticResource LateFeesGridVisibilityConverter}, TargetNullValue=Collapsed, FallbackValue=Collapsed}" />
+            <helpers:BindingInfo ElementName="ActiveRentalsGroup" Property="{x:Static dxlc:LayoutGroup.HeaderTemplateProperty}" Value="{Binding CurrentCustomerActiveRents.Count, Converter={StaticResource ActiveRentalsGroupHeaderTemplateConverter}}" />
+            <helpers:BindingInfo ElementName="ActiveRentalsGrid" Property="{x:Static dxg:GridControl.ItemsSourceProperty}" Value="{Binding CurrentCustomerActiveRents}" />
+            <helpers:BindingInfo ElementName="ActiveRentalsGrid" Property="{x:Static helpers:GridControlSignalHelper.RefreshDataSignalSlotProperty}" Value="{Binding CheckedRentsChangedSignal}" />
+            <helpers:BindingInfo ElementName="SelectActiveRentalUnbound" Property="{x:Static helpers:CustomEventCommandHelper.ValueReadingProperty}" Value="{Binding CommandReadRecordChecked}" />
+            <helpers:BindingInfo ElementName="SelectActiveRentalUnbound" Property="{x:Static helpers:CustomEventCommandHelper.ValueWritingProperty}" Value="{Binding CommandWriteRecordChecked}" />
+            <helpers:BindingInfo ElementName="TabsGroup" Property="{x:Static helpers:TabbedGroupSignalHelper.SelectIndexSignalSlotProperty}" Value="{Binding CheckedAllActiveRentsSignal}" />
+            <helpers:BindingInfo ElementName="MainLayoutControl" Property="{x:Static helpers:LayoutControlSignalHelper.FlipLayoutSignalSlotProperty}" Value="{Binding FlipLayoutSignal}" />
+            <helpers:BindingInfo ElementName="CustomerInfoPresenter" Property="{x:Static ContentControl.ContentProperty}" Value="{Binding CurrentCustomer}" />
+            <helpers:BindingInfo ElementName="CustomerInfoPresenter" Property="{x:Static helpers:CustomEventCommandHelper.MouseDoubleClickProperty}" Value="{Binding Detail.CommandOpenCurrentCustomerDetail}" />
+            <helpers:ValueInfo ElementName="CustomerInfoPresenter" Property="{x:Static helpers:CustomEventCommandHelper.MouseDoubleClickParameterProperty}" Value="{x:Static local:WpfViewsManager.CategoryCurrentCustomerRents}" />
+            <helpers:ElementLayoutInfo ElementName="MainLayoutControl" StoreFolder="LayoutControl:CurrentCustomerRentsEdit-MainLayoutControl" Store="{StaticResource ElementLayoutDataStore}" />
+            <helpers:ElementLayoutInfo ElementName="ReceiptsGrid" StoreFolder="GridControl:CurrentCustomerRentsEdit-ReceiptsGrid" Store="{StaticResource ElementLayoutDataStore}" />
+            <helpers:ElementLayoutInfo ElementName="RentalsGrid" StoreFolder="GridControl:CurrentCustomerRentsEdit-RentalsGrid" Store="{StaticResource ElementLayoutDataStore}" />
+            <helpers:ElementLayoutInfo ElementName="PurchasesGrid" StoreFolder="GridControl:CurrentCustomerRentsEdit-PurchasesGrid" Store="{StaticResource ElementLayoutDataStore}" />
+            <helpers:ElementLayoutInfo ElementName="LateFeesGrid" StoreFolder="GridControl:CurrentCustomerRentsEdit-LateFeesGrid" Store="{StaticResource ElementLayoutDataStore}" />
+            <helpers:ElementLayoutInfo ElementName="ActiveRentalsGrid" StoreFolder="GridControl:CurrentCustomerRentsEdit-ActiveRentalsGrid" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <dxlc:LayoutControl x:Name="MainLayoutControl" Orientation="Horizontal" Padding="0" ItemSpace="12" VerticalAlignment="Stretch">
+        <dxlc:LayoutControl.TabsStyle>
+            <Style TargetType="dx:DXTabControl">
+                <Setter Property="Padding" Value="1" />
+            </Style>
+        </dxlc:LayoutControl.TabsStyle>
+        <dxlc:LayoutItem x:Name="CustomerInfoItem" HorizontalAlignment="Left" dxlc:LayoutControl.AllowHorizontalSizing="True" Width="320" MinWidth="220" MaxWidth="600">
+            <ContentControl x:Name="CustomerInfoPresenter" ContentTemplate="{StaticResource CustomerInfoTemplate}" />
+        </dxlc:LayoutItem>
+        <dxlc:LayoutGroup View="Tabs" x:Name="TabsGroup" helpers:TabbedGroupSignalHelper.IndexToSelect="1">
+            <dxlc:LayoutGroup x:Name="ReceiptsGroup" Orientation="Vertical" VerticalAlignment="Stretch">
+                <dxlc:LayoutItem VerticalAlignment="Stretch" BorderThickness="0">
+                    <dxg:GridControl x:Name="ReceiptsGrid" AutoExpandAllGroups="True" ShowBorder="False" VerticalAlignment="Stretch">
+                        <dxg:GridControl.View>
+                            <dxg:TableView x:Name="ReceiptsGridView" AllowEditing="False" ShowGroupedColumns="True" AutoWidth="True" ShowTotalSummary="True" NavigationStyle="Row" />
+                        </dxg:GridControl.View>
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn x:Name="ReceiptIdColumn" FieldName="ReceiptId" Header="{helpers:ConstString ID=ReceiptId}" ColumnFilterMode="DisplayText">
+                                <dxg:GridColumn.EditSettings>
+                                    <dxe:TextEditSettings helpers:StyleConverter.Style="{StaticResource CardNumberTextEdit}" />
+                                </dxg:GridColumn.EditSettings>
+                            </dxg:GridColumn>
+                            <dxg:GridColumn x:Name="TypeColumn" FieldName="Type" Header="{helpers:ConstString ID=Type}" GroupIndex="0" ReadOnly="True">
+                                <dxg:GridColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Source="{Binding RowData.Row.Type,Converter={StaticResource ReceiptTypeToTypeIconConverter}}" Margin="5,0" Stretch="None" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+                                            <TextBlock Grid.Column="1" Text="{Binding RowData.Row.Type}" VerticalAlignment="Center" TextTrimming="WordEllipsis"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </dxg:GridColumn.CellTemplate>
+                                <dxg:GridColumn.GroupValueTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                                            <TextBlock Text="{helpers:ConstString ID=TypeLabel}" VerticalAlignment="Center" />
+                                            <Image Source="{Binding Data.Type, Converter={StaticResource ReceiptTypeToTypeIconConverter}}" Margin="5,0" Stretch="None" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+                                            <TextBlock Text="{Binding Data.Type}" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </dxg:GridColumn.GroupValueTemplate>
+                            </dxg:GridColumn>
+                            <dxg:GridColumn x:Name="DateColumn" FieldName="Date" Header="{helpers:ConstString ID=Date}" ColumnFilterMode="DisplayText" AutoFilterCondition="Contains" />
+                            <dxg:GridColumn x:Name="DiscountColumn" FieldName="Discount" Header="{helpers:ConstString ID=Discount}" ColumnFilterMode="DisplayText">
+                                <dxg:GridColumn.EditSettings>
+                                    <dxe:SpinEditSettings helpers:StyleConverter.Style="{StaticResource PriceSpinEdit}" />
+                                </dxg:GridColumn.EditSettings>
+                            </dxg:GridColumn>
+                            <dxg:GridColumn x:Name="PaymentColumn" FieldName="Payment" Header="{helpers:ConstString ID=Payment}" ColumnFilterMode="DisplayText">
+                                <dxg:GridColumn.EditSettings>
+                                    <dxe:SpinEditSettings helpers:StyleConverter.Style="{StaticResource PriceSpinEdit}" />
+                                </dxg:GridColumn.EditSettings>
+                            </dxg:GridColumn>
+                        </dxg:GridControl.Columns>
+                        <dxg:GridControl.GroupSummary>
+                            <dxg:GridSummaryItem FieldName="Payment" SummaryType="Sum" DisplayFormat="{}Payment = {0:c}" />
+                            <dxg:GridSummaryItem FieldName="Discount" SummaryType="Sum" DisplayFormat="{}Discount = {0:c}" />
+                        </dxg:GridControl.GroupSummary>
+                        <dxg:GridControl.TotalSummary>
+                            <dxg:GridSummaryItem FieldName="ReceiptId" SummaryType="Count" />
+                            <dxg:GridSummaryItem FieldName="Payment" SummaryType="Sum" DisplayFormat="C" />
+                            <dxg:GridSummaryItem FieldName="Discount" SummaryType="Sum" DisplayFormat="C" />
+                        </dxg:GridControl.TotalSummary>
+                    </dxg:GridControl>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem dxlc:LayoutControl.AllowVerticalSizing="True" MinHeight="140" MaxHeight="500">
+                    <Grid DockPanel.Dock="Top">
+                        <dxg:GridControl x:Name="RentalsGrid" ShowBorder="False">
+                            <dxg:GridControl.View>
+                                <dxg:TableView AllowEditing="False" ShowGroupedColumns="False" ShowGroupPanel="False" AutoWidth="True" NavigationStyle="Row" />
+                            </dxg:GridControl.View>
+                            <dxg:GridControl.Columns>
+                                <dxg:GridColumn x:Name="RentalsGridRentIdColumn" FieldName="RentId" Header="{helpers:ConstString ID=RentalId}" Width="86">
+                                    <dxg:GridColumn.EditSettings>
+                                        <dxe:TextEditSettings helpers:StyleConverter.Style="{StaticResource CardNumberTextEdit}" />
+                                    </dxg:GridColumn.EditSettings>
+                                </dxg:GridColumn>
+                                <dxg:GridColumn x:Name="RentalsGridMovieInfoColumn" FieldName="MovieInfo" Header="{helpers:ConstString ID=Movie}" HorizontalHeaderContentAlignment="Stretch" />
+                                <dxg:GridColumn x:Name="RentalsGridRentedOnColumn" FieldName="RentedOn" Header="{helpers:ConstString ID=RentedOn}" Width="79" />
+                                <dxg:GridColumn x:Name="RentalsGridDaysColumn" FieldName="Days" Header="{helpers:ConstString ID=Days}" Width="51" />
+                                <dxg:GridColumn x:Name="RentalsGridAciveColumn" FieldName="Active" Header="{helpers:ConstString ID=Active}" Width="69">
+                                    <dxg:GridColumn.EditSettings>
+                                        <dxe:CheckEditSettings />
+                                    </dxg:GridColumn.EditSettings>
+                                </dxg:GridColumn>
+                                <dxg:GridColumn x:Name="RentalsGridPaymentColumn" FieldName="Payment" Header="{helpers:ConstString ID=Payment}" Width="69">
+                                    <dxg:GridColumn.EditSettings>
+                                        <dxe:SpinEditSettings helpers:StyleConverter.Style="{StaticResource PriceSpinEdit}" />
+                                    </dxg:GridColumn.EditSettings>
+                                </dxg:GridColumn>
+                            </dxg:GridControl.Columns>
+                        </dxg:GridControl>
+                        <dxg:GridControl x:Name="PurchasesGrid" ShowBorder="False">
+                            <dxg:GridControl.View>
+                                <dxg:TableView AllowEditing="False" ShowGroupedColumns="False" AutoWidth="True" AllowBestFit="True" ShowGroupPanel="False" NavigationStyle="Row" />
+                            </dxg:GridControl.View>
+                            <dxg:GridControl.Columns>
+                                <dxg:GridColumn x:Name="PurchasesGridRentIdColumn" FieldName="RentId" Header="{helpers:ConstString ID=RentalId}">
+                                    <dxg:GridColumn.EditSettings>
+                                        <dxe:TextEditSettings helpers:StyleConverter.Style="{StaticResource CardNumberTextEdit}" />
+                                    </dxg:GridColumn.EditSettings>
+                                </dxg:GridColumn>
+                                <dxg:GridColumn x:Name="PurchasesGridMovieInfoColumn" FieldName="MovieInfo" Header="{helpers:ConstString ID=Movie}" HorizontalHeaderContentAlignment="Stretch" />
+                                <dxg:GridColumn x:Name="PurchasesGridPaymentColumn" FieldName="Payment" Header="{helpers:ConstString ID=Payment}">
+                                    <dxg:GridColumn.EditSettings>
+                                        <dxe:SpinEditSettings helpers:StyleConverter.Style="{StaticResource PriceSpinEdit}" />
+                                    </dxg:GridColumn.EditSettings>
+                                </dxg:GridColumn>
+                            </dxg:GridControl.Columns>
+                        </dxg:GridControl>
+                        <dxg:GridControl x:Name="LateFeesGrid" ShowBorder="False">
+                            <dxg:GridControl.View>
+                                <dxg:TableView AllowEditing="False" ShowGroupedColumns="False" AutoWidth="True" ShowGroupPanel="False" NavigationStyle="Row" />
+                            </dxg:GridControl.View>
+                            <dxg:GridControl.Columns>
+                                <dxg:GridColumn x:Name="LateFeesGridRentIdColumn" FieldName="RentId" Header="{helpers:ConstString ID=RentalId}">
+                                    <dxg:GridColumn.EditSettings>
+                                        <dxe:TextEditSettings helpers:StyleConverter.Style="{StaticResource CardNumberTextEdit}" />
+                                    </dxg:GridColumn.EditSettings>
+                                </dxg:GridColumn>
+                                <dxg:GridColumn x:Name="LateFeesGridMovieInfoColumn" FieldName="MovieInfo" Header="{helpers:ConstString ID=Movie}" HorizontalHeaderContentAlignment="Stretch" />
+                                <dxg:GridColumn x:Name="LateFeesGridOverdueColumn" FieldName="Overdue" Header="{helpers:ConstString ID=Days}" />
+                                <dxg:GridColumn x:Name="LateFeesGridOverduePaymentColumn" FieldName="OverduePayment" Header="{helpers:ConstString ID=Payment}">
+                                    <dxg:GridColumn.EditSettings>
+                                        <dxe:SpinEditSettings helpers:StyleConverter.Style="{StaticResource PriceSpinEdit}" />
+                                    </dxg:GridColumn.EditSettings>
+                                </dxg:GridColumn>
+                            </dxg:GridControl.Columns>
+                        </dxg:GridControl>
+                    </Grid>
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup x:Name="ActiveRentalsGroup" Header="{helpers:ConstString ID=ActiveRentals}">
+                <dxg:GridControl x:Name="ActiveRentalsGrid" DockPanel.Dock="Top" ShowBorder="False">
+                    <helpers:UnboundColumnHelper.UnboundColumns>
+                        <helpers:UnboundColumnCollection>
+                            <helpers:CommandUnboundColumn x:Name="SelectActiveRentalUnbound" ColumnName="SelectActiveRental" />
+                        </helpers:UnboundColumnCollection>
+                    </helpers:UnboundColumnHelper.UnboundColumns>
+                    <dxg:GridControl.View>
+                        <dxg:TableView AllowEditing="True" ShowGroupedColumns="False" ShowGroupPanel="False" NavigationStyle="Cell" AutoWidth="True" helpers:ImmediateCellValueSavingHelper.FieldName="SelectActiveRental" />
+                    </dxg:GridControl.View>
+                    <dxg:GridControl.Columns>
+                        <dxg:GridColumn x:Name="SelectActiveColumn" FieldName="SelectActiveRental" Header="" UnboundType="Boolean" HorizontalHeaderContentAlignment="Center">
+                            <dxg:GridColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Stretch="None" Source="{Binding Source={StaticResource SelectActiveRentalSource}, Path=ImageSource}"                                                                                                                                             
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </dxg:GridColumn.HeaderTemplate>
+                        </dxg:GridColumn>
+                        <dxg:GridColumn x:Name="ActiveRentalTypeColumn" FieldName="ActiveRentalType" UnboundType="Object" Header="" HorizontalHeaderContentAlignment="Center" ReadOnly="True">
+                            <dxg:GridColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Image RenderOptions.BitmapScalingMode="NearestNeighbor" Stretch="None" Source="{Binding Source={StaticResource RentTypeSource}, Path=ImageSource}"                                                 
+                                           VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </dxg:GridColumn.HeaderTemplate>
+                            <dxg:GridColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding RowData.Row.ActiveType, Converter={StaticResource ActiveRentTypeToIconConverter}}" Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+                                </DataTemplate>
+                            </dxg:GridColumn.CellTemplate>
+                        </dxg:GridColumn>
+                        <dxg:GridColumn x:Name="RentIdColumn" FieldName="RentId" Header="{helpers:ConstString ID=RentalId}" Width="86" BestFitArea="All" ReadOnly="True">
+                            <dxg:GridColumn.EditSettings>
+                                <dxe:TextEditSettings helpers:StyleConverter.Style="{StaticResource CardNumberTextEdit}" />
+                            </dxg:GridColumn.EditSettings>
+                        </dxg:GridColumn>
+                        <dxg:GridColumn x:Name="MovieTitleColumn" FieldName="MovieTitle" Header="{helpers:ConstString ID=MovieTitle}" ReadOnly="True" />
+                        <dxg:GridColumn x:Name="ItemFormatColumn" FieldName="ItemFormat" Header="{helpers:ConstString ID=Format}" ReadOnly="True">
+                            <dxg:GridColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="{Binding RowData.Row.ItemFormat,Converter={StaticResource FormatToFormatIconConverter}}" Margin="5,0" Stretch="None" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding RowData.Row.ItemFormat}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </dxg:GridColumn.CellTemplate>
+                        </dxg:GridColumn>
+                        <dxg:GridColumn x:Name="RentedOnColumn" FieldName="RentedOn" Header="{helpers:ConstString ID=RentedOn}" Width="79" ReadOnly="True" />
+                        <dxg:GridColumn x:Name="DaysColumn" FieldName="Days" Header="{helpers:ConstString ID=Days}" Width="51" ReadOnly="True" />
+                        <dxg:GridColumn x:Name="OverdueColumn" FieldName="Overdue" Header="{helpers:ConstString ID=DaysOverdue}" ReadOnly="True">
+                            <dxg:GridColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding RowData.Row.Overdue, Converter={StaticResource RentOverdueFormatter}}" VerticalAlignment="Center" HorizontalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                </DataTemplate>
+                            </dxg:GridColumn.CellTemplate>
+                        </dxg:GridColumn>
+                        <dxg:GridColumn x:Name="ActivePaymentColumn" FieldName="Payment" Header="{helpers:ConstString ID=Payment}" Width="69" ReadOnly="True">
+                            <dxg:GridColumn.EditSettings>
+                                <dxe:SpinEditSettings helpers:StyleConverter.Style="{StaticResource PriceSpinEdit}" />
+                            </dxg:GridColumn.EditSettings>
+                        </dxg:GridColumn>
+                    </dxg:GridControl.Columns>
+                </dxg:GridControl>
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</UserControl>

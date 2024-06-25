@@ -1,0 +1,211 @@
+﻿<local:TabItemModule
+    x:Class="ChartsDemo.Bubble3DSeriesViewTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:ChartsDemo"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800">
+    <!--#region Resources-->
+    <local:TabItemModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dxc:ColorEachColorizer3D
+                x:Key="ColorEachColorizer3DKey" />
+        </ResourceDictionary>
+    </local:TabItemModule.Resources>
+    <!--#endregion-->
+
+    <!--#region Options-->
+    <local:TabItemModule.Options>
+        <StackPanel
+            Style="{StaticResource optionsRootStackPanelStyle}">
+            <GroupBox
+                Header="Marker Max Size">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Content="0.5"
+                            HorizontalAlignment="Left" />
+                        <Label
+                            Grid.Column="1"
+                            Content="1.0"
+                            HorizontalAlignment="Center" />
+                        <Label
+                            Grid.Column="2"
+                            Content="2.0"
+                            HorizontalAlignment="Right" />
+                    </Grid>
+                    <dxe:TrackBarEdit
+                        Name="slMaxSize"
+                        Minimum="0.5"
+                        Maximum="2.0"
+                        Value="0.55"
+                        TickPlacement="None"
+                        SmallStep="0.01"
+                        LargeStep="0.15" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox
+                Header="Marker Min Size">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Content="0.1"
+                            HorizontalAlignment="Left" />
+                        <Label
+                            Grid.Column="1"
+                            Content="0.3"
+                            HorizontalAlignment="Center" />
+                        <Label
+                            Grid.Column="2"
+                            Content="0.5"
+                            HorizontalAlignment="Right" />
+                    </Grid>
+                    <dxe:TrackBarEdit
+                        Name="slMinSize"
+                        Minimum="0.1"
+                        Maximum="0.5"
+                        Value="0.2"
+                        TickPlacement="None"
+                        SmallStep="0.01"
+                        LargeStep="0.15" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox
+                Header="Model">
+                <dxe:ListBoxEdit
+                    Name="lbModel"
+                    SelectedIndex="1">
+                    <dxe:ListBoxEdit.Items>
+                        <dxc:Marker3DCubePointModel />
+                        <dxc:Marker3DSpherePointModel />
+                    </dxe:ListBoxEdit.Items>
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+        </StackPanel>
+    </local:TabItemModule.Options>
+    <!--#endregion-->
+
+    <DockPanel>
+
+        <!--#region ChartsRibbon-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}" />
+        <!--#endregion-->
+
+        <dxc:Chart3DControl
+            x:Name="chart"
+            AspectRatio="0 0 0">
+            <dxc:Series3DDataSourceAdapter
+                SeriesDataMember="IrisData.Species"
+                XArgumentDataMember="IrisData.SepalLength"
+                YArgumentDataMember="IrisData.PetalLength"
+                ValueDataMember="IrisData.SepalWidth"
+                dxc:Bubble3DSeriesView.WeightDataMember="IrisData.PetalWidth">
+                <dxc:Series3DDataSourceAdapter.DataSource>
+                    <XmlDataProvider
+                        Source="/ChartsDemo;component/Data/IrisDataSet.xml" />
+                </dxc:Series3DDataSourceAdapter.DataSource>
+                <dxc:Series3DDataSourceAdapter.SeriesTemplate>
+                    <dxc:Series3DTemplate
+                        CrosshairLabelPattern="Species: {S}&#xA;Petal Length: {X:F02}&#xA;Sepal Length: {Z:F02}&#xA;Sepal Width: {Y:F02}&#xA;Petal Width: {W:F02}">
+                        <dxc:Series3DTemplate.View>
+                            <dxc:Bubble3DSeriesView
+                                MinSize="{Binding ElementName=slMinSize, Path=Value}"
+                                MaxSize="{Binding ElementName=slMaxSize, Path=Value}"
+                                MarkerModel="{Binding ElementName=lbModel, Path=SelectedItem}">
+                                <dxc:Bubble3DSeriesView.Colorizer>
+                                    <dxc:SolidColorizer3D />
+                                </dxc:Bubble3DSeriesView.Colorizer>
+                            </dxc:Bubble3DSeriesView>
+                        </dxc:Series3DTemplate.View>
+                    </dxc:Series3DTemplate>
+                </dxc:Series3DDataSourceAdapter.SeriesTemplate>
+            </dxc:Series3DDataSourceAdapter>
+            <!--#region CrosshairOptions-->
+            <dxc:Chart3DControl.CrosshairOptions>
+                <dxc:Crosshair3DOptions
+                    ShowXArgumentLine="False"
+                    ShowYArgumentLine="False"
+                    ShowValueLine="False"
+                    ShowXArgumentLabel="False"
+                    ShowYArgumentLabel="False"
+                    ShowValueLabel="False" />
+            </dxc:Chart3DControl.CrosshairOptions>
+            <!--#endregion-->
+            <!--#region Titles-->
+            <dxc:Chart3DControl.Titles>
+                <dxc:Title
+                    Dock="Top"
+                    HorizontalAlignment="Center"
+                    Content="Iris Data Set" />
+                <dxc:Title
+                    Dock="Bottom"
+                    HorizontalAlignment="Right"
+                    FontSize="12"
+                    Foreground="Silver"
+                    Margin="0,0,5,3"
+                    Content="From archive.ics.uci.edu" />
+            </dxc:Chart3DControl.Titles>
+            <!--#endregion-->
+            <!--#region Axes-->
+            <dxc:Chart3DControl.XAxis>
+                <dxc:XAxis3D>
+                    <dxc:XAxis3D.Title>
+                        <dxc:AxisTitle
+                            Content="Sepal Length" />
+                    </dxc:XAxis3D.Title>
+                </dxc:XAxis3D>
+            </dxc:Chart3DControl.XAxis>
+            <dxc:Chart3DControl.YAxis>
+                <dxc:YAxis3D>
+                    <dxc:YAxis3D.Title>
+                        <dxc:AxisTitle
+                            Content="Petal Length" />
+                    </dxc:YAxis3D.Title>
+                </dxc:YAxis3D>
+            </dxc:Chart3DControl.YAxis>
+            <dxc:Chart3DControl.ZAxis>
+                <dxc:ZAxis3D>
+                    <dxc:ZAxis3D.Title>
+                        <dxc:AxisTitle
+                            Content="Sepal Width" />
+                    </dxc:ZAxis3D.Title>
+                </dxc:ZAxis3D>
+            </dxc:Chart3DControl.ZAxis>
+            <!--#endregion-->
+            <!--#region Legends-->
+            <dxc:Chart3DControl.Legends>
+                <dxc:Legend
+                    HorizontalPosition="Right"
+                    VerticalPosition="Top" />
+            </dxc:Chart3DControl.Legends>
+            <!--#endregion-->
+        </dxc:Chart3DControl>
+
+    </DockPanel>
+</local:TabItemModule>

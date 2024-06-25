@@ -1,0 +1,85 @@
+﻿<dxdb:DemoModule x:Class="DialogsDemo.ThemedMessageBoxModule"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <Grid Margin="12" Width="300">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Content="Caption: " VerticalAlignment="Center" Margin="0,0,0,4" />
+                <dxe:TextEdit Grid.Column="1" Text="Themed Message Box" x:Name="captionEdit" Margin="0,0,0,4" />
+                <Label Grid.Row="1" Content="Text: " VerticalAlignment="Center" Margin="0,0,0,4" />
+                <dxe:TextEdit Grid.Column="1" Grid.Row="1" Text="Hello world!" x:Name="contentEdit" Margin="0,0,0,4" />
+                <Label Grid.Row="2" Content="Buttons: " VerticalAlignment="Center" Margin="0,0,0,4" />
+                <dxe:ComboBoxEdit Grid.Row="2" Grid.Column="1" x:Name="buttons" IsTextEditable="False" ShowSizeGrip="False" SelectedIndex="0" Margin="0,0,0,4" SelectedIndexChanged="OnButtonsChanged">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxmvvm:EnumItemsSourceBehavior EnumType="MessageBoxButton" />
+                    </dxmvvm:Interaction.Behaviors>
+                </dxe:ComboBoxEdit>
+                <Label Grid.Row="3" Content="Default button: " VerticalAlignment="Center" Margin="0,0,0,4" />
+                <dxe:ComboBoxEdit Grid.Row="3" Grid.Column="1" x:Name="defaultButton" IsTextEditable="False" ShowSizeGrip="False" Margin="0,0,0,4" EditValueChanged="OnDefaultButtonChanged"/>
+                <Label Grid.Row="4" Content="Icon: " VerticalAlignment="Center" Margin="0,0,0,4" />
+                <dxe:ComboBoxEdit Grid.Row="4" Grid.Column="1" x:Name="icons" IsTextEditable="False" ShowSizeGrip="False" SelectedIndex="3" Margin="0,0,0,4" DisplayFormatString="F">
+                    <dxe:ComboBoxEdit.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding StringFormat=F}"/>
+                        </DataTemplate>
+                    </dxe:ComboBoxEdit.ItemTemplate>
+                    <MessageBoxImage>None</MessageBoxImage>
+                    <MessageBoxImage>Error</MessageBoxImage>
+                    <MessageBoxImage>Question</MessageBoxImage>
+                    <MessageBoxImage>Warning</MessageBoxImage>
+                    <MessageBoxImage>Information</MessageBoxImage>
+                </dxe:ComboBoxEdit>
+                <Label Grid.Row="5" Content="Allow text selection: " VerticalAlignment="Center" Margin="0,0,0,4" />
+                <dxe:CheckEdit Grid.Column="1" Grid.Row="5" EditValue="True" x:Name="allowTextSelectionEdit" Margin="0,0,0,4" />
+                <Label Grid.Row="6" Content="Timer: " VerticalAlignment="Center" Margin="0,0,0,4"/>
+                <dxe:ComboBoxEdit Grid.Row="6" Grid.Column="1" x:Name="timerTimeout" IsTextEditable="False" ShowSizeGrip="False" SelectedIndex="1" Margin="0,0,0,4" EditValueChanged="OnTimerTimeoutChanged">
+                    <sys:String>No timer</sys:String>
+                    <sys:String>5</sys:String>
+                    <sys:String>6</sys:String>
+                    <sys:String>7</sys:String>
+                    <sys:String>8</sys:String>
+                    <sys:String>9</sys:String>
+                    <sys:String>10</sys:String>
+                </dxe:ComboBoxEdit>
+                <Label Grid.Row="7" Content="Timer format: " VerticalAlignment="Center" Margin="0,0,0,4"/>
+                <dxe:ComboBoxEdit DisplayMember="Example" ValueMember="Format" Grid.Row="7" Grid.Column="1" x:Name="predefinedFormats" IsTextEditable="False" ShowSizeGrip="False" Margin="0,0,0,4"/>
+                <Label Grid.Row="8" Content="Result: " VerticalAlignment="Center" Margin="0,0,0,4"/>
+                <Label Grid.Column="1" Grid.Row="8" x:Name="dialogResult" Margin="0,0,0,4"/>
+            </Grid>
+        </ScrollViewer>
+        <Grid>
+            <Button Click="ShowThemedMessageBox"
+                    SnapsToDevicePixels="True"
+                    Content="Show Themed Message Box"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Height="50"
+                    Width="300" />
+        </Grid>
+    </DockPanel>
+</dxdb:DemoModule>

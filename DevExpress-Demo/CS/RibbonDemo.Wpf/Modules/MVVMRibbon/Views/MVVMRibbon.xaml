@@ -1,0 +1,82 @@
+﻿<local:RibbonDemoModule x:Class="RibbonDemo.MVVMRibbon"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                        xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+                        xmlns:local="clr-namespace:RibbonDemo"
+                        mc:Ignorable="d"
+                        DataContext="{dxmvvm:ViewModelSource Type=local:MVVMRibbonViewModel}"
+                        d:DesignHeight="300"
+                        d:DesignWidth="525">
+    <local:RibbonDemoModule.Resources>
+        <DataTemplate DataType="{x:Type local:CommandModel}">
+            <ContentControl>
+                <dxb:BarButtonItem Content="{Binding Caption}" Glyph="{Binding SmallGlyph}" LargeGlyph="{Binding LargeGlyph}" Command="{Binding}" />
+            </ContentControl>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:MyGroupCommand}">
+            <ContentControl>
+                <dxb:BarSubItem Content="{Binding Caption}"
+                                Glyph="{Binding SmallGlyph}"
+                                LargeGlyph="{Binding LargeGlyph}"
+                                GlyphAlignment="Left"
+                                BarItemDisplayMode="ContentAndGlyph"
+                                ItemLinksSource="{Binding Commands}"
+                                Command="{Binding}" />
+            </ContentControl>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:PageGroupModel}">
+            <ContentControl>
+                <dxr:RibbonPageGroup ItemLinksSource="{Binding Commands}"
+                                     Caption="{Binding Name}"
+                                     Glyph="{Binding Glyph}"
+                                     ShowCaptionButton="True"
+                                     AllowCollapse="True"
+                                     CaptionButtonCommand="{Binding}" />
+            </ContentControl>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:PageModel}">
+            <ContentControl>
+                <dxr:RibbonPage GroupsSource="{Binding Groups}" Caption="{Binding Name}" />
+            </ContentControl>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:CategoryModel}">
+            <ContentControl>
+                <dxr:RibbonDefaultPageCategory PagesSource="{Binding Pages}" />
+            </ContentControl>
+        </DataTemplate>
+    </local:RibbonDemoModule.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <dxr:RibbonControl x:Name="ribbonControl"
+                           RibbonStyle="Office2019"
+                           RibbonTitleBarVisibility="Collapsed"
+                           ToolbarShowMode="Hide"
+                           CategoriesSource="{Binding Categories}">
+            <dxr:RibbonControl.ApplicationMenu>
+                <dxr:ApplicationMenu ItemLinksSource="{Binding MenuItems}" />
+            </dxr:RibbonControl.ApplicationMenu>
+            <dxmvvm:Interaction.Behaviors>
+                <local:RibbonMergeingService></local:RibbonMergeingService>
+            </dxmvvm:Interaction.Behaviors>
+        </dxr:RibbonControl>
+        <TextBox Grid.Row="1" x:Name="textBox" AcceptsReturn="True" TextWrapping="Wrap" Margin="-1,0,-1,-1">
+            <dxmvvm:Interaction.Behaviors>
+                <dxmvvm:DependencyPropertyBehavior PropertyName="Text" EventName="TextChanged" Binding="{Binding Text, Mode=TwoWay}" />
+                <dxmvvm:DependencyPropertyBehavior PropertyName="SelectedText" EventName="SelectionChanged" Binding="{Binding SelectedText, Mode=TwoWay}" />
+                <dxmvvm:DependencyPropertyBehavior PropertyName="SelectionStart"
+                                                   EventName="SelectionChanged"
+                                                   Binding="{Binding SelectionStart, Mode=TwoWay}" />
+                <dxmvvm:DependencyPropertyBehavior PropertyName="SelectionLength"
+                                                   EventName="SelectionChanged"
+                                                   Binding="{Binding SelectionLength, Mode=TwoWay}" />
+            </dxmvvm:Interaction.Behaviors>
+        </TextBox>
+    </Grid>
+</local:RibbonDemoModule>

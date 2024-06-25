@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="MVVMDemo.Services.FolderBrowserDialogServiceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.Services"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxdlg="http://schemas.devexpress.com/winfx/2008/xaml/dialogs"
+             DataContext="{dxmvvm:ViewModelSource local:FolderBrowserDialogServiceViewModel}">
+    <!--#region !-->
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:FolderBrowserDialogService x:Name="FolderBrowserDialogService"/>
+        <dxdlg:DXFolderBrowserDialogService x:Name="DXFolderBrowserDialogService"/>
+    </dxmvvm:Interaction.Behaviors>
+    <!--#endregion-->
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <Button Command="{Binding ShowDialogCommand}" CommandParameter="FolderBrowserDialogService">Show System Dialog</Button>
+        <Button Command="{Binding ShowDialogCommand}" CommandParameter="DXFolderBrowserDialogService">Show DevExpress Dialog</Button>
+        <dxlc:LayoutItem Label="Selected folder:" VerticalAlignment="Top" LabelPosition="Top">
+            <TextBlock Text="{Binding SelectedFolder}" TextWrapping="Wrap"/>
+        </dxlc:LayoutItem>
+    </dxlc:LayoutControl>
+</UserControl>

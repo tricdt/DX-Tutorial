@@ -1,0 +1,180 @@
+﻿<local:SankeyDemoModule
+    x:Class="SankeyDemo.Interaction"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+    xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxsa="http://schemas.devexpress.com/winfx/2008/xaml/sankey"
+    xmlns:dxsat="http://schemas.devexpress.com/winfx/2008/xaml/sankey/themekeys"
+    xmlns:local="clr-namespace:SankeyDemo"
+    Width="800"
+    Height="600"
+    DataContext="{dxmvvm:ViewModelSource Type=local:InteractionViewModel}">
+
+    <local:SankeyDemoModule.Resources>
+        <ResourceDictionary>
+            <local:ColorValueDictionaryToColorCollectionConverter x:Key="colorCollectionConverter" />
+            <local:StringKeyDictionaryToColorizerKeyItemCollectionConverter x:Key="keyCollectionConverter" />
+            <local:InteractionDemoToolTipConverter x:Key="toolTipContentConverter" />
+            <DataTemplate x:Key="toolTipContentTemplate">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontWeight="Bold"
+                        Foreground="{dxi:ThemeResource {dxsat:SankeyBrushesThemeKey ResourceKey=ToolTipForeground}}"
+                        Text="{Binding ToolTipText}" />
+                    <TextBlock
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        Foreground="{dxi:ThemeResource {dxsat:SankeyBrushesThemeKey ResourceKey=ToolTipForeground}}"
+                        Text="{Binding SourceObject, Converter={StaticResource toolTipContentConverter}}" />
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </local:SankeyDemoModule.Resources>
+
+    <Grid Background="{Binding Background, ElementName=sankey}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <dxsa:SankeyDiagramControl
+            x:Name="sankey"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            BorderThickness="0"
+            Colorizer="{Binding Colorizer}"
+            DataSource="{Binding SankeyData}"
+            HighlightedItems="{Binding HighlightedSankeyItems, Mode=OneTime}"
+            LinkToolTipContentTemplate="{StaticResource toolTipContentTemplate}"
+            NodeToolTipContentTemplate="{StaticResource toolTipContentTemplate}"
+            SelectedItems="{Binding SelectedExportItems, Mode=OneTime}"
+            SelectionMode="Multiple"
+            SourceDataMember="Exporter"
+            TargetDataMember="Importer"
+            WeightDataMember="Sum">
+            <dxsa:SankeyDiagramControl.LayoutAlgorithm>
+                <dxsa:SankeyLinearLayoutAlgorithm NodeAlignment="Near" />
+            </dxsa:SankeyDiagramControl.LayoutAlgorithm>
+            <dxsa:SankeyDiagramControl.Titles>
+                <dxsa:SankeyTitle
+                    HorizontalAlignment="Center"
+                    Content="Major oil trade movements"
+                    Dock="Top"
+                    FontFamily="Tahoma"
+                    FontSize="24" />
+                <dxsa:SankeyTitle
+                    HorizontalAlignment="Center"
+                    Content="Trade flows worldwide (million tonnes)"
+                    Dock="Top"
+                    FontFamily="Tahoma"
+                    FontSize="16" />
+                <dxsa:SankeyTitle
+                    HorizontalAlignment="Right"
+                    Content="bp Statistical Review of World Energy 2020"
+                    Dock="Bottom"
+                    FontFamily="Tahoma"
+                    FontSize="12"
+                    Foreground="Gray" />
+            </dxsa:SankeyDiagramControl.Titles>
+        </dxsa:SankeyDiagramControl>
+        <Border
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="0,10,10,3"
+            BorderBrush="{Binding BorderBrush, ElementName=sankey}"
+            BorderThickness="1">
+            <dxm:MapControl
+                x:Name="map"
+                CenterPoint="40, 0"
+                EnableRotation="False"
+                IsManipulationEnabled="True"
+                MaxZoomLevel="3"
+                MinZoomLevel="0.5"
+                SelectionMode="Multiple"
+                SizeChanged="map_SizeChanged">
+                <dxm:MapControl.ZoomTrackbarOptions>
+                    <dxm:ZoomTrackbarOptions Visible="False" />
+                </dxm:MapControl.ZoomTrackbarOptions>
+                <dxm:MapControl.ScrollButtonsOptions>
+                    <dxm:ScrollButtonsOptions Visible="False" />
+                </dxm:MapControl.ScrollButtonsOptions>
+                <dxm:MapControl.ScalePanelOptions>
+                    <dxm:ScalePanelOptions Visible="False" />
+                </dxm:MapControl.ScalePanelOptions>
+                <dxm:MapControl.CoordinatesPanelOptions>
+                    <dxm:CoordinatesPanelOptions Visible="False" />
+                </dxm:MapControl.CoordinatesPanelOptions>
+                <dxm:VectorLayer EnableHighlighting="False" EnableSelection="False">
+                    <dxm:ShapefileDataAdapter FileUri="{Binding MapFileUri}" />
+                    <dxm:VectorLayer.ShapeTitleOptions>
+                        <dxm:ShapeTitleOptions VisibilityMode="Hidden" />
+                    </dxm:VectorLayer.ShapeTitleOptions>
+                </dxm:VectorLayer>
+                <dxm:VectorLayer
+                    x:Name="mapLayer"
+                    Data="{Binding DataAdapter}"
+                    Loaded="mapLayer_Loaded"
+                    SelectedItems="{Binding SelectedMapItems, Mode=OneTime}">
+                    <dxm:VectorLayer.Colorizer>
+                        <dxm:KeyColorColorizer Colors="{Binding ContinentColorPairs, Converter={StaticResource colorCollectionConverter}}" Keys="{Binding ContinentColorPairs, Converter={StaticResource keyCollectionConverter}}">
+                            <dxm:KeyColorColorizer.ItemKeyProvider>
+                                <dxm:AttributeItemKeyProvider AttributeName="CONTINENT" />
+                            </dxm:KeyColorColorizer.ItemKeyProvider>
+                        </dxm:KeyColorColorizer>
+                    </dxm:VectorLayer.Colorizer>
+                    <dxm:VectorLayer.ShapeTitleOptions>
+                        <dxm:ShapeTitleOptions>
+                            <dxm:ShapeTitleOptions.Template>
+                                <DataTemplate>
+                                    <Grid>
+                                        <dxm:ShapeTitleTextControl
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Foreground="{dxi:ThemeResource {dxsat:SankeyBrushesThemeKey ResourceKey=TextElementForeground}}"
+                                            Stroke="{dxi:ThemeResource {dxsat:SankeyBrushesThemeKey ResourceKey=ToolTipBackground}}"
+                                            Text="{Binding Path=Text}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </dxm:ShapeTitleOptions.Template>
+                        </dxm:ShapeTitleOptions>
+                    </dxm:VectorLayer.ShapeTitleOptions>
+                </dxm:VectorLayer>
+                <dxm:VectorLayer
+                    Data="{Binding MapArrowStorage}"
+                    EnableHighlighting="False"
+                    EnableSelection="False" />
+            </dxm:MapControl>
+        </Border>
+        <dxg:GridControl
+            x:Name="grid"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="0,3,10,10"
+            AutoGenerateColumns="AddNew"
+            EnableSmartColumnsGeneration="True"
+            ItemsSource="{Binding SankeyData}"
+            SelectedItems ="{Binding SelectedExportItems}"
+            SelectionMode="MultipleRow">
+            <dxg:GridControl.View>
+                <dxg:TableView
+                    x:Name="gridTable"
+                    AllowEditing="False"
+                    Loaded="gridTable_Loaded"
+                    ShowGroupPanel="False" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </Grid>
+
+</local:SankeyDemoModule>

@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="MVVMDemo.DXBindingDemo.BindingExpressionsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.DXBindingDemo"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             DataContext="{dxmvvm:ViewModelSource Type=local:BindingExpressionsViewModel}">
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <dxlc:LayoutGroup Header="Text=&quot;{DXBinding 'FirstName + ` ` + LastName'}&quot;" Orientation="Vertical" View="GroupBox">
+            <!--#region FirstName and LastName-->
+            <dxlc:LayoutItem Label="First Name:">
+                <dxe:TextEdit Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem Label="Last Name:">
+                <dxe:TextEdit Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"/>
+            </dxlc:LayoutItem>
+            <!--#endregion-->
+            <dxlc:LayoutItem Label="Full Name:">
+                <!--#region !-->
+                <TextBlock Text="{DXBinding 'FirstName + ` ` + LastName'}"/>
+                <!--#endregion-->
+            </dxlc:LayoutItem>
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup Header="IsEnabled=&quot;{DXBinding '!IsReadonly'}&quot;" View="GroupBox" >
+            <CheckBox IsChecked="{Binding IsReadonly}" VerticalAlignment="Top" HorizontalAlignment="Left">IsReadonly</CheckBox>
+            <!--#region !-->
+            <TextBox IsEnabled="{DXBinding '!IsReadonly'}" VerticalAlignment="Top">Some text</TextBox>
+            <!--#endregion-->
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup Header="IsEnabled=&quot;{DXBinding '!$sys:String.IsNullOrEmpty(UserName) and AcceptTerms'}&quot;" Orientation="Vertical" View="GroupBox">
+            <!--#region UserName and AcceptTerms-->
+            <dxlc:LayoutGroup VerticalAlignment="Top">
+                <dxlc:LayoutItem Label="User Name:" >
+                    <dxe:TextEdit Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"/>
+                </dxlc:LayoutItem>
+                <CheckBox IsChecked="{Binding AcceptTerms}" HorizontalAlignment="Right">Accept terms and conditions</CheckBox>
+            </dxlc:LayoutGroup>
+            <!--#endregion-->
+            <!--#region !-->
+            <Button Command="{Binding RegisterCommand}" IsEnabled="{DXBinding '!$sys:String.IsNullOrEmpty(UserName) and AcceptTerms'}" VerticalAlignment="Top">Register</Button>
+            <!--#endregion-->
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</UserControl>

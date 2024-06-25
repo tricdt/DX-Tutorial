@@ -1,0 +1,66 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.SearchControlModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:local="clr-namespace:EditorsDemo"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                         Height="400"
+                         Width="800">
+    <local:EditorsDemoModule.DataContext>
+        <dxdb:NWindDataLoader />
+    </local:EditorsDemoModule.DataContext>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <local:SearchControlOptions Margin="12,0" x:Name="options" FocusedControl="{Binding Path=., ElementName=searchControl}" MinWidth="210" />
+        </ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.05*" />
+                <RowDefinition Height="0.85*" />
+                <RowDefinition Height="0.10*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1" HorizontalAlignment="Center" MinWidth="400">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <dxe:SelectorEditColumnProvider x:Name="columnProvider"
+                                                CustomColumns="{Binding CustomColumns, ElementName=options}"
+                                                OwnerEdit="{Binding Path=., ElementName=listBoxEdit}" />
+                <dxe:SearchControl x:Name="searchControl"
+                                   ColumnProvider="{Binding Path=., ElementName=columnProvider}" />
+                <GroupBox Header="Editors" Grid.Row="1" Grid.Column="1" Margin="0,16,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <dxe:ComboBoxEdit x:Name="comboBoxEdit"
+                                          Grid.Row="0"
+                                          Margin="16,12,16,16"
+                                          VerticalAlignment="Top"
+                                          IsTextEditable="False"
+                                          ValueMember="ProductID"
+                                          DisplayMember="ProductName"
+                                          FilterCriteria="{Binding FilterCriteria, ElementName=searchControl}"
+                                          ItemsSource="{Binding Path=Products}" />
+                        <dxe:ListBoxEdit x:Name="listBoxEdit"
+                                         Grid.Row="1"
+                                         Margin="16,12,16,16"
+                                         ValueMember="ProductID"
+                                         DisplayMember="ProductName"
+                                         VerticalAlignment="Stretch"
+                                         FilterCriteria="{Binding FilterCriteria, ElementName=searchControl}"
+                                         ItemsSource="{Binding Path=Products}" />
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</local:EditorsDemoModule>

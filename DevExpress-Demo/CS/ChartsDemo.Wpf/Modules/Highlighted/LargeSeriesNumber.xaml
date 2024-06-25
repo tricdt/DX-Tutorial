@@ -1,0 +1,148 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.LargeSeriesNumberDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ChartsDemo"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ModuleLoaded="ChartsDemoModule_ModuleLoaded"
+    ModuleUnloaded="ChartsDemoModule_ModuleUnloaded">
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+
+    <DockPanel>
+        <!--#region ChartsDemoRibbon-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}"
+            ShowRunChartDesignerButton="true" />
+        <!--#endregion-->
+
+        <dxc:ChartControl
+            x:Name="chart"
+            DataSource="{DXBinding Expr='$local:SeaIceAreaDataReader.ReadDataFromFile()'}"
+            BoundDataChanged="chart_BoundDataChanged">
+            <dxc:ChartControl.CrosshairOptions>
+                <dxc:CrosshairOptions
+                    CrosshairLabelMode="ShowForNearestSeries"
+                    LinesMode="Auto"
+                    ShowArgumentLabels="True" />
+            </dxc:ChartControl.CrosshairOptions>
+            <!--#region Titles-->
+            <dxc:ChartControl.Titles>
+                <dxc:Title
+                    Content="Global Sea Ace Area"
+                    HorizontalAlignment="Center" />
+                <dxc:Title
+                    Content="From NSIDC NASA Team sea ice concentration data"
+                    Style="{StaticResource dataSourceTitle}" />
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+            <dxc:XYDiagram2D
+                SeriesDataMember="Year"
+                EnableAxisXNavigation="True"
+                EnableAxisYNavigation="True">
+                <dxc:XYDiagram2D.AxisX>
+                    <dxc:AxisX2D>
+                        <!--#region WholeRange-->
+                        <dxc:AxisX2D.WholeRange>
+                            <dxc:Range
+                                SideMarginsValue="0" />
+                        </dxc:AxisX2D.WholeRange>
+                        <!--#endregion-->
+                        <!--#region Label-->
+                        <dxc:AxisX2D.Label>
+                            <dxc:AxisLabel
+                                TextPattern="{}Day {A:0.}" />
+                        </dxc:AxisX2D.Label>
+                        <!--#endregion-->
+                        <dxc:AxisX2D.CustomLabels>
+                            <dxc:CustomAxisLabel
+                                Content="January"
+                                Value="1" />
+                            <dxc:CustomAxisLabel
+                                Content="February"
+                                Value="31" />
+                            <dxc:CustomAxisLabel
+                                Content="March"
+                                Value="59" />
+                            <dxc:CustomAxisLabel
+                                Content="April"
+                                Value="90" />
+                            <dxc:CustomAxisLabel
+                                Content="May"
+                                Value="120" />
+                            <dxc:CustomAxisLabel
+                                Content="June"
+                                Value="151" />
+                            <dxc:CustomAxisLabel
+                                Content="July"
+                                Value="181" />
+                            <dxc:CustomAxisLabel
+                                Content="August"
+                                Value="212" />
+                            <dxc:CustomAxisLabel
+                                Content="September"
+                                Value="243" />
+                            <dxc:CustomAxisLabel
+                                Content="October"
+                                Value="273" />
+                            <dxc:CustomAxisLabel
+                                Content="November"
+                                Value="303" />
+                            <dxc:CustomAxisLabel
+                                Content="December"
+                                Value="334" />
+                        </dxc:AxisX2D.CustomLabels>
+                    </dxc:AxisX2D>
+                </dxc:XYDiagram2D.AxisX>
+                <!--#region AxisY-->
+                <dxc:XYDiagram2D.AxisY>
+                    <dxc:AxisY2D>
+                        <dxc:AxisY2D.WholeRange>
+                            <dxc:Range
+                                dxc:AxisY2D.AlwaysShowZeroLevel="False" />
+                        </dxc:AxisY2D.WholeRange>
+                        <dxc:AxisY2D.Title>
+                            <dxc:AxisTitle
+                                Content="Sea Ace Area, Millions km²" />
+                        </dxc:AxisY2D.Title>
+                    </dxc:AxisY2D>
+                </dxc:XYDiagram2D.AxisY>
+                <!--#endregion-->
+                <dxc:XYDiagram2D.SeriesTemplate>
+                    <dxc:LineSeries2D
+                        CheckedInLegend="{Binding Checked, Mode=TwoWay}"
+                        ArgumentDataMember="DayOfYear"
+                        ValueDataMember="IceArea"
+                        CrosshairLabelPattern="{}{S}&#10;Day {A:0.}: {V:0.000M km²}">
+                        <dxc:LineSeries2D.LineStyle>
+                            <dxc:LineStyle
+                                LineJoin="Round"
+                                Thickness="2" />
+                        </dxc:LineSeries2D.LineStyle>
+                    </dxc:LineSeries2D>
+                </dxc:XYDiagram2D.SeriesTemplate>
+            </dxc:XYDiagram2D>
+            <!--#region Legend-->
+            <dxc:ChartControl.Legend>
+                <dxc:Legend
+                    MarkerMode="CheckBox"
+                    ReverseItems="True" />
+            </dxc:ChartControl.Legend>
+            <!--#endregion-->
+        </dxc:ChartControl>
+    </DockPanel>
+</local:ChartsDemoModule>

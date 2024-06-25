@@ -1,0 +1,7 @@
+DevExpress.Diagram.v{DXVersion}.Core
+DevExpress.Xpf.Diagram.v{DXVersion}
+DevExpress.Xpf.DocumentViewer.v{DXVersion}.Core
+DevExpress.Xpf.PropertyGrid.v{DXVersion}
+DevExpress.Xpf.Printing.v{DXVersion}
+DevExpress.RichEdit.v{DXVersion}.Core
+DevExpress.Office.v{DXVersion}.Core

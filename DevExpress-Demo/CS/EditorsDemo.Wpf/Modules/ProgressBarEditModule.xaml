@@ -1,0 +1,178 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.ProgressBarEditModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                         xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                         xmlns:local="clr-namespace:EditorsDemo"
+                         xmlns:utils="clr-namespace:EditorsDemo.Utils">
+    <local:EditorsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/EditorsDemo;component/Controls/ControlStyles/RangedEditors.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <utils:DecimalToConverter x:Key="decimalConverter" />
+            <local:DemoDataProvider x:Key="DemoDataProvider" />
+        </ResourceDictionary>
+    </local:EditorsDemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12" MinWidth="300">
+                <GroupBox Header="Value Properties">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Value: " VerticalAlignment="Center" Margin="0,0,0,6" />
+                        <dxe:SpinEdit Grid.Column="1"
+                                      Grid.Row="0"
+                                      x:Name="txtValue"
+                                      VerticalAlignment="Center"
+                                      Margin="0,0,0,6"
+                                      EditValue="{Binding Value, ElementName=editor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource decimalConverter}, ConverterParameter={x:Type sys:Double}}"
+                                      MinValue="{Binding Minimum, ElementName=editor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource decimalConverter}, ConverterParameter={x:Type sys:Double}}"
+                                      MaxValue="{Binding Maximum, ElementName=editor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource decimalConverter}, ConverterParameter={x:Type sys:Double}}" />
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="Minimum: " VerticalAlignment="Center" Margin="0,0,0,6" />
+                        <dxe:SpinEdit Grid.Column="1"
+                                      Grid.Row="1"
+                                      x:Name="txtMinValue"
+                                      VerticalAlignment="Center"
+                                      Margin="0,0,0,6"
+                                      MaxValue="{Binding Value, ElementName=editor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource decimalConverter}, ConverterParameter={x:Type sys:Double}}"
+                                      EditValue="{Binding Minimum, ElementName=editor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource decimalConverter}, ConverterParameter={x:Type sys:Double}}" />
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Maximum: " VerticalAlignment="Center" Margin="0,0,0,6" />
+                        <dxe:SpinEdit Grid.Column="1"
+                                      Grid.Row="2"
+                                      x:Name="txtMaxValue"
+                                      VerticalAlignment="Center"
+                                      Margin="0,0,0,6"
+                                      MinValue="{Binding Value, ElementName=editor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource decimalConverter}, ConverterParameter={x:Type sys:Double}}"
+                                      Text="{Binding Maximum, ElementName=editor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource decimalConverter}, ConverterParameter={x:Type sys:Double}}" />
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Header="Content Properties" Margin="0,12,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Margin="0,0,0,6" Text="Content display mode: " />
+                        <dxe:ComboBoxEdit VerticalAlignment="Center"
+                                          Margin="0,0,0,6"
+                                          Grid.Column="1"
+                                          Grid.Row="0"
+                                          x:Name="cbContentSettings"
+                                          EditValue="{Binding Path=ContentDisplayMode, ElementName=editor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          IsTextEditable="False"
+                                          SelectedIndex="0" />
+                        <dxe:CheckEdit Grid.Column="1"
+                                       Grid.Row="1"
+                                       VerticalAlignment="Center"
+                                       Margin="0,0,0,6"
+                                       EditValue="{Binding IsPercent, ElementName=editor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                       Content="Is percent"
+                                       Checked="CheckEdit_Checked"
+                                       Unchecked="CheckEdit_Unchecked" />
+                        <TextBlock Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Margin="0,0,0,12" Text="Display format: " />
+                        <dxe:ComboBoxEdit Grid.Column="1"
+                                          Grid.Row="2"
+                                          x:Name="cbDisplayFormat"
+                                          VerticalAlignment="Center"
+                                          Margin="0,0,0,6"
+                                          EditValueChanged="cbDisplayFormat_EditValueChanged">
+                            <dxe:ComboBoxEdit.Items>
+                                <sys:String>Progress: {0}</sys:String>
+                                <sys:String>Progress: {0:p}</sys:String>
+                                <sys:String>Custom title</sys:String>
+                            </dxe:ComboBoxEdit.Items>
+                        </dxe:ComboBoxEdit>
+                        <TextBlock Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" Margin="0,0,0,6" Text="Orientation: " />
+                        <dxe:ComboBoxEdit VerticalAlignment="Center"
+                                          Margin="0,0,0,6"
+                                          Grid.Column="1"
+                                          Grid.Row="3"
+                                          x:Name="cbOrientation"
+                                          IsTextEditable="False"
+                                          EditValueChanged="cbOrientation_EditValueChanged" />
+                        <TextBlock Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" Text="Progress bar style: " />
+                        <dxe:ComboBoxEdit Grid.Column="1"
+                                          Grid.Row="4"
+                                          VerticalAlignment="Center"
+                                          x:Name="cbBarStyle"
+                                          EditValueChanged="cbBarStyle_EditValueChanged"
+                                          IsTextEditable="False"
+                                          SelectedIndex="0">
+                            <dxe:ComboBoxEdit.Items>
+                                <dxe:ComboBoxEditItem>Normal</dxe:ComboBoxEditItem>
+                                <dxe:ComboBoxEditItem>Indeterminate</dxe:ComboBoxEditItem>
+                            </dxe:ComboBoxEdit.Items>
+                        </dxe:ComboBoxEdit>
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.25*" />
+                <RowDefinition Height="0.75*" />
+            </Grid.RowDefinitions>
+            <dxe:ProgressBarEdit x:Name="editor" Maximum="125" Minimum="5" Value="65" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <dxg:GridControl Grid.Row="1" Margin="32,0,32,32" ItemsSource="{Binding Source}">
+                <dxg:GridControl.View>
+                    <dxg:TableView ShowTotalSummary="True" ShowGroupPanel="False" />
+                </dxg:GridControl.View>
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn x:Name="colPriority" FieldName="Priority" SortMode="Value" Width="2*" MinWidth="100" />
+                    <dxg:GridColumn FieldName="From" Width="3*" />
+                    <dxg:GridColumn x:Name="colUserId" FieldName="ToId" Header="To" Width="3*">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:ComboBoxEditSettings ValueMember="Id" DisplayMember="Name" ItemsSource="{Binding Users, Source={StaticResource DemoDataProvider}}" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn x:Name="colHoursActive" FieldName="HoursActive" Width="6*">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:ProgressBarEditSettings ContentDisplayMode="Value" Minimum="0" Maximum="1000" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn FieldName="Sent" Width="2*" GroupInterval="DateRange">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:DateEditSettings DisplayFormat="d" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.GroupSummary>
+                    <dxg:GridSummaryItem FieldName="HoursActive" SummaryType="Average" />
+                    <dxg:GridSummaryItem FieldName="From" SummaryType="Count" />
+                </dxg:GridControl.GroupSummary>
+                <dxg:GridControl.TotalSummary>
+                    <dxg:GridSummaryItem FieldName="From" SummaryType="Count" />
+                    <dxg:GridSummaryItem FieldName="HoursActive" SummaryType="Average" />
+                </dxg:GridControl.TotalSummary>
+            </dxg:GridControl>
+        </Grid>
+    </DockPanel>
+</local:EditorsDemoModule>

@@ -1,0 +1,213 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.BindingIndividualSeriesDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:ChartsDemo"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{dxmvvm:ViewModelSource Type=local:BindingIndividualSeriesViewModel}">
+
+    <!--#region Resources-->
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style
+                TargetType="dxc:BarSideBySideSeries2D"
+                x:Key="seriesStyle">
+                <Setter
+                    Property="ArgumentDataMember"
+                    Value="{Binding SelectedArgumentDataMember}" />
+                <Setter
+                    Property="ValueDataMember"
+                    Value="{Binding SelectedValueDataMember}" />
+                <Setter
+                    Property="FilterString"
+                    Value="{Binding FilterString}" />
+            </Style>
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+    <!--#endregion-->
+
+    <DockPanel>
+        <!--#region ChartsDemoRibbon & Options-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}" />
+
+        <ScrollViewer
+            Name="PART_Options"
+            Style="{StaticResource optionsScrollViewerStyle}">
+            <StackPanel
+                Style="{StaticResource optionsRootStackPanelStyle}">
+                <StackPanel>
+                    <TextBlock
+                        Text="Argument Data Member:" />
+                    <dxe:ComboBoxEdit
+                        Margin="{StaticResource textUnderControlMargin}"
+                        ItemsSource="{Binding ArgumentDataMembers}"
+                        SelectedItem="{Binding SelectedArgumentDataMember, Mode=TwoWay}" />
+                </StackPanel>
+                <StackPanel
+                    Margin="{StaticResource optionsGroupTopMargin}">
+                    <TextBlock
+                        Text="Value Data Member:" />
+                    <dxe:ComboBoxEdit
+                        Margin="{StaticResource textUnderControlMargin}"
+                        ItemsSource="{Binding ValueDataMembers}"
+                        SelectedItem="{Binding SelectedValueDataMember, Mode=TwoWay}" />
+                </StackPanel>
+                <StackPanel
+                    Margin="{StaticResource optionsGroupTopMargin}">
+                    <TextBlock
+                        Text="Filter by:" />
+                    <dxe:ComboBoxEdit
+                        Margin="{StaticResource textUnderControlMargin}"
+                        ItemsSource="{Binding Categories}"
+                        SelectedItem="{Binding SelectedCategory, Mode=TwoWay}" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+
+        <Grid>
+            <!--#region Grid Definitions-->
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="2*"
+                    MinHeight="240" />
+                <RowDefinition
+                    Height="2" />
+                <RowDefinition
+                    Height="*"
+                    MinHeight="120" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition
+                    Width="2" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <GridSplitter
+                Grid.Row="1"
+                Grid.ColumnSpan="3"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center" />
+            <GridSplitter
+                Grid.RowSpan="3"
+                Grid.Column="1"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Center" />
+            <!--#endregion-->
+
+            <dxc:ChartControl
+                x:Name="chart"
+                Grid.ColumnSpan="3"
+                AnimationMode="OnLoad">
+                <!--#region Titles-->
+                <dxc:ChartControl.Titles>
+                    <dxc:Title
+                        Content="Sales Volume (Thousands of USD)"
+                        HorizontalAlignment="Center" />
+                </dxc:ChartControl.Titles>
+                <!--#endregion-->
+                <dxc:XYDiagram2D>
+                    <!--#region Axes-->
+                    <dxc:XYDiagram2D.AxisX>
+                        <dxc:AxisX2D>
+                            <dxc:AxisX2D.QualitativeScaleOptions>
+                                <dxc:QualitativeScaleOptions
+                                    AggregateFunction="Sum" />
+                            </dxc:AxisX2D.QualitativeScaleOptions>
+                        </dxc:AxisX2D>
+                    </dxc:XYDiagram2D.AxisX>
+                    <dxc:XYDiagram2D.AxisY>
+                        <dxc:AxisY2D>
+                            <dxc:AxisY2D.WholeRange>
+                                <dxc:Range
+                                    dxc:AxisY2D.AlwaysShowZeroLevel="False" />
+                            </dxc:AxisY2D.WholeRange>
+                        </dxc:AxisY2D>
+                    </dxc:XYDiagram2D.AxisY>
+                    <!--#endregion-->
+                    <dxc:BarSideBySideSeries2D
+                        DisplayName="DevAV North"
+                        DataSource="{Binding DevAVNorthData}"
+                        Style="{StaticResource seriesStyle}"
+                        AnimationAutoStartMode="SetStartState">
+                        <!--#region Animation-->
+                        <dxc:BarSideBySideSeries2D.PointAnimation>
+                            <dxc:Bar2DGrowUpAnimation
+                                PointDelay="0:0:0.04" />
+                        </dxc:BarSideBySideSeries2D.PointAnimation>
+                        <!--#endregion-->
+                    </dxc:BarSideBySideSeries2D>
+                    <dxc:BarSideBySideSeries2D
+                        DisplayName="DevAV South"
+                        DataSource="{Binding DevAVSouthData}"
+                        Style="{StaticResource seriesStyle}"
+                        AnimationAutoStartMode="SetStartState">
+                        <!--#region Animation-->
+                        <dxc:BarSideBySideSeries2D.PointAnimation>
+                            <dxc:Bar2DGrowUpAnimation
+                                PointDelay="0:0:0.05" />
+                        </dxc:BarSideBySideSeries2D.PointAnimation>
+                        <!--#endregion-->
+                    </dxc:BarSideBySideSeries2D>
+                </dxc:XYDiagram2D>
+            </dxc:ChartControl>
+
+            <!--#region GridControls-->
+            <dxg:GridControl
+                Grid.Row="2"
+                ItemsSource="{Binding DevAVNorthData}">
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn
+                        FieldName="Category" />
+                    <dxg:GridColumn
+                        FieldName="Product" />
+                    <dxg:GridColumn
+                        FieldName="Income" />
+                    <dxg:GridColumn
+                        FieldName="Revenue" />
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.View>
+                    <dxg:TableView
+                        Header="DevAV North"
+                        ShowGroupPanel="False" />
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+
+            <dxg:GridControl
+                Grid.Row="2"
+                Grid.Column="2"
+                ItemsSource="{Binding DevAVSouthData}">
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn
+                        FieldName="Category" />
+                    <dxg:GridColumn
+                        FieldName="Product" />
+                    <dxg:GridColumn
+                        FieldName="Income" />
+                    <dxg:GridColumn
+                        FieldName="Revenue" />
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.View>
+                    <dxg:TableView
+                        Header="DevAV South"
+                        ShowGroupPanel="False" />
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+            <!--#endregion-->
+        </Grid>
+    </DockPanel>
+</local:ChartsDemoModule>

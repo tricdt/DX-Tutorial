@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+    <style type="text/css">
+        .Black {
+            fill: #727272;
+        }
+        .White {
+            fill: #ffffff;
+        }
+        .Blue {
+            fill: #1177D7;
+        }
+        .Yellow {
+            fill: #FFB115;
+        }
+        .Green {
+            fill: #039C23;
+        }
+        .Red {
+            fill: #D11C1C;
+        }
+    </style>
+    <title>Setup</title>
+    <!-- <circle class="White" cx="20.84" cy="10.5" r="10.5"/> -->
+    <!-- <path class="White" d="M1.83,29.83l.34.34a4,4,0,0,0,5.66,0L20,18l-6-6L1.83,24.17A4,4,0,0,0,1.83,29.83Z" transform="translate(-0.66)"/> -->
+    <path class="Black" d="M29.16,6.84,23,13a2.83,2.83,0,0,1-4-4l6.16-6.16A8.48,8.48,0,0,0,13.84,14.16L3,25a2.83,2.83,0,0,0,4,4L17.84,18.16A8.48,8.48,0,0,0,29.16,6.84Z" transform="translate(-0.66)"/>
+</svg>

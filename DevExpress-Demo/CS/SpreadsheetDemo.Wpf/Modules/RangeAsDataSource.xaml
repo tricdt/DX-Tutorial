@@ -1,0 +1,103 @@
+﻿<local:SpreadsheetDemoModule xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                             xmlns:dxsps="http://schemas.devexpress.com/winfx/2008/xaml/spreadsheet"
+                             xmlns:local="clr-namespace:SpreadsheetDemo"
+                             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                             mc:Ignorable="d"
+                             d:DesignHeight="400"
+                             d:DesignWidth="800"
+                             x:Class="SpreadsheetDemo.RangeAsDataSource">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="36" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <dxsps:SpreadsheetControl x:Name="spreadsheetControl1"
+                                  Grid.Row="1"
+                                  Grid.Column="0"
+                                  DocumentSource="{DXBinding '$local:DemoUtils.GetRelativePath(`RangeAsDataSource_template.xlsx`)'}"
+                                  DocumentLoaded="spreadsheetControl1_DocumentLoaded"
+                                  CellValueChanged="spreadsheetControl1_CellValueChanged">
+            <dxsps:SpreadsheetControl.Options>
+                <dxsps:SpreadsheetControlOptions Culture="en-US" />
+            </dxsps:SpreadsheetControl.Options>
+        </dxsps:SpreadsheetControl>
+        <GridSplitter Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" />
+        <dxc:ChartControl x:Name="chartControl1" Grid.Column="2" Grid.Row="1">
+            <dxc:ChartControl.CrosshairOptions>
+                <dxc:CrosshairOptions />
+            </dxc:ChartControl.CrosshairOptions>
+            <dxc:ChartControl.Palette>
+                <dxc:InAFogPalette />
+            </dxc:ChartControl.Palette>
+            <dxc:ChartControl.Titles>
+                <dxc:Title Content="PROBABILITY DENSITY FUNCTION"
+                           Dock="Top"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           FontFamily="Century Gothic"
+                           FontSize="16" />
+                <dxc:Title Content="CUMULATIVE DISTRIBUTION FUNCTION"
+                           Dock="Bottom"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           FontFamily="Century Gothic"
+                           FontSize="16" />
+            </dxc:ChartControl.Titles>
+            <dxc:XYDiagram2D PaneOrientation="Vertical">
+                <dxc:XYDiagram2D.AxisX>
+                    <dxc:AxisX2D GridLinesVisible="True">
+                        <dxc:AxisX2D.VisualRange>
+                            <dxc:Range MaxValue="5" MinValue="-5" SideMarginsValue="0.2" />
+                        </dxc:AxisX2D.VisualRange>
+                        <dxc:AxisX2D.WholeRange>
+                            <dxc:Range MaxValue="5" MinValue="-5" SideMarginsValue="0.2" />
+                        </dxc:AxisX2D.WholeRange>
+                        <dxc:AxisX2D.NumericScaleOptions>
+                            <dxc:ContinuousNumericScaleOptions />
+                        </dxc:AxisX2D.NumericScaleOptions>
+                    </dxc:AxisX2D>
+                </dxc:XYDiagram2D.AxisX>
+                <dxc:XYDiagram2D.Panes>
+                    <dxc:Pane x:Name="pane0" />
+                </dxc:XYDiagram2D.Panes>
+                <dxc:LineScatterSeries2D DisplayName="PDF" ArgumentScaleType="Numerical" CrosshairLabelPattern="X={A:0.0} Y={V:0.00e+00}" />
+                <dxc:LineScatterSeries2D DisplayName="CDF"
+                                         ArgumentScaleType="Numerical"
+                                         Pane="{Binding ElementName=pane0}"
+                                         CrosshairLabelPattern="X={A:0.0} Y={V:0.00e+00}" />
+            </dxc:XYDiagram2D>
+        </dxc:ChartControl>
+        <Grid Grid.Row="0" Grid.ColumnSpan="3">
+            <Label Content="Mean:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0" />
+            <dxe:TrackBarEdit x:Name="trbMean"
+                              HorizontalAlignment="Left"
+                              Margin="52,3,0,3"
+                              VerticalAlignment="Center"
+                              Width="166"
+                              Minimum="-5"
+                              Maximum="5"
+                              LargeStep="1"
+                              EditValueChanged="trbMean_EditValueChanged" />
+            <Label Content="Standard deviation:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="258,0,0,0" />
+            <dxe:TrackBarEdit x:Name="trbStdDev"
+                              HorizontalAlignment="Left"
+                              Margin="395,3,0,3"
+                              VerticalAlignment="Center"
+                              Width="166"
+                              Minimum="10"
+                              Value="55"
+                              EditValueChanged="trbStdDev_EditValueChanged"
+                              TickFrequency="15" />
+        </Grid>
+    </Grid>
+</local:SpreadsheetDemoModule>

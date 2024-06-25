@@ -1,0 +1,71 @@
+﻿<local:PropertyGridDemoModule x:Class="PropertyGridDemo.CollectionEditingModule"
+                              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              xmlns:local="clr-namespace:PropertyGridDemo"
+                              xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+                              xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid">
+    <local:PropertyGridDemoModule.Resources>
+        <local:VisualItemsSelector x:Key="itemsSelector" />
+        <local:GetNameConverter x:Key="getNameConverter" />
+        <local:VisualizerItemInitializer x:Key="itemInitializer" />
+    </local:PropertyGridDemoModule.Resources>
+    <Grid Margin="12">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="12" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="12" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <local:SelectedElementVisualizer Grid.Column="0"
+                                         VerticalAlignment="Center"
+                                         SelectedElement="{Binding Path=SelectedObject, ElementName=pGrid, UpdateSourceTrigger=PropertyChanged}">
+            <local:VisualizerPanel Loaded="OnVisualizerPanelLoaded" MinWidth="100" MinHeight="50" x:Name="root" Changed="OnVisualizerPanelChanged">
+                <Button HorizontalAlignment="Center" Content="Button" Margin="5" />
+                <TextBox HorizontalAlignment="Center" Margin="5">Text Editor</TextBox>
+                <CheckBox HorizontalAlignment="Center" Margin="5">CheckBox</CheckBox>
+            </local:VisualizerPanel>
+        </local:SelectedElementVisualizer>
+        <dxg:GridControl x:Name="grid" Grid.Column="2" AutoExpandAllGroups="True">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn Binding="{Binding Path=RowData.Row, Converter={StaticResource getNameConverter}}" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TreeListView x:Name="view"
+                                  ChildNodesSelector="{StaticResource itemsSelector}"
+                                  TreeDerivationMode="ChildNodesSelector"
+                                  ShowColumnHeaders="False"
+                                  AutoWidth="True"
+                                  NavigationStyle="Row"
+                                  AutoExpandAllNodes="True"
+                                  ShowIndicator="False" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+        <dxprg:PropertyGridControl Grid.Column="4"
+                                   x:Name="pGrid"
+                                   SelectedObject="{Binding Path=CurrentItem, ElementName=grid}"
+                                   ShowProperties="WithPropertyDefinitions"
+                                   CustomExpand="pGrid_CustomExpand"
+                                   CollectionButtonsVisibility="pGrid_CollectionButtonsVisibility"
+                                   CollectionButtonClick="pGrid_CollectionButtonClick"
+                                   ExpandCategoriesWhenSelectedObjectChanged="True">
+            <dxprg:PropertyGridControl.PropertyDefinitions>
+                <dxprg:PropertyDefinition Path="Width" />
+                <dxprg:PropertyDefinition Path="Height" />
+                <dxprg:PropertyDefinition Path="HorizontalAlignment" />
+                <dxprg:PropertyDefinition Path="VerticalAlignment" />
+                <dxprg:CollectionDefinition Type="{x:Type UIElementCollection}" Path="Children" NewItemInitializer="{StaticResource itemInitializer}">
+                    <dxprg:PropertyDefinition Path="*" InsertDefinitionsFrom="{dxprg:RootPropertyDefinition}" />
+                    <dxprg:PropertyDefinition Path="*.Text" />
+                    <dxprg:PropertyDefinition Path="*.IsChecked" />
+                    <dxprg:PropertyDefinition Path="*.Content" />
+                    <dxprg:PropertyDefinition Path="*.BorderBrush" />
+                    <dxprg:PropertyDefinition Path="*.BorderThickness" />
+                    <dxprg:PropertyDefinition Path="*.Foreground" />
+                    <dxprg:PropertyDefinition Path="*.HorizontalContentAlignment" />
+                    <dxprg:PropertyDefinition Path="*.VerticalContentAlignment" />
+                </dxprg:CollectionDefinition>
+            </dxprg:PropertyGridControl.PropertyDefinitions>
+        </dxprg:PropertyGridControl>
+    </Grid>
+</local:PropertyGridDemoModule>

@@ -1,0 +1,120 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.SearchLookUpEditModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:local="clr-namespace:EditorsDemo"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                         Height="300"
+                         Width="300">
+    <local:EditorsDemoModule.Resources>
+        <local:CollectionViewViewModel x:Key="viewModel" />
+        <ControlTemplate x:Key="addNewRecordTemplate">
+            <StackPanel Margin="8" MinWidth="200">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="First Name:" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="0,0,6,4" />
+                    <dxe:TextEdit x:Name="textFirstName"
+                                  Grid.Row="1"
+                                  Grid.Column="1"
+                                  EditValue="{Binding Path=FirstName, Mode=TwoWay}"
+                                  Margin="0,0,0,4"
+                                  Validate="Validate" />
+                    <TextBlock Text="Last Name:" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Margin="0,0,6,4" />
+                    <dxe:TextEdit x:Name="textLastName"
+                                  Grid.Row="2"
+                                  Grid.Column="1"
+                                  EditValue="{Binding Path=LastName, Mode=TwoWay}"
+                                  Margin="0,0,0,4"
+                                  Validate="Validate" />
+                    <TextBlock Text="Job Title:" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Margin="0,0,6,4" />
+                    <dxe:TextEdit x:Name="textJobTitle"
+                                  Grid.Row="3"
+                                  Grid.Column="1"
+                                  EditValue="{Binding Path=JobTitle, Mode=TwoWay}"
+                                  Margin="0,0,0,4"
+                                  Validate="Validate" />
+                    <TextBlock Text="Birth Date:" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" Margin="0,0,6,4" />
+                    <dxe:DateEdit x:Name="textBirthDate"
+                                  Grid.Row="4"
+                                  Grid.Column="1"
+                                  EditValue="{Binding Path=BirthDate, Mode=TwoWay}"
+                                  Margin="0,0,0,4"
+                                  Validate="Validate" />
+                </Grid>
+            </StackPanel>
+        </ControlTemplate>
+        <ControlTemplate x:Key="popupContentTemplate">
+            <dxg:GridControl x:Name="PART_GridControl" AutoExpandAllGroups="True">
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn FieldName="JobTitle" />
+                    <dxg:GridColumn FieldName="FirstName" />
+                    <dxg:GridColumn FieldName="LastName" />
+                    <dxg:GridColumn FieldName="BirthDate" />
+                    <dxg:GridColumn FieldName="ImageData" Width="60" FixedWidth="True">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:ImageEditSettings ShowMenu="True" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.View>
+                    <dxg:TableView Name="View"
+                                   ShowGroupedColumns="True"
+                                   AutoWidth="True"
+                                   AllowPerPixelScrolling="True"
+                                   ScrollAnimationDuration="0"
+                                   ShowAutoFilterRow="True"
+                                   ShowTotalSummary="True"
+                                   IsSynchronizedWithCurrentItem="False" />
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+        </ControlTemplate>
+    </local:EditorsDemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <local:SearchLookUpEditOptions Margin="12,0,12,12" x:Name="options" MinWidth="210" />
+        </ScrollViewer>
+        <Grid Margin="48,40,48,48">
+            <GroupBox Header="Search Lookup Editor" VerticalAlignment="Top" HorizontalAlignment="Center" Width="300">
+                <dxg:LookUpEdit Name="searchLookUpEdit"
+                                HorizontalAlignment="Stretch"
+                                PopupHeight="500"
+                                PopupWidth="750"
+                                PopupMinHeight="100"
+                                PopupMinWidth="100"
+                                IsPopupAutoWidth="False"
+                                FilterCondition="StartsWith"
+                                FindButtonPlacement="Popup"
+                                NullValueButtonPlacement="Popup"
+                                AddNewButtonPlacement="Popup"
+                                FindMode="Always"
+                                ShowSizeGrip="True"
+                                PopupContentTemplate="{StaticResource popupContentTemplate}"
+                                ItemsSource="{Binding Path=CollectionView, Source={StaticResource viewModel}}"
+                                AutoPopulateColumns="False"
+                                DisplayMember="LastName"
+                                ValueMember="Id">
+                    <dxg:LookUpEdit.StyleSettings>
+                        <dxg:SearchLookUpEditStyleSettings />
+                    </dxg:LookUpEdit.StyleSettings>
+                </dxg:LookUpEdit>
+            </GroupBox>
+        </Grid>
+    </DockPanel>
+</local:EditorsDemoModule>

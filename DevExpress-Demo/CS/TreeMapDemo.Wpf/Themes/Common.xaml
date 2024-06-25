@@ -1,0 +1,114 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxtmt="http://schemas.devexpress.com/winfx/2008/xaml/treemap/themekeys"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxtm="http://schemas.devexpress.com/winfx/2008/xaml/treemap">
+    <Style
+        x:Key="toolTipTextBlockStyle"
+        TargetType="TextBlock">
+        <Setter
+            Property="Foreground"
+            Value="{dxi:ThemeResource {dxtmt:TreeMapBrushesThemeKeyExtension ResourceKey=ToolTipForeground}}" />
+    </Style>
+    <Style x:Key="title" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Margin" Value="0,8,0,0" />
+        <Setter Property="FontFamily" Value="Tahoma" />
+        <Setter Property="DockPanel.Dock" Value="Top" />
+    </Style>
+    <Style
+        x:Key="toolTipItemsControlStyle"
+        TargetType="ItemsControl">
+        <Setter
+            Property="Foreground"
+            Value="{dxi:ThemeResource {dxtmt:TreeMapBrushesThemeKeyExtension ResourceKey=ToolTipForeground}}" />
+    </Style>
+    <Style
+        x:Key="toolTipBorderStyle"
+        TargetType="Border">
+        <Setter
+            Property="Background"
+            Value="{dxi:ThemeResource {dxtmt:TreeMapBrushesThemeKeyExtension ResourceKey=ToolTipForeground}}" />
+    </Style>
+    <Style
+        TargetType="dxtm:SunburstControl">
+        <Setter
+            Property="Margin"
+            Value="20" />
+    </Style>
+
+
+    <Style
+        TargetType="dxe:ComboBoxEdit">
+        <Setter
+            Property="IsTextEditable"
+            Value="False" />
+    </Style>
+
+    <Style
+        TargetType="dxe:ListBoxEdit">
+        <Setter
+            Property="ShowBorder"
+            Value="False" />
+        <Setter
+            Property="Background"
+            Value="{x:Null}" />
+        <Setter
+            Property="StyleSettings">
+            <Setter.Value>
+                <dxe:RadioListBoxEditStyleSettings />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style
+        TargetType="GroupBox">
+        <Setter
+            Property="Margin"
+            Value="0,0,0,10" />
+    </Style>
+
+
+
+    <Style
+        TargetType="ScrollViewer"
+        x:Key="optionsScrollViewerStyle">
+        <Setter
+            Property="HorizontalScrollBarVisibility"
+            Value="Disabled" />
+        <Setter
+            Property="VerticalScrollBarVisibility"
+            Value="Auto" />
+        <Setter
+            Property="DockPanel.Dock"
+            Value="Right" />
+        <Setter
+            Property="dx:ScrollBarExtensions.ScrollBarMode"
+            Value="TouchOverlap" />
+        <Setter
+            Property="Focusable"
+            Value="False" />
+    </Style>
+
+    <Style
+        TargetType="StackPanel"
+        x:Key="optionsRootStackPanelStyle">
+        <Setter
+            Property="Margin"
+            Value="12,8,12,12" />
+        <Setter
+            Property="MinWidth"
+            Value="210" />
+    </Style>
+
+    <Thickness
+        x:Key="controlUnderTextMargin"
+        Top="1" />
+
+    <Thickness
+        x:Key="controlGroupMargin"
+        Top="10" />
+</ResourceDictionary>

@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="ProductsDemo.Modules.PhotoGallery"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+                 xmlns:dxmcn="clr-namespace:DevExpress.Map.Native;assembly=DevExpress.Map.v22.2.Core"
+                 xmlns:demo="clr-namespace:ProductsDemo">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.ProductsDemo.Wpf;component/Themes/generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="citySmallIconTemplate">
+                <Image Source="/DevExpress.ProductsDemo.Wpf;component/Images/PhotoGallery/CitySmallIcon.png" Stretch="Uniform" Height="12" Width="12">
+                    <Image.RenderTransform>
+                        <TranslateTransform X="-6" Y="-6"/>
+                    </Image.RenderTransform>
+                </Image>
+            </DataTemplate>
+            <demo:ViewTypeToBoolConverter x:Key="viewTypeToBoolConverter"/>
+            <demo:ViewTypeToVisibilityConverter x:Key="viewTypeToVisibilityConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid x:Name="LayoutRoot">
+            <dxm:MapControl x:Name="map"
+                            Background="#FF2D2D2D"
+                            FlowDirection="LeftToRight"
+                            IsManipulationEnabled="True"
+                            ZoomLevel="{Binding ZoomLevel, Mode=TwoWay}"
+                            CenterPoint="{Binding CenterPoint, Mode=TwoWay}"
+                            MinZoomLevel="{Binding MinZoomLevel, Mode=TwoWay}"
+                            MaxZoomLevel="{Binding MaxZoomLevel, Mode=TwoWay}"
+                            SelectionMode="Single">
+                <dxm:MapControl.MiniMap>
+                    <dxm:MiniMap Width="256" Height="256" Alignment="TopLeft"
+                                     Visibility="{Binding Path=ViewType, Converter={StaticResource viewTypeToVisibilityConverter}, ConverterParameter={x:Static demo:PhotoGalleryViewType.Map}}">
+                        <dxm:MiniMap.Behavior>
+                            <dxm:FixedMiniMapBehavior ZoomLevel="0.5"/>
+                        </dxm:MiniMap.Behavior>
+                        <dxm:MiniMapImageTilesLayer>
+                            <dxm:BingMapDataProvider Kind="Area" BingKey="{x:Static dxmcn:DXBingKeyVerifier.BingKeyWpfProductsDemo}"/>
+                        </dxm:MiniMapImageTilesLayer>
+                        <dxm:MiniMapVectorLayer>
+                            <dxm:ListSourceDataAdapter DataSource="{Binding CitySmallIcons}">
+                                <dxm:ListSourceDataAdapter.Mappings>
+                                    <dxm:MapItemMappingInfo Latitude="Location.Latitude" Longitude="Location.Longitude"/>
+                                </dxm:ListSourceDataAdapter.Mappings>
+                            </dxm:ListSourceDataAdapter>
+                        </dxm:MiniMapVectorLayer>
+                    </dxm:MiniMap>
+                </dxm:MapControl.MiniMap>
+                <dxm:MapControl.ZoomTrackbarOptions>
+                    <dxm:ZoomTrackbarOptions Visible="False"/>
+                </dxm:MapControl.ZoomTrackbarOptions>
+                <dxm:MapControl.ScrollButtonsOptions>
+                    <dxm:ScrollButtonsOptions Visible="False"/>
+                </dxm:MapControl.ScrollButtonsOptions>
+                <dxm:ImageLayer x:Name="tileLayer">
+                    <dxm:BingMapDataProvider BingKey="{x:Static dxmcn:DXBingKeyVerifier.BingKeyWpfProductsDemo}" Kind="Area"/>
+                </dxm:ImageLayer>
+                <dxm:VectorLayer>
+                    <dxm:VectorLayer.Data>
+                        <dxm:ListSourceDataAdapter DataSource="{Binding Cities}"/>
+                    </dxm:VectorLayer.Data>
+                </dxm:VectorLayer>
+                <dxm:VectorLayer>
+                    <dxm:VectorLayer.Data>
+                        <dxm:MapItemStorage>
+                            <dxm:MapCustomElement x:Name="placePointer" Location="{Binding Content.SelectedPlace.Location, RelativeSource={RelativeSource Self}}" >
+                                <dxm:MapCustomElement.ContentTemplate>
+                                    <DataTemplate>
+                                        <demo:LabelControl>
+                                            <demo:LabelControl.Visible>
+                                                <Binding Converter="{StaticResource viewTypeToBoolConverter}" Path="ViewType">
+                                                    <Binding.ConverterParameter>
+                                                        <demo:PhotoGalleryViewType>Detail</demo:PhotoGalleryViewType>
+                                                    </Binding.ConverterParameter>
+                                                </Binding>
+                                            </demo:LabelControl.Visible>
+                                        </demo:LabelControl>
+                                    </DataTemplate>
+                                </dxm:MapCustomElement.ContentTemplate>
+                            </dxm:MapCustomElement>
+                        </dxm:MapItemStorage>
+                    </dxm:VectorLayer.Data>
+                </dxm:VectorLayer>
+            </dxm:MapControl>
+
+            <demo:PhotoGalleryControl x:Name="photoGallery" AnchorPoint="{Binding CityPoint}"
+                                       ItemsSource="{Binding Path=SelectedCity.Places}"
+                                           Title="{Binding Path=SelectedCity.Name}" MouseLeftButtonUp="photoGallery_MouseLeftButtonUp">
+                <demo:PhotoGalleryControl.Visible>
+                    <Binding Path="ViewType" Converter="{StaticResource viewTypeToBoolConverter}" Mode="TwoWay">
+                        <Binding.ConverterParameter>
+                            <demo:PhotoGalleryViewType>Gallery</demo:PhotoGalleryViewType>
+                        </Binding.ConverterParameter>
+                    </Binding>
+                </demo:PhotoGalleryControl.Visible>
+                <demo:PhotoGalleryControl.ItemTemplate>
+                    <DataTemplate>
+                        <demo:PhotoGalleryItemControl Margin="15" Click="GalleryItemClick"/>
+                    </DataTemplate>
+                </demo:PhotoGalleryControl.ItemTemplate>
+            </demo:PhotoGalleryControl>
+            <demo:PlaceInfoControl x:Name="placeControl" Margin="10,10,10,80" HorizontalAlignment="Right"
+                                    PlaceInfo="{Binding SelectedPlace}" ShowNextPlace="placeControl_ShowNextSight" ShowPrevPlace="placeControl_ShowPreviousSight">
+                <demo:PlaceInfoControl.Visible>
+                    <Binding Path="ViewType" Converter="{StaticResource viewTypeToBoolConverter}">
+                        <Binding.ConverterParameter>
+                            <demo:PhotoGalleryViewType>Detail</demo:PhotoGalleryViewType>
+                        </Binding.ConverterParameter>
+                    </Binding>
+                </demo:PlaceInfoControl.Visible>
+            </demo:PlaceInfoControl>
+            <StackPanel HorizontalAlignment="Left" Margin="15" Orientation="Horizontal" VerticalAlignment="Top">
+                <demo:PhotoGalleryButton x:Name="backButton" Click="OnBackClick">
+                    <demo:PhotoGalleryButton.Visible>
+                        <Binding Path="ViewType" Converter="{StaticResource viewTypeToBoolConverter}">
+                            <Binding.ConverterParameter>
+                                <demo:PhotoGalleryViewType>Detail</demo:PhotoGalleryViewType>
+                            </Binding.ConverterParameter>
+                        </Binding>
+                    </demo:PhotoGalleryButton.Visible>
+                    <Image Source="/DevExpress.ProductsDemo.Wpf;component/Images/PhotoGallery/BackButton.png" Stretch="None"/>
+                </demo:PhotoGalleryButton>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

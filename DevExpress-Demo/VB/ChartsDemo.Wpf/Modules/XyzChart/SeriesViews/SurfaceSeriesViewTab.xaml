@@ -1,0 +1,157 @@
+﻿<local:TabItemModule
+    x:Class="ChartsDemo.SurfaceSeriesViewTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:ChartsDemo"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800">
+    <!--#region Resources-->
+    <local:TabItemModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:TabItemModule.Resources>
+    <!--#endregion-->
+
+    <!--#region Options-->
+    <local:TabItemModule.Options>
+        <StackPanel
+            Style="{StaticResource optionsRootStackPanelStyle}">
+            <GroupBox
+                Header="Number of Surface-defining Points">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Text="100"
+                            HorizontalAlignment="Left" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="2700"
+                            HorizontalAlignment="Right" />
+                    </Grid>
+                    <dxe:TrackBarEdit
+                        Name="slMaxDrawingPoints"
+                        Value="1400"
+                        Minimum="100"
+                        Maximum="2700"
+                        SmallStep="50"
+                        LargeStep="100"
+                        TickFrequency="100"
+                        TickPlacement="TopLeft" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox
+                Margin="0,5,0,0"
+                Header="Visualization Mode:">
+                <dxe:ListBoxEdit
+                    Name="lbeSurfaceVisualizationMode"
+                    ItemsSource="{dxe:EnumItemsSource EnumType=dxc:SurfaceVisualizationMode}"
+                    SelectedIndex="0">
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+        </StackPanel>
+    </local:TabItemModule.Options>
+    <!--#endregion-->
+
+    <DockPanel>
+
+        <!--#region ChartsRibbon-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}" />
+        <!--#endregion-->
+
+        <dxc:Chart3DControl
+            x:Name="chart"
+            AspectRatio="0 0 0">
+            <dxc:Series3DStorage>
+                <dxc:Series3D
+                    DisplayName="Function">
+                    <dxc:SeriesPoint3DDataSourceAdapter
+                        XArgumentDataMember="X"
+                        YArgumentDataMember="Y"
+                        ValueDataMember="Z"
+                        DataSource="{DXBinding '$local:SurfaceDataGenerator.Generate()'}" />
+                    <dxc:Series3D.View>
+                        <dxc:SurfaceSeriesView
+                            MarkerVisible="True"
+                            MarkerSize="5.5"
+                            VisualizationMode="{Binding ElementName=lbeSurfaceVisualizationMode, Path=EditValue}"
+                            MaxDrawingPointCount="{Binding ElementName=slMaxDrawingPoints, Path=Value}">
+                            <dxc:SurfaceSeriesView.FillStyle>
+                                <dxc:GradientFillStyle
+                                    LegendTextPattern="{}{V:F2}">
+                                    <!--#region ColorStops-->
+                                    <dxc:GradientFillStyle.ColorStops>
+                                        <dxc:ColorStop
+                                            Offset="0%" />
+                                        <dxc:ColorStop
+                                            Offset="25%" />
+                                        <dxc:ColorStop
+                                            Offset="50%" />
+                                        <dxc:ColorStop
+                                            Offset="75%" />
+                                        <dxc:ColorStop
+                                            Offset="100%" />
+                                    </dxc:GradientFillStyle.ColorStops>
+                                    <!--#endregion-->
+                                </dxc:GradientFillStyle>
+                            </dxc:SurfaceSeriesView.FillStyle>
+                        </dxc:SurfaceSeriesView>
+                    </dxc:Series3D.View>
+                </dxc:Series3D>
+            </dxc:Series3DStorage>
+            <!--#region Legends-->
+            <dxc:Chart3DControl.Legends>
+                <dxc:Legend
+                    Visible="True"
+                    HorizontalPosition="Right"
+                    VerticalPosition="Top" />
+            </dxc:Chart3DControl.Legends>
+            <!--#endregion-->
+            <!--#region Axes-->
+            <dxc:Chart3DControl.XAxis>
+                <dxc:XAxis3D>
+                    <dxc:XAxis3D.CrosshairAxisLabelOptions>
+                        <dxc:CrosshairAxisLabelOptions
+                            Pattern="{}{V:F3}" />
+                    </dxc:XAxis3D.CrosshairAxisLabelOptions>
+                </dxc:XAxis3D>
+            </dxc:Chart3DControl.XAxis>
+            <dxc:Chart3DControl.YAxis>
+                <dxc:YAxis3D>
+                    <dxc:YAxis3D.CrosshairAxisLabelOptions>
+                        <dxc:CrosshairAxisLabelOptions
+                            Pattern="{}{V:F3}" />
+                    </dxc:YAxis3D.CrosshairAxisLabelOptions>
+                </dxc:YAxis3D>
+            </dxc:Chart3DControl.YAxis>
+            <dxc:Chart3DControl.ZAxis>
+                <dxc:ZAxis3D>
+                    <dxc:ZAxis3D.CrosshairAxisLabelOptions>
+                        <dxc:CrosshairAxisLabelOptions
+                            Pattern="{}{V:F3}" />
+                    </dxc:ZAxis3D.CrosshairAxisLabelOptions>
+                </dxc:ZAxis3D>
+            </dxc:Chart3DControl.ZAxis>
+            <!--#endregion-->
+        </dxc:Chart3DControl>
+
+    </DockPanel>
+</local:TabItemModule>

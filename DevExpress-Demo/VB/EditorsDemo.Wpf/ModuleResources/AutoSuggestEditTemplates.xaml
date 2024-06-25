@@ -1,0 +1,49 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                    xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase">
+    <dxdb:NWindDataLoader x:Key="NWindDataLoader" />
+    <dxe:BytesToImageSourceConverter x:Key="imageConverter" />
+    <ControlTemplate x:Key="displayTemplate">
+        <Image x:Name="PART_Editor" Margin="1" Width="24"
+               Source="{Binding Path=SelectedItem.Icon25, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource imageConverter}}" />
+    </ControlTemplate>
+    <ControlTemplate x:Key="gridTemplate">
+        <dxg:GridControl
+            x:Name="PART_Content"
+            ShowBorder="False"
+            ItemsSource="{Binding Path=(dxe:BaseEdit.OwnerEdit).ItemsSource, RelativeSource={RelativeSource TemplatedParent}}"
+            AllowInitiallyFocusedRow="False">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="CategoryID" Header="Category" HeaderToolTip="Category" MinWidth="36" Width="36" AllowResizing="False"
+                                DisplayTemplate="{StaticResource displayTemplate}">
+                    <dxg:GridColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text=" " />
+                        </DataTemplate>
+                    </dxg:GridColumn.HeaderTemplate>
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings
+                            IsTextEditable="False"
+                            ValueMember="CategoryID"
+                            DisplayMember="CategoryName"
+                            ItemsSource="{Binding Path=Categories, Source={StaticResource NWindDataLoader}}" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="ProductName" Header="Product" Width="2*" />
+                <dxg:GridColumn FieldName="QuantityPerUnit" Header="Quantity" Width="*" />
+                <dxg:GridColumn FieldName="UnitPrice" Header="Unit Price" AutoFilterCondition="Equals" Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="c" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Discontinued" Width="40" AllowResizing="False" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView Name="view" HighlightItemOnHover="True" ShowGroupPanel="False" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </ControlTemplate>
+
+</ResourceDictionary>

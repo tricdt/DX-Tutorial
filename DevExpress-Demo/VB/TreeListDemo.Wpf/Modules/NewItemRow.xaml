@@ -1,0 +1,85 @@
+﻿<local:TreeListDemoModule x:Class="TreeListDemo.NewItemRow"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:local="clr-namespace:TreeListDemo"
+                          mc:Ignorable="d"
+                          d:DesignHeight="400"
+                          d:DesignWidth="800">
+    <local:TreeListDemoModule.Resources>
+        <local:EmployeedTasks x:Key="employeeTasks" />
+        <local:EmployeeTaskImageSelector x:Key="taskImageSelector" />
+    </local:TreeListDemoModule.Resources>
+    <DockPanel>
+        <local:TreeListDemoRibbon DockPanel.Dock="Top" ExportTreeList="{x:Reference treeList}" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,5,12,12" MinWidth="210">
+                <GroupBox Header="New Item Row Position">
+                    <dxe:ListBoxEdit ShowBorder="False"
+                                     SelectedItem="{Binding ElementName=view, Path=NewItemRowPosition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     SelectedIndexChanged="{DXEvent Handler='@ElementName(view).FocusedRowHandle = $dxg:TreeListControl.NewItemRowHandle'}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxg:NewItemRowPosition>Top</dxg:NewItemRowPosition>
+                        <dxg:NewItemRowPosition>Bottom</dxg:NewItemRowPosition>
+                        <dxg:NewItemRowPosition>None</dxg:NewItemRowPosition>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+
+        <dxg:TreeListControl x:Name="treeList"
+                             ItemsSource="{Binding Path=EditableDataSource, Source={StaticResource employeeTasks}}">
+            <dxg:TreeListControl.Columns>
+                <dxg:TreeListColumn FieldName="Name" Header="Task" Width="*" />
+                <dxg:TreeListColumn FieldName="Employee" Header="Assignee" Width="150">
+                    <dxg:TreeListColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{Binding Path=EmployeeNames, Source={StaticResource employeeTasks}}" AutoComplete="True"/>
+                    </dxg:TreeListColumn.EditSettings>
+                </dxg:TreeListColumn>
+                <dxg:TreeListColumn FieldName="Status" Header="Progress" FixedWidth="True" Width="100">
+                    <dxg:TreeListColumn.CellDisplayTemplate>
+                        <DataTemplate>
+                            <dxe:ProgressBarEdit Name="PART_Editor" ContentDisplayMode="Value" IsPercent="True" DisplayFormatString="p0"/>
+                        </DataTemplate>
+                    </dxg:TreeListColumn.CellDisplayTemplate>
+                </dxg:TreeListColumn>
+                <dxg:TreeListColumn FieldName="StartDate" Width="100" />
+                <dxg:TreeListColumn FieldName="DueDate" Width="100" />
+            </dxg:TreeListControl.Columns>
+            <dxg:TreeListControl.View>
+                <dxg:TreeListView x:Name="view"
+                                  KeyFieldName="ID"
+                                  ParentFieldName="ParentID"
+                                  AllowPerPixelScrolling="True"
+                                  AutoExpandAllNodes="True"
+                                  TreeColumnFieldName="Name"
+                                  NewItemRowPosition="Bottom"
+                                  NavigationStyle="Cell"
+                                  AllowPrintColumnHeaderImage="True"
+                                  AllowDragDrop="True"
+                                  ShowDragDropHint="False"
+                                  ShowNodeImages="True"
+                                  NodeImageSelector="{StaticResource taskImageSelector}"
+                                  RowIndent="16"
+                                  UseEvenRowBackground="True"
+                                  EnterMoveNextColumn="False"
+                                  InitNewNode="OnInitNewNode">
+                    <dxg:TreeListView.FormatConditions>
+                        <dxg:FormatCondition FieldName="IsNew" PredefinedFormatName="BoldText" Expression="[IsUpdated] = true" ApplyToRow="True" />
+                    </dxg:TreeListView.FormatConditions>
+                </dxg:TreeListView>
+            </dxg:TreeListControl.View>
+        </dxg:TreeListControl>
+    </DockPanel>
+</local:TreeListDemoModule>

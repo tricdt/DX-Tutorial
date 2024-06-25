@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="MVVMDemo.TypedStylesDemo.StyleTriggersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+    <UserControl.Resources>
+        <!--#region !-->
+        <ButtonStyle x:Key="ButtonStyle" Foreground="Blue" Margin="15">
+            <ButtonStyle.Triggers>
+                <ButtonTrigger IsMouseOver="True" IsFocused="True">
+                    <ButtonStyle Foreground="Red" />
+                </ButtonTrigger>
+                <ButtonTrigger IsMouseOver="True" IsFocused="False">
+                    <ButtonStyle Foreground="Green" />
+                </ButtonTrigger>
+            </ButtonStyle.Triggers>
+        </ButtonStyle>
+        <!--#endregion-->
+    </UserControl.Resources>
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <Button Style="{StaticResource ButtonStyle}">Button</Button>
+    </dxlc:LayoutControl>
+</UserControl>

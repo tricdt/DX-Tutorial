@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="WindowsUIDemo.Modules.FrameNavigationViews.UserManagementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+             xmlns:localviews="clr-namespace:WindowsUIDemo.Modules.FrameNavigationViews"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/WindowsUIDemo;component/Themes/Common.xaml" />
+    </UserControl.Resources>
+    <Grid>
+        <dxwui:PageAdornerControl Header="User Management">
+            <dxwui:PageAdornerControl.HeaderTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <ContentPresenter Content="{Binding}" />
+                        <localviews:NavigatorView HorizontalAlignment="Right" Grid.Column="1" />
+                    </Grid>
+                </DataTemplate>
+            </dxwui:PageAdornerControl.HeaderTemplate>
+            <Border Background="#FF00ABDC">
+                <StackPanel VerticalAlignment="Center">
+                    <dx:DXImage Source="/WindowsUIDemo;component/Images/UserManagment.svg" Style="{StaticResource imageView}" />
+                    <TextBlock Style="{StaticResource viewText}"/>
+                </StackPanel>
+            </Border>
+        </dxwui:PageAdornerControl>
+    </Grid>
+</UserControl>

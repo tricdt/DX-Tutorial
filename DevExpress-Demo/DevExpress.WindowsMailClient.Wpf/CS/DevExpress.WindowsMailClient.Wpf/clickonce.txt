@@ -1,0 +1,13 @@
+DevExpress.Office.v{DXVersion}.Core
+DevExpress.RichEdit.v{DXVersion}.Core
+DevExpress.Utils.v{DXVersion}
+DevExpress.Xpf.RichEdit.v{DXVersion}
+DevExpress.Xpf.Scheduling.v{DXVersion}
+DevExpress.XtraScheduler.v{DXVersion}.Core
+DevExpress.XtraScheduler.v{DXVersion}.Core.Desktop
+DevExpress.SpellChecker.v{DXVersion}.Core
+DevExpress.Xpf.SpellChecker.v{DXVersion}
+DevExpress.XtraRichEdit.v{DXVersion}
+DevExpress.Docs.v{DXVersion}
+DevExpress.Xpf.Printing.v{DXVersion}
+DevExpress.DevAV.v{DXVersion}.Data

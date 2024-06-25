@@ -1,0 +1,103 @@
+﻿<local:GaugesDemoModule x:Class="GaugesDemo.LinearModels"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
+                        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                        xmlns:local="clr-namespace:GaugesDemo"
+                        mc:Ignorable="d"
+                        d:DesignHeight="557"
+                        d:DesignWidth="2643"
+                        Loaded="{DXEvent Handler='Start()'}"
+                        Unloaded="{DXEvent Handler='Stop()'}">
+    <local:GaugesDemoModule.DataContext>
+        <local:GaugeRandomDataGenerator MaxValue="100" UpdateInterval="1000"/>
+    </local:GaugesDemoModule.DataContext>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <GroupBox Header="Model" Margin="12,5,12,12" VerticalAlignment="Top" MinWidth="210">
+                <dxe:ListBoxEdit Name="lbModel"
+                                 Background="{x:Null}"
+                                 ShowBorder="False"
+                                 SelectedIndex="0"
+                                 ItemsSource="{local:GaugeModelsSource PredefinedModels={x:Static dxga:LinearGaugeControl.PredefinedModels}}">
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+        </ScrollViewer>
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Width="Auto" HorizontalAlignment="Center" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <dxga:LinearGaugeControl Height="400"
+                                         MaxWidth="160"
+                                         EnableAnimation="True"
+                                         Model="{Binding ElementName=lbModel, Path=SelectedItem.Model}">
+                    <dxga:LinearScale HorizontalAlignment="Center">
+                        <dxga:LinearScale.Layers>
+                            <dxga:LinearScaleLayer />
+                            <dxga:LinearScaleLayer />
+                        </dxga:LinearScale.Layers>
+                        <dxga:LinearScale.LevelBars>
+                            <dxga:LinearScaleLevelBar Value="{Binding LevelBarValue}" />
+                        </dxga:LinearScale.LevelBars>
+                        <dxga:LinearScale.Markers>
+                            <dxga:LinearScaleMarker Value="{Binding MarkerValue}" />
+                        </dxga:LinearScale.Markers>
+                        <dxga:LinearScale.RangeBars>
+                            <dxga:LinearScaleRangeBar Value="{Binding RangeBarValue}" />
+                        </dxga:LinearScale.RangeBars>
+                        <dxga:LinearScale.Ranges>
+                            <dxga:LinearScaleRange StartValue="0%" EndValue="33%" />
+                            <dxga:LinearScaleRange StartValue="33%" EndValue="67%" />
+                            <dxga:LinearScaleRange StartValue="67%" EndValue="100%" />
+                        </dxga:LinearScale.Ranges>
+                    </dxga:LinearScale>
+                </dxga:LinearGaugeControl>
+                <dxga:LinearGaugeControl Grid.Column="1"
+                                         Margin="20,0,0,0"
+                                         Height="140"
+                                         MaxWidth="400"
+                                         EnableAnimation="True"
+                                         Model="{Binding ElementName=lbModel, Path=SelectedItem.Model}">
+                    <dxga:LinearScale LayoutMode="LeftToRight">
+                        <dxga:LinearScale.Layers>
+                            <dxga:LinearScaleLayer />
+                            <dxga:LinearScaleLayer />
+                        </dxga:LinearScale.Layers>
+                        <dxga:LinearScale.LevelBars>
+                            <dxga:LinearScaleLevelBar Value="{Binding LevelBarValue}" />
+                        </dxga:LinearScale.LevelBars>
+                        <dxga:LinearScale.Markers>
+                            <dxga:LinearScaleMarker Value="{Binding MarkerValue}" />
+                        </dxga:LinearScale.Markers>
+                        <dxga:LinearScale.RangeBars>
+                            <dxga:LinearScaleRangeBar Value="{Binding RangeBarValue}" />
+                        </dxga:LinearScale.RangeBars>
+                        <dxga:LinearScale.Ranges>
+                            <dxga:LinearScaleRange StartValue="0%" EndValue="33%" />
+                            <dxga:LinearScaleRange StartValue="33%" EndValue="67%" />
+                            <dxga:LinearScaleRange StartValue="67%" EndValue="100%" />
+                        </dxga:LinearScale.Ranges>
+                    </dxga:LinearScale>
+                </dxga:LinearGaugeControl>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</local:GaugesDemoModule>

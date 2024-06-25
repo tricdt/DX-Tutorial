@@ -1,0 +1,47 @@
+<UserControl x:Class="DevExpress.VideoRent.Wpf.MovieCategoryEditView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/CommonTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <helpers:DataSource x:Key="DataSource" />
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore" />
+            <helpers:ValidationRuleIsNotBlank x:Key="ValidationRuleIsNotBlank" Message="{helpers:ConstString ID=RuleIsNotBlankWarning}" />
+            <helpers:ValidationRuleIsUnique x:Key="NameValidationRule" Message="{helpers:ConstString ID=RuleUniqueName}" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}" DoValidateSignalSlot="{Binding DoValidateSignal}" IsValid="{Binding IsValid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <helpers:BindingInfo ElementName="resource:ElementLayoutDataStore" Property="{x:Static local:ElementLayoutDataStore.DisposeSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="NameEdit" Property="{x:Static dxe:BaseEdit.EditValueProperty}" Value="{Binding EditObject.VideoRentObject.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="FormatTabs" Property="{x:Static dx:DXTabControl.ItemsSourceProperty}" Value="{Binding Detail.CategoryPriceEdits}" />
+            <helpers:BindingInfo ElementName="resource:NameValidationRule" Property="{x:Static helpers:ValidationRuleIsUnique.ValuesProperty}" Value="{Binding AnotherCategories.List}" />
+            <helpers:ValidationInfo EditName0="NameEdit" Rule="{StaticResource ValidationRuleIsNotBlank}" />
+            <helpers:ValidationInfo EditName0="NameEdit" Rule="{StaticResource NameValidationRule}" />
+            <helpers:ElementLayoutInfo ElementName="MainLayoutControl" StoreFolder="LayoutControl:MovieCategoryEdit-MainLayoutControl" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <dxlc:LayoutControl x:Name="MainLayoutControl" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0">
+        <dxlc:LayoutItem Label="{helpers:ConstString ID=NameLabel}">
+            <dxe:TextEdit x:Name="NameEdit" />
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <dx:DXTabControl x:Name="FormatTabs" ItemHeaderTemplate="{StaticResource MovieFormatTabItemHeaderTemplate}">
+                <dx:DXTabControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentPresenter Content="{Binding View}" />
+                    </DataTemplate>
+                </dx:DXTabControl.ItemTemplate>
+            </dx:DXTabControl>
+        </dxlc:LayoutItem>
+    </dxlc:LayoutControl>
+</UserControl>

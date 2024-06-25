@@ -1,0 +1,97 @@
+﻿<demo:LayoutControlDemoModule x:Class="LayoutControlDemo.pageDashboard"
+                              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                              xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                              xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                              xmlns:demo="clr-namespace:LayoutControlDemo"
+                              mc:Ignorable="d"
+                              d:DesignHeight="710"
+                              d:DesignWidth="1000">
+    <demo:LayoutControlDemoModule.Resources>
+        <demo:ScalablePaddingConverter x:Key="ScalablePaddingConverter" />
+        <Style TargetType="dx:DXImage">
+            <Setter Property="dxb:ImageColorizer.IsEnabled" Value="True"/>
+            <Setter Property="dxb:ImageColorizer.Color" Value="#FFF8F8F8"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Width" Value="80"/>
+        </Style>
+    </demo:LayoutControlDemoModule.Resources>
+    <demo:LayoutControlDemoModule.DataContext>
+        <demo:PageDashboardViewModel />
+    </demo:LayoutControlDemoModule.DataContext>
+    <DockPanel>
+
+        <dxlc:TileLayoutControl Padding="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource ScalablePaddingConverter}}">
+            <dxlc:TileLayoutControl.Background>
+                <ImageBrush ImageSource="../Images/DashboardBackground.jpg" Stretch="UniformToFill" />
+            </dxlc:TileLayoutControl.Background>
+
+            <dxlc:Tile Size="ExtraLarge" ContentSource="{Binding Listings}" Background="#FF6CBD45" ContentChangeInterval="00:00:04.00">
+                <dxlc:Tile.ContentTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Image Source="{Binding ImageUri}" Stretch="UniformToFill" HorizontalAlignment="Center" />
+                            <Grid Background="#FF6CBD45" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                <StackPanel Margin="4">
+                                    <TextBlock FontSize="14" Text="{Binding Bedrooms, StringFormat=\{0\} Bedrooms}" />
+                                    <TextBlock FontSize="14" Text="{Binding Baths, StringFormat=\{0\} Baths}" />
+                                </StackPanel>
+                            </Grid>
+                            <Grid Background="#FF6CBD45" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                <StackPanel Margin="4">
+                                    <TextBlock FontSize="16" Text="{Binding Price, StringFormat=C0}" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </dxlc:Tile.ContentTemplate>
+            </dxlc:Tile>
+            <dxlc:Tile ContentSource="{Binding Agents}" Background="#FF666666" ContentChangeInterval="00:00:05.00">
+                <dxlc:Tile.ContentTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding FirstName}" FontSize="16" Foreground="#FFFFFFFF" />
+                                    <TextBlock Text="{Binding LastName}" FontSize="16" Foreground="#FFFFFFFF" Margin="5,0,0,0" />
+                                </StackPanel>
+                                <TextBlock Text="{Binding Phone}" Foreground="#FFFFFFFF" />
+                            </StackPanel>
+                            <Image Source="{Binding PhotoUri}" Stretch="None" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                        </Grid>
+                    </DataTemplate>
+                </dxlc:Tile.ContentTemplate>
+            </dxlc:Tile>
+            <dxlc:Tile Size="ExtraSmall" Background="#FF00ABDC" Header="User Management">
+                <dx:DXImage Source="../Images/UserManagment.svg" Width="48" Height="48"/>
+            </dxlc:Tile>
+            <dxlc:Tile Size="ExtraSmall" Background="#FF54AF0E" Header="System Information">
+                <dx:DXImage Source="../Images/System.svg" Width="48" Height="48"/>
+            </dxlc:Tile>
+            <dxlc:Tile Size="ExtraSmall" Background="#FFD4AF00" Header="Research">
+                <dx:DXImage Source="../Images/Research.svg" Width="48" Height="48"/>
+            </dxlc:Tile>
+
+            <dxlc:Tile Background="#FF6652A2" Header="Statistics" dxlc:FlowLayoutControl.IsFlowBreak="True">
+                <dx:DXImage Source="../Images/Statistics.svg"/>
+            </dxlc:Tile>
+            <dxlc:Tile Background="#FF7CA7D1" Header="Zillow" ContentChangeInterval="00:00:03.00">
+                <dxlc:Tile.ContentSource>
+                    <dx:FrameworkElements>
+                        <dx:DXImage Margin="12" Source="../Images/Home.svg"/>
+                        <TextBlock FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center">Your <Bold>Edge</Bold> in <Bold>Real Estate</Bold></TextBlock>
+                    </dx:FrameworkElements>
+                </dxlc:Tile.ContentSource>
+            </dxlc:Tile>
+            <dxlc:Tile Size="Small" Background="#FFE65E20" Header="Mortgage Rates">
+                <dx:DXImage Source="../Images/Rates.svg"/>
+            </dxlc:Tile>
+            <dxlc:Tile Size="Small" Background="#FFC3213F" Header="Loan Calculator">
+                <dx:DXImage Source="../Images/Calc.svg"/>
+            </dxlc:Tile>
+        </dxlc:TileLayoutControl>
+    </DockPanel>
+</demo:LayoutControlDemoModule>

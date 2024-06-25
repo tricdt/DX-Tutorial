@@ -1,0 +1,44 @@
+<dx:ThemedWindow x:Class="DevExpress.VideoRent.Wpf.CreateDatabaseWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    Icon="../Images/AppIcon.ico"
+    Width="400"
+    Title="{helpers:ConstString ID=CreateDatabase}" WindowStartupLocation="CenterScreen" SizeToContent="Height" ResizeMode="CanMinimize">
+
+    <dx:ThemedWindow.Resources>
+        <ResourceDictionary>
+            <Storyboard x:Key="EnlargementStoryBoard" Storyboard.TargetName="Credentials">
+                <DoubleAnimation Duration="00:00:00.2" Storyboard.TargetProperty="(FrameworkElement.Height)" >
+                    <DoubleAnimation.EasingFunction>
+                        <ExponentialEase EasingMode="EaseIn" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+        </ResourceDictionary>
+    </dx:ThemedWindow.Resources>
+
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <dxlc:LayoutControl Orientation="Vertical" x:Name="MainLayoutControl" Padding="0">
+            <dxlc:LayoutItem>
+                <helpers:NoteControl Text="{helpers:ConstString ID=DatabaseCreating}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutGroup Orientation="Vertical" ItemLabelsAlignment="Local">
+                <dxlc:LayoutItem Label="{helpers:ConstString ID=CreatingDatabaseLabel}">
+                    <helpers:VisualBackgroundWorker x:Name="CreateDbWorker" />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="{helpers:ConstString ID=GenerateRentsHistoryLabel}">
+                    <helpers:VisualBackgroundWorker x:Name="GenerateRentsHistoryWorker" />
+                </dxlc:LayoutItem>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutItem VerticalAlignment="Stretch" />
+        </dxlc:LayoutControl>
+    </Grid>
+</dx:ThemedWindow>

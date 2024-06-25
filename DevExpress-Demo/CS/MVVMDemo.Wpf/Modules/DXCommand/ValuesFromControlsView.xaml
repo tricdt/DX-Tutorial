@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="MVVMDemo.DXCommandDemo.ValuesFromControlsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.DXCommandDemo"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+    <UserControl.DataContext>
+        <local:ValuesFromControlsViewModel/>
+    </UserControl.DataContext>
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <dxlc:LayoutGroup Header="Command=&quot;{DXCommand 'Save()', CanExecute='@e(canSaveCheckBox).IsChecked'}&quot;" Orientation="Vertical" View="GroupBox">
+            <CheckBox x:Name="canSaveCheckBox" IsChecked="True" Content="Can Save"/>
+            <!--#region !-->
+            <Button Command="{DXCommand 'Save()', CanExecute='@e(canSaveCheckBox).IsChecked'}">Save</Button>
+            <!--#endregion-->
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup Header="Command=&quot;{DXCommand 'Open(@e(filNameTextEdit).Text)', CanExecute='CanOpen(@e(filNameTextEdit).Text)'}&quot;" Orientation="Vertical" View="GroupBox">
+            <dxe:TextEdit x:Name="filNameTextEdit" NullText="Enter file name"/>
+            <!--#region !-->
+            <Button Command="{DXCommand 'Open(@e(filNameTextEdit).Text)', CanExecute='CanOpen(@e(filNameTextEdit).Text)'}">Open</Button>
+            <!--#endregion-->
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</UserControl>

@@ -1,0 +1,104 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.ToggleSwitchModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:local="clr-namespace:EditorsDemo"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12" MinWidth="250">
+                <dxe:CheckEdit Content="Is Checked"
+                                   Grid.ColumnSpan="2"
+                                   Grid.Row="0"
+                                   Margin="0,0,0,6"
+                                   EditValue="{Binding Path=IsChecked, ElementName=toggleSwitch, UpdateSourceTrigger=PropertyChanged}" />
+
+                <dxe:CheckEdit Content="Is Three State"
+                                   Grid.ColumnSpan="2"
+                                   Grid.Row="1"
+                                   Margin="0,0,0,6"
+                                   EditValue="{Binding Path=IsThreeState, ElementName=toggleSwitch, UpdateSourceTrigger=PropertyChanged}" />
+
+                <dxe:CheckEdit Content="Enable Animation"
+                                   Grid.ColumnSpan="2"
+                                   Grid.Row="2"
+                                   Margin="0,0,0,6"
+                                   EditValue="{Binding Path=EnableAnimation, ElementName=toggleSwitch, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Checked State Content:" VerticalAlignment="Center" Margin="0,0,6,3" />
+                <dxe:TextEdit Grid.Column="1"
+                                  Grid.Row="3"
+                                  Margin="0,0,0,6"
+                                  Text="{Binding ElementName=toggleSwitch, Path=CheckedStateContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock Grid.Column="0" Grid.Row="4" Text="Unchecked State Content:" VerticalAlignment="Center" Margin="0,0,6,3" />
+                <dxe:TextEdit Grid.Column="1"
+                                  Grid.Row="4"
+                                  Margin="0,0,0,6"
+                                  Text="{Binding ElementName=toggleSwitch, Path=UncheckedStateContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock Grid.Column="0" Grid.Row="5" Text="Content Placement:" VerticalAlignment="Center" Margin="0,0,6,3" />
+                <dxe:ComboBoxEdit Grid.Column="1"
+                                      Grid.Row="5"
+                                      Margin="0,0,0,6"
+                                      IsTextEditable="False"
+                                      ItemsSource="{dxe:EnumItemsSource EnumType=dxe:ToggleSwitchContentPlacement}"
+                                      EditValue="{Binding ElementName=toggleSwitch, Path=ContentPlacement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Grid.Column="0" Grid.Row="6" Text="Switch Width:" VerticalAlignment="Center" Margin="0,0,6,3" />
+                <dxe:TextEdit Grid.Column="1"
+                                  Grid.Row="6"
+                                  Margin="0,0,0,6"
+                                  Mask="d"
+                                  MaskType="Numeric"
+                                  Text="{Binding ElementName=toggleSwitch, Path=ToggleSwitchWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Grid.Column="0" Grid.Row="7" Text="Switch Height:" VerticalAlignment="Center" Margin="0,0,6,3" />
+                <dxe:TextEdit Grid.Column="1"
+                                  Grid.Row="7"
+                                  Margin="0,0,0,6"
+                                  Mask="d"
+                                  MaskType="Numeric"
+                                  Text="{Binding ElementName=toggleSwitch, Path=ToggleSwitchHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+        </ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*" />
+                <RowDefinition Height="0.8*" />
+            </Grid.RowDefinitions>
+            <dxe:ToggleSwitch x:Name="toggleSwitch"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center"
+                              CheckedStateContent="On"
+                              UncheckedStateContent="Off" />
+            <GroupBox Header="Sample" Grid.Row="1" Margin="40,0,40,40">
+                <dxlc:LayoutControl TextElement.FontSize="14">
+                    <dxlc:LayoutGroup Orientation="Vertical" ItemSpace="10">
+                        <dxlc:LayoutItemLabel Content="Notifications Settings" FontSize="22" Margin="0,0,0,16" VerticalAlignment="Top" />
+                        <dxlc:LayoutItemLabel Content="Show app notifications" VerticalAlignment="Top" />
+                        <dxlc:LayoutItem Margin="0,0,0,16" VerticalAlignment="Top">
+                            <dxe:ToggleSwitch ContentPlacement="Far" HorizontalAlignment="Left" CheckedStateContent="On" UncheckedStateContent="Off" IsChecked="True" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItemLabel Content="Show notifications on the lock screen" VerticalAlignment="Top" />
+                        <dxlc:LayoutItem Margin="0,0,0,16" VerticalAlignment="Top">
+                            <dxe:ToggleSwitch ContentPlacement="Far" HorizontalAlignment="Left" CheckedStateContent="On" UncheckedStateContent="Off" IsChecked="True" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItemLabel Content="Show alarms, reminders and incoming VOIP calls on the lock screen" VerticalAlignment="Top" />
+                        <dxlc:LayoutItem Margin="0,0,0,16" VerticalAlignment="Top">
+                            <dxe:ToggleSwitch ContentPlacement="Far" HorizontalAlignment="Left" CheckedStateContent="On" UncheckedStateContent="Off" IsChecked="True" />
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItemLabel Content="Hide notifications while presenting" VerticalAlignment="Top" />
+                        <dxlc:LayoutItem VerticalAlignment="Top">
+                            <dxe:ToggleSwitch ContentPlacement="Far" HorizontalAlignment="Left" CheckedStateContent="On" UncheckedStateContent="Off" />
+                        </dxlc:LayoutItem>
+                    </dxlc:LayoutGroup>
+                </dxlc:LayoutControl>
+            </GroupBox>
+        </Grid>
+    </DockPanel>
+</local:EditorsDemoModule>

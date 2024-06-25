@@ -1,0 +1,195 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.DateEditModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:local="clr-namespace:EditorsDemo"
+                         xmlns:utils="clr-namespace:EditorsDemo.Utils"
+                         xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                         xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
+    <local:EditorsDemoModule.Resources>
+        <local:DemoDataProvider x:Key="DemoDataProvider" />
+        <utils:NullableToStringConverter x:Key="NullableToStringConverter" />
+        <DataTemplate x:Key="clipTemplate">
+            <Grid Width="7" Height="15" ToolTipService.ToolTip="{Binding}" Background="Transparent">
+                <Path Stretch="Fill"
+                      Fill="#FF000000"
+                      Data="F1 M 1222.51,786C 1220.9,786.008 1219.72,785.446 1219,784.57C 1218.27,783.699 1218.01,782.58 1218.01,781.501L 1218,771.999L 1219,771.999L 1219.01,781.501C 1219.07,783.357 1219.78,784.96 1222.51,785.001C 1225.24,784.96 1225.95,783.357 1226.01,781.501L 1226,770.502C 1225.93,768.68 1225.32,768.077 1223.5,768C 1221.68,768.077 1221.07,768.68 1221,770.502L 1221,775.502C 1221,775.996 1221.01,776.692 1221.21,777.189C 1221.44,777.682 1221.68,777.976 1222.5,778.001C 1223.32,777.976 1223.56,777.682 1223.79,777.189C 1223.99,776.692 1224,775.996 1224,775.502L 1224,773.126C 1224,772.25 1224,771.999 1224,771.999L 1225,771.999C 1225,771.999 1225,774.5 1225,775.502C 1225,776.005 1225.01,776.81 1224.71,777.562C 1224.44,778.32 1223.68,779.026 1222.5,779C 1221.32,779.026 1220.56,778.32 1220.29,777.562C 1219.99,776.81 1220,776.005 1220,775.502C 1220,774.5 1220,772.502 1220,770.502C 1220,769.424 1220.27,768.521 1220.9,767.897C 1221.52,767.275 1222.42,766.999 1223.5,767.001C 1224.58,766.999 1225.48,767.275 1226.1,767.897C 1226.73,768.521 1227,769.424 1227,770.502L 1227.01,781.501C 1227.01,782.58 1226.74,783.699 1226.02,784.57C 1225.3,785.439 1224.13,786 1222.54,786L 1222.51,786 Z " />
+            </Grid>
+        </DataTemplate>
+        <ControlTemplate x:Key="HoursActiveDisplayTemplate">
+            <Border Background="Transparent">
+                <dxe:ProgressBarEdit EditMode="InplaceInactive"
+                                     Minimum="0"
+                                     Maximum="1000"
+                                     EditValue="{Binding EditValue,  RelativeSource={RelativeSource TemplatedParent}}"
+                                     ContentDisplayMode="Value" />
+            </Border>
+        </ControlTemplate>
+    </local:EditorsDemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12" MinWidth="250">
+                <GroupBox Header="Properties">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Min value:" VerticalAlignment="Center" Margin="0,6,6,0" />
+                        <dxe:DateEdit x:Name="minDate" Grid.Row="0" Grid.Column="1" Margin="0,6,0,0" AllowNullInput="True" />
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Max value:" VerticalAlignment="Center" Margin="0,6,6,0" />
+                        <dxe:DateEdit x:Name="maxDate" Grid.Row="1" Grid.Column="1" Margin="0,6,0,0" AllowNullInput="True" />
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Null value:" VerticalAlignment="Center" Margin="0,6,6,0" />
+                        <dxe:DateEdit x:Name="nullDate" Grid.Row="2" Grid.Column="1" Margin="0,6,0,0" AllowNullInput="True" />
+
+                        <dxe:CheckEdit Grid.Row="3"
+                                       x:Name="allowNull"
+                                       IsChecked="True"
+                                       Content="Allow null input (Ctrl+0, Ctrl+Del)"
+                                       Grid.ColumnSpan="2"
+                                       Margin="0,6,0,0" />
+
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Appearance" Margin="0,12,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit Grid.ColumnSpan="2"
+                                       IsChecked="True"
+                                       x:Name="showClearButton"
+                                       Content="Show &quot;Clear&quot; button"
+                                       Margin="0,6,0,0"
+                                       Grid.Row="1" />
+                        <dxe:CheckEdit Grid.ColumnSpan="2"
+                                       IsChecked="True"
+                                       x:Name="showTodayButton"
+                                       Content="Show &quot;Today&quot;"
+                                       Margin="0,6,0,0"
+                                       Grid.Row="2" />
+                        <dxe:CheckEdit Grid.ColumnSpan="2" IsChecked="True" x:Name="showWeekNumbers" Content="Show week numbers" Margin="0,6,0,0" Grid.Row="3" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Mask" Margin="0,12,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Text="Edit mask:" VerticalAlignment="Center" Margin="0,0,6,0" />
+                        <dxe:ComboBoxEdit x:Name="dateMask" SelectedIndex="0" Grid.Column="1" IsTextEditable="False" DisplayMember="MaskName" ValueMember="MaskString" />
+                        <dxe:CheckEdit Grid.Row="1"
+                                       Grid.ColumnSpan="2"
+                                       x:Name="maskUseAsDisplayFormat"
+                                       IsChecked="True"
+                                       Content="Use mask as display format"
+                                       Margin="0,6,0,0" />
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.25*" />
+                <RowDefinition Height="0.75*" />
+            </Grid.RowDefinitions>
+            <GroupBox Header="Sent Date" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="From:" Margin="12,12,12,4" />
+                    <dxe:DateEdit x:Name="editor"
+                                  Grid.Column="1"
+                                  VerticalAlignment="Center"
+                                  Width="200"
+                                  Mask="{Binding ElementName=dateMask, Path=EditValue, Mode=OneWay}"
+                                  EditValue="{Binding FromDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                  MaskUseAsDisplayFormat="{Binding ElementName=maskUseAsDisplayFormat, Path=IsChecked, Mode=OneWay}"
+                                  ShowClearButton="{Binding ElementName=showClearButton, Path=IsChecked, Mode=OneWay}"
+                                  ShowToday="{Binding ElementName=showTodayButton, Path=IsChecked, Mode=OneWay}"
+                                  ShowWeekNumbers="{Binding ElementName=showWeekNumbers, Path=IsChecked, Mode=OneWay}"
+                                  NullValue="{Binding ElementName=nullDate, Path=EditValue, Mode=OneWay}"
+                                  MinValue="{Binding ElementName=minDate, Path=EditValue, Mode=TwoWay}"
+                                  MaxValue="{Binding ElementName=maxDate, Path=EditValue, Mode=TwoWay}"
+                                  AllowNullInput="{Binding ElementName=allowNull, Path=IsChecked, Mode=OneWay}"
+                                  AllowRoundOutOfRangeValue="true" />
+
+                    <TextBlock Text="To:" Margin="12,4,12,12" Grid.Row="1" />
+                    <dxe:DateEdit Grid.Column="1"
+                                  Grid.Row="1"
+                                  VerticalAlignment="Center"
+                                  Width="200"
+                                  Mask="{Binding ElementName=dateMask, Path=EditValue, Mode=OneWay}"
+                                  EditValue="{Binding ToDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                  MaskUseAsDisplayFormat="{Binding ElementName=maskUseAsDisplayFormat, Path=IsChecked, Mode=OneWay}"
+                                  ShowClearButton="{Binding ElementName=showClearButton, Path=IsChecked, Mode=OneWay}"
+                                  ShowToday="{Binding ElementName=showTodayButton, Path=IsChecked, Mode=OneWay}"
+                                  ShowWeekNumbers="{Binding ElementName=showWeekNumbers, Path=IsChecked, Mode=OneWay}"
+                                  NullValue="{Binding ElementName=nullDate, Path=EditValue, Mode=OneWay}"
+                                  MinValue="{Binding ElementName=minDate, Path=EditValue, Mode=TwoWay}"
+                                  MaxValue="{Binding ElementName=maxDate, Path=EditValue, Mode=TwoWay}"
+                                  AllowNullInput="{Binding ElementName=allowNull, Path=IsChecked, Mode=OneWay}"
+                                  AllowRoundOutOfRangeValue="true" />
+                </Grid>
+            </GroupBox>
+
+            <dxg:GridControl Grid.Row="1" FilterString="{Binding FilterString, Mode=TwoWay}" Margin="32,0,32,32" ItemsSource="{Binding Source}">
+                <dxg:GridControl.View>
+                    <dxg:TableView ShowTotalSummary="True" ShowGroupPanel="False" />
+                </dxg:GridControl.View>
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn x:Name="colId" FieldName="OID" Header="Id" Width="*" MinWidth="30" ReadOnly="true" />
+                    <dxg:GridColumn x:Name="colPriority" FieldName="Priority" SortMode="Value" Width="2*" MinWidth="100" />
+                    <dxg:GridColumn FieldName="From" Width="3*" />
+                    <dxg:GridColumn x:Name="colUserId" FieldName="ToId" Header="To" Width="3*">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:ComboBoxEditSettings ValueMember="Id" DisplayMember="Name" ItemsSource="{Binding Users, Source={StaticResource DemoDataProvider}}" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn FieldName="Sent" Width="3*" GroupInterval="DateRange">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:DateEditSettings DisplayFormat="d" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn x:Name="colHoursActive" FieldName="HoursActive" Width="2*" DisplayTemplate="{StaticResource HoursActiveDisplayTemplate}">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings MaskType="Numeric" Mask="d" HorizontalContentAlignment="Center" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn x:Name="colHasAttachment" FieldName="HasAttachment" Width="*" HeaderTemplate="{StaticResource clipTemplate}" />
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.GroupSummary>
+                    <dxg:GridSummaryItem FieldName="HoursActive" SummaryType="Average" />
+                    <dxg:GridSummaryItem FieldName="From" SummaryType="Count" />
+                </dxg:GridControl.GroupSummary>
+                <dxg:GridControl.TotalSummary>
+                    <dxg:GridSummaryItem FieldName="From" SummaryType="Count" />
+                    <dxg:GridSummaryItem FieldName="HoursActive" SummaryType="Average" />
+                </dxg:GridControl.TotalSummary>
+            </dxg:GridControl>
+        </Grid>
+    </DockPanel>
+</local:EditorsDemoModule>

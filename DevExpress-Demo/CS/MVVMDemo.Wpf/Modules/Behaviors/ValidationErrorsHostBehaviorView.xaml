@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="MVVMDemo.Behaviors.ValidationErrorsHostBehaviorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.Behaviors"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             DataContext="{dxmvvm:ViewModelSource Type=local:ValidationErrorsHostBehaviorViewModel}">
+    <!--#region !-->
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:ValidationErrorsHostBehavior x:Name="validationErrorsHostBehavior"/>
+    </dxmvvm:Interaction.Behaviors>
+    <!--#endregion-->
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <dxlc:LayoutItem Label="First Name:">
+            <dxe:TextEdit Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem Label="Last Name:">
+            <dxe:TextEdit Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+        </dxlc:LayoutItem>
+        <Button IsEnabled="{Binding ElementName=validationErrorsHostBehavior, Path=HasErrors, Converter={dxmvvm:BooleanNegationConverter}}"
+                Command="{Binding RegisterCommand}" Content="Register"/>
+    </dxlc:LayoutControl>
+</UserControl>

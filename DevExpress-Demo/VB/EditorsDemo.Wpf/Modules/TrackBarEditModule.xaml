@@ -1,0 +1,43 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.TrackBarEditModule"
+                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                         xmlns:local="clr-namespace:EditorsDemo"
+                         xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+    <DockPanel>
+        <Grid >
+            <dxlc:LayoutControl HorizontalAlignment="Stretch" VerticalAlignment="Center" Orientation="Vertical" MaxWidth="600">
+                <dxlc:LayoutGroup Orientation="Vertical" View="GroupBox" Header="Working modes" Margin="0,0,0,20" Padding="20">
+                    <dxlc:LayoutItem Label="Trackbar editor" AddColonToLabel="true" Margin="0,0,0,24">
+                        <dxe:TrackBarEdit Value="20" ValueToolTipPlacement="TopLeft" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Zoom trackbar editor" AddColonToLabel="true" Margin="0,0,0,24">
+                        <dxe:TrackBarEdit Value="70" ValueToolTipPlacement="TopLeft">
+                            <dxe:TrackBarEdit.StyleSettings>
+                                <dxe:TrackBarZoomStyleSettings />
+                            </dxe:TrackBarEdit.StyleSettings>
+                        </dxe:TrackBarEdit>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Range trackbar editor" AddColonToLabel="true">
+                        <dxe:TrackBarEdit SelectionStart="20" SelectionEnd="70" ValueToolTipPlacement="TopLeft">
+                            <dxe:TrackBarEdit.StyleSettings>
+                                <dxe:TrackBarRangeStyleSettings />
+                            </dxe:TrackBarEdit.StyleSettings>
+                        </dxe:TrackBarEdit>
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup HorizontalAlignment="Stretch" Orientation="Vertical" View="GroupBox" Header="Tick item display modes" Margin="0,0,0,20" Padding="20">
+                    <dxlc:LayoutItem Label="Ticks" AddColonToLabel="true" Margin="0,0,0,24">
+                        <dxe:TrackBarEdit TickItemDisplayMode="Tick" TickFrequency="10" ValueToolTipPlacement="TopLeft" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Text" AddColonToLabel="true" Margin="0,0,0,24">
+                        <dxe:TrackBarEdit TickItemDisplayMode="Text" TickFrequency="10" ValueToolTipPlacement="TopLeft" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Tick and text" AddColonToLabel="true">
+                        <dxe:TrackBarEdit TickItemDisplayMode="TickAndText" TickFrequency="10" ValueToolTipPlacement="TopLeft" />
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutControl>
+        </Grid>
+    </DockPanel>
+</local:EditorsDemoModule>

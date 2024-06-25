@@ -1,0 +1,107 @@
+﻿<local:GridDemoModule x:Class="GridDemo.Grouping"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                      xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                      xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                      xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                      xmlns:local="clr-namespace:GridDemo"
+                      xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:dxrudex="http://schemas.devexpress.com/winfx/2008/xaml/reports/userdesignerextensions"
+                      xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                      mc:Ignorable="d"
+                      d:DesignHeight="400"
+                      d:DesignWidth="800">
+    <DockPanel>
+        <local:GridDemoRibbon DockPanel.Dock="Top" ExportGrid="{x:Reference grid}" ReportService="{x:Reference rmsGrouping}" />
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <StackPanel Margin="0,8,0,0">
+                    <dxe:CheckEdit Margin="0,0,0,4"
+                                   Name="allowFixedGroupsCheckBox"
+                                   IsChecked="{Binding Path=View.AllowFixedGroups, Mode=TwoWay, Converter={dx:DefaultBooleanToNullableBooleanConverter}}"
+                                   Content="Allow Fixed Groups"
+                                   ToolTipService.ToolTip="Specifies whether the top visible group row is always displayed when scrolling through grouped data." />
+                    <dxe:CheckEdit Margin="0,0,0,4" IsChecked="{Binding Path=View.ShowGroupPanel, Mode=TwoWay}" Content="Show Group Panel" />
+                    <dxe:CheckEdit Margin="0,0,0,4" IsChecked="{Binding Path=View.ShowGroupedColumns, Mode=TwoWay}" Content="Show Grouped Columns" />
+                    <dxe:CheckEdit Margin="0,0,0,4"
+                                   IsChecked="{Binding Path=View.Grid.AutoExpandAllGroups, Mode=TwoWay}"
+                                   Content="Automatically Expand All Groups" />
+                    <dxe:CheckEdit Margin="0,0,0,4"
+                                   IsChecked="{Binding Path=View.UseAnimationWhenExpanding, Mode=TwoWay}"
+                                   Content="Use Animation When Expanding" />
+                    <dxe:CheckEdit Margin="0,0,0,0" IsChecked="{Binding Path=View.Grid.IsRecursiveExpand, Mode=TwoWay}" Content="Expand Groups Recursively" />
+                </StackPanel>
+
+                <StackPanel Margin="0,8,0,0">
+                    <Button Click="OnGroupByCountryThenCityClick" Margin="0,0,0,4">
+                        <TextBlock>Group by <Bold>Country</Bold> then <Bold>City</Bold></TextBlock>
+                    </Button>
+                    <Button Click="OnGroupByCountryCityOrderDateClick" Margin="0,0,0,4">
+                        <TextBlock>Group by <Bold>Country</Bold>, <Bold>City</Bold>, <Bold>Order Date</Bold></TextBlock>
+                    </Button>
+                    <Button Click="OnGroupByCityThenOrderDateClick" Margin="0,0,0,4">
+                        <TextBlock>Group by <Bold>City</Bold> then <Bold>Order Date</Bold></TextBlock>
+                    </Button>
+                    <Button Click="OnClearGroupingClick">
+                        <TextBlock>Clear grouping</TextBlock>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Margin="0,12,0,0">
+                    <Button Command="{Binding Commands.ExpandAllGroups, ElementName=view}" Margin="0,0,0,4">Expand All Groups</Button>
+                    <Button Command="{Binding Commands.CollapseAllGroups, ElementName=view}">Collapse All Groups</Button>
+                </StackPanel>
+
+                <local:RecentReports ReportService="{x:Reference rmsGrouping}" />
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxg:GridControl Name="grid" ItemsSource="{x:Static dxdb:NWindDataProvider.Invoices}" ShowBorder="False">
+            <!--#region Columns-->
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="Country" MinWidth="30" Width="*" />
+                <dxg:GridColumn FieldName="City" MinWidth="30" Width="*" />
+                <dxg:GridColumn FieldName="OrderDate" MinWidth="30" Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:DateEditSettings DisplayFormat="d" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="UnitPrice" MinWidth="30" Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="$0.00" MaskType="Numeric" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Region" MinWidth="30" Width="*" />
+                <dxg:GridColumn FieldName="Total"
+                                UnboundDataType="{x:Type sys:Decimal}"
+                                MinWidth="30"
+                                Width="*"
+                                UnboundExpression="([UnitPrice] * [Quantity]) * (1 - [Discount])">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:TextEditSettings DisplayFormat="$0.00" MaskType="Numeric" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <!--#endregion-->
+            <dxg:GridControl.GroupSummary>
+                <dxg:GridSummaryItem SummaryType="Count" />
+            </dxg:GridControl.GroupSummary>
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="view" NavigationStyle="Row" AllowScrollAnimation="True" AllowFixedGroups="True">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxrudex:GridReportManagerService Name="rmsGrouping" />
+                    </dxmvvm:Interaction.Behaviors>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </DockPanel>
+</local:GridDemoModule>

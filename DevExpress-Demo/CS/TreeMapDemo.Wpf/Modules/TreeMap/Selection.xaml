@@ -1,0 +1,291 @@
+﻿<local:TreeMapDemoModule
+    x:Class="TreeMapDemo.Selection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxct="http://schemas.devexpress.com/winfx/2008/xaml/charts/themekeys"
+    xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+    xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+    xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+    xmlns:dxtm="http://schemas.devexpress.com/winfx/2008/xaml/treemap"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:TreeMapDemo">
+
+    <!--#region Resources-->
+    <local:TreeMapDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/TreeMapDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:SelectedMapItemConverter
+                x:Key="selectedMapItemsConverter" />
+            <local:ChartPaletteToMapColorsConverter
+                x:Key="chartPaletteToMapColorsConverter" />
+            <local:ColorsMultiConverter
+                x:Key="colorsMultiConverter" />
+            <DoubleCollection
+                x:Key="colorizerRange">0,13</DoubleCollection>
+        </ResourceDictionary>
+    </local:TreeMapDemoModule.Resources>
+    <!--#endregion-->
+
+    <Grid>
+        <!--#region Row and Column Defenitions-->
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="3*" />
+            <RowDefinition
+                Height="2*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <!--#endregion-->
+
+        <dxtm:TreeMapControl
+            x:Name="treeMap"
+            Margin="5,4,2,5"
+            Grid.Column="0"
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Padding="10"
+            BorderThickness="0"
+            SelectionMode="Single"
+            SelectedItem="{Binding Path=SelectedCountry, Mode=TwoWay}"
+            Background="{dxi:ThemeResource {dxct:ChartBrushesThemeKey ResourceKey=ChartBackgroundBrush}}">
+
+            <dxtm:TreeMapControl.TreeMapStyle>
+                <dxtm:TreeMapStyle
+                    GroupBackground="Transparent"
+                    GroupFontSize="12" />
+            </dxtm:TreeMapControl.TreeMapStyle>
+            <dxtm:TreeMapControl.GroupHeaderContentTemplate>
+                <DataTemplate>
+                    <TextBlock
+                        Text="{Binding Label}"
+                        Foreground="{dxi:ThemeResource {dxct:ChartBrushesThemeKey ResourceKey=TitleForeground}}"
+                        FontWeight="{Binding FontWeight}"
+                        FontSize="{Binding FontSize}"
+                        TextTrimming="WordEllipsis"
+                        Margin="4" />
+                </DataTemplate>
+            </dxtm:TreeMapControl.GroupHeaderContentTemplate>
+
+            <dxtm:TreeMapControl.Colorizer>
+                <dxtm:TreeMapPaletteColorizer>
+                    <dxtm:CustomPalette>
+                        <!--#region Colors-->
+                        <Color A="170" R="97" G="150" B="211" />
+                        <Color A="170" R="234" G="127" B="56" />
+                        <Color A="170" R="252" G="195" B="25" />
+                        <Color A="170" R="76" G="107" B="194" />
+                        <Color A="170" R="111" G="174" B="73" />
+                        <Color A="170" R="48" G="91" B="143" />
+                        <Color A="170" R="155" G="76" B="26" />
+                        <Color A="170" R="150" G="117" B="10" />
+                        <Color A="170" R="46" G="66" B="119" />
+                        <Color A="170" R="68" G="105" B="47" />
+                        <Color A="170" R="127" G="171" B="220" />
+                        <Color A="170" R="238" G="153" B="92" />
+                        <Color A="170" R="252" G="208" B="58" />
+                        <Color A="170" R="103" G="129" B="195" />
+                        <!--#endregion-->
+                    </dxtm:CustomPalette>
+                </dxtm:TreeMapPaletteColorizer>
+            </dxtm:TreeMapControl.Colorizer>
+
+            <dxtm:TreeMapFlatDataAdapter
+                DataSource="{Binding CountriesData}"
+                ValueDataMember="GDP"
+                LabelDataMember="Name">
+                <dxtm:TreeMapFlatDataAdapter.Groups>
+                    <dxtm:GroupDefinitionCollection>
+                        <dxtm:TreeMapGroupDefinition
+                            GroupDataMember="Continent" />
+                    </dxtm:GroupDefinitionCollection>
+                </dxtm:TreeMapFlatDataAdapter.Groups>
+            </dxtm:TreeMapFlatDataAdapter>
+        </dxtm:TreeMapControl>
+
+        <!--#region MapControl-->
+        <dxm:MapControl
+            x:Name="map"
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="2,5,5,2"
+            SizeChanged="OnMapSizeChanged"
+            EnableZooming="False"
+            EnableScrolling="False"
+            IsManipulationEnabled="True"
+            MinZoomLevel="0.1"
+            CenterPoint="45,0"
+            Padding="4,12"
+            SelectionMode="Single">
+            <dxm:MapControl.ZoomTrackbarOptions>
+                <dxm:ZoomTrackbarOptions
+                    Visible="False" />
+            </dxm:MapControl.ZoomTrackbarOptions>
+            <dxm:MapControl.ScalePanelOptions>
+                <dxm:ScalePanelOptions
+                    Visible="False" />
+            </dxm:MapControl.ScalePanelOptions>
+            <dxm:MapControl.ScrollButtonsOptions>
+                <dxm:ScrollButtonsOptions
+                    Visible="False" />
+            </dxm:MapControl.ScrollButtonsOptions>
+            <dxm:MapControl.CoordinatesPanelOptions>
+                <dxm:CoordinatesPanelOptions
+                    Visible="False" />
+            </dxm:MapControl.CoordinatesPanelOptions>
+            <dxm:VectorLayer
+                x:Name="backgroundLayer"
+                EnableHighlighting="False"
+                EnableSelection="False"
+                MinZoomLevel="0.1">
+                <dxm:ShapefileDataAdapter
+                    FileUri="{Binding MapFileUri}" />
+                <dxm:VectorLayer.ShapeTitleOptions>
+                    <dxm:ShapeTitleOptions
+                        VisibilityMode="Hidden" />
+                </dxm:VectorLayer.ShapeTitleOptions>
+            </dxm:VectorLayer>
+            <dxm:VectorLayer
+                x:Name="vectorLayer"
+                AllowResetSelection="False"
+                MinZoomLevel="0.1"
+                SelectedItem="{Binding Path=SelectedCountry, Mode=TwoWay, Converter={StaticResource selectedMapItemsConverter}}">
+                <dxm:VectorLayer.ShapeTitleOptions>
+                    <dxm:ShapeTitleOptions
+                        VisibilityMode="Hidden" />
+                </dxm:VectorLayer.ShapeTitleOptions>
+                <dxm:VectorLayer.SelectedShapeFill>
+                    <LinearGradientBrush
+                        SpreadMethod="Repeat"
+                        EndPoint="7,7"
+                        MappingMode="Absolute">
+                        <GradientStop
+                            Color="#FFFFA500" />
+                        <GradientStop
+                            Color="#FFFFA500"
+                            Offset="0.45" />
+                        <GradientStop
+                            Color="#70FFA500"
+                            Offset="0.55" />
+                        <GradientStop
+                            Color="#70FFA500"
+                            Offset=".95" />
+                    </LinearGradientBrush>
+                </dxm:VectorLayer.SelectedShapeFill>
+                <dxm:VectorLayer.Data>
+                    <dxm:ShapefileDataAdapter
+                        FileUri="{Binding MapFileUri}"
+                        ShapesLoaded="ShapefileLoader_ShapesLoaded" />
+                </dxm:VectorLayer.Data>
+                <dxm:VectorLayer.Colorizer>
+                    <dxm:ChoroplethColorizer
+                        RangeStops="{StaticResource colorizerRange}"
+                        Colors="{Binding Path=Colorizer.Palette, ElementName=treeMap, 
+                                                        Converter={StaticResource chartPaletteToMapColorsConverter}, ConverterParameter={StaticResource colorizerRange}, Mode=OneWay}"
+                        ApproximateColors="True">
+                        <dxm:ChoroplethColorizer.ValueProvider>
+                            <dxm:ShapeAttributeValueProvider
+                                AttributeName="MAP_COLOR" />
+                        </dxm:ChoroplethColorizer.ValueProvider>
+                    </dxm:ChoroplethColorizer>
+                </dxm:VectorLayer.Colorizer>
+            </dxm:VectorLayer>
+        </dxm:MapControl>
+        <!--#endregion-->
+
+        <!--#region ChartControl-->
+        <dxc:ChartControl
+            x:Name="chart2"
+            Grid.Row="2"
+            Grid.Column="1"
+            Padding="12,4,12,0"
+            BorderThickness="0"
+            AnimationMode="OnDataChanged"
+            Margin="2,2,5,5">
+            <dxc:ChartControl.Palette>
+                <MultiBinding
+                    Converter="{StaticResource ResourceKey=colorsMultiConverter}">
+                    <Binding
+                        Path="Colorizer.Palette"
+                        ElementName="treeMap" />
+                    <Binding
+                        Path="SelectedItem"
+                        ElementName="treeMap" />
+                </MultiBinding>
+            </dxc:ChartControl.Palette>
+            <dxc:ChartControl.Titles>
+                <dxc:Title
+                    Content="GDP Dynamic"
+                    HorizontalAlignment="Center" />
+            </dxc:ChartControl.Titles>
+            <dxc:ChartControl.Diagram>
+                <dxc:XYDiagram2D>
+                    <dxc:XYDiagram2D.DefaultPane>
+                        <dxc:Pane
+                            DomainBorderBrush="Transparent" />
+                    </dxc:XYDiagram2D.DefaultPane>
+                    <dxc:XYDiagram2D.AxisX>
+                        <dxc:AxisX2D
+                            TickmarksMinorVisible="False">
+                            <dxc:AxisX2D.WholeRange>
+                                <dxc:Range
+                                    SideMarginsValue="0" />
+                            </dxc:AxisX2D.WholeRange>
+                        </dxc:AxisX2D>
+                    </dxc:XYDiagram2D.AxisX>
+                    <dxc:XYDiagram2D.AxisY>
+                        <dxc:AxisY2D
+                            Alignment="Near"
+                            Interlaced="False"
+                            TickmarksMinorVisible="False">
+                            <dxc:AxisY2D.WholeRange>
+                                <dxc:Range
+                                    SideMarginsValue="0" />
+                            </dxc:AxisY2D.WholeRange>
+                            <dxc:AxisY2D.NumericOptions>
+                                <dxc:NumericOptions
+                                    Format="Number"
+                                    Precision="0" />
+                            </dxc:AxisY2D.NumericOptions>
+                            <dxc:AxisY2D.Label>
+                                <dxc:AxisLabel
+                                    TextPattern="{}{V:0,,,}B$" />
+                            </dxc:AxisY2D.Label>
+                        </dxc:AxisY2D>
+                    </dxc:XYDiagram2D.AxisY>
+                    <dxc:SplineAreaSeries2D
+                        DataSource="{Binding Path=SelectedCountry.GDPDynamic, Mode=OneWay}"
+                        ArgumentDataMember="Year"
+                        ValueDataMember="GDP"
+                        ArgumentScaleType="Numerical"
+                        DisplayName="GDP"
+                        CrosshairLabelPattern="{}{S}: {V:#,,,}B$">
+                        <dxc:AreaSeries2D.SeriesAnimation>
+                            <dxc:Area2DUnwindAnimation
+                                Duration="0:0:0.5" />
+                        </dxc:AreaSeries2D.SeriesAnimation>
+                    </dxc:SplineAreaSeries2D>
+                </dxc:XYDiagram2D>
+            </dxc:ChartControl.Diagram>
+        </dxc:ChartControl>
+        <!--#endregion-->
+
+        <!--#region Title (TextBlock)-->
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Text="Top Countries By GDP"
+            FontSize="21"
+            HorizontalAlignment="Center"
+            Foreground="{dxi:ThemeResource {dxt:FloatingContainerThemeKey ResourceKey=FloatingContainerDefaultButtonForegroundNormalState}}" />
+        <!--#endregion-->
+    </Grid>
+</local:TreeMapDemoModule>

@@ -1,0 +1,963 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9E9C97C3-0562-43A7-9529-DEC7536EF5FC}</ProjectGuid>
+    <BaseIntermediateOutputPath>obj.Wpf</BaseIntermediateOutputPath>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EditorsDemo</RootNamespace>
+    <AssemblyName>EditorsDemo</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ConvertToNet6Windows />
+  </PropertyGroup>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;WPF;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Debug\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;CLICKONCE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Release\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Release\</OutputPath>
+    <DefineConstants>TRACE;WPF;CLICKONCE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugTest\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DEBUGTEST</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>demoicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Images\Groups\Administration.svg" />
+    <Resource Include="Images\Groups\Inventory.svg" />
+    <Resource Include="Images\Groups\Manufacturing.svg" />
+    <Resource Include="Images\Groups\Quality.svg" />
+    <Resource Include="Images\Groups\Research.svg" />
+    <Resource Include="Images\Groups\Sales.svg" />
+    <Resource Include="Images\Products\Beverages.svg" />
+    <Resource Include="Images\Products\Condiments.svg" />
+    <Resource Include="Images\Products\Confections.svg" />
+    <Resource Include="Images\Products\DairyProducts.svg" />
+    <Resource Include="Images\Products\GrainsCereals.svg" />
+    <Resource Include="Images\Products\MeatPoultry.svg" />
+    <Resource Include="Images\Products\Produce.svg" />
+    <Resource Include="Images\Products\Seafood.svg" />
+    
+    <EmbeddedResource Include="Data\Events.xml" />
+    <EmbeddedResource Include="Data\Cities.xml" />
+    <EmbeddedResource Include="Data\FirstNames.xml" />
+    <EmbeddedResource Include="Data\LastNames.xml" />
+    <EmbeddedResource Include="Data\Streets.xml" />
+    <EmbeddedResource Include="Data\Countries.xml" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+      <netcore3ignore />
+    </None>
+    
+    <EntityDeploy Include="Controls\EFServerModeModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EFServerModeModel.Designer.cs</LastGenOutput>
+      <netcore3ignore />
+    </EntityDeploy>
+    
+    
+    
+    <Resource Include="Images\CheckEdit\CheckEdit2Checked.svg" />
+    <Resource Include="Images\CheckEdit\CheckEdit1Checked.svg" />
+    <Resource Include="Images\CheckEdit\CheckEdit2Unchecked.svg" />
+    <Resource Include="Images\CheckEdit\CheckEdit1Unchecked.svg" />
+    <Resource Include="Images\CheckEdit\CheckEdit1Indeterminate.svg" />
+    <Resource Include="Images\about.ico" />
+    <Resource Include="Images\demoicon.ico" />
+    <Resource Include="Images\warning.ico" />
+    <Resource Include="Images\Svg\copy.svg" />
+    <Resource Include="Images\Svg\cut.svg" />
+    <Resource Include="Images\Svg\paste.svg" />
+    <Resource Include="Images\Svg\CenterAlignment.svg" />
+    <Resource Include="Images\Svg\StretchAlignment.svg" />
+    <Resource Include="Images\Svg\LeftAlignment.svg" />
+    <Resource Include="Images\Svg\RightAlignment.svg" />
+    <Page Include="ModuleResources\AutoSuggestEditTemplates.xaml" />
+    <Page Include="ModuleResources\CardViewExplorerTemplates.xaml" />
+    <Reference Include="DevExpress.Charts.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Images.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Printing.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Data.Desktop.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Data.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.DemoData.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Core.v22.2.Extensions"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.DemoBase.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Core.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Ribbon.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="nunit.framework" Condition=" '$(Configuration)' == 'DebugTest' ">
+      <HintPath></HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <Aliases>nunit</Aliases>
+    <Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Charts.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2.Extensions"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Mvvm.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.PropertyGrid.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.XtraScheduler.v22.2.Core"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.XtraScheduler.v22.2.Core.Desktop"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Scheduler.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Scheduling.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.Accordion.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="DevExpress.Xpf.TypedStyles.v22.2"><HintPath></HintPath><Private>False</Private></Reference>
+    <Reference Include="EntityFramework">
+      <Private>True</Private>
+      <HintPath>..\..\Bin\EntityFramework.dll</HintPath>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="PresentationFramework.Luna"><Private>False</Private></Reference>
+    <Reference Include="System"><Private>False</Private></Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations"><Private>False</Private></Reference>
+    <Reference Include="System.Core"><Private>False</Private></Reference>
+    <Reference Include="System.Data.Entity"><Private>False</Private></Reference>
+    <Reference Include="System.Data.Linq"><Private>False</Private></Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47">
+      <Private>True</Private>
+      <HintPath>..\..\Bin\System.Data.SQLite.dll</HintPath>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.108.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47">
+      <Private>True</Private>
+      <HintPath>..\..\Bin\System.Data.SQLite.EF6.dll</HintPath>
+      <netcore3ignore />
+    </Reference>
+    <Reference Include="System.Drawing"><Private>False</Private></Reference>
+    <Reference Include="System.Runtime.Serialization"><Private>False</Private></Reference>
+    <Reference Include="System.Security"><Private>False</Private></Reference>
+    <Reference Include="System.ServiceModel"><Private>False</Private></Reference>
+    <Reference Include="System.Windows.Forms"><Private>False</Private></Reference>
+    <Reference Include="System.Xaml"><Private>False</Private></Reference>
+    <Reference Include="System.Xml.Linq"><Private>False</Private></Reference>
+    <Reference Include="System.Data.DataSetExtensions"><Private>False</Private></Reference>
+    <Reference Include="System.Data"><Private>False</Private></Reference>
+    <Reference Include="System.Xml"><Private>False</Private></Reference>
+    <Reference Include="UIAutomationProvider"><Private>False</Private></Reference>
+    <Reference Include="WindowsBase"><Private>False</Private></Reference>
+    <Reference Include="PresentationCore"><Private>False</Private></Reference>
+    <Reference Include="PresentationFramework"><Private>False</Private></Reference>
+    <Reference Include="System.Data.Services.Client"><Private>False</Private></Reference>
+    <Reference Include="System.ServiceModel"><Private>False</Private></Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DataGridTestClasses.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataGridTestClasses.dbml</DependentUpon>
+      <netcore3ignore />
+    </Compile>
+    <Compile Include="Controls\EFServerModeModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EFServerModeModel.edmx</DependentUpon>
+      <netcore3ignore />
+    </Compile>
+    <Compile Include="Controls\OrderDataGenerator.cs" />
+    <Compile Include="Controls\OrderInfoDataGenerator.cs" />
+    <Compile Include="Controls\SeparatorControl.xaml.cs">
+      <DependentUpon>SeparatorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CountriesData.cs" />
+    <Compile Include="Data\DemoValuesProvider.cs" />
+    <Compile Include="Data\DynamicallyAssignDataEditorsData.cs" />
+    <Compile Include="Data\OutlookDataGenerator.cs" />
+    <Compile Include="Helpers\BarCodeSymbologyCoverter.cs" />
+    <Compile Include="Helpers\BarCodeSymbologyTemplateSelector.cs" />
+    <Compile Include="Helpers\PinnedWindowBehavior.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleResources\AutoSuggestEditInplaceEditingBehavior.cs" />
+    <Compile Include="ModuleResources\CardInfo.cs" />
+    <Compile Include="ModuleResources\CardViewExplorerFileSource.cs" />
+    <Compile Include="ModuleResources\CardViewExplorerIconManager.cs" />
+    <Compile Include="ModuleResources\CardViewExplorerImageList.cs" />
+    <Compile Include="ModuleResources\CardViewExplorerViewModel.cs" />
+    <Compile Include="ModuleResources\Converters.cs" />
+    <Compile Include="ModuleResources\DataEditorTypesClasses.cs" />
+    <Compile Include="ModuleResources\InstantFeedbackModeViewModelBase.cs" />
+    <Compile Include="ModuleResources\MultiThreadDataProcessingClasses.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ModuleResources\MultiThreadDataProcessingViewModel.cs" />
+    <Compile Include="Modules\AutoSuggestEditModule.xaml.cs">
+      <DependentUpon>AutoSuggestEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\BarCode2D.xaml.cs">
+      <DependentUpon>BarCode2D.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\BrowsePathEditModule.xaml.cs">
+      <DependentUpon>BrowsePathEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CustomMaskEdit.xaml.cs">
+      <DependentUpon>CustomMaskEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\BrowsePathEditModuleViewModel.cs" />
+    <Compile Include="Modules\FilterBehavior\AppointmentsGenerator.cs" />
+    <Compile Include="Modules\FilterBehavior\CollectionViewFilterBehavior.cs" />
+    <Compile Include="Modules\ComboBoxEditWithPLINQSource.xaml.cs">
+      <DependentUpon>ComboBoxEditWithPLINQSource.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\EditorsServerModeSource.xaml.cs">
+      <DependentUpon>EditorsServerModeSource.xaml</DependentUpon>
+      <netcore3ignore />
+    </Compile>
+    <Compile Include="Modules\EditorsAsyncServerMode.xaml.cs">
+      <DependentUpon>EditorsAsyncServerMode.xaml</DependentUpon>
+      <netcore3ignore />
+    </Compile>
+    <Compile Include="Controls\EditorsShowcaseBrowserModule.cs" />
+    <Compile Include="Modules\FilterBehaviorModule.xaml.cs" />
+    <Compile Include="Modules\FilterBehavior\DevAVBranchesSales.cs" />
+    <Compile Include="Modules\FilterBehavior\FilterBehaviorFilteringPanel.xaml.cs">
+      <DependentUpon>FilterBehaviorFilteringPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FilterBehavior\FilterBehaviorFilterEditor.xaml.cs">
+      <DependentUpon>FilterBehaviorFilterEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FilterBehavior\FilterBehaviorChartControl.xaml.cs">
+      <DependentUpon>FilterBehaviorChartControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FilterBehavior\FilterBehaviorCollecitonView.xaml.cs">
+      <DependentUpon>FilterBehaviorCollecitonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FilterBehavior\FilterBehaviorCollecitonViewViewModel.cs" />
+    <Compile Include="Modules\FilterBehavior\FilterBehaviorScheduler.xaml.cs">
+      <DependentUpon>FilterBehaviorScheduler.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FilterBehavior\FilterBehaviorViewModelDataViewModel.cs" />
+    <Compile Include="Modules\FilterBehavior\FilterBehaviorViewModelData.xaml.cs">
+      <DependentUpon>FilterBehaviorViewModelData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FilterBehavior\FilterBehaviorListBoxEditViewModel.cs" />
+    <Compile Include="Modules\FilterBehavior\FilterBehaviorChartControlViewModel.cs" />
+    <Compile Include="Modules\FilterBehavior\FilterBehaviorListBoxEdit.xaml.cs">
+      <DependentUpon>FilterBehaviorListBoxEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FilterBehavior\ProductInfo.cs" />
+    <Compile Include="Modules\InplaceEditorsPropertyGridModule.xaml.cs">
+      <DependentUpon>InplaceEditorsPropertyGridModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\InplaceEditorsTreeListModule.xaml.cs">
+      <DependentUpon>InplaceEditorsTreeListModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\InplaceEditorsGridModule.xaml.cs">
+      <DependentUpon>InplaceEditorsGridModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\BindingValidationViewModel.cs" />
+    <Compile Include="ViewModels\EditorsViewModelBase.cs" />
+    <Compile Include="ViewModels\InputValidationViewModel.cs" />
+    <Compile Include="ViewModels\ValidationViewModelBase.cs" />
+    <Compile Include="Modules\LinearBarCode.xaml.cs">
+      <DependentUpon>LinearBarCode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\LookUpEditModule.xaml.cs">
+      <DependentUpon>LookUpEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\LookUpEditServerMode\LookUpInstantFeedbackModeViewModel.cs">
+      <netcore3ignore />
+    </Compile>
+    <Compile Include="Modules\LookUpEditServerMode\PersonGenerator.cs" />
+    <Compile Include="Modules\LookUpEditServerMode\PersonsDataContext.cs">
+      <netcore3ignore />
+    </Compile>
+    <Compile Include="Modules\NotifyIcon.xaml.cs">
+      <DependentUpon>NotifyIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\OverviewModule.xaml.cs">
+      <DependentUpon>OverviewModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RatingEditModule.xaml.cs">
+      <DependentUpon>RatingEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SimpleButtonModule.xaml.cs">
+      <DependentUpon>SimpleButtonModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SVGImageModule.xaml.cs">
+      <DependentUpon>SVGImageModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\HyperLinkEditModule.xaml.cs">
+      <DependentUpon>HyperLinkEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TimePickerModule.xaml.cs">
+      <DependentUpon>TimePickerModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TimeSpanMaskEdit.xaml.cs">
+      <DependentUpon>TimeSpanMaskEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ToggleSwitchModule.xaml.cs">
+      <DependentUpon>ToggleSwitchModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TokenComboBoxModule.xaml.cs">
+      <DependentUpon>TokenComboBoxModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TokenLookUpModule.xaml.cs">
+      <DependentUpon>TokenLookUpModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CollectionViewViewModel.cs" />
+    <Compile Include="ViewModels\LookUpEditorDemoViewModel.cs" />
+    <Compile Include="ViewModels\OutlookViewModel.cs" />
+    <Compile Include="ViewModels\InplaceEditorsViewModel.cs" />
+    <Compile Include="ViewModels\LinearBarCodeViewModel.cs" />
+    <Compile Include="ViewModels\NotifyIconViewModel.cs" />
+    <Compile Include="ViewModels\OverviewDemoViewModel.cs" />
+    <Compile Include="ViewModels\RangeControlFilteringViewModel.cs">
+      <netcore3ignore />
+    </Compile>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ViewModels\TimeSpanMaskViewModel.cs" />
+    <Page Include="Controls\CollectionViewNavigator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ControlStyles\RangedEditors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\InternetConnectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PaintControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PasswordStrengthControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SearchLookUpEditOptions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SearchControlOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SeparatorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SQLConnectionWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ModuleResources\DataEditorTypesDescriptions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ModuleResources\DataEditorTypesTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ModuleResources\DynamicallyAssignDataEditorsResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ModuleResources\LookUpEditTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModuleResources\MultiEditorDescriptions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ModuleResources\RowTemplateTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\AutoSuggestEditModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\BarCode2D.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\BrowsePathEditModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\ColorEditModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\CalculatorModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\ComboBoxEditModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CheckEditModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ComboBoxEditWithPLINQSource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\EditorsServerModeSource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <netcore3ignore />
+    </Page>
+    <Page Include="Modules\EditorsAsyncServerMode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <netcore3ignore />
+    </Page>
+    <Page Include="Modules\DatePickerModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\FilterBehavior\FilterBehaviorFilteringPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FilterBehavior\FilterBehaviorFilterEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FilterBehavior\FilterBehaviorChartControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FilterBehavior\FilterBehaviorCollecitonView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FilterBehavior\FilterBehaviorScheduler.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FilterBehavior\FilterBehaviorViewModelData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FilterBehavior\FilterBehaviorListBoxEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\FlyoutControlModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\InplaceEditorsPropertyGridModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\InplaceEditorsTreeListModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\InplaceEditorsGridModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\LinearBarCode.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\LookUpEditModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\NotifyIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CustomMaskEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\OverviewModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\RangeControlFilteringModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <netcore3ignore />
+    </Page>
+    <Page Include="Modules\DateNavigatorModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FontEditModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ImageEditModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\PasswordBoxEditModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ListBoxEditModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ProgressBarEditModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RatingEditModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\SearchControlModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\SearchLookUpEditModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\ChartClientForRangeControlModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\SimpleButtonModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\SVGImageModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\HyperLinkEditModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TimePickerModule.xaml" />
+    <Page Include="Modules\TimeSpanMaskEdit.xaml" />
+    <Page Include="Modules\ToggleSwitchModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TokenComboBoxModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\TokenLookUpModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\TrackBarEditModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Views\BarCodeSymbologyDataTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Controls\CollectionViewNavigator.xaml.cs">
+      <DependentUpon>CollectionViewNavigator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DemoRichTextBox.cs" />
+    <Compile Include="Controls\InternetConnectionControl.xaml.cs">
+      <DependentUpon>InternetConnectionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PaintControl.xaml.cs">
+      <DependentUpon>PaintControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PasswordStrengthControl.xaml.cs">
+      <DependentUpon>PasswordStrengthControl.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    
+    <Page Include="Controls\ControlStyles\Panel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ControlStyles\OptionsButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MaskPropertiesEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ValidationSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ButtonEditModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TextEditModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DateEditModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\MemoEditModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\BindingValidationModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\InputValidationModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SimpleMaskEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RegularMaskEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RegExMaskEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DateTimeMaskEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\NumericMaskEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SpinEditModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Controls\DemoModuleControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\MaskPropertiesEdit.xaml.cs">
+      <DependentUpon>MaskPropertiesEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SearchLookUpEditOptions.xaml.cs">
+      <DependentUpon>SearchLookUpEditOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SearchControlOptions.xaml.cs">
+      <DependentUpon>SearchControlOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ValidationSettings.xaml.cs">
+      <DependentUpon>ValidationSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ButtonEditModule.xaml.cs">
+      <DependentUpon>ButtonEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ColorEditModule.xaml.cs">
+      <DependentUpon>ColorEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CalculatorModule.xaml.cs">
+      <DependentUpon>CalculatorModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ComboBoxEditModule.xaml.cs">
+      <DependentUpon>ComboBoxEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CheckEditModule.xaml.cs">
+      <DependentUpon>CheckEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DatePickerModule.xaml.cs">
+      <DependentUpon>DatePickerModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FlyoutControlModule.xaml.cs">
+      <DependentUpon>FlyoutControlModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RangeControlFilteringModule.xaml.cs">
+      <DependentUpon>RangeControlFilteringModule.xaml</DependentUpon>
+      <netcore3ignore />
+    </Compile>
+    <Compile Include="Modules\DateNavigatorModule.xaml.cs">
+      <DependentUpon>DateNavigatorModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FontEditModule.xaml.cs">
+      <DependentUpon>FontEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ImageEditModule.xaml.cs">
+      <DependentUpon>ImageEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PasswordBoxEditModule.xaml.cs">
+      <DependentUpon>PasswordBoxEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ListBoxEditModule.xaml.cs">
+      <DependentUpon>ListBoxEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ProgressBarEditModule.xaml.cs">
+      <DependentUpon>ProgressBarEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SearchControlModule.xaml.cs">
+      <DependentUpon>SearchControlModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SearchLookUpEditModule.xaml.cs">
+      <DependentUpon>SearchLookUpEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ChartClientForRangeControlModule.xaml.cs">
+      <DependentUpon>ChartClientForRangeControlModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TextEditModule.xaml.cs">
+      <DependentUpon>TextEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DateEditModule.xaml.cs">
+      <DependentUpon>DateEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\MemoEditModule.xaml.cs">
+      <DependentUpon>MemoEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TrackBarEditModule.xaml.cs">
+      <DependentUpon>TrackBarEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\BindingValidationModule.xaml.cs">
+      <DependentUpon>BindingValidationModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\InputValidationModule.xaml.cs">
+      <DependentUpon>InputValidationModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SimpleMaskEdit.xaml.cs">
+      <DependentUpon>SimpleMaskEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RegularMaskEdit.xaml.cs">
+      <DependentUpon>RegularMaskEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RegExMaskEdit.xaml.cs">
+      <DependentUpon>RegExMaskEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DateTimeMaskEdit.xaml.cs">
+      <DependentUpon>DateTimeMaskEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\NumericMaskEdit.xaml.cs">
+      <DependentUpon>NumericMaskEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SpinEditModule.xaml.cs">
+      <DependentUpon>SpinEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DemoTesting\Fixtures.cs" />
+    <Compile Include="Service References\SCService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.datasvcmap</DependentUpon>
+      <netcore3ignore />
+    </Compile>
+    <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="clickonce.txt">
+      <netcore3ignore />
+    </EmbeddedResource>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\ColorEditDemoImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Persons\w09.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Persons\m24.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Persons\w26.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Persons\m18.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Persons\m02.jpg" />
+    <Resource Include="Images\Persons\m03.jpg" />
+    <Resource Include="Images\Persons\m13.jpg" />
+    <Resource Include="Images\Persons\m25.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Persons\m19.jpg" />
+    <Resource Include="Images\Persons\w22.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Persons\w03.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Persons\w16.jpg" />
+    <Resource Include="Images\Persons\w29.jpg" />
+    <Resource Include="Images\Persons\w30.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Cursors\cursor_pen.png" />
+    <EmbeddedResource Include="Images\Cursors\cursor_text.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\">
+      <netcore3ignore />
+    </WCFMetadata>
+  </ItemGroup>
+  <ItemGroup>
+    <ServiceReferenceMetadataStorage Include="Service References\SCService\">
+      <Type>datasvcmap</Type>
+      <netcore3ignore />
+    </ServiceReferenceMetadataStorage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent"><ItemGroup><Resource Include="@(Page)" /></ItemGroup><ItemGroup><Resource Include="@(Compile)" /></ItemGroup></Target>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+	<GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+	<RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>	
+	<ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3
+    <Import Project="Demo.targets" />
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3 
+	<ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
+  </ItemGroup>
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3 
+    <Import Project="Themes.WPF.NetCore.targets" />
+  ONLY NETCORE3-->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    
+  </PropertyGroup>
+</Project>

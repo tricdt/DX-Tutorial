@@ -1,0 +1,814 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{144670CB-6396-488C-A76D-2E03A3B69E78}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>
+    </RootNamespace>
+    <AssemblyName>DevExpress.ProductsDemo.Wpf</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG,TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>demoicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ClickOnce Debug\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,CLICKONCE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU'">
+    <OutputPath>bin\ClickOnce Release\</OutputPath>
+    <DefineConstants>TRACE,CLICKONCE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugTest\</OutputPath>
+    <DefineConstants>DEBUG,TRACE,DEBUGTEST</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.DevAV.v22.2.Data">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Images.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Map.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.PivotGrid.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.DataAccess.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpo.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.DemoBase.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Charts.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Gauges.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Map.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.PivotGrid.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Scheduling.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v22.2.Core.Desktop">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Spreadsheet.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Office.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.SpellChecker.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Controls.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.framework" Condition=" '$(Configuration)' == 'DebugTest' ">
+      <HintPath></HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.Desktop.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Drawing.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.DemoData.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v22.2.Extensions">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Docking.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Accordion.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.PdfViewer.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.DocumentViewer.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Printing.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Ribbon.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.RichEdit.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Spreadsheet.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.SpellChecker.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2013.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.108.0, Culture=neutral, PublicKeyToken=4c3bc44151be4b47, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\System.Data.SQLite.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationUI">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ReachFramework">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Services.Client">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Deployment">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Printing">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UIAutomationProvider">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UIAutomationTypes">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Controls\CustomFlagWindow.xaml.vb">
+      <DependentUpon>CustomFlagWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EditContactContent.xaml.vb">
+      <DependentUpon>EditContactContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EditContactWindow.xaml.vb">
+      <DependentUpon>EditContactWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EditTaskWindow.xaml.vb">
+      <DependentUpon>EditTaskWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InfoViewModel.vb" />
+    <Compile Include="Controls\PrintView.xaml.vb">
+      <DependentUpon>PrintView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PrintViewModel.vb" />
+    <Compile Include="DXSplashScreen\ProgressWindow.xaml.vb">
+      <DependentUpon>ProgressWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\DataBaseHelper.vb" />
+    <Compile Include="Helpers\ExceptionHelper.vb" />
+    <Compile Include="MasterDetailReport\Report.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MasterDetailReport\Report.Designer.vb">
+      <DependentUpon>Report.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ModulesResources\ChartFactory.vb" />
+    <Compile Include="ModulesResources\FieldAreaHelper.vb" />
+    <Compile Include="ModulesResources\SchedulerModel.vb" />
+    <Compile Include="Controls\InfoView.xaml.vb">
+      <DependentUpon>InfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModulesViewModels\GridContactsModuleViewModel.vb" />
+    <Compile Include="ModulesViewModels\GridTasksModuleViewModel.vb" />
+    <Compile Include="ModulesViewModels\GridViewModelBase.vb" />
+    <Compile Include="Controls\PhotosGallery\CityInformationControl.vb" />
+    <Compile Include="Controls\PhotosGallery\Info\CityInfo.vb" />
+    <Compile Include="Controls\PhotosGallery\Info\PlaceInfo.vb" />
+    <Compile Include="Controls\PhotosGallery\LabelControl.vb" />
+    <Compile Include="Controls\PhotosGallery\PhotoGalleryButton.vb" />
+    <Compile Include="Controls\PhotosGallery\PhotoGalleryControl.vb" />
+    <Compile Include="Controls\PhotosGallery\PhotoGalleryItemControl.vb" />
+    <Compile Include="Controls\PhotosGallery\PlaceInfoControl.vb" />
+    <Compile Include="Controls\PhotosGallery\Utils.vb" />
+    <Compile Include="Controls\PhotosGallery\ViewTypeToBoolConverter.vb" />
+    <Compile Include="Controls\PhotosGallery\VisibleControl.vb" />
+    <Compile Include="ModulesViewModels\PivotGrid\PivotGridDataAccess.vb" />
+    <Compile Include="ModulesViewModels\PivotGrid\PivotGridModel.vb" />
+    <Compile Include="ModulesViewModels\PivotGrid\PivotGridViewModel.vb" />
+    <Compile Include="ModulesViewModels\ReportsModuleViewModel.vb" />
+    <Compile Include="ModulesViewModels\SalesDemo\BillionStringToShortStringConverter.vb" />
+    <Compile Include="ModulesViewModels\SalesDemo\DashboardGroup.vb" />
+    <Compile Include="ModulesViewModels\SalesDemo\DateTimeUtils.vb" />
+    <Compile Include="ModulesViewModels\SalesDemo\DecimalToRangeValueConverter.vb" />
+    <Compile Include="ModulesViewModels\SalesDemo\ImageHyperlinkBehavior.vb" />
+    <Compile Include="ModulesViewModels\SalesDemo\ModelAssemblyHelper.vb" />
+    <Compile Include="ModulesViewModels\SalesDemo\NavigationModule.vb" />
+    <Compile Include="ModulesViewModels\SalesDemo\ResourceImageHelper.vb" />
+    <Compile Include="ModulesViewModels\SalesDemo\SalePerformanceViewModel.vb" />
+    <Compile Include="ModulesViewModels\SalesDemo\SalesDashboardViewModel.vb" />
+    <Compile Include="ModulesViewModels\SalesDemo\SampleDataProvider.vb" />
+    <Compile Include="ModulesViewModels\SchedulerModuleViewModel.vb" />
+    <Compile Include="Modules\PdfViewerDemo.xaml.vb">
+      <DependentUpon>PdfViewerDemo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PhotoGallery.xaml.vb">
+      <DependentUpon>PhotoGallery.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PivotGridModule.xaml.vb">
+      <DependentUpon>PivotGridModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ReportsModule.xaml.vb">
+      <DependentUpon>ReportsModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SalesDashboard.xaml.vb">
+      <DependentUpon>SalesDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SalesPerformanceView.xaml.vb">
+      <DependentUpon>SalesPerformanceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SchedulerModule.xaml.vb">
+      <DependentUpon>SchedulerModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SpreadsheetModule.xaml.vb">
+      <DependentUpon>SpreadsheetModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Utils.vb" />
+    <Compile Include="Sales.Model\BusinessObjects.vb" />
+    <Compile Include="Sales.Model\Interfaces.vb" />
+    <Compile Include="Sales.Model\OleDataProvider.vb" />
+    <Compile Include="Sales.Model\SalesDBGenerator.vb" />
+    <Compile Include="Sales.Model\SalesForecastMaker.vb" />
+    <Compile Include="Sales.Model\SQLHelper.vb" />
+    <Compile Include="Sales.Model\Utils.vb" />
+    <Page Include="Controls\CustomFlagWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\EditContactContent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\EditContactWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\EditTaskWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PrintView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DXSplashScreen\ProgressWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.vb">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.vb">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="ModulesResources\ContactsTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModulesResources\GridTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModulesResources\SalesDashboardResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ModulesResources\SalesPerformanceViewResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\GridContactsModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\GridTasksModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\InfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\PdfViewerDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\PhotoGallery.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\PivotGridModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ReportsModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\RichEditModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SalesDashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SalesPerformanceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SchedulerModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\SpreadsheetModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls\PhotoGallery\CityInformationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls\PhotoGallery\LabelControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls\PhotoGallery\PhotoGalleryButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls\PhotoGallery\PhotoGalleryControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls\PhotoGallery\PhotoGalleryItemControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls\PhotoGallery\PlaceInfoControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\DashboardGroup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainWindowViewModel.vb" />
+    <Compile Include="ModulesResources\ContactsClasses.vb" />
+    <Compile Include="ModulesResources\Converters.vb" />
+    <Compile Include="ModulesResources\GridColumnModel.vb" />
+    <Compile Include="ModulesResources\TasksClasses.vb" />
+    <Compile Include="Modules\GridContactsModule.xaml.vb">
+      <DependentUpon>GridContactsModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\GridTasksModule.xaml.vb">
+      <DependentUpon>GridTasksModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RichEditModule.xaml.vb">
+      <DependentUpon>RichEditModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="MasterDetailReport\Report.resx">
+      <DependentUpon>Report.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>DevExpress.DevAV.Properties</CustomToolNamespace>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <EmbeddedResource Include="clickonce.txt" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Contacts\Unknown-user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PhotoGallery\Athens\Academy-of-Athens.jpg" />
+    <Resource Include="Images\PhotoGallery\Athens\Acropolis-of-Athens.jpg" />
+    <Resource Include="Images\PhotoGallery\Athens\National-Library-of-Greece.jpg" />
+    <Resource Include="Images\PhotoGallery\Athens\Temple-of-Hephaestus.jpg" />
+    <Resource Include="Images\PhotoGallery\Athens\Temple-of-Olympian-Zeus.jpg" />
+    <Resource Include="Images\PhotoGallery\Athens\Zappeion.jpg" />
+    <Resource Include="Images\PhotoGallery\BackButton.png" />
+    <Resource Include="Images\PhotoGallery\Barcelona\Arc-de-Triomf.jpg" />
+    <Resource Include="Images\PhotoGallery\Barcelona\Camp-Nou.jpg" />
+    <Resource Include="Images\PhotoGallery\Barcelona\Cathedral-of-Santa-Eulalia.jpg" />
+    <Resource Include="Images\PhotoGallery\Barcelona\Columbus-Monument.jpg" />
+    <Resource Include="Images\PhotoGallery\Barcelona\Palau-de-la-Musica-Catalana.jpg" />
+    <Resource Include="Images\PhotoGallery\Barcelona\Sagrada-Familia.jpg" />
+    <Resource Include="Images\PhotoGallery\Berlin\Bellevue-Palace.jpg" />
+    <Resource Include="Images\PhotoGallery\Berlin\Brandenburg-Gate.jpg" />
+    <Resource Include="Images\PhotoGallery\Berlin\Fernsehturm-Berlin.jpg" />
+    <Resource Include="Images\PhotoGallery\Berlin\Gendarmenmarkt.jpg" />
+    <Resource Include="Images\PhotoGallery\Berlin\Red-City-Hall.jpg" />
+    <Resource Include="Images\PhotoGallery\Berlin\Reichstag.jpg" />
+    <Resource Include="Images\PhotoGallery\Cairo\Al-Azhar-Mosque.jpg" />
+    <Resource Include="Images\PhotoGallery\Cairo\Cairo-Citadel.jpg" />
+    <Resource Include="Images\PhotoGallery\Cairo\Cairo-Tower.jpg" />
+    <Resource Include="Images\PhotoGallery\Cairo\Egyptian-Museum.jpg" />
+    <Resource Include="Images\PhotoGallery\Cairo\Mosque-of-Ibn-Tulun.jpg" />
+    <Resource Include="Images\PhotoGallery\CityInformationControl.png" />
+    <Resource Include="Images\PhotoGallery\CitySmallIcon.png" />
+    <Resource Include="Images\PhotoGallery\Label.png" />
+    <Resource Include="Images\PhotoGallery\London\Buckingham-Palace.jpg" />
+    <Resource Include="Images\PhotoGallery\London\St-Pauls-Cathedral.jpg" />
+    <Resource Include="Images\PhotoGallery\London\Tower-Bridge.jpg" />
+    <Resource Include="Images\PhotoGallery\London\Tower-of-London.jpg" />
+    <Resource Include="Images\PhotoGallery\London\Trafalgar-Square.jpg" />
+    <Resource Include="Images\PhotoGallery\London\Westminster-Abbey.jpg" />
+    <Resource Include="Images\PhotoGallery\Los-Angeles\%28Los-Angeles%29-Downtown.jpg" />
+    <Resource Include="Images\PhotoGallery\Los-Angeles\%28Los-Angeles%29-Griffith-Observatory.jpg" />
+    <Resource Include="Images\PhotoGallery\Los-Angeles\%28Los-Angeles%29-International-Airport.jpg" />
+    <Resource Include="Images\PhotoGallery\Los-Angeles\%28Los-Angeles%29-Music-Center.jpg" />
+    <Resource Include="Images\PhotoGallery\Los-Angeles\DevExpress-Office.jpg" />
+    <Resource Include="Images\PhotoGallery\Los-Angeles\Hollywood-Walk-of-Fame.jpg" />
+    <Resource Include="Images\PhotoGallery\Moscow\Bolshoi-Theatre.jpg" />
+    <Resource Include="Images\PhotoGallery\Moscow\Cathedral-of-Christ-the-Saviour.jpg" />
+    <Resource Include="Images\PhotoGallery\Moscow\Novodevichy-Convent.jpg" />
+    <Resource Include="Images\PhotoGallery\Moscow\Ostankino-Tower.jpg" />
+    <Resource Include="Images\PhotoGallery\Moscow\Saint-Basils-Cathedral.jpg" />
+    <Resource Include="Images\PhotoGallery\Moscow\Spasskaya-Tower.jpg" />
+    <Resource Include="Images\PhotoGallery\NewYork\Broadway.jpg" />
+    <Resource Include="Images\PhotoGallery\NewYork\Brooklyn-Bridge.jpg" />
+    <Resource Include="Images\PhotoGallery\NewYork\Empire-State-Building.jpg" />
+    <Resource Include="Images\PhotoGallery\NewYork\Rockefeller-Center.jpg" />
+    <Resource Include="Images\PhotoGallery\NewYork\Statue-of-Liberty.jpg" />
+    <Resource Include="Images\PhotoGallery\NewYork\Times-Square.jpg" />
+    <Resource Include="Images\PhotoGallery\NextPlace.png" />
+    <Resource Include="Images\PhotoGallery\Paris\Arc-de-Triomphe.jpg" />
+    <Resource Include="Images\PhotoGallery\Paris\Eiffel-Tower.jpg" />
+    <Resource Include="Images\PhotoGallery\Paris\Louvre.jpg" />
+    <Resource Include="Images\PhotoGallery\Paris\Montmartre.jpg" />
+    <Resource Include="Images\PhotoGallery\Paris\Notre-Dame-de-Paris.jpg" />
+    <Resource Include="Images\PhotoGallery\Paris\Sainte-Chapelle.jpg" />
+    <Resource Include="Images\PhotoGallery\Prague\Charles-Bridge.jpg" />
+    <Resource Include="Images\PhotoGallery\Prague\Lennon-Wall.jpg" />
+    <Resource Include="Images\PhotoGallery\Prague\Prague-Orloj.jpg" />
+    <Resource Include="Images\PhotoGallery\Prague\Prague-Zoo.jpg" />
+    <Resource Include="Images\PhotoGallery\Prague\St.-Vitus-Cathedral.jpg" />
+    <Resource Include="Images\PhotoGallery\PrevPlace.png" />
+    <Resource Include="Images\PhotoGallery\Rio-de-Janeiro\Christ-the-Redeemer.jpg" />
+    <Resource Include="Images\PhotoGallery\Rio-de-Janeiro\Copacabana-Beach.jpg" />
+    <Resource Include="Images\PhotoGallery\Rio-de-Janeiro\Maracana.jpg" />
+    <Resource Include="Images\PhotoGallery\Rio-de-Janeiro\Rio-Niteroi-Bridge.jpg" />
+    <Resource Include="Images\PhotoGallery\Rio-de-Janeiro\Sugarloaf-Mountain.jpg" />
+    <Resource Include="Images\PhotoGallery\Sydney\Queen-Victoria-Building.jpg" />
+    <Resource Include="Images\PhotoGallery\Sydney\Royal-Botanic-Gardens.jpg" />
+    <Resource Include="Images\PhotoGallery\Sydney\Sydney-Central-Business-District.jpg" />
+    <Resource Include="Images\PhotoGallery\Sydney\Sydney-Harbour-Bridge.jpg" />
+    <Resource Include="Images\PhotoGallery\Sydney\Sydney-Opera-House.jpg" />
+    <Resource Include="Images\PhotoGallery\Sydney\Sydney-Town-Hall.jpg" />
+    <Resource Include="Images\PhotoGallery\Tokyo\Rainbow-Bridge.jpg" />
+    <Resource Include="Images\PhotoGallery\Tokyo\Tokyo-Imperial-Palace.jpg" />
+    <Resource Include="Images\PhotoGallery\Tokyo\Tokyo-National-Museum.jpg" />
+    <Resource Include="Images\PhotoGallery\Tokyo\Tokyo-Tower.jpg" />
+    <Resource Include="Images\PhotoGallery\Tokyo\University-of-Tokyo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SalesDemo\ArrowLeft.png" />
+    <Resource Include="Images\SalesDemo\ArrowRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tasks\Doctor.svg" />
+    <Resource Include="Images\Tasks\Miss.svg" />
+    <Resource Include="Images\Tasks\Mr.svg" />
+    <Resource Include="Images\Tasks\Mrs.svg" />
+    <Resource Include="Images\Tasks\Ms.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Contacts\Card.svg" />
+    <Resource Include="Images\Contacts\List.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Contacts\SortAsc.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Contacts\Country.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Contacts\Delete.svg" />
+    <Resource Include="Images\Contacts\Edit.svg" />
+    <Resource Include="Images\Contacts\NewContact.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tasks\NewTask.svg" />
+    <Resource Include="Images\Tasks\NextWeek.svg" />
+    <Resource Include="Images\Tasks\NoDate.svg" />
+    <Resource Include="Images\Tasks\ThisWeek.svg" />
+    <Resource Include="Images\Tasks\Today.svg" />
+    <Resource Include="Images\Tasks\Tomorrow.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tasks\Custom.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tasks\Overdue.svg" />
+    <Resource Include="Images\Tasks\Deferred.svg" />
+    <Resource Include="Images\Tasks\Prioritized.svg" />
+    <Resource Include="Images\Tasks\DetailView.svg" />
+    <Resource Include="Images\Tasks\TaskList.svg" />
+    <Resource Include="Images\Tasks\Active.svg" />
+    <Resource Include="Images\Tasks\Completed.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tasks\Priority_High.svg" />
+    <Resource Include="Images\Tasks\Priority_Low.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Print.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tasks\Status_0.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tasks\Status_1.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Analytics.svg" />
+    <Resource Include="Images\BandedReports.svg" />
+    <Resource Include="Images\GridContacts.svg" />
+    <Resource Include="Images\GridTasks.svg" />
+    <Resource Include="Images\PDFViewer.svg" />
+    <Resource Include="Images\Pivot.svg" />
+    <Resource Include="Images\Scheduler.svg" />
+    <Resource Include="Images\Spreadsheet.svg" />
+    <Resource Include="Images\WeatherMap.svg" />
+    <Resource Include="Images\WordProcessing.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Buy.svg" />
+    <Resource Include="Images\GettingStarted.svg" />
+    <Resource Include="Images\Support.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\NormalView.svg" />
+    <Resource Include="Images\ReadingView.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tasks\Reminder.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tasks\Category_HouseChores.svg" />
+    <Resource Include="Images\Tasks\Category_Shopping.svg" />
+    <Resource Include="Images\Tasks\Category_Work.svg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

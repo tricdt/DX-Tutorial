@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="MVVMDemo.DXEventDemo.EventArgsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.DXEventDemo"
+             xmlns:demo="clr-namespace:MVVMDemo"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm">
+    <UserControl.DataContext>
+        <local:EventArgsViewModel/>
+    </UserControl.DataContext>
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <TextBlock VerticalAlignment="Top">Double click item to see the detail info</TextBlock>
+        <dxlc:LayoutGroup View="Tabs">
+            <dxlc:LayoutGroup Header="Standard ListBox">
+                <ListBox ItemsSource="{x:Static demo:PersonInfo.Persons}" DisplayMemberPath="FullName"
+                         MouseDoubleClick="{DXEvent 'ShowPersonDetail($dxmvvm:ItemsControlMouseEventArgsConverter.GetDataRow(@sender, @args))'}"/>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup Header="DevExpress GridControl">
+                <!--#region !-->
+                <dxg:GridControl ItemsSource="{x:Static demo:PersonInfo.Persons}" AutoGenerateColumns="AddNew"
+                                 MouseDoubleClick="{DXEvent 'ShowPersonDetail($dx:EventArgsToDataRowConverter.GetDataRow(@args))'}">
+                    <!--#region view-->
+                    <dxg:GridControl.View>
+                        <dxg:TableView NavigationStyle="Row" ShowGroupPanel="False"/>
+                    </dxg:GridControl.View>
+                    <!--#endregion-->
+                </dxg:GridControl>
+                <!--#endregion-->
+            </dxlc:LayoutGroup>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+
+</UserControl>

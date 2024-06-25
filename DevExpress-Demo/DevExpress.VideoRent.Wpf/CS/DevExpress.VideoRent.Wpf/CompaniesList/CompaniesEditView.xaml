@@ -1,0 +1,93 @@
+<UserControl x:Class="DevExpress.VideoRent.Wpf.CompaniesEditView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="900">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/EditsStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dx:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <helpers:EmptyConverter x:Key="EmptyConverter" />
+            <helpers:NullContentToVisibilityConverter x:Key="NullContentToVisibilityConverter" />
+            <local:DrawingImageToImageSourceConverter x:Key="DrawingImageToImageSourceConverter" />
+            <helpers:DateConverter x:Key="DateConverter" />
+            <helpers:DataSource x:Key="DataSource" />
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore" />
+            <local:MoviePhotoConverter x:Key="MoviePhotoConverter" />
+            <dxg:TableView x:Key="TableView" ShowGroupedColumns="True" AutoWidth="True" helpers:ImmediateCellValueSavingHelper.FieldName="" />
+            <helpers:BoolToAnyConverter x:Key="GridViewNavigationStyleConverter">
+                <helpers:BoolToAnyConverter.FalseValue>
+                    <dxg:GridViewNavigationStyle>Row</dxg:GridViewNavigationStyle>
+                </helpers:BoolToAnyConverter.FalseValue>
+                <helpers:BoolToAnyConverter.TrueValue>
+                    <dxg:GridViewNavigationStyle>Cell</dxg:GridViewNavigationStyle>
+                </helpers:BoolToAnyConverter.TrueValue>
+            </helpers:BoolToAnyConverter>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}">
+            <helpers:BindingInfo ElementName="resource:ElementLayoutDataStore" Property="{x:Static local:ElementLayoutDataStore.DisposeSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="CompaniesGrid" Property="{x:Static helpers:FocusedRowRestoringHelper.ItemsSourceInterfaceProperty}" Value="{Binding EditObject.VideoRentObjects}" />
+            <helpers:BindingInfo ElementName="WebSiteColumn" Property="{x:Static helpers:CommandHelper.Command0Property}" Value="{Binding CommandGoToWebSite}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static dxg:DataViewBase.FocusedRowProperty}" Value="{Binding CurrentRecord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static helpers:CustomEventCommandHelper.MouseDoubleClickProperty}" Value="{Binding Detail.CommandEdit}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static helpers:CustomEventCommandHelper.EnterKeyDownProperty}" Value="{Binding Detail.CommandEdit}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static dxg:TableView.AllowPerPixelScrollingProperty}" Value="{Binding GridUIOptions.AllowPerPixelScrolling}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static dxg:TableView.AllowCascadeUpdateProperty}" Value="{Binding GridUIOptions.AllowCascadeUpdate}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static dxg:DataViewBase.AllowEditingProperty}" Value="{Binding GridUIOptions.AllowEditing}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static helpers:FocusedRowRestoringHelper.NavigationStyleInterfaceProperty}" Value="{Binding GridUIOptions.AllowEditing, Converter={StaticResource GridViewNavigationStyleConverter}}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static dxg:TableView.ShowAutoFilterRowProperty}" Value="{Binding GridUIOptions.ShowTheAutoFilterRow}" />
+            <helpers:BindingInfo ElementName="resource:TableView" Property="{x:Static dxg:TableView.ShowVerticalLinesProperty}" Value="{Binding GridUIOptions.ShowVerticalLines}" />
+            <helpers:BindingInfo ElementName="TypeColumnEditSettings" Property="{x:Static dxe:LookUpEditSettingsBase.ItemsSourceProperty}" Value="{Binding CompanyTypeEditData.List}" />
+            <helpers:BindingInfo ElementName="CountryColumnEditSettings" Property="{x:Static dxe:LookUpEditSettingsBase.ItemsSourceProperty}" Value="{Binding CountryEditData.List}" />
+            <helpers:ElementLayoutInfo ElementName="CompaniesGrid" StoreFolder="GridControl:CompaniesEdit-CompaniesGrid" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <dxg:GridControl x:Name="CompaniesGrid" View="{StaticResource TableView}" helpers:GridControlHelper.Grid="{Binding RelativeSource={RelativeSource Self}}">
+        <dxg:GridControl.Columns>
+            <dxg:GridColumn x:Name="NameColumn" FieldName="Name" Header="{helpers:ConstString ID=Name}" AllowGrouping="False" Width="300" AutoFilterCondition="Contains">
+                <dxg:GridColumn.EditSettings>
+                    <dxe:TextEditSettings />
+                </dxg:GridColumn.EditSettings>
+            </dxg:GridColumn>
+            <dxg:GridColumn x:Name="CountryColumn" FieldName="Country!" Header="{helpers:ConstString ID=Country}" Width="50" ColumnFilterMode="DisplayText">
+                <dxg:GridColumn.EditSettings>
+                    <dxe:ComboBoxEditSettings x:Name="CountryColumnEditSettings" helpers:StyleConverter.Style="{StaticResource SelectComboBoxEdit}" />
+                </dxg:GridColumn.EditSettings>
+            </dxg:GridColumn>
+            <dxg:GridColumn x:Name="TypeColumn" FieldName="Type!" Header="{helpers:ConstString ID=Type}" Width="100" ColumnFilterMode="DisplayText">
+                <dxg:GridColumn.EditSettings>
+                    <dxe:ComboBoxEditSettings x:Name="TypeColumnEditSettings" helpers:StyleConverter.Style="{StaticResource SelectComboBoxEdit}" />
+                </dxg:GridColumn.EditSettings>
+            </dxg:GridColumn>
+            <dxg:GridColumn x:Name="WebSiteColumn" FieldName="WebSite" Header="{helpers:ConstString ID=WebSite}" Width="150" AllowGrouping="False" ReadOnly="True" AutoFilterCondition="Contains">
+                <dxg:GridColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Hyperlink helpers:CustomEventCommandHelper.Click="{Binding Path=Column.(helpers:CommandHelper.Command0)}">
+                                <TextBlock Text="{Binding RowData.Row.WebSite}" TextTrimming="CharacterEllipsis"/>
+                            </Hyperlink>
+                        </TextBlock>
+                    </DataTemplate>
+                </dxg:GridColumn.CellTemplate>
+            </dxg:GridColumn>
+            <dxg:GridColumn x:Name="FlagColumn" FieldName="Country!.Flag" Header="{helpers:ConstString ID=Flag}" Width="30" ReadOnly="True">
+                <dxg:GridColumn.CellTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding RowData.Row.Country!.Flag, Converter={StaticResource DrawingImageToImageSourceConverter}}" Stretch="Uniform" MaxHeight="18" RenderOptions.BitmapScalingMode="NearestNeighbor" />
+                    </DataTemplate>
+                </dxg:GridColumn.CellTemplate>
+            </dxg:GridColumn>
+        </dxg:GridControl.Columns>
+    </dxg:GridControl>
+</UserControl>

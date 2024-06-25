@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.Red{fill:#D11C1C;}
+	.Black{fill:#727272;}
+</style>
+<rect x="20" y="10" class="Black" width="6" height="2"/>
+<polygon class="Red" points="14,4 12,2 8,6 4,2 2,4 6,8 2,12 4,14 8,10 12,14 14,12 10,8 "/>
+<polygon class="Black" points="18,6 14,10 15.3,11.3 19,8 28,8 28,10 28,12 28,16 16,16 10,16 4,16 2,16 2,30 30,30 30,28 30,10 
+	30,6 "/>
+</svg>

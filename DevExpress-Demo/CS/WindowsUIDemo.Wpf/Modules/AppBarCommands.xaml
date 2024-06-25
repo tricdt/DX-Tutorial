@@ -1,0 +1,105 @@
+﻿<local:WindowsUIDemoModule x:Class="WindowsUIDemo.AppBarCommands"
+                           xmlns:local="clr-namespace:WindowsUIDemo"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                           xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+                           xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                           xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+                           xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                           DataContext="{dxmvvm:ViewModelSource local:PhotoCollection}">
+    <DockPanel>
+        <dxlc:LayoutControl Name="PART_Options" DockPanel.Dock="Right" Padding="12,4,12,12" Orientation="Vertical" MinWidth="210" dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap">
+            <GroupBox Header="Alignment" Margin="0,1,0,0" VerticalAlignment="Top">
+                <dxe:ListBoxEdit Background="{x:Null}"
+                                         Name="alignmentListBox"
+                                         ShowBorder="False"
+                                         SelectedIndex="0">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxmvvm:EnumItemsSourceBehavior EnumType="dxwui:AppBarAlignment" />
+                    </dxmvvm:Interaction.Behaviors>
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+            <GroupBox Header="Hide Mode" Margin="0,1,0,0" VerticalAlignment="Top">
+                <dxe:ListBoxEdit Background="{x:Null}"
+                                         Name="hideModeListBox"
+                                         ShowBorder="False"
+                                         SelectedIndex="0">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxmvvm:EnumItemsSourceBehavior EnumType="dxwui:AppBarHideMode" />
+                    </dxmvvm:Interaction.Behaviors>
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+            <dxe:CheckEdit x:Name="isOpenCheckEdit" IsChecked="True" Content="IsOpen" VerticalAlignment="Top" Margin="0,4,0,0" />
+            <dxe:CheckEdit Content="IsCompact" IsChecked="{Binding IsCompact, ElementName=appBar, Mode=TwoWay}" VerticalAlignment="Top" />
+            <dxe:CheckEdit Content="IsAnimatonEnabled" IsChecked="{Binding Path=IsAnimationEnabled, ElementName=appBar, Mode=TwoWay}" VerticalAlignment="Top" />
+        </dxlc:LayoutControl>
+        <Grid Background="#55000000">
+            <Grid.Resources>
+                <Style TargetType="dxwui:AppBarButton">
+                    <Setter Property="AllowGlyphTheming" Value="True" />
+                    <Setter Property="GlyphHeight" Value="24" />
+                    <Setter Property="GlyphWidth" Value="24"/>
+                    <Setter Property="GlyphStretch" Value="Uniform"/>
+                </Style>
+                <ControlTemplate x:Key="ScrollViewerControlTemplate" TargetType="{x:Type ScrollViewer}">
+                    <Grid x:Name="Grid" Background="Transparent">
+                        <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                                Margin="{TemplateBinding Padding}"
+                                                Content="{TemplateBinding Content}"
+                                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                CanContentScroll="{TemplateBinding CanContentScroll}"
+                                                CanHorizontallyScroll="False"
+                                                CanVerticallyScroll="False" />
+                    </Grid>
+                </ControlTemplate>
+                <Style TargetType="ScrollViewer">
+                    <Setter Property="Template" Value="{StaticResource ScrollViewerControlTemplate}" />
+                </Style>
+            </Grid.Resources>
+            <dxwui:FlipView ItemsSource="{Binding Photos}"
+                            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                            x:Name="imageViewer1"
+                            IsAnimationEnabled="True"
+                            IsManipulationEnabled="True">
+                <dxwui:FlipView.ItemTemplate>
+                    <DataTemplate>
+                        <local:ImageViewer ImageSource="{Binding Source}"
+                                           Rotation="{Binding Rotation, Mode=TwoWay}"
+                                           Scale="{Binding Scale, Mode=TwoWay}"
+                                           Flip="{Binding Flip, Mode=TwoWay}" />
+                    </DataTemplate>
+                </dxwui:FlipView.ItemTemplate>
+            </dxwui:FlipView>
+            <dxwui:AppBar x:Name="appBar"
+                          Alignment="{Binding EditValue, ElementName=alignmentListBox}"
+                          HideMode="{Binding EditValue, ElementName=hideModeListBox}"
+                          IsOpen="{Binding IsChecked, ElementName=isOpenCheckEdit, Mode=TwoWay}">
+                <dxwui:AppBarButton Label="Zoom in" Command="{Binding ZoomInCommand}" Glyph="{dx:DXImage SvgImages/Zoom/ZoomIn.svg}" />
+                <dxwui:AppBarButton Label="Zoom out" Command="{Binding ZoomOutCommand}" Glyph="{dx:DXImage SvgImages/Zoom/ZoomOut.svg}" />
+                <dxwui:AppBarSeparator />
+                <dxwui:AppBarButton Label="Actual Size" Command="{Binding ResetScaleCommand}" Glyph="{dx:DXImage SvgImages/PDF Viewer/Zoom.svg}" />
+                <dxwui:AppBarButton Label="Rotate" HorizontalAlignment="Right" Glyph="{dx:DXImage SvgImages/Dashboards/DrillDown.svg}">
+                    <dxwui:AppBarButton.Flyout>
+                        <dxwui:MenuFlyout ShowIndicator="True">
+                            <dxwui:MenuFlyoutItem Content="90° clockwise" Command="{Binding RotateClockwiseCommand}" />
+                            <dxwui:MenuFlyoutItem Content="90° counter clockwise" Command="{Binding RotateCounterclockwiseCommand}" />
+                            <dxwui:MenuFlyoutItem Content="180°" Command="{Binding Rotate180Command}" />
+                            <dxwui:MenuFlyoutSeparator />
+                            <dxwui:MenuFlyoutItem Content="Reset" Command="{Binding RotateResetCommand}" />
+                        </dxwui:MenuFlyout>
+                    </dxwui:AppBarButton.Flyout>
+                </dxwui:AppBarButton>
+                <dxwui:AppBarButton Label="Flip" Command="{Binding FlipCommand}" Alignment="Far" Glyph="{dx:DXImage SvgImages/Dashboards/ConvertTo.svg}" />
+                <dxwui:AppBarSeparator Alignment="Far" />
+                <dxwui:AppBarButton Label="Print" Command="{Binding PrintCommand}" Alignment="Far" Glyph="{dx:DXImage SvgImages/Print/Print.svg}" />
+            </dxwui:AppBar>
+        </Grid>
+    </DockPanel>
+</local:WindowsUIDemoModule>

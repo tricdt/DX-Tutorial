@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="MVVMDemo.EnumItemsSource.GridControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVMDemo.EnumItemsSource"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <dxg:GridControl x:Name="listBox" ItemsSource="{x:Static local:UserRoleInfo.UserRoles}"
+                         VerticalAlignment="Top" Height="200">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="FullName"/>
+                <dxg:GridColumn FieldName="UserRole">
+                    <dxg:GridColumn.EditSettings>
+                        <!--#region !-->
+                        <dxe:ComboBoxEditSettings ItemsSource="{dxe:EnumItemsSource EnumType=local:UserRole, ImageSize='16,16'}"
+                                                  IsTextEditable="False" ApplyItemTemplateToSelectedItem="True"/>
+                        <!--#endregion-->
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+        </dxg:GridControl>
+
+    </dxlc:LayoutControl>
+</UserControl>

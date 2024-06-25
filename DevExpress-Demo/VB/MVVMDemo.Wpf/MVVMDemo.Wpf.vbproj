@@ -1,0 +1,1056 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8F1CBFB8-F3AB-4BDF-84C6-710FC47D388C}</ProjectGuid>
+    <BaseIntermediateOutputPath>obj.Wpf</BaseIntermediateOutputPath>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>
+    </RootNamespace>
+    <AssemblyName>MVVMDemo</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ConvertToNet6Windows />
+  </PropertyGroup>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,WPF,</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE,WPF</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Debug\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Debug\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,WPF,CLICKONCE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <IntermediateOutputPath>.\obj\ClickOnce Release\</IntermediateOutputPath>
+    <OutputPath>.\bin\ClickOnce Release\</OutputPath>
+    <DefineConstants>TRACE,WPF,CLICKONCE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugTest\</OutputPath>
+    <DefineConstants>TRACE,DEBUG,WPF,DEBUGTEST</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' &gt;= '14.0' ">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>BC42104</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>demoicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Modules\Behaviors\Images\Admin.svg" />
+    <Resource Include="Modules\Behaviors\Images\Moderator.svg" />
+    <Resource Include="Modules\Behaviors\Images\User.svg" />
+    <Reference Include="DevExpress.Data.Desktop.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.DemoData.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.DemoBase.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Docking.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2.Core">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Controls.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Dialogs.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.TypedStyles.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.framework" Condition=" '$(Configuration)' == 'DebugTest' ">
+      <HintPath></HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v22.2">
+      <HintPath></HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xaml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UIAutomationProvider">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Services.Client">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\AsyncCommands\AsyncDelegateCommandsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Behaviors\BehaviorsInStyleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Behaviors\EnumItemsSourceBehaviorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Behaviors\FocusBehaviorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Behaviors\ConfirmationBehaviorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Behaviors\DependencyPropertyBehaviorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Behaviors\CompositeCommandBehaviorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Behaviors\CustomBehaviorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Behaviors\ValidationErrorsHostBehaviorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Behaviors\KeyToCommandView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\BindableBase\BindablePropertiesViaFieldsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\BindableBase\BindablePropertiesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Commands\AutoCommandsChangeNotificationsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Commands\AutoCommandsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Commands\ChangeNotificationsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Commands\POCOCommandsChangeNotificationsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Commands\POCOCommandsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Commands\DelegateCommandsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\AsyncCommands\AsyncPOCOCommandsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Behaviors\EventToCommandView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Converters\FormatStringConverterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Converters\ObjectToObjectConverterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Converters\NumericToVisibilityConverterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Converters\NumericToBooleanConverterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Converters\StringToBooleanConverterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Converters\ObjectToBooleanConverterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Converters\BooleanToObjectConverterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Converters\BooleanNegationConverterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Converters\BooleanToVisibilityConverterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DXBinding\BackConversionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DXBinding\SourcesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DXBinding\FunctionsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DXBinding\BindingExpressionsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DXCommand\MultipleCallsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DXCommand\CommandParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DXCommand\ValuesFromControlsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DXCommand\BindingCommandToMethodsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DXDataTemplateSelector\UsingDXBindingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DXDataTemplateSelector\DeclarativeDataTemplateSelectorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\DXEvent\EventArgsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DXEvent\MultipleCallsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DXEvent\BindingEventToMethodView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\EnumItemsSource\ComboBoxEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\EnumItemsSource\GridControlView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\EnumItemsSource\ListBoxEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\POCOViewModels\DependentPropertiesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\POCOViewModels\ChangeNotificationsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\POCOViewModels\DataErrorInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\POCOViewModels\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\POCOViewModels\CommandsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\POCOViewModels\ServicesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\POCOViewModels\PropertiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Services\UIObjectServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Services\FolderBrowserDialogServiceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Services\CustomServiceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Services\OpenFolderDialogServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Services\SaveFileDialogServiceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Services\OpenFileDialogServiceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Services\DispatcherServiceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Services\SplashScreenManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Services\WindowServiceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Services\DocumentManagerService\DocumentDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Services\DocumentManagerService\CollectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Services\DocumentManagerService\FrameView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Services\DocumentManagerService\DockingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Services\DocumentManagerService\TabbedView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Services\DialogServiceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Services\MessageBoxService\MessageBoxServiceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Services\DocumentManagerService\WindowedView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Services\NavigationService\NavigationDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Services\NavigationService\FrameView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TypedStyles\BindingsAndDynamicResourcesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TypedStyles\DataTriggersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TypedStyles\TemplateTriggersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TypedStyles\StyleTriggersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TypedStyles\MarkupExtensionsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TypedStyles\EventsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TypedStyles\DXControlsTypedStylesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TypedStyles\AttachedPropertiesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TypedStyles\DXBindingAndDXCommandView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TypedStyles\BaseStylesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TypedStyles\ImplicitStylesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TypedStyles\StandardSettersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TypedStyles\StandardControlsTypedStylesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewModelBase\DataErrorInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewModelBase\ManualCommandsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewModelBase\AutoCommandsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewModelBase\LoginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewModelBase\ServicesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewModelsInteraction\MessengerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewModelsInteraction\MainPOCOView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewModelsInteraction\ParentPOCOView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewModelsInteraction\ParentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ViewModelsInteraction\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.vb">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MVVMDemoModule.vb" />
+    <EmbeddedResource Include="clickonce.txt">
+      <netcore3ignore />
+    </EmbeddedResource>
+    <Compile Include="Modules\Services\MessageBoxService\PredefinedFormat.vb" />
+    <Compile Include="Modules\Services\MessageBoxService\Helpers.vb" />
+    <Compile Include="MainWindow.xaml.vb">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AsyncCommandsModule.vb" />
+    <Compile Include="Modules\AsyncCommands\AsyncDelegateCommandsView.xaml.vb">
+      <DependentUpon>AsyncDelegateCommandsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AsyncCommands\AsyncDelegateCommandsViewModel.vb" />
+    <Compile Include="Data\PersonInfo.vb" />
+    <Compile Include="Modules\DXDataTemplateSelector\UsingDXBindingView.xaml.vb">
+      <DependentUpon>UsingDXBindingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DXDataTemplateSelector\DeclarativeDataTemplateSelectorView.xaml.vb">
+      <DependentUpon>DeclarativeDataTemplateSelectorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DXDataTemplateSelector\UserRoleInfo.vb" />
+    <Compile Include="Modules\EnumItemsSourceModule.vb" />
+    <Compile Include="Modules\EnumItemsSource\ComboBoxEditView.xaml.vb">
+      <DependentUpon>ComboBoxEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\EnumItemsSource\GridControlView.xaml.vb">
+      <DependentUpon>GridControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\EnumItemsSource\ListBoxEditView.xaml.vb">
+      <DependentUpon>ListBoxEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\EnumItemsSource\UserRole.vb" />
+    <Compile Include="Modules\EnumItemsSource\UserRoleInfo.vb" />
+    <Compile Include="Modules\DXDataTemplateSelectorModule.vb" />
+    <Compile Include="Modules\Services\UIObjectServiceView.xaml.vb">
+      <DependentUpon>UIObjectServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\UIObjectServiceViewModel.vb" />
+    <Compile Include="Modules\Services\OpenFolderDialogServiceView.xaml.vb">
+      <DependentUpon>OpenFolderDialogServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\OpenFolderDialogServiceViewModel.vb" />
+    <Compile Include="Modules\Services\SplashScreenManagerView.xaml.vb">
+      <DependentUpon>SplashScreenManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\SplashScreenManagerViewModel.vb" />
+    <Compile Include="Modules\TypedStylesModule.vb" />
+    <Compile Include="Modules\ConvertersModule.vb" />
+    <Compile Include="Modules\Converters\FormatStringConverterView.xaml.vb">
+      <DependentUpon>FormatStringConverterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Converters\ObjectToObjectConverterView.xaml.vb">
+      <DependentUpon>ObjectToObjectConverterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Converters\NumericToVisibilityConverterView.xaml.vb">
+      <DependentUpon>NumericToVisibilityConverterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Converters\NumericToBooleanConverterView.xaml.vb">
+      <DependentUpon>NumericToBooleanConverterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Converters\StartState.vb" />
+    <Compile Include="Modules\Converters\StringToBooleanConverterView.xaml.vb">
+      <DependentUpon>StringToBooleanConverterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Converters\ObjectToBooleanConverterView.xaml.vb">
+      <DependentUpon>ObjectToBooleanConverterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Converters\BooleanToObjectConverterView.xaml.vb">
+      <DependentUpon>BooleanToObjectConverterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Converters\BooleanNegationConverterView.xaml.vb">
+      <DependentUpon>BooleanNegationConverterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Converters\BooleanToVisibilityConverterView.xaml.vb">
+      <DependentUpon>BooleanToVisibilityConverterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DXEventModule.vb" />
+    <Compile Include="Modules\DXCommandModule.vb" />
+    <Compile Include="Modules\DXBindingModule.vb" />
+    <Compile Include="Modules\DXBinding\BackConversionView.xaml.vb">
+      <DependentUpon>BackConversionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DXBinding\BackConversionViewModel.vb" />
+    <Compile Include="Modules\DXBinding\SourcesView.xaml.vb">
+      <DependentUpon>SourcesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DXBinding\FunctionsView.xaml.vb">
+      <DependentUpon>FunctionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DXBinding\BindingExpressionsView.xaml.vb">
+      <DependentUpon>BindingExpressionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DXBinding\FunctionsViewModel.vb" />
+    <Compile Include="Modules\DXBinding\BindingExpressionsViewModel.vb" />
+    <Compile Include="Modules\DXBinding\RegistrationHelper.vb" />
+    <Compile Include="Modules\DXCommand\MultipleCallsView.xaml.vb">
+      <DependentUpon>MultipleCallsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DXCommand\MultipleCallsViewModel.vb" />
+    <Compile Include="Modules\DXCommand\CommandParameterView.xaml.vb">
+      <DependentUpon>CommandParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DXCommand\CommandParameterViewModel.vb" />
+    <Compile Include="Modules\DXCommand\ValuesFromControlsView.xaml.vb">
+      <DependentUpon>ValuesFromControlsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DXCommand\BindingCommandToMethodsView.xaml.vb">
+      <DependentUpon>BindingCommandToMethodsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DXCommand\ValuesFromControlsViewModel.vb" />
+    <Compile Include="Modules\DXCommand\BindingCommandToMethodsViewModel.vb" />
+    <Compile Include="Modules\DXEvent\EventArgsView.xaml.vb">
+      <DependentUpon>EventArgsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DXEvent\EventArgsViewModel.vb" />
+    <Compile Include="Modules\DXEvent\MultipleCallsView.xaml.vb">
+      <DependentUpon>MultipleCallsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DXEvent\BindingEventToMethodView.xaml.vb">
+      <DependentUpon>BindingEventToMethodView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DXEvent\BindingEventToMethodViewModel.vb" />
+    <Compile Include="Modules\ServicesModule.vb" />
+    <Compile Include="Modules\Behaviors\BehaviorsInStyleView.xaml.vb">
+      <DependentUpon>BehaviorsInStyleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Behaviors\EnumItemsSourceBehaviorView.xaml.vb">
+      <DependentUpon>EnumItemsSourceBehaviorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Behaviors\FocusBehaviorView.xaml.vb">
+      <DependentUpon>FocusBehaviorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Behaviors\ConfirmationBehaviorView.xaml.vb">
+      <DependentUpon>ConfirmationBehaviorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Behaviors\DependencyPropertyBehaviorView.xaml.vb">
+      <DependentUpon>DependencyPropertyBehaviorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Behaviors\CompositeCommandBehaviorView.xaml.vb">
+      <DependentUpon>CompositeCommandBehaviorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Behaviors\CompositeCommandBehaviorViewModel.vb" />
+    <Compile Include="Modules\Behaviors\SelectAllOnGotFocusBehavior.vb" />
+    <Compile Include="Modules\Behaviors\UserRole.vb" />
+    <Compile Include="Modules\Behaviors\CustomBehaviorView.xaml.vb">
+      <DependentUpon>CustomBehaviorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Behaviors\ValidationErrorsHostBehaviorView.xaml.vb">
+      <DependentUpon>ValidationErrorsHostBehaviorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Behaviors\KeyToCommandView.xaml.vb">
+      <DependentUpon>KeyToCommandView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Behaviors\ConfirmationBehaviorViewModel.vb" />
+    <Compile Include="Modules\Behaviors\DependencyPropertyBehaviorViewModel.vb" />
+    <Compile Include="Modules\Behaviors\ValidationErrorsHostBehaviorViewModel.vb" />
+    <Compile Include="Modules\Behaviors\KeyToCommandViewModel.vb" />
+    <Compile Include="Modules\CommandsModule.vb" />
+    <Compile Include="Modules\Commands\AutoCommandsChangeNotificationsView.xaml.vb">
+      <DependentUpon>AutoCommandsChangeNotificationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Commands\AutoCommandsView.xaml.vb">
+      <DependentUpon>AutoCommandsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Commands\AutoCommandsChangeNotificationsViewModel.vb" />
+    <Compile Include="Modules\Commands\AutoCommandsViewModel.vb" />
+    <Compile Include="Modules\Commands\ChangeNotificationsView.xaml.vb">
+      <DependentUpon>ChangeNotificationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Commands\POCOCommandsChangeNotificationsView.xaml.vb">
+      <DependentUpon>POCOCommandsChangeNotificationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Commands\POCOCommandsView.xaml.vb">
+      <DependentUpon>POCOCommandsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Commands\POCOCommandsChangeNotificationsViewModel.vb" />
+    <Compile Include="Modules\Commands\POCOCommandsViewModel.vb" />
+    <Compile Include="Modules\Commands\POCOCommandsChangeNotificationsViewModel_RuntimeGeneratedCode.vb" />
+    <Compile Include="Modules\Commands\POCOCommandsViewModel_RuntimeGeneratedCode.vb" />
+    <Compile Include="Modules\Commands\DelegateCommandsView.xaml.vb">
+      <DependentUpon>DelegateCommandsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Commands\ChangeNotificationsViewModel.vb" />
+    <Compile Include="Modules\Commands\DelegateCommandsViewModel.vb" />
+    <Compile Include="Modules\AsyncCommands\AsyncPOCOCommandsView.xaml.vb">
+      <DependentUpon>AsyncPOCOCommandsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\AsyncCommands\AsyncPOCOCommandsViewModel.vb" />
+    <Compile Include="Modules\AsyncCommands\AsyncPOCOCommandsViewModel_RuntimeGeneratedCode.vb" />
+    <Compile Include="Modules\Behaviors\EventToCommandView.xaml.vb">
+      <DependentUpon>EventToCommandView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Behaviors\EventToCommandViewModel.vb" />
+    <Compile Include="Modules\Services\GridExportService.vb" />
+    <Compile Include="Modules\Services\FolderBrowserDialogServiceView.xaml.vb">
+      <DependentUpon>FolderBrowserDialogServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\FolderBrowserDialogServiceViewModel.vb" />
+    <Compile Include="Modules\Services\CustomServiceView.xaml.vb">
+      <DependentUpon>CustomServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\CustomServiceViewModel.vb" />
+    <Compile Include="Modules\Services\SaveFileDialogServiceView.xaml.vb">
+      <DependentUpon>SaveFileDialogServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\OpenFileDialogServiceView.xaml.vb">
+      <DependentUpon>OpenFileDialogServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\SaveFileDialogServiceViewModel.vb" />
+    <Compile Include="Modules\Services\OpenFileDialogServiceViewModel.vb" />
+    <Compile Include="Modules\Services\DispatcherServiceView.xaml.vb">
+      <DependentUpon>DispatcherServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\DispatcherServiceViewModel.vb" />
+    <Compile Include="Modules\Services\WindowServiceDetailViewModel.vb" />
+    <Compile Include="Modules\Services\DialogServiceDetailViewModel.vb" />
+    <Compile Include="Modules\Services\WindowServiceView.xaml.vb">
+      <DependentUpon>WindowServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\WindowServiceViewModel.vb" />
+    <Compile Include="Modules\Services\DocumentManagerService\CollectionViewModel.vb" />
+    <Compile Include="Modules\Services\DocumentManagerService\DocumentDetailView.xaml.vb">
+      <DependentUpon>DocumentDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\DocumentManagerService\CollectionView.xaml.vb">
+      <DependentUpon>CollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\DocumentManagerService\DetailViewModel.vb" />
+    <Compile Include="Modules\Services\DocumentManagerService\FrameView.xaml.vb">
+      <DependentUpon>FrameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\DocumentManagerService\DockingView.xaml.vb">
+      <DependentUpon>DockingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\DocumentManagerService\TabbedView.xaml.vb">
+      <DependentUpon>TabbedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\DialogServiceView.xaml.vb">
+      <DependentUpon>DialogServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\DialogServiceViewModel.vb" />
+    <Compile Include="Modules\Services\MessageBoxService\MessageBoxServiceView.xaml.vb">
+      <DependentUpon>MessageBoxServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\MessageBoxService\MessageBoxServiceViewModel.vb" />
+    <Compile Include="Modules\Services\DocumentManagerService\WindowedView.xaml.vb">
+      <DependentUpon>WindowedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\NavigationService\CollectionViewModel.vb" />
+    <Compile Include="Modules\Services\NavigationService\NavigationDetailView.xaml.vb">
+      <DependentUpon>NavigationDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Services\NavigationService\DetailViewModel.vb" />
+    <Compile Include="Modules\Services\NavigationService\FrameView.xaml.vb">
+      <DependentUpon>FrameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TypedStyles\BindingsAndDynamicResourcesView.xaml.vb">
+      <DependentUpon>BindingsAndDynamicResourcesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TypedStyles\DXBindingAndDXCommandViewModel.vb" />
+    <Compile Include="Modules\TypedStyles\DataTriggersView.xaml.vb">
+      <DependentUpon>DataTriggersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TypedStyles\TemplateTriggersView.xaml.vb">
+      <DependentUpon>TemplateTriggersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TypedStyles\StyleTriggersView.xaml.vb">
+      <DependentUpon>StyleTriggersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TypedStyles\MarkupExtensionsView.xaml.vb">
+      <DependentUpon>MarkupExtensionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TypedStyles\EventsView.xaml.vb">
+      <DependentUpon>EventsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TypedStyles\DXControlsTypedStylesView.xaml.vb">
+      <DependentUpon>DXControlsTypedStylesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TypedStyles\AttachedPropertiesView.xaml.vb">
+      <DependentUpon>AttachedPropertiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TypedStyles\DXBindingAndDXCommandView.xaml.vb">
+      <DependentUpon>DXBindingAndDXCommandView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TypedStyles\BaseStylesView.xaml.vb">
+      <DependentUpon>BaseStylesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TypedStyles\ImplicitStylesView.xaml.vb">
+      <DependentUpon>ImplicitStylesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TypedStyles\StandardSettersView.xaml.vb">
+      <DependentUpon>StandardSettersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TypedStyles\StandardControlsTypedStylesView.xaml.vb">
+      <DependentUpon>StandardControlsTypedStylesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewModelBase\DataErrorInfoView.xaml.vb">
+      <DependentUpon>DataErrorInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewModelBase\DataErrorInfoViewModel.vb" />
+    <Compile Include="Modules\BehaviorsModule.vb" />
+    <Compile Include="Modules\ViewModelsInteractionModule.vb" />
+    <Compile Include="Modules\ViewModelBaseModule.vb" />
+    <Compile Include="Modules\BindableBaseModule.vb" />
+    <Compile Include="Modules\BindableBase\BindablePropertiesViaFieldsView.xaml.vb">
+      <DependentUpon>BindablePropertiesViaFieldsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\BindableBase\BindablePropertiesView.xaml.vb">
+      <DependentUpon>BindablePropertiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\BindableBase\BindablePropertiesViaFieldsViewModel.vb" />
+    <Compile Include="Modules\BindableBase\BindablePropertiesViewModel.vb" />
+    <Compile Include="Modules\POCOViewModelsModule.vb" />
+    <Compile Include="Modules\POCOViewModels\DependentPropertiesView.xaml.vb">
+      <DependentUpon>DependentPropertiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\POCOViewModels\ChangeNotificationsView.xaml.vb">
+      <DependentUpon>ChangeNotificationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\POCOViewModels\DependentPropertiesViewModel.vb" />
+    <Compile Include="Modules\POCOViewModels\ChangeNotificationsViewModel.vb" />
+    <Compile Include="Modules\POCOViewModels\DependentPropertiesViewModel_RuntimeGeneratedCode.vb" />
+    <Compile Include="Modules\POCOViewModels\ChangeNotificationsViewModel_RuntimeGeneratedCode.vb" />
+    <Compile Include="Modules\POCOViewModels\CommandsViewModel_RuntimeGeneratedCode.vb" />
+    <Compile Include="Modules\POCOViewModels\DataErrorInfoView.xaml.vb">
+      <DependentUpon>DataErrorInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\POCOViewModels\DataErrorInfoViewModel_RuntimeGeneratedCode.vb" />
+    <Compile Include="Modules\POCOViewModels\LoginView.xaml.vb">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\POCOViewModels\DataErrorInfoViewModel.vb" />
+    <Compile Include="Modules\POCOViewModels\LoginViewModel.vb" />
+    <Compile Include="Modules\POCOViewModels\CommandsView.xaml.vb">
+      <DependentUpon>CommandsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\POCOViewModels\LoginViewModel_RuntimeGeneratedCode.vb" />
+    <Compile Include="Modules\POCOViewModels\PropertiesViewModel_RuntimeGeneratedCode.vb" />
+    <Compile Include="Modules\POCOViewModels\ServicesView.xaml.vb">
+      <DependentUpon>ServicesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\POCOViewModels\PropertiesView.xaml.vb">
+      <DependentUpon>PropertiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\POCOViewModels\CommandsViewModel.vb" />
+    <Compile Include="Modules\POCOViewModels\ServicesViewModel_RuntimeGeneratedCode.vb" />
+    <Compile Include="Modules\POCOViewModels\ServicesViewModel.vb" />
+    <Compile Include="Modules\POCOViewModels\PropertiesViewModel.vb" />
+    <Compile Include="Modules\ViewModelBase\ManualCommandsView.xaml.vb">
+      <DependentUpon>ManualCommandsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewModelBase\AutoCommandsView.xaml.vb">
+      <DependentUpon>AutoCommandsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewModelBase\ManualCommandsViewModel.vb" />
+    <Compile Include="Modules\ViewModelBase\AutoCommandsViewModel.vb" />
+    <Compile Include="Modules\ViewModelBase\LoginView.xaml.vb">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewModelBase\LoginViewModel.vb" />
+    <Compile Include="Modules\ViewModelBase\ServicesView.xaml.vb">
+      <DependentUpon>ServicesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewModelBase\ServicesViewModel.vb" />
+    <Compile Include="Modules\ViewModelsInteraction\MessengerView.xaml.vb">
+      <DependentUpon>MessengerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewModelsInteraction\MessengerViewModel.vb" />
+    <Compile Include="Modules\ViewModelsInteraction\ChildPOCOViewModel.vb" />
+    <Compile Include="Modules\ViewModelsInteraction\DetailPOCOViewModel.vb" />
+    <Compile Include="Modules\ViewModelsInteraction\ChildViewModel.vb" />
+    <Compile Include="Modules\ViewModelsInteraction\DetailViewModel.vb" />
+    <Compile Include="Modules\ViewModelsInteraction\MainPOCOView.xaml.vb">
+      <DependentUpon>MainPOCOView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewModelsInteraction\ParentPOCOView.xaml.vb">
+      <DependentUpon>ParentPOCOView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewModelsInteraction\ParentView.xaml.vb">
+      <DependentUpon>ParentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewModelsInteraction\MainView.xaml.vb">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ViewModelsInteraction\MainPOCOViewModel.vb" />
+    <Compile Include="Modules\ViewModelsInteraction\ParentPOCOViewModel.vb" />
+    <Compile Include="Modules\ViewModelsInteraction\ParentViewModel.vb" />
+    <Compile Include="Modules\ViewModelsInteraction\MainViewModel.vb" />
+    <Compile Include="Properties\AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DemoTesting\Fixtures.vb" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CustomToolNamespace>MVVMDemo.Properties</CustomToolNamespace>
+    </EmbeddedResource>
+    <None Include="App.config">
+      <netcore3ignore />
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\">
+      <netcore3ignore />
+    </WCFMetadata>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent">
+    <ItemGroup>
+      <Resource Include="@(Page)" />
+    </ItemGroup>
+    <ItemGroup>
+      <Resource Include="@(Compile)" />
+    </ItemGroup>
+  </Target>
+  <!--ONLY NETCORE3
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+	<GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+	<ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3
+    <Import Project="Demo.targets" />
+  ONLY NETCORE3-->
+  <!--ONLY NETCORE3
+    <Import Project="Themes.WPF.NetCore.targets" />
+  ONLY NETCORE3-->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

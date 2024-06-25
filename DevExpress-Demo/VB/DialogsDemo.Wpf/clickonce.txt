@@ -1,0 +1,2 @@
+DevExpress.Dialogs.v{DXVersion}.Core
+DevExpress.Xpf.Dialogs.v{DXVersion}

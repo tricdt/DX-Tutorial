@@ -1,0 +1,9 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/DevExpress.RealtorWorld.Xpf;component/Controls/Themes/RenderScrollViewer.xaml" />
+        <ResourceDictionary Source="/DevExpress.RealtorWorld.Xpf;component/Controls/Themes/ImageScrollViewer.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

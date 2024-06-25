@@ -1,0 +1,185 @@
+﻿<local:TabItemModule
+    x:Class="ChartsDemo.RegularGridDataTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:ChartsDemo"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800">
+    <local:TabItemModule.DataContext>
+        <local:HeightMapGenerator />
+    </local:TabItemModule.DataContext>
+    <!--#region Resources-->
+    <local:TabItemModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:TabItemModule.Resources>
+    <!--#endregion-->
+
+    <!--#region Options-->
+    <local:TabItemModule.Options>
+        <StackPanel
+            Style="{StaticResource optionsRootStackPanelStyle}">
+            <dxe:ListBoxEdit
+                x:Name="FillStyleCombo"
+                DisplayMember="Title"
+                SelectedIndex="1"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left">
+                <dxe:ListBoxEdit.Items>
+                    <local:FillStyleItem
+                        Title="Solid">
+                        <local:FillStyleItem.FillStyle>
+                            <dxc:SolidFillStyle
+                                Brush="SeaGreen" />
+                        </local:FillStyleItem.FillStyle>
+                    </local:FillStyleItem>
+
+                    <local:FillStyleItem
+                        Title="Gradient">
+                        <local:FillStyleItem.FillStyle>
+                            <dxc:GradientFillStyle>
+                                <dxc:GradientFillStyle.ColorStops>
+                                    <dxc:ColorStop
+                                        Color="#B42B01"
+                                        Offset="100%" />
+                                    <dxc:ColorStop
+                                        Color="#C74919"
+                                        Offset="84%" />
+                                    <dxc:ColorStop
+                                        Color="#E17B31"
+                                        Offset="70%" />
+                                    <dxc:ColorStop
+                                        Color="#FBA756"
+                                        Offset="56%" />
+                                    <dxc:ColorStop
+                                        Color="#FDCC8A"
+                                        Offset="42%" />
+                                    <dxc:ColorStop
+                                        Color="#B4E095"
+                                        Offset="28%" />
+                                    <dxc:ColorStop
+                                        Color="#7DCDA8"
+                                        Offset="14%" />
+                                    <dxc:ColorStop
+                                        Color="#69A8CC"
+                                        Offset="0%" />
+                                </dxc:GradientFillStyle.ColorStops>
+                            </dxc:GradientFillStyle>
+                        </local:FillStyleItem.FillStyle>
+                    </local:FillStyleItem>
+
+                    <local:FillStyleItem
+                        Title="Stripe">
+                        <local:FillStyleItem.FillStyle>
+                            <dxc:StripeFillStyle>
+                                <dxc:GradientFillStyle.ColorStops>
+                                    <dxc:ColorStop
+                                        Color="#B42B01"
+                                        Offset="100%" />
+                                    <dxc:ColorStop
+                                        Color="#C74919"
+                                        Offset="84%" />
+                                    <dxc:ColorStop
+                                        Color="#E17B31"
+                                        Offset="70%" />
+                                    <dxc:ColorStop
+                                        Color="#FBA756"
+                                        Offset="56%" />
+                                    <dxc:ColorStop
+                                        Color="#FDCC8A"
+                                        Offset="42%" />
+                                    <dxc:ColorStop
+                                        Color="#B4E095"
+                                        Offset="28%" />
+                                    <dxc:ColorStop
+                                        Color="#7DCDA8"
+                                        Offset="14%" />
+                                    <dxc:ColorStop
+                                        Color="#69A8CC"
+                                        Offset="0%" />
+                                </dxc:GradientFillStyle.ColorStops>
+                            </dxc:StripeFillStyle>
+                        </local:FillStyleItem.FillStyle>
+                    </local:FillStyleItem>
+
+                    <local:FillStyleItem
+                        Title="Image">
+                        <local:FillStyleItem.FillStyle>
+                            <dxc:ImageFillStyle>
+                                <dxc:ImageFillStyle.ImageSource>
+                                    <BitmapImage
+                                        UriSource="{x:Static local:HeightMapGenerator.HeightMapUri}" />
+                                </dxc:ImageFillStyle.ImageSource>
+                            </dxc:ImageFillStyle>
+                        </local:FillStyleItem.FillStyle>
+                    </local:FillStyleItem>
+                </dxe:ListBoxEdit.Items>
+                <dxe:ListBoxEdit.StyleSettings>
+                    <dxe:RadioListBoxEditStyleSettings />
+                </dxe:ListBoxEdit.StyleSettings>
+            </dxe:ListBoxEdit>
+        </StackPanel>
+    </local:TabItemModule.Options>
+    <!--#endregion-->
+
+    <DockPanel>
+
+        <dxc:Chart3DControl
+            x:Name="chart"
+            AspectRatio="0 0 0">
+            <dxc:Series3DStorage>
+                <dxc:Series3D
+                    DisplayName="Map"
+                    CrosshairLabelPattern="{}X:{X:F02} Y:{Y:F02} Z:{Z:F02}">
+                    <dxc:SeriesPoint3DMatrixAdapter
+                        Values="{Binding MapValues}"
+                        XArguments="{Binding MapX}"
+                        YArguments="{Binding MapY}" />
+                    <dxc:Series3D.View>
+                        <dxc:SurfaceSeriesView
+                            VisualizationMode="Grid"
+                            FillStyle="{Binding Path=SelectedItem.FillStyle, ElementName=FillStyleCombo}" />
+                    </dxc:Series3D.View>
+                </dxc:Series3D>
+            </dxc:Series3DStorage>
+            <!--#region CrosshairOptions-->
+            <dxc:Chart3DControl.CrosshairOptions>
+                <dxc:Crosshair3DOptions
+                    ShowXArgumentLine="False"
+                    ShowYArgumentLine="False"
+                    ShowXArgumentLabel="False"
+                    ShowYArgumentLabel="False" />
+            </dxc:Chart3DControl.CrosshairOptions>
+            <!--#endregion-->
+            <!--#region ZAxis-->
+            <dxc:Chart3DControl.ZAxis>
+                <dxc:ZAxis3D>
+                    <dxc:ZAxis3D.CrosshairAxisLabelOptions>
+                        <dxc:CrosshairAxisLabelOptions
+                            Pattern="{}{V:F02}"
+                            Visibility="True" />
+                    </dxc:ZAxis3D.CrosshairAxisLabelOptions>
+                </dxc:ZAxis3D>
+            </dxc:Chart3DControl.ZAxis>
+            <!--#endregion-->
+            <!--#region Legends-->
+            <dxc:Chart3DControl.Legends>
+                <dxc:Legend
+                    HorizontalPosition="Right"
+                    VerticalPosition="Top"
+                    ReverseItems="True" />
+            </dxc:Chart3DControl.Legends>
+            <!--#endregion-->
+        </dxc:Chart3DControl>
+
+    </DockPanel>
+</local:TabItemModule>

@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="TreeListDemo.TreeListDemoRibbon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:TreeListDemo"
+             xmlns:grid="clr-namespace:GridDemo"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+             xmlns:printing="clr-namespace:DevExpress.XtraPrinting;assembly=DevExpress.Printing.v22.2.Core"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300">
+    <dxr:RibbonControl>
+        <dxr:RibbonPage Caption="Demo">
+            <dxr:RibbonPageGroup Caption="Print and Export" IsVisible="{DXBinding '@a($local:TreeListDemoRibbon).ExportTreeList != null'}">
+                <dxb:BarButtonItem Content="Print Preview"
+                                   Glyph="pack://application:,,,/TreeListDemo;component/Images/Ribbon/Preview.svg"
+                                   Command="{DXBinding '@a($local:TreeListDemoRibbon).ExportTreeList.View.Commands.ShowRibbonPrintPreview'}" />
+                <dxb:BarSplitButtonItem Content="Data Aware Export"
+                                        Hint="An advanced data export engine that supports a lot of MS Excel data analysis capabilites.">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxdb:BarSplitButtonItemBehavior />
+                    </dxmvvm:Interaction.Behaviors>
+                    <dxb:PopupMenu>
+                        <dxb:BarButtonItem Content="Export to XLSX"
+                                           Glyph="pack://application:,,,/TreeListDemo;component/Images/Ribbon/ExportToXLSX.svg"
+                                           ItemClick="{DXEvent Handler='$grid:DemoModuleExportHelper.ExportToXlsx(@a($local:TreeListDemoRibbon).ExportTreeList.View)'}" />
+                        <dxb:BarButtonItem Content="Export to XLS"
+                                           Glyph="pack://application:,,,/TreeListDemo;component/Images/Ribbon/ExportToXLS.svg"
+                                           ItemClick="{DXEvent Handler='$grid:DemoModuleExportHelper.ExportToXls(@a($local:TreeListDemoRibbon).ExportTreeList.View)'}" />
+                        <dxb:BarButtonItem Content="Export to CSV"
+                                           Glyph="pack://application:,,,/TreeListDemo;component/Images/Ribbon/ExportToCSV.svg"
+                                           ItemClick="{DXEvent Handler='$grid:DemoModuleExportHelper.ExportToCsv(@a($local:TreeListDemoRibbon).ExportTreeList.View)'}" />
+                    </dxb:PopupMenu>
+                </dxb:BarSplitButtonItem>
+                <dxb:BarSplitButtonItem Content="WYSIWYG Export"
+                                        Hint="Allows you to export data in various formats and provides numerous customization options.">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxdb:BarSplitButtonItemBehavior />
+                    </dxmvvm:Interaction.Behaviors>
+                    <dxb:PopupMenu>
+                        <dxb:BarButtonItem Content="Export to PDF"
+                                           Glyph="pack://application:,,,/TreeListDemo;component/Images/Ribbon/ExportToPDF.svg"
+                                           ItemClick="{DXEvent Handler='$grid:DemoModuleWYSIWYGExportHelper.DoExport(@a($local:TreeListDemoRibbon).ExportTreeList.View, $printing:ExportFormat.Pdf)'}" />
+                        <dxb:BarButtonItem Content="Export to HTML"
+                                           Glyph="pack://application:,,,/TreeListDemo;component/Images/Ribbon/ExportToHTML.svg"
+                                           ItemClick="{DXEvent Handler='$grid:DemoModuleWYSIWYGExportHelper.DoExport(@a($local:TreeListDemoRibbon).ExportTreeList.View, $printing:ExportFormat.Htm)'}" />
+                        <dxb:BarButtonItem Content="Export to MHT"
+                                           Glyph="pack://application:,,,/TreeListDemo;component/Images/Ribbon/ExportToMHT.svg"
+                                           ItemClick="{DXEvent Handler='$grid:DemoModuleWYSIWYGExportHelper.DoExport(@a($local:TreeListDemoRibbon).ExportTreeList.View, $printing:ExportFormat.Mht)'}" />
+                        <dxb:BarButtonItem Content="Export to RTF"
+                                           Glyph="pack://application:,,,/TreeListDemo;component/Images/Ribbon/ExportToRTF.svg"
+                                           ItemClick="{DXEvent Handler='$grid:DemoModuleWYSIWYGExportHelper.DoExport(@a($local:TreeListDemoRibbon).ExportTreeList.View, $printing:ExportFormat.Rtf)'}" />
+                        <dxb:BarButtonItem Content="Export to XLSX"
+                                           Glyph="pack://application:,,,/TreeListDemo;component/Images/Ribbon/ExportToXLSX.svg"
+                                           ItemClick="{DXEvent Handler='$grid:DemoModuleWYSIWYGExportHelper.DoExport(@a($local:TreeListDemoRibbon).ExportTreeList.View, $printing:ExportFormat.Xlsx)'}" />
+                        <dxb:BarButtonItem Content="Export to XLS"
+                                           Glyph="pack://application:,,,/TreeListDemo;component/Images/Ribbon/ExportToXLS.svg"
+                                           ItemClick="{DXEvent Handler='$grid:DemoModuleWYSIWYGExportHelper.DoExport(@a($local:TreeListDemoRibbon).ExportTreeList.View, $printing:ExportFormat.Xls)'}" />
+                        <dxb:BarButtonItem Content="Export to Text"
+                                           Glyph="pack://application:,,,/TreeListDemo;component/Images/Ribbon/ExportToText.svg"
+                                           ItemClick="{DXEvent Handler='$grid:DemoModuleWYSIWYGExportHelper.DoExport(@a($local:TreeListDemoRibbon).ExportTreeList.View, $printing:ExportFormat.Text)'}" />
+                        <dxb:BarButtonItem Content="Export to Image"
+                                           Glyph="pack://application:,,,/TreeListDemo;component/Images/Ribbon/ExportToImage.svg"
+                                           ItemClick="{DXEvent Handler='$grid:DemoModuleWYSIWYGExportHelper.DoExport(@a($local:TreeListDemoRibbon).ExportTreeList.View, $printing:ExportFormat.Image)'}" />
+                        <dxb:BarButtonItem Content="Export to DOCX"
+                                           Glyph="pack://application:,,,/TreeListDemo;component/Images/Ribbon/ExportToDOCX.svg"
+                                           ItemClick="{DXEvent Handler='$grid:DemoModuleWYSIWYGExportHelper.DoExport(@a($local:TreeListDemoRibbon).ExportTreeList.View, $printing:ExportFormat.Docx)'}" />
+                    </dxb:PopupMenu>
+                </dxb:BarSplitButtonItem>
+            </dxr:RibbonPageGroup>
+        </dxr:RibbonPage>
+    </dxr:RibbonControl>
+</UserControl>

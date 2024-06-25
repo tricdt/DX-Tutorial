@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="EditorsDemo.MaskPropertiesEdit"
+             x:Name="maskEdit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" x:Name="lblEditValue" Margin="0,0,6,0" Text="Edit value:" />
+            <dxe:TextEdit Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True" x:Name="txtEditValue" EditValue="{Binding Path=FocusedEditor.EditValue, ElementName=maskEdit}" Focusable="False" />
+        </Grid>
+        <Grid Margin="0,12,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock VerticalAlignment="Center" x:Name="lblAutoComplete" Grid.Column="0" Grid.Row="0" Text="Auto complete: "  Margin="0,6,0,0" />
+            <dxe:ComboBoxEdit VerticalAlignment="Center" IsTextEditable="False" Grid.Column="1" Grid.Row="0" x:Name="cbAutoComplete" SelectedIndexChanged="cbAutoComplete_SelectedIndexChanged">
+                <dxe:ComboBoxEdit.Items>
+                    <sys:String>Default</sys:String>
+                    <sys:String>None</sys:String>
+                    <sys:String>Strong</sys:String>
+                    <sys:String>Optimistic</sys:String>
+                </dxe:ComboBoxEdit.Items>
+            </dxe:ComboBoxEdit>
+            <TextBlock VerticalAlignment="Center" x:Name="lblEditMask" Margin="0,6,6,0" Grid.Column="0" Grid.Row="1" Text="Edit mask: " />
+            <dxe:TextEdit VerticalAlignment="Center"
+                    Margin="0,6,0,0"
+                    Grid.Column="1"
+                    Grid.Row="1" x:Name="txtEditMask" LostFocus="txtEditMask_LostFocus" />
+            <TextBlock VerticalAlignment="Center" x:Name="lblMaskType" Margin="0,6,6,0" Grid.Column="0" Grid.Row="2" Text="Mask type: " />
+            <dxe:ComboBoxEdit Margin="0,6,0,0" IsTextEditable="False" Grid.Column="1" Grid.Row="2" x:Name="cbMaskType" SelectedIndexChanged="cbMaskType_SelectedIndexChanged" VerticalAlignment="Center">
+                <dxe:ComboBoxEdit.Items>
+                    <sys:String>DateTime</sys:String>
+                    <sys:String>DateTimeAdvancingCaret</sys:String>
+                </dxe:ComboBoxEdit.Items>
+            </dxe:ComboBoxEdit>
+            <TextBlock VerticalAlignment="Center" x:Name="lblPlaceHolder" Margin="0,6,6,0" Grid.Column="0" Grid.Row="3" Text="Placeholder: " />
+            <dxe:TextEdit VerticalAlignment="Center"
+                    Margin="0,6,0,0"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="3"
+                    x:Name="txtPlaceHolder"
+                    EditValueChanged="txtPlaceHolder_EditValueChanged"
+                    MaskType="Regular"
+                    Mask="."
+                    MaskUseAsDisplayFormat="True"
+                    MaskShowPlaceHolders="True"
+                    >
+            </dxe:TextEdit>
+            <TextBlock VerticalAlignment="Center" x:Name="lblCardType" Grid.Column="0" Grid.Row="4" Text="Card type: " Margin="0,6,6,0" />
+            <dxe:ComboBoxEdit Margin="0,6,0,0" VerticalAlignment="Center" IsTextEditable="False" Grid.Column="1" Grid.Row="4" x:Name="cbCardType" SelectedIndexChanged="OncbCardType_SelectedIndexChanged" DisplayMember="Name"/>
+            <dxe:CheckEdit Margin="0,6,0,0" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" x:Name="chIgnoreMaskBlank" Content="Ignore mask blank" EditValueChanged="chIgnoreMaskBlank_EditValueChanged" />
+            <dxe:CheckEdit Margin="0,6,0,0" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Content="Beep on error" x:Name="chBeep" EditValueChanged="chBeep_EditValueChanged" />
+            <dxe:CheckEdit Margin="0,6,0,0" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Content="Save literal" x:Name="cbSaveLiteral" EditValueChanged="cbSaveLiteral_EditValueChanged" />
+            <dxe:CheckEdit Margin="0,6,0,0" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" Content="Show place holders" x:Name="chShowPlaceHolders" EditValueChanged="chShowPlaceHolders_EditValueChanged" />
+            <dxe:CheckEdit Margin="0,6,0,0" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="9" Content="Use mask as display format" x:Name="chUseMaskAsDisplayFormat" EditValueChanged="chUseMaskAsDisplayFormat_EditValueChanged" />
+            <dxe:CheckEdit Margin="0,6,0,0" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="10" Content="Allow null input" x:Name="chAllowNull" EditValueChanged="chAllowNull_EditValueChanged" />
+        </Grid>
+    </StackPanel>
+</UserControl>

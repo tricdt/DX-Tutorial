@@ -1,0 +1,45 @@
+﻿<local:MapDemoModule x:Class="MapDemo.ShapeImage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+             xmlns:local="clr-namespace:MapDemo"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <local:MapDemoModule.Resources>
+        <local:DemoValuesProvider x:Key="DemoValuesProvider" />
+    </local:MapDemoModule.Resources>
+    <Grid>
+        <dxm:MapControl x:Name="map" ZoomLevel="14" MaxZoomLevel="17" MinZoomLevel="10">
+            <dxm:MapControl.CenterPoint>
+                <dxm:GeoPoint Latitude="40.78" Longitude="-73.9675"/>
+            </dxm:MapControl.CenterPoint>
+            <dxm:MapControl.Layers>
+                <dxm:ImageLayer ViewportChanged="ImageLayer_ViewportChanged" >
+                    <dxm:BingMapDataProvider Kind="Road" BingKey="{Binding DevexpressBingKey, Source={StaticResource DemoValuesProvider}}" />
+                </dxm:ImageLayer>
+                <dxm:VectorLayer EnableSelection="False">
+                    <dxm:MapItemStorage>
+                        <dxm:MapPolygon EnableHighlighting="False">
+                            <dxm:MapPolygon.Fill>
+                                <ImageBrush ImageSource="/MapDemo;component/Images/ShapeImage/CentralPark.png" />
+                            </dxm:MapPolygon.Fill>
+                            <dxm:MapPolygon.Points>
+                                <dxm:GeoPoint Latitude="40.767809" Longitude="-73.981249" />
+                                <dxm:GeoPoint Latitude="40.768458" Longitude="-73.981477" />
+                                <dxm:GeoPoint Latitude="40.800273" Longitude="-73.958291" />
+                                <dxm:GeoPoint Latitude="40.800396" Longitude="-73.957846" />
+                                <dxm:GeoPoint Latitude="40.797011" Longitude="-73.949683" />
+                                <dxm:GeoPoint Latitude="40.796626" Longitude="-73.949541" />
+                                <dxm:GeoPoint Latitude="40.764918" Longitude="-73.972547" />
+                                <dxm:GeoPoint Latitude="40.765230" Longitude="-73.973245" />
+                                <dxm:GeoPoint Latitude="40.764704" Longitude="-73.973741" />
+                            </dxm:MapPolygon.Points>
+                        </dxm:MapPolygon>
+                    </dxm:MapItemStorage>
+                </dxm:VectorLayer>
+            </dxm:MapControl.Layers>
+        </dxm:MapControl>
+    </Grid>
+</local:MapDemoModule>

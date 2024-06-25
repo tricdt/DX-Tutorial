@@ -1,0 +1,39 @@
+﻿<local:SpellCheckerDemoModule x:Class="SpellCheckerDemo.TextEdit"
+                              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              xmlns:local="clr-namespace:SpellCheckerDemo"
+                              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                              xmlns:dxspch="http://schemas.devexpress.com/winfx/2008/xaml/spellchecker"
+                              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                              mc:Ignorable="d"
+                              d:DesignHeight="400"
+                              d:DesignWidth="800">
+    <DockPanel>
+        <StackPanel Name="PART_Options" DockPanel.Dock="Right" Margin="12,8,12,12" MinWidth="210">
+            <dxe:CheckEdit Content="CheckAsYouType Mode" EditValue="{DXBinding '@e(spellChecker).CheckAsYouType'}" Margin="0,0,0,8" />
+            <Button Content="Check Spelling" Click="{DXEvent '@e(spellChecker).Check()'}" />
+        </StackPanel>
+        <dxe:TextEdit x:Name="textEdit"
+                      SelectAllOnGotFocus="False"
+                      AcceptsReturn="True"
+                      TextWrapping="Wrap"
+                      VerticalContentAlignment="Top"
+                      Text="Strickland Xtra Co. (www.stricklandfire.somecompany.com) is an independent business unit of Strickland Corporation, a leading versatile accessories supplier in ArlenHill, Texas.&#xA; We are currently in the process of designing an information systenm tosupport placing and billing ordres.&#xA; We are contrcting indeoendent software wendors, amnd slecting the basic set of programming controls required to support our framework. There are several promenet vendors in the software compnents markeplace from which we will select a component suite to meet our demands.&#xA; The the spellchecking capabiltis are of our top priorietes since we baddly need them.&#xA; &#xA; Our requirements  are asfollows:&#xA; &#xA; The phonetic suggestion algorithm shuld be used thaT takes into account the pronunciation of a word. wE ARE AWARE that the SpellChecker component utilizes the implementation of the Double Metaphone search algorithm.  It can be brifly described as it implements two phonetic codes (primary and secondary) that are calculated for each word. The calculation rules are different for different languages. and are bazed on the set of pronunciation rules for that lagnuage.&#xA; &#xA; Then, the phonetic strategy compares the phonetic code of the misspelled word to all the words in the word list. If the phonetic codes match, then the word is added to the suggestion list.&#xA; &#xA; Please imform us whether your suite can meet our high standarts.&#xA; &#xA; Sincerely yours,&#xA; Nathan M. Boyes, CIO"
+                      Margin="10">
+            <dxmvvm:Interaction.Behaviors>
+                <dxspch:DXSpellChecker x:Name="spellChecker" Culture="en-US" CheckAsYouType="True" ShowSpellCheckMenu="True">
+                    <dxspch:DXSpellChecker.Dictionaries>
+                        <dxspch:SpellCheckerISpellDictionary Culture="en-US"
+                                                             DictionaryUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/american.xlg"
+                                                             GrammarUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/english.aff" />
+                        <dxspch:SpellCheckerCustomDictionary Culture="en-US"
+                                                             DictionaryUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/CustomEnglish.dic"
+                                                             AlphabetUri="pack://application:,,,/SpellCheckerDemo;component//Data/Dictionaries/EnglishAlphabet.txt" />
+                    </dxspch:DXSpellChecker.Dictionaries>
+                </dxspch:DXSpellChecker>
+            </dxmvvm:Interaction.Behaviors>
+        </dxe:TextEdit>
+    </DockPanel>
+</local:SpellCheckerDemoModule>

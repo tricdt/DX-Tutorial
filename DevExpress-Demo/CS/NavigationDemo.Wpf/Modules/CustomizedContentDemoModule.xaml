@@ -1,0 +1,124 @@
+﻿<local:AccordionDemoModule x:Class="NavigationDemo.CustomizedContentDemoModule"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                           xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                           xmlns:dxa="http://schemas.devexpress.com/winfx/2008/xaml/accordion"
+                           xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                           xmlns:local="clr-namespace:NavigationDemo"
+                           xmlns:utils="clr-namespace:NavigationDemo.Utils"
+                           mc:Ignorable="d"
+                           DataContext="{dxmvvm:ViewModelSource local:CustomizedContentViewModel}"
+                           ModuleLoaded="{DXEvent Handler='OnLoaded()'}"
+                           ModuleUnloaded="{DXEvent Handler='OnUnloaded()'}"
+                           d:DesignHeight="400"
+                           d:DesignWidth="600">
+
+    <!--#region Resources-->
+    <local:AccordionDemoModule.Resources>
+        <CollectionViewSource Source="{Binding Data}" x:Key="Companies" >
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="CompanyName"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+
+        <DataTemplate DataType="{x:Type CollectionViewGroup}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="80" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Path=Name}" />
+                <dx:DXImage Grid.Column="1" Width="16" Height="16">
+                    <Image.Source>
+                        <MultiBinding Converter="{utils:DeltaValueToImageSourceConverter NegativeImageSource='pack://application:,,,/NavigationDemo;component/Images/Triangle_Down.svg', PositiveImageSource='pack://application:,,,/NavigationDemo;component/Images/Triangle_Up.svg'}">
+                            <Binding Path="Items[0].DeltaPrice" />
+                            <Binding Path="Items[0].DeltaChange" />
+                            <Binding ElementName="StockIndicatorModeSelector" Path="EditValue" />
+                        </MultiBinding>
+                    </Image.Source>
+                </dx:DXImage>
+                <TextBlock Grid.Column="2" Text="{Binding Path=Items[0].Price, StringFormat=c}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:StockItemInfo}">
+            <Grid MinWidth="200">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="80" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.RowSpan="3" Text="{Binding Price, StringFormat=c}" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Text="Change:" FontWeight="Bold" />
+                <TextBlock Grid.Column="2" Text="{Binding DeltaPrice, StringFormat=c}" HorizontalAlignment="Right" />
+                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding DeltaPricePercent, StringFormat=P}" HorizontalAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="Low Price:" FontWeight="Bold" />
+                <TextBlock Grid.Column="2" Grid.Row="2" Text="{Binding LowPrice, StringFormat=c}" HorizontalAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="High Price:" FontWeight="Bold" />
+                <TextBlock Grid.Column="2" Grid.Row="3" Text="{Binding HighPrice, StringFormat=c}" HorizontalAlignment="Right" />
+                <TextBlock Grid.Row="3" Text="Volume:" FontWeight="Bold" />
+                <TextBlock Grid.Row="3" Text="{Binding Volume}" HorizontalAlignment="Right" Margin="0,0,10,0" />
+                <dxe:SparklineEdit Grid.ColumnSpan="3" Grid.Row="4" Items="{Binding PriceHistory}">
+                    <dxe:SparklineEdit.StyleSettings>
+                        <dxe:AreaSparklineStyleSettings Brush="#FF1ABDD6" AreaOpacity="1" />
+                    </dxe:SparklineEdit.StyleSettings>
+                </dxe:SparklineEdit>
+            </Grid>
+        </DataTemplate>
+    </local:AccordionDemoModule.Resources>
+    <!--#endregion-->
+
+    <DockPanel>
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Header="Expand Button Position" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit EditValue="{Binding ElementName=accordion, Path=RootItemExpandButtonPosition}" Background="{x:Null}" ShowBorder="False">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type dxa:ExpandButtonPosition}" />
+                        </dxmvvm:Interaction.Behaviors>
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Stock Indicator Mode" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit x:Name="StockIndicatorModeSelector" Background="{x:Null}" ShowBorder="False" SelectedIndex="0">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type local:StockIndicatorMode}" />
+                        </dxmvvm:Interaction.Behaviors>
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxa:AccordionControl Loaded="{DXEvent '@Self.ExpandItem(@Self.Items[0])'}"
+                              x:Name="accordion"
+                              ItemsSource="{Binding Source={StaticResource Companies}}"
+                              ChildrenPath="Items"
+                              RootItemExpandButtonPosition="None"
+                              SubItemExpandButtonPosition="None"
+                              SelectionMode="None"
+                              AllowCollectionView="True"
+                              Width="400"
+                              Margin="0,30,0,30" />
+    </DockPanel>
+</local:AccordionDemoModule>

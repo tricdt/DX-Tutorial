@@ -1,0 +1,26 @@
+﻿<local:PropertyGridDemoModule x:Class="PropertyGridDemo.TypeConvertersFluentAPIModule"
+                              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              xmlns:local="clr-namespace:PropertyGridDemo"
+                              xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*" />
+            <RowDefinition />
+            <RowDefinition Height="0.15*" />
+        </Grid.RowDefinitions>
+        <dxprg:PropertyGridControl Grid.Column="1"
+                                   Grid.Row="1"
+                                   SelectedObject="{Binding}"
+                                   CustomExpand="PropertyGridControl_OnCustomExpand"
+                                   ShowCategories="False">
+            <dxprg:PropertyDefinition Path="*" UseTypeConverterToStringConversion="True" />
+            <dxprg:PropertyDefinition Path="Product" AllowInstanceInitializer="False" UseTypeConverterToStringConversion="True" />
+        </dxprg:PropertyGridControl>
+    </Grid>
+</local:PropertyGridDemoModule>

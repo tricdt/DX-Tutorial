@@ -1,0 +1,214 @@
+﻿<local:TabItemModule
+    x:Class="ChartsDemo.PolarRangeAreaTab"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ChartsDemo"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{DXBinding Expr='$local:ChartViewModelFactory.CreatePolarViewModel()'}">
+    <!--#region Resources-->
+    <local:TabItemModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </local:TabItemModule.Resources>
+    <!--#endregion-->
+
+    <!--#region Options-->
+    <local:TabItemModule.Options>
+        <StackPanel
+            Style="{StaticResource optionsRootStackPanelStyle}">
+            <GroupBox
+                Header="Function"
+                Margin="0,5,0,0">
+                <dxe:ListBoxEdit
+                    Name="lbeFunction"
+                    ItemsSource="{Binding Sources}"
+                    SelectedItem="{Binding SelectedSource}"
+                    DisplayMember="Description"
+                    ValueMember="DataSource">
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+            <GroupBox
+                Header="Shape Style"
+                Margin="0,5,0,0">
+                <dxe:ListBoxEdit
+                    Name="lbeShapeStyle"
+                    ItemsSource="{dxe:EnumItemsSource EnumType=dxc:CircularDiagramShapeStyle}"
+                    EditValue="{x:Static dxc:CircularDiagramShapeStyle.Circle}">
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+            <GroupBox
+                Header="Rotation Direction"
+                Margin="0,5,0,0">
+                <dxe:ListBoxEdit
+                    Name="lbeRotationDirection"
+                    ItemsSource="{dxe:EnumItemsSource EnumType=dxc:CircularDiagramRotationDirection}"
+                    EditValue="{x:Static dxc:CircularDiagramRotationDirection.Counterclockwise}">
+                    <dxe:ListBoxEdit.StyleSettings>
+                        <dxe:RadioListBoxEditStyleSettings />
+                    </dxe:ListBoxEdit.StyleSettings>
+                </dxe:ListBoxEdit>
+            </GroupBox>
+            <GroupBox
+                Header="Start Angle"
+                Margin="0,5,0,0">
+                <StackPanel
+                    MinWidth="150">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Text="0"
+                            HorizontalAlignment="Left" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Text="180"
+                            HorizontalAlignment="Center" />
+                        <TextBlock
+                            Grid.Column="2"
+                            Text="360"
+                            HorizontalAlignment="Right" />
+                    </Grid>
+                    <dxe:TrackBarEdit
+                        Name="tlbStartAngle"
+                        Value="0"
+                        Minimum="0"
+                        Maximum="360"
+                        TickPlacement="None" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox
+                Header="Labels"
+                Margin="0,5,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="Auto" />
+                        <ColumnDefinition
+                            MinWidth="50"
+                            Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <dxe:CheckEdit
+                        Name="cheLabelVisible"
+                        Grid.ColumnSpan="2"
+                        Content="Visible"
+                        IsChecked="False"
+                        Margin="0,0,0,10" />
+                    <TextBlock
+                        Text="Kind:"
+                        VerticalAlignment="Center"
+                        Grid.Row="1"
+                        Margin="0,0,15,0" />
+                    <dxe:ComboBoxEdit
+                        Name="cbeLabelKind"
+                        Grid.Row="1"
+                        ItemsSource="{dxe:EnumItemsSource EnumType=dxc:RangeAreaLabelKind}"
+                        EditValue="{x:Static dxc:RangeAreaLabelKind.Value1Label}"
+                        Width="116"
+                        IsEnabled="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}}, Path=Children[0].IsChecked}"
+                        Grid.ColumnSpan="2"
+                        Margin="35,0,0,0" />
+                </Grid>
+            </GroupBox>
+            <GroupBox
+                Header="Markers"
+                Margin="0,5,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <dxe:CheckEdit
+                        Name="cheMarker1Visible"
+                        Grid.Row="1"
+                        Margin="0,0,0,5"
+                        Content="Marker1 Visible"
+                        IsChecked="True" />
+                    <dxe:CheckEdit
+                        Name="cheMarker2Visible"
+                        Grid.Row="2"
+                        Margin="0,0,0,5"
+                        Content="Marker2 Visible"
+                        IsChecked="True" />
+                </Grid>
+            </GroupBox>
+        </StackPanel>
+    </local:TabItemModule.Options>
+    <!--#endregion-->
+
+    <DockPanel
+        Loaded="{DXEvent '@e(chart).Animate()'}">
+
+        <!--#region ChartsRibbon-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}" />
+        <!--#endregion-->
+
+        <dxc:ChartControl
+            Name="chart"
+            AnimationMode="OnLoad">
+            <dxmvvm:Interaction.Behaviors>
+                <local:ChartAnimationService />
+            </dxmvvm:Interaction.Behaviors>
+            <dxc:PolarDiagram2D
+                StartAngle="{Binding ElementName=tlbStartAngle, Path=Value}"
+                ShapeStyle="{Binding ElementName=lbeShapeStyle, Path=EditValue}"
+                RotationDirection="{Binding ElementName=lbeRotationDirection, Path=EditValue}">
+                <dxc:PolarRangeAreaSeries2D
+                    x:Name="series"
+                    DataSource="{Binding SelectedSource.DataSource}"
+                    ArgumentDataMember="X"
+                    ValueDataMember="Y1"
+                    Value2DataMember="Y2"
+                    Transparency="0.6"
+                    ToolTipPointPattern=" {A}: {V1:0.00} - {V2:0.00}"
+                    DisplayName="Day-Night"
+                    Marker1Visible="{Binding ElementName=cheMarker1Visible, Path=IsChecked}"
+                    Marker2Visible="{Binding ElementName=cheMarker2Visible, Path=IsChecked}"
+                    AnimationAutoStartMode="SetStartState">
+                    <dxc:PolarRangeAreaSeries2D.Label>
+                        <dxc:SeriesLabel
+                            dxc:CircularRangeAreaSeries2D.LabelKind="{Binding ElementName=cbeLabelKind, Path=EditValue}"
+                            Visible="{Binding ElementName=cheLabelVisible, Path=IsChecked}"
+                            Indent="15"
+                            ResolveOverlappingMode="HideOverlapped"
+                            TextPattern="{}{V:0.00}" />
+                    </dxc:PolarRangeAreaSeries2D.Label>
+                </dxc:PolarRangeAreaSeries2D>
+            </dxc:PolarDiagram2D>
+            <!--#region Titles-->
+            <dxc:ChartControl.Titles>
+                <dxc:Title
+                    HorizontalAlignment="Center">Function in polar coordinates</dxc:Title>
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+        </dxc:ChartControl>
+
+    </DockPanel>
+</local:TabItemModule>

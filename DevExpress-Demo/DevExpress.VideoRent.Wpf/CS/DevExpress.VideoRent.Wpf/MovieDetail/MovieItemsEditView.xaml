@@ -1,0 +1,146 @@
+<mb:CustomShowUserControl x:Class="DevExpress.VideoRent.Wpf.MovieItemsEditView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:mb="clr-namespace:DevExpress.VideoRent.Wpf.ModulesBase"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"  
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:resources="clr-namespace:DevExpress.VideoRent.Resources;assembly=DevExpress.VideoRent.Resources"
+    xmlns:videorent="clr-namespace:DevExpress.VideoRent;assembly=DevExpress.VideoRent"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    Width="922" Height="670"
+    ShowMethodType="{DynamicResource ShowType}">
+
+    <mb:CustomShowUserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/EditsStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <helpers:StringFormatConverter x:Key="StringFormatConverter" />
+            <helpers:EmptyConverter x:Key="EmptyConverter"/>
+            <helpers:DataSource x:Key="DataSource" />
+            <resources:ImagesSourceHelper x:Key="ImagesHelper" />
+            <helpers:ImageCollectionImageSource x:Key="AddButtonImageSource" ImageCollection="{Binding Source={StaticResource ImagesHelper}, Path=BarIcons}" ImageIndex="0" />
+            <helpers:ImageCollectionImageSource x:Key="DeleteButtonImageSource" ImageCollection="{Binding Source={StaticResource ImagesHelper}, Path=BarIcons}" ImageIndex="2" />
+            <local:MoviePhotoConverter x:Key="MoviePhotoConverter" />
+            <local:EnumItemToItemIconConverter x:Key="FormatToFormatIconConverter" EnumType="{x:Type videorent:MovieItemFormat}" ImagesPropertyName="DiskIcons"/>
+            <local:MovieItemStatusToFontWeightConverter x:Key="MovieItemStatusToFontWeightConverter"/>
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore"/>
+            <mb:PopupShowType x:Key="ShowType" Title="{helpers:ConstString ID=MovieItems}" />
+        </ResourceDictionary>
+    </mb:CustomShowUserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings> 
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}">
+            <helpers:BindingInfo ElementName="resource:ElementLayoutDataStore" Property="{x:Static local:ElementLayoutDataStore.DisposeSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static mb:ShowType.CloseSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="resource:ShowType" Property="{x:Static helpers:CustomEventCommandHelper.ClosingProperty}" Value="{Binding CommandDispose}" />
+            <helpers:BindingInfo ElementName="ItemsAssociationsGrid" Property="{x:Static helpers:CustomEventCommandHelper.AddItemClickProperty}" Value="{Binding Detail.CommandAddItems}" />
+            <helpers:BindingInfo ElementName="ItemsAssociationsGrid" Property="{x:Static helpers:CustomEventCommandHelper.DeleteItemClickProperty}" Value="{Binding CommandDelete}" />
+            <helpers:BindingInfo ElementName="ItemsAssociationsGrid" Property="{x:Static helpers:AddDeleteBar.AllowDeleteProperty}" Value="{Binding AllowDelete}" />
+            <helpers:BindingInfo ElementName="ItemsGrid" Property="{x:Static dxg:GridControl.ItemsSourceProperty}" Value="{Binding EditObject.Movie.Items}" />
+            <helpers:BindingInfo ElementName="ItemsGridView" Property="{x:Static dxg:TableView.SelectedRowsSourceProperty}" Value="{Binding SelectedItems}" />
+            <helpers:BindingInfo ElementName="MovieTitle" Property="{x:Static TextBlock.TextProperty}" Value="{Binding EditObject.Movie.Title}" />
+            <helpers:BindingInfo ElementName="MovieYear" Property="{x:Static TextBlock.TextProperty}" Value="{Binding EditObject.Movie.ReleaseDate.Year, Converter={StaticResource StringFormatConverter}, ConverterParameter=(\{0\})}" />
+            <helpers:BindingInfo ElementName="MovieGenre" Property="{x:Static TextBlock.TextProperty}" Value="{Binding EditObject.Movie.Genre}" />
+            <helpers:BindingInfo ElementName="MovieDirectors" Property="{x:Static TextBlock.TextProperty}" Value="{Binding EditObject.Movie.Directors}" />
+            <helpers:BindingInfo ElementName="MovieLanguage" Property="{x:Static TextBlock.TextProperty}" Value="{Binding EditObject.Movie.Language!.Name}" />
+            <helpers:BindingInfo ElementName="MovieRunTime" Property="{x:Static TextBlock.TextProperty}" Value="{Binding EditObject.Movie.RunTime}" />
+            <helpers:BindingInfo ElementName="MovieAspectRatio" Property="{x:Static TextBlock.TextProperty}" Value="{Binding EditObject.Movie.AspectRatio}" />
+            <helpers:BindingInfo ElementName="MoviePhoto" Property="{x:Static Image.SourceProperty}" Value="{Binding EditObject.Movie.Photo, Converter={StaticResource MoviePhotoConverter}}" />
+            <helpers:BindingInfo ElementName="ItemLocationEditsettings" Property="{x:Static dxe:ComboBoxEditSettings.ItemsSourceProperty}" Value="{Binding Shelves}" />
+            <helpers:BindingInfo ElementName="CloseButton" Property="{x:Static helpers:CustomEventCommandHelper.ClickProperty}" Value="{Binding CommandDispose}" />
+            <helpers:ElementLayoutInfo ElementName="TopLayoutControl" StoreFolder="GridControl:MovieItemsEdit-TopLayoutControl" Store="{StaticResource ElementLayoutDataStore}" />
+            <helpers:ElementLayoutInfo ElementName="ItemsGrid" StoreFolder="GridControl:MovieItemsEdit-ItemsGrid" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <helpers:AssociationsGrid x:Name="ItemsAssociationsGrid" Margin="0,0,10,0" Padding="10,0,0,0" BarDockInfoContainerType="Left" AddItemDisplayMode="ContentAndGlyph" IsAllowEditingItemVisible="False"
+        AddItemContent="{helpers:ConstString ID=AddItems}" AddItemGlyph="{Binding Source={StaticResource AddButtonImageSource}, Path=ImageSource}"
+        DeleteItemContent="{helpers:ConstString ID=Delete}" DeleteItemGlyph="{Binding Source={StaticResource DeleteButtonImageSource}, Path=ImageSource}">
+        <helpers:AssociationsGrid.TopContent>
+            <dxlc:LayoutControl x:Name="TopLayoutControl" Padding="0,10,0,10">
+                <dxlc:LayoutGroup Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" ItemSpace="0">
+                    <dxlc:LayoutItem VerticalContentAlignment="Top" VerticalAlignment="Top">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="MovieTitle" FontWeight="Bold" />
+                            <TextBlock x:Name="MovieYear" Margin="5,0" />
+                        </StackPanel>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="{helpers:ConstString ID=GenreLabel}">
+                        <TextBlock x:Name="MovieGenre" FontWeight="SemiBold" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="{helpers:ConstString ID=DirectorsLabel}">
+                        <TextBlock x:Name="MovieDirectors" FontWeight="SemiBold" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="{helpers:ConstString ID=LanguageLabel}">
+                        <TextBlock x:Name="MovieLanguage" FontWeight="SemiBold" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="{helpers:ConstString ID=RunTimeLabel}">
+                        <TextBlock x:Name="MovieRunTime" FontWeight="SemiBold" />
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="{helpers:ConstString ID=AspectRatioLabel}">
+                        <TextBlock x:Name="MovieAspectRatio" FontWeight="SemiBold" />
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutItem HorizontalAlignment="Right" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch">
+                    <Image x:Name="MoviePhoto" HorizontalAlignment="Center" VerticalAlignment="Stretch" Stretch="Uniform" Height="100" />
+                </dxlc:LayoutItem>
+            </dxlc:LayoutControl>
+        </helpers:AssociationsGrid.TopContent>
+        <helpers:AssociationsGrid.MainContent>
+            <dxg:GridControl x:Name="ItemsGrid" SelectionMode="Row">
+                <dxg:GridControl.View>
+                    <dxg:TableView x:Name="ItemsGridView" NavigationStyle="Cell" helpers:ImmediateCellValueSavingHelper.FieldName="{x:Null}" />
+                </dxg:GridControl.View>
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn x:Name="MovieItemIdColumn" FieldName="MovieItemId" Header="#" ReadOnly="True">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings HorizontalContentAlignment="Left" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn x:Name="StatusColumn" FieldName="Status" Header="{helpers:ConstString ID=Status}" ReadOnly="True">
+                        <dxg:GridColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="4,0,4,0" Text="{Binding RowData.Row.Status}" FontWeight="{Binding RowData.Row.Status,Converter={StaticResource MovieItemStatusToFontWeightConverter}}"/>
+                            </DataTemplate>
+                        </dxg:GridColumn.CellTemplate>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn x:Name="SellingPriceColumn" FieldName="SellingPrice" Header="{helpers:ConstString ID=SellingPrice}">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:SpinEditSettings helpers:StyleConverter.Style="{StaticResource PriceSpinEdit}" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn x:Name="AvailableForSellColumn" FieldName="AvailableForSellMark" Header="{helpers:ConstString ID=AvailableForSell}" />
+                    <dxg:GridColumn x:Name="LocationColumn" FieldName="Location" Header="{helpers:ConstString ID=Location}">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:ComboBoxEditSettings x:Name="ItemLocationEditsettings" helpers:StyleConverter.Style="{StaticResource SelectComboBoxEdit}" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn x:Name="FormatColumn" FieldName="Format" Header="{helpers:ConstString ID=Format}" GroupIndex="0" ReadOnly="True">
+                        <dxg:GridColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding RowData.Row.Format,Converter={StaticResource FormatToFormatIconConverter}}" Margin="5,0" Stretch="None" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding RowData.Row.Format}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </dxg:GridColumn.CellTemplate>
+                        <dxg:GridColumn.GroupValueTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                                    <TextBlock Text="{helpers:ConstString ID=FormatLabel}" VerticalAlignment="Center"/>
+                                    <Image Source="{Binding Data.Format,Converter={StaticResource FormatToFormatIconConverter}}" Margin="5,0" Stretch="None" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Data.Format}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </dxg:GridColumn.GroupValueTemplate>
+                    </dxg:GridColumn>
+                </dxg:GridControl.Columns>
+            </dxg:GridControl>
+        </helpers:AssociationsGrid.MainContent>
+        <helpers:AssociationsGrid.BottomContent>
+            <Button x:Name="CloseButton" Content="{helpers:ConstString ID=Close}" MinWidth="120" Margin="0,12,0,12" HorizontalAlignment="Right" />
+        </helpers:AssociationsGrid.BottomContent>
+    </helpers:AssociationsGrid>
+</mb:CustomShowUserControl>

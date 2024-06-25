@@ -1,0 +1,62 @@
+﻿using System;
+using System.ComponentModel;
+using System.Linq;
+
+namespace DevExpress.CrmDemo.Win.Data {
+    public class CompanyStat : INotifyPropertyChanged {
+        #region Public members
+
+        public DateTime Date {
+            get { return _date; }
+            set {
+                _date = value;
+                InvokePropertyChanged("Date");
+            }
+        }
+
+        public string DateString {
+            get { return _dateString; }
+            set {
+                _dateString = value;
+                InvokePropertyChanged("DateString");
+            }
+        }
+
+        public long Count {
+            get { return _count; }
+            set {
+                _count = value;
+                InvokePropertyChanged("Count");
+            }
+        }
+
+        public long Amount {
+            get { return _amount; }
+            set {
+                _amount = value;
+                InvokePropertyChanged("Amount");
+            }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged implementation
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void InvokePropertyChanged(string name) {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if(handler != null) handler(this, new PropertyChangedEventArgs(name));
+        }
+        #endregion
+
+        #region Private data
+        private long _count;
+        private string _dateString;
+        private long _amount;
+        private DateTime _date;
+        #endregion
+
+    }
+
+    public class CompanyStatList : BindingList<CompanyStat> { }
+}

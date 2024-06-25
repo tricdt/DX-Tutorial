@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg id="Add"
+	 xmlns="http://www.w3.org/2000/svg"
+	 xmlns:xlink="http://www.w3.org/1999/xlink"
+	 xml:space="preserve"
+	 version="1.1"
+	 viewBox="0 0 11 13">
+	<style type="text/css">
+		.Black{fill:#414141;}
+	</style>
+	<path class="Black" d="M9,5.82a3,3,0,1,0-2,0V12H9V11h2V10H9V9h2V8H9ZM8,4A1,1,0,1,1,9,3,1,1,0,0,1,8,4Z"/>
+	<path class="Black" d="M3,5.05V8H2V5.05a2.5,2.5,0,0,0,0,4.9V13H3V9.95a2.5,2.5,0,0,0,0-4.9Z"/>
+</svg>

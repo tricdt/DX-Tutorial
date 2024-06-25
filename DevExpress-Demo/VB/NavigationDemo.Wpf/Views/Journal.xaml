@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="NavigationDemo.Journal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:local="clr-namespace:NavigationDemo"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="800">
+    <dxg:GridControl x:Name="grid"
+                     AutoExpandAllGroups="True" ShowBorder="False"
+                     AllowColumnMRUFilterList="False"
+                     ItemsSource="{x:Static local:NavigationPaneData.JournalData}"
+                     dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap">
+        <dxg:GridControl.GroupSummary>
+            <dxg:GridSummaryItem SummaryType="Count" />
+        </dxg:GridControl.GroupSummary>
+        <dxg:GridControl.Columns>
+            <dxg:GridColumn FieldName="Date" Width="*">
+                <dxg:GridColumn.EditSettings>
+                    <dxe:DateEditSettings DisplayFormat="d" />
+                </dxg:GridColumn.EditSettings>
+            </dxg:GridColumn>
+            <dxg:GridColumn FieldName="Time" Width="*">
+                <dxg:GridColumn.EditSettings>
+                    <dxe:TextEditSettings MaskType="DateTime" Mask="T" MaskUseAsDisplayFormat="True"/>
+                </dxg:GridColumn.EditSettings>
+            </dxg:GridColumn>
+            <dxg:GridColumn FieldName="Description" Width="6*"/>
+        </dxg:GridControl.Columns>
+        <dxg:GridControl.TotalSummary>
+            <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+        </dxg:GridControl.TotalSummary>
+        <dxg:GridControl.View>
+            <dxg:TableView ShowFixedTotalSummary="True" AllowScrollAnimation="True" Name="view" AllowFixedGroups="True"
+                            NewItemRowPosition="Top" ColumnFilterPopupMode="Excel"/>
+        </dxg:GridControl.View>
+    </dxg:GridControl>
+</UserControl>

@@ -1,0 +1,2 @@
+Namespace DialogsDemo
+End Namespace

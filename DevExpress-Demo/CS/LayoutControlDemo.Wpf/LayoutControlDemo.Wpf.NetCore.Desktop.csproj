@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProjectGuid>{D4B1A7E6-7BA1-0184-2CE0-545B7C1FCF9E}</ProjectGuid>
+    <EnableDefaultItems>False</EnableDefaultItems>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <Configurations>Debug;Release;DebugTest</Configurations>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    <EmbeddedResourceUseDependentUponConvention>False</EmbeddedResourceUseDependentUponConvention>
+    <RootNamespace>LayoutControlDemo</RootNamespace>
+    <AssemblyName>LayoutControlDemo</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>WinExe</OutputType>
+    <WarningLevel>4</WarningLevel>
+    <IntermediateOutputPath>obj.NCD</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;WPF;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputPath>.\bin\ClickOnce DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\ClickOnce ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;WPF;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktopTest\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DEBUGTEST;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Images\VisualStudio.svg" />
+    <Resource Include="Images\Female.svg" />
+    <Resource Include="Images\Male.svg" />
+    <Resource Include="Images\Calc.svg" />
+    <Resource Include="Images\Home.svg" />
+    <Resource Include="Images\Rates.svg" />
+    <Resource Include="Images\Research.svg" />
+    <Resource Include="Images\Statistics.svg" />
+    <Resource Include="Images\System.svg" />
+    <Resource Include="Images\UserManagment.svg" />
+    <PackageReference Include="DevExpress.Wpf" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Demos" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="22.2.3" />
+    
+    
+    
+    
+    
+    
+    
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CarsContext.cs" />
+    <Compile Include="Controls\controlCarInfo.xaml.cs">
+      <DependentUpon>controlCarInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\controlProperties.xaml.cs">
+      <DependentUpon>controlProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DemoModuleControl.cs" />
+    <Compile Include="Controls\LayoutControlCustomizationBehavior.cs" />
+    <Compile Include="Data\AdvancedGroupedLayoutData.cs" />
+    <Compile Include="Data\AdvancedGroupedLayoutData_FluentAPI.cs" />
+    <Compile Include="Data\AttributeSupportData.cs" />
+    <Compile Include="Data\AttributeSupportData_FluentAPI.cs" />
+    <Compile Include="Data\GroupedLayoutData.cs" />
+    <Compile Include="Data\GroupedLayoutData_FluentAPI.cs" />
+    <Compile Include="Data\MaskedInputData.cs" />
+    <Compile Include="Data\MaskedInputData_FluentAPI.cs" />
+    <Compile Include="Data\SupportedDataTypesData.cs" />
+    <Compile Include="Data\SupportedDataTypesData_FluentAPI.cs" />
+    <Compile Include="DemoTesting\Fixtures.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\pageDataLayoutControl.xaml.cs">
+      <DependentUpon>pageDataLayoutControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CarsViewModel.cs" />
+    <Compile Include="ViewModels\DataControlPageViewModel.cs" />
+    <Compile Include="ViewModels\PageDashboardViewModel.cs" />
+    <Compile Include="ViewModels\RealEstateViewModel.cs" />
+    <Compile Include="Modules\pageCars.xaml.cs">
+      <DependentUpon>pageCars.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\pageDashboard.xaml.cs">
+      <DependentUpon>pageDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\pageDockLayoutControl.xaml.cs">
+      <DependentUpon>pageDockLayoutControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\pageEmployees.xaml.cs">
+      <DependentUpon>pageEmployees.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\pageFlowLayoutControl.xaml.cs">
+      <DependentUpon>pageFlowLayoutControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\pageImageGallery.xaml.cs">
+      <DependentUpon>pageImageGallery.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\pageLayoutControl.xaml.cs">
+      <DependentUpon>pageLayoutControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\pageMortgageApplication.xaml.cs">
+      <DependentUpon>pageMortgageApplication.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\pageProducts.xaml.cs">
+      <DependentUpon>pageProducts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\pageRealEstate.xaml.cs">
+      <DependentUpon>pageRealEstate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SampleLayoutItem.cs" />
+    <Compile Include="Controls\ThicknessEdit.cs" />
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Controls\controlCarInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\controlProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\pageDataLayoutControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\pageCars.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\pageDashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\pageDockLayoutControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\pageEmployees.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\pageFlowLayoutControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\pageImageGallery.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\pageLayoutControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\pageMortgageApplication.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\pageProducts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\pageRealEstate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\pageTileLayoutControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\PropertyEdits.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\SampleLayoutItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="Modules\pageTileLayoutControl.xaml.cs">
+      <DependentUpon>pageTileLayoutControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\RealEstate\1.jpg" />
+    <Resource Include="Images\RealEstate\2.jpg" />
+    <Resource Include="Images\RealEstate\3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Photos\01.JPG" />
+    <Resource Include="Images\Photos\02.JPG" />
+    <Resource Include="Images\Photos\03.JPG" />
+    <Resource Include="Images\Photos\04.JPG" />
+    <Resource Include="Images\Photos\05.JPG" />
+    <Resource Include="Images\Photos\06.JPG" />
+    <Resource Include="Images\Photos\07.JPG" />
+    <Resource Include="Images\Photos\08.JPG" />
+    <Resource Include="Images\Photos\09.JPG" />
+    <Resource Include="Images\Photos\10.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\VCL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Agents\1.jpg" />
+    <Resource Include="Images\Agents\2.jpg" />
+    <Resource Include="Images\Agents\3.jpg" />
+    <Resource Include="Images\Agents\4.jpg" />
+    <Resource Include="Images\Agents\5.jpg" />
+    <Resource Include="Images\Agents\6.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DashboardBackground.jpg" />
+  </ItemGroup>
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent"><ItemGroup><Resource Include="@(Page)" /></ItemGroup><ItemGroup><Resource Include="@(Compile)" /></ItemGroup></Target>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
+  </ItemGroup>
+  <ItemGroup></ItemGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

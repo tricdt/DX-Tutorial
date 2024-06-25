@@ -1,0 +1,217 @@
+﻿<local:ChartsDemoModule
+    x:Class="ChartsDemo.SegmentColorizerDemo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:ChartsDemo"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800">
+    <local:ChartsDemoModule.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/ChartsDemo;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dxc:RangeSegmentColorizer
+                x:Key="rangeColorizer"
+                RangeStops="{Binding ActualTemperatureRanges}">
+                <dxc:RangeSegmentColorizer.Palette>
+                    <dxc:CustomPalette>
+                        <dxc:CustomPalette.Colors>
+                            <Color>DarkBlue</Color>
+                            <Color>SteelBlue</Color>
+                            <Color>LightBlue</Color>
+                            <Color>Yellow</Color>
+                            <Color>OrangeRed</Color>
+                        </dxc:CustomPalette.Colors>
+                    </dxc:CustomPalette>
+                </dxc:RangeSegmentColorizer.Palette>
+            </dxc:RangeSegmentColorizer>
+            <dxc:TrendSegmentColorizer
+                x:Key="trendColorizer"
+                RisingTrendColor="Red"
+                FallingTrendColor="Blue" />
+            <dxc:PointBasedSegmentColorizer
+                x:Key="pointBasedColorizer"/>
+            <dxc:KeyColorColorizer x:Key="keyColorColorizer" KeyProvider="{local:MonthKeyProvider}">
+                <dxc:KeyColorColorizer.Keys>
+                    <sys:String>January</sys:String>
+                    <sys:String>February</sys:String>
+                    <sys:String>March</sys:String>
+                    <sys:String>April</sys:String>
+                    <sys:String>May</sys:String>
+                    <sys:String>June</sys:String>
+                    <sys:String>July</sys:String>
+                    <sys:String>August</sys:String>
+                    <sys:String>September</sys:String>
+                    <sys:String>October</sys:String>
+                    <sys:String>November</sys:String>
+                    <sys:String>December</sys:String>
+                </dxc:KeyColorColorizer.Keys>
+                <dxc:KeyColorColorizer.Palette>
+                    <dxc:CustomPalette>
+                        <dxc:CustomPalette.Colors>
+                            <Color>#152897</Color>
+                            <Color>#4078b0</Color>
+                            <Color>#9dcade</Color>
+                            <Color>#b9dec2</Color>
+                            <Color>#ecf635</Color>
+                            <Color>#ffb700</Color>
+                            <Color>#fa7905</Color>
+                            <Color>#ffb700</Color>
+                            <Color>#ecf635</Color>
+                            <Color>#b9dec2</Color>
+                            <Color>#9dcade</Color>
+                            <Color>#4078b0</Color>
+                            <Color>#152897</Color>
+                        </dxc:CustomPalette.Colors>
+                    </dxc:CustomPalette>
+                </dxc:KeyColorColorizer.Palette>
+            </dxc:KeyColorColorizer>
+            <Style
+                x:Key="seriesStyle"
+                TargetType="{x:Type dxc:SegmentSeries2DBase}">
+                <Setter
+                    Property="DataSource"
+                    Value="{Binding}" />
+                <Setter
+                    Property="ArgumentDataMember"
+                    Value="Date" />
+                <Setter
+                    Property="ColorDataMember"
+                    Value="Date" />
+                <Setter
+                    Property="ValueDataMember"
+                    Value="{DXBinding '@e(lbTemperatureUnit).SelectedItem'}" />
+                <Setter
+                    Property="SegmentColorizer"
+                    Value="{Binding Path=SelectedItem.Tag, ElementName=lbColorizerType}">
+                </Setter>
+                <Setter
+                    Property="Colorizer"
+                    Value="{StaticResource keyColorColorizer}"/>
+            </Style>
+        </ResourceDictionary>
+    </local:ChartsDemoModule.Resources>
+
+    <DockPanel>
+        <!--#region ChartsDemoRibbon-->
+        <local:ChartsDemoRibbon
+            DockPanel.Dock="Top"
+            Chart="{x:Reference chart}" />
+        <!--#endregion-->
+        <ScrollViewer
+            Name="PART_Options"
+            Style="{StaticResource optionsScrollViewerStyle}">
+            <StackPanel
+                Style="{StaticResource optionsRootStackPanelStyle}">
+                <GroupBox
+                    Header="Segment Colorizer Type"
+                    VerticalAlignment="Top">
+                    <dxe:ListBoxEdit
+                        Name="lbColorizerType"
+                        SelectedIndex="0">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.Items>
+                            <dxe:ListBoxEditItem
+                                Content="Range"
+                                Tag="{StaticResource rangeColorizer}" />
+                            <dxe:ListBoxEditItem
+                                Content="Trend"
+                                Tag="{StaticResource trendColorizer}" />
+                            <dxe:ListBoxEditItem
+                                Content="Point Based"
+                                Tag="{StaticResource pointBasedColorizer}" />
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox
+                    Header="Series Type"
+                    VerticalAlignment="Top">
+                    <dxe:ListBoxEdit
+                        Name="lbSeriesType"
+                        SelectedIndex="0">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.Items>
+                            <sys:String>Line</sys:String>
+                            <sys:String>Spline</sys:String>
+                            <sys:String>Area</sys:String>
+                            <sys:String>SplineArea</sys:String>
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox
+                    Header="Temperature Unit"
+                    VerticalAlignment="Top">
+                    <dxe:ListBoxEdit
+                        Name="lbTemperatureUnit"
+                        SelectedItem="{Binding ActualTemperatureRanges, Converter={local:DoubleCollectionToStringConverterConverter}}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.Items>
+                            <sys:String>Fahrenheit</sys:String>
+                            <sys:String>Celsius</sys:String>
+                        </dxe:ListBoxEdit.Items>
+
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+
+        <dxc:ChartControl
+            x:Name="chart">
+            <!--#region Titles-->
+            <dxc:ChartControl.Titles>
+                <dxc:Title
+                    Content="Mean Daily Temperature"
+                    Dock="Top"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top" />
+            </dxc:ChartControl.Titles>
+            <!--#endregion-->
+            <dxc:XYDiagram2D
+                EnableAxisXNavigation="True"
+                EnableAxisYNavigation="True">
+                <dxc:LineSeries2D
+                    Style="{StaticResource seriesStyle}"
+                    Visible="{DXBinding '@e(lbSeriesType).SelectedItem == `Line`'}" />
+                <dxc:AreaSeries2D
+                    Style="{StaticResource seriesStyle}"
+                    Visible="{DXBinding '@e(lbSeriesType).SelectedItem == `Area`'}"
+                    Transparency="0.3" />
+                <dxc:SplineSeries2D
+                    Style="{StaticResource seriesStyle}"
+                    Visible="{DXBinding '@e(lbSeriesType).SelectedItem == `Spline`'}" />
+                <dxc:SplineAreaSeries2D
+                    Style="{StaticResource seriesStyle}"
+                    Visible="{DXBinding '@e(lbSeriesType).SelectedItem == `SplineArea`'}"
+                    Transparency="0.3" />
+                <dxc:XYDiagram2D.AxisX>
+                    <dxc:AxisX2D>
+                        <dxc:AxisX2D.WholeRange>
+                            <dxc:Range
+                                SideMarginsValue="5" />
+                        </dxc:AxisX2D.WholeRange>
+                    </dxc:AxisX2D>
+                </dxc:XYDiagram2D.AxisX>
+                <dxc:XYDiagram2D.AxisY>
+                    <dxc:AxisY2D>
+                        <dxc:AxisY2D.Label>
+                            <dxc:AxisLabel TextPattern="{DXBinding '@e(lbTemperatureUnit).SelectedItem == `Celsius` ? `{V:F1}°C` : `{V:F1}°F`'}"/>
+                        </dxc:AxisY2D.Label>
+                    </dxc:AxisY2D>
+                </dxc:XYDiagram2D.AxisY>
+            </dxc:XYDiagram2D>
+        </dxc:ChartControl>
+    </DockPanel>
+</local:ChartsDemoModule>

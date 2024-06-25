@@ -1,0 +1,67 @@
+﻿<local:PivotGridDemoModule x:Class="PivotGridDemo.Serialization"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:local="clr-namespace:PivotGridDemo"
+                           xmlns:dxpg="http://schemas.devexpress.com/winfx/2008/xaml/pivotgrid"
+                           xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                           xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                           xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                           ModuleLoaded="PivotGridDemoModule_Loaded">
+
+    <DockPanel>
+        <local:PivotGridDemoRibbon DockPanel.Dock="Top" ExportPivotGrid="{x:Reference pivotGrid}"/>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,5,12,12" MinWidth="210">
+                <GroupBox Header="Layout">
+                    <StackPanel>
+                        <Button Content="Save Layout" Click="SaveLayoutButton_Click" Margin="0,0,0,4" />
+                        <Button Content="Restore Layout" Click="RestoreLayoutButton_Click" IsEnabled="False" Name="restoreLayoutButton" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Layout Samples" Margin="0,5,0,0">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                            <TextBlock Text="Select:" VerticalAlignment="Center" Margin="0,0,4,0" />
+                            <dxe:ComboBoxEdit Width="100" Name="layoutSamplesComboBox" IsTextEditable="False" />
+                        </StackPanel>
+                        <Button Content="Load" Click="LoadSampleButton_Click" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+
+        <dxpg:PivotGridControl x:Name="pivotGrid"
+                               DataProcessingEngine="Optimized"
+                               DataSource="{x:Static dxdb:NWindDataProvider.CustomerReports}"
+                               local:FieldAreaHelper.FixAreas="True"
+                               RowTreeWidth="230"
+                               ShowBorder="False">
+            <dxpg:PivotGridControl.Fields>
+                <dxpg:PivotGridField x:Name="fieldYear"
+                                     DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateYear}"
+                                     Area="ColumnArea"
+                                     Width="80"
+                                     ShowGroupIntervalName="True"
+                                     ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}"
+                                     SortOrder="Descending" />
+                <dxpg:PivotGridField x:Name="fieldQuarter"
+                                     DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateQuarter}"
+                                     Area="ColumnArea"
+                                     ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}"
+                                     Width="90"
+                                     ShowGroupIntervalName="True" />
+                <dxpg:PivotGridField x:Name="fieldMonth" DataBinding="{dxpg:DataSourceColumnBinding OrderDate, GroupInterval=DateMonth}" Area="FilterArea" Width="80"
+                                     ShowGroupIntervalName="True"
+                                 ValueFormat="{Binding DataBinding.GroupInterval, RelativeSource={RelativeSource Self}, Converter={local:GroupIntervalToValueFormatConverter}}" />
+                <dxpg:PivotGridField x:Name="fieldCompanyName" DataBinding="{dxpg:DataSourceColumnBinding CompanyName}" Area="RowArea" Width="150" Caption="Customer" />
+                <dxpg:PivotGridField x:Name="fieldProductName" DataBinding="{dxpg:DataSourceColumnBinding ProductName}" Area="RowArea" Width="120" Caption="Product Name" />
+                <dxpg:PivotGridField x:Name="fieldProductAmount" DataBinding="{dxpg:DataSourceColumnBinding ProductAmount}" Area="DataArea" Width="70" Caption="Product Amount" CellFormat="c" />
+            </dxpg:PivotGridControl.Fields>
+        </dxpg:PivotGridControl>
+    </DockPanel>
+</local:PivotGridDemoModule>

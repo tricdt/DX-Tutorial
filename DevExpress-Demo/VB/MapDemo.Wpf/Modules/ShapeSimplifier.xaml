@@ -1,0 +1,113 @@
+﻿<local:MapDemoModule x:Class="MapDemo.ShapeSimplifier"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                     xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+                     xmlns:dxmt="http://schemas.devexpress.com/winfx/2008/xaml/map/themekeys"
+                     xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+                     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                     xmlns:local="clr-namespace:MapDemo"
+                     mc:Ignorable="d"
+                     DataContext="{dxmvvm:ViewModelSource Type=local:ShapeSimplifierViewModel}">
+    <local:MapDemoModule.Resources>
+        <dx:BoolInverseConverter x:Key="inverseBooleanConverter"/>
+    </local:MapDemoModule.Resources>
+    <DockPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Orientation="Vertical" Margin="10,10,10,10" MinWidth="160">
+                <GroupBox Header="Tolerance">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="0" Margin="0,6,5,0"/>
+                            <dxe:TrackBarEdit x:Name="ToleranceTrackbar"
+                                SmallStep="1"
+                                LargeStep="5"
+                                EditValue="{Binding Tolerance}"
+                                Minimum="0"
+                                Maximum="280"
+                                Margin="0,6,0,0"
+                                IsEnabled="{Binding AutoMode, Converter={StaticResource inverseBooleanConverter}}"
+                                TickPlacement="None"
+                                MinWidth="140"/>
+                            <TextBlock Text="100" Margin="5,6,0,0"/>
+                        </StackPanel>
+                        <dxe:CheckEdit Name="chkAutoMode" Margin="0,0,0,0" Content="Auto" IsChecked="{Binding AutoMode}" />
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Shape Type">
+                    <dxe:ListBoxEdit
+                                 Background="{x:Null}"
+                                 EditValue="{Binding Path=ActiveShape}"
+                                 ShowBorder="False"
+                                 ItemsSource="{dxe:EnumItemsSource EnumType=local:ActiveShapeType, AllowImages=False}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid>
+            <dxm:MapControl x:Name="map" MinZoomLevel="5" MaxZoomLevel="12" IsManipulationEnabled="True">
+                <dxm:MapControl.MapEditor>
+                    <dxm:MapEditor x:Name="Editor" AllowSaveActions="False">
+                        <dxm:MapEditor.EditorPanelOptions>
+                            <dxm:MapEditorPanelOptions Visible="False"/>
+                        </dxm:MapEditor.EditorPanelOptions>
+                    </dxm:MapEditor>
+                </dxm:MapControl.MapEditor>
+
+                <dxmvvm:Interaction.Behaviors>
+                    <dxmvvm:MethodToCommandBehavior
+                         Target="{Binding}"
+                         Command="Simplify"
+                         CommandParameter="{x:Null}"
+                         Source="{Binding ElementName=Editor}"
+                         Method="SimplifyItems">
+                    </dxmvvm:MethodToCommandBehavior>
+                </dxmvvm:Interaction.Behaviors>
+
+                <dxm:MapControl.ZoomTrackbarOptions>
+                    <dxm:ZoomTrackbarOptions Visible="False" />
+                </dxm:MapControl.ZoomTrackbarOptions>
+                <dxm:MapControl.ScrollButtonsOptions>
+                    <dxm:ScrollButtonsOptions Visible="False" />
+                </dxm:MapControl.ScrollButtonsOptions>
+                <dxm:MapControl.ScalePanelOptions>
+                    <dxm:ScalePanelOptions Visible="False" />
+                </dxm:MapControl.ScalePanelOptions>
+                <dxm:MapControl.CoordinatesPanelOptions>
+                    <dxm:CoordinatesPanelOptions Visible="False" />
+                </dxm:MapControl.CoordinatesPanelOptions>
+
+                <dxm:VectorLayer x:Name="vectorItemsLayer1" Visibility="{Binding ActiveShape, Converter={local:ActiveShapeTypeToLayerVisibilityConverter}, 
+                    ConverterParameter={x:Static local:ActiveShapeType.Polygon}}" Data="{Binding PolygonData}" DataLoaded="{DXEvent '@e(map).ZoomToFitLayerItems()'}"
+                                 EnableHighlighting="False" EnableSelection="False"/>
+                <dxm:VectorLayer x:Name="vectorItemsLayer2" Visibility="{Binding ActiveShape, Converter={local:ActiveShapeTypeToLayerVisibilityConverter}, 
+                    ConverterParameter={x:Static local:ActiveShapeType.Polyline}}" Data="{Binding PolylineData}"
+                    EnableHighlighting="False" EnableSelection="False" ShapeStroke="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=ShapeFill}}"/>
+                <dxm:VectorLayer Data="{Binding EtalonData}" ShapeStroke="#96FA7D00"
+                                 EnableHighlighting="False" EnableSelection="False"/>
+            </dxm:MapControl>
+            <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="6">
+                <Border Background="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=OverlayBackground}}" />
+                <TextBlock TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           Text="{Binding Path=Status}"
+                           Foreground="{dxi:ThemeResource {dxmt:MapBrushesThemeKey ResourceKey=OverlayElementForeground}}"
+                           HorizontalAlignment="Center"
+                           FontSize="18"
+                           Margin="4" />
+            </Grid>
+        </Grid>
+    </DockPanel>
+</local:MapDemoModule>

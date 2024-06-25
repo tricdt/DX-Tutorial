@@ -1,0 +1,184 @@
+﻿<local:TreeListDemoModule x:Class="TreeListDemo.TreeStructureEditing"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                          xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                          xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                          xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+                          xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+                          xmlns:local="clr-namespace:TreeListDemo"
+                          mc:Ignorable="d"
+                          d:DesignHeight="400"
+                          d:DesignWidth="800">
+
+    <local:TreeListDemoModule.Resources>
+        <local:EmployeedTasks x:Key="employeeTasks" />
+        <local:PriorityIconConverter x:Key="priorityIconConverter" />
+        <dx:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
+        <Style x:Key="indentOutdentButtonStyle" TargetType="dx:SimpleButton">
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Padding" Value="5,1,24,1" />
+        </Style>
+        <Style x:Key="serviceColumnStyle" TargetType="dxg:TreeListColumn">
+            <Setter Property="AllowSorting" Value="False" />
+            <Setter Property="AllowResizing" Value="False" />
+            <Setter Property="AllowColumnFiltering" Value="False" />
+            <Setter Property="Width" Value="28" />
+            <Setter Property="MinWidth" Value="28" />
+            <Setter Property="ImageAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="isCompletedColumnPrintCellStyle"
+               TargetType="{x:Type dxe:CheckEdit}"
+               BasedOn="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintCellStyle}}">
+            <Setter Property="dxp:ExportSettings.TargetType" Value="Panel" />
+            <Setter Property="DisplayTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <dx:DXImage dxp:ExportSettings.TargetType="Image"
+                                    Stretch="None"
+                                    Source="{dx:SvgImageSource Uri=/TreeListDemo;component/Images/Completed.svg, Size=16\,16}" Width="32" Height="32"
+                                    Visibility="{Binding Path=Value, Converter={StaticResource boolToVisibilityConverter}}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="priorityColumnPrintCellStyle"
+               TargetType="{x:Type dxe:TextEdit}"
+               BasedOn="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintCellStyle}}">
+            <Setter Property="dxp:ExportSettings.TargetType" Value="Panel" />
+            <Setter Property="DisplayTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <dx:DXImage dxp:ExportSettings.TargetType="Image"
+                                    Stretch="None"
+                                    Source="{Binding Path=Value, Converter={StaticResource priorityIconConverter}}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="descriptionColumnPrintCellStyle"
+               TargetType="{x:Type dxe:CheckEdit}"
+               BasedOn="{StaticResource {dxgt:TableViewThemeKey ResourceKey=DefaultPrintCellStyle}}">
+            <Setter Property="dxp:ExportSettings.TargetType" Value="Panel" />
+            <Setter Property="DisplayTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <dx:DXImage dxp:ExportSettings.TargetType="Image"
+                                    Stretch="None"
+                                    Source="{dx:SvgImageSource Uri=/TreeListDemo;component/Images/Note.svg, Size=16\,16}" Width="16" Height="16"
+                                    Visibility="{Binding Path=Value, Converter={StaticResource boolToVisibilityConverter}}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </local:TreeListDemoModule.Resources>
+    <DockPanel>
+        <local:TreeListDemoRibbon DockPanel.Dock="Top" ExportTreeList="{x:Reference treeList}" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,5,12,12" MinWidth="210">
+                <GroupBox Header="Tree Column Field Name">
+                    <dxe:ListBoxEdit EditValue="{Binding Path=TreeColumnFieldName, Mode=TwoWay, ElementName=view, UpdateSourceTrigger=PropertyChanged}"
+                                     ShowBorder="False"
+                                     Background="{x:Null}">
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                        <dxe:ListBoxEdit.Items>
+                            <dxe:CustomItem EditValue="Name" DisplayText="Task" />
+                            <dxe:CustomItem EditValue="Employee" DisplayText="Assignee" />
+                        </dxe:ListBoxEdit.Items>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <dx:SimpleButton Content="Indent Selected Nodes"
+                                 Command="{Binding Commands.IndentSelectedNodes, ElementName=view}"
+                                 Margin="0,12,0,0" Glyph="{dx:SvgImageSource Uri=/TreeListDemo;component/Images/IndentIncrease.svg, Size=16\,16}"
+                                 Style="{StaticResource indentOutdentButtonStyle}">
+                </dx:SimpleButton>
+                <dx:SimpleButton Content="Outdent Selected Nodes"
+                                 Command="{Binding Commands.OutdentSelectedNodes, ElementName=view}"
+                                 Margin="0,4,0,0" Glyph="{dx:SvgImageSource Uri=/TreeListDemo;component/Images/IndentDecrease.svg, Size=16\,16}"
+                                 Style="{StaticResource indentOutdentButtonStyle}">
+                </dx:SimpleButton>
+            </StackPanel>
+        </ScrollViewer>
+        <dxg:TreeListControl x:Name="treeList"
+                             ItemsSource="{Binding Path=DataSource, Source={StaticResource employeeTasks}}"
+                             SelectionMode="Row"
+                             Loaded="{DXEvent Handler='@Self.UnselectItem(0);@Self.SelectItem(2)'}">
+            <dxg:TreeListControl.Columns>
+                <dxg:TreeListColumn FieldName="IsCompleted"
+                                    HeaderToolTip="Is Completed"
+                                    Style="{StaticResource serviceColumnStyle}"
+                                    PrintCellStyle="{StaticResource isCompletedColumnPrintCellStyle}"
+                                    Image="{dx:SvgImageSource Uri=/TreeListDemo;component/Images/Completed.svg, Size=20\,20}">
+                    <dxg:TreeListColumn.CellTemplate>
+                        <DataTemplate>
+                            <dx:DXImage Source="{dx:SvgImageSource Uri=/TreeListDemo;component/Images/Completed.svg, Size=20\,20}"
+                                        Stretch="None"
+                                        Visibility="{Binding Path=Value, Converter={StaticResource boolToVisibilityConverter}}" />
+                        </DataTemplate>
+                    </dxg:TreeListColumn.CellTemplate>
+                </dxg:TreeListColumn>
+                <dxg:TreeListColumn FieldName="Priority"
+                                    HeaderToolTip="Priority"
+                                    Style="{StaticResource serviceColumnStyle}"
+                                    PrintCellStyle="{StaticResource priorityColumnPrintCellStyle}"
+                                    Image="/TreeListDemo;component/Images/Flag_Green.svg">
+                    <dxg:TreeListColumn.CellTemplate>
+                        <DataTemplate>
+                            <dx:DXImage Source="{Binding Path=Value, Converter={StaticResource priorityIconConverter}}"
+                                        Stretch="None"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </dxg:TreeListColumn.CellTemplate>
+                </dxg:TreeListColumn>
+                <dxg:TreeListColumn FieldName="HasDescription"
+                                    ToolTip="Description"
+                                    CellToolTipBinding="{Binding Description}"
+                                    HeaderToolTip="Description"
+                                    Style="{StaticResource serviceColumnStyle}"
+                                    PrintCellStyle="{StaticResource descriptionColumnPrintCellStyle}"
+                                    Image="{dx:SvgImageSource Uri=/TreeListDemo;component/Images/Note.svg, Size=16\,16}">
+                    <dxg:TreeListColumn.CellTemplate>
+                        <DataTemplate>
+                            <dx:DXImage Source="{dx:SvgImageSource Uri=/TreeListDemo;component/Images/Note.svg, Size=16\,16}"
+                                        Stretch="None"
+                                        Visibility="{Binding Path=Value, Converter={StaticResource boolToVisibilityConverter}}" />
+                        </DataTemplate>
+                    </dxg:TreeListColumn.CellTemplate>
+                </dxg:TreeListColumn>
+                <dxg:TreeListColumn FieldName="Name" Header="Task" Width="*" />
+                <dxg:TreeListColumn FieldName="Employee" Header="Assignee" Width="150" />
+                <dxg:TreeListColumn FieldName="StartDate" Width="100" />
+                <dxg:TreeListColumn FieldName="DueDate" Width="100" />
+                <dxg:TreeListColumn FieldName="Status" Header="Progress" FixedWidth="True" Width="100" />
+            </dxg:TreeListControl.Columns>
+            <dxg:TreeListControl.View>
+                <dxg:TreeListView x:Name="view"
+                                  KeyFieldName="ID"
+                                  ParentFieldName="ParentID"
+                                  AllowPerPixelScrolling="True"
+                                  AutoExpandAllNodes="True"
+                                  TreeColumnFieldName="Name"
+                                  NavigationStyle="Row"
+                                  AllowPrintColumnHeaderImage="True"
+                                  AllowDragDrop="True"
+                                  ShowDragDropHint="False"
+                                  RowIndent="16">
+                    <dxg:TreeListView.FormatConditions>
+                        <dxg:FormatCondition FieldName="Region" PredefinedFormatName="BoldText" Expression="[IsCompleted] = true" ApplyToRow="True" />
+                        <dxg:DataBarFormatCondition FieldName="Status" PredefinedFormatName="GreenGradientDataBar" />
+                    </dxg:TreeListView.FormatConditions>
+                </dxg:TreeListView>
+            </dxg:TreeListControl.View>
+        </dxg:TreeListControl>
+    </DockPanel>
+</local:TreeListDemoModule>

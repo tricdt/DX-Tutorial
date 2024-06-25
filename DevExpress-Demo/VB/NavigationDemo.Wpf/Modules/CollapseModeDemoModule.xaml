@@ -1,0 +1,155 @@
+﻿<local:AccordionDemoModule x:Class="NavigationDemo.CollapseModeDemoModule"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                           xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                           xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                           xmlns:dxa="http://schemas.devexpress.com/winfx/2008/xaml/accordion"
+                           xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                           xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                           xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase"
+                           xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
+                           xmlns:utils="clr-namespace:NavigationDemo.Utils"
+                           xmlns:local="clr-namespace:NavigationDemo"
+                           mc:Ignorable="d"
+                           DataContext="{dxmvvm:ViewModelSource local:CollapseModeViewModel}"
+                           x:Name="root"
+                           d:DesignHeight="768"
+                           d:DesignWidth="1024">
+
+    <!--#region Resources-->
+    <local:AccordionDemoModule.Resources>
+        <Style x:Key="accordionItemContainerStyle" TargetType="dxa:AccordionItem">
+            <Setter Property="Header" Value="{Binding Name}" />
+            <Style.Triggers>
+                <Trigger Property="ItemLevel" Value="1">
+                    <Setter Property="Glyph" Value="{Binding Icon}" />
+                    <Setter Property="GlyphSize" Value="16,16"/>
+                    <Setter Property="ShowInCollapsedMode" Value="{Binding ShowInCollapsedMode}" />
+                    <Setter Property="CanSelect" Value="{Binding CanSelect}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="dxg:GridColumn">
+            <Setter Property="HeaderImageStyle">
+                <Setter.Value>
+                    <Style TargetType="Image">
+                        <Setter Property="Width" Value="16"/>
+                        <Setter Property="Height" Value="16"/>
+                        <Setter Property="Margin" Value="0,0,3,0"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <dxmvvm:ObjectToObjectConverter x:Key="accordionPanelWidthConverter" DefaultTarget="Auto">
+            <dxmvvm:MapItem Source="True" Target="200" />
+        </dxmvvm:ObjectToObjectConverter>
+    </local:AccordionDemoModule.Resources>
+    <!--#endregion-->
+
+    <DockPanel>
+        <!--#region Options-->
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Name="PART_Options"
+                      DockPanel.Dock="Right"
+                      dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap"
+                      Focusable="False">
+            <StackPanel Margin="12,0,12,12" MinWidth="210">
+                <GroupBox Header="Expand/Collapse" Margin="0,5,0,0">
+                    <StackPanel>
+                        <dxe:CheckEdit Content="Collapse Button Visible" IsChecked="{Binding ElementName=accordion, Path=IsCollapseButtonVisible, Mode=TwoWay}" />
+                        <dxe:CheckEdit Margin="0,6,0,0" Content="Show Popup On Hover" IsChecked="{Binding ElementName=accordion, Path=ShowPopupOnHover, Mode=TwoWay}" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Summary Item Position" Margin="0,5,0,0">
+                    <dxe:ListBoxEdit Background="{x:Null}" ShowBorder="False" EditValue="{Binding ElementName=accordion, Path=SummaryItemPosition}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EnumItemsSourceBehavior EnumType="{x:Type dxa:SummaryItemPosition}" />
+                        </dxmvvm:Interaction.Behaviors>
+                        <dxe:ListBoxEdit.StyleSettings>
+                            <dxe:RadioListBoxEditStyleSettings />
+                        </dxe:ListBoxEdit.StyleSettings>
+                    </dxe:ListBoxEdit>
+                </GroupBox>
+                <GroupBox Header="Can Select Filter" Margin="0,5,0,0">
+                    <StackPanel>
+                        <ItemsControl ItemsSource="{Binding FiltersData[1].FilterItems}" Background="{x:Null}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <dxe:CheckEdit Content="{Binding Name}" EditValue="{Binding CanSelect, Mode=TwoWay}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
+        <dxdo:DockLayoutManager ViewStyle="Light">
+            <dxdo:LayoutGroup>
+                <dxdo:LayoutPanel ItemWidth="{Binding ElementName=accordion, Path=IsExpanded, Converter={StaticResource accordionPanelWidthConverter}}"
+                                  ShowCaption="False"
+                                  AllowSizing="False">
+                    <dxa:AccordionControl x:Name="accordion"
+                                          SelectionMode="Single"
+                                          ItemsSource="{Binding FiltersData}"
+                                          SelectionUnit="SubItem"
+                                          CollapsedItemClickAction="Select"
+                                          SummaryItemHeader="All Filters"
+                                          SummaryItemGlyph="{dx:DXImage SvgImages/Setup/Properties.svg}"
+                                          SummaryItemGlyphSize="16,16"
+                                          AutoExpandAllItems="True"
+                                          IsCollapseButtonVisible="True"
+                                          ChildrenPath="FilterItems"
+                                          ItemContainerStyle="{StaticResource accordionItemContainerStyle}"
+                                          ShowSearchControl="True"
+                                          Margin="1" />
+                </dxdo:LayoutPanel>
+                <dxdo:LayoutPanel ShowCaption="False">
+                    <dxg:GridControl x:Name="filterGrid"
+                                     AutoExpandAllGroups="True"
+                                     ShowBorder="False"
+                                     FilterString="{Binding ElementName=accordion, Path=SelectedItem, Mode=TwoWay, Converter={utils:FilterStringConverter}}"
+                                     ItemsSource="{x:Static dxdb:EmployeesWithPhotoData.DataSource}"
+                                     AllowColumnMRUFilterList="False"
+                                     dx:ScrollBarExtensions.ScrollBarMode="TouchOverlap">
+                        <dxg:GridControl.GroupSummary>
+                            <dxg:GridSummaryItem SummaryType="Count" />
+                        </dxg:GridControl.GroupSummary>
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn FieldName="FullName"
+                                            Width="3*"
+                                            UnboundType="String"
+                                            UnboundExpression="[FirstName] + ' ' + [LastName]"
+                                            ReadOnly="True"
+                                            Image="{dx:DXImage SvgImages/Spreadsheet/EqualTo.svg}" />
+                            <dxg:GridColumn FieldName="BirthDate" Width="2*" Image="{dx:DXImage SvgImages/Icon Builder/Shopping_Favorites.svg}">
+                                <dxg:GridColumn.EditSettings>
+                                    <dxe:DateEditSettings DisplayFormat="d" />
+                                </dxg:GridColumn.EditSettings>
+                            </dxg:GridColumn>
+                            <dxg:GridColumn FieldName="JobTitle" Width="3*" Header="Job Title" Image="{dx:DXImage SvgImages/Business Objects/BO_Employee.svg}"/>
+                            <dxg:GridColumn FieldName="HireDate" Width="2*" Header="Hire Date" Image="{dx:DXImage SvgImages/Scheduling/GroupByDate.svg}"/>
+                            <dxg:GridColumn FieldName="CountryRegionName" Width="3*" Header="Country" Image="{dx:DXImage SvgImages/Dashboards/ShapeLabels.svg}"/>
+                            <dxg:GridColumn Name="colInfo" FieldName="Phone" Header="Phone" AllowSorting="False" Image="{dx:DXImage SvgImages/Business Objects/BO_Contact.svg}"/>
+                        </dxg:GridControl.Columns>
+                        <dxg:GridControl.TotalSummary>
+                            <dxg:GridSummaryItem SummaryType="Count" Alignment="Right" />
+                            <dxg:GridSummaryItem FieldName="FullName" SummaryType="Count" />
+                        </dxg:GridControl.TotalSummary>
+                        <dxg:GridControl.View>
+                            <dxg:TableView ShowFixedTotalSummary="True"
+                                           AllowScrollAnimation="True"
+                                           Name="view"
+                                           AllowFixedGroups="True"
+                                           NavigationStyle="Row"
+                                           ColumnFilterPopupMode="Excel" />
+                        </dxg:GridControl.View>
+                    </dxg:GridControl>
+                </dxdo:LayoutPanel>
+            </dxdo:LayoutGroup>
+        </dxdo:DockLayoutManager>
+    </DockPanel>
+</local:AccordionDemoModule>

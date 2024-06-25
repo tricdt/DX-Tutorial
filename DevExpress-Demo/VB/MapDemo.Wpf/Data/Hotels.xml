@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Hotels>
+  <Hotel>
+    <Name>Geek Island Resort</Name>
+    <Latitude>-21.1434</Latitude>
+    <Longitude>-175.154</Longitude>
+    <ShpFileUri>/MapDemo;component/Data/Shapefiles/Hotels/Hotel1.shp</ShpFileUri>
+    <CenterX>-96.3115</CenterX>
+    <CenterY>-47.6707</CenterY>
+    <ZoomLevel>2</ZoomLevel>
+    <ImageUri>/MapDemo;component/Images/Hotels/Hotel_1.png</ImageUri>
+    <HighlightedImageUri>/MapDemo;component/Images/Hotels/Hotel_1_h.png</HighlightedImageUri>
+  </Hotel>
+
+  <Hotel>
+    <Name>Nerd Hotel Tonga</Name>
+    <Latitude>-21.1936528</Latitude>
+    <Longitude>-175.1552</Longitude>
+    <ShpFileUri>/MapDemo;component/Data/Shapefiles/Hotels/Hotel2.shp</ShpFileUri>
+    <CenterX>-128.3983</CenterX>
+    <CenterY>-62.9459</CenterY>
+    <ZoomLevel>2</ZoomLevel>
+    <ImageUri>/MapDemo;component/Images/Hotels/Hotel_2.png</ImageUri>
+    <HighlightedImageUri>/MapDemo;component/Images/Hotels/Hotel_2_h.png</HighlightedImageUri>
+  </Hotel>
+
+  <Hotel>
+    <Name>The IT Paradise Hotel</Name>
+    <Latitude>-21.1658</Latitude>
+    <Longitude>-175.1134</Longitude>
+    <ShpFileUri>/MapDemo;component/Data/Shapefiles/Hotels/Hotel3.shp</ShpFileUri>
+    <CenterX>-192.638</CenterX>
+    <CenterY>-95.4434</CenterY>
+    <ZoomLevel>2</ZoomLevel>
+    <ImageUri>/MapDemo;component/Images/Hotels/Hotel_3.png</ImageUri>
+    <HighlightedImageUri>/MapDemo;component/Images/Hotels/Hotel_3_h.png</HighlightedImageUri>
+  </Hotel>
+</Hotels>

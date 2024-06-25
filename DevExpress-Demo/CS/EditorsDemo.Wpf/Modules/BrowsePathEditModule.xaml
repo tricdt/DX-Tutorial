@@ -1,0 +1,67 @@
+﻿<local:EditorsDemoModule x:Class="EditorsDemo.BrowsePathEditModule"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:local="clr-namespace:EditorsDemo">
+    <local:EditorsDemoModule.DataContext>
+        <local:BrowsePathEditModuleViewModel  />
+    </local:EditorsDemoModule.DataContext>
+    <DockPanel>
+        <DockPanel.Resources>
+            <Style TargetType="{x:Type dxe:BrowsePathEdit}">
+                <Setter Property="Margin" Value="0,0,0,24" />
+            </Style>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Margin" Value="0,0,0,10" />
+            </Style>
+        </DockPanel.Resources>
+
+        <dxmvvm:Interaction.Behaviors>
+            <dx:DXMessageBoxService/>
+        </dxmvvm:Interaction.Behaviors>
+
+        <StackPanel VerticalAlignment="Top"
+                    Width="820"
+                    HorizontalAlignment="Center">
+
+            <TextBlock FontSize="24" Text="SVG to PNG Converter" Margin="0,50,0,70"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap"/>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Margin="0,0,40,0">
+                    <Grid Width="200" Height="150" >
+                        <dxe:ImageEdit Source="{Binding SourceImage}" Padding="20" ShowBorder="True" ShowMenu="False" ShowLoadDialogOnClickMode="Never" >
+                            <dxe:ImageEdit.EmptyContentTemplate>
+                                <ControlTemplate>
+                                    <TextBlock Text="Preview" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#DFDFDF" />
+                                </ControlTemplate>
+                            </dxe:ImageEdit.EmptyContentTemplate>
+                        </dxe:ImageEdit>
+                    </Grid>
+                    <TextBlock Text="{Binding ResultFileSizeKilobytes, Converter={local:PngSizeToTextConverter}}" HorizontalAlignment="Center" Margin="0,10,0,0" Foreground="#808080" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Select an SVG file:" />
+                    <dxe:BrowsePathEdit DialogType="FileOpen" EditValue="{Binding SourceFilePath, UpdateSourceTrigger=PropertyChanged}" DialogFilter="*.svg|*.svg" AllowDrop="True" NullText="Drop an SVG file here" />
+
+                    <TextBlock Text="Save PNG as:" />
+                    <dxe:BrowsePathEdit DialogType="FileSave" EditValue="{Binding ResultFilePath, UpdateSourceTrigger=PropertyChanged}" DialogFilter="*.png|*.png">
+                        <dxe:ButtonInfo GlyphKind="Cancel" Command="{Binding ClearCommand}" />
+                    </dxe:BrowsePathEdit>
+
+                    <dx:SimpleButton Content="Convert" Command="{Binding ConvertCommand}" Margin="0,10,10,0" Width="150" HorizontalAlignment="Left" />
+                </StackPanel>
+            </Grid>
+
+        </StackPanel>
+    </DockPanel>
+</local:EditorsDemoModule>

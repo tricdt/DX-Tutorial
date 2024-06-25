@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="DevExpress.VideoRent.Wpf.FindCustomerEditView"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:local="clr-namespace:DevExpress.VideoRent.Wpf"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:helpers="clr-namespace:DevExpress.VideoRent.Wpf.Helpers"
+    xmlns:videorent="clr-namespace:DevExpress.VideoRent;assembly=DevExpress.VideoRent"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
+    d:DesignWidth="1000">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/EditsStyles.xaml" />
+                <ResourceDictionary Source="/DevExpress.VideoRent.Wpf;component/Themes/CommonTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <helpers:DataSource x:Key="DataSource" />
+            <local:EnumItemToItemIconConverter x:Key="GenderToGenderIconConverter" EnumType="{x:Type videorent:PersonGender}" ImagesPropertyName="PersonIcons"/>
+            <local:ElementLayoutDataStore x:Key="ElementLayoutDataStore"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <helpers:DataBindingsHelper.Bindings>
+        <helpers:BindingsInfoCollection DataContext="{Binding Source={StaticResource DataSource}, Path=DataObject}">
+            <helpers:BindingInfo ElementName="resource:ElementLayoutDataStore" Property="{x:Static local:ElementLayoutDataStore.DisposeSignalSlotProperty}" Value="{Binding DisposeSignal}" />
+            <helpers:BindingInfo ElementName="CustomersGrid" Property="{x:Static dxg:GridControl.ItemsSourceProperty}" Value="{Binding EditObject.VideoRentObjects}" />
+            <helpers:BindingInfo ElementName="TableView" Property="{x:Static dxg:GridViewBase.FocusedRowProperty}" Value="{Binding CurrentRecord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <helpers:BindingInfo ElementName="TableView" Property="{x:Static helpers:CustomEventCommandHelper.MouseDoubleClickProperty}" Value="{Binding Detail.CommandSaveAndDispose}" />
+            <helpers:BindingInfo ElementName="TableView" Property="{x:Static helpers:CustomEventCommandHelper.EnterKeyDownProperty}" Value="{Binding Detail.CommandSaveAndDispose}" />
+            <helpers:BindingInfo ElementName="CustomerInfoPresenter" Property="{x:Static ContentControl.ContentProperty}" Value="{Binding CurrentRecord}" />
+            <helpers:ElementLayoutInfo ElementName="MainLayoutControl" StoreFolder="LayoutControl:FindCustomerEdit-MainLayoutControl" Store="{StaticResource ElementLayoutDataStore}" />
+            <helpers:ElementLayoutInfo ElementName="CustomersGrid" StoreFolder="GridControl:FindCustomerEdit-CustomersGrid" Store="{StaticResource ElementLayoutDataStore}" />
+        </helpers:BindingsInfoCollection>
+    </helpers:DataBindingsHelper.Bindings>
+    <dxlc:LayoutControl x:Name="MainLayoutControl" Orientation="Horizontal" VerticalAlignment="Stretch" ItemSpace="12" Padding="0">
+        <dxlc:LayoutItem VerticalAlignment="Stretch">
+            <dxg:GridControl x:Name="CustomersGrid">
+                <dxg:GridControl.View>
+                    <dxg:TableView x:Name="TableView" AllowEditing="False" NavigationStyle="Row" ShowGroupedColumns="True" AutoWidth="True" ShowGroupPanel="False" ShowAutoFilterRow="True"/>
+                </dxg:GridControl.View>
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn x:Name="GenderColumn" FieldName="Gender" Header="{helpers:ConstString ID=Gender}" Width="62" ReadOnly="True">
+                        <dxg:GridColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Stretch="None" Source="{Binding Data.Gender,Converter={StaticResource GenderToGenderIconConverter}}" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+                            </DataTemplate>
+                        </dxg:GridColumn.CellTemplate>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn x:Name="CustomerIdColumn" FieldName="CustomerId" Header="{helpers:ConstString ID=CardNumber}" ReadOnly="True">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings helpers:StyleConverter.Style="{StaticResource CardNumberTextEdit}" />
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn x:Name="FullNameColumn" FieldName="FullName" Header="{helpers:ConstString ID=Name}" />
+                    <dxg:GridColumn x:Name="FirstNameColumn" FieldName="FirstName" Header="{helpers:ConstString ID=FirstName}" Visible="False"/>
+                    <dxg:GridColumn x:Name="LastNameColumn" FieldName="LastName" Header="{helpers:ConstString ID=LastName}" Visible="False"/>
+                    <dxg:GridColumn x:Name="MiddleNameColumn" FieldName="MiddleName" Header="{helpers:ConstString ID=MiddleName}" Visible="False"/>
+                    <dxg:GridColumn x:Name="BirthDateColumn" FieldName="BirthDate" Header="{helpers:ConstString ID=BirthDate}" local:ColumnByYearFilterHelper.IsEnabled="True" Visible="False" />
+                    <dxg:GridColumn x:Name="PhoneColumn" FieldName="Phone" Header="{helpers:ConstString ID=Phone}" />
+                    <dxg:GridColumn x:Name="AddressColumn" FieldName="Address" Header="{helpers:ConstString ID=Address}" />
+                </dxg:GridControl.Columns>
+            </dxg:GridControl>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem HorizontalAlignment="Left" dxlc:LayoutControl.AllowHorizontalSizing="True" Width="320" VerticalAlignment="Stretch" x:Name="InfoLayoutItem">
+            <ContentControl x:Name="CustomerInfoPresenter" ContentTemplate="{StaticResource CustomerInfoTemplate}" />
+        </dxlc:LayoutItem>
+    </dxlc:LayoutControl>
+</UserControl>

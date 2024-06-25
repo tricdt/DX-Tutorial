@@ -1,0 +1,173 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:DialogsDemo"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol">
+
+    <DataTemplate x:Key="cardHeaderTemplate">
+        <Grid>
+            <TextBlock Text="{Binding Path=Data.GroupName}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
+    </DataTemplate>
+
+    <Style x:Key="layoutItemStyle" TargetType="{x:Type dxlc:LayoutItem}">
+        <Setter Property="ElementSpace" Value="10"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
+    <DataTemplate x:Key="cardTemplate">
+        <Grid x:Name="PART_CardRoot" HorizontalAlignment="Left" Width="320">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="#FFB5B5B5"
+                    BorderThickness="1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    UseLayoutRounding="True"
+                    Height="{Binding ElementName=PART_CardInfo, Path=ActualHeight}"
+                    Grid.Column="0" >
+                <dx:DXImage x:Name="PART_Image"
+                            Source ="{Binding Row.ImageData}" />
+            </Border>
+            <StackPanel x:Name="PART_CardInfo" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="8,0,0,0" Grid.Column="1">
+                <dxlc:LayoutControl Orientation="Vertical" Padding="0" Grid.Column="1" >
+                    <dxlc:LayoutItem Label="Title:" Style="{StaticResource layoutItemStyle}">
+                        <TextBlock Text="{Binding Path=Row.JobTitle}" ToolTip="{Binding Path=Row.JobTitle}"/>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="First name:" Style="{StaticResource layoutItemStyle}">
+                        <TextBlock Text="{Binding Path=Row.FirstName}"/>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Last name:" Style="{StaticResource layoutItemStyle}">
+                        <TextBlock Text="{Binding Path=Row.LastName}"/>
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutControl>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+    <dx:ImageDataConverter x:Key="ImageDataConverter" />
+
+    <DataTemplate x:Key="groupBoxHeaderTemplate">
+        <TextBlock Text="{Binding Path=Header, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type GroupBox}}}" FontWeight="Bold"/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type local:ThemedWindowDialogContentModel}">
+        <Grid x:Name="PART_Root" DataContext="{Binding RootViewModel}" Margin="12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="PART_TitleName"
+                       Text="{DXBinding Expr='FocusedRow.FirstName + ` ` + FocusedRow.LastName'}"
+                       FontWeight="Bold"
+                       FontSize="18"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Grid.Column="0"
+                       Grid.Row="0"
+                       Grid.ColumnSpan="2"/>
+            <TextBlock x:Name="PART_TitlePosition"
+                       Text="{DXBinding Expr='FocusedRow.JobTitle + ` in ` + FocusedRow.GroupName + ` team`'}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Grid.Column="0"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       Margin="0,0,0,12"/>
+            <Border BorderBrush="#FFB5B5B5"
+                    BorderThickness="1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    UseLayoutRounding="True"
+                    Height="{Binding ElementName=PART_InfoStackPanel, Path=ActualHeight}"
+                    Grid.Column="0"
+                    Grid.Row="2">
+                <dx:DXImage x:Name="PART_Image"
+                            Source ="{Binding FocusedRow.ImageData}" />
+            </Border>
+            <StackPanel x:Name="PART_InfoStackPanel"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Margin="12,0,0,0">
+                <dxlc:LayoutControl Padding="0" Orientation="Vertical">
+                    <dxlc:LayoutGroup Orientation="Vertical" View="GroupBox" Header="Personal info">
+                        <dxlc:LayoutItem Label="Birth date: " VerticalAlignment="Top" >
+                            <TextBlock>
+                                <Run Text="{Binding FocusedRow.BirthDate, StringFormat=D}"/>
+                                <Run Text="("/><Run Text="{DXBinding Expr='$sys:DateTime.Now.Year - FocusedRow.BirthDate.Year', Mode=OneWay}"/>
+                                <Run Text="years)" />
+                            </TextBlock>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Gender: " VerticalAlignment="Top">
+                            <DockPanel>
+                                <TextBlock Text="{Binding FocusedRow.Gender, Converter={local:GenderToFullStringConverter}}" DockPanel.Dock="Left" HorizontalAlignment="Left" />
+                                <dx:DXImage Source="{Binding FocusedRow.Gender, Converter={local:GenderToImageConverter}}"
+                                            Width="16" Height="16"
+                                            DockPanel.Dock="Left"
+                                            Margin="2,0,2,0"
+                                            HorizontalAlignment="Left"/>
+                            </DockPanel>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Marital status: " VerticalAlignment="Top">
+                            <TextBlock Text="{Binding FocusedRow.MaritalStatus, Converter={local:StatusToFullStringConverter}}"/>
+                        </dxlc:LayoutItem>
+                    </dxlc:LayoutGroup>
+                    <dxlc:LayoutGroup Orientation="Vertical" View="GroupBox" Header="Job info">
+                        <dxlc:LayoutItem Label="Hire date: " VerticalAlignment="Top">
+                            <TextBlock Text="{Binding FocusedRow.HireDate, StringFormat=D}"/>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Experience: " VerticalAlignment="Top">
+                            <TextBlock>
+                                <Run Text="{DXBinding Expr='$sys:DateTime.Now.Year - FocusedRow.HireDate.Year', Mode=OneWay}"/>
+                                <Run Text="years"/>
+                            </TextBlock>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Phone: " VerticalAlignment="Top">
+                            <TextBlock Text="{Binding FocusedRow.Phone}"/>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="E-mail " VerticalAlignment="Top">
+                            <TextBlock>
+                                <Hyperlink Command="{Binding ShowMessageCommand}">
+                                    <TextBlock Text="{Binding FocusedRow.EmailAddress}"/>
+                                </Hyperlink>
+                            </TextBlock>
+                        </dxlc:LayoutItem>
+                    </dxlc:LayoutGroup>
+                    <dxlc:LayoutGroup Orientation="Vertical" View="GroupBox" Header="Address info">
+                        <dxlc:LayoutItem Label="Country: " VerticalAlignment="Top">
+                            <DockPanel>
+                                <TextBlock Text="{Binding FocusedRow.CountryRegionName}" DockPanel.Dock="Left" HorizontalAlignment="Left" />
+                                <Image Source="{Binding Path=FocusedRow.CountryRegionName, Converter={local:CountryToFlagImageConverter}}"
+                                               Stretch="Uniform"
+                                               DockPanel.Dock="Left"
+                                               Margin="2,0,2,0"
+                                               Height="16"
+                                               Width="16"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"/>
+                            </DockPanel>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="City: " VerticalAlignment="Top">
+                            <TextBlock Text="{Binding FocusedRow.City}"/>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Postal code: " VerticalAlignment="Top">
+                            <TextBlock Text="{Binding FocusedRow.PostalCode}"/>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Address: " VerticalAlignment="Top">
+                            <TextBlock Text="{Binding FocusedRow.AddressLine1}"/>
+                        </dxlc:LayoutItem>
+                    </dxlc:LayoutGroup>
+                </dxlc:LayoutControl>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProjectGuid>{84174F7E-34FB-05E3-1935-63FC17EAB3BB}</ProjectGuid>
+    <EnableDefaultItems>False</EnableDefaultItems>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <Configurations>Debug;Release;DebugTest</Configurations>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    <EmbeddedResourceUseDependentUponConvention>False</EmbeddedResourceUseDependentUponConvention>
+    <RootNamespace>PropertyGridDemo</RootNamespace>
+    <AssemblyName>PropertyGridDemo</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>WinExe</OutputType>
+    <WarningLevel>4</WarningLevel>
+    <IntermediateOutputPath>obj.NCD</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;WPF;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Debug|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <OutputPath>.\bin\ClickOnce DebugNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ClickOnce Release|AnyCPU' ">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\ClickOnce ReleaseNetCoreDesktop\</OutputPath>
+    <DefineConstants>TRACE;WPF;CLICKONCE;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugTest|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <OutputPath>bin\DebugNetCoreDesktopTest\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WPF;DEBUGTEST;DXCORE3;</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Images\Products\Beverages.svg" />
+    <Resource Include="Images\Products\Condiments.svg" />
+    <Resource Include="Images\Products\Confections.svg" />
+    <Resource Include="Images\Products\DairyProducts.svg" />
+    <Resource Include="Images\Products\GrainsCereals.svg" />
+    <Resource Include="Images\Products\MeatPoultry.svg" />
+    <Resource Include="Images\Products\Produce.svg" />
+    <Resource Include="Images\Products\Seafood.svg" />
+    <Resource Include="Images\Icons\TabbedViewModule\Effects_32x32.png" />
+    <Resource Include="Images\Icons\TabbedViewModule\FillnLine_32x32.png" />
+    <Resource Include="Images\Icons\TabbedViewModule\SeriesOptions_32x32.png" />
+    <Resource Include="Images\Icons\TabbedViewModule\theme-Metropolis\Effects_32x32.png" />
+    <Resource Include="Images\Icons\TabbedViewModule\theme-Metropolis\FillnLine_32x32.png" />
+    <Resource Include="Images\Icons\TabbedViewModule\theme-Metropolis\SeriesOptions_32x32.png" />
+    <Resource Include="Images\Icons\TabbedViewModule\theme-Office2007\Effects_32x32.png" />
+    <Resource Include="Images\Icons\TabbedViewModule\theme-Office2007\FillnLine_32x32.png" />
+    <Resource Include="Images\Icons\TabbedViewModule\theme-Office2007\SeriesOptions_32x32.png" />
+    <Resource Include="Images\Icons\TabbedViewModule\theme-Office\Effects_32x32.png" />
+    <Resource Include="Images\Icons\TabbedViewModule\theme-Office\FillnLine_32x32.png" />
+    <Resource Include="Images\Icons\TabbedViewModule\theme-Office\SeriesOptions_32x32.png" />
+    <PackageReference Include="DevExpress.Wpf" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Demos" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="22.2.3" />
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\TabbedViewModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\TypeConvertersFluentAPIModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\TabbedViewModuleCharts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomTemplatesModuleTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\DynamicallyAssignDataEditorsResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\PropertyAttributesModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CategoryAttributesModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataAnnotationAttributesModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataAnnotationAttributesFluentAPIModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\LayoutCustomizationModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ExpandabilityCustomizationModule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\ValidationDataAnnotationAttributesModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ValidationFluentAPIModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ValidationIDataErrorInfoModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\SelectedItemEditingModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\DataEditorsModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\ObjectInspector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\CollectionEditingModule.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\MultiEditorDescriptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\TabbedViewModuleResources\Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\TabbedViewModuleResources\Templates\Effects.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\TabbedViewModuleResources\Templates\FillnLine.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\TabbedViewModuleResources\Templates\Misc.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\TabbedViewModuleResources\Templates\SeriesOptions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DataErrorInfoValidationData.cs" />
+    <Compile Include="Data\Gender.cs" />
+    <Compile Include="Data\MultiEditorsList.cs" />
+    <Compile Include="Helpers\GridColumnHelper.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Converters.cs" />
+    <Compile Include="ViewModels\TabbedViewModule\Helpers.cs" />
+    <Compile Include="ViewModels\TabbedViewModule\Model\BaseOptions.cs" />
+    <Compile Include="ViewModels\TabbedViewModule\Model\BorderOptions.cs" />
+    <Compile Include="ViewModels\TabbedViewModule\Model\Effects.cs" />
+    <Compile Include="ViewModels\TabbedViewModule\Model\FillOptions.cs" />
+    <Compile Include="ViewModels\TabbedViewModule\Model\Metadata\BaseOptions.cs" />
+    <Compile Include="ViewModels\TabbedViewModule\Model\Metadata\BorderOptions.cs" />
+    <Compile Include="ViewModels\TabbedViewModule\Model\Metadata\Effects.cs" />
+    <Compile Include="ViewModels\TabbedViewModule\Model\Metadata\FillOptions.cs" />
+    <Compile Include="ViewModels\TabbedViewModule\Model\Metadata\SeriesOptions.cs" />
+    <Compile Include="ViewModels\TabbedViewModule\Model\SeriesOptions.cs" />
+    <Compile Include="Helpers\CommitEditingOnCellValueChanged.cs" />
+    <Compile Include="Modules\GridHelpersSQLite.cs" />
+    <Compile Include="Modules\TabbedViewModule.xaml.cs">
+      <DependentUpon>TabbedViewModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\TypeConvertersFluentAPIModule.xaml.cs">
+      <DependentUpon>TypeConvertersFluentAPIModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\TabbedViewModuleCharts.xaml.cs">
+      <DependentUpon>TabbedViewModuleCharts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\DataAnnotationAttributesFluentAPIViewModel.cs" />
+    <Compile Include="ViewModels\DataAnnotationAttributesViewModel.cs" />
+    <Compile Include="ViewModels\CategoryAttributesViewModel.cs" />
+    <Compile Include="ViewModels\PropertyAttributesViewModel.cs" />
+    <Compile Include="ViewModels\ValidationDataAnnotationAttributesViewModel.cs" />
+    <Compile Include="ViewModels\ValidationIDataErrorInfoViewModel.cs" />
+    <Compile Include="Data\DynamicallyAssignDataEditorsData.cs" />
+    <Compile Include="Controls\DescriptionAttachedBehavior.cs" />
+    <Compile Include="ViewModels\ValidationFluentAPIViewModel.cs" />
+    <Compile Include="ViewModels\ObjectInspectorViewModel.cs" />
+    <Compile Include="Controls\DemoModuleControl.cs" />
+    <Compile Include="Controls\SelectedElementVisualizer.cs" />
+    <Compile Include="Controls\VisualizerPanel.cs" />
+    <Compile Include="Data\AttributesSupportGroupingData.cs" />
+    <Compile Include="Data\AttributesSupportData.cs" />
+    <Compile Include="Data\AttributesSupportDataAnnotationsData.cs" />
+    <Compile Include="Data\AttributesSupportDataAnnotationsFluentAPIData.cs" />
+    <Compile Include="ViewModels\LayoutCustomizationViewModel.cs" />
+    <Compile Include="Data\DataAnnotationValidationData.cs" />
+    <Compile Include="Data\FluentAPIValidationData.cs" />
+    <Compile Include="Modules\PropertyAttributesModule.xaml.cs">
+      <DependentUpon>PropertyAttributesModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CategoryAttributesModule.xaml.cs">
+      <DependentUpon>CategoryAttributesModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataAnnotationAttributesModule.xaml.cs">
+      <DependentUpon>DataAnnotationAttributesModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataAnnotationAttributesFluentAPIModule.xaml.cs">
+      <DependentUpon>DataAnnotationAttributesFluentAPIModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\LayoutCustomizationModule.xaml.cs">
+      <DependentUpon>LayoutCustomizationModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ExpandabilityCustomizationModule.xaml.cs">
+      <DependentUpon>ExpandabilityCustomizationModule.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Modules\ValidationDataAnnotationAttributesModule.xaml.cs">
+      <DependentUpon>ValidationDataAnnotationAttributesModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ValidationFluentAPIModule.xaml.cs">
+      <DependentUpon>ValidationFluentAPIModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ValidationIDataErrorInfoModule.xaml.cs">
+      <DependentUpon>ValidationIDataErrorInfoModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SelectedItemEditingModule.xaml.cs">
+      <DependentUpon>SelectedItemEditingModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DataEditorsModule.xaml.cs">
+      <DependentUpon>DataEditorsModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\DataEditorsViewModel.cs" />
+    <Compile Include="Modules\ObjectInspector.xaml.cs">
+      <DependentUpon>ObjectInspector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SimpleEditingData.cs" />
+    <Compile Include="Modules\CollectionEditingModule.xaml.cs">
+      <DependentUpon>CollectionEditingModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DemoTesting\Fixtures.cs" />
+    <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    
+    <!--ONLY NETCORE3
+    <EmbeddedResource Include="Demo.targets" />
+    <EmbeddedResource Include="Themes.WPF.NetCore.targets" />
+    ONLY NETCORE3-->
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="demoicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Persons\m03.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    </ItemGroup>
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+  <Target Name="SourceCode" BeforeTargets="PreBuildEvent"><ItemGroup><Resource Include="@(Page)" /></ItemGroup><ItemGroup><Resource Include="@(Compile)" /></ItemGroup></Target>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
+  </ItemGroup>
+  <ItemGroup></ItemGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
