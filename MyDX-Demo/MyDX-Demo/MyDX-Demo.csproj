@@ -80,12 +80,20 @@
       <DependentUpon>BindablePropertiesViaFieldsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\BindableBaseDemo\BindablePropertiesViaFieldsViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\BindableBaseDemo\BindablePropertiesView.xaml.cs">
+      <DependentUpon>BindablePropertiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\BindableBaseDemo\BindablePropertiesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Module\MVVM-Demo\BindableBaseDemo\BindablePropertiesViaFieldsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\BindableBaseDemo\BindablePropertiesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
