@@ -42,6 +42,7 @@
     <Reference Include="DevExpress.Data.v22.2" />
     <Reference Include="DevExpress.Printing.v22.2.Core" />
     <Reference Include="DevExpress.Xpf.Core.v22.2" />
+    <Reference Include="DevExpress.Xpf.LayoutControl.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Themes.Office2019Colorful.v22.2" />
     <Reference Include="DevExpress.Drawing.v22.2" />
     <Reference Include="System" />
@@ -75,11 +76,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Module\MVVM-Demo\BindableBaseDemo\BindablePropertiesViaFieldsView.xaml.cs">
+      <DependentUpon>BindablePropertiesViaFieldsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\BindableBaseDemo\BindablePropertiesViaFieldsViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Module\MVVM-Demo\BindableBaseDemo\BindablePropertiesViaFieldsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
