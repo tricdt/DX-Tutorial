@@ -46,7 +46,9 @@
     <Reference Include="DevExpress.Xpf.Themes.Office2019Colorful.v22.2" />
     <Reference Include="DevExpress.Drawing.v22.2" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -84,6 +86,7 @@
       <DependentUpon>BindablePropertiesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\BindableBaseDemo\BindablePropertiesViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\Data\PersonInfo.cs" />
     <Compile Include="Module\MVVM-Demo\DXBindingDemo\BackConversionView.xaml.cs">
       <DependentUpon>BackConversionView.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,11 @@
       <DependentUpon>BindingExpressionsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\DXBindingDemo\BindingExpressionsViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\DXBindingDemo\FunctionsView.xaml.cs">
+      <DependentUpon>FunctionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\DXBindingDemo\FunctionsViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\DXBindingDemo\RegistrationHelper.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -110,6 +118,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\DXBindingDemo\BindingExpressionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\DXBindingDemo\FunctionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
