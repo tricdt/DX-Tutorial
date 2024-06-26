@@ -100,6 +100,10 @@
     </Compile>
     <Compile Include="Module\MVVM-Demo\DXBindingDemo\FunctionsViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\DXBindingDemo\RegistrationHelper.cs" />
+    <Compile Include="Module\MVVM-Demo\DXBindingDemo\SourcesView.xaml.cs">
+      <DependentUpon>SourcesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\DXBindingDemo\SourcesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -122,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\DXBindingDemo\FunctionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\DXBindingDemo\SourcesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="MyDX_Demo.Module.MVVM_Demo.DXBindingDemo.SourcesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyDX_Demo.Module.MVVM_Demo.DXBindingDemo"
+             xmlns:dxlc ="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:demo ="clr-namespace:MyDX_Demo.Module.MVVM_Demo.Data"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <demo:PersonInfo x:Key="personInfo" FirstName="Gregory" LastName="Price"/>
+    </UserControl.Resources>
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <dxlc:LayoutGroup Header="Self: Content=&quot;{DXBinding '@s.IsChecked'}&quot;"  Orientation="Vertical" View="GroupBox" VerticalAlignment="Top">
+            <CheckBox Content="{DXBinding '@s.IsChecked'}"/>
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup Header="ElementName: Text=&quot;{DXBinding '@e(textBox).Text'}&quot;" Orientation="Horizontal" View="GroupBox" VerticalAlignment="Top">
+            <TextBox x:Name="txtBox">Some text</TextBox>
+            <TextBlock Text="{DXBinding '@e(txtBox).Text'}"></TextBlock>
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup Header="FindAncestor: Text=&quot;{DXBinding '@a($dxlc:LayoutGroup).Header'}&quot;" Orientation="Vertical" View="GroupBox" VerticalAlignment="Top">
+            <TextBlock Text="{DXBinding '@a($dxlc:LayoutGroup).Header'}"/>
+        </dxlc:LayoutGroup>
+        <dxlc:LayoutGroup Header="StaticResource: Text=&quot;{DXBinding '@r(personInfo).FullName'}&quot;" Orientation="Vertical" View="GroupBox" VerticalAlignment="Top">
+            <TextBlock  Text="{DXBinding '@r(personInfo).FullName'}"/>
+        </dxlc:LayoutGroup>
+    </dxlc:LayoutControl>
+</UserControl>
