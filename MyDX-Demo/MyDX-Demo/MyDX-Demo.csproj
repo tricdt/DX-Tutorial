@@ -108,6 +108,10 @@
       <DependentUpon>AutoCommandsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\ViewModelBaseDemo\AutoCommandViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ViewModelBaseDemo\DataErrorInfoView.xaml.cs">
+      <DependentUpon>DataErrorInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ViewModelBaseDemo\DataErrorInfoViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -138,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\ViewModelBaseDemo\AutoCommandsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ViewModelBaseDemo\DataErrorInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
