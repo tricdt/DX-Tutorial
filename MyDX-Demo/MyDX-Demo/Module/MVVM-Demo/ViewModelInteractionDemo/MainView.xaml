@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="MyDX_Demo.Module.MVVM_Demo.ViewModelInteractionDemo.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyDX_Demo.Module.MVVM_Demo.ViewModelInteractionDemo"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxmvvm ="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <local:MainViewModel/>
+    </UserControl.DataContext>
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DialogService>
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="Window">
+                    <Setter Property="Width" Value="200"/>
+                    <Setter Property="Height" Value="150"/>
+                    <Setter Property="WindowStyle" Value="ToolWindow"/>
+                </Style>
+            </dx:DialogService.DialogStyle>
+            <dx:DialogService.ViewTemplate>
+                <DataTemplate>
+                    <Border>
+                        <Border.DataContext>
+                            <local:DetailViewModel/>
+                        </Border.DataContext>
+                        <TextBlock Text="{Binding DetailInfo}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </DataTemplate>
+            </dx:DialogService.ViewTemplate>
+        </dx:DialogService>
+    </dxmvvm:Interaction.Behaviors>
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <ListBox x:Name="itemsList" SelectedIndex="0">
+            <sys:String>First</sys:String>
+            <sys:String>Second</sys:String>
+            <sys:String>Third</sys:String>
+        </ListBox>
+        <Button Command="{Binding ShowDetailCommand}" CommandParameter="{Binding ElementName=itemsList, Path=SelectedItem}" Height="40">Show Detail</Button>
+    </dxlc:LayoutControl>
+</UserControl>
