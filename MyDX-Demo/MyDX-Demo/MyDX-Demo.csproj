@@ -124,6 +124,7 @@
       <DependentUpon>ServicesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\ViewModelBaseDemo\ServicesViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\ChildViewModel .cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\DetailViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -133,6 +134,10 @@
       <DependentUpon>MessengerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\MessengerViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\ParentView.xaml.cs">
+      <DependentUpon>ParentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\ParentViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -187,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\ViewModelInteractionDemo\MessengerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ViewModelInteractionDemo\ParentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
