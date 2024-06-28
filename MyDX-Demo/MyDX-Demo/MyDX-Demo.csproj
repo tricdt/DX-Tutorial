@@ -125,7 +125,12 @@
     </Compile>
     <Compile Include="Module\MVVM-Demo\ViewModelBaseDemo\ServicesViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\ChildViewModel .cs" />
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\DetailPOCOViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\DetailViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\MainPOCOView.xaml.cs">
+      <DependentUpon>MainPOCOView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\MainPOCOViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -184,6 +189,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\ViewModelBaseDemo\ServicesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ViewModelInteractionDemo\MainPOCOView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
