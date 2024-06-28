@@ -124,6 +124,11 @@
       <DependentUpon>ServicesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\ViewModelBaseDemo\ServicesViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\DetailViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\MainViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -170,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\ViewModelBaseDemo\ServicesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ViewModelInteractionDemo\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
