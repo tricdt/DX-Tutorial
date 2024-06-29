@@ -148,6 +148,10 @@
       <DependentUpon>DataErrorInfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\DataErrorInfoViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\DependentPropertiesView.xaml.cs">
+      <DependentUpon>DependentPropertiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\DependentPropertiesViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelBaseDemo\AutoCommandsView.xaml.cs">
       <DependentUpon>AutoCommandsView.xaml</DependentUpon>
     </Compile>
@@ -230,6 +234,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\POCOViewModelsDemo\DataErrorInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\POCOViewModelsDemo\DependentPropertiesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
