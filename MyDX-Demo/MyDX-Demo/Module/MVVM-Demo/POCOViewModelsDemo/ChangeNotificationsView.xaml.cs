@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyDX_Demo.Module.MVVM_Demo.POCOViewlModelsDemo
+namespace MyDX_Demo.Module.MVVM_Demo.POCOViewModelsDemo
 {
     /// <summary>
     /// Interaction logic for ChangeNotificationsView.xaml

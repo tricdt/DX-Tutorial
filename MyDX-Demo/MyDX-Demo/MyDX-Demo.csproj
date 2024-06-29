@@ -136,10 +136,14 @@
       <DependentUpon>SourcesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\DXBindingDemo\SourcesViewModel.cs" />
-    <Compile Include="Module\MVVM-Demo\POCOViewlModelsDemo\ChangeNotificationsView.xaml.cs">
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\ChangeNotificationsView.xaml.cs">
       <DependentUpon>ChangeNotificationsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Module\MVVM-Demo\POCOViewlModelsDemo\ChangeNotificationsViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\ChangeNotificationsViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\CommandsView.xaml.cs">
+      <DependentUpon>CommandsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\CommandsViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelBaseDemo\AutoCommandsView.xaml.cs">
       <DependentUpon>AutoCommandsView.xaml</DependentUpon>
     </Compile>
@@ -213,7 +217,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Module\MVVM-Demo\POCOViewlModelsDemo\ChangeNotificationsView.xaml">
+    <Page Include="Module\MVVM-Demo\POCOViewModelsDemo\ChangeNotificationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\POCOViewModelsDemo\CommandsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

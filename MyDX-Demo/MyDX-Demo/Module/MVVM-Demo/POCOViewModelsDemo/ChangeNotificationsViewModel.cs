@@ -1,10 +1,15 @@
 ﻿using DevExpress.Mvvm.DataAnnotations;
 using DevExpress.Mvvm.POCO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 
-namespace MyDX_Demo.Module.MVVM_Demo.POCOViewlModelsDemo
+namespace MyDX_Demo.Module.MVVM_Demo.POCOViewModelsDemo
 {
-    public partial class ChangeNotificationsViewModel
+    public class ChangeNotificationsViewModel
     {
         [BindableProperty(OnPropertyChangedMethodName = "OnNameChanged")]
         public virtual string FirstName { get; set; }
