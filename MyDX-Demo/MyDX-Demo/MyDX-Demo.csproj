@@ -124,6 +124,7 @@
       <DependentUpon>ServicesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\ViewModelBaseDemo\ServicesViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\ChildPOCOViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\ChildViewModel .cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\DetailPOCOViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\DetailViewModel.cs" />
@@ -139,6 +140,10 @@
       <DependentUpon>MessengerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\MessengerViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\ParentPOCOView.xaml.cs">
+      <DependentUpon>ParentPOCOView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\ParentPOCOViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\ParentView.xaml.cs">
       <DependentUpon>ParentView.xaml</DependentUpon>
     </Compile>
@@ -201,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\ViewModelInteractionDemo\MessengerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ViewModelInteractionDemo\ParentPOCOView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
