@@ -160,6 +160,10 @@
       <DependentUpon>PropertiesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\PropertiesViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\ServicesView.xaml.cs">
+      <DependentUpon>ServicesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\ServicesViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelBaseDemo\AutoCommandsView.xaml.cs">
       <DependentUpon>AutoCommandsView.xaml</DependentUpon>
     </Compile>
@@ -254,6 +258,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\POCOViewModelsDemo\PropertiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\POCOViewModelsDemo\ServicesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
