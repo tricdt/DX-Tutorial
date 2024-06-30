@@ -55,6 +55,7 @@
     <Reference Include="DevExpress.Xpf.Core.v22.2" />
     <Reference Include="DevExpress.Xpf.DataAccess.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Diagram.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Dialogs.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Docking.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.ExpressionEditor.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Grid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -177,6 +178,10 @@
       <DependentUpon>DispatcherServiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\ServicesDemo\DispatcherServiceViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\FolderBrowserDialogServiceView.xaml.cs">
+      <DependentUpon>FolderBrowserDialogServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\FolderBrowserDialogServiceViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ServicesDemo\GridExportService.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelBaseDemo\AutoCommandsView.xaml.cs">
       <DependentUpon>AutoCommandsView.xaml</DependentUpon>
@@ -291,6 +296,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\FolderBrowserDialogServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Module\MVVM-Demo\ViewModelBaseDemo\AutoCommandsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -366,7 +375,9 @@
   <ItemGroup>
     <Analyzer Include="..\packages\DevExpress.Mvvm.CodeGenerators.22.1.1\analyzers\dotnet\cs\DevExpress.Mvvm.CodeGenerators.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
