@@ -187,6 +187,14 @@
       <DependentUpon>OpenFileDialogServiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\ServicesDemo\OpenFileDialogServiceViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\SaveFileDialogServiceView.xaml.cs">
+      <DependentUpon>SaveFileDialogServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\SaveFileDialogServiceViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\SplashScreenManagerView.xaml.cs">
+      <DependentUpon>SplashScreenManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\SplashScreenManagerViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelBaseDemo\AutoCommandsView.xaml.cs">
       <DependentUpon>AutoCommandsView.xaml</DependentUpon>
     </Compile>
@@ -305,6 +313,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\ServicesDemo\OpenFileDialogServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\SaveFileDialogServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\SplashScreenManagerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
