@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="MyDX_Demo.Module.MVVM_Demo.ServicesDemo.UIObjectServiceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyDX_Demo.Module.MVVM_Demo.ServicesDemo"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:demo ="clr-namespace:MyDX_Demo.Module.MVVM_Demo.Data"
+             DataContext="{dxmvvm:ViewModelSource local:UIObjectServiceViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <dxg:GridControl Name="uiGrid" ItemsSource="{x:Static demo:PersonInfo.Persons}" AutoGenerateColumns="AddNew" MaxHeight="400">
+            <dxmvvm:Interaction.Behaviors>
+                <dxmvvm:UIObjectService Name="GridService"/>
+            </dxmvvm:Interaction.Behaviors>
+            <dxg:GridControl.View>
+                <dxg:TableView NavigationStyle="Row" ShowGroupPanel="False">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxmvvm:UIObjectService Name="TableViewService"/>
+                    </dxmvvm:Interaction.Behaviors>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+        <Button Command="{Binding ExportCommand}" VerticalAlignment="Top">Export to PDF</Button>
+        <Button Command="{Binding ShowColumnChooserCommand}" VerticalAlignment="Top">Show Column Chooser</Button>
+    </dxlc:LayoutControl>
+</UserControl>

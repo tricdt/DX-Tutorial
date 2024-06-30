@@ -195,6 +195,10 @@
       <DependentUpon>SplashScreenManagerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\ServicesDemo\SplashScreenManagerViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\UIObjectServiceView.xaml.cs">
+      <DependentUpon>UIObjectServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\UIObjectServiceViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelBaseDemo\AutoCommandsView.xaml.cs">
       <DependentUpon>AutoCommandsView.xaml</DependentUpon>
     </Compile>
@@ -321,6 +325,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\ServicesDemo\SplashScreenManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\UIObjectServiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
