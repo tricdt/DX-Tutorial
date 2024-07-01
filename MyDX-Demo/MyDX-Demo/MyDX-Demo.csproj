@@ -205,10 +205,11 @@
       <DependentUpon>UIObjectServiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\ServicesDemo\UIObjectServiceViewModel.cs" />
-    <Compile Include="Module\MVVM-Demo\ServicesDemo\User.cs" />
-    <Compile Include="Module\MVVM-Demo\ServicesDemo\UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\WindowServiceDetailViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\WindowServiceView.xaml.cs">
+      <DependentUpon>WindowServiceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\WindowServiceViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelBaseDemo\AutoCommandsView.xaml.cs">
       <DependentUpon>AutoCommandsView.xaml</DependentUpon>
     </Compile>
@@ -346,7 +347,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Module\MVVM-Demo\ServicesDemo\UserControl1.xaml">
+    <Page Include="Module\MVVM-Demo\ServicesDemo\WindowServiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

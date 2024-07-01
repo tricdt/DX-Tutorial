@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MyDX_Demo.Module.MVVM_Demo.ServicesDemo
 {
     /// <summary>
-    /// Interaction logic for UserControl1.xaml
+    /// Interaction logic for WindowServiceView.xaml
     /// </summary>
-    public partial class UserControl1 :User
+    public partial class WindowServiceView : UserControl
     {
-        public UserControl1()
+        public WindowServiceView()
         {
             InitializeComponent();
         }
