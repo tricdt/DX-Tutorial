@@ -198,6 +198,9 @@
     <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\FrameView.xaml.cs">
       <DependentUpon>FrameView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\TabbedView.xaml.cs">
+      <DependentUpon>TabbedView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\WindowedView.xaml.cs">
       <DependentUpon>WindowedView.xaml</DependentUpon>
     </Compile>
@@ -206,6 +209,14 @@
     </Compile>
     <Compile Include="Module\MVVM-Demo\ServicesDemo\FolderBrowserDialogServiceViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ServicesDemo\GridExportService.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\NavigationService\CollectionViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\NavigationService\DetailViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\NavigationService\FrameView.xaml.cs">
+      <DependentUpon>FrameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\NavigationService\NavigationDetailView.xaml.cs">
+      <DependentUpon>NavigationDetailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Module\MVVM-Demo\ServicesDemo\OpenFileDialogServiceView.xaml.cs">
       <DependentUpon>OpenFileDialogServiceView.xaml</DependentUpon>
     </Compile>
@@ -360,11 +371,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\TabbedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\WindowedView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\ServicesDemo\FolderBrowserDialogServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\NavigationService\FrameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\NavigationService\NavigationDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
