@@ -192,6 +192,9 @@
       <DependentUpon>DocumentDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\DocumentDetailViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\FrameView.xaml.cs">
+      <DependentUpon>FrameView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\WindowedView.xaml.cs">
       <DependentUpon>WindowedView.xaml</DependentUpon>
     </Compile>
@@ -343,6 +346,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\DocumentDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\FrameView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
