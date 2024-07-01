@@ -188,6 +188,9 @@
       <DependentUpon>CollectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\CollectionViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\DockingView.xaml.cs">
+      <DependentUpon>DockingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\DocumentDetailView.xaml.cs">
       <DependentUpon>DocumentDetailView.xaml</DependentUpon>
     </Compile>
@@ -342,6 +345,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\CollectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\DockingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
