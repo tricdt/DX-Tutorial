@@ -184,6 +184,17 @@
       <DependentUpon>DispatcherServiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\ServicesDemo\DispatcherServiceViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\CollectionView.xaml.cs">
+      <DependentUpon>CollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\CollectionViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\DocumentDetailView.xaml.cs">
+      <DependentUpon>DocumentDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\DocumentDetailViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\WindowedView.xaml.cs">
+      <DependentUpon>WindowedView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Module\MVVM-Demo\ServicesDemo\FolderBrowserDialogServiceView.xaml.cs">
       <DependentUpon>FolderBrowserDialogServiceView.xaml</DependentUpon>
     </Compile>
@@ -324,6 +335,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\ServicesDemo\DispatcherServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\CollectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\DocumentDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\WindowedView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
