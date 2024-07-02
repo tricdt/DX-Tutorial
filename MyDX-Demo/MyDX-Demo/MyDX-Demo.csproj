@@ -128,6 +128,9 @@
       <DependentUpon>ConfirmationBehaviorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\Behaviors\ConfirmationBehaviorViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\Behaviors\CustomBehaviorView.xaml.cs">
+      <DependentUpon>CustomBehaviorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Module\MVVM-Demo\Behaviors\SelectAllOnGotFocusBehavior.cs" />
     <Compile Include="Module\MVVM-Demo\BindableBaseDemo\BindablePropertiesViaFieldsView.xaml.cs">
       <DependentUpon>BindablePropertiesViaFieldsView.xaml</DependentUpon>
@@ -318,6 +321,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\Behaviors\ConfirmationBehaviorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\Behaviors\CustomBehaviorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
