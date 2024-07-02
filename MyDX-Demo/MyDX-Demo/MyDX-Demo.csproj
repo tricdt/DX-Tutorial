@@ -209,6 +209,12 @@
     </Compile>
     <Compile Include="Module\MVVM-Demo\ServicesDemo\FolderBrowserDialogServiceViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ServicesDemo\GridExportService.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\MessageBoxService\Helpers.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\MessageBoxService\MessageBoxServiceView.xaml.cs">
+      <DependentUpon>MessageBoxServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\MessageBoxService\MessageBoxServiceViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\MessageBoxService\PredefinedFormat.cs" />
     <Compile Include="Module\MVVM-Demo\ServicesDemo\NavigationService\CollectionViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ServicesDemo\NavigationService\DetailViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ServicesDemo\NavigationService\FrameView.xaml.cs">
@@ -380,6 +386,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Module\MVVM-Demo\ServicesDemo\FolderBrowserDialogServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\MessageBoxService\MessageBoxServiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
