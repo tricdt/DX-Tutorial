@@ -117,6 +117,14 @@
       <DependentUpon>ColumnChooser.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\Grid-Demo\Controls\DemoModuleControl.cs" />
+    <Compile Include="Module\MVVM-Demo\Behaviors\BehaviorsInStyleView.xaml.cs">
+      <DependentUpon>BehaviorsInStyleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\Behaviors\CompositeCommandBehaviorView.xaml.cs">
+      <DependentUpon>CompositeCommandBehaviorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\Behaviors\CompositeCommandBehaviorViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\Behaviors\SelectAllOnGotFocusBehavior.cs" />
     <Compile Include="Module\MVVM-Demo\BindableBaseDemo\BindablePropertiesViaFieldsView.xaml.cs">
       <DependentUpon>BindablePropertiesViaFieldsView.xaml</DependentUpon>
     </Compile>
@@ -294,6 +302,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Module\Grid-Demo\ColumnChooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\Behaviors\BehaviorsInStyleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\Behaviors\CompositeCommandBehaviorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
