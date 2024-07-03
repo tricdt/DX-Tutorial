@@ -9,6 +9,6 @@
     <StackPanel>
         <control:AnalogClock ShowSeconds="False"/>
         <control:AnalogClock ShowSeconds="False"/>
-        <control:AnalogClock/>
+        <control:AnalogClock TimeChanged="AnalogClock_TimeChanged"/>
     </StackPanel>
 </dx:ThemedWindow>

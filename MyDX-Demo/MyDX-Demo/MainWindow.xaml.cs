@@ -24,5 +24,10 @@ namespace MyDX_Demo
         {
             InitializeComponent();
         }
+
+        private void AnalogClock_TimeChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
