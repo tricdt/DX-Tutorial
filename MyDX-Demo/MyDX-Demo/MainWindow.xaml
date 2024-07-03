@@ -6,7 +6,9 @@
     xmlns:Views="clr-namespace:MyDX_Demo.Views"
     xmlns:control="clr-namespace:MyDX_Demo.Controls"
     Title="MainWindow" Height="800" Width="1000">
-    <Grid>
+    <StackPanel>
+        <control:AnalogClock ShowSeconds="True"/>
         <control:AnalogClock/>
-    </Grid>
+        <control:AnalogClock/>
+    </StackPanel>
 </dx:ThemedWindow>

@@ -16,6 +16,19 @@ namespace MyDX_Demo.Controls
         private Line hourHand;
         private Line minuteHand;
         private Line secondHand;
+
+
+        public bool ShowSeconds
+        {
+            get { return (bool)GetValue(ShowSecondsProperty); }
+            set { SetValue(ShowSecondsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ShowSeconds.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShowSecondsProperty =
+            DependencyProperty.Register("ShowSeconds", typeof(bool), typeof(AnalogClock), new PropertyMetadata(true));
+
+
         static AnalogClock()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(AnalogClock), new FrameworkPropertyMetadata(typeof(AnalogClock)));
