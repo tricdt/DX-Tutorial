@@ -101,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\AnalogClockStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -109,6 +113,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\AnalogClock.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -135,7 +140,12 @@
       <DependentUpon>DependencyPropertyBehaviorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\Behaviors\DependencyPropertyBehaviorViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\Behaviors\EnumItemsSourceBehaviorView.xaml.cs">
+      <DependentUpon>EnumItemsSourceBehaviorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\Behaviors\EnumItemsSourceBehaviorViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\Behaviors\SelectAllOnGotFocusBehavior.cs" />
+    <Compile Include="Module\MVVM-Demo\Behaviors\UserRole.cs" />
     <Compile Include="Module\MVVM-Demo\BindableBaseDemo\BindablePropertiesViaFieldsView.xaml.cs">
       <DependentUpon>BindablePropertiesViaFieldsView.xaml</DependentUpon>
     </Compile>
@@ -336,6 +346,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Module\MVVM-Demo\Behaviors\EnumItemsSourceBehaviorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Module\MVVM-Demo\BindableBaseDemo\BindablePropertiesViaFieldsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -500,6 +514,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -538,8 +556,11 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Controls\" />
+    <Content Include="Module\MVVM-Demo\Behaviors\Images\Admin.svg" />
+    <Content Include="Module\MVVM-Demo\Behaviors\Images\Moderator.svg" />
+    <Content Include="Module\MVVM-Demo\Behaviors\Images\User.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
