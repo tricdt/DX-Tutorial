@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -38,6 +39,13 @@ namespace MyDX_Demo.Controls
             hourHand = Template.FindName("PART_HourHand", this) as Line;
             minuteHand = Template.FindName("PART_MinuteHand", this) as Line;
             secondHand = Template.FindName("PART_SecondHand", this) as Line;
+            Binding showSecondHandBinding = new Binding
+            {
+                Path = new PropertyPath(nameof(ShowSeconds)),
+                Source=this,
+                Converter = new BooleanToVisibilityConverter()
+            };
+            secondHand.SetBinding(VisibilityProperty, showSecondHandBinding);
             UpdateHandAngles();
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 1);
