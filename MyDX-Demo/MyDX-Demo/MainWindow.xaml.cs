@@ -1,4 +1,5 @@
 ﻿using DevExpress.Xpf.Core;
+using MyDX_Demo.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +26,9 @@ namespace MyDX_Demo
             InitializeComponent();
         }
 
-        private void AnalogClock_TimeChanged(object sender, RoutedEventArgs e)
+        private void AnalogClock_TimeChanged(object sender, TimeChangedEventArgs e)
         {
-
+            tbTime.Text = e.NewTime.ToString("hh:mm:ss");
         }
     }
 }
