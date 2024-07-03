@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="MyDX_Demo.Module.MVVM_Demo.ServicesDemo.MessageBoxService.MessageBoxServiceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyDX_Demo.Module.MVVM_Demo.ServicesDemo.MessageBoxService"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             DataContext="{dxmvvm:ViewModelSource Type=local:MessageBoxServiceViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+        <UserControl.Resources>
+        <local:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
+        <local:MessageBoxButtonToMessageBoxResultsConverter x:Key="MessageBoxButtonToMessageBoxResultsConverter"/>
+    </UserControl.Resources>
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService x:Name="DXMessageBoxService" AllowTextSelection="{Binding AllowTextSelection}"
+                                TimerTimeout="{Binding TimerTimeout}" TimerFormat="{Binding TimerFormat}"/>
+        <dxwui:WinUIMessageBoxService x:Name="WinUIMessageBoxService"/>
+    </dxmvvm:Interaction.Behaviors>
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <dxlc:LayoutItem Label="Text:">
+            <dxe:TextEdit Text="{Binding Text}" VerticalAlignment="Top"/>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem Label="Caption:">
+            <dxe:TextEdit Text="{Binding Caption}" VerticalAlignment="Top"/>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem Label="Buttons:">
+            <dxe:ComboBoxEdit EditValue="{Binding Buttons, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{dxe:EnumItemsSource EnumType=dxmvvm:MessageButton}" IsTextEditable="False"/>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem Label="Default button:">
+            <dxe:ComboBoxEdit EditValue="{Binding DefaultButton, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Buttons, Converter={StaticResource MessageBoxButtonToMessageBoxResultsConverter}}" IsTextEditable="False"/>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem Label="Icon:">
+            <dxe:ComboBoxEdit EditValue="{Binding Icon}" ItemsSource="{Binding Icons}" IsTextEditable="False"/>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem Label="Allow text selection:">
+            <dxe:CheckEdit IsChecked="{Binding AllowTextSelection}"/>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem Label="Timer:">
+            <dxe:ComboBoxEdit Grid.Row="5" Grid.Column="1" SelectedItem="{Binding TimerTimeout, Converter={StaticResource TimeSpanToStringConverter}}" IsTextEditable="False" ShowSizeGrip="False">
+                <sys:String>No timer</sys:String>
+                <sys:String>5</sys:String>
+                <sys:String>6</sys:String>
+                <sys:String>7</sys:String>
+                <sys:String>8</sys:String>
+                <sys:String>9</sys:String>
+                <sys:String>10</sys:String>
+            </dxe:ComboBoxEdit>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem Label="Timer format:">
+            <dxe:ComboBoxEdit DisplayMember="Example" ValueMember="Format" EditValue="{Binding TimerFormat}" ItemsSource="{Binding PredefinedFormats}" IsTextEditable="False" ShowSizeGrip="False"/>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem Label="Result:">
+            <TextBlock Text="{Binding Result}"/>
+        </dxlc:LayoutItem>
+        <Button Command="{Binding ShowMessageCommand}" CommandParameter="DXMessageBoxService" VerticalAlignment="Top">Show Standard Message Box</Button>
+        <Button Command="{Binding ShowMessageCommand}" CommandParameter="WinUIMessageBoxService" VerticalAlignment="Top">Show WindowsUI Style Message Box</Button>
+    </dxlc:LayoutControl>
+</UserControl>

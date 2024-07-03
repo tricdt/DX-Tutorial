@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="MyDX_Demo.Module.MVVM_Demo.Behaviors.ConfirmationBehaviorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyDX_Demo.Module.MVVM_Demo.Behaviors"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             DataContext="{dxmvvm:ViewModelSource Type=local:ConfirmationBehaviorViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <TextBlock TextWrapping="Wrap" VerticalAlignment="Top">It's often required to show a confirmation box before performing an action. <Bold>ConfirmationBehavior</Bold> allows you to automate this process.</TextBlock>
+        <CheckBox x:Name="enableCheckBox" IsChecked="True" VerticalAlignment="Top">Enable confirmation message</CheckBox>
+        <Button Content="Register" VerticalAlignment="Top">
+            <dxmvvm:Interaction.Behaviors>
+                <dxmvvm:ConfirmationBehavior Command="{Binding RegisterCommand}" MessageText="Are you sure you want to register?"
+                                             EnableConfirmationMessage="{Binding IsChecked, ElementName=enableCheckBox}"/>
+            </dxmvvm:Interaction.Behaviors>
+        </Button>
+    </dxlc:LayoutControl>
+</UserControl>

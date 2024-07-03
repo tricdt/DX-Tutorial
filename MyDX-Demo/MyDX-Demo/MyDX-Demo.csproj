@@ -37,18 +37,51 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Charts.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.CodeParser.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.DataAccess.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.DemoData.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Diagram.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Images.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Mvvm.v22.2" />
     <Reference Include="DevExpress.Data.Desktop.v22.2" />
     <Reference Include="DevExpress.Data.v22.2" />
+    <Reference Include="DevExpress.Office.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v22.2.Core" />
+    <Reference Include="DevExpress.RichEdit.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Sparkline.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.CodeView.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Controls.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Core.v22.2" />
+    <Reference Include="DevExpress.Xpf.DataAccess.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.DemoBase.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Diagram.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Dialogs.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Docking.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.ExpressionEditor.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Layout.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.LayoutControl.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.PivotGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Printing.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.PropertyGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.ReportDesigner.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Ribbon.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.RichEdit.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Themes.Office2019Colorful.v22.2" />
     <Reference Include="DevExpress.Drawing.v22.2" />
+    <Reference Include="DevExpress.XtraCharts.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGauges.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -57,6 +90,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -66,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\AnalogClockStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -74,10 +113,39 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\AnalogClock.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Module\Grid-Demo\ColumnChooser.xaml.cs">
+      <DependentUpon>ColumnChooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\Grid-Demo\Controls\DemoModuleControl.cs" />
+    <Compile Include="Module\MVVM-Demo\Behaviors\BehaviorsInStyleView.xaml.cs">
+      <DependentUpon>BehaviorsInStyleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\Behaviors\CompositeCommandBehaviorView.xaml.cs">
+      <DependentUpon>CompositeCommandBehaviorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\Behaviors\CompositeCommandBehaviorViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\Behaviors\ConfirmationBehaviorView.xaml.cs">
+      <DependentUpon>ConfirmationBehaviorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\Behaviors\ConfirmationBehaviorViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\Behaviors\CustomBehaviorView.xaml.cs">
+      <DependentUpon>CustomBehaviorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\Behaviors\DependencyPropertyBehaviorView.xaml.cs">
+      <DependentUpon>DependencyPropertyBehaviorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\Behaviors\DependencyPropertyBehaviorViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\Behaviors\EnumItemsSourceBehaviorView.xaml.cs">
+      <DependentUpon>EnumItemsSourceBehaviorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\Behaviors\EnumItemsSourceBehaviorViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\Behaviors\SelectAllOnGotFocusBehavior.cs" />
+    <Compile Include="Module\MVVM-Demo\Behaviors\UserRole.cs" />
     <Compile Include="Module\MVVM-Demo\BindableBaseDemo\BindablePropertiesViaFieldsView.xaml.cs">
       <DependentUpon>BindablePropertiesViaFieldsView.xaml</DependentUpon>
     </Compile>
@@ -104,6 +172,107 @@
       <DependentUpon>SourcesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\DXBindingDemo\SourcesViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\ChangeNotificationsView.xaml.cs">
+      <DependentUpon>ChangeNotificationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\ChangeNotificationsViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\CommandsView.xaml.cs">
+      <DependentUpon>CommandsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\CommandsViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\DataErrorInfoView.xaml.cs">
+      <DependentUpon>DataErrorInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\DataErrorInfoViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\DependentPropertiesView.xaml.cs">
+      <DependentUpon>DependentPropertiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\DependentPropertiesViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\LoginViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\PropertiesView.xaml.cs">
+      <DependentUpon>PropertiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\PropertiesViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\ServicesView.xaml.cs">
+      <DependentUpon>ServicesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\POCOViewModelsDemo\ServicesViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\CustomServiceView.xaml.cs">
+      <DependentUpon>CustomServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\CustomServiceViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DialogServiceDetailViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DialogServiceView.xaml.cs">
+      <DependentUpon>DialogServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DialogServiceViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DispatcherServiceView.xaml.cs">
+      <DependentUpon>DispatcherServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DispatcherServiceViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\CollectionView.xaml.cs">
+      <DependentUpon>CollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\CollectionViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\DockingView.xaml.cs">
+      <DependentUpon>DockingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\DocumentDetailView.xaml.cs">
+      <DependentUpon>DocumentDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\DocumentDetailViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\FrameView.xaml.cs">
+      <DependentUpon>FrameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\TabbedView.xaml.cs">
+      <DependentUpon>TabbedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\WindowedView.xaml.cs">
+      <DependentUpon>WindowedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\FolderBrowserDialogServiceView.xaml.cs">
+      <DependentUpon>FolderBrowserDialogServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\FolderBrowserDialogServiceViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\GridExportService.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\MessageBoxService\Helpers.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\MessageBoxService\MessageBoxServiceView.xaml.cs">
+      <DependentUpon>MessageBoxServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\MessageBoxService\MessageBoxServiceViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\MessageBoxService\PredefinedFormat.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\NavigationService\CollectionViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\NavigationService\DetailViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\NavigationService\FrameView.xaml.cs">
+      <DependentUpon>FrameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\NavigationService\NavigationDetailView.xaml.cs">
+      <DependentUpon>NavigationDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\OpenFileDialogServiceView.xaml.cs">
+      <DependentUpon>OpenFileDialogServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\OpenFileDialogServiceViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\SaveFileDialogServiceView.xaml.cs">
+      <DependentUpon>SaveFileDialogServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\SaveFileDialogServiceViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\SplashScreenManagerView.xaml.cs">
+      <DependentUpon>SplashScreenManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\SplashScreenManagerViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\UIObjectServiceView.xaml.cs">
+      <DependentUpon>UIObjectServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\UIObjectServiceViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\WindowServiceDetailViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\WindowServiceView.xaml.cs">
+      <DependentUpon>WindowServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ServicesDemo\WindowServiceViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelBaseDemo\AutoCommandsView.xaml.cs">
       <DependentUpon>AutoCommandsView.xaml</DependentUpon>
     </Compile>
@@ -124,16 +293,63 @@
       <DependentUpon>ServicesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\ViewModelBaseDemo\ServicesViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\ChildPOCOViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\ChildViewModel .cs" />
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\DetailPOCOViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\DetailViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\MainPOCOView.xaml.cs">
+      <DependentUpon>MainPOCOView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\MainPOCOViewModel.cs" />
     <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\MainViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\MessengerView.xaml.cs">
+      <DependentUpon>MessengerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\MessengerViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\ParentPOCOView.xaml.cs">
+      <DependentUpon>ParentPOCOView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\ParentPOCOViewModel.cs" />
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\ParentView.xaml.cs">
+      <DependentUpon>ParentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Module\MVVM-Demo\ViewModelInteractionDemo\ParentViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Module\Grid-Demo\ColumnChooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\Behaviors\BehaviorsInStyleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\Behaviors\CompositeCommandBehaviorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\Behaviors\ConfirmationBehaviorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\Behaviors\CustomBehaviorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\Behaviors\DependencyPropertyBehaviorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\Behaviors\EnumItemsSourceBehaviorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Module\MVVM-Demo\BindableBaseDemo\BindablePropertiesViaFieldsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -158,6 +374,106 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Module\MVVM-Demo\POCOViewModelsDemo\ChangeNotificationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\POCOViewModelsDemo\CommandsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\POCOViewModelsDemo\DataErrorInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\POCOViewModelsDemo\DependentPropertiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\POCOViewModelsDemo\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\POCOViewModelsDemo\PropertiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\POCOViewModelsDemo\ServicesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\CustomServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\DialogServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\DispatcherServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\CollectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\DockingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\DocumentDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\FrameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\TabbedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\DocumentManagerService\WindowedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\FolderBrowserDialogServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\MessageBoxService\MessageBoxServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\NavigationService\FrameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\NavigationService\NavigationDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\OpenFileDialogServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\SaveFileDialogServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\SplashScreenManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\UIObjectServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ServicesDemo\WindowServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Module\MVVM-Demo\ViewModelBaseDemo\AutoCommandsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -178,7 +494,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Module\MVVM-Demo\ViewModelInteractionDemo\MainPOCOView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Module\MVVM-Demo\ViewModelInteractionDemo\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ViewModelInteractionDemo\MessengerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ViewModelInteractionDemo\ParentPOCOView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Module\MVVM-Demo\ViewModelInteractionDemo\ParentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -201,6 +537,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -216,7 +553,15 @@
   <ItemGroup>
     <Analyzer Include="..\packages\DevExpress.Mvvm.CodeGenerators.22.1.1\analyzers\dotnet\cs\DevExpress.Mvvm.CodeGenerators.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Module\MVVM-Demo\Behaviors\Images\Admin.svg" />
+    <Content Include="Module\MVVM-Demo\Behaviors\Images\Moderator.svg" />
+    <Content Include="Module\MVVM-Demo\Behaviors\Images\User.svg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

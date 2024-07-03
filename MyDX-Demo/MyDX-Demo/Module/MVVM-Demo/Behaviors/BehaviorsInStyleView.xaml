@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="MyDX_Demo.Module.MVVM_Demo.Behaviors.BehaviorsInStyleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyDX_Demo.Module.MVVM_Demo.Behaviors"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <ItemsControl>
+                            <local:SelectAllOnGotFocusBehavior/>
+                        </ItemsControl>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <TextBox Text="Some text 1" VerticalAlignment="Top">
+            <dxmvvm:Interaction.Behaviors>
+                <dxmvvm:FocusBehavior />
+            </dxmvvm:Interaction.Behaviors>
+        </TextBox>
+        <TextBox Text="Some text 2" VerticalAlignment="Top"/>
+    </dxlc:LayoutControl>
+</UserControl>
