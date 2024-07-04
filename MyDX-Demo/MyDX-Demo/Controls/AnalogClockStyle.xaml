@@ -12,10 +12,40 @@
                         <Grid.RenderTransform>
                             <RotateTransform Angle="90"/>
                         </Grid.RenderTransform>
-                        <Line x:Name="PART_HourHand" Stroke="Black" StrokeThickness="1" VerticalAlignment="Center" HorizontalAlignment="Center" X1="0" X2="-75"/>
-                        <Line x:Name="PART_MinuteHand" Stroke="Black" StrokeThickness="1" VerticalAlignment="Center" HorizontalAlignment="Center" X1="0" X2="-100"/>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="TimeStates">
+                                <VisualState x:Name="Day">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="ClockFill" Storyboard.TargetProperty="Color" To="SkyBlue"/>
+                                        <ColorAnimation Storyboard.TargetName="HourStroke" Storyboard.TargetProperty="Color" To="Gold"/>
+                                        <ColorAnimation Storyboard.TargetName="MinuteStroke" Storyboard.TargetProperty="Color" To="Gold"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Night">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="ClockFill" Storyboard.TargetProperty="Color" To="Black"/>
+                                        <ColorAnimation Storyboard.TargetName="HourStroke" Storyboard.TargetProperty="Color" To="White"/>
+                                        <ColorAnimation Storyboard.TargetName="MinuteStroke" Storyboard.TargetProperty="Color" To="White"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Ellipse x:Name="PART_Clock"  Stroke="Black" StrokeThickness="1" Width="210" Height="210">
+                            <Ellipse.Fill>
+                                <SolidColorBrush x:Name="ClockFill" Color="White"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Line x:Name="PART_HourHand" StrokeThickness="1" VerticalAlignment="Center" HorizontalAlignment="Center" X1="0" X2="-75">
+                            <Line.Stroke>
+                                <SolidColorBrush x:Name="HourStroke" Color="Black"/>
+                            </Line.Stroke>
+                        </Line>
+                        <Line x:Name="PART_MinuteHand" StrokeThickness="1" VerticalAlignment="Center" HorizontalAlignment="Center" X1="0" X2="-100">
+                            <Line.Stroke>
+                                <SolidColorBrush x:Name="MinuteStroke" Color="Black"/>
+                            </Line.Stroke>
+                        </Line>
                         <Line x:Name="PART_SecondHand" Visibility="{TemplateBinding ShowSeconds, Converter={StaticResource BooleanToVisibilityConverter}}" Stroke="Red" StrokeThickness="1" VerticalAlignment="Center" HorizontalAlignment="Center" X1="0" X2="-100"/>
-                        <Ellipse x:Name="PART_Border"  Stroke="Black" StrokeThickness="1" Width="210" Height="210"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
