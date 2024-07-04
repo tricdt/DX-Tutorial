@@ -26,9 +26,9 @@ namespace MyDX_Demo
             InitializeComponent();
         }
 
-        private void AnalogClock_TimeChanged(object sender, TimeChangedEventArgs e)
+        private void AnalogClock_TimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime> e)
         {
-            tbTime.Text = e.NewTime.ToString("hh:mm:ss");
+            tbTime.Text = e.NewValue.ToString("hh:mm:ss");
         }
     }
 }

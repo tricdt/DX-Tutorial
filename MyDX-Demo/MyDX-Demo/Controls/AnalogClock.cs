@@ -13,7 +13,7 @@ using System.Windows.Threading;
 
 namespace MyDX_Demo.Controls
 {
-    public delegate void TimeChangedEventHandler(object sender, TimeChangedEventArgs e);
+    //public delegate void TimeChangedEventHandler(object sender, TimeChangedEventArgs e);
     public class AnalogClock:Control
     {
         private Line hourHand;
@@ -31,8 +31,8 @@ namespace MyDX_Demo.Controls
             DependencyProperty.Register("ShowSeconds", typeof(bool), typeof(AnalogClock), new PropertyMetadata(true));
 
         public static readonly RoutedEvent TimeChangedEvent = 
-            EventManager.RegisterRoutedEvent("TimeChanged", RoutingStrategy.Bubble, typeof(TimeChangedEventHandler), typeof(AnalogClock));
-        public event TimeChangedEventHandler TimeChanged
+            EventManager.RegisterRoutedEvent("TimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime>), typeof(AnalogClock));
+        public event RoutedPropertyChangedEventHandler<DateTime> TimeChanged
         {
             add
             {
@@ -68,7 +68,7 @@ namespace MyDX_Demo.Controls
         }
         protected virtual void OnTimeChanged(DateTime time) { 
             UpdateHandAngles(time);
-            RaiseEvent(new TimeChangedEventArgs(TimeChangedEvent, this) { NewTime = time});
+            RaiseEvent(new RoutedPropertyChangedEventArgs<DateTime>(DateTime.Now.AddSeconds(-1), DateTime.Now, TimeChangedEvent));
         }
         private void UpdateHandAngles(DateTime time)
         {
