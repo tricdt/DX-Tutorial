@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="MyDX_Demo.Module.MVVM_Demo.Behaviors.EnumItemsSourceBehaviorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyDX_Demo.Module.MVVM_Demo.Behaviors"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             DataContext="{dxmvvm:ViewModelSource local:EnumItemsSourceBehaviorViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <dxlc:LayoutControl Orientation="Vertical" VerticalAlignment="Top">
+        <TextBlock TextWrapping="Wrap">The <Bold>EnumItemsSourceBehavior</Bold> class allows you to bind an enumeration to the ItemsSource property of any ItemsControl.</TextBlock>
+        <dxlc:LayoutItem Label="ListBox" LabelPosition="Top">
+            <ListBox x:Name="list" VerticalAlignment="Top" >
+                <dxmvvm:Interaction.Behaviors>
+                    <dxmvvm:EnumItemsSourceBehavior ImageSize="16,16" EnumType="local:UserRole"/>
+                    <dxmvvm:EventToCommand EventName="MouseDoubleClick" Command="{Binding EditCommand}" CommandParameter="{Binding ElementName=list, Path=SelectedItem}"/>
+                </dxmvvm:Interaction.Behaviors>
+            </ListBox>
+        </dxlc:LayoutItem>
+        <dxlc:LayoutItem Label="ComboBox" LabelPosition="Top">
+            <ComboBox VerticalAlignment="Top" SelectedIndex="0">
+                <dxmvvm:Interaction.Behaviors>
+                    <dxmvvm:EnumItemsSourceBehavior ImageSize="16,16" EnumType="local:UserRole"/>
+                </dxmvvm:Interaction.Behaviors>
+            </ComboBox>
+        </dxlc:LayoutItem>
+    </dxlc:LayoutControl>
+</UserControl>
