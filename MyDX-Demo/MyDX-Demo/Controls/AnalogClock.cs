@@ -14,35 +14,14 @@ using System.Windows.Threading;
 namespace MyDX_Demo.Controls
 {
     //public delegate void TimeChangedEventHandler(object sender, TimeChangedEventArgs e);
-    public class AnalogClock:Control
+    public class AnalogClock : Clock
     {
         private Line hourHand;
         private Line minuteHand;
         private Line secondHand;
 
 
-        public bool ShowSeconds
-        {
-            get { return (bool)GetValue(ShowSecondsProperty); }
-            set { SetValue(ShowSecondsProperty, value); }
-        }
-        // Using a DependencyProperty as the backing store for ShowSeconds.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ShowSecondsProperty =
-            DependencyProperty.Register("ShowSeconds", typeof(bool), typeof(AnalogClock), new PropertyMetadata(true));
-
-        public static readonly RoutedEvent TimeChangedEvent = 
-            EventManager.RegisterRoutedEvent("TimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime>), typeof(AnalogClock));
-        public event RoutedPropertyChangedEventHandler<DateTime> TimeChanged
-        {
-            add
-            {
-                AddHandler(TimeChangedEvent, value);
-            }
-            remove
-            {
-                RemoveHandler(TimeChangedEvent, value);
-            }
-        }
+      
         static AnalogClock()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(AnalogClock), new FrameworkPropertyMetadata(typeof(AnalogClock)));
@@ -52,36 +31,15 @@ namespace MyDX_Demo.Controls
             hourHand = Template.FindName("PART_HourHand", this) as Line;
             minuteHand = Template.FindName("PART_MinuteHand", this) as Line;
             secondHand = Template.FindName("PART_SecondHand", this) as Line;
-            //Binding showSecondHandBinding = new Binding
-            //{
-            //    Path = new PropertyPath(nameof(ShowSeconds)),
-            //    Source=this,
-            //    Converter = new BooleanToVisibilityConverter()
-            //};
-            //secondHand.SetBinding(VisibilityProperty, showSecondHandBinding);
-            UpdateHandAngles(DateTime.Now);
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 1);
-            timer.Tick += (s, e) => OnTimeChanged(DateTime.Now);
-            timer.Start();
+
             base.OnApplyTemplate();
         }
-    
-        protected virtual void OnTimeChanged(DateTime time) { 
-            UpdateHandAngles(time);
-            UpdateTimeState(time);
-            RaiseEvent(new RoutedPropertyChangedEventArgs<DateTime>(DateTime.Now.AddSeconds(-1), DateTime.Now, TimeChangedEvent));
-        }
-        private void UpdateTimeState(DateTime time)
+
+
+        protected override void OnTimeChanged(DateTime time)
         {
-            if (time.Hour > 6 && time.Hour < 18)
-            {
-                VisualStateManager.GoToState(this, "Day", false);
-            }
-            else
-            {
-                VisualStateManager.GoToState(this, "Night", false);
-            }
+            UpdateHandAngles(time);
+            base.OnTimeChanged(time);
         }
         private void UpdateHandAngles(DateTime time)
         {
