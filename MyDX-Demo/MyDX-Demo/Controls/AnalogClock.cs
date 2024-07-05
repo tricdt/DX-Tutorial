@@ -13,7 +13,9 @@ using System.Windows.Threading;
 
 namespace MyDX_Demo.Controls
 {
-    //public delegate void TimeChangedEventHandler(object sender, TimeChangedEventArgs e);
+    [TemplatePart(Name = "PART_HourHand", Type = typeof(Line))]
+    [TemplatePart(Name = "PART_MinuteHand", Type = typeof(Line))]
+    [TemplatePart(Name = "PART_SecondHand", Type = typeof(Line))]
     public class AnalogClock : Clock
     {
         private Line hourHand;

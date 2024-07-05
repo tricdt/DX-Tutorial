@@ -6,8 +6,13 @@
     xmlns:Views="clr-namespace:MyDX_Demo.Views"
     xmlns:control="clr-namespace:MyDX_Demo.Controls"
     Title="MainWindow" Height="800" Width="1000">
-    <StackPanel>
-        <control:AnalogClock TimeChanged="AnalogClock_TimeChanged"/>
-        <TextBlock x:Name="tbTime" Text="00:00:00" Margin="10" FontSize="50"/>
-    </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <control:AnalogClock Grid.Row="0" ShowSeconds="True"/>
+        <control:DigitalClock Grid.Row="1" ShowSeconds="False" Margin="0 10 0 0" FontSize="36" HorizontalAlignment="Center" ColonBlink="True"/>
+    </Grid>
 </dx:ThemedWindow>
