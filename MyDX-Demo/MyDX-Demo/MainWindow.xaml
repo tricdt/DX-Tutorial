@@ -13,6 +13,6 @@
         </Grid.RowDefinitions>
 
         <control:AnalogClock Grid.Row="0" ShowSeconds="True"/>
-        <control:DigitalClock Grid.Row="1" ShowSeconds="False" Margin="0 10 0 0" FontSize="36" HorizontalAlignment="Center" ColonBlink="True"/>
+        <control:DigitalClock Grid.Row="1" ShowSeconds="True" Margin="0 10 0 0" FontSize="36" HorizontalAlignment="Center" ColonBlink="True"/>
     </Grid>
 </dx:ThemedWindow>

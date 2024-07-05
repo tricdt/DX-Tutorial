@@ -14,10 +14,29 @@ namespace MyDX_Demo.Controls
     [TemplateVisualState(Name = "Night", GroupName = "TimeStates")]
     public class Clock : Control
     {
-        public static readonly DependencyProperty TimeProperty =
-            DependencyProperty.Register("Time", typeof(DateTime), typeof(Clock), new PropertyMetadata(DateTime.Now, TimePropertyChanged));
+      
         public static readonly DependencyProperty ShowSecondsProperty =
             DependencyProperty.Register("ShowSeconds", typeof(bool), typeof(Clock), new PropertyMetadata(true));
+        public static readonly DependencyProperty TimeProperty =
+          DependencyProperty.Register("Time", typeof(DateTime), typeof(Clock), new PropertyMetadata(DateTime.Now, TimePropertyChanged, TimeCoerceValue));
+
+        private static object TimeCoerceValue(DependencyObject d, object baseValue)
+        {
+            if (baseValue is DateTime)
+            {
+                DateTime time = (DateTime)baseValue;
+                if(time.Second % 2 == 1)
+                {
+                    baseValue = time.AddSeconds(1);
+                }
+            }
+            return baseValue;
+        }
+
+        private static object TimeValidateValue(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
 
         public static readonly RoutedEvent TimeChangedEvent =
             EventManager.RegisterRoutedEvent("TimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime>), typeof(Clock));
