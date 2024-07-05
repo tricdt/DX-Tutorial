@@ -15,14 +15,22 @@ namespace MyDX_Demo.Controls
     public class Clock : Control
     {
         public static readonly DependencyProperty TimeProperty =
-            DependencyProperty.Register("Time", typeof(DateTime), typeof(Clock), new PropertyMetadata(DateTime.Now));
-
-
+            DependencyProperty.Register("Time", typeof(DateTime), typeof(Clock), new PropertyMetadata(DateTime.Now, TimePropertyChanged));
         public static readonly DependencyProperty ShowSecondsProperty =
             DependencyProperty.Register("ShowSeconds", typeof(bool), typeof(Clock), new PropertyMetadata(true));
 
         public static readonly RoutedEvent TimeChangedEvent =
             EventManager.RegisterRoutedEvent("TimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime>), typeof(Clock));
+
+        private static void TimePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Clock) { 
+               Clock clock = (Clock)d;
+               clock.RaiseEvent(new RoutedPropertyChangedEventArgs<DateTime>((DateTime)e.OldValue, (DateTime)e.NewValue, TimeChangedEvent));
+            }
+        }
+
+
         public DateTime Time
         {
             get { return (DateTime)GetValue(TimeProperty); }
@@ -62,7 +70,7 @@ namespace MyDX_Demo.Controls
         protected virtual void OnTimeChanged(DateTime newTime)
         {
             UpdateTimeState(newTime);
-            RaiseEvent(new RoutedPropertyChangedEventArgs<DateTime>(Time, newTime, TimeChangedEvent));
+            //RaiseEvent(new RoutedPropertyChangedEventArgs<DateTime>(Time, newTime, TimeChangedEvent));
             Time= newTime;
         }
         private void UpdateTimeState(DateTime time)
