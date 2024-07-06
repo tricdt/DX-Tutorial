@@ -90,6 +90,8 @@
     </Compile>
     <Compile Include="Controls\DigitalClock.cs" />
     <Compile Include="Controls\TimeChangedEventArgs.cs" />
+    <Compile Include="Converters\DivisionConverter.cs" />
+    <Compile Include="Converters\GreaterThanMultiConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

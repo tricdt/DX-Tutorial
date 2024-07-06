@@ -16,7 +16,7 @@
         <control:DigitalClock Grid.Row="1" ShowSeconds="True" Margin="0 10 0 0" FontSize="36" HorizontalAlignment="Center" ColonBlink="True"/>-->
         <control:ControllableClock>
             <control:ControllableClock.Clock>
-                <control:DigitalClock/>
+                <control:AnalogClock/>
             </control:ControllableClock.Clock>
         </control:ControllableClock>
     </Grid>
